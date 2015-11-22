@@ -1,0 +1,8 @@
+CONFIGURAR LAS VARIABLES DE ENTORNO PRIMERAMENTE
+CREAR LAS SIGUIENTES VARIABLES
+1) usuario postgres export DB_USER="usuario de la base de datos"
+2) password postgres export DB_PASS="password de la base de datos"
+3) nombre de la base de datos export DB_NAME="nombre de la base de datos"
+4) servidor localhost export DB_SERVER="nombre del localhost"
+5) nombre de usuario del  sistema export USER_ENVIROMENT="nombre del usuario" 
+esto es para poner el servidor en produccion o en configuracion local
