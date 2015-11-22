@@ -1,0 +1,32 @@
+body{
+	background: #FFFFFF;
+}
+
+.nombre-panel{
+	position: absolute;
+	margin-left: 150px;
+	font-size: 25px;	
+}
+#panel{
+	position: absolute;
+	margin-left: 150px;
+	width: 70%;
+	height: 70%;
+	margin-top: 90px;
+}
+
+.img{
+	position: relative;
+	margin-left:-173px;
+}
+
+.formulario{
+	margin-left: 290px;
+	position: absolute;
+	margin-top: 20px;
+	height: 33px;
+	width: 60%;
+}
+
+
+
