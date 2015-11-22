@@ -15,3 +15,9 @@ Route::get('/', function()
 {
 	return "SIMCI";
 });
+
+
+Route::get('/inicio', function()
+{
+	return View::make("inicio.plantilla_index");
+});
