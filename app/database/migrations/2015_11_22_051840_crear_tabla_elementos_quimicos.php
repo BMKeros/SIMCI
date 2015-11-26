@@ -23,7 +23,7 @@ class CrearTablaElementosQuimicos extends Migration {
 			$table->string('nombre', 20);
 			$table->decimal('peso_atomico', 3, 5);
 			$table->string('valencia', 10);
-			$table->string('bloques', 2);
+			$table->string('bloque', 2);
 			$table->integer('cod_estado');
 			$table->foreing('cod_estado')->reference('estados_materia')->on('cod_estado');
 			$table->integer('cod_clasificacion');
