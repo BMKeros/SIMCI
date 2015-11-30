@@ -33,69 +33,63 @@
 @show
 
 @section('menu-usuario')
-  <div class="desplegable">
+<div class="ui grid" class="desplegable">
   <!--Menu Desplegable de Usuario-Profesor-->
-    <div class="ui left vertical inverted labeled icon sidebar menu" id="usuario">
-      	<a class="item">
-        	<i class="home icon"></i>
-        	Home
-      	</a>
-      	
-      	<a class="item">
-        	<i class="block layout icon"></i>
-        	Topics
-      	</a>
-      	
-      	<a class="item">
-        	<i class="smile icon"></i>
-        	Friends
-      	</a>
-      	
-      	<a class="item">
-        	<i class="calendar icon"></i>
-        	History
-      	</a>
-      	
-      	<a class="item">
-        	<i class="mail icon"></i>
-        	Messages
-      	</a>
-      	
-      	<a class="item">
-        	<i class="chat icon"></i>
-        	Discussions
-      	</a>
-      	
-      	<a class="item">
-        	<i class="trophy icon"></i>
-        	Achievements
-      	</a>
-      	
-      	<a class="item">
-        	<i class="shop icon"></i>
-        	Store
-      	</a>
-      	
-      	<a class="item">
-        	<i class="settings icon"></i>
-        	Settings
-      	</a>
-    </div>
-  
-  <div class="ui black big launch right attached fixed button" id="menu">
-    <i class="content icon">
-    </i>
-
-    <span class="text"> Menu</span>    
+  <div class="ui left vertical inverted labeled icon sidebar menu" id="usuario">
+  	<a class="item">
+    	<i class="home icon"></i>
+    	Home
+  	</a>
+  	
+  	<a class="item">
+    	<i class="block layout icon"></i>
+    	Topics
+  	</a>
+  	
+  	<a class="item">
+    	<i class="smile icon"></i>
+    	Friends
+  	</a>
+  	
+  	<a class="item">
+    	<i class="calendar icon"></i>
+    	History
+  	</a>
+  	
+  	<a class="item">
+    	<i class="mail icon"></i>
+    	Messages
+  	</a>
+  	
+  	<a class="item">
+    	<i class="chat icon"></i>
+    	Discussions
+  	</a>
+  	
+  	<a class="item">
+    	<i class="trophy icon"></i>
+    	Achievements
+  	</a>
+  	
+  	<a class="item">
+    	<i class="shop icon"></i>
+    	Store
+  	</a>
+  	
+  	<a class="item">
+    	<i class="settings icon"></i>
+    	Settings
+  	</a>
   </div>
-    <!--div class="ui animated button" id="menu">
-      <div class="hidden content">
-        <i class="sidebar icon"></i>
-      </div>
-      <div class="visible content">Menu</div>
-    </div-->
 
 
+
+  <div class="ui vertical animated button" tabindex="0" id="menu">
+    <div class="hidden content">Menu</div>
+    <div class="visible content">
+      <i class="sidebar icon"></i>
+    </div>
+  </div>
 </div>
 
 @show
