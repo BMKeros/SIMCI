@@ -11,13 +11,8 @@
 |
 */
 
-Route::get('/', function()
-{
-	return "SIMCI UP";
-});
+Route::get('/', array('uses' => 'UsuariosController@getLogin'));
+
+Route::controller('/usuarios', 'UsuariosController');
 
 
-Route::get('/inicio', function()
-{
-	return View::make("inicio.plantilla_index");
-});

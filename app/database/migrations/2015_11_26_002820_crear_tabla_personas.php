@@ -20,6 +20,7 @@ class CrearTablaPersonas extends Migration {
 			$table->string('primer_apellido', 15);
 			$table->string('segundo_apellido', 15);
 			$table->string('cedula', 8);
+			$table->integer('sexo_id');
 			$table->date('fecha_nacimiento');
 			$table->timestamps();
 		});
