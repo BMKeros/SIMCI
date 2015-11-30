@@ -16,5 +16,7 @@ el cual contendra lo siguinte
 		'USER_ENVIROMENT' => 'el nombre de usuario del so'
 	);
 
+?>
+
 	
 esto es para poner el servidor en produccion o en configuracion local

@@ -33,10 +33,10 @@ return array(
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',
-			'host'     => $_SERVER["DB_SERVER"],
-			'database' => $_SERVER["DB_NAME"],
-			'username' => $_SERVER["DB_USER"],
-			'password' => $_SERVER["DB_PASS"],
+			'host'     => $_ENV["DB_SERVER"],
+			'database' => $_ENV["DB_NAME"],
+			'username' => $_ENV["DB_USER"],
+			'password' => $_ENV["DB_PASS"],
 			'charset'  => 'utf8',
 			'prefix'   => '',
 			'schema'   => 'public',
