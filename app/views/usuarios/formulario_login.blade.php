@@ -39,7 +39,7 @@
 					      		<div class="field">
 					        		<label>Usuario</label>
 					        		<div class="ui left icon input">
-					          			<input type="text" placeholder="Usuario">
+					          			<input type="text" placeholder="Usuario" id="usuario-login">
 					          			<i class="user icon"></i>
 					        		</div>
 					      		</div>
@@ -47,7 +47,7 @@
 					      	<div class="field">
 					        	<label>Password</label>
 					        	<div class="ui left icon input">
-					          		<input type="password" placeholder="Password">
+					          		<input type="password" placeholder="Password" id="password-login">
 					          		<i class="lock icon"></i>
 					        	</div>
 					      	</div>
