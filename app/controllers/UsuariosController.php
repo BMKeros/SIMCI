@@ -3,7 +3,7 @@
 class UsuariosController extends Controller {
 	
 	public function getLogin(){
-		return View::make('usuarios.formulario_registro');
+		return View::make('usuarios.formulario_login');
 	}
 
 	public function postLogin(){

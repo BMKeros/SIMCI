@@ -25,43 +25,42 @@
 			</div>
 		</header><!--Fin barra de navegacion principal-->
 
-	
-		<div class="ui two column centered grid">
+	<div class="ui two column doubling stackable grid container">
+		<div class="ui one column centered grid">
 			<div class="column">
-			<div class="formulario" id="inicio_sesion">
-		    	<div class="ten wide column">
-		    		<div class="ui two column middle aligned very relaxed stackable grid">
-					  	<div class="column">
-					  		<div class="ui blue message">
-					  			<div id="ident"> <p> Inicio Sesion</p> </div>
-					  		</div>
-		   			    	<div class="ui form">
-					      		<div class="field">
-					        		<label>Usuario</label>
-					        		<div class="ui left icon input">
-					          			<input type="text" placeholder="Usuario" id="usuario-login">
-					          			<i class="user icon"></i>
-					        		</div>
-					      		</div>
-					      	
-					      	<div class="field">
-					        	<label>Password</label>
-					        	<div class="ui left icon input">
-					          		<input type="password" placeholder="Password" id="password-login">
-					          		<i class="lock icon"></i>
-					        	</div>
-					      	</div>
-					      	
-					      	<div class="ui blue submit button">Login</div>
-					    	
-					    	</div>
-					 	</div>
+				<div class="formulario" id="inicio_sesion">
+			    	<div class="ten wide column">
+			    		<div class="">
+						  	<div class="column">
+						  		<div class="ui blue message">
+						  			<div id="ident"> <p> Inicio Sesion</p> </div>
+						  		</div>
+			   			    	<div class="ui form">
+						      		<div class="field">
+						        		<label>Usuario</label>
+						        		<div class="ui left icon input">
+						          			<input type="text" placeholder="Usuario" id="usuario-login">
+						          			<i class="user icon"></i>
+						        		</div>
+						      		</div>
+						      	
+							      	<div class="field">
+							        	<label>Password</label>
+							        	<div class="ui left icon input">
+							          		<input type="password" placeholder="Password" id="password-login">
+							          		<i class="lock icon"></i>
+							        	</div>
+							      	</div>
+						      	
+						      		<div class="ui blue submit button">Login</div>
+						    	</div>
+						 	</div>
+						</div>
 					</div>
 				</div>
 			</div>
-			</div>
 		</div>
-
+	</div>
 		<script src="semantic/semantic.min.js"></script>	
 	</body>
 </html>
