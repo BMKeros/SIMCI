@@ -1,7 +1,31 @@
 <?php
 
 class UsuariosController extends Controller {
+	
+	public function getLogin(){
+		return View::make('usuarios.formulario_registro');
+	}
 
+	public function postLogin(){
+		
+		$logindata = array(
+			'usuario' => Input::get('usuario'),	
+			'password' => Input::get('password')
+		);
+
+		if(Auth::attempt($logindata, Input::get('remember')))
+		{
+			return View::make('usuarios.formulario_registro');
+		}
+		else{
+			return Redirect::to('/usuarios/login')->with('mensaje_error', 'Usuario o Contraseña Invalidos');
+		}
+	}
+
+	public function getLogout(){
+		Auth::logout();
+		return Redirect::to('/usuarios/login')->with('mensaje_error', 'Has cerrado Sesion con Exito.!');		
+	}
 
 	//mostrar formulario de registro de personas
 	public function getFormularioPersonas()
@@ -17,19 +41,5 @@ class UsuariosController extends Controller {
 		//guardamos en la db los datos del usuario
 		DB::table('personas')->insert($datos);
 
-	}
-
-	//mostrar formulario de registro de usuarios
-	public function getLogin(){
-		return View::make('usuarios.formulario_login');
-	}
-
-	//procesar datos del formuolario de usuario
-	public function postRegistroUsuario(){
-		//capturamos los datos del formulario
-		$datos = Input::all();
-
-		//insertamos en la tabla usuarios
-		DB::table('usuarios')->insert($datos);
 	}
 }
