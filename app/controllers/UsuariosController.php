@@ -2,7 +2,7 @@
 
 class UsuariosController extends Controller {
 
-/*
+
 	//mostrar formulario de registro de personas
 	public function getFormularioPersonas()
 	{
@@ -19,11 +19,9 @@ class UsuariosController extends Controller {
 
 	}
 
-*/
-
 	//mostrar formulario de registro de usuarios
 	public function getLogin(){
-		return View::make('usuarios.formulario_registro');
+		return View::make('usuarios.formulario_login');
 	}
 
 	//procesar datos del formuolario de usuario
