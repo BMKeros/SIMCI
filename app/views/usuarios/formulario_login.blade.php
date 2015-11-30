@@ -3,27 +3,24 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>SIMCI</title>
 		
-		<script src="/semantic/jquery.js"></script>
 		<link rel="stylesheet" href="/semantic/semantic.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/formulario_inicio_sesion.css">
 	</head>
 	
 	<body>
-		<header><!--Barra de navegacion principal-->
-			<div class="barra-nav" id="barra">
-				<div class="ui attached stackable menu">
-				  	<div class="ui container">
-				    	<a class="item"><i class="home icon"></i> SIMCI</a>
-				    	<div class="right item">
-				    	<div class="ui input"><input type="text" placeholder="Search..."></div>
-				    	</div>
-				  	</div>
-				</div>
-			</div>
-		</header><!--Fin barra de navegacion principal-->
+		
+		<div class="ui attached stackable menu">
+		  	<div class="ui container">
+		    	<a class="item"><i class="home icon"></i> SIMCI</a>
+		    	<div class="right item">
+		    	<div class="ui input"><input type="text" placeholder="Search..."></div>
+		    	</div>
+		  	</div>
+		</div>
+		
 
 	<div class="ui two column doubling stackable grid container">
 		<div class="ui one column centered grid">
@@ -33,7 +30,7 @@
 			    		<div class="">
 						  	<div class="column">
 						  		<div class="ui blue message">
-						  			<div id="ident"> <p> Inicio Sesion</p> </div>
+						  			<div align="center"><p style="font-size:18px">Inicio Sesion</p></div>
 						  		</div>
 			   			    	<div class="ui form">
 						      		<div class="field">
@@ -61,6 +58,8 @@
 			</div>
 		</div>
 	</div>
+
+		<script src="/js/jquery.js"></script>
 		<script src="semantic/semantic.min.js"></script>	
 	</body>
 </html>
