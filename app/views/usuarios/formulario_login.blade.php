@@ -47,8 +47,14 @@
 							          		<i class="lock icon"></i>
 							        	</div>
 							      	</div>
-						      	
-						      		<div class="ui blue submit button" id="btn-inicio-sesion">Login</div>
+						      		
+						      		<!--<div class="ui right aligned grid">
+        								<div class="sixteen wide column">
+          									<div class="ui blue submit button" id="btn-inicio-sesion">Login</div>
+        								</div>
+      								</div>-->
+      								<button class="large ui right floated blue submit button"  id="btn-inicio-sesion">Login</button>
+						      		
 						    	</div>
 						 	</div>
 						</div>
