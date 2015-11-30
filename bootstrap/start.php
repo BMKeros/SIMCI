@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array($_SERVER['USER_ENVIROMENT']),
+	'local' => array(explode($_SERVER['SERVER_ADMIN'],'@')[0]),
 
 ));
 
