@@ -22,12 +22,11 @@
 		</div>
 		
 
-	<div class="ui two column doubling stackable grid container">
-		<div class="ui one column centered grid">
-			<div class="column">
-				<div class="formulario" id="inicio_sesion">
-			    	<div class="ten wide column">
-			    		<div class="">
+		<div class="ui two column doubling stackable grid container">
+			<div class="ui one column centered grid">
+				<div class="column">
+					<div class="formulario" id="inicio_sesion">
+				    	<div class="ten wide column">
 						  	<div class="column">
 						  		<div class="ui blue message">
 						  			<div align="center"><p style="font-size:18px">Inicio Sesion</p></div>
@@ -49,7 +48,7 @@
 							        	</div>
 							      	</div>
 						      	
-						      		<div class="ui blue submit button">Login</div>
+						      		<div class="ui blue submit button" id="btn-inicio-sesion">Login</div>
 						    	</div>
 						 	</div>
 						</div>
@@ -57,9 +56,9 @@
 				</div>
 			</div>
 		</div>
-	</div>
 
-		<script src="/js/jquery.js"></script>
-		<script src="semantic/semantic.min.js"></script>	
+		<script src="/js/jquery.min.js"></script>
+		<script src="/semantic/semantic.min.js"></script>	
+		
 	</body>
 </html>
