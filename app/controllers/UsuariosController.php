@@ -24,7 +24,7 @@ class UsuariosController extends Controller {
 
 	public function getLogout(){
 		Auth::logout();
-		return Redirect::to('/usuarios/login')->with('mensaje_error', 'Has cerrado Sesion con Exito.!');		
+		return Redirect::to('/usuarios/login')->with('mensaje_exito', 'Has cerrado Sesion con Exito.!');		
 	}
 
 	//mostrar formulario de registro de personas
