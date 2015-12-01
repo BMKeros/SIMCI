@@ -18,7 +18,7 @@ class CrearTablaUsuarios extends Migration {
 			$table->string('usuario')->unique();
 			$table->string('email', 60)->unique();
 			$table->string('password');
-			$table->integer('cod_permiso');
+			$table->string('cod_permiso', 4);
 			$table->rememberToken();
 			$table->timestamps();
 		});

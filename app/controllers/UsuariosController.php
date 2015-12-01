@@ -15,11 +15,11 @@ class UsuariosController extends Controller {
 
 		if(Auth::attempt($logindata, Input::get('remember')))
 		{
-			return "Exito";
-			//return View::make('usuarios.formulario_registro');
+			//falta agrgarle la ruta a la que dirigra
+			return Redirect::to('/');
 		}
 		else{
-			return Redirect::to('/usuarios/login')->with(array('mensaje_error' => 'Usuario o Contraseña Invalidos'));
+			return Redirect::to('/usuarios/login')->with('mensaje_error', 'Usuario o Contraseña Invalidos');
 		}
 	}
 
