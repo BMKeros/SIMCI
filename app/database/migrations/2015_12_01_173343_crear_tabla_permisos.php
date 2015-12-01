@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaAlmacenes extends Migration {
+class CrearTablaPermisos extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,14 +12,12 @@ class CrearTablaAlmacenes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('almacenes', function(Blueprint $table)
+		Schema::create('permisos', function($table)
 		{
 			$table->increments('id');
-			$table->integer('cod_almacen');
-			$table->integer('responsable');
-			$table->integer('primer_auxiliar');
-			$table->integer('segundo_auxiliar');
-			$table->string('descripcion', 8);
+			$table->string('nombre',15);
+			$table->string('codigo',4);
+			$table->string('descripcion',150);
 			$table->timestamps();
 		});
 	}
@@ -31,7 +29,7 @@ class CrearTablaAlmacenes extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('almacenes');
+		Schema::drop('permisos');
 	}
 
 }

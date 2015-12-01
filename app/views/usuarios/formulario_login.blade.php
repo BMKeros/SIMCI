@@ -69,7 +69,7 @@
 
 		<script src="/js/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>	
-		<script src="/js/script_formularios.js"></script>
+		<script src="/js/scripts_formularios.js"></script>
 
 		<script>
 		$(document).ready(function(){
