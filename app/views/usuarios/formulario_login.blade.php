@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<title>SIMCI</title>
 		
-		<link rel="stylesheet" href="/semantic/semantic.min.css">
+		<link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/formulario_inicio_sesion.css">
 	</head>
 	
