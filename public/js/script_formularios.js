@@ -1,4 +1,5 @@
 var reglas_formulario_login = {
+   on: 'blur',
    fields: {
       usuario: {
          identifier: 'usuario',
@@ -19,12 +20,13 @@ var reglas_formulario_login = {
   		},
   		password:{
   			identifier: 'password',
-  			ruler:[
+  			rules:[
   				{
   					type:'empty',
 	            prompt:'Este campo no puede quedar vacio, y debe contene entre 5 y 20 caracteres'
   				}
   			]
   		}
-  	}
+  	},
+   inline: true
 };

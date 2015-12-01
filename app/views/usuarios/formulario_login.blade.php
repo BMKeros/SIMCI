@@ -31,11 +31,12 @@
 						  		<div class="ui blue message">
 						  			<div align="center"><p style="font-size:18px">Inicio Sesion</p></div>
 						  		</div>
-			   			    	<div class="ui form">
+						  		
+			   			    	<form class="ui form" id="form-inicio-sesion">
 						      		<div class="field">
 						        		<label>Usuario</label>
 						        		<div class="ui left icon input">
-						          			<input type="text" placeholder="Usuario" id="usuario-login">
+						          			<input type="text" placeholder="Usuario" id="usuario-login" name="usuario">
 						          			<i class="user icon"></i>
 						        		</div>
 						      		</div>
@@ -43,19 +44,15 @@
 							      	<div class="field">
 							        	<label>Password</label>
 							        	<div class="ui left icon input">
-							          		<input type="password" placeholder="Password" id="password-login">
+							          		<input type="password" placeholder="Password" id="password-login" name="password">
 							          		<i class="lock icon"></i>
 							        	</div>
 							      	</div>
-						      		
-						      		<!--<div class="ui right aligned grid">
-        								<div class="sixteen wide column">
-          									<div class="ui blue submit button" id="btn-inicio-sesion">Login</div>
-        								</div>
-      								</div>-->
+
       								<button class="large ui right floated blue submit button"  id="btn-inicio-sesion">Login</button>
-						      		
-						    	</div>
+
+						      		<div class="ui error message"></div>
+						    	</form>
 						 	</div>
 						</div>
 					</div>
@@ -65,12 +62,13 @@
 
 		<script src="/js/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>	
+		<script src="/js/script_formularios.js"></script>
 
 		<script>
 		$(document).ready(function(){
-			$('#btn-inicio-sesion').on('click', function(){
-				$('.ui form').form(reglas_formulario_login());
-			});
+			
+			$('.ui.form').form(reglas_formulario_login);	
+			
 		});
 		</script>
 		
