@@ -30,8 +30,13 @@
 						  	<div class="column">
 						  		<div class="ui blue message">
 						  			<div align="center"><p style="font-size:18px">Inicio Sesion</p></div>
+						  			@if(isset($mensaje_error))
+						  				<div class="ui error message">{{$mensaje_error}}</div>
+						  			@endif
+
 						  		</div>
 						  		
+
 			   			    	<form class="ui form" id="form-inicio-sesion" action="/usuarios/login" method="POST">
 						      		<div class="field">
 						        		<label>Usuario</label>

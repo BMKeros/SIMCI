@@ -19,7 +19,7 @@ class UsuariosController extends Controller {
 			//return View::make('usuarios.formulario_registro');
 		}
 		else{
-			return Redirect::to('/usuarios/login')->with('mensaje_error', 'Usuario o Contraseña Invalidos');
+			return Redirect::to('/usuarios/login')->with(array('mensaje_error' => 'Usuario o Contraseña Invalidos'));
 		}
 	}
 
