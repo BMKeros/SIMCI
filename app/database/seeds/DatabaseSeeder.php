@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder {
 		Eloquent::unguard();
 
 		$this->call('UsuarioTableSeeder');
+		$this->call('PermisoTableSeeder');
 	}
 }
 
@@ -19,18 +20,20 @@ class UsuarioTableSeeder extends Seeder {
 
     public function run()
     {
+    	DB::table('usuarios')->delete();
+
         $usuario = new Usuario;
 
-        $usuario->usuario = 'ivantelix';
-        $usuario->email = 'ivantelix@gmail.com';
-        $usuario->password = 'iseedeadpeople';
+        $usuario->usuario = 'simci';
+        $usuario->email = 'simci@gmail.com';
+        $usuario->password = 'admin';
         $usuario->cod_permiso = 'ad40';
 
 		$usuario->save();
     }
 }
 
-class UsuarioTableSeeder extends Seeder {
+class PermisoTableSeeder extends Seeder {
 
     public function run()
     {
