@@ -28,7 +28,7 @@ class CrearTablaEstadosMaterias extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('estados_materias');
+		Schema::drop('estados_materia');
 	}
 
 }

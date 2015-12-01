@@ -17,7 +17,6 @@ class CrearTablaAlmacenes extends Migration {
 			$table->increments('id');
 			$table->integer('cod_almacen');
 			$table->integer('id_responsable');
-			$table->foreign('id_responsable')->reference('id')->on('personas');
 			$table->string('descripcion', 8);
 			$table->timestamps();
 		});
