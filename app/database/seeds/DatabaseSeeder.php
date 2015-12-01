@@ -11,12 +11,14 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 
+
 		$this->call('UsuarioTableSeeder');
 		$this->call('PermisoTableSeeder');
+		$this->call('UsuariosTableSeeder');
 	}
 }
 
-class UsuarioTableSeeder extends Seeder {
+class UsuariosTableSeeder extends Seeder {
 
     public function run()
     {
@@ -33,7 +35,8 @@ class UsuarioTableSeeder extends Seeder {
     }
 }
 
-class PermisoTableSeeder extends Seeder {
+class PermisosTableSeeder extends Seeder {
+
 
     public function run()
     {
@@ -63,4 +66,4 @@ class AlmacenTableSeeder extends Seeder {
     }
 }
 
-*7
+*/

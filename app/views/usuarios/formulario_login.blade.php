@@ -12,13 +12,8 @@
 	
 	<body>
 		
-		<div class="ui attached stackable menu">
-		  	<div class="ui container">
-		    	<a class="item"><i class="home icon"></i> SIMCI</a>
-		    	<div class="right item">
-		    	<div class="ui input"><input type="text" placeholder="Search..."></div>
-		    	</div>
-		  	</div>
+		<div class="ui large attached stackable menu">
+	    	<a class="item"><i class="home icon"></i> SIMCI</a>
 		</div>
 		
 
@@ -55,8 +50,8 @@
 							      	</div>
 
 
-      								<button class="large ui right floated blue submit button"  id="btn-inicio-sesion">Login</button>
-      								<div class="large ui right floated submit buttonui reset button">Reset</div>
+      								<button class="large ui right floated blue submit button"  id="btn-inicio-sesion">Iniciar Sesion</button>
+      								<div class="large ui right floated submit buttonui reset button">Limpiar</div>
 
 						      		<div class="ui error message"></div>
 						    	</form>
