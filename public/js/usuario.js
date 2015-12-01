@@ -3,4 +3,7 @@ $(document).ready(function(){
     	$('#usuario')
   			.sidebar('toggle');
     });
+
+    $('.ui.dropdown')
+  		.dropdown();
 });
