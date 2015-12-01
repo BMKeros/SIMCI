@@ -32,7 +32,7 @@
 						  			<div align="center"><p style="font-size:18px">Inicio Sesion</p></div>
 						  		</div>
 						  		
-			   			    	<form class="ui form" id="form-inicio-sesion">
+			   			    	<form class="ui form" id="form-inicio-sesion" action="/usuarios/login" method="POST">
 						      		<div class="field">
 						        		<label>Usuario</label>
 						        		<div class="ui left icon input">
@@ -49,7 +49,9 @@
 							        	</div>
 							      	</div>
 
+
       								<button class="large ui right floated blue submit button"  id="btn-inicio-sesion">Login</button>
+      								<div class="large ui right floated submit buttonui reset button">Reset</div>
 
 						      		<div class="ui error message"></div>
 						    	</form>
@@ -67,7 +69,9 @@
 		<script>
 		$(document).ready(function(){
 			
-			$('.ui.form').form(reglas_formulario_login);	
+			$('.ui.form').form(reglas_formulario_login);
+
+			
 			
 		});
 		</script>

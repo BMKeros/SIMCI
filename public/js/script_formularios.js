@@ -10,7 +10,7 @@ var reglas_formulario_login = {
 	         },
 	         {
 	        	   type:'minLength[5]',
-	        	   prompt:'Elcampo usuario debe contener minimo 5 caracteres'
+	        	   prompt:'El campo usuario debe contener minimo 5 caracteres'
 	        	},
             {
                type:'maxLength[20]',
@@ -23,8 +23,12 @@ var reglas_formulario_login = {
   			rules:[
   				{
   					type:'empty',
-	            prompt:'Este campo no puede quedar vacio, y debe contene entre 5 y 20 caracteres'
-  				}
+	            prompt:'Este campo no debe quedar vacio'
+  				},
+          {
+            type:'minLength[5]',
+            prompt:'La contraseña debe contener como minimo 5 caracteres'
+          }
   			]
   		}
   	},

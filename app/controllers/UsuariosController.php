@@ -15,7 +15,8 @@ class UsuariosController extends Controller {
 
 		if(Auth::attempt($logindata, Input::get('remember')))
 		{
-			return View::make('usuarios.formulario_registro');
+			return "Exito";
+			//return View::make('usuarios.formulario_registro');
 		}
 		else{
 			return Redirect::to('/usuarios/login')->with('mensaje_error', 'Usuario o Contraseña Invalidos');
