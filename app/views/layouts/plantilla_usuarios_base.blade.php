@@ -148,7 +148,7 @@
 
 @show
 <script src="js/jquery.min.js"></script>
-<script src="js/usuario.js"></script>
+<script src="js/plantilla_usuario.js"></script>
 <script src="semantic/semantic.min.js"></script>	
 @section('js')
 @show	
