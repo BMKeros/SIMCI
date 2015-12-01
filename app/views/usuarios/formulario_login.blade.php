@@ -65,6 +65,14 @@
 
 		<script src="/js/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>	
+
+		<script>
+		$(document).ready(function(){
+			$('#btn-inicio-sesion').on('click', function(){
+				$('.ui form').form(reglas_formulario_login());
+			});
+		});
+		</script>
 		
 	</body>
 </html>
