@@ -50,8 +50,10 @@
 							      	</div>
 
 
-      								<button class="large ui right floated blue submit button"  id="btn-inicio-sesion">Iniciar Sesion</button>
-      								<div class="large ui right floated submit buttonui reset button">Limpiar</div>
+      								<button class="large ui right floated blue submit button"  id="btn-inicio-sesion"><i class="sign in icon"></i>Iniciar Sesion</button>
+      									
+      								<div class="large ui right floated submit buttonui reset button"> <i class=" trash outline icon"></i>
+      								Limpiar</div>
 
 						      		<div class="ui error message"></div>
 						    	</form>

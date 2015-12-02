@@ -40,18 +40,22 @@
           					</div>
 					        
 					        <div class="item">
+
 					            <div class="ui red empty circular label"></div>
 					            Solicitudes
+					            	<div class="ui small teal label">3</div>
 					        </div>
 					        
 					        <div class="item">
 					        	<div class="ui blue empty circular label"></div>
 								Reportes
+									<div class="ui small teal label">2</div>
 					        </div>
 
 					        <div class="item">
 					        	<div class="ui black empty circular label"></div>
 					        	Actualizaciones
+					        		<div class="ui small teal label">4</div>
 					        </div>
         				</div>
       				</div>
