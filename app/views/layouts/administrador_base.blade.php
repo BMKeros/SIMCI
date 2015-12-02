@@ -24,10 +24,10 @@
   			<div class="ui attached stackable menu">
     			<a class="item"><i class="home icon"></i> SIMCI</a>
     			
-    			<div class="right item "><!--Dropdown para notificaciones-->
-      				<div class="ui floating labeled icon dropdown button" style="left:340px">
-        				<i class="alarm icon"></i>
-        				<span class="text">Notificaciones</span>
+    			<div class= "item" style="left: 900px; "><!--Dropdown para notificaciones-->
+      				<div class="ui floating labeled icon dropdown" style="left: 80px; ">
+        				<i class="alarm icon"></i><i class="caret right icon"></i>
+        				<span class="text"></span>
         				<div class="menu">
           					<div class="header">Buscar</div>
           					<div class="ui left icon input">
@@ -61,7 +61,7 @@
       				</div>
     			</div><!--Fin del Dropdown de Notificaciones-->
 
-    			<div class="right item" style="padding-right: 90px; "><!--Css para ubicar dropdown-->
+    			<div class="right item" style="padding-right: 10px; "><!--Css para ubicar dropdown-->
     				<div class="ui floating labeled icon dropdown button"><!--Dropdwn para ajustes-->
           				<i class="user icon"></i>
           				<span class="text">Administrador</span>
