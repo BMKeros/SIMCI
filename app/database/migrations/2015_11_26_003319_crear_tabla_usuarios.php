@@ -20,6 +20,7 @@ class CrearTablaUsuarios extends Migration {
 			$table->string('password');
 			$table->integer('permiso_id');
 			$table->integer('tipo_id');
+			$table->boolean('activo');
 			$table->rememberToken();
 			$table->timestamps();
 		});
