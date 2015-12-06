@@ -15,7 +15,7 @@ class CrearTablaSubClasificacionElementos extends Migration {
 		Schema::create('sub_clasificacion_elementos', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('cod_sub_clasificacion');
+			$table->integer('cod_subclasificacion');
 			$table->string('descripcion', 20);
 			$table->timestamps();
 		});
