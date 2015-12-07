@@ -12,7 +12,7 @@ class CrearTablaSubClasificacionElementos extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sub_clasificacion_elementos', function(Blueprint $table)
+		Schema::create('subclasificacion_elementos', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->integer('cod_subclasificacion');
@@ -28,7 +28,7 @@ class CrearTablaSubClasificacionElementos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('sub_clasificacion_elementos');
+		Schema::drop('subclasificacion_elementos');
 	}
 
 }

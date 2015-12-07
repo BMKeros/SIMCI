@@ -13,17 +13,17 @@ class CrearIndexTablas extends Migration {
 	public function up()
 	{
 		//ELEMENTOS QUIMICOS
-		Schema::table('elementos_quimicos', function($table){
+		/*Schema::table('elementos_quimicos', function($table){
     		$table->foreign('cod_estado')->references('id')
     			->on('estados_materia')
     			->onDelete('cascade');;
     		$table->foreign('cod_clasificacion')->references('id')
     			->on('clasificacion_elementos')
     			 ->onDelete('cascade');
-    		$table->foreign('cod_sub_clasificacion')->references('id')
-    			->on('sub_clasificacion_elementos')
+    		$table->foreign('cod_subclasificacion')->references('id')
+    			->on('subclasificacion_elementos')
     			->onDelete('cascade');
-		});
+		});*/
 
 		//USUARIOS
 		Schema::table('usuarios', function($table){

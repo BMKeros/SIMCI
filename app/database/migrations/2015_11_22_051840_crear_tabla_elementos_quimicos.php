@@ -21,17 +21,17 @@ class CrearTablaElementosQuimicos extends Migration {
 			$table->string('simbolo', 3);
 			$table->integer('numero_atomico');
 			$table->string('nombre', 20);
-			$table->decimal('peso_atomico', 5);
+			$table->decimal('peso_atomico', 20,10);
 			$table->string('valencia', 20);
-			$table->decimal('temp_ebullicion',7);
-			$table->decimal('temp_fusion',7);
+			$table->decimal('temp_ebullicion',20,10);
+			$table->decimal('temp_fusion',20,10);
 			$table->string('bloque', 2);
 			$table->integer('cod_estado');
 			$table->integer('cod_clasificacion');
 			$table->integer('cod_subclasificacion');
 			$table->string('config_electronica',90);
-			$table->decimal('densidad',7);
-			$table->decimal('electronegatividad',7);
+			$table->decimal('densidad',15,10);
+			$table->decimal('electronegatividad',15,10);
 
 			$table->timestamps();
 		});
