@@ -22,7 +22,7 @@ class CrearTablaUsuarios extends Migration {
 			$table->integer('tipo_id');
 			$table->boolean('activo');
 			$table->rememberToken();
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

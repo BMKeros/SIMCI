@@ -17,7 +17,8 @@ class CrearTablaSubClasificacionElementos extends Migration {
 			$table->increments('id');
 			$table->integer('cod_subclasificacion');
 			$table->string('descripcion', 20);
-			$table->timestamps();
+			
+			$table->nullableTimestamps();
 		});
 	}
 

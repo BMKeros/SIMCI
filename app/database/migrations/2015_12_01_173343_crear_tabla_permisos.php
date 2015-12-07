@@ -18,7 +18,7 @@ class CrearTablaPermisos extends Migration {
 			$table->string('nombre',15);
 			$table->string('codigo',4);
 			$table->string('descripcion',150);
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

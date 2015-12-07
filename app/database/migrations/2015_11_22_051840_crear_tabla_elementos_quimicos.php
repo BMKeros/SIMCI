@@ -33,7 +33,7 @@ class CrearTablaElementosQuimicos extends Migration {
 			$table->decimal('densidad',15,10);
 			$table->decimal('electronegatividad',15,10);
 
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

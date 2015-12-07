@@ -20,7 +20,8 @@ class CrearTablaAlmacenes extends Migration {
 			$table->integer('primer_auxiliar');
 			$table->integer('segundo_auxiliar');
 			$table->string('descripcion', 8);
-			$table->timestamps();
+			
+			$table->nullableTimestamps();
 		});
 	}
 

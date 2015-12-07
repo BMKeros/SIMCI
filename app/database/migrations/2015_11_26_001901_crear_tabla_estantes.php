@@ -17,7 +17,8 @@ class CrearTablaEstantes extends Migration {
 			$table->increments('id');
 			$table->integer('cod_estantes');
 			$table->string('descripcion', 8);
-			$table->timestamps();
+			
+			$table->nullableTimestamps();
 		});
 	}
 

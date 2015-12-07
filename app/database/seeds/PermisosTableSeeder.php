@@ -27,6 +27,6 @@ class PermisosTableSeeder extends Seeder {
             array('nombre' => 'lectura', 'codigo' => 'ad40', 'descripcion'=> 'permisos para leer, escribir, actualizar y eliminar todas las opciones del sistema'),
         );
 
-        //DB::table('permisos')->insert($campos);
+        DB::table('permisos')->insert($campos);
     }
 }

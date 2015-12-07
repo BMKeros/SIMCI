@@ -17,7 +17,7 @@ class CrearTablaPermisosUsuarios extends Migration {
 			$table->increments('id');
 			$table->string('cod_permiso',4);
 			$table->integer('usuario_id');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

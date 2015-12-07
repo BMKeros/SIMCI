@@ -17,7 +17,8 @@ class CrearTablaClasificacionElementos extends Migration {
 			$table->increments('id');
 			$table->integer('cod_clasificacion');
 			$table->string('descripcion', 20);
-			$table->timestamps();
+			
+			$table->nullableTimestamps();
 		});
 	}
 

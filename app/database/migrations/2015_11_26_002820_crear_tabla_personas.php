@@ -22,7 +22,8 @@ class CrearTablaPersonas extends Migration {
 			$table->string('cedula', 8);
 			$table->integer('sexo_id');
 			$table->date('fecha_nacimiento');
-			$table->timestamps();
+			
+			$table->nullableTimestamps();
 		});
 	}
 

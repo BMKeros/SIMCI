@@ -17,7 +17,8 @@ class CrearTablaEstadosMaterias extends Migration {
 			$table->increments('id');
 			$table->integer('cod_estado');
 			$table->string('descripcion', 25);
-			$table->timestamps();
+			
+			$table->nullableTimestamps();
 		});
 	}
 
