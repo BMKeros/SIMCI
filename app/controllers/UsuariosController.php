@@ -2,6 +2,8 @@
 
 class UsuariosController extends Controller {
 	
+	//tentativo una funcion que muestre todos los usuarios registrados
+	
 	public function getLogin(){
 		return View::make('usuarios.formulario_login');
 	}
@@ -28,19 +30,55 @@ class UsuariosController extends Controller {
 		return Redirect::to('/usuarios/login')->with('mensaje_exito', 'Has cerrado Sesion con Exito.!');		
 	}
 
-	//mostrar formulario de registro de personas
-	public function getFormularioPersonas()
-	{
-		return View::make('usuarios.formulario_registro');
+	public function getNuevoUsuario(){
+
+		//falta agg la ruta para el registro de un nuevo usuario
+		return View::make('/');
 	}
 
-	//procesar datos del formulario de personas
-	public function postRegistroPersonas(){
-		//capturamos los datos del formulario
-		$datos = Input::all();
+	public function postNuevoUsuario(){
+		$usuario = new Usuario;
 
-		//guardamos en la db los datos del usuario
-		DB::table('personas')->insert($datos);
+		$usuario->usuario = Input::get('');
+		$usuario->email = Input::get('');
+		$usuario->password = Input::get('');
+		$usuario->permiso_id = Input::get('');
+		$usuario->tipo_id = Input::get('');
+		$usuario->activo ;
+	}
 
+	public function getActualizarUsuario($id){
+		
+		$usuario = Usuario::find($id);
+
+		//falta retornar una vista que muestre el formulario para actualizar
+		return View::make('/')->with('usuario', $usuario);
+	}
+
+	public function postActualizarUsuario($id){
+
+		$usuario = Usuario::find($id);
+
+		$usuario->usuario = Input::get('');
+		$usuario->email = Input::get('');
+		$usuario->password = Input::get('');
+		$usuario->permiso_id = Input::get('');
+		$usuario->tipo_id = Input::get('');
+		$usuario->activo ;
+		
+		if($usuario->save()){
+			return View::make('/')->with('registro con exito');
+		}
+		else{
+			return View::make('/')->with('mensaje', 'error registro no exitoso');
+		}
+	}
+
+	public function getEliminarUsuario($id){
+		$usuario = Usuario::find($id);
+
+		$usuario->delete();
+
+		return View::make('/')->with('mensaje', 'usuario eliminado con exito.!');
 	}
 }
