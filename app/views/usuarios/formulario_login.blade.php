@@ -13,7 +13,7 @@
 	<body>
 		
 		<div class="ui large attached stackable menu">
-	    	<a class="item"><i class="home icon"></i> SIMCI</a>
+	    	<a class="item" href="/"><i class="home icon"></i> SIMCI</a>
 		</div>
 		
 
