@@ -14,6 +14,7 @@ class CrearTablaUsuarios extends Migration {
 	{
 		Schema::create('usuarios', function(Blueprint $table)
 		{
+
 			$table->increments('id');
 			$table->string('usuario')->unique();
 			$table->string('email', 60)->unique();
@@ -33,7 +34,7 @@ class CrearTablaUsuarios extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('usuarios');
+		drop_cascade('usuarios');
 	}
 
 }

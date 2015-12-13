@@ -15,7 +15,10 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+		"files": [
+            "app/helpers/helpers_db.php"
+        ]
 	},
 	"scripts": {
 		"post-install-cmd": [

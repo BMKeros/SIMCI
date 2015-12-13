@@ -29,7 +29,7 @@ class CrearIndexTablas extends Migration {
 		Schema::table('usuarios', function($table){
 			$table->foreign('permiso_id')->references('id')
 				->on('permisos')
-				->onDelete('cascade');
+				->onDrop('cascade');
 
 			$table->foreign('tipo_usuario')->references('id')
 				->on('tipos_usuario')
@@ -69,7 +69,7 @@ class CrearIndexTablas extends Migration {
 	 */
 	public function down()
 	{
-		//
+
 	}
 
 }
