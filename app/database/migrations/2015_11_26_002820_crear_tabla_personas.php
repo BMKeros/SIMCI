@@ -34,11 +34,7 @@ class CrearTablaPersonas extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('personas', function(Blueprint $table){
-			$table->dropForeign('personas_sexo_id_foreign');
-		});
-		
-		Schema::drop('personas');
+		drop_cascade('personas');
 	}
 
 }

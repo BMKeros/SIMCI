@@ -28,7 +28,7 @@ class CrearTablaTiposUsuario extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tipos_usuario');
+		drop_cascade('tipos_usuario');
 	}
 
 }

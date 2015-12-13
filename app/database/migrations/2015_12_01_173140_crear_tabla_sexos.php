@@ -27,7 +27,7 @@ class CrearTablaSexos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('sexos');
+		drop_cascade('sexos');
 	}
 
 }

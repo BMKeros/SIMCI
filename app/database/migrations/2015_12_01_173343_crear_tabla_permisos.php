@@ -29,7 +29,7 @@ class CrearTablaPermisos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('permisos');
+		drop_cascade('permisos');
 	}
 
 }

@@ -32,7 +32,7 @@ class CrearTablaAlmacenes extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('almacenes');
+		drop_cascade('almacenes');
 	}
 
 }

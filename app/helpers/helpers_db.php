@@ -2,5 +2,8 @@
 
 
 function drop_cascade($table = null){
-	DB::statement('DROP TABLE '.$table.' CASCADE;');
+	if( Schema::hasTable($table) ){
+		DB::statement('DROP TABLE '.$table.' CASCADE;');
+	}
+
 }
