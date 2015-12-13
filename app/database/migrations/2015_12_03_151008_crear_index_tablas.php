@@ -31,7 +31,7 @@ class CrearIndexTablas extends Migration {
 				->on('permisos')
 				->onDelete('cascade');
 
-			$table->foreign('tipo_id')->references('id')
+			$table->foreign('tipo_usuario')->references('id')
 				->on('tipos_usuario')
 				->onDelete('cascade');
 		});
