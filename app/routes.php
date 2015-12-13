@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', array('uses' => 'UsuariosController@getLogin'));
+Route::get('/', array('uses' => 'AutenticacionController@getLogin'));
 
 
 Route::controller('/usuarios', 'UsuariosController');
+Route::controller('/autenticacion', 'AutenticacionController');
 
 

@@ -32,7 +32,7 @@
 					  			@endif
 						  		
 
-			   			    	<form class="ui form" id="form-inicio-sesion" action="/usuarios/login" method="POST">
+			   			    	<form class="ui form" id="form-inicio-sesion" action="/autenticacion/login" method="POST">
 						      		<div class="field">
 						        		<label>Usuario</label>
 						        		<div class="ui left icon input">
