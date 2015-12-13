@@ -13,8 +13,10 @@ class DatabaseSeeder extends Seeder {
 
 
 		$this->call('PermisosTableSeeder');
+		$this->call('TiposUsuarioTableSeeder');
 		$this->call('UsuariosTableSeeder');
 		$this->call('ElementosQuimicosTableSeeder');
+
 	}
 }
 
