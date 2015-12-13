@@ -13,7 +13,7 @@ class UsuariosTableSeeder extends Seeder {
         $usuario->password = 'admin';
         $usuario->permiso_id = '4';
         $usuario->tipo_usuario = '1';
-
+        
 		$usuario->save();
     }
 }
