@@ -54,7 +54,6 @@ class PersonasController extends Controller {
 		$persona->cedula = Input::get('');
 		$persona->sexo = Input::get('');
 		$persona->fecha_nacimiento = Input::get('');
-		$persona->activo ;
 		
 		if($persona->save()){
 			return View::make('/')->with('registro con exito');
@@ -69,7 +68,7 @@ class PersonasController extends Controller {
 
 		$persona->delete();
 
-		return View::make('/')->with('mensaje', 'Personaeliminada con Exito.!');
+		return View::make('/')->with('mensaje', 'Persona eliminada con Exito.!');
 
 	}
 }

@@ -44,7 +44,7 @@ class UsuariosController extends Controller {
 		$usuario->password = Input::get('');
 		$usuario->permiso_id = Input::get('');
 		$usuario->tipo_id = Input::get('');
-		$usuario->activo ;
+		$usuario->activo = true;
 	}
 
 	public function getActualizarUsuario($id){
@@ -64,7 +64,7 @@ class UsuariosController extends Controller {
 		$usuario->password = Input::get('');
 		$usuario->permiso_id = Input::get('');
 		$usuario->tipo_id = Input::get('');
-		$usuario->activo ;
+		$usuario->activo = Input::get('') ;
 		
 		if($usuario->save()){
 			return View::make('/')->with('registro con exito');
