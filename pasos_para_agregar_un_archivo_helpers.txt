@@ -1,0 +1,13 @@
+1) agregar el nuevo archivo a la carpeta de helper unicada en la raiz de la app
+2) luego de haber creado el nuevo archivo en la carpeta helper agregar el nombre del archivo al composer.json 
+en la siguiente linea
+
+		"files": [
+            "app/helpers/helpers_db.php"
+            "app/helpers/NUEVO ARCHIVO.php"
+        ]
+luego de de esto ejecutar el siguiente comando
+
+php composer.phar dumpautoload 
+
+y ya podras usar los helpers en toda la app
