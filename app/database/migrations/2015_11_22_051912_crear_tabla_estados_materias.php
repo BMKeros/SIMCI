@@ -16,7 +16,7 @@ class CrearTablaEstadosMaterias extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('cod_estado');
-			$table->string('descripcion', 25);
+			$table->string('descripcion', 30);
 			
 			$table->nullableTimestamps();
 		});
@@ -29,7 +29,7 @@ class CrearTablaEstadosMaterias extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('estados_materia');
+		drop_cascade('estados_materia');
 	}
 
 }
