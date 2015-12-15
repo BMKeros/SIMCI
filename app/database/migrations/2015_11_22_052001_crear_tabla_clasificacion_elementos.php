@@ -19,7 +19,7 @@ class CrearTablaClasificacionElementos extends Migration {
 			$table->primary('cod_clasificacion');
 			$table->string('descripcion', 25);
 			
-			$table->nullableTimestamps();
+			//$table->nullableTimestamps();
 		});
 	}
 
