@@ -14,11 +14,12 @@ class CrearTablaClasificacionElementos extends Migration {
 	{
 		Schema::create('clasificacion_elementos', function(Blueprint $table)
 		{
-			$table->increments('id');
+			//$table->increments('id');
 			$table->integer('cod_clasificacion');
-			$table->string('descripcion', 20);
+			$table->primary('cod_clasificacion');
+			$table->string('descripcion', 25);
 			
-			$table->nullableTimestamps();
+			//$table->nullableTimestamps();
 		});
 	}
 
@@ -29,7 +30,7 @@ class CrearTablaClasificacionElementos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('clasificacion_elementos');
+		drop_cascade('clasificacion_elementos');
 	}
 
 }

@@ -13,7 +13,6 @@
 
 Route::get('/', array('uses' => 'AutenticacionController@getLogin'));
 
-
 Route::controller('/usuarios', 'UsuariosController');
 Route::controller('/autenticacion', 'AutenticacionController');
 

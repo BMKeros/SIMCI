@@ -14,11 +14,13 @@ class CrearTablaSubClasificacionElementos extends Migration {
 	{
 		Schema::create('subclasificacion_elementos', function(Blueprint $table)
 		{
-			$table->increments('id');
+			//$table->increments('id');
+			$table->integer('cod_clasificacion');
 			$table->integer('cod_subclasificacion');
-			$table->string('descripcion', 20);
+			$table->primary('cod_subclasificacion');
+			$table->string('descripcion', 25);
 			
-			$table->nullableTimestamps();
+			//$table->nullableTimestamps();
 		});
 	}
 
@@ -29,7 +31,7 @@ class CrearTablaSubClasificacionElementos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('subclasificacion_elementos');
+		drop_cascade('subclasificacion_elementos');
 	}
 
 }
