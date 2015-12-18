@@ -29,6 +29,8 @@
 
 					  			@if(Session::has('mensaje_error'))
 					  				<div class="ui error message" align="center"><i class=" remove circle outline icon"></i>{{Session::get('mensaje_error')}}</div>
+					  			@elseif(Session::has('mensaje_error'))
+					  				<div class="ui error message" align="center"><i class=" remove circle outline icon"></i>{{Session::get('mensaje_exito')}}</div>
 					  			@endif
 						  		
 
