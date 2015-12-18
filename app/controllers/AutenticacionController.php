@@ -17,8 +17,14 @@ class AutenticacionController extends Controller {
 
 		if(Auth::attempt($logindata, Input::get('remember')))
 		{
-			//falta agrgarle la ruta a la que dirigra
-			return Redirect::to('/');
+			if(Auth::user()->activo){
+				//falta agrgarle la ruta a la que dirigra
+				return Redirect::to('/');
+			}
+			else{
+				Auth::logout();
+				return Redirect::to('/autenticacion/login')->with('mensaje_alert', 'Su usuario se encuentra inactivo ');
+			}
 		}
 		else{
 			return Redirect::to('/autenticacion/login')->with('mensaje_error', 'Usuario o Contraseña Invalidos');
