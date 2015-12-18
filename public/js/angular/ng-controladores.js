@@ -1,10 +1,11 @@
-var myapp = angular.module('SIMCI', [], function($interpolateProvider) {
+var simci = angular.module('SIMCI', [], function($interpolateProvider) {
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
 });
 
-myapp.controller('buscar_reactivoController', function ($scope, $http){
-   $scope.cambio =function(){
+
+simci.controller('BuscarReactivoController',  ['$scope','$http','$log', function ($scope, $http, $log){
+    $scope.cambio = function(){
 
    		$http({
    			method: 'GET',
@@ -19,4 +20,4 @@ myapp.controller('buscar_reactivoController', function ($scope, $http){
 
    }
 		
-});
+}]);
