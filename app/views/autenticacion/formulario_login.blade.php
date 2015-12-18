@@ -8,6 +8,7 @@
 		
 		<link rel="stylesheet" type="text/css" href="/semantic/semantic.min.css">
 		<link rel="stylesheet" type="text/css" href="/css/formulario_inicio_sesion.css">
+		<link rel="icon" href="favicon.ico" type="image/x-icon" />
 	</head>
 	
 	<body>
