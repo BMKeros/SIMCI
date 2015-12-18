@@ -5,7 +5,7 @@ class AutenticacionController extends Controller {
 	//tentativo una funcion que muestre todos los usuarios registrados
 	
 	public function getLogin(){
-		return View::make('usuarios.formulario_login');
+		return View::make('autenticacion.formulario_login');
 	}
 
 	public function postLogin(){
