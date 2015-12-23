@@ -14,12 +14,9 @@ class CrearTablaClasificacionElementos extends Migration {
 	{
 		Schema::create('clasificacion_elementos', function(Blueprint $table)
 		{
-			//$table->increments('id');
 			$table->integer('cod_clasificacion');
 			$table->primary('cod_clasificacion');
 			$table->string('descripcion', 25);
-			
-			//$table->nullableTimestamps();
 		});
 	}
 

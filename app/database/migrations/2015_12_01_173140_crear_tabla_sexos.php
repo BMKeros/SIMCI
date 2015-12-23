@@ -16,7 +16,6 @@ class CrearTablaSexos extends Migration {
 		{
 			$table->increments('id');
 			$table->string('descripcion',15);
-			$table->nullableTimestamps();
 		});
 	}
 

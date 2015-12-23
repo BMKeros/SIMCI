@@ -14,7 +14,7 @@ class CrearIndexTablas extends Migration {
 	{
 		//ELEMENTOS QUIMICOS
 		Schema::table('elementos_quimicos', function($table){
-    		$table->foreign('cod_estado')->references('id')
+    		$table->foreign('cod_estado')->references('cod_estado')
     			->on('estados_materia')
     			->onDelete('cascade');;
     		$table->foreign('cod_clasificacion')->references('cod_clasificacion')

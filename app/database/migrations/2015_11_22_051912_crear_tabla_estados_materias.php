@@ -14,11 +14,9 @@ class CrearTablaEstadosMaterias extends Migration {
 	{
 		Schema::create('estados_materia', function(Blueprint $table)
 		{
-			$table->increments('id');
 			$table->integer('cod_estado');
+			$table->primary('cod_estado');
 			$table->string('descripcion', 30);
-			
-			$table->nullableTimestamps();
 		});
 	}
 
