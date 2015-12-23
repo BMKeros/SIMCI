@@ -39,6 +39,10 @@ class CrearIndexTablas extends Migration {
 		//PERSONAS
 		Schema::table('personas', function($table){
 
+			$table->foreign('usuario_id')->references('id')
+				->on('usuarios')
+				->onDelete('cascade');
+
 			$table->foreign('sexo_id')->references('id')
 				->on('sexos')
 				->onDelete('cascade');
