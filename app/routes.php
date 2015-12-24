@@ -13,8 +13,9 @@
 
 Route::get('/', array('uses' => 'AutenticacionController@getLogin'));
 
-Route::controller('/usuarios', 'UsuariosController');
+Route::controller('/usuarios', 'UsuariosController');//ruta para los usuarios
 Route::controller('/autenticacion', 'AutenticacionController');
+Route::controller('/busquedas', 'BusquedasController');//ruta para todas las busquedas del sistema
 
 
 
