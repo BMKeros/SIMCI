@@ -79,3 +79,7 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+
+// Agregamos de manera global las constantes
+
+require app_path().'/constantes/constantes.php';
