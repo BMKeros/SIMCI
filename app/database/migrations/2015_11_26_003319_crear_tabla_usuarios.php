@@ -19,9 +19,9 @@ class CrearTablaUsuarios extends Migration {
 			$table->string('usuario')->unique();
 			$table->string('email', 60)->unique();
 			$table->string('password');
-			$table->integer('permiso_id');
-			$table->integer('tipo_usuario');
-			$table->string('imagen',20);
+			$table->string('cod_permiso',4);
+			$table->string('cod_tipo_usuario',4);
+			$table->string('imagen',20)->default('/');
 			$table->boolean('activo')->default(true);
 			$table->rememberToken();
 			$table->nullableTimestamps();

@@ -14,8 +14,8 @@ class CrearTablaTiposUsuario extends Migration {
 	{
 		Schema::create('tipos_usuario', function($table)
 		{
-			$table->increments('id');
 			$table->string('codigo',4);
+			$table->primary('codigo');
 			$table->string('descripcion',20);
 		});
 	}
