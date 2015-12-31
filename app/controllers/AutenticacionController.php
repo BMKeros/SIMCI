@@ -18,12 +18,14 @@ class AutenticacionController extends Controller {
 		if(Auth::attempt($logindata, Input::get('remember')))
 		{
 			if(Auth::user()->activo){
-				//falta agrgarle la ruta a la que dirigra
-				return Redirect::to('/');
+				
+				$tipo = Auth::user()->cod_tipo_usuario;
+				
+				return redirect_por_tipo($tipo);
 			}
 			else{
 				Auth::logout();
-				return Redirect::to('/autenticacion/login')->with('mensaje_alert', 'Su usuario se encuentra inactivo ');
+				return Redirect::to('/autenticacion/login')->with('mensaje_alerta', 'Su usuario se encuentra inactivo ');
 			}
 		}
 		else{

@@ -30,8 +30,8 @@
 				  				<div class="ui error message" align="center"><i class=" remove circle outline icon"></i>{{Session::get('mensaje_error')}}</div>
 				  			@elseif(Session::has('mensaje_exito'))
 				  				<div class="ui positive message" align="center"><i class="check icon"></i>{{Session::get('mensaje_exito')}}</div>
-				  			@elseif(Session::has('mensaje_alert'))
-								<div class="ui warning message" align="center"><i class="warning sign icon"></i>{{Session::get('mensaje_alert')}}</div>
+				  			@elseif(Session::has('mensaje_alerta'))
+								<div class="ui warning message" align="center"><i class="warning sign icon"></i>{{Session::get('mensaje_alerta')}}</div>
 				  			@endif
 					  		
 
