@@ -7,14 +7,14 @@ class ModulosController extends Controller {
 	}
 
 	public function getAdministracion(){
-		return "Modulo administracion";
+		return View::make('modulos.dashboard_administracion');
 	}
 
 	public function getProfesores(){
-		return "Modulo administracion";
+		return Vien::make('modulos.dashboard_profesor');
 	}
 
 	public function getEstudiantes(){
-		return "Modulo usurios";
+		return Vien::make('modulos.dashboard_estudiante');
 	}
 }
