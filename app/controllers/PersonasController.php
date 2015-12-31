@@ -2,7 +2,9 @@
 
 class PersonasController extends Controller {
 	
-	//tentativo una funcion que muestre todos las personas registradas
+	public function __construct(){
+        $this->beforeFilter('guest', array('except' => ''));
+	}
 	
 	//mostrar formulario de registro de personas
 	public function getRegistroPersonas()

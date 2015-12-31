@@ -2,6 +2,10 @@
 
 class UsuariosController extends Controller {
 	
+	public function __construct(){
+        $this->beforeFilter('guest', array('except' => ''));
+	}
+	
 	public function getNuevoUsuario(){
 
 		//falta agg la ruta para el registro de un nuevo usuario

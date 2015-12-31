@@ -2,6 +2,10 @@
 
 class ModulosController extends Controller {
 
+	public function __construct(){
+        $this->beforeFilter('guest', array('except' => ''));
+	}
+
 	public function getAdministracion(){
 		return "Modulo administracion";
 	}

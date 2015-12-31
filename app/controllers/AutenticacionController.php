@@ -1,8 +1,11 @@
 <?php
 
 class AutenticacionController extends Controller {
+
+	public function __construct(){
+        $this->beforeFilter('guest', array('except' => 'getLogin'));
+	}
 	
-	//tentativo una funcion que muestre todos los usuarios registrados
 	
 	public function getLogin(){
 		return View::make('autenticacion.formulario_login');
