@@ -1,8 +1,9 @@
 var reglas_formulario_login = {
    on: 'blur',
+   duration: 40,
    fields: {
       usuario: {
-         identifier: 'usuario',
+        identifier: 'usuario',
     		rules:[
             {
                type:'empty',
