@@ -7,12 +7,12 @@ class TiposUsuarioTableSeeder extends Seeder {
        DB::table('tipos_usuario')->delete();
 
         $campos = array(
-        	array('codigo' => 'TU01', 'descripcion' => 'Root'),
-        	array('codigo' => 'TU02', 'descripcion' => 'Administrador'),
-        	array('codigo' => 'TU03', 'descripcion' => 'Profesor'),
-        	array('codigo' => 'TU04', 'descripcion' => 'Estudiante'),
-        	array('codigo' => 'TU05', 'descripcion' => 'Almacenista'),
-        	array('codigo' => 'TU06', 'descripcion' => 'Supervisor'),
+        	array('codigo' => TIPO_USER_ROOT, 'descripcion' => 'Root'),
+        	array('codigo' => TIPO_USER_ADMIN, 'descripcion' => 'Administrador'),
+        	array('codigo' => TIPO_USER_PROFESOR, 'descripcion' => 'Profesor'),
+        	array('codigo' => TIPO_USER_ESTUDIANTE, 'descripcion' => 'Estudiante'),
+        	array('codigo' => TIPO_USER_ALMACENISTA, 'descripcion' => 'Almacenista'),
+        	array('codigo' => TIPO_USER_SUPERVISOR, 'descripcion' => 'Supervisor'),
         );
 
         DB::table('tipos_usuario')->insert($campos);
