@@ -13,6 +13,17 @@
 
 Route::get('/', array('uses' => 'AutenticacionController@getLogin'));
 
+//Metodo para Ng-route
+
+Route::get('/views/{nombre}', function($nombre) {
+  	$view_path = $nombre;
+
+  	if (View::exists($view_path)) {
+    	return View::make($view_path);
+  	}
+  	App::abort(404);
+});
+
 Route::controller('/usuarios', 'UsuariosController');//ruta para los usuarios
 Route::controller('/autenticacion', 'AutenticacionController');
 Route::controller('/buscar', 'BusquedasController');//ruta para todas las busquedas del sistema
