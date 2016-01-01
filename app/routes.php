@@ -14,7 +14,6 @@
 Route::get('/', array('uses' => 'AutenticacionController@getLogin'));
 
 //Metodo para Ng-route
-
 Route::get('/views/{nombre}', function($nombre) {
   	$view_path = $nombre;
 
