@@ -21,7 +21,7 @@
 
 	@section('barra-usuario')
 		<header><!--Barra de navegacion usuario-profesor-->
-  			<div class="ui attached stackable menu">
+<!--  			<div class="ui attached stackable menu">
     			<a class="item"><i class="home icon"></i> SIMCI</a>
     			
     			<div class= "item" style="left: 900px; "><!--Dropdown para notificaciones-->
@@ -60,6 +60,33 @@
         				</div>
       				</div>
     			</div><!--Fin del Dropdown de Notificaciones-->
+    			-->
+    			<div class="ui fixed menu">
+	    <div class="ui container">
+	    	<a href="#" class="header item">
+	        	<img class="logo" src="/img/logo.png">
+	        	&nbsp;&nbsp;&nbsp;SIMCI
+	      	</a>
+	      	<div class="ui simple dropdown right item">
+		        {{ ucfirst(Auth::user()->usuario )}} <i class="dropdown icon"></i>
+		        <div class="menu">
+		          <a class="item" href="#">Link Item</a>
+		          <a class="item" href="#">Link Item</a>
+		          <div class="divider"></div>
+		          <div class="header">Header Item</div>
+		          <div class="item">
+		            <i class="dropdown icon"></i>
+		            Sub Menu
+		            <div class="menu">
+		              <a class="item" href="#">Link Item</a>
+		              <a class="item" href="#">Link Item</a>
+		            </div>
+		          </div>
+		          <a class="item" href="#">Link Item</a>
+		        </div>
+		      </div>
+	    </div>
+  	</div>
 
     			<div class="right item" style="padding-right: 10px; "><!--Css para ubicar dropdown-->
     				<div class="ui floating labeled icon dropdown button"><!--Dropdwn para ajustes-->
@@ -157,9 +184,9 @@
 		</div>
 	@show
 	
-	<script src="js/jquery.min.js"></script>
-	<script src="js/scripts_plantilla_usuario.js"></script>
-	<script src="semantic/semantic.min.js"></script>	
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/scripts_plantilla_usuario.js"></script>
+	<script src="/semantic/semantic.min.js"></script>	
 	
 	@section('js')
 	@show	
