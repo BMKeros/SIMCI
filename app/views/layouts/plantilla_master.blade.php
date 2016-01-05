@@ -20,13 +20,14 @@
 
 	<body>
 
-		@yield('contenido-body')
+		@yield('contenido-body-master')
 
 		<script src="/bower_components/jquery/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="/js/angular/ng-controladores.js"></script>
+		<script src="/js/angular/ng-routes.js"></script>
 		
 		@section('js')
 		@show	

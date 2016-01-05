@@ -10,7 +10,7 @@
 @stop
 	
 
-@section('contenido-body')
+@section('contenido-body-master')
 	
 	<div class="ui fixed menu">
 	    <div class="ui container">
