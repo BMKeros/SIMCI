@@ -21,8 +21,11 @@ Route::get('/views/{folder}/{name_template}', function($folder,$name_template) {
   	if (View::exists($view_path)) {
     	return View::make($view_path);
   	}
-  	App::abort(404);
+  	else{
+  		return Response::json("Vista no Encontrada [404]", 404);
+  	}
 });
+
 
 Route::controller('/usuarios', 'UsuariosController');//ruta para los usuarios
 Route::controller('/autenticacion', 'AutenticacionController');
