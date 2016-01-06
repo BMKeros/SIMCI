@@ -1,4 +1,4 @@
-@extends('layouts.estudiante_base')
+@extends('modulos.dashboard_estudiante')
 	@section('barra-usuarios')
 	@parent
 		<div class="ui ten column doubling stackable grid container">
