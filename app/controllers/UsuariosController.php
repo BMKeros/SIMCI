@@ -9,7 +9,7 @@ class UsuariosController extends Controller {
 	public function getNuevoUsuario(){
 
 		//falta agg la ruta para el registro de un nuevo usuario
-		return View::make('/');
+		return View::make('usuarios.registrar_usuario');
 	}
 
 	public function postNuevoUsuario(){
