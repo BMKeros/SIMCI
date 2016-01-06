@@ -1,12 +1,11 @@
 <?php
 
 class AutenticacionController extends Controller {
-
+	
 	public function __construct(){
-        $this->beforeFilter('guest', array('except' => 'getLogin'));
+		$this->beforeFilter('CheckAuth',array('except'=>array('getLogout')));
 	}
-	
-	
+
 	public function getLogin(){
 		return View::make('autenticacion.formulario_login');
 	}

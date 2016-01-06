@@ -14,19 +14,20 @@
 		@section('css')
 		@show
 
-		<link rel="icon" href="favicon.ico" type="image/x-icon" />
+		<link rel="icon" href="/img/logo.png" type="image/x-icon" />
 
 	</head>
 
 	<body>
 
-		@yield('contenido-body')
+		@yield('contenido-body-master')
 
-		<script src="/js/jquery.min.js"></script>
+		<script src="/bower_components/jquery/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>
-		<script src="/js/angular/angular.min.js"></script>	
-
+		<script src="/bower_components/angular/angular.min.js"></script>	
+		<script src="/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="/js/angular/ng-controladores.js"></script>
+		<script src="/js/angular/ng-routes.js"></script>
 		
 		@section('js')
 		@show	

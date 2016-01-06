@@ -10,10 +10,16 @@
 @stop
 	
 
-@section('contenido-body')
-	<div class="ui large attached stackable menu">
-    	<a class="item" href="/"><i class="home icon"></i> SIMCI</a>
-	</div>
+@section('contenido-body-master')
+	
+	<div class="ui fixed menu">
+	    <div class="ui container">
+	    	<a href="#" class="header item">
+	        	<img class="logo" src="/img/logo.png">
+	        	&nbsp;&nbsp;&nbsp;SIMCI
+	      	</a>
+	    </div>
+  	</div>
 	
 
 	<div class="ui two column doubling stackable grid container">
@@ -35,7 +41,7 @@
 				  			@endif
 					  		
 
-		   			    	<form class="ui form" id="form-inicio-sesion" action="/autenticacion/login" method="POST">
+		   			    	<form class="ui large form" id="form-inicio-sesion" action="/autenticacion/login" method="POST">
 					      		<div class="field">
 					        		<label>Usuario</label>
 					        		<div class="ui left icon input">

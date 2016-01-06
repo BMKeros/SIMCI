@@ -88,3 +88,30 @@ Route::filter('csrf', function()
 		throw new Illuminate\Session\TokenMismatchException;
 	}
 });
+
+
+///Filtro para redireccionar si esta autenticado
+
+Route::filter('CheckAuth', function()
+{
+	if(Auth::check()){
+		
+		$tipo = Auth::user()->cod_tipo_usuario;
+				
+		return redirect_por_tipo($tipo);
+	}
+});
+
+Route::filter('CheckGuest', function()
+{
+	if (Auth::guest()){
+		if (Request::ajax())
+		{
+			return Response::make('Unauthorized', 401);
+		}
+		else
+		{
+			return Redirect::guest('/autenticacion/login');
+		}
+	}
+});
