@@ -5,7 +5,7 @@
 		    	<div class="ten wide column">
 				  	<div class="column">
 
-	   			    	<form class="ui form" id="form-inicio-sesion">
+	   			    	<form class="ui form" id="form-nuevo-usuario">
 					      	<div class="field">
 				        		<div class="ui left icon input">
 				          			<input type="text" placeholder="Usuario" id="usuario" name="usuario">

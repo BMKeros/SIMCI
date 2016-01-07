@@ -5,11 +5,18 @@ class UsuariosController extends Controller {
 	public function __construct(){
         $this->beforeFilter('guest', array('except' => ''));
 	}
+
+	public function getTodosUsuarios(){
+		$usuarios = Usuario::all();
+
+		return json_encode($usuarios);
+	}
 	
 	public function getNuevoUsuario(){
 
 		//falta agg la ruta para el registro de un nuevo usuario
-		return View::make('usuarios.registrar_usuario');
+		//return View::make('usuarios.registrar_usuario');
+		return View::make('buscador_prueba');
 	}
 
 	public function postNuevoUsuario(){
