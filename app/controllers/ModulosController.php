@@ -11,10 +11,10 @@ class ModulosController extends Controller {
 	}
 
 	public function getProfesores(){
-		return Vien::make('modulos.dashboard_profesor');
+		return View::make('modulos.dashboard_profesor');
 	}
 
 	public function getEstudiantes(){
-		return Vien::make('modulos.dashboard_estudiante');
+		return View::make('modulos.dashboard_estudiante');
 	}
 }

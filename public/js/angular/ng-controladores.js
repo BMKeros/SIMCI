@@ -8,6 +8,10 @@ simci.controller('BuscarReactivoController',  ['$scope','$http','$log', function
 }]);
 
 //Ejemplo del controlador de las vistas de ng-route
-simci.controller('PruebaController',  ['$scope','$http','$log', function ($scope, $http, $log){
-    $log.info("algo");
-}]);
+
+simci.controller('PruebaController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
+  function ($scope, $http, $log , $route, $routeParams, $location){
+    $log.info($routeParams);
+    $log.info($location);
+  }]
+);

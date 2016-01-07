@@ -7,7 +7,7 @@
    			    	<form class="ui form" id="">
 				      	<div class="field">
 			        		<div class="ui left icon input">
-			          			<input type="text" placeholder="Usuario" id="usuario" name="usuario" ng-model="M_usaurio">
+			          			<input type="text" placeholder="Usuario" id="usuario" name="usuario" ng-model="M_usuario">
 			          			<i class="user icon"></i>
 			        		</div>
 		      			</div>
