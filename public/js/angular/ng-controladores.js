@@ -1,27 +1,23 @@
-(function(){
+(function(GlobalApp){
 
-  var simci = angular.module('SIMCI', ['ngRoute'], function($interpolateProvider) {
-          $interpolateProvider.startSymbol('<%');
-          $interpolateProvider.endSymbol('%>');
-  });
+  if( typeof GlobalApp !== 'undefined'){
 
-  simci.controller('BuscarReactivoController',  ['$scope','$http','$log', function ($scope, $http, $log){
-        		
-  }]);
+    simci.controller('BuscarReactivoController',  ['$scope','$http','$log', function ($scope, $http, $log){
+          		
+    }]);
 
-  //Ejemplo del controlador de las vistas de ng-route
 
-  simci.controller('PruebaController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
-    function ($scope, $http, $log , $route, $routeParams, $location){
-      $log.info($routeParams);
-      $log.info($location);
-    }]
-  );
+    simci.controller('PruebaController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
+      function ($scope, $http, $log , $route, $routeParams, $location){
+        $log.info($routeParams);
+        $log.info($location);
+      }]
+    );
+    
+  }
+  else{
 
-  
-  //Seteamos de manera global la app simci
-  window.simci = simci;
+    throw new Error( "La app SIMCI no ha sido declarada en AngularJs" );
+  }
 
-  return simci;
-
-})();
+})(typeof simci === 'undefined' ? undefined : simci);

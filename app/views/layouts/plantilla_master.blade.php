@@ -26,6 +26,7 @@
 		<script src="/semantic/semantic.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
+		<script src="/js/angular/ng-app.js"></script>
 		<script src="/js/angular/ng-controladores.js"></script>
 		<script src="/js/angular/ng-routes.js"></script>
 		
