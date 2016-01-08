@@ -1,21 +1,26 @@
+(function(GlobalApp){
 
-if( typeof simci !== 'undefined'){
+  if( typeof GlobalApp !== 'undefined'){
  
-  simci.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider) {
-    //Esto es solo de prueba asi es que debe llevar el orden
-    $routeProvider.
-      when('/prueba', {
-        templateUrl: '/views/usuarios/registrar_usuario',
-        controller: 'PruebaController'
-      }).
-      otherwise({
-        redirectTo: '/'
-      });
+    GlobalApp.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider) {
+      //Esto es solo de prueba asi es que debe llevar el orden
+      $routeProvider.
+        when('/prueba', {
+          templateUrl: '/views/usuarios/registrar_usuario',
+          controller: 'PruebaController'
+        }).
+        otherwise({
+          redirectTo: '/'
+        });
 
-      //$locationProvider.html5Mode(true);
-  }]);
+        //$locationProvider.html5Mode(true);
+    }]);
 
-}
-else{
-  alert("La app SIMCI no ha sido declarada en AngularJs");
-}
+  }
+  else{
+
+    throw new Error( "La app SIMCI no ha sido declarada en AngularJs" );
+
+  }
+
+})(typeof simci === 'undefined' ? undefined : simci);

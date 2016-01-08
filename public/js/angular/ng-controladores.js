@@ -1,17 +1,27 @@
-var simci = angular.module('SIMCI', ['ngRoute'], function($interpolateProvider) {
-        $interpolateProvider.startSymbol('<%');
-        $interpolateProvider.endSymbol('%>');
-});
+(function(){
 
-simci.controller('BuscarReactivoController',  ['$scope','$http','$log', function ($scope, $http, $log){
-      		
-}]);
+  var simci = angular.module('SIMCI', ['ngRoute'], function($interpolateProvider) {
+          $interpolateProvider.startSymbol('<%');
+          $interpolateProvider.endSymbol('%>');
+  });
 
-//Ejemplo del controlador de las vistas de ng-route
+  simci.controller('BuscarReactivoController',  ['$scope','$http','$log', function ($scope, $http, $log){
+        		
+  }]);
 
-simci.controller('PruebaController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
-  function ($scope, $http, $log , $route, $routeParams, $location){
-    $log.info($routeParams);
-    $log.info($location);
-  }]
-);
+  //Ejemplo del controlador de las vistas de ng-route
+
+  simci.controller('PruebaController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
+    function ($scope, $http, $log , $route, $routeParams, $location){
+      $log.info($routeParams);
+      $log.info($location);
+    }]
+  );
+
+  
+  //Seteamos de manera global la app simci
+  window.simci = simci;
+
+  return simci;
+
+})();
