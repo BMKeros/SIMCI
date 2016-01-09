@@ -35,10 +35,10 @@
 		</div>
 	</header>
 	
-	<div class="ui grid" id="desplegable">
+	<div class="ui grid">
   		<!--Menu Desplegable de Usuario-Profesor-->
   		<div class="eight column row">
-    		<div class="ui left vertical inverted labeled icon sidebar menu" id="usuario">
+    		<div class="ui left vertical inverted labeled icon sidebar menu" id="menu-administracion">
 	    		<a class="item" href="#/prueba">
 	      			<i class="home icon"></i>
 	      			Home
@@ -85,9 +85,9 @@
 		    	</a>
     		</div>
 			
-			<div class="ui animated fade big launch button" id="menu"  style="margin-top:100px;">
+			<div class="ui animated fade big launch button" id="btn-abrir-menu">
       			<div class="hidden content">
-        			<div id="botton">Menu</div>
+        			Menu
       			</div>
       			<div class="visible content">
         			<i class="sidebar icon"></i>
@@ -96,8 +96,6 @@
     		
   		</div>
 
-  		
-		<a href="#/prueba">presiona</a>
 		<div ng-view></div>
 	
 	</div>
@@ -108,8 +106,8 @@
 	<script>
 		$(document).ready(function(){
 
-			$("#menu").click(function(){
-		    	$('#usuario')
+			$("#btn-abrir-menu").click(function(){
+		    	$('#menu-administracion')
 		    	.sidebar({
 		    		transition:'overlay',
 		    		dimPage: false,

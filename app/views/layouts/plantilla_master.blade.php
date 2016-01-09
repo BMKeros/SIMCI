@@ -10,6 +10,7 @@
 		@show
 		
 	  	<link rel="stylesheet" href="/semantic/semantic.min.css" />
+	  	<link rel="stylesheet" href="/css/styles.css" />
 
 		@section('css')
 		@show
