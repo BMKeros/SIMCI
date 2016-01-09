@@ -10,10 +10,14 @@
           controller: 'PruebaController'
         }).
         otherwise({
-          redirectTo: '/'
+          redirectTo: function(){
+            return '/';
+          }
         });
 
+        //$locationProvider.hashPrefix('/'); //Este es usado para darle un pefijo a # de angular
         //$locationProvider.html5Mode(true);
+        
     }]);
 
   }
