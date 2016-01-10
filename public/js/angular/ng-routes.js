@@ -5,9 +5,9 @@
     GlobalApp.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider) {
       //Esto es solo de prueba asi es que debe llevar el orden
       $routeProvider.
-        when('/prueba', {
-          templateUrl: '/views/usuarios/registrar_usuario',
-          controller: 'PruebaController'
+        when('/usuarios', {
+          templateUrl: '/views/usuarios/principal_usuarios',
+          controller: 'UsuariosController'
         }).
         otherwise({
           redirectTo: function(){

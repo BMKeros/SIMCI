@@ -7,8 +7,17 @@
     }]);
 
 
-    simci.controller('PruebaController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
+    simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
       function ($scope, $http, $log , $route, $routeParams, $location){
+        
+        $scope.opciones = [
+          {nombre:"Crear Usuarios"},
+          {nombre:"Ver Usuarios"},
+          {nombre:"Eliminar Usuarios"},
+          {nombre:"Modificar Usuarios"},
+          {nombre:"Actualizar Usuarios"}
+        ];
+        
         $log.info($routeParams);
         $log.info($location);
       }]
