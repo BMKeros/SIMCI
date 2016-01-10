@@ -20,7 +20,7 @@
 			      	<div class="menu">
 			        	<a class="item"><i class="edit icon"></i> Edit Profile</a>
 			        	<a class="item"><i class="globe icon"></i> Choose Language</a>
-			        	<a class="item"><i class="settings icon"></i> Account Settings</a>
+			        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
 			      	</div>
 			    </div>
     		</div>
@@ -29,14 +29,14 @@
 
 
 	<div class="ui left vertical inverted labeled icon sidebar menu" id="menu-administracion">
-		<a class="item" href="#/prueba">
+		<a class="item" href="#">
   			<i class="home icon"></i>
-  			Home
+  			Inicio
 		</a>
 	
-		<a class="item">
-  			<i class="block layout icon"></i>
-  			Topics
+		<a class="item" ng-href="#/usuarios">
+  			<i class="user layout icon"></i>
+  			Usuarios
 		</a>
 	
 		<a class="item">
@@ -84,42 +84,21 @@
 			<i class="sidebar icon"></i>
 		</div>
 	</div>
-
-	
 	
 	<div class="ui container">
 		<div class="ui one column grid">
 			<div class="column">
-			<div ng-view></div>
+				<div ng-view>
+					<div class="ui container">
+					  <div class="ui active inverted dimmer">
+					    <div class="ui large text loader">Cargando</div>
+					  </div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 	
-	<!--<div class="ui cards">
-  				<div class="card">
-    				<div class="content">
-      					<img class="right floated mini ui image" src="/images/avatar/large/elliot.jpg">
-      					<div class="header">
-        					Ver Usuarios
-      					</div>
-      					
-      					<div class="meta">
-        					Descripcion
-      					</div>
-      					
-      					<div class="description">
-        					Esta opcion podras ver todos los usuarios registrados en el sistema
-      					</div>
-    				</div>
-    				
-    				<div class="extra content">
-      					<div class="ui two buttons">
-        					<div class="ui basic green button">Approve</div>
-      					</div>
-    				</div>
-  				</div>
-  				</div>-->
-
   	<footer>
   		<div class="ui bottom fixed menu barra_inferior">
 		  	<div class="item right">

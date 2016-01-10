@@ -22,6 +22,7 @@
 
 		@yield('contenido-body-master')
 
+
 		<script src="/bower_components/jquery/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
@@ -37,6 +38,7 @@
 
 			$(document).ready(function(){
 				TOOLS_APP.ver_reloj();
+				$('.ui.basic.modal').modal('show');
 			});
 			
 		</script>
