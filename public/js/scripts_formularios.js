@@ -35,3 +35,5 @@ var reglas_formulario_login = {
   	},
    inline: true
 };
+
+
