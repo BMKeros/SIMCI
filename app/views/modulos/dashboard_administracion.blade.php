@@ -89,7 +89,7 @@
 	
 	<div class="ui container">
 		<div class="ui one column grid">
-			<div class="column fondo3">
+			<div class="column">
 			<div ng-view></div>
 			</div>
 		</div>
@@ -121,7 +121,7 @@
   				</div>-->
 
   	<footer>
-  		<div class="ui bottom fixed menu">
+  		<div class="ui bottom fixed menu barra_inferior">
 		  	<div class="item right">
 		  		<a class="ui teal tag label">
 		  			<span id="reloj">0:00:00</span>
