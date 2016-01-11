@@ -1,0 +1,29 @@
+#btn-abrir-menu {
+  margin-top:60px; 
+  padding:10px 30px 10px 50px;
+  margin-bottom: 10px;
+}
+
+#reloj {
+  font-size: 17px;
+  padding-left: 5px;
+}
+
+.barra_inferior{
+	background-color: #FFB177 !important;
+}
+
+.espacio_buttom{
+	margin-bottom: 100px;
+}
+
+
+.fondo1{
+  background-color: red;
+}
+.fondo2{
+  background-color: blue;
+}
+.fondo3{
+  background-color: yellow;
+}

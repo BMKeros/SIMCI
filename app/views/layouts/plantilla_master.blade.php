@@ -10,25 +10,39 @@
 		@show
 		
 	  	<link rel="stylesheet" href="/semantic/semantic.min.css" />
+	  	<link rel="stylesheet" href="/css/styles.css" />
 
 		@section('css')
 		@show
 
 		<link rel="icon" href="/img/logo.png" type="image/x-icon" />
-
 	</head>
 
 	<body>
 
 		@yield('contenido-body-master')
 
+
 		<script src="/bower_components/jquery/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
+		<script src="/js/moment-with-locales.min.js"></script>
+		
+		<script src="/js/scripts_app.js"></script>
+		<script src="/js/angular/ng-app.js"></script>
 		<script src="/js/angular/ng-controladores.js"></script>
 		<script src="/js/angular/ng-routes.js"></script>
 		
+		<script>
+
+			$(document).ready(function(){
+				TOOLS_APP.ver_reloj();
+				$('.ui.basic.modal').modal('show');
+			});
+			
+		</script>
+
 		@section('js')
 		@show	
 	</body>

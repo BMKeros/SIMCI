@@ -26,7 +26,6 @@ Route::get('/views/{folder}/{name_template}', function($folder,$name_template) {
   	}
 });
 
-
 Route::controller('/usuarios', 'UsuariosController');//ruta para los usuarios
 Route::controller('/autenticacion', 'AutenticacionController');
 Route::controller('/buscar', 'BusquedasController');//ruta para todas las busquedas del sistema
