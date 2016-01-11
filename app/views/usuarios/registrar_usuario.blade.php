@@ -3,8 +3,6 @@
 		<div class="column">
 	    	<div class="ten wide column">
 			  	<div class="column">
-
-<<<<<<< HEAD
 	   			    	<form class="ui form" id="form-nuevo-usuario">
 					      	<div class="field">
 				        		<div class="ui left icon input">
@@ -12,7 +10,6 @@
 				          			<i class="user icon"></i>
 				        		</div>
 			      			</div>
-=======
    			    	<form class="ui form" id="">
 				      	<div class="field">
 			        		<div class="ui left icon input">
@@ -20,7 +17,6 @@
 			          			<i class="user icon"></i>
 			        		</div>
 		      			</div>
->>>>>>> b18cf4cdcb43a85be42bf203c4452e794c4df557
 
 				      	<div class="field">
 			        		<div class="ui left icon input">
