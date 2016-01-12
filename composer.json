@@ -17,7 +17,7 @@
 			"app/tests/TestCase.php"
 		],
 		"files": [
-            "app/helpers/helpers_db.php"
+            "app/helpers/helpers.php"
         ]
 	},
 	"scripts": {
