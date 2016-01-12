@@ -11,6 +11,7 @@
         }).
         otherwise({
           redirectTo: function(){
+
             return '/';
           }
         });

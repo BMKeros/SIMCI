@@ -22,12 +22,19 @@ class UsuariosController extends Controller {
 	public function postNuevoUsuario(){
 		$usuario = new Usuario;
 
-		$usuario->usuario = Input::get('');
-		$usuario->email = Input::get('');
-		$usuario->password = Input::get('');
-		$usuario->permiso_id = Input::get('');
-		$usuario->tipo_id = Input::get('');
-		$usuario->activo = true;
+		$usuario->usuario = Input::get('usuario');
+		$usuario->email = Input::get('email');
+		$usuario->password = Input::get('password');
+		//comentado las siguientes 3 ineas porque aun no se obtienen esos campos en el formulario
+		//$usuario->permiso_id = Input::get('');
+		//$usuario->tipo_id = Input::get('');
+		//$usuario->activo = true;
+		if($usuario->save()){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 	public function getActualizarUsuario($id){

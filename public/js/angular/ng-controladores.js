@@ -20,6 +20,21 @@
         
         $log.info($routeParams);
         $log.info($location);
+
+
+        $scope.registrar_nuevo_usuario = function(){
+          $http({
+            method: 'POST',
+            url: '/usuarios/nuevo-usuario',
+            usuario: '$scope.M_usuario',
+            email: '$scope.M_email',
+            password: '$scope.M_password'
+          }).then(function success(data){
+            console.log(data);
+          },function error(data_error){
+            console.log(data_error);
+          });
+        }
       }]
     );
     
