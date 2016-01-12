@@ -39,17 +39,17 @@
   			Usuarios
 		</a>
 	
-		<a class="item">
-  			<i class="smile icon"></i>
-  			Friends
+		<a class="item" ng-href="#/catalogo">
+  			<i class="shop icon"></i>
+  			Catalogo
+		</a>
+
+		<a class="item" ng-href="#/inventario">
+  			<i class="archive icon"></i>
+  			Inventario
 		</a>	
 	
-		<a class="item">
-  			<i class="calendar icon"></i>
-  			History
-		</a>
-	
-	   		<a class="item">
+	   	<a class="item">
   			<i class="mail icon"></i>
   			Messages
 		</a>
@@ -89,11 +89,11 @@
 		<div class="ui one column grid">
 			<div class="column">
 				<div ng-view>
-					<div class="ui container">
+					<!--<div class="ui container">
 					  <div class="ui active inverted dimmer">
 					    <div class="ui large text loader">Cargando</div>
 					  </div>
-					</div>
+					</div>-->
 				</div>
 			</div>
 		</div>
