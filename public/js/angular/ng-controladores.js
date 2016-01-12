@@ -53,9 +53,11 @@
           $http({
             method: 'POST',
             url: '/usuarios/nuevo-usuario',
-            usuario: '$scope.M_usuario',
-            email: '$scope.M_email',
-            password: '$scope.M_password'
+            {
+              usuario: '$scope.M_usuario',
+              email: '$scope.M_email',
+              password: '$scope.M_password'
+            }
           }).then(function success(data){
             console.log(data);
           },function error(data_error){
