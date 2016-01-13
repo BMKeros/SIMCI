@@ -20,21 +20,33 @@ class UsuariosController extends Controller {
 	}
 
 	public function postNuevoUsuario(){
-		$usuario = new Usuario;
+		$nuevo_usuario = new Usuario;
 
-		$usuario->usuario = Input::get('usuario');
-		$usuario->email = Input::get('email');
-		$usuario->password = Input::get('password');
-		//comentado las siguientes 3 ineas porque aun no se obtienen esos campos en el formulario
-		//$usuario->permiso_id = Input::get('');
-		//$usuario->tipo_id = Input::get('');
-		//$usuario->activo = true;
-		if($usuario->save()){
-			return true;
+		$usuario = Input::get('usuario');
+		$email = Input::get('email');
+		$password = Input::get('password');
+
+		$existe_usuario = Usuario::find($usuario);
+		$existe_email = Usuario::find($email);
+
+		if($existe_usuario){
+			return "Usuairo ya esta en uso, Intenta con otro";
 		}
 		else{
-			return false;
+			if($existe_email){
+				return "Email ya esta en uso, Intenta con otro";
+			}
+			else{
+				$nuevo_usuario->usuario = $usuario;
+				$nuevo_usuario->email = $email;
+				$nuevo_usuario->password = $password;
+
+				$nuevo_usuario->save();
+
+				return "Registro con Exito";
+			}
 		}
+		
 	}
 
 	public function getActualizarUsuario($id){
