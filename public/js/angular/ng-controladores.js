@@ -48,23 +48,29 @@
         $log.info($routeParams);
         $log.info($location);
 
-        /*
+        
         $scope.registrar_nuevo_usuario = function(){
+
+          var datos = {};
+
+          datos.usuario = $scope.M_usuario;
+
           $http({
             method: 'POST',
-            url: '/usuarios/nuevo-usuario',
-            {
+            url: '/api/usuarios/nuevo-usuario',
+            data: {
               usuario: '$scope.M_usuario',
               email: '$scope.M_email',
               password: '$scope.M_password'
             }
-          }).then(function success(data){
+          }).then(function(data){
             console.log(data);
-          },function error(data_error){
+          },function(data_error){
             console.log(data_error);
           });
+        }
 
-        }*/
+
       }]
     );
 
@@ -137,12 +143,12 @@
         $scope.modulo.opciones = [
           {
             nombre:"registrar objeto",
-            descripcion: "Esta opcion le permitira crear nuevos objetos en el inventario",
+            descripcion: "Esta opcion le permitira añadir nuevos objetos al catalogo",
             url: "#/"
           },
           {
-            nombre:"ver inventario",
-            descripcion: "Esta opcion le permitira ver los objetos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
+            nombre:"ver catalogo",
+            descripcion: "Esta opcion le permitira ver los objetos del catalogo, a su vez tambien podra modificar o eliminar dichos objetos",
             url: "#/"
           },
           
