@@ -20,31 +20,41 @@ class UsuariosController extends Controller {
 	}
 
 	public function postNuevoUsuario(){
-		$nuevo_usuario = new Usuario;
+
 
 		$usuario = Input::get('usuario');
 		$email = Input::get('email');
 		$password = Input::get('password');
 
-		$existe_usuario = Usuario::find($usuario);
-		$existe_email = Usuario::find($email);
+        $reglas = array(
+            'usuario' =>'required|unique:usuarios' ,
+            'email' =>'required|email|unique:usuarios' ,
+        );
 
-		if($existe_usuario){
-			return "Usuairo ya esta en uso, Intenta con otro";
+        $campos = array('usuario'=>$usuario,
+                        'email'=>$email
+        );
+
+        $mensajes = array(
+            'unique' => 'Este :attribute ya existe',
+        );
+
+        $validacion = Validator::make($campos,$reglas,$mensajes);
+        
+
+		if($validacion->fails()){
+			return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
 		}
 		else{
-			if($existe_email){
-				return "Email ya esta en uso, Intenta con otro";
-			}
-			else{
-				$nuevo_usuario->usuario = $usuario;
-				$nuevo_usuario->email = $email;
-				$nuevo_usuario->password = $password;
+			
+			$nuevo_usuario = new Usuario;
+			$nuevo_usuario->usuario = $usuario;
+			$nuevo_usuario->email = $email;
+			$nuevo_usuario->password = $password;
 
-				$nuevo_usuario->save();
+			$nuevo_usuario->save();
 
-				return "Registro con Exito";
-			}
+			return Response::json(array('resultado'=>true, 'mensajes'=>'Usuario creado con exito'));
 		}
 		
 	}
