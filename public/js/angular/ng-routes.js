@@ -33,6 +33,13 @@
           controller: 'InventarioController'
         }).
 
+
+        //Rutas para catalogo
+        when('/catalogo', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'CatalogoController'
+        }).
+
         otherwise({
           redirectTo: function(){
 
