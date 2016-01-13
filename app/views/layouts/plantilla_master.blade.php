@@ -37,8 +37,7 @@
 		<script>
 
 			$(document).ready(function(){
-				TOOLS_APP.ver_reloj();
-				$('.ui.basic.modal').modal('show');
+				TOOLS_APP.ver_reloj();			
 			});
 			
 		</script>
