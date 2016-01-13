@@ -15,6 +15,7 @@
          <div class="column" ng-repeat="opcion in modulo.opciones">
             
             <div class="ui fluid card">
+            	
                <div class="content">
                   <!--<img class="right floated mini ui image" src="/images/avatar/large/elliot.jpg">-->
                   <i class="right floated bordered user icon"></i>
