@@ -14,15 +14,19 @@
         			&nbsp;&nbsp;&nbsp;SIMCI
       			</a>
       			
-		      	<div class="ui simple dropdown right item">
-
-  					{{ ucfirst(Auth::user()->usuario )}}	
-			      
-			     	<i class="dropdown icon"></i>
-			      	<div class="menu">
-			        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
-			      	</div>
-			    </div>
+      			<div class="right menu">
+      				<a class="item">
+      					Notificaciones
+      					<div class="ui red label">22</div>
+      				</a>
+			      	<div class="ui simple dropdown item">
+	  					{{ ucfirst(Auth::user()->usuario )}}	
+				     	<i class="dropdown icon"></i>
+				      	<div class="menu">
+				        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
+				      	</div>
+				    </div>
+				</div>
     		</div>
 		</div>
 	</header>
