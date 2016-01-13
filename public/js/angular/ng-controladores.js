@@ -48,7 +48,7 @@
         $log.info($routeParams);
         $log.info($location);
 
-
+        /*
         $scope.registrar_nuevo_usuario = function(){
           $http({
             method: 'POST',
@@ -63,7 +63,8 @@
           },function error(data_error){
             console.log(data_error);
           });
-        }
+
+        }*/
       }]
     );
 
@@ -95,6 +96,7 @@
       }]
     );
     
+    return simci;
   }
   else{
 
