@@ -15,11 +15,11 @@
       			</a>
       			
 		      	<div class="ui simple dropdown right item">
-			      {{ ucfirst(Auth::user()->usuario )}}
+
+  					{{ ucfirst(Auth::user()->usuario )}}	
+			      
 			     	<i class="dropdown icon"></i>
 			      	<div class="menu">
-			        	<a class="item"><i class="edit icon"></i> Edit Profile</a>
-			        	<a class="item"><i class="globe icon"></i> Choose Language</a>
 			        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
 			      	</div>
 			    </div>
@@ -40,7 +40,7 @@
 		</a>
 	
 		<a class="item" ng-href="#/catalogo">
-  			<i class="shop icon"></i>
+  			<i class="book icon"></i>
   			Catalogo
 		</a>
 
