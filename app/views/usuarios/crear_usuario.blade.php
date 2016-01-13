@@ -50,7 +50,7 @@
 											  	<option value="tipo1">PrimerASFASFASFAo</option>
 											 	<option value="tipo2">SeguasdfbasdjkASDndo</option>
 											 	<option value="tipo2">TercaSasfaserasfASFASo</option>
-											 	<option value="tipo4">CuaASaSDASDAISJDAISJDOAISJdoAISJDOAIJSodiaJSODAJSoJDAOSIJDAOSIjdoAISJDOAISJdoaIJSDOAIJSDoaIJSDOAIJSdoIJASOsjdhakjsdbkajshdlkjahslkhsdlkaHSDLKAHSLDkjaHSLKDJHALSKJdhADFAYSaGDKAGHDIAULShdiALUSHDIAUShdIUASHDIAUSdrto</option>
+											 	<option value="tipo4">Cuarto</option>
 											</select>
 										</div>
 									</div>
