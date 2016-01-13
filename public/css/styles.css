@@ -9,6 +9,11 @@
   padding-left: 5px;
 }
 
+
+.capitalize{
+  text-transform: capitalize;
+}
+
 .barra_inferior{
 	background-color: #FFB177 !important;
 }

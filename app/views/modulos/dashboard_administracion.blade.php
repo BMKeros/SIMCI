@@ -1,10 +1,10 @@
-@extends('layouts.plantilla_base_modulos')
+@extends('layouts.plantilla_master')
 
 @section('titulo')
 	<title>SIMCI - Administracion</title>
 @stop
 
-@section('contenido-body')
+@section('contenido-body-master')
 	
 	<header>
   		<div class="ui fixed menu">
