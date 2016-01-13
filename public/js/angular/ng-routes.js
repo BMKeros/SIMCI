@@ -11,7 +11,7 @@
           controller: 'UsuariosController'
         }).
         when('/usuarios/crear', {
-          templateUrl: '/views/usuarios/registrar_usuario',
+          templateUrl: '/views/usuarios/crear_usuario',
           controller: 'UsuariosController'
         }).
         when('/usuarios/ver/:param', {
