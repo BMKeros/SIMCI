@@ -34,7 +34,7 @@
                   
                <div class="extra content">
                      <div class="ui two buttons">
-                        <a class="ui basic green button" href="<% opcion.url %>">Entrar</a>
+                        <a class="ui basic green button" href="<% opcion.url %>">Acceder</a>
                      </div>
                </div>
             </div>
