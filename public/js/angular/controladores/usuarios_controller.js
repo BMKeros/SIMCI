@@ -48,15 +48,13 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
       var datos = {};
 
       datos.usuario = $scope.M_usuario;
+      datos.email = $scope.M_email;
+      datos.password = $scope.M_password;
 
       $http({
         method: 'POST',
         url: '/api/usuarios/nuevo-usuario',
-        data: {
-          usuario: '$scope.M_usuario',
-          email: '$scope.M_email',
-          password: '$scope.M_password'
-        }
+        datos
       }).then(function(data){
         console.log(data);
       },function(data_error){
