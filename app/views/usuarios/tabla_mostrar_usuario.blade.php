@@ -1,5 +1,4 @@
 @extends('layouts.plantilla_master')
-@section ('contenido-body-master')
   <div class="ui two column doubling stackable grid container">
     <div class="ui one column centered grid">
       <div class="column">
@@ -250,11 +249,3 @@
       </div>
     </div>
   </div>
-  @stop
-@section('js')
-
-<script>
-  $('.button')
-    .popup();
-</script>
-@stop
