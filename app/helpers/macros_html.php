@@ -49,5 +49,3 @@ Form::macro('select_tipo_usuario', function(){
 
 ?>
 
-?>
-

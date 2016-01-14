@@ -107,11 +107,7 @@
 										</div>
 									</div>
 								</div>
-
 							<button class=" ui mediun right floated teal submit button"  id="btn-inicio-sesion"><i class="check circle icon"></i>Registrar</button>
-
-														
-
 						</form>
 			  		</div>
 				</div>
