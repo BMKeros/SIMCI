@@ -5,10 +5,10 @@
 		    	<div class="ten wide column">
 				  	<div class="column">
 						<div class="ui form">
-							<form class="ui form">
+							<form class="ui form" id="formulario_crear_usuario">
 							  	<div class="field">
 								    <div class="fields">
-								      	<div class="six wide field">
+								      	<div class="eight wide field">
 								        	<input type="text" name="usuario" placeholder="Usuario">
 								      	</div>
 
@@ -19,32 +19,20 @@
 						  		</div>
 
 								<div class="field">
-								    <div class="sixteen wide fields">
-										<div class="field">	
+								    <div class="fields">
+										<div class="eight wide field">	
 								        	<input type="password" name="password" placeholder="Password">
 								        </div>
 
-								      	<div class="field">
+								      	<div class="eight wide field">
 								        	<input type="password" name="password_confirmacion" placeholder="Confirmar Password">
 								      	</div>
-
-								      	<div class="sixteen wide fields">
-									      	<div class="field">
-										      	<select name="gender" class="ui dropdown" id="select">
-												  	<option value="">Tipo Usuario</option>
-												  	<option value="tipo1">Primero</option>
-												 	<option value="tipo2">Segundo</option>
-												 	<option value="tipo2">Tercero</option>
-												 	<option value="tipo4">Cuarto</option>
-												</select>
-											</div>
-										</div>
 								    </div>
 								</div>
 
 								<div class="field">
-									<div class="sixteen wide fields">
-										<div class="field">
+									<div class="fields">
+										<div class="eight wide field">
 									      	<select name="gender" class="ui dropdown" id="select">
 											  	<option value="">Permisos</option>
 											  	<option value="tipo1">Primero</option>
@@ -53,10 +41,22 @@
 											 	<option value="tipo4">Cuarto</option>
 											</select>
 										</div>
+
+										<div class="eight wide field">
+									      	<select name="gender" class="ui dropdown" id="select">
+											  	<option value="">Tipo Usuario</option>
+											  	<option value="tipo1">Primero</option>
+											 	<option value="tipo2">Segundo</option>
+											 	<option value="tipo2">Tercero</option>
+											 	<option value="tipo4">Cuarto</option>
+											</select>
+										</div>
 										
-										<div class="ui toggle checkbox">
+										<div class="field">
+											<div class="ui toggle checkbox">
+												<label>Usuario activo</label>
 												<input type="checkbox" name="public">
-													<label>Activar Usuario</label>
+											</div>
 										</div>
 									</div>
 
@@ -133,3 +133,7 @@
 	</div>
 </div>
 
+
+<script>
+	$('#formulario_crear_usuario').form(reglas_formulario_crear_usuario);
+</script>
