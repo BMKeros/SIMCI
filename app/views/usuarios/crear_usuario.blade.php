@@ -1,11 +1,11 @@
 <div class="ui two column doubling stackable grid container">
 	<div class="ui one column centered grid">
-		<div class="column">
-	    	<div class="ten wide column">
-			  	<div class="column">
-					<div class="ui form">
-						<form class="ui form">
-						  	<h4 class="ui dividing header">Crear Usuario</h4>
+		<h4 class="ui dividing header">Crear Usuario</h4>
+			<div class="column">
+		    	<div class="ten wide column">
+				  	<div class="column">
+						<div class="ui form">
+							<form class="ui form">
 							  	<div class="field">
 								    <div class="fields">
 								      	<div class="six wide field">
@@ -55,8 +55,8 @@
 										</div>
 										
 										<div class="ui toggle checkbox">
-  											<input type="checkbox" name="public">
-  												<label>Activar Usuario</label>
+												<input type="checkbox" name="public">
+													<label>Activar Usuario</label>
 										</div>
 									</div>
 
@@ -64,12 +64,12 @@
 										<input type="file" name="imagen" placeholder="">
 									</div>
 								</div>
-						</form>
-			  		</div>
+							</form>
+				  		</div>
+					</div>
 				</div>
 			</div>
-		</div>
-		
+			
 		<h4 class="ui dividing header">Datos Personales</h4>
 		<div class="column">
 	    	<div class="ten wide column">
