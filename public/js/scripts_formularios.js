@@ -6,16 +6,16 @@ var reglas_formulario_login = {
         identifier: 'usuario',
     		rules:[
             {
-               type:'empty',
-	            prompt:'Este campo no puede quedar vacio, y debe contene entre 5 y 20 caracteres'
+              type:'empty',
+	            prompt:'Este campo no puede quedar vacio'
 	         },
 	         {
 	        	   type:'minLength[5]',
-	        	   prompt:'El campo usuario debe contener minimo 5 caracteres'
+	        	   prompt:'Este campo debe contener minimo {ruleValue} caracteres'
 	        	},
             {
                type:'maxLength[20]',
-               prompt:'Elcampo usuario no debe exceder los 20 caracteres'
+               prompt:'Este campo no debe exceder los {ruleValue} caracteres'
             }
 	     ]
   		},
@@ -28,7 +28,7 @@ var reglas_formulario_login = {
   				},
           {
             type:'minLength[5]',
-            prompt:'La contraseña debe contener como minimo 5 caracteres'
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           }
   			]
   		}
@@ -36,4 +36,44 @@ var reglas_formulario_login = {
    inline: true
 };
 
+
+var reglas_formulario_crear_usuario = {
+  on: 'blur',
+   duration: 40,
+   fields: {
+      usuario: {
+        identifier: 'usuario',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Es campo debe contener minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[20]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+       ]
+      },
+
+      email:{
+        identifier: 'email',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type: 'email',
+            prompt: ''
+          }
+        ]
+      }
+      
+    },
+   inline: true
+};
 
