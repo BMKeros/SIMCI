@@ -3,7 +3,7 @@
 class PersonasController extends Controller {
 	
 	public function __construct(){
-        $this->beforeFilter('guest', array('except' => ''));
+        //$this->beforeFilter('guest', array('except' => ''));
 	}
 	
 	//mostrar formulario de registro de personas
@@ -14,56 +14,48 @@ class PersonasController extends Controller {
 
 	//procesar datos del formulario de personas
 	public function postRegistroPersonas(){
-		//capturamos los datos del formulario
-		$datos = Input::all();
 
-		//guardamos en la db los datos del usuario
-		$persona = new Persona;
+		$p_nombre = Input::get('primer_nombre');
+		$s_nombre = Input::get('segundo_nombre');
+		$p_apellido = Input::get('primer_apellido');
+		$s_apellido = Input::get('segundo_apellido');
+		$cedula = Input::get('cedula');
+		$sexo = Input::get('sexo');
+		$fecha_nacimiento = Input::get('fecha_nacimiento');
+		$usuario = Input::get('usuario_id');
 
-		$persona->primer_nombre = Input::get('primer_nombre');
-		$persona->segundo_nombre = Input::get('segundo_nombre');
-		$persona->primer_apellido = Input::get('primer_apellido');
-		$persona->segundo_apellido = Input::get('segundo_apellido');
-		$persona->cedula = Input::get('cedula');
-		$persona->sexo = Input::get('sexo');
-		$persona->fecha_nacimiento = Input::get('fecha_nacimiento');
-
+		
 		//reglas
-        $reglas = array(
-            'usuario' =>'required|max:50|unique:usuarios|alpha_num' ,
-            'email' =>'required|email|unique:usuarios' ,
-            'password' =>'required|min:4' ,
-       
-        );
+        $reglas = array('cedula' =>'required|unique:personas');
 
-        $campos = array('usuario'=>Input::get('usuario'),
-                        'email'=>Input::get('email'),
-                        'password' => Input::get('password'),
-        );
+        $campos = array('cedula'=>$cedula);
 
-        $mensajes = array(
-            'min' => 'El :attribute debe tener un minimo de :min caracteres!',
-            'email'=> 'El formato del :attribute es invalido',
-            'unique' => 'Este :attribute ya existe',
-        );
+        $mensajes = array('unique' => 'Esta :attribute ya existe');
 
         $validacion = Validator::make($campos,$reglas,$mensajes);
         
     	if($validacion->fails()){
-    		return Redirect::to('/usuarios/crear-usuario')->with('mensaje_error','Error en el formulario');
+    		return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
     	}
 		else{
-			$usuario = new Usuario;
+			
+			$persona = new Persona;
 
-			$usuario->usuario = Input::get('usuario');
-			$usuario->email = Input::get('email');
-			$usuario->password = Input::get('password');
-			$usuario->tipo_usuario = Input::get('tipo_usuario');
-			$usuario->pais_id = Input::get('pais');
+			$persona->primer_nombre = $p_nombre;
+			$persona->segundo_nombre = $s_nombre;
+			$persona->primer_apellido = $p_apellido;
+			$persona->segundo_apellido = $s_apellido;
+			$persona->cedula = $cedula;
+			$persona->sexo = $sexo;
+			$persona->fecha_nacimiento = $fecha_nacimiento;
+			$persona->usuario_id = $usuario;
 
-			$usuario->save();
-
-			return Redirect::to('/usuarios/crear-usuario')->with('mensaje_exito','Usuario creado con exito');
+			return Response::json(array(
+				'resultado'=>false, 
+				'mensajes'=>$validacion->messages()->all(),
+				'datos'=>array('persona_creada'=>$persona->id)
+				)
+			);
 		}
 	}
 

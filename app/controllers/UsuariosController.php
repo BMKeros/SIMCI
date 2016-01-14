@@ -54,7 +54,12 @@ class UsuariosController extends Controller {
 
 			$nuevo_usuario->save();
 
-			return Response::json(array('resultado'=>true, 'mensajes'=>'Usuario creado con exito'));
+			return Response::json(array(
+				'resultado'=>true, 
+				'mensajes'=>'Usuario creado con exito',
+				'datos'=>array('usuario_creado'=>$nuevo_usuario->id)
+				)
+			);
 		}
 		
 	}
