@@ -76,8 +76,6 @@
 
 
 @section('js')
-	<script src="/js/scripts_formularios.js"></script>
-
 	<script>
 		$(document).ready(function(){
 			$('.ui.form').form(reglas_formulario_login);

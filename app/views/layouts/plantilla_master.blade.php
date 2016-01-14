@@ -30,6 +30,7 @@
 		<script src="/js/moment-with-locales.min.js"></script>
 		
 		<script src="/js/scripts_app.js"></script>
+		<script src="/js/scripts_formularios.js"></script>
 		<script src="/js/angular/ng-app.js"></script>
 		<script src="/js/angular/ng-controladores.js"></script>
 		<script src="/js/angular/ng-routes.js"></script>
