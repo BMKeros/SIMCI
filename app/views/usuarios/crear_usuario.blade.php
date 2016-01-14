@@ -13,7 +13,7 @@
 								      	</div>
 
 								      	<div class="sixteen wide field">
-											<input type="text" name="Email" placeholder="Direccion Email">
+											<input type="text" name="email" placeholder="Direccion Email">
 										</div>
 								    </div>
 						  		</div>
