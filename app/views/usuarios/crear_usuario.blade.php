@@ -47,9 +47,9 @@
 										<div class="field">
 									      	<select name="gender" class="ui dropdown" id="select">
 											  	<option value="">Permisos</option>
-											  	<option value="tipo1">PrimerASFASFASFAo</option>
-											 	<option value="tipo2">SeguasdfbasdjkASDndo</option>
-											 	<option value="tipo2">TercaSasfaserasfASFASo</option>
+											  	<option value="tipo1">Primero</option>
+											 	<option value="tipo2">Segundo</option>
+											 	<option value="tipo2">Tercero</option>
 											 	<option value="tipo4">Cuarto</option>
 											</select>
 										</div>
