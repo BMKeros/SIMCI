@@ -34,11 +34,11 @@
 								<div class="field">
 									<div class="fields">
 										<div class="eight wide field">
-									      	{{Form::select_permisos()}}
+									      	{{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos'))}}
 										</div>
 
 										<div class="eight wide field">
-									      	{{Form::select_tipo_usuario()}}
+									      	{{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario'))}}
 										</div>
 									</div>
 									<div class="field">
@@ -103,7 +103,7 @@
 								<div class="field">
 									<div class="fields">
 										<div class="eight wide field">
-											{{Form::select_sexo()}}
+											{{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo'))}}
 										</div>
 									</div>
 								</div>

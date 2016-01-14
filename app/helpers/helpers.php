@@ -22,3 +22,24 @@ function redirect_por_tipo($tipo_usuario = null){
 		return Redirect::to('/')->with(array('mensaje_alerta'=>"Error ha ocurrido un problema con su tipo de usuario"));		
 	}
 }
+
+function atributos_dinamicos($atributos = null){
+	
+	if($atributos && !empty($atributos)){
+		$default_atributos = array('class'=>"ui dropdown capitalize",'id'=>'default', 'name' => 'default');
+
+		foreach ($default_atributos as $key => $value) {
+		  (array_key_exists($key, $atributos))?'':$atributos[$key] = $value;
+		}
+
+		$tmp = "";
+		foreach ($atributos as $key => $value) {
+		  $tmp.= sprintf(" %s=\"%s\" ",$key,$value);
+		}	
+
+		return $tmp;
+	}
+	else{
+		return "";
+	}
+}
