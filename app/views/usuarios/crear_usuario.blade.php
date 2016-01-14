@@ -26,7 +26,7 @@
 								        </div>
 
 								      	<div class="field">
-								        	<input type="password" name="password" placeholder="Confirmar Password">
+								        	<input type="password" name="password_confirmacion" placeholder="Confirmar Password">
 								      	</div>
 
 								      	<div class="sixteen wide fields">
@@ -42,6 +42,7 @@
 										</div>
 								    </div>
 								</div>
+
 								<div class="field">
 									<div class="sixteen wide fields">
 										<div class="field">
