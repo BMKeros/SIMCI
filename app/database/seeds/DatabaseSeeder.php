@@ -21,9 +21,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SubClasificacionElementosSeeder');
 		$this->call('EstadosMateriaSeeder');
 		$this->call('ElementosQuimicosTableSeeder');
-
-		
-
+		$this->call('SexosTableSeeder');
 	}
 }
 

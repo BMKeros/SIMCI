@@ -29,34 +29,22 @@
 								      	</div>
 								    </div>
 								</div>
+								
 
 								<div class="field">
 									<div class="fields">
 										<div class="eight wide field">
-									      	<select name="gender" class="ui dropdown" id="select">
-											  	<option value="">Permisos</option>
-											  	<option value="tipo1">Primero</option>
-											 	<option value="tipo2">Segundo</option>
-											 	<option value="tipo2">Tercero</option>
-											 	<option value="tipo4">Cuarto</option>
-											</select>
+									      	{{Form::select_permisos()}}
 										</div>
 
 										<div class="eight wide field">
-									      	<select name="gender" class="ui dropdown" id="select">
-											  	<option value="">Tipo Usuario</option>
-											  	<option value="tipo1">Primero</option>
-											 	<option value="tipo2">Segundo</option>
-											 	<option value="tipo2">Tercero</option>
-											 	<option value="tipo4">Cuarto</option>
-											</select>
+									      	{{Form::select_tipo_usuario()}}
 										</div>
-										
-										<div class="field">
-											<div class="ui toggle checkbox">
-												<label>Usuario activo</label>
-												<input type="checkbox" name="public">
-											</div>
+									</div>
+									<div class="field">
+										<div class="ui toggle checkbox">
+											<label>Usuario activo</label>
+											<input type="checkbox" name="public">
 										</div>
 									</div>
 
@@ -115,16 +103,15 @@
 								<div class="field">
 									<div class="fields">
 										<div class="eight wide field">
-											<select class="ui dropdown">
-								  				<option value="">Sexo</option>
-												<option value="1">Masculino</option>
-												<option value="0">Femenino</option>
-											</select>
+											{{Form::select_sexo()}}
 										</div>
 									</div>
 								</div>
 
 							<button class=" ui mediun right floated teal submit button"  id="btn-inicio-sesion"><i class="check circle icon"></i>Registrar</button>
+
+														
+
 						</form>
 			  		</div>
 				</div>
@@ -132,8 +119,15 @@
 		</div>
 	</div>
 </div>
-
-
 <script>
 	$('#formulario_crear_usuario').form(reglas_formulario_crear_usuario);
 </script>
+
+<script>
+$('.ui.dropdown')
+  .dropdown({
+    maxSelections: 3
+  })
+;
+</script>
+
