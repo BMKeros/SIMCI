@@ -1,4 +1,3 @@
-@extends('layouts.plantilla_master')
 <div class="ui two column doubling stackable grid container">
 	<div class="ui one column centered grid">
 		<div class="column">
