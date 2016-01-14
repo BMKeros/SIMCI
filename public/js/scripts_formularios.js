@@ -68,10 +68,28 @@ var reglas_formulario_crear_usuario = {
           },
           {
             type: 'email',
-            prompt: ''
+            prompt: 'Introduce una direccion email valida'
           }
         ]
-      }
+      },
+
+      password:{
+        identifier: 'password',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type: 'match[password_confirmacion]',
+            prompt: 'Las contraseñas no coinciden'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Es campo debe contener minimo {ruleValue} caracteres'
+          },
+        ]
+      },
       
     },
    inline: true
