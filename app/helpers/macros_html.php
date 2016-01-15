@@ -2,19 +2,16 @@
 Form::macro('select_permisos', function(){
 	$permisos = DB::table('permisos')->lists('nombre', 'codigo');
 
-	$html = '<div class="ui fluid multiple selection dropdown">';
-	$html .= '<input name="tags" type="hidden">';
-	$html .= '<i class="dropdown icon"></i>';
-	$html .= '<div class="default text">Permisos</div>';
-
-	$html .= '<div class="menu mayuscula">';
+	$html = '<select multiple="" name="skills" class="ui fluid normal dropdown">';
+	$html .= '<option value="">Permisos</option>';
 	        
 	foreach ($permisos as $key => $value){
-	    $html .= sprintf('<div class="item" data-value="%s">%s</div>', $key, $value);
+	    $html .= sprintf('<option value="%s">%s</option>', $key, $value);
 	}    
-	$html .= '</div></div>';
+	$html .= '</select>';
 
 	return $html;
+
 });
 
 

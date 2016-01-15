@@ -125,5 +125,12 @@ $('.ui.dropdown')
     maxSelections: 3
   })
 ;
+
+
+$('.max.example .ui.normal.dropdown')
+  .dropdown({
+    maxSelections: 3
+  })
+;
 </script>
 
