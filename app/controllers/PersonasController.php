@@ -6,8 +6,33 @@ class PersonasController extends Controller {
         //$this->beforeFilter('guest', array('except' => ''));
 	}
 	
-	//mostrar formulario de registro de personas
-	public function getRegistroPersonas(){}
+	public function getTodasPersonas(){
+		$personas = Persona::all();
+
+		return Response::json($personas);
+	}
+
+	public function getVerPersona($id){
+		
+		$persona = Persona::find($id);
+
+		if($persona){
+			return Response::json(array(
+				'resultado'=>true,
+				'mensajes'=> $persona
+				)
+			);
+		}
+		else{
+			return Response::json(array(
+				'resultado'=>false,
+				'mensajes'=> array('error'=>'Error, Persona no encontrada')
+				)
+			,404);
+		}
+	}
+
+
 
 	//procesar datos del formulario de personas
 	public function postRegistroPersonas(){
@@ -106,7 +131,7 @@ class PersonasController extends Controller {
 		}
 	}
 
-	public function postEliminar($id){
+	public function postEliminarPersona($id){
 		
 		$persona = Persona::find($id);
 
