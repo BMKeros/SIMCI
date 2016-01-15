@@ -2,7 +2,7 @@
 	<div class="six wide tablet twelve wide computer column">
 		<div class="ui form">
 			<form class="ui form" id="formulario_crear_usuario">
-				<h3 class="ui dividing header">Datos de usuario</h3>
+				<h3 class="ui centered dividing header">Datos de usuario</h3>
 				
 				<div class="field">
 					<div class="two fields">
@@ -34,10 +34,12 @@
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
+							<label>Permisos</label>
 					      	{{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos'))}}
 						</div>
 
 						<div class="field">
+							<label>Tipo de usuario</label>
 					      	{{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario'))}}
 						</div>
 					</div>
@@ -55,7 +57,7 @@
 				</div>
 
 				<br>
-				<h3 class="ui dividing header">Datos Personales</h3>
+				<h3 class="ui centered dividing header">Datos Personales</h3>
 				
 				<h4 class="ui dividing header">Nombre completo</h4>
 				
