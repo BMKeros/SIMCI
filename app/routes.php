@@ -26,8 +26,8 @@ Route::get('/views/{folder}/{name_template}', function($folder,$name_template) {
   	}
 });
 
-//Aqui van todos los controladores que se prestaran como api
 
+//Aqui van todos los controladores que se prestaran como api
 Route::group(array('prefix' => 'api'), function(){
 	Route::controller('/usuarios', 'UsuariosController');//ruta para los usuarios
 });
@@ -36,3 +36,4 @@ Route::group(array('prefix' => 'api'), function(){
 Route::controller('/autenticacion', 'AutenticacionController');
 Route::controller('/buscar', 'BusquedasController');//ruta para todas las busquedas del sistema
 Route::controller('/modulos', 'ModulosController');
+

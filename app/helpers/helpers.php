@@ -43,3 +43,12 @@ function atributos_dinamicos($atributos = null){
 		return "";
 	}
 }
+
+function quitar_espacios($input = ''){
+	return str_replace(array(' ','   '), '', $input);
+}
+
+function input_default($input = '', $default = ''){
+	$num_char = strlen(quitar_espacios($input));
+	return ($num_char == 0)? ($default): ($input);
+}

@@ -38,8 +38,8 @@ var reglas_formulario_login = {
 
 
 var reglas_formulario_crear_usuario = {
-  on: 'blur',
-   duration: 40,
+   on: 'blur',
+   duration: 20,
    fields: {
       usuario: {
         identifier: 'usuario',

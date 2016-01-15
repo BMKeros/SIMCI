@@ -13,6 +13,10 @@
   text-transform: capitalize;
 }
 
+.mayuscula{
+  text-transform: uppercase;
+}
+
 .barra_inferior{
 	background-color: #FFB177 !important;
 }

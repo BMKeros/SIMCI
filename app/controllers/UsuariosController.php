@@ -99,3 +99,5 @@ class UsuariosController extends Controller {
 		return View::make('/')->with('mensaje', 'usuario eliminado con exito.!');
 	}
 }
+
+

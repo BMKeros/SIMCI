@@ -7,10 +7,7 @@ class PersonasController extends Controller {
 	}
 	
 	//mostrar formulario de registro de personas
-	public function getRegistroPersonas()
-	{
-		return View::make('personas.registro_personas');
-	}
+	public function getRegistroPersonas(){}
 
 	//procesar datos del formulario de personas
 	public function postRegistroPersonas(){
@@ -59,40 +56,75 @@ class PersonasController extends Controller {
 		}
 	}
 
-	public function getActualizarPersona($id){
-		
-		$persona = Persona::find($id);
-
-		//falta retornar una vista que muestre el formulario para actualizar
-		return View::make('/')->with('persona', $persona);
-	}
+	public function getActualizarPersona($id){}
 
 	public function postActualizarPersona($id){
 
 		$persona = Persona::find($id);
 
-		$persona->primer_nombre = Input::get('');
-		$persona->segundo_nombre = Input::get('');
-		$persona->primer_apellido = Input::get('');
-		$persona->segundo_apellido = Input::get('');
-		$persona->cedula = Input::get('');
-		$persona->sexo = Input::get('');
-		$persona->fecha_nacimiento = Input::get('');
+		$p_nombre = Input::get('primer_nombre',$persona->primer_nombre);
+		$s_nombre = Input::get('segundo_nombre', $persona->segundo_nombre);
+		$p_apellido = Input::get('primer_apellido',$persona->primer_apellido);
+		$s_apellido = Input::get('segundo_apellido');
+		$cedula = Input::get('cedula');
+		$sexo = Input::get('sexo');
+		$fecha_nacimiento = Input::get('fecha_nacimiento');
+		$usuario = Input::get('usuario_id');
+
 		
-		if($persona->save()){
-			return View::make('/')->with('registro con exito');
-		}
+		//reglas
+        $reglas = array('cedula' =>'required|unique:personas');
+
+        $campos = array('cedula'=>$cedula);
+
+        $mensajes = array('unique' => 'Esta :attribute ya existe');
+
+        $validacion = Validator::make($campos,$reglas,$mensajes);
+        
+    	if($validacion->fails()){
+    		return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
+    	}
 		else{
-			return View::make('/')->with('mensaje', 'error registro no exitoso');
+			
+			$persona = new Persona;
+
+			$persona->primer_nombre = $p_nombre;
+			$persona->segundo_nombre = $s_nombre;
+			$persona->primer_apellido = $p_apellido;
+			$persona->segundo_apellido = $s_apellido;
+			$persona->cedula = $cedula;
+			$persona->sexo = $sexo;
+			$persona->fecha_nacimiento = $fecha_nacimiento;
+			$persona->usuario_id = $usuario;
+
+			return Response::json(array(
+				'resultado'=>false, 
+				'mensajes'=>$validacion->messages()->all(),
+				'datos'=>array('persona_creada'=>$persona->id)
+				)
+			);
 		}
 	}
 
-	public function getEliminar($id){
+	public function postEliminar($id){
+		
 		$persona = Persona::find($id);
 
-		$persona->delete();
+		if($persona){
+			$persona->delete();
 
-		return View::make('/')->with('mensaje', 'Persona eliminada con Exito.!');
-
+			return Response::json(array(
+				'resultado'=>true,
+				'mensajes'=> array('exito'=>'Se ha eliminado la persona con exito')
+				)
+			);
+		}
+		else{
+			return Response::json(array(
+				'resultado'=>false,
+				'mensajes'=> array('error'=>'Error, Persona no encontrada')
+				)
+			,404);
+		}
 	}
 }
