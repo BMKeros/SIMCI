@@ -103,16 +103,14 @@
 		</div>
 	</div>
 	
-  	<footer>
-  		<div class="ui bottom fixed menu barra_inferior">
-		  	<div class="item right">
-		  		<a class="ui teal tag label">
-		  			<span id="reloj">0:00:00</span>
-		  		</a>
-			</div>
+	<div class="ui bottom fixed menu barra_inferior">
+	  	<div class="item right">
+	  		<a class="ui teal tag label">
+	  			<span id="reloj">0:00:00</span>
+	  		</a>
 		</div>
-  	</footer>
-	
+	</div>
+  	
 @stop
 
 @section('js')
