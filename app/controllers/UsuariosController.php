@@ -3,54 +3,78 @@
 class UsuariosController extends Controller {
 	
 	public function __construct(){
-        $this->beforeFilter('CheckGuest', array('except' => ''));
+        //$this->beforeFilter('CheckGuest', array('except' => ''));
 	}
 
 	public function getTodosUsuarios(){
 		$usuarios = Usuario::all();
 
-		return json_encode($usuarios);
+		return Response::json($usuarios);
 	}
 	
-	public function getNuevoUsuario(){
+	public function getVerUsuario($id){
+		$usuario = Usuario::find($id);
 
-		//falta agg la ruta para el registro de un nuevo usuario
-		//return View::make('usuarios.registrar_usuario');
-		return View::make('buscador_prueba');
+		if($usuario){
+			return Response::json(array(
+				'resultado'=>true, 
+				'datos'=>$usuario
+				)
+			);
+		}
+		else{
+			return Response::json(array(
+				'resultado'=>false, 
+				'mensajes'=>array('Usuario no existe')
+				)
+			);
+		}
 	}
 
 	public function postNuevoUsuario(){
 
-
 		$usuario = Input::get('usuario');
 		$email = Input::get('email');
 		$password = Input::get('password');
+		$tipo_usuario = Input::get('tipo_usuario');
+		$permisos = Input::get('permisos');
 
         $reglas = array(
             'usuario' =>'required|unique:usuarios' ,
             'email' =>'required|email|unique:usuarios' ,
+            'password' => 'required|min:5',
+            'tipo_usuario'=> 'required|exists:tipos_usuario,codigo',
+            'permisos' => 'required|exists:permisos,codigo'
         );
 
-        $campos = array('usuario'=>$usuario,
-                        'email'=>$email
+        $campos = array(
+        	'usuario'=>$usuario,
+            'email'=>$email,
+            'password'=>$password,
+            'tipo_usuario'=> $tipo_usuario,
+            'permisos' => $permisos
         );
 
         $mensajes = array(
             'unique' => 'Este :attribute ya existe',
+            'required' => ':attribute no puede estar en blanco',
+            'exists' => 'Este :attribute no existe'
         );
 
         $validacion = Validator::make($campos,$reglas,$mensajes);
         
 
 		if($validacion->fails()){
-			return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
+			return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()));
 		}
 		else{
-			
+	
 			$nuevo_usuario = new Usuario;
 			$nuevo_usuario->usuario = $usuario;
 			$nuevo_usuario->email = $email;
 			$nuevo_usuario->password = $password;
+			$nuevo_usuario->cod_tipo_usuario = $tipo_usuario;
+			$nuevo_usuario->cod_permiso = $permisos;
 
 			$nuevo_usuario->save();
 
@@ -62,14 +86,6 @@ class UsuariosController extends Controller {
 			);
 		}
 		
-	}
-
-	public function getActualizarUsuario($id){
-		
-		$usuario = Usuario::find($id);
-
-		//falta retornar una vista que muestre el formulario para actualizar
-		return View::make('/')->with('usuario', $usuario);
 	}
 
 	public function postActualizarUsuario($id){
@@ -91,13 +107,25 @@ class UsuariosController extends Controller {
 		}
 	}
 
-	public function getEliminarUsuario($id){
+	public function postEliminarUsuario($id){
 		$usuario = Usuario::find($id);
 
-		$usuario->delete();
-
-		return View::make('/')->with('mensaje', 'usuario eliminado con exito.!');
-	}
+		if($usuario){
+			$usuario->delete();	
+			return Response::json(array(
+				'resultado'=>true, 
+				'mensajes'=>array('Usuario eliminado con exito')
+				)
+			);
+		}
+		else{
+			return Response::json(array(
+				'resultado'=>false, 
+				'mensajes'=>array('Usuario no existe')
+				)
+			);
+		}
+	}	
 }
 
 
