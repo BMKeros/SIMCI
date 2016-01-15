@@ -8,8 +8,8 @@ class SexosTableSeeder extends Seeder {
        DB::table('sexos')->delete();
 
         $campos = array(
-        	array('id' => '40010', 'descripcion' => 'Masculino'),
-            array('id' => '40011', 'descripcion'=> 'Femenino')
+        	array('id' => '10', 'descripcion' => 'Masculino'),
+            array('id' => '20', 'descripcion'=> 'Femenino')
         );
 
         DB::table('sexos')->insert($campos);
