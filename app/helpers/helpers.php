@@ -23,10 +23,11 @@ function redirect_por_tipo($tipo_usuario = null){
 	}
 }
 
-function atributos_dinamicos($atributos = null){
+function atributos_dinamicos($atributos = null, $default = null){
 	
 	if($atributos && !empty($atributos)){
-		$default_atributos = array('class'=>"ui dropdown capitalize",'id'=>'default', 'name' => 'default');
+		
+		$default_atributos = ($default)?($default):(array('class'=>"ui",'id'=>'default', 'name' => 'default'));
 
 		foreach ($default_atributos as $key => $value) {
 		  (array_key_exists($key, $atributos))?'':$atributos[$key] = $value;
