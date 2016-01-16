@@ -16,9 +16,9 @@ class CrearTablaPersonas extends Migration {
 		{
 			$table->increments('id');
 			$table->string('primer_nombre', 15);
-			$table->string('segundo_nombre', 15);
+			$table->string('segundo_nombre', 15)->nullable();
 			$table->string('primer_apellido', 15);
-			$table->string('segundo_apellido', 15);
+			$table->string('segundo_apellido', 15)->nullable();
 			$table->string('cedula', 8);
 			$table->integer('sexo_id');
 			$table->integer('usuario_id');
