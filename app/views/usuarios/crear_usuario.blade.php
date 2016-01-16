@@ -8,11 +8,11 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Usuario</label>
-			        		<input type="text" name="usuario[usuario]" placeholder="Usuario" ng-model="DatosForm.usuario.usuario">
+			        		<input type="text" name="usuario" placeholder="Usuario" ng-model="DatosForm.usuario.usuario">
 			        	</div>
 			     		<div class="field">
 			     			<label>Email</label>
-							<input type="text" name="usuario[email]" placeholder="Direccion Email" ng-model="DatosForm.usuario.email">
+							<input type="text" name="email" placeholder="Direccion Email" ng-model="DatosForm.usuario.email">
 						</div>
 				    </div>
 				</div>
@@ -53,7 +53,7 @@
 				</div>
 
 				<div class="field">
-					<input type="file" name="imagen" placeholder="">
+					<input type="file" name="imagen" placeholder="" ng-model="DatosForm.usuario.imagen">
 				</div>
 
 				<br>
