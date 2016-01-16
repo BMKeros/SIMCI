@@ -35,12 +35,12 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Permisos</label>
-					      	{{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos'))}}
+					      	{{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos','ng-model'=>'DatosForm.usuario.permisos'))}}
 						</div>
 
 						<div class="field">
 							<label>Tipo de usuario</label>
-					      	{{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario'))}}
+					      	{{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario', 'ng-model'=>'DatosForm.usuario.tipo_usuario'))}}
 						</div>
 					</div>
 				</div>
@@ -101,7 +101,7 @@
 				<div class="field">
 					<div class="fields">
 						<div class="field">
-							{{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo'))}}
+							{{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo','ng-model'=>'DatosForm.persona.sexo'))}}
 						</div>
 					</div>
 				</div>
