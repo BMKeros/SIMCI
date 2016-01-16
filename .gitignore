@@ -8,4 +8,7 @@ composer.lock
 .phpintel
 Thumbs.db
 /public/node_modules
+/public/uploads/imagenes/*.jpg
+/public/uploads/imagenes/*.bmp
+/public/uploads/imagenes/*.png
 
