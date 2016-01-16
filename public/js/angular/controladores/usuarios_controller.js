@@ -45,11 +45,8 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
     
     $scope.registrar_nuevo_usuario = function(){
 
-      var datos = {};
-
-      datos.usuario = $scope.M_usuario;
-      datos.email = $scope.M_email;
-      datos.password = $scope.M_password;
+        //objeto para los datos del formulario usuario y personas
+        $scope.DatosForm = {};
 
       $http({
         method: 'POST',

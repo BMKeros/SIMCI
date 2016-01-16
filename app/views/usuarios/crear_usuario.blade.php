@@ -8,11 +8,11 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Usuario</label>
-			        		<input type="text" name="usuario[usuario]" placeholder="Usuario">
+			        		<input type="text" name="usuario[usuario]" placeholder="Usuario" ng-model="DatosForm.usuario.usuario">
 			        	</div>
 			     		<div class="field">
 			     			<label>Email</label>
-							<input type="text" name="usuario[email]" placeholder="Direccion Email">
+							<input type="text" name="usuario[email]" placeholder="Direccion Email" ng-model="DatosForm.usuario.email">
 						</div>
 				    </div>
 				</div>
@@ -21,7 +21,7 @@
 				    <div class="two fields">
 						<div class="field">
 							<label>Password</label>	
-				        	<input type="password" name="password" placeholder="Password">
+				        	<input type="password" name="password" placeholder="Password" ng-model="DatosForm.usuario.password">
 				        </div>
 
 				      	<div class="field">
@@ -62,10 +62,10 @@
 				<div class="field">
 				    <div class="two fields">
 				      	<div class="field">
-				        	<input type="text" name="primer_nombre" placeholder="Primer Nombre">
+				        	<input type="text" name="primer_nombre" placeholder="Primer Nombre" ng-model="DatosForm.persona.primer_nombre">
 				      	</div>
 				      	<div class="field">
-							<input type="text" name="segundo_nombre" placeholder="Segundo Nombre">
+							<input type="text" name="segundo_nombre" placeholder="Segundo Nombre" ng-model="DatosForm.persona.segundo_nombre">
 						</div>
 					</div>
 				</div>
@@ -73,11 +73,11 @@
 				<div class="field">
 				    <div class="two fields">
 						<div class="field">	
-				        	<input type="text" name="primer_apellido" placeholder="Primer Apellido">
+				        	<input type="text" name="primer_apellido" placeholder="Primer Apellido" ng-model="DatosForm.persona.primer_apellido">
 				        </div>
 
 				      	<div class="field">
-				        	<input type="text" name="segundo_apellido" placeholder="Segundo Apellido">
+				        	<input type="text" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="DatosForm.persona.segundo_apellido">
 				      	</div>
 					</div>
 				</div>
@@ -86,12 +86,12 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Cedula</label>
-							<input type="text" name="cedula" placeholder="Cedula">
+							<input type="text" name="cedula" placeholder="Cedula" ng-model="DatosForm.persona.cedula">
 						</div>
 
 						<div class="field">
 							<label>Fecha de nacimiento</label>
-							<input type="date" name="fecha_nacimiento" placeholder="Fecha Nacimieto">
+							<input type="date" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.persona.fecha_nacimiento">
 						</div>
 					</div>
 				</div>
