@@ -115,3 +115,10 @@ Route::filter('CheckGuest', function()
 		}
 	}
 });
+
+Route::filter('APICheckGuest', function()
+{
+	if(Auth::guest()){
+		return Response::make('Acceso no autorizado, inicie sesion porfavor', 401);
+	}
+});
