@@ -48,7 +48,7 @@
 				<div class="field">
 					<div class="ui toggle checkbox">
 						<label>Usuario activo</label>
-						<input type="checkbox" name="public">
+						<input type="checkbox" name="activo">
 					</div>
 				</div>
 
@@ -85,7 +85,7 @@
 				</div>
 
 				<div class="field">
-					<div class="two fields">
+					<div class="three fields">
 						<div class="field">
 							<label>Cedula</label>
 							<input type="text" name="cedula" placeholder="Cedula" ng-model="DatosForm.persona.cedula">
@@ -95,19 +95,16 @@
 							<label>Fecha de nacimiento</label>
 							<input type="date" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.persona.fecha_nacimiento">
 						</div>
-					</div>
-				</div>
-										
-				<div class="field">
-					<div class="fields">
+
 						<div class="field">
+							<label>Sexo</label>
 							{{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo','ng-model'=>'DatosForm.persona.sexo'))}}
 						</div>
 					</div>
-				</div>
-				
+				</div>					
+				<br>
 				<div class="field">
-					<button class="positive ui button">Positive Button</button>
+					<button class="big positive ui right floated button" ng-click="">Registrar</button>
 				</div>
 			</form>
 		</div>
@@ -123,5 +120,7 @@
 	$('.ui.dropdown').dropdown({
     	maxSelections: 3
   	});
+
+  	$('.checkbox').checkbox();
 </script>
 
