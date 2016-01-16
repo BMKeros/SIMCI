@@ -8,6 +8,10 @@ class Persona Extends Eloquent{
 	public function usuario(){
 		return $this->belongsTo('Usuario');
 	}
+
+	public function sexo(){
+		return $this->belongsTo('Sexo');
+	}
 }
 
 ?>
