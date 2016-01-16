@@ -31,7 +31,7 @@ class UsuariosController extends Controller {
 		}
 	}
 
-	public function postNuevoUsuario(){
+	public function postCrearUsuario(){
 
 		$usuario = Input::get('usuario');
 		$email = Input::get('email');
@@ -62,9 +62,9 @@ class UsuariosController extends Controller {
         );
 
         $mensajes = array(
-            'unique' => 'Este :attribute ya existe',
+            'unique' => ':attribute ya existe',
             'required' => ':attribute no puede estar en blanco',
-            'exists' => 'Este :attribute no existe',
+            'exists' => ':attribute no existe',
             'max' => ':attribute debe tener un maximo de :max caracteres',
             'min' => ':attribute debe tener un minimo de :min caracteres',
             'mimes' => ':attribute extensiones validas [JPG, PNG, BMP]',
@@ -75,7 +75,7 @@ class UsuariosController extends Controller {
         
 
 		if($validacion->fails()){
-			return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()));
+			return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
 		}
 		else{
 	
