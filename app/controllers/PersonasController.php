@@ -35,7 +35,7 @@ class PersonasController extends Controller {
 
 
 	//procesar datos del formulario de personas
-	public function postRegistroPersonas(){
+	public function postCrearPersona(){
 
 		$p_nombre = Input::get('primer_nombre');
 		$s_nombre = Input::get('segundo_nombre');
@@ -48,11 +48,38 @@ class PersonasController extends Controller {
 
 		
 		//reglas
-        $reglas = array('cedula' =>'required|unique:personas');
+        $reglas = array(
+        	'cedula' =>'required|digits:8|unique:personas|numeric',
+        	'fecha_nacimiento' => 'required|date_format:Y-m-d',
+        	'primer_nombre' => 'required|alpha|max:15',
+        	'primer_apellido' => 'required|alpha|max:15',
+        	'segundo_nombre' => 'alpha|max:15',
+        	'segundo_apellido' => 'alpha|max:15',
+        	'usuario_id' => 'required|exists:usuarios,id|numeric',
+        	'sexo' => 'required|exists:sexos,id|numeric'
+        );
 
-        $campos = array('cedula'=>$cedula);
+        $campos = array(
+        	'cedula'=>$cedula,
+        	'fecha_nacimiento' => $fecha_nacimiento,
+        	'primer_nombre' => $p_nombre,
+        	'primer_apellido' => $p_apellido,
+        	'segundo_nombre' => $s_nombre,
+        	'segundo_apellido' => $s_apellido,
+        	'usuario_id' => $usuario,
+        	'sexo' => $sexo
+        );
 
-        $mensajes = array('unique' => 'Esta :attribute ya existe');
+        $mensajes = array(
+        	'unique' => ':attribute ya existe',
+        	'required' => ':attribute no puede estar en blanco',
+        	'alpha' => ':attribute debe contener solo caracteres',
+        	'max' => ':attribute debe tener un maximo de :max caracteres',
+        	'exists' => ':attribute no existe',
+        	'date_format' => ':attribute debe tener este formato YY-MM-DD',
+        	'numeric' => ':attribute debe tener solo numeros',
+        	'digits' => ':attribute debe tener solo :digits digitos',
+        );
 
         $validacion = Validator::make($campos,$reglas,$mensajes);
         
@@ -72,16 +99,16 @@ class PersonasController extends Controller {
 			$persona->fecha_nacimiento = $fecha_nacimiento;
 			$persona->usuario_id = $usuario;
 
+			$persona->save();
+
 			return Response::json(array(
-				'resultado'=>false, 
-				'mensajes'=>$validacion->messages()->all(),
+				'resultado'=>true, 
+				'mensajes'=>array('Datos registrados con exito'),
 				'datos'=>array('persona_creada'=>$persona->id)
 				)
 			);
 		}
 	}
-
-	public function getActualizarPersona($id){}
 
 	public function postActualizarPersona($id){
 
@@ -94,15 +121,39 @@ class PersonasController extends Controller {
 		$cedula = input_default(Input::get('cedula'),$persona->cedula);
 		$sexo = input_defualt(Input::get('sexo'),$persona->sexo_id);
 		$fecha_nacimiento = input_default(Input::get('fecha_nacimiento'),$persona->fecha_nacimiento);
-		$usuario = Input::get('usuario_id');
-
 		
 		//reglas
-        $reglas = array('cedula' =>'required|unique:personas');
+        $reglas = array(
+        	'cedula' =>'required|unique:personas|numeric',
+        	'fecha_nacimiento' => 'required|date_format:Y-m-d',
+        	'primer_nombre' => 'required|alpha|max:15',
+        	'primer_apellido' => 'required|aplha|max:15',
+        	'segundo_nombre' => 'alpha|max:15',
+        	'segundo_apellido' => 'alpha|max:15',
+        	'usuario_id' => 'required|exists:usuarios,id|numeric',
+        	'sexo' => 'required|exists:sexos,id|numeric'
+        );
 
-        $campos = array('cedula'=>$cedula);
+        $campos = array(
+        	'cedula'=>$cedula,
+        	'fecha_nacimiento' => $fecha_nacimiento,
+        	'primer_nombre' => $primer_nombre,
+        	'primer_apellido' => $primer_apellido,
+        	'segundo_nombre' => $segundo_nombre,
+        	'segundo_apellido' => $segundo_apellido,
+        	'usuario_id' => $usuario,
+        	'sexo' => $sexo
+        );
 
-        $mensajes = array('unique' => 'Esta :attribute ya existe');
+        $mensajes = array(
+        	'unique' => ':attribute ya existe',
+        	'required' => ':attribute no puede estar en blanco',
+        	'alpha' => ':attribute debe contener solo caracteres',
+        	'max' => ':attribute debe tener un maximo de :max caracteres',
+        	'exists' => ':attribute no existe',
+        	'date_format' => ':attribute debe tener este formato YY-MM-DD',
+        	'numeric' => ':attribute debe tener solo numeros'
+        );
 
         $validacion = Validator::make($campos,$reglas,$mensajes);
         
