@@ -18,7 +18,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 
 	//un usuario pertenece a una persona
 	public function persona(){
-		return $this->belongsTo('Persona');
+		return $this->hasOne('Persona');
 	}
 
 

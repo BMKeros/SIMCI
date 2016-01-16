@@ -6,7 +6,7 @@ class Persona Extends Eloquent{
 
 
 	public function usuario(){
-		return $this->hasOne('Usuario');
+		return $this->belongsTo('Usuario');
 	}
 }
 
