@@ -15,7 +15,7 @@
           controller: 'UsuariosController'
         }).
         when('/usuarios/ver/:param', {
-          templateUrl: '/views/usuarios/principal_usuarios',
+          templateUrl: '/views/usuarios/mostrar_usuarios',
           controller: 'UsuariosController'
         }).
         when('/usuarios/eliminar/:idUsuario', {

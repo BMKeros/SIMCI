@@ -8,7 +8,7 @@ gulp.task('crear_controladores',function(){
   gulp.src('./js/angular/controladores/*.js')
   .pipe(debug())
   .pipe(concat('ng-controladores.js'))
-  .pipe(uglify())
+  //.pipe(uglify())
   .pipe(gulp.dest('./js/angular/'))
 });
 

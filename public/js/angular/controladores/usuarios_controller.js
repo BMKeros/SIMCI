@@ -5,6 +5,8 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
   function ($scope, $http, $log , $route, $routeParams, $location){
     $scope.modulo = {};
 
+    $scope.DatosForm = {}; // Objeto para los datos de formulario
+
     $scope.modulo.nombre = "Usuarios";
     $scope.modulo.icono = {
       tipo: "users",
@@ -42,11 +44,7 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
     $log.info($routeParams);
     $log.info($location);
 
-    
     $scope.registrar_nuevo_usuario = function(){
-
-        //objeto para los datos del formulario usuario y personas
-        $scope.DatosForm = {};
 
       $http({
         method: 'POST',
