@@ -89,17 +89,13 @@
 		</div>
 	</div>
 	
-	<div class="ui container">
-		<div class="ui one column grid">
-			<div class="column">
-				<div ng-view>
-					<!--<div class="ui container">
-					  <div class="ui active inverted dimmer">
-					    <div class="ui large text loader">Cargando</div>
-					  </div>
-					</div>-->
-				</div>
-			</div>
+	<div class="ui container espacio_buttom">
+		<div ng-view>
+			<!--<div class="ui container">
+			  <div class="ui active inverted dimmer">
+			    <div class="ui large text loader">Cargando</div>
+			  </div>
+			</div>-->
 		</div>
 	</div>
 	
