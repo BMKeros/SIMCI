@@ -5,7 +5,7 @@ Form::macro('select_permisos', function($atributos = null){
  		
  		$default_values=array('class'=>"ui fluid normal dropdown");
 	
-		$html = sprintf('<select multiple="" %s ">',atributos_dinamicos($atributos,$default_values));
+		$html = sprintf('<select multiple="" %s >',atributos_dinamicos($atributos,$default_values));
 		$html .= '<option value="">Permisos</option>';
 		        
 		foreach ($permisos as $key => $value){
@@ -29,7 +29,7 @@ Form::macro('select_sexo', function($atributos = null){
 
 		$default_values = array('class'=>"ui dropdown capitalize");
 
-		$html = sprintf('<select %s ">', atributos_dinamicos($atributos, $default_values));
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos, $default_values));
 		$html .= '<option value="">Sexo</option>';
 		
 		foreach ($sexo as $key => $value) {
@@ -54,7 +54,7 @@ Form::macro('select_tipo_usuario', function($atributos = null){
 		
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
-		$html = sprintf('<select %s ">', atributos_dinamicos($atributos,$default_values));
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
 		$html .= '<option value="">Tipo Usuario</option>';
 		
 		foreach ($tipo_usuario as $key => $value) {
