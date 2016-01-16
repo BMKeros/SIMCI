@@ -53,3 +53,17 @@ function input_default($input = '', $default = ''){
 	$num_char = strlen(quitar_espacios($input));
 	return ($num_char == 0)? ($default): ($input);
 }
+
+
+function cargar_crear_imagen_usuario($archivo = null,$name_usuario = ""){
+	if($archivo){
+		$extension = explode(".", $archivo->getClientOriginalName());
+		$extension = $extension[count($extension)-1];
+		$name = sprintf('%s_img_perfil_user.%s',$name_usuario,$extension);
+		$archivo->move('uploads/imagenes',$name);
+		return $name;
+	}
+	else{
+		return null;
+	}
+}
