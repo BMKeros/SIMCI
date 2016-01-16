@@ -3,7 +3,7 @@
 class UsuariosController extends Controller {
 	
 	public function __construct(){
-        //$this->beforeFilter('CheckGuest', array('except' => ''));
+        //$this->beforeFilter('APICheckGuest', array('except' => ''));
 	}
 
 	public function getTodosUsuarios(){
@@ -38,13 +38,17 @@ class UsuariosController extends Controller {
 		$password = Input::get('password');
 		$tipo_usuario = Input::get('tipo_usuario');
 		$permisos = Input::get('permisos');
+		$imagen = Input::file('imagen');
+		$activo = Input::get('activo');
 
         $reglas = array(
-            'usuario' =>'required|unique:usuarios' ,
-            'email' =>'required|email|unique:usuarios' ,
+            'usuario' =>'required|max:15|min:5|unique:usuarios|alpha_num' ,
+            'email' =>'required|email|max:50|unique:usuarios' ,
             'password' => 'required|min:5',
             'tipo_usuario'=> 'required|exists:tipos_usuario,codigo',
-            'permisos' => 'required|exists:permisos,codigo'
+            'permisos' => 'required|exists:permisos,codigo',
+            'imagen' => 'mimes:jpeg,bmp,png',
+            'activo' => 'boolean'
         );
 
         $campos = array(
@@ -52,13 +56,19 @@ class UsuariosController extends Controller {
             'email'=>$email,
             'password'=>$password,
             'tipo_usuario'=> $tipo_usuario,
-            'permisos' => $permisos
+            'permisos' => $permisos,
+            'imagen' => $imagen,
+            'activo' => $activo
         );
 
         $mensajes = array(
             'unique' => 'Este :attribute ya existe',
             'required' => ':attribute no puede estar en blanco',
-            'exists' => 'Este :attribute no existe'
+            'exists' => 'Este :attribute no existe',
+            'max' => ':attribute debe tener un maximo de :max caracteres',
+            'min' => ':attribute debe tener un minimo de :min caracteres',
+            'mimes' => ':attribute extensiones validas [JPG, PNG, BMP]',
+            'alpha_num' => ':attribute de contener caracteres alfanumericos'
         );
 
         $validacion = Validator::make($campos,$reglas,$mensajes);
@@ -76,6 +86,13 @@ class UsuariosController extends Controller {
 			$nuevo_usuario->cod_tipo_usuario = $tipo_usuario;
 			$nuevo_usuario->cod_permiso = $permisos;
 
+			if($imagen){
+				$name_file = cargar_crear_imagen_usuario($imagen,$usuario);
+				$nuevo_usuario->imagen = PATH_IMAGENES.$name_file; 
+			}
+
+			if($activo){ $nuevo_usuario->activo = $activo; }
+			
 			$nuevo_usuario->save();
 
 			return Response::json(array(
