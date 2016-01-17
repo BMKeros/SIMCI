@@ -6,31 +6,42 @@ class UsuariosController extends Controller {
         //$this->beforeFilter('APICheckGuest', array('except' => ''));
 	}
 
-	public function getTodosUsuarios(){
-		$usuarios = Usuario::all();
+	public function getMostrar(){
+		$tipo_busqueda = Input::get('type', 'todos');
+		$id_usuario = Input::get('id', null);
+		$orden = Input::get('ordenar','asc');
 
-		return Response::json($usuarios);
+		switch($tipo_busqueda){
+			case 'todos':
+				if($orden){
+					$response = Usuario::orderBy('id', $orden)->get();
+				}
+				else{
+					$response = Usuario::all();	
+				}
+			break;
+
+			case 'usuario':
+				if($id_usuario){
+					$response = Usuario::find($id_usuario);
+
+					if(is_null($response)){
+						$response = array();
+					}
+				}
+				else{
+					$response = array();
+				}
+			break;
+
+			default:
+				$response = Usuario::all();
+			break;
+		}
+		
+		return Response::json($response);
 	}
 	
-	public function getVerUsuario($id){
-		$usuario = Usuario::find($id);
-
-		if($usuario){
-			return Response::json(array(
-				'resultado'=>true, 
-				'datos'=>$usuario
-				)
-			);
-		}
-		else{
-			return Response::json(array(
-				'resultado'=>false, 
-				'mensajes'=>array('Usuario no existe')
-				)
-			);
-		}
-	}
-
 	public function postCrearUsuario(){
 
 		$usuario = Input::get('usuario');
