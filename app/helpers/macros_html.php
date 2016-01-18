@@ -76,7 +76,7 @@ Form::macro('select_tipo_usuario', function($atributos = null){
 //a partir de aqui estan version betra los nombres de las funciones y demas
 //detalles que estan para un cambio...
 
-Form::macro('dimension', function($atributos = null){
+Form::macro('select_dimension', function($atributos = null){
 	if($atributos){
 
 		$almacenes = DB::table('almacenes')->lists('descripcion', 'cod_almacen');
@@ -111,7 +111,7 @@ Form::macro('select_sub_dimension', function($atributos = null){
 		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
 		$html .= '<option value="">Sub-Dimension</option>';
 		
-		foreach ($almacenes as $key => $value) {
+		foreach ($estantes as $key => $value) {
 			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
 		}
 		
@@ -131,7 +131,7 @@ Form::macro('select_agrupacion', function($atributos = null){
 		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
 		$html .= '<option value="">Tipo de Objeto</option>';
 		
-		foreach ($almacenes as $key => $value) {
+		foreach ($tipo_objetos as $key => $value) {
 			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
 		}
 		
@@ -145,14 +145,14 @@ Form::macro('select_unidades', function($atributos = null){
 	if($atributos){
 
 		$unidades = DB::table('unidades')->select('cod_unidad', 'descripcion', 'abreviatura')->get();
-
+	
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
 		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
-		$html .= '<option value="">Sub-Dimension</option>';
+		$html .= '<option value="">Unidades</option>';
 		
-		foreach ($unidad as $unidades) {
-			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad['cod_unidad'], $unidad['abreviatura'], $unidad('descripcion'));
+		foreach ($unidades as $unidad) {
+			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->descripcion);
 		}
 		
 		$html .= '</select>';
