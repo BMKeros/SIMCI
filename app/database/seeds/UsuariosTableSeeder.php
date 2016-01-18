@@ -11,7 +11,6 @@ class UsuariosTableSeeder extends Seeder {
         $usuario->usuario = 'simci';
         $usuario->email = 'simci@gmail.com';
         $usuario->password = 'admin';
-        $usuario->cod_permiso= 'AD40';
         $usuario->cod_tipo_usuario = TIPO_USER_ROOT;
         
 		$usuario->save();
