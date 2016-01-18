@@ -14,8 +14,8 @@ class CrearTablaPermisosUsuarios extends Migration {
 	{
 		Schema::create('permisos_usuarios', function($table)
 		{
-			$table->increments('id');
 			$table->string('cod_permiso',4);
+			$table->primary('cod_permiso');
 			$table->integer('usuario_id');
 			$table->nullableTimestamps();
 		});
