@@ -15,11 +15,13 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 	
 	protected $hidden = array('password', 'remember_token');
 
-
-	//un usuario pertenece a una persona
 	public function persona(){
 		return $this->hasOne('Persona');
 	}
+
+	public function permisos(){
+        return $this->belongsToMany('Permiso','permisos_usuarios','usuario_id','cod_permiso');
+    }
 
 
 	public function setPasswordAttribute($value){
