@@ -40,8 +40,6 @@
       </div>
    </div>
 </div>
-@stop
-
 <!--Bloque 2 -> Modale Ver Usuario-->
 <div class="ui modal ver">
    <div class="header">Datos </div>
