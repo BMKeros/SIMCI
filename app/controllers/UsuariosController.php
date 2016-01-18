@@ -95,7 +95,7 @@ class UsuariosController extends Controller {
 			$nuevo_usuario->email = $email;
 			$nuevo_usuario->password = $password;
 			$nuevo_usuario->cod_tipo_usuario = $tipo_usuario;
-			$nuevo_usuario->cod_permiso = $permisos;
+			//$nuevo_usuario->cod_permiso = $permisos;
 
 			if($imagen){
 				$name_file = cargar_crear_imagen_usuario($imagen,$usuario);
@@ -224,7 +224,7 @@ class UsuariosController extends Controller {
 					'email' => $email,
 					'password' => $password,
 					'cod_tipo_usuario' => $tipo_usuario,
-					'cod_permiso' => $permisos,
+					//'cod_permiso' => $permisos,
 				);
 
 				if($imagen){
