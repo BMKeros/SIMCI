@@ -139,17 +139,17 @@ var reglas_formulario_crear_usuario = {
             prompt:'Este campo no puede quedar vacio'
           },
           {
-            type:'minLength[5]',
+            type:'minLength[3]',
             prompt:'Es campo debe contener minimo {ruleValue} caracteres'
           },
           {
             type:'maxLength[15]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           },
-          {
+          /*{
             type:'regExp[/^[A-Za-z]$/]',
             prompt:'Este campo solo dede tener caracteres alfabeticos'
-          },
+          },*/
         ]
       },
 
@@ -161,17 +161,17 @@ var reglas_formulario_crear_usuario = {
             prompt:'Este campo no puede quedar vacio'
           },
           {
-            type:'minLength[5]',
+            type:'minLength[3]',
             prompt:'Es campo debe contener minimo {ruleValue} caracteres'
           },
           {
             type:'maxLength[15]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           },
-          {
+          /*{
             type:'regExp[/^[A-Za-z]$/]',
             prompt:'Este campo solo dede tener caracteres alfabeticos'
-          },
+          },*/
         ]
       },
 
