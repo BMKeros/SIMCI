@@ -2,14 +2,15 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui compact celled definition table">
+         <table class="ui selectable celled table">
             <thead>
                <tr>
                   <th></th>
-                  <th>usuario</th>
+                  <th>Usuario</th>
                   <th>Direccion electronica</th>
-                  <th>permiso</th>
-                  <th>acciones</th>
+                  <th>Permisos</th>
+                  <th>Tipo Usuario</th>
+                  <th>Acciones</th>
                  
                </tr>
             </thead>
@@ -20,9 +21,10 @@
                   <td>Daniel Bonalde</td>
                   <td>jhlilk22@yahoo.com</td>
                   <td> Tipo de Permiso</td>
-                  <td class="thre wide">
+                  <td>ROOT</td>
+                  <td class="three wide" >
                   
-                     <div class="ui icon button blue activar-popup mostrar"  data-content="Ver Usuario">
+                     <div class="ui icon button blueactivar-popup mostrar"  data-content="Ver Usuario">
                         <i class="unhide icon"></i>
                      </div>
 
@@ -36,10 +38,29 @@
                   </td>
                </tr>
             </tbody>
+            <tfoot>
+			    <tr>
+				    <th colspan="6">
+				      <div class="ui right floated pagination menu">
+				        <a class="icon item">
+				          <i class="left chevron icon"></i>
+				        </a>
+				        <a class="item">1</a>
+				        <a class="item">2</a>
+				        <a class="item">3</a>
+				        <a class="item">4</a>
+				        <a class="icon item">
+				          <i class="right chevron icon"></i>
+				        </a>
+				      </div>
+				    </th>
+			  	</tr>
+			</tfoot>
          </table>
       </div>
    </div>
 </div>
+
 <!--Bloque 2 -> Modale Ver Usuario-->
 <div class="ui modal ver">
    <div class="header">Datos </div>
@@ -70,6 +91,8 @@
                   <td colspan="5"><b>Permisos</b> Activo</td>
                </tr>
             </tbody>
+
+            
          </table>
       </div>
       <div class="actions">
