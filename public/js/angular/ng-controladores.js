@@ -131,17 +131,24 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
     $log.info($routeParams);
     $log.info($location);
 
-    $scope.registrar_nuevo_usuario = function(){
+    $scope.registrar_usuario = function(){
+    
+      var is_valid_form = $('#formulario_crear_usuario')
+      .form(reglas_formulario_crear_usuario)
+      .form('is valid');
 
-      $http({
-        method: 'POST',
-        url: '/api/usuarios/nuevo-usuario',
-        datos
-      }).then(function(data){
-        console.log(data);
-      },function(data_error){
-        console.log(data_error);
-      });
+      if(is_valid_form){
+        $log.info($scope.DatosForm);
+        $http({
+          method: 'POST',
+          url: '/api/usuarios/crear-usuario-completo',
+          data: $scope.DatosForm
+        }).then(function(data){
+          console.log(data.data);
+        },function(data_error){
+          console.log(data_error);
+        });
+      }
     }
 
 
