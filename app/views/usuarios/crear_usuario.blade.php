@@ -53,7 +53,7 @@
 				</div>
 
 				<div class="field">
-					<input type="file" name="imagen" placeholder="" ng-model-fileara="DatosForm.imagen">
+					<input type="file" name="imagen" placeholder="" ng-model-file="DatosForm.imagen">
 				</div>
 
 				<br>
@@ -113,17 +113,9 @@
 
 
 
-<script>
-
-$('#btn-registrar').on('click', function(){
-		//$('#formulario_crear_usuario').form(reglas_formulario_crear_usuario);	
-});
-
-
+<script>    
 	$('.ui.dropdown').dropdown({
     	maxSelections: 3
   	});
-
   	$('.checkbox').checkbox();
 </script>
-
