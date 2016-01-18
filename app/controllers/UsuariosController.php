@@ -95,7 +95,7 @@ class UsuariosController extends Controller {
 			$nuevo_usuario->email = $email;
 			$nuevo_usuario->password = $password;
 			$nuevo_usuario->cod_tipo_usuario = $tipo_usuario;
-			//$nuevo_usuario->cod_permiso = $permisos;
+			$nuevo_usuario->permisos()->attach($permisos);
 
 			if($imagen){
 				$name_file = cargar_crear_imagen_usuario($imagen,$usuario);
@@ -235,6 +235,8 @@ class UsuariosController extends Controller {
 				}
 
 				$nuevo_usuario = Usuario::create($datos);
+
+				$nuevo_usuario->permisos()->attach($permisos);
 
 				Persona::create(array(
 					'primer_nombre' => $p_nombre,
