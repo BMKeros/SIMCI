@@ -44,25 +44,40 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
     $log.info($routeParams);
     $log.info($location);
 
-    $scope.registrar_usuario = function(){
-    
-      var is_valid_form = $('#formulario_crear_usuario')
-      .form(reglas_formulario_crear_usuario)
-      .form('is valid');
 
-      if(is_valid_form){
-        $log.info($scope.DatosForm);
-        $http({
-          method: 'POST',
-          url: '/api/usuarios/crear-usuario-completo',
-          data: $scope.DatosForm
-        }).then(function(data){
-          console.log(data.data);
-        },function(data_error){
-          console.log(data_error);
-        });
-      }
+    if($location.$$url == '/usuarios/crear'){
+        
+        $scope.registrar_usuario = function(){
+        
+          var formulario = $('#formulario_crear_usuario');
+
+          var is_valid_form = formulario.form(reglas_formulario_crear_usuario).form('is valid');
+
+          if(is_valid_form){
+            //Activamos el loading
+            $('#btn-registrar').addClass('loading').prop('disabled',true);
+
+            $http({
+              method: 'POST',
+              url: '/api/usuarios/crear-usuario-completo',
+              data: $scope.DatosForm
+            }).then(function(data){
+              console.log(data.data);
+
+              formulario.form('clear');
+              //Desactivamos el loading
+              $('#btn-registrar').removeClass('loading').prop('disabled',false);
+
+            },function(data_error){
+              console.log(data_error);
+
+              //Desactivamos el loading
+              $('#btn-registrar').removeClass('loading').prop('disabled',false);
+            });
+          }
+        }
     }
+    
 
 
   }]
