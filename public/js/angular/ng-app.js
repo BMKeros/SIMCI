@@ -10,6 +10,25 @@
       return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
     }
   });
+
+  simci.directive("ngModelFile", [function () {
+    return {
+        scope: {
+            ngModelFile: "="
+        },
+        link: function (scope, element, attributes) {
+          element.bind("change", function (changeEvent) {
+              var reader = new FileReader();
+              reader.onload = function (loadEvent) {
+                  scope.$apply(function () {
+                      scope.ngModelFile = loadEvent.target.result;
+                  });
+              }
+              reader.readAsDataURL(changeEvent.target.files[0]);
+          });
+        }
+    }
+}]);
    
   //Seteamos de manera global la app simci
   window.simci = simci;
