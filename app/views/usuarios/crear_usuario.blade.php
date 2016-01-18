@@ -48,7 +48,7 @@
 				<div class="field">
 					<div class="ui toggle checkbox">
 						<label>Usuario activo</label>
-						<input type="checkbox" name="activo">
+						<input type="checkbox" name="activo" checked="checked">
 					</div>
 				</div>
 
@@ -104,7 +104,7 @@
 				</div>					
 				<br>
 				<div class="field">
-					<button class="big positive ui right floated button" ng-click="">Registrar</button>
+					<button class="big positive ui right floated button" ng-click="" id="btn-registrar">Registrar</button>
 				</div>
 			</form>
 		</div>
@@ -115,7 +115,10 @@
 
 <script>
 
-	$('#formulario_crear_usuario').form(reglas_formulario_crear_usuario);
+$('#btn-registrar').on('click', function(){
+		$('#formulario_crear_usuario').form(reglas_formulario_crear_usuario);	
+});
+
 
 	$('.ui.dropdown').dropdown({
     	maxSelections: 3
