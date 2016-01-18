@@ -19,7 +19,6 @@ class CrearTablaUsuarios extends Migration {
 			$table->string('usuario',15)->unique();
 			$table->string('email', 60)->unique();
 			$table->string('password');
-			$table->string('cod_permiso',4);
 			$table->string('cod_tipo_usuario',4);
 			$table->string('imagen',100)->default('/');
 			$table->boolean('activo')->default(true);
