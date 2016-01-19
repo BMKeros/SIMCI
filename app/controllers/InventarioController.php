@@ -3,28 +3,28 @@
 		
 		public function postRegistrarElemento(){
 
-			$cod_dimension = Inmput::get('cod_dimencion');
-			$cod_sub_dimension = Input::get('cod_sub_dimencion');
+			$cod_dimension = Input::get('cod_dimension');
+			$cod_sub_dimension = Input::get('cod_sub_dimension');
 			$cod_agrupacion = Input::get('cod_agrupacion');
 			$cod_sub_agrupacion = Input::get('cod_sub_agrupacion');
-			$nuemero_orden = Input::get('numero_orden');
+			$numero_orden = Input::get('numero_orden');
 			$cod_objeto = Input::get('cod_objeto');
 			$cantidad_disponible = Input::get('cantidad_disponible');
-			$usa_recipiente = Input::get('usa_recipiente');
-			$recipientes_disponible = Input::get('recipientes_disponible');		
+			$usa_recipientes = Input::get('usa_recipientes');
+			$recipientes_disponibles = Input::get('recipientes_disponibles');		
 
 			$reglas = array(
 				'cod_dimension' => 'required|integer',
 				'cod_sub_dimension' =>'required|integer',
 				'cod_agrupacion' => 'required|integer',
 				'cod_sub_agrupacion' => 'required|integer',
-				'nuemero_orden' => 'required|integer',
+				'numero_orden' => 'required|integer',
 				//pendiente evaluar si cod_objeto sera unique
 				'cod_objeto' => 'required|integer',
 				'cantidad_disponible' => 'required',
 				//campos aun no se sabe si se dejaran o se quitaran
-				'usa_recipiente' => 'required|boolean',
-				'recipientes_disponible' => 'required|integer'
+				'usa_recipientes' => 'required|boolean',
+				'recipientes_disponibles' => 'required|integer'
 			);
 
 			$campos = array(
@@ -32,11 +32,11 @@
 				'cod_sub_dimension' => $cod_sub_dimension,
 				'cod_agrupacion' => $cod_agrupacion,
 				'cod_sub_agrupacion' => $cod_sub_agrupacion,
-				'nuemero_orden' => $nuemero_orden,
+				'numero_orden' => $numero_orden,
 				'cod_objeto' => $cod_objeto,
 				'cantidad_disponible' => $cantidad_disponible,
-				'usa_recipiente' => $usa_recipiente,
-				'recipientes_disponible' => $recipientes_disponible
+				'usa_recipientes' => $usa_recipientes,
+				'recipientes_disponibles' => $recipientes_disponibles
 
 			);
 
@@ -61,8 +61,8 @@
 				$nuevo_elemento->numero_orden = $numero_orden;
 				$nuevo_elemento->cod_objeto = $cod_objeto;
 				$nuevo_elemento->cantidad_disponible = $cantidad_disponible;
-				$nuevo_elemento->usa_recipiente = $usa_recipiente;
-				$nuevo_elemento->recipientes_disponible = $recipientes_disponible;
+				$nuevo_elemento->usa_recipientes = $usa_recipientes;
+				$nuevo_elemento->recipientes_disponibles = $recipientes_disponibles;
 
 				$nuevo_elemento->save();
 
@@ -83,12 +83,12 @@
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
-				'cod_almacen' => 'required|integer|unique',
-				'responsable' => 'required|integer|unique',
+				'cod_almacen' => 'required|integer',
+				'responsable' => 'required|integer',
 
 				//pendientes por modificar si seran o no unicos
-				'primer_auxiliar' => 'integer|unique',
-				'segundo_auxiliar' => 'integer|unique',
+				'primer_auxiliar' => 'required|integer',
+				'segundo_auxiliar' => 'required|integer',
 
 				'descripcion' => 'required|min:3|max:8'
 			);
