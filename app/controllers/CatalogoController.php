@@ -1,5 +1,12 @@
 <?php  
 	class CatalogoController extends Controller{
+
+		public function getMostratCatalogos(){
+			$catalogos = Catalogo::all();
+
+			return Response::json($catalogos);
+		}
+
 		public function postRegistrarObjeto(){
 			$nombre = Input::get('nombre');
 			$descripcion = Input::get('descripcion');

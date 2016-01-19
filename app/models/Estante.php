@@ -1,5 +1,5 @@
 <?php  
-	class Estantes extends Eloquent{
+	class Estante extends Eloquent{
 		protected $table = 'estantes';
 		protected $fillable = array('cod_estante', 'descripcion');
 
