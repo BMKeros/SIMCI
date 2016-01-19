@@ -1,8 +1,8 @@
 
 /// Controlador para usuarios
 
-simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
-  function ($scope, $http, $log , $route, $routeParams, $location){
+simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$route', '$routeParams', '$location', 
+  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location){
     $scope.modulo = {};
 
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -44,9 +44,6 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
     $log.info($routeParams);
     $log.info($location);
 
-            
-
-
     if($location.$$url == '/usuarios/crear'){
         
         $scope.mostrar_mensaje = false;
@@ -54,7 +51,6 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
         $scope.registrar_usuario = function(){
         
           var formulario = $('#formulario_crear_usuario');
-
           var is_valid_form = formulario.form(reglas_formulario_crear_usuario).form('is valid');
 
           if(is_valid_form){
@@ -67,11 +63,9 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
               url: '/api/usuarios/crear-usuario-completo',
               data: $scope.DatosForm
             }).then(function(data){
-              console.log(data.data);
-              
-              if(data.data.resultado){
-                console.log(data.data);
 
+              if(data.data.resultado){
+                
                 $scope.mostrar_mensaje = true;
                 $scope.mensaje_validacion = {
                   titulo: 'Usuario creado con exito',
@@ -80,7 +74,12 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
                   mensajes: ['El usuario ha sido almacenado en la base de datos.']
                 };
 
-                formulario.form('clear');
+                $timeout(function(){
+                  //Desactivamos el loading
+                  $('#btn-registrar').removeClass('loading').prop('disabled',false);
+                  formulario.form('clear');
+                }, 0, false);
+
               }
               else{
 
@@ -91,24 +90,23 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
                   color: 'red',
                   mensajes: data.data.mensajes
                 };
-
               }
 
               //Desactivamos el loading
               $('#btn-registrar').removeClass('loading').prop('disabled',false);
 
             },function(data_error){
+
               console.log(data_error);
 
               //Desactivamos el loading
               $('#btn-registrar').removeClass('loading').prop('disabled',false);
             });
-          }
+            
+          } //If condicional
         }
     }
     
-
-
   }]
 );
     
