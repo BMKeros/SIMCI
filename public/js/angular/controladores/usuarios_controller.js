@@ -44,9 +44,13 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
     $log.info($routeParams);
     $log.info($location);
 
+            
+
 
     if($location.$$url == '/usuarios/crear'){
         
+        $scope.mostrar_mensaje = false;
+
         $scope.registrar_usuario = function(){
         
           var formulario = $('#formulario_crear_usuario');
@@ -54,6 +58,7 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
           var is_valid_form = formulario.form(reglas_formulario_crear_usuario).form('is valid');
 
           if(is_valid_form){
+            
             //Activamos el loading
             $('#btn-registrar').addClass('loading').prop('disabled',true);
 
@@ -62,9 +67,31 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
               url: '/api/usuarios/crear-usuario-completo',
               data: $scope.DatosForm
             }).then(function(data){
-              console.log(data.data);
+              if(data.data.result){
+                console.log(data.data);
 
-              formulario.form('clear');
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Usuario creado con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: ['El usuario ha sido almacenado en la base de datos.']
+                };
+
+                formulario.form('clear');
+              }
+              else{
+
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Hubo un error al guardar el formulario',
+                  icono: 'remove',
+                  color: 'red',
+                  mensajes: data.data.mensajes
+                };
+
+              }
+
               //Desactivamos el loading
               $('#btn-registrar').removeClass('loading').prop('disabled',false);
 
