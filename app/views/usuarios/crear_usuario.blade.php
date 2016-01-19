@@ -8,7 +8,7 @@
 					<div class="content">
 						<div class="header"><% mensaje_validacion.titulo %></div>
 						<ul class="list">
-							<li ng-repeat=" mensaje in mensaje_validacion.mensajes"><% mensaje | capitalize %></li>
+							<li ng-repeat=" mensaje in mensaje_validacion.mensajes track by $index"><% mensaje | capitalize %></li>
 						</ul>
 					</div>
 				</div>
