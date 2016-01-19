@@ -271,7 +271,7 @@ class UsuariosController extends Controller {
 
 			return Response::json(array(
 				'resultado'=>true, 
-				'mensajes'=>'Usuario creado con exito',
+				'mensajes'=>array('Usuario creado con exito'),
 				'datos'=>array('usuario_creado'=>$nuevo_usuario->id)
 				)
 			);

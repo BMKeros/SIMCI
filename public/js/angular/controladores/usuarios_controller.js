@@ -67,6 +67,8 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$route', '$rout
               url: '/api/usuarios/crear-usuario-completo',
               data: $scope.DatosForm
             }).then(function(data){
+              console.log(data.data);
+              
               if(data.data.resultado){
                 console.log(data.data);
 
