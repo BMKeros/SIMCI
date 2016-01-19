@@ -17,8 +17,8 @@ class CrearTablaAlmacenes extends Migration {
 			$table->increments('id');
 			$table->integer('cod_almacen');
 			$table->integer('responsable');
-			$table->integer('primer_auxiliar');
-			$table->integer('segundo_auxiliar');
+			$table->integer('primer_auxiliar')->nullable();
+			$table->integer('segundo_auxiliar')->nullable();
 			$table->string('descripcion', 8);
 			
 			$table->nullableTimestamps();

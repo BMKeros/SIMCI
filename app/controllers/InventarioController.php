@@ -3,15 +3,15 @@
 		
 		public function postRegistrarElemento(){
 
-			$cod_dimension = Inmput::get('');
-			$cod_sub_dimension = Input::get('');
-			$cod_agrupacion = Input::get('');
-			$cod_sub_agrupacion = Input::get('');
-			$nuemero_orden = Input::get('');
-			$cod_objeto = Input::get('');
-			$cantidad_disponible = Input::get('');
-			$usa_recipiente = Input::get('');
-			$recipientes_disponible = Input::get('');		
+			$cod_dimension = Inmput::get('cod_dimencion');
+			$cod_sub_dimension = Input::get('cod_sub_dimencion');
+			$cod_agrupacion = Input::get('cod_agrupacion');
+			$cod_sub_agrupacion = Input::get('cod_sub_agrupacion');
+			$nuemero_orden = Input::get('numero_orden');
+			$cod_objeto = Input::get('cod_objeto');
+			$cantidad_disponible = Input::get('cantidad_disponible');
+			$usa_recipiente = Input::get('usa_recipiente');
+			$recipientes_disponible = Input::get('recipientes_disponible');		
 
 			$reglas = array(
 				'cod_dimension' => 'required|integer',
@@ -76,10 +76,10 @@
 		}
 
 		public function postRegistrarAlmacen(){
-			$cod_almacen = Input::get('');
-			$responsable = Input::get('');
-			$primer_auxiliar = Input::get('');
-			$segundo_auxiliar = Input::get('');
+			$cod_almacen = Input::get('cod_almacen');
+			$responsable = Input::get('responsable');
+			$primer_auxiliar = Input::get('primer_auxiliar');
+			$segundo_auxiliar = Input::get('segundo_auxiliar');
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
@@ -87,7 +87,7 @@
 				'responsable' => 'required|integer|unique',
 
 				//pendientes por modificar si seran o no unicos
-				'primer_auxiliar' => 'required|integer|unique',
+				'primer_auxiliar' => 'integer|unique',
 				'segundo_auxiliar' => 'integer|unique',
 
 				'descripcion' => 'required|min:3|max:8'
@@ -130,8 +130,8 @@
 		}
 
 		public function postRegistrarEstante(){
-			$cod_estante = Input::get('');
-			$descripcion = Input::get('');
+			$cod_estante = Input::get('cod_estante');
+			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
 				'cod_estante' => 'required|integer|unique',
@@ -170,8 +170,8 @@
 
 
 		public function postRegistrarAgrupacion(){
-			$nombre = Input::get('');
-			$descripcion = Input::get('');
+			$nombre = Input::get('nombre');
+			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
 				'nombre' => 'required|min:5|max:30',
