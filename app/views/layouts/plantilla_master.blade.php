@@ -25,8 +25,10 @@
 
 		<script src="/bower_components/jquery/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>
+		<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
+		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
 		<script src="/js/moment-with-locales.min.js"></script>
 		
 		<script src="/js/scripts_app.js"></script>
@@ -34,6 +36,8 @@
 		<script src="/js/angular/ng-app.js"></script>
 		<script src="/js/angular/ng-controladores.js"></script>
 		<script src="/js/angular/ng-routes.js"></script>
+		
+		
 		
 		<script>
 
