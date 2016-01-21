@@ -16,12 +16,18 @@
             </thead>
          
             <tbody>
-               <tr ng-repeat='x in [1]'>
-                  <td></td>
-                  <td>Daniel Bonalde</td>
-                  <td>jhlilk22@yahoo.com</td>
-                  <td> Tipo de Permiso</td>
-                  <td>ROOT</td>
+               <tr ng-repeat='usuario in usuarios'>
+                  <td><% usuario.id %></td>
+                  <td><% usuario.usuario|capitalize %></td>
+                  <td><% usuario.email %></td>
+                  <td>
+                  	<ul>
+                  		<li ng-repeat=" permiso in usuario.attr_permisos">
+                  			<% permiso.nombre %>
+                  		</li>
+                  	</ul>
+                  </td>
+                  <td><% usuario.cod_tipo_usuario%></td>
                   <td class="three wide" >
                   
                      <div class="ui icon button blueactivar-popup mostrar"  data-content="Ver Usuario">
