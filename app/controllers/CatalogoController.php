@@ -18,8 +18,8 @@
 				'nombre' => 'required|min:5|max:100', 
 				'descripcion' => 'required|min:5|max:200',
 				'especificaciones' => 'required|min:5|max:200',
-				'cod_unidad' => 'required|integer',
-				'cod_tipo_objeto' => 'required|integer'
+				'cod_unidad' => 'required|numeric|exists:catalogo_objetos,cod_unidad',
+				'cod_tipo_objeto' => 'required|numeric|exists:catalogo_objetos,cod_tipo_objeto'
 			);
 
 			$campos = array(
@@ -34,7 +34,9 @@
 				'required' => 'El campo :attribute es necesario',
 				'integer' => 'El campo :attribute debe ser numerico',
 				'min' => 'El campo :attribute no debe contener menos de :min caracteres',
-				'max' => 'El campo :attribute no debe exceder los :max caracteres'
+				'max' => 'El campo :attribute no debe exceder los :max caracteres',
+				'exists' => ':attribute no existe',
+				'numeric' => 'El :attribute debe ser solo numeros'
 			);
 
 			$validacion = Validator::make($campos, $reglas, $mensajes);
