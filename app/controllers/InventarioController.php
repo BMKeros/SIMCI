@@ -14,17 +14,17 @@
 			$recipientes_disponibles = Input::get('recipientes_disponibles');		
 
 			$reglas = array(
-				'cod_dimension' => 'required|integer',
-				'cod_sub_dimension' =>'required|integer',
-				'cod_agrupacion' => 'required|integer',
-				'cod_sub_agrupacion' => 'required|integer',
-				'numero_orden' => 'required|integer',
+				'cod_dimension' => 'required|numeric|exists:inventario,cod_dimension',
+				'cod_sub_dimension' =>'required|numeric|exists:inventario,cod_subdimension',
+				'cod_agrupacion' => 'required|numeric|exists:inventario,cod_agrupacion',
+				'cod_sub_agrupacion' => 'required|numeric|exists:inventario,cod_subagrupacion',
+				'numero_orden' => 'required|numeric',
 				//pendiente evaluar si cod_objeto sera unique
-				'cod_objeto' => 'required|integer',
+				'cod_objeto' => 'required|numeric|exists:inventario,cod_objeto',
 				'cantidad_disponible' => 'required',
 				//campos aun no se sabe si se dejaran o se quitaran
 				'usa_recipientes' => 'required|boolean',
-				'recipientes_disponibles' => 'required|integer'
+				'recipientes_disponibles' => 'required|numeric'
 			);
 
 			$campos = array(
@@ -37,13 +37,14 @@
 				'cantidad_disponible' => $cantidad_disponible,
 				'usa_recipientes' => $usa_recipientes,
 				'recipientes_disponibles' => $recipientes_disponibles
-
 			);
 
 			$mensajes = array(
 				'required' => 'El campo :attribute es necesario',
 				'integer' => 'El campo :attribute debe ser numerico',
-				'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)'
+				'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
+				':attribute no existe',
+				'numeric' => 'El :attribute debe ser solo numeros'
 			);
 
 			$validacion = Validator::make($campos, $reglas, $mensajes);
