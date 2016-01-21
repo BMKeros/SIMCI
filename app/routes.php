@@ -31,6 +31,7 @@ Route::group(array('prefix' => 'api'), function(){
 	Route::controller('/usuarios', 'UsuariosController');//ruta para los usuarios
 	Route::controller('/personas', 'PersonasController');//ruta para los personas
   Route::controller('/inventario', 'InventarioController');
+  Route::controller('/catalogo', 'CatalogoController');
 });
 
 

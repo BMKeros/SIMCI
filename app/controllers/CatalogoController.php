@@ -1,7 +1,7 @@
 <?php  
 	class CatalogoController extends Controller{
 
-		public function getMostratCatalogos(){
+		public function getMostrarCatalogos(){
 			$catalogos = Catalogo::all();
 
 			return Response::json($catalogos);
@@ -53,7 +53,7 @@
 
 				$catalogo->save();
 
-				return Response::json(array('resultado' => true, 'mensajes' => 'Nuevo Catalogo de OLbjetos creado con exito'));
+				return Response::json(array('resultado' => true, 'mensajes' => 'Nuevo Catalogo de Objetos creado con exito'));
 			}
 		}
 	}
