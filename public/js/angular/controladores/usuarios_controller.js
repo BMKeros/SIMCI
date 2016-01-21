@@ -105,9 +105,25 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$rou
             
           } //If condicional
         }
+    
+    }// If == '/usuarios/crear'
+
+    if($location.$$url == '/usuarios/ver/todos'){
+      
+      $scope.usuarios = [];
+
+      $http({
+        method: 'GET',
+        url: '/api/usuarios/mostrar'
+      }).then(function(data){
+        console.log(data.data);
+        $scope.usuarios = data.data;
+      }, function(data_error){
+        console.log(data_error);
+      });
+
     }
     
   }]
 );
-    
     
