@@ -24,6 +24,14 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     }
 
 
+    public function getAttrPermisosAttribute()
+    {
+        return $this->permisos->toArray();
+    }
+
+    protected $appends = ['attr_permisos'];
+
+
 	public function setPasswordAttribute($value){
 		if ( ! empty ($value)){
 			$this->attributes['password'] = Hash::make($value);
