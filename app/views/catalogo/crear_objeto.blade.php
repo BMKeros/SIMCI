@@ -21,7 +21,7 @@
 				<div class="field centered grid">
 					<div class="three fields">
 						<div class="field">
-							<label>Nombre del Producto</label>
+							<label>Nombre del Objeto</label>
 			        		<input type="text" name="nombre_objeto" placeholder="Nombre" ng-model="DatosForm.nombre">
 			        	</div>
 				    </div>
@@ -31,12 +31,12 @@
 					<div class="two fields">
 			      		
 						 	<div class="field">
-						    	<label>Especificacion del Producto</label>
+						    	<label>Especificacion del Objeto</label>
 						    	<textarea placeholder="Especificaciones del Producto" ng-model="DatosForm.especificaciones"></textarea>
 						  	</div>
 						  	
 						  	<div class="field">
-							    <label>Descripcion del Producto</label>
+							    <label>Descripcion del Objeto</label>
 							    <textarea placeholder="Descripcion del Producto" ng-model="DatosForm.descripcion"></textarea>
 							</div>
 						
