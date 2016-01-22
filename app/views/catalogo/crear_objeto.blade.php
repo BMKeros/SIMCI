@@ -1,8 +1,10 @@
+@extends('layouts.plantilla_master')
+@section('contenido-body-master')
 <div class="ui centered grid">
 	<div class="six wide tablet twelve wide computer column">
 		<div class="ui form">
 			<form class="ui form" id="formulario_crear_objeto">
-				<h3 class="ui centered dividing header">Llenar Catalogo</h3>
+				<h3 class="ui centered dividing header">Registrar Objeto</h3>
 				<br>
 				<div class="field centered grid">
 					<div class="three fields">
@@ -10,17 +12,26 @@
 							<label>Nombre del Producto</label>
 			        		<input type="text" name="nombre_pruducto" placeholder="Nombre">
 			        	</div>
-			        	<div class="field">
-				      		<label>Especificacion del Producto</label>	
-				        	<input type="text" name="especificaciones" placeholder="Especificaciones">
-				      	</div>
-
-				      	<div class="field">
-				        	<label>Descripcion del Producto</label>
-							<input type="text" name="descripcion" placeholder="Descripcion">
-				        </div>
 				    </div>
 				</div>
+
+				<div class="field">
+					<div class="two fields">
+			      		
+						 	<div class="field">
+						    	<label>Especificacion del Producto</label>
+						    	<textarea></textarea>
+						  	</div>
+						  	
+						  	<div class="field">
+							    <label>Descripcion del Producto</label>
+							    <textarea></textarea>
+							</div>
+						
+				    </div>
+				</div>
+
+				<br>
 
 				<div class="field">
 				    <div class="two fields">
@@ -35,13 +46,19 @@
 						</div>
 				    </div>
 				</div>
-			<div class="ui right floated submit button blue">Registrar</div>
+			
+			<br>
+
+			<button type="submit" class="ui big right floated submit button blue" class=" ng-click="registrar_objeto()"">Registrar</button>
 			</form>
 		</div>
 	</div>
 </div>
+@stop
+@section('js')
 <script>
 $(document).ready(function(){
 	$('#formulario_crear_objeto').form(reglas_formulario_crear_usuario)
 	});
 </script>
+@stop
