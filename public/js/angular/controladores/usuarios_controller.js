@@ -27,7 +27,7 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$rou
       {
         nombre:"crear permisos",
         descripcion: "Opcion se podran crear nuevos permisos de usuarios para el sistema",
-        url: "#/usuarios/eliminar"
+        url: "#/usuarios/crear/permiso"
       },
       {
         nombre:"ver permisos",
@@ -37,7 +37,7 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$rou
       {
         nombre:"crear tipos de usuario",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los permisos registrados en el sistema",
-        url: "#/usuarios/modificar"
+        url: "#/usuarios/crear/tipo-usuario"
       },
     ];
     
