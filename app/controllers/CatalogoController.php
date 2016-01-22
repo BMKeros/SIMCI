@@ -1,11 +1,65 @@
 <?php  
 	class CatalogoController extends Controller{
 
-		public function getMostrarCatalogos(){
-			//$catalogos = Catalogo::all()->paginate(15);
-			$catalogos = DB::table('usuarios')->paginate(2);
+		public function getMostrar(){
 
-			return Response::json($catalogos);
+			$tipo_busqueda = Input::get('type', 'todos');
+			$id_objeto = Input::get('id', null);
+			$orden = Input::get('ordenar','asc');
+
+			switch($tipo_busqueda){
+				case 'todos':
+					if($orden){
+						$response = Catalogo::orderBy('id', $orden)->get();
+					}
+					else{
+						$response = Catalogo::all();	
+					}
+				break;
+
+				case 'objeto':
+					if($id_objeto){
+						$response = Catalogo::find($id_objeto);
+
+						if(is_null($response)){
+							$response = array();
+						}
+					}
+					else{
+						$response = array();
+					}
+				break;
+
+				case 'paginacion':
+					$length = Input::get('length', 10);
+					$value_search = Input::get('search');
+					$draw = Input::get('draw',1);
+
+					if(quitar_espacios($value_search['value']) == ''){
+						$data = Catalogo::paginate($length);	
+					}
+					else{
+
+					}
+					
+
+					$response = array(
+						"draw"=>$draw,
+						"page"=>$data->getCurrentPage(),
+						"recordsTotal"=>$data->getTotal(),
+						"recordsFiltered"=> $data->count(),
+						"data" => $data->all()
+					);
+
+				break;
+
+				default:
+					$response = Catalogo::all();
+				break;
+
+			}
+
+			return Response::json($response);
 		}
 
 		public function postRegistrarObjeto(){
@@ -117,7 +171,7 @@
 			}
 		}
 
-		public function postEliminarCatalogo(){
+		public function postEliminar(){
 			$id = Input::get('id');
 
 			$objeto = Catalogo::find($id);
