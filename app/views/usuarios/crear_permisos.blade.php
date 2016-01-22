@@ -19,11 +19,11 @@
 
 				    <div class="field">
 				    	<label>Descripcion de Permiso</label>
-				    	<textarea "ng-modal Datos.Form.Descripcion" placeholder="Descripcion de los Permisos"></textarea>
+				    	<textarea "ng-modal Datos.Form.Descripcion" placeholder="Descripcion de Permiso"></textarea>
 				    </div>
 				</div>
 
-				<div class="ui big right floated submit button blue" ng-click="registrar_objeto()" id="btn-registrar"> Registrar
+				<div class="ui big right floated submit button green" ng-click="registrar_objeto()" id="btn-registrar"> Registrar
 				</div>
 			</form>
 		</div>
