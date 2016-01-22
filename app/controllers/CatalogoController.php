@@ -65,7 +65,6 @@
 
 			if(!is_null($objeto)){
 
-
 				$nombre = input_default(Input::get('nombre'),$objeto->nombre);
 				$descripcion = input_default(Input::get('descripcion'),$objeto->descripcion);
 				$especificaciones = input_default(Input::get('especificaciones'),$objeto->especificaciones);

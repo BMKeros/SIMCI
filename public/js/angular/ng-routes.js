@@ -39,6 +39,15 @@
           templateUrl: '/views/layouts/layout_main_modulos',
           controller: 'CatalogoController'
         }).
+        when('/catalogo/crear-objeto', {
+          templateUrl: '/views/catalogo/crear_objeto',
+          controller: 'CatalogoController'
+        }).
+        when('/catalogo/mostrar-catalogo', {
+          templateUrl: '/views/catalogo/mostrar_catalogo',
+          controller: 'CatalogoController'
+        }).
+
 
         otherwise({
           redirectTo: function(){

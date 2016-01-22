@@ -118,13 +118,12 @@
 				</div>					
 				<br>
 				<div class="field">
-					<button class="big positive ui right floated button" ng-click="registrar_usuario()" id="btn-registrar">Registrar</button>
+					<div class="big positive ui right floated button" ng-click="registrar_usuario()" id="btn-registrar">Registrar</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
-
 
 
 <script>    

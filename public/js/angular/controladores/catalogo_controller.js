@@ -4,6 +4,7 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$route', '$rout
   function ($scope, $http, $log , $route, $routeParams, $location){
     
     $scope.modulo = {};
+    $scope.DatosForm = {}; // Objeto para los datos de formulario
 
     $scope.modulo.nombre = "Catalogo";
     $scope.modulo.icono = {
@@ -15,12 +16,12 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$route', '$rout
       {
         nombre:"registrar objeto",
         descripcion: "Esta opcion le permitira añadir nuevos objetos al catalogo",
-        url: "#/"
+        url: "#/catalogo/crear-objeto"
       },
       {
         nombre:"ver catalogo",
         descripcion: "Esta opcion le permitira ver los objetos del catalogo, a su vez tambien podra modificar o eliminar dichos objetos",
-        url: "#/"
+        url: "#/catalogo/mostrar-catalogo"
       },
       
     ];
