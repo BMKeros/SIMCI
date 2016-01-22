@@ -41,7 +41,6 @@
 					else{
 
 					}
-					
 
 					$response = array(
 						"draw"=>$draw,
@@ -175,7 +174,6 @@
 			$id = Input::get('id');
 
 			$objeto = Catalogo::find($id);
-
 			if(!is_null($objeto)){
 				$objeto->delete();
 				return Response::json(array('resultado' => true, 'mensajes' => array('Objetos eliminado con exito')));
