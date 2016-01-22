@@ -16,7 +16,7 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$route', '$rout
       {
         nombre:"registrar objeto",
         descripcion: "Esta opcion le permitira añadir nuevos objetos al catalogo",
-        url: "#/catalogo/crear-objeto"
+        url: "#/catalogo/registrar-objeto"
       },
       {
         nombre:"ver catalogo",
@@ -29,7 +29,7 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$route', '$rout
     $log.info($routeParams);
     $log.info($location);
 
-    if($location.$$url == '/catalogo/crear-objeto'){
+    if($location.$$url == '/catalogo/registrar-objeto'){
 
       $scope.mostrar_mensaje = false;
 

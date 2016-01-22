@@ -39,7 +39,7 @@
           templateUrl: '/views/layouts/layout_main_modulos',
           controller: 'CatalogoController'
         }).
-        when('/catalogo/crear-objeto', {
+        when('/catalogo/registrar-objeto', {
           templateUrl: '/views/catalogo/crear_objeto',
           controller: 'CatalogoController'
         }).
