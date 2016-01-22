@@ -118,9 +118,10 @@
 		    	.sidebar({
 		    		transition:'overlay',
 		    		dimPage: false,
+		    		context: 'body',
 		    	})
 		    	.sidebar('toggle');
 		  	});
-		});
+		});context
 	</script>
 @stop
