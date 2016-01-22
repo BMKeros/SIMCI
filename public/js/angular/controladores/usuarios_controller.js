@@ -1,8 +1,8 @@
 
 /// Controlador para usuarios
 
-simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$route', '$routeParams', '$location', 
-  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location){
+simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$route', '$routeParams', '$location','$compile','DTOptionsBuilder', 'DTColumnBuilder',
+  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder){
     $scope.modulo = {};
 
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -109,21 +109,78 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$rou
     }// If == '/usuarios/crear'
 
     if($location.$$url == '/usuarios/ver/todos'){
-      
-      $scope.usuarios = [];
 
-      $http({
-        method: 'GET',
-        url: '/api/usuarios/mostrar'
-      }).then(function(data){
-        console.log(data.data);
-        $scope.usuarios = data.data;
-      }, function(data_error){
-        console.log(data_error);
+      $scope.opciones_tabla_usuarios = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+         url: '/api/usuarios/mostrar?type=paginacion',
+         type: 'GET'
+      })
+      .withDataProp('data')
+      .withPaginationType('full_numbers')
+      .withOption('processing', true)
+      .withOption('serverSide', true)
+      .withOption('createdRow', function(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+        $log.info(row);
+        $log.info(dataIndex);
       });
+    
+      $scope.columnas_tabla_usuarios = [
+          DTColumnBuilder.newColumn('id').withTitle('ID').notSortable(),
+          DTColumnBuilder.newColumn('usuario').withTitle('Usuario').notSortable(),
+          DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+          DTColumnBuilder.newColumn('attr_permisos').withTitle('Permiso').notSortable(),
+          DTColumnBuilder.newColumn('cod_tipo_usuario').withTitle('Tipo de Usuario').notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+            function(data, type, full) {
+              return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>
+                      <a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>  
+                      <a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
+          })
 
-    }
+      ];
+
+
+      ///Funciones 
+      $scope.modal_ver_usuario = function(id){
+        $scope.data_usuario = {};
+
+        $http({
+          method: 'GET',
+          url: '/api/usuarios/mostrar?type=usuario_full&id='+id,
+          data: $scope.DatosForm
+        }).then(function(data){
+          $log.info(data);
+          $scope.data_usuario = data.data;
+
+          //Mostramos la modal
+          angular.element('#modal_ver_usuario').modal('show');
+        },function(data_error){
+          $log.info(data_error);
+        });
+      };
+
+      $scope.modal_modificar_usuario = function(id){
+        $http({
+          method: 'GET',
+          url: '/api/usuarios/mostrar?type=usuario_full&id='+id,
+          data: $scope.DatosForm
+        }).then(function(data){
+          $log.info(data);
+          $scope.data_usuario = data.data;
+
+          //Mostramos la modal
+          angular.element('#modal_modificar_usuario').modal('show');
+        },function(data_error){
+          $log.info(data_error);
+        });
+      };
+
+      $scope.modal_eliminar_usuario = function(id){
+        angular.element('#modal_eliminar_usuario').modal('show');
+      };
+
+    }// If
     
   }]
 );
-    
