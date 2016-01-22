@@ -7,7 +7,7 @@
 				<div class="field">
 					<div class="six wide field">
 						<div class="field">
-							<label>Tipo de usuario</label>
+							<label>Codigo</label>
 			        		<input type="text" name="tipo_usuario" value="" placeholder="Tipo de Usuario">
 			        	</div>
 			        </div>
@@ -17,10 +17,12 @@
 		        	<div class="nine wide field ui form">
 					  	<div class="field">
 					    	<label>Descripcion</label>
-					    		<textarea></textarea>
+					    		<textarea placeholder="Descripcion"></textarea>
 					  	</div>
 					</div>
 		        </div>
+	        <div class="ui big right floated submit button blue" ng-click="registrar_objeto()" id="btn-registrar"> Registrar
+			</div>
 			</form>
 		</div>
 	</div>

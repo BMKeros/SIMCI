@@ -19,7 +19,7 @@
 				<h3 class="ui centered dividing header">Registrar Objeto</h3>
 				<br>
 				<div class="field centered grid">
-					<div class="three fields">
+					<div class="field">
 						<div class="field">
 							<label>Nombre del Objeto</label>
 			        		<input type="text" name="nombre_objeto" placeholder="Nombre" ng-model="DatosForm.nombre">
@@ -32,12 +32,12 @@
 			      		
 						 	<div class="field">
 						    	<label>Especificacion del Objeto</label>
-						    	<textarea placeholder="Especificaciones del Producto" ng-model="DatosForm.especificaciones"></textarea>
+						    	<textarea placeholder="Especificaciones del Objeto" ng-model="DatosForm.especificaciones"></textarea>
 						  	</div>
 						  	
 						  	<div class="field">
 							    <label>Descripcion del Objeto</label>
-							    <textarea placeholder="Descripcion del Producto" ng-model="DatosForm.descripcion"></textarea>
+							    <textarea placeholder="Descripcion del Objeto" ng-model="DatosForm.descripcion"></textarea>
 							</div>
 						
 				    </div>
