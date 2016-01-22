@@ -19,7 +19,7 @@
 				<h3 class="ui centered dividing header">Registrar Objeto</h3>
 				<br>
 				<div class="field centered grid">
-					<div class="three fields">
+					<div class="field">
 						<div class="field">
 							<label>Nombre del Objeto</label>
 			        		<input type="text" name="nombre_objeto" placeholder="Nombre" ng-model="DatosForm.nombre">
