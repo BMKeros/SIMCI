@@ -16,7 +16,7 @@
 			</div>
 			
 			<form class="ui form" id="formulario_crear_usuario">
-				<h3 class="ui centered dividing header">Datos de usuario</h3>
+				<h3 class="ui centered dividing header">Datos de Usuario</h3>
 				
 				<div class="field">
 					<div class="two fields">
