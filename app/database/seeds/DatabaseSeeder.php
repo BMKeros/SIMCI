@@ -16,12 +16,16 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('PermisosTableSeeder');
 		$this->call('TiposUsuarioTableSeeder');
+		$this->call('UnidadesTableSeeder');
+		$this->call('TipoObjetosTableSeeder');
 		$this->call('UsuariosTableSeeder');
 		$this->call('ClasificacionElementosSeeder');
 		$this->call('SubClasificacionElementosSeeder');
 		$this->call('EstadosMateriaSeeder');
 		$this->call('ElementosQuimicosTableSeeder');
 		$this->call('SexosTableSeeder');
+		$this->call('TipoObjetosTableSeeder');
+		
 	}
 }
 
