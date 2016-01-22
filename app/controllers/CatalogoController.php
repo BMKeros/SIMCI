@@ -89,12 +89,11 @@
 				);
 
 				$mensajes = array(
-					'required' => 'El campo :attribute es necesario',
-					'integer' => 'El campo :attribute debe ser numerico',
-					'min' => 'El campo :attribute no debe contener menos de :min caracteres',
-					'max' => 'El campo :attribute no debe exceder los :max caracteres',
+					'required' => ':attribute es necesario',
+					'min' => ':attribute no debe contener menos de :min caracteres',
+					'max' => ':attribute no debe exceder los :max caracteres',
 					'exists' => ':attribute no existe',
-					'numeric' => 'El :attribute debe ser solo numeros'
+					'numeric' => ':attribute debe contener solo numeros'
 				);
 
 				$validacion = Validator::make($campos, $reglas, $mensajes);
@@ -109,7 +108,7 @@
 					$catalogo->cod_unidad = $cod_unidad;
 					$catalogo->cod_tipo_objeto = $cod_tipo_objeto;
 					$catalogo->save();
-					
+
 					return Response::json(array('resultado' => true, 'mensajes' => array('Objetos creado con exito')));
 				}
 			}
