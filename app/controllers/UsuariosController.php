@@ -303,7 +303,7 @@ class UsuariosController extends Controller {
 
 				return Response::json(array(
 					'resultado'=>false, 
-					'mensajes'=> $e->getMessage()
+					'mensajes'=> array($e->getMessage())
 				));
 			}
 
