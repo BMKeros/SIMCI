@@ -1,10 +1,8 @@
-@extends('layouts.plantilla_master')
-@section('contenido-body-master')
 <div class="ui centered grid">
 	<div class="six wide tablet twelve wide computer column">
 		<div class="ui form">
 			<form class="ui form" id="formulario_crear_permisos_usuarios">
-				<h3 class="ui centered dividing header">Permisos de Usuario</h3>
+				<h3 class="ui centered dividing header">Crear Permisos</h3>
 
 				<div class="field centered grid">
 					<div class="two fields">
@@ -31,4 +29,3 @@
 		</div>
 	</div>
 </div>
-@stop
