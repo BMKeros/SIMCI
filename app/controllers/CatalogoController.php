@@ -61,49 +61,55 @@
 		}
 
 		public function postActualizarCatalogo($id){
-			$catalogo = Catalogo::find($id);
+			$objeto = Catalogo::find($id);
 
-			$catalogo->nombre = input_default(input::get('nombre'),$catalogo->nombre);
-			$catalogo->descripcion = input_default(input::get('descripcion'),$catalogo->descripcion);
-			$catalogo->nombre = input_default(input::get('especificaciones'),$catalogo->especificaciones);
-			$catalogo->nombre = input_default(input::get('cod_unidad'),$catalogo->cod_unidad);
-			$catalogo->nombre = input_default(input::get('cod_tipo_objeto'),$catalogo->cod_tipo_objeto);
+			if(!is_null($objeto)){
 
 
-			$reglas = array(
-				'nombre' => 'required|min:5|max:100', 
-				'descripcion' => 'required|min:5|max:200',
-				'especificaciones' => 'required|min:5|max:200',
-				'cod_unidad' => 'required|numeric|exists:catalogo_objetos,cod_unidad',
-				'cod_tipo_objeto' => 'required|numeric|exists:catalogo_objetos,cod_tipo_objeto'
-			);
+				$nombre = input_default(Input::get('nombre'),$objeto->nombre);
+				$descripcion = input_default(Input::get('descripcion'),$objeto->descripcion);
+				$especificaciones = input_default(Input::get('especificaciones'),$objeto->especificaciones);
+				$cod_unidad = input_default(Input::get('cod_unidad'),$catalogo->cod_unidad);
+				$cod_tipo_objeto = input_default(Input::get('cod_tipo_objeto'),$objeto->cod_tipo_objeto);
 
-			$campos = array(
-				'nombre' => $catalogo->nombre,
-				'descripcion' => $catalogo->descripcion,
-				'especificaciones' => $catalogo->especificaciones,
-				'cod_unidad' => $catalogo->cod_unidad,
-				'cod_tipo_objeto' => $catalogo->cod_tipo_objeto
-			);
+				$reglas = array(
+					'nombre' => 'required|min:5|max:100', 
+					'descripcion' => 'required|min:5|max:200',
+					'especificaciones' => 'required|min:5|max:200',
+					'cod_unidad' => 'required|numeric|exists:catalogo_objetos,cod_unidad',
+					'cod_tipo_objeto' => 'required|numeric|exists:catalogo_objetos,cod_tipo_objeto'
+				);
 
-			$mensajes = array(
-				'required' => 'El campo :attribute es necesario',
-				'integer' => 'El campo :attribute debe ser numerico',
-				'min' => 'El campo :attribute no debe contener menos de :min caracteres',
-				'max' => 'El campo :attribute no debe exceder los :max caracteres',
-				'exists' => ':attribute no existe',
-				'numeric' => 'El :attribute debe ser solo numeros'
-			);
+				$campos = array(
+					'nombre' => $catalogo->nombre,
+					'descripcion' => $catalogo->descripcion,
+					'especificaciones' => $catalogo->especificaciones,
+					'cod_unidad' => $catalogo->cod_unidad,
+					'cod_tipo_objeto' => $catalogo->cod_tipo_objeto
+				);
 
-			$validacion = Validator::make($campos, $reglas, $mensajes);
+				$mensajes = array(
+					'required' => 'El campo :attribute es necesario',
+					'integer' => 'El campo :attribute debe ser numerico',
+					'min' => 'El campo :attribute no debe contener menos de :min caracteres',
+					'max' => 'El campo :attribute no debe exceder los :max caracteres',
+					'exists' => ':attribute no existe',
+					'numeric' => 'El :attribute debe ser solo numeros'
+				);
 
-			if($validacion->fails()){
-				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+				$validacion = Validator::make($campos, $reglas, $mensajes);
+
+				if($validacion->fails()){
+					return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+				}
+				else{
+					$catalogo->save();
+
+					return Response::json(array('resultado' => true, 'mensajes' => array('Objetos creado con exito')));
+				}
 			}
 			else{
-				$catalogo->save();
-
-				return Response::json(array('resultado' => true, 'mensajes' => 'Nuevo Catalogo de Objetos creado con exito'));
+				return Response::json(array('resultado' => false, 'mensajes' => array('Objeto no encontrado')));
 			}
 		}
 	}
