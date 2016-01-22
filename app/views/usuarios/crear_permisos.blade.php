@@ -23,7 +23,7 @@
 				    </div>
 				</div>
 
-				<div class="ui big right floated submit button blue" ng-click="registrar_objeto()" id="btn-registrar"> Aceptar
+				<div class="ui big right floated submit button blue" ng-click="registrar_objeto()" id="btn-registrar"> Registrar
 				</div>
 			</form>
 		</div>
