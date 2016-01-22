@@ -69,7 +69,7 @@
 				$nombre = input_default(Input::get('nombre'),$objeto->nombre);
 				$descripcion = input_default(Input::get('descripcion'),$objeto->descripcion);
 				$especificaciones = input_default(Input::get('especificaciones'),$objeto->especificaciones);
-				$cod_unidad = input_default(Input::get('cod_unidad'),$catalogo->cod_unidad);
+				$cod_unidad = input_default(Input::get('cod_unidad'),$objeto->cod_unidad);
 				$cod_tipo_objeto = input_default(Input::get('cod_tipo_objeto'),$objeto->cod_tipo_objeto);
 
 				$reglas = array(
@@ -102,15 +102,29 @@
 					return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
 				}
 				else{
-					$catalogo->nombre = $nombre;
-					$catalogo->descripcion = $descripcion;
-					$catalogo->especificaciones = $especificaciones;
-					$catalogo->cod_unidad = $cod_unidad;
-					$catalogo->cod_tipo_objeto = $cod_tipo_objeto;
-					$catalogo->save();
+					$objeto->nombre = $nombre;
+					$objeto->descripcion = $descripcion;
+					$objeto->especificaciones = $especificaciones;
+					$objeto->cod_unidad = $cod_unidad;
+					$objeto->cod_tipo_objeto = $cod_tipo_objeto;
+					$objeto->save();
 
 					return Response::json(array('resultado' => true, 'mensajes' => array('Objetos creado con exito')));
 				}
+			}
+			else{
+				return Response::json(array('resultado' => false, 'mensajes' => array('Objeto no encontrado')));
+			}
+		}
+
+		public function postEliminarCatalogo(){
+			$id = Input::get('id');
+
+			$objeto = Catalogo::find($id);
+
+			if(!is_null($objeto)){
+				$objeto->delete();
+				return Response::json(array('resultado' => true, 'mensajes' => array('Objetos eliminado con exito')));
 			}
 			else{
 				return Response::json(array('resultado' => false, 'mensajes' => array('Objeto no encontrado')));
