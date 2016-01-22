@@ -1,5 +1,3 @@
-@extends('layouts.plantilla_master')
-@section('contenido-body-master')
 <div class="ui centered grid">
 	<div class="six wide tablet twelve wide computer column">
 		<div class="ui form">
@@ -31,4 +29,3 @@
 		</div>
 	</div>
 </div>
-@stop
