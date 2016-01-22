@@ -12,6 +12,13 @@ class Persona Extends Eloquent{
 	public function sexo(){
 		return $this->belongsTo('Sexo');
 	}
+
+	public function getAttrSexoAttribute()
+    {
+        return $this->sexo->toArray();
+    }
+
+    protected $appends = ['attr_sexo'];
 }
 
 ?>
