@@ -60,7 +60,8 @@
 			}
 		}
 
-		public function postActualizarCatalogo($id){
+		public function postActualizarCatalogo(){
+			$id = Input::get('id');
 			$objeto = Catalogo::find($id);
 
 			if(!is_null($objeto)){
