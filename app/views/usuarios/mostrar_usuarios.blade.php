@@ -2,103 +2,40 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui selectable celled table">
-            <thead>
-               <tr>
-                  <th></th>
-                  <th>Usuario</th>
-                  <th>Direccion electronica</th>
-                  <th>Permisos</th>
-                  <th>Tipo Usuario</th>
-                  <th>Acciones</th>
-                 
-               </tr>
-            </thead>
-         
-            <tbody>
-               <tr ng-repeat='usuario in usuarios'>
-                  <td><% usuario.id %></td>
-                  <td><% usuario.usuario|capitalize %></td>
-                  <td><% usuario.email %></td>
-                  <td>
-                  	<ul>
-                  		<li ng-repeat=" permiso in usuario.attr_permisos">
-                  			<% permiso.nombre %>
-                  		</li>
-                  	</ul>
-                  </td>
-                  <td><% usuario.cod_tipo_usuario%></td>
-                  <td class="three wide" >
-                  
-                     <div class="ui icon button blueactivar-popup mostrar"  data-content="Ver Usuario">
-                        <i class="unhide icon"></i>
-                     </div>
-
-                     <div class="ui icon button green activar-popup modificar"  data-content="Modificar Usuario">
-                       <i class="edit icon"></i>
-                     </div>    
-                     
-                     <div class="ui icon button red activar-popup eliminar"  data-content="Eliminar Usuario">
-                       <i class="remove icon"></i>
-                     </div>
-                  </td>
-               </tr>
-            </tbody>
-            <tfoot>
-			    <tr>
-				    <th colspan="6">
-				      <div class="ui right floated pagination menu">
-				        <a class="icon item">
-				          <i class="left chevron icon"></i>
-				        </a>
-				        <a class="item">1</a>
-				        <a class="item">2</a>
-				        <a class="item">3</a>
-				        <a class="item">4</a>
-				        <a class="icon item">
-				          <i class="right chevron icon"></i>
-				        </a>
-				      </div>
-				    </th>
-			  	</tr>
-			</tfoot>
-         </table>
+         <table class="ui selectable celled table" datatable="" dt-options="opciones_tabla_usuarios" dt-columns="columnas_tabla_usuarios"  width="100%"></table>
       </div>
    </div>
 </div>
 
 <!--Bloque 2 -> Modale Ver Usuario-->
-<div class="ui modal ver">
+<div class="ui modal" id="modal_ver_usuario">
    <div class="header">Datos </div>
       <div class="content">
          <table class="ui celled table">
             <tbody>
                <tr>
-                  <td colspan="2"><b>Primer Nombre:</b> Daniels.</td>
-                  <td colspan="2"><b>Segundo Nombre:</b> Moises.</td>
-                  <td colspan="2"><b>Primer Apellido:</b> Bonalde.</td>
-                  <td colspan="2"><b>Segundo Apellido:</b> Prado.</td>
+                  <td colspan="2"><b>Primer Nombre:</b> <% data_usuario.persona.primer_nombre | capitalize %></td>
+                  <td colspan="2"><b>Segundo Nombre:</b> <% data_usuario.persona.segundo_nombre | capitalize %></td>
+                  <td colspan="2"><b>Primer Apellido:</b> <% data_usuario.persona.primer_apellido | capitalize %></td>
+                  <td colspan="2"><b>Segundo Apellido:</b> <% data_usuario.persona.segundo_apellido | capitalize %></td>
                </tr>
 
                <tr>
-                  <td colspan="1"><b>Cedula:</b> 23.674.783</td>
-                  <td colspan="2"><b>Sexo:</b> Masculino.</td>
-                  <td colspan="1"><b>Tipo De Usuario:</b> Administrador.</td>
-                  <td colspan="4"><b>Fecha de Nacimiento:</b> DD/MMM/AAAA</td>
+                  <td colspan="1"><b>Cedula:</b> <%data_usuario.persona.cedula%></td>
+                  <td colspan="2"><b>Sexo:</b> <% data_usuario.persona.attr_sexo.descripcion%></td>
+                  <td colspan="4"><b>Fecha de Nacimiento:</b> <% data_usuario.persona.fecha_nacimiento%></td>
                </tr>
 
                <tr>
-                  <td colspan="4"><b>Usuario:</b> UserNuevoUser</td>
-                  <td colspan="4"><b>Email:</b> DireccionElectronico@SIMCI.com</td>
+                  <td colspan="4"><b>Usuario:</b> <% data_usuario.usuario.usuario | capitalize %></td>
+                  <td colspan="4"><b>Email:</b> <% data_usuario.usuario.email %></td>
                </tr>
 
                <tr>
-                  <td colspan="3"><b>Tipo Usuario:</b>Administrador</td>
+                  <td colspan="3"><b>Tipo Usuario:</b> <% data_usuario.usuario.cod_tipo_usuario %></td>
                   <td colspan="5"><b>Permisos</b> Activo</td>
                </tr>
             </tbody>
-
-            
          </table>
       </div>
       <div class="actions">
@@ -113,7 +50,7 @@
    </div>
 <!--Bloque 3 -> Modal Modificar Usuario-->
 
-<div class="ui modal modificar">
+<div class="ui modal" id="modal_modificar_usuario">
 <div class="header">Actualizar</div>
    <div class="content">
       <div class="ui form">
@@ -122,11 +59,11 @@
             <div class="field">
                <div class="two fields">
                  <div class="field">
-                   <input type="text" name="usuario" placeholder="Usuario">
+                   <input type="text" name="usuario" placeholder="Usuario" ng-model="data_usuario.usuario.usuario">
                  </div>
 
                   <div class="eight wide field">
-                     <input type="text" name="email" placeholder="Direccion Email">
+                     <input type="text" name="email" placeholder="Direccion Email" ng-model="data_usuario.usuario.email">
                   </div>
                </div>
             </div>
@@ -150,7 +87,7 @@
                   </div>
 
                   <div class="eight wide field">
-                     {{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario'))}}
+                     {{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario','ng-model'=>'data_usuario.usuario.cod_tipo_usuario'))}}
                   </div>
                </div>
             </div>
@@ -161,11 +98,11 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                     <input type="text" name="primer_nombre" placeholder="Primer Nombre">
+                     <input type="text" name="primer_nombre" placeholder="Primer Nombre" ng-model="data_usuario.persona.primer_nombre">
                   </div>
                 
                   <div class="two field">
-                     <input type="text" name="segundo_nombre" placeholder="Segundo Nombre">
+                     <input type="text" name="segundo_nombre" placeholder="Segundo Nombre" ng-model="data_usuario.persona.segundo_nombre">
                   </div>
                </div>
             </div>
@@ -173,11 +110,11 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">  
-                     <input type="text" name="primer_apellido" placeholder="Primer Apellido">
+                     <input type="text" name="primer_apellido" placeholder="Primer Apellido" ng-model="data_usuario.persona.primer_apellido">
                   </div>
 
                   <div class="two field">
-                     <input type="text" name="segundo_apellido" placeholder="Segundo Apellido">
+                     <input type="text" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="data_usuario.persona.segundo_apellido">
                   </div>
                </div>
             </div>
@@ -185,11 +122,11 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                     <input type="text" name="cedula" placeholder="Cedula">
+                     <input type="text" name="cedula" placeholder="Cedula" ng-model="data_usuario.persona.cedula">
                   </div>
 
                   <div class="two field">
-                     <input type="date" name="fecha_nacimiento" placeholder="Fecha Nacimieto">
+                     <input type="date" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="data_usuario.persona.fecha_nacimiento">
                   </div>
                </div>
             </div>
@@ -197,7 +134,7 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                     {{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo'))}}
+                    {{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo','ng-model'=>"data_usuario.persona.sexo.id"))}}
                   </div>
                </div>
             </div>
@@ -215,8 +152,9 @@
    </div>
 </div>
 
+
 <!--Bloque 4 -> Eliminar Usuario-->
-<div class="ui basic modal eliminar">
+<div class="ui basic modal" id="modal_eliminar_usuario">
    <i class="close icon"></i>
    <div class="header">
       Eliminar Usuario!

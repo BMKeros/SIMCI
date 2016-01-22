@@ -46,3 +46,8 @@
 .fondo3{
   background-color: yellow;
 }
+
+.dataTables_length {
+  padding-bottom: 20px !important;
+}
+

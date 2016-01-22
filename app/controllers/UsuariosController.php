@@ -34,11 +34,52 @@ class UsuariosController extends Controller {
 				}
 			break;
 
+			case 'usuario_full':
+				if($id_usuario){
+					$data = Usuario::find($id_usuario);
+
+					if(is_null($data)){
+						$response = array();
+					}
+					else{
+						$response = array('usuario'=>$data, 'persona'=>$data->persona);
+					}
+				}
+				else{
+					$response = array();
+				}
+			break;
+
+			case 'paginacion':
+				$length = Input::get('length', 10);
+				$value_search = Input::get('search');
+				$draw = Input::get('draw',1);
+
+				if(quitar_espacios($value_search['value']) == ''){
+					$data = Usuario::paginate($length);	
+				}
+				else{
+
+					$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->paginate($length);	
+				}
+				
+
+				$response = array(
+					"draw"=>$draw,
+					"page"=>$data->getCurrentPage(),
+					"recordsTotal"=>$data->getTotal(),
+					"recordsFiltered"=> $data->count(),
+					"data" => $data->all()
+				);
+
+			break;
+
 			default:
 				$response = Usuario::all();
 			break;
+
 		}
-		
+
 		return Response::json($response);
 	}
 	
