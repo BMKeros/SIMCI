@@ -32,12 +32,12 @@
 			      		
 						 	<div class="field">
 						    	<label>Especificacion del Producto</label>
-						    	<textarea ng-model="DatosForm.especificaciones"></textarea>
+						    	<textarea placeholder="Especificaciones del Producto" ng-model="DatosForm.especificaciones"></textarea>
 						  	</div>
 						  	
 						  	<div class="field">
 							    <label>Descripcion del Producto</label>
-							    <textarea ng-model="DatosForm.descripcion"></textarea>
+							    <textarea placeholder="Descripcion del Producto" ng-model="DatosForm.descripcion"></textarea>
 							</div>
 						
 				    </div>
@@ -61,7 +61,8 @@
 			
 			<br>
 
-			<button type="submit" class="ui big right floated submit button blue" ng-click="registrar_objeto()" id="btn-registrar">Registrar</button>
+			<div class="ui big right floated submit button green" ng-click="registrar_objeto()" id="btn-registrar">Registrar
+			</div>
 			</form>
 		</div>
 	</div>
