@@ -11,6 +11,7 @@
 		
 	  	<link rel="stylesheet" href="/semantic/semantic.min.css" />
 	  	<link rel="stylesheet" href="/css/styles.css" />
+	  	<link rel="stylesheet" href="/bower_components/datatables/media/css/jquery.dataTables.min.css">
 
 		@section('css')
 		@show
