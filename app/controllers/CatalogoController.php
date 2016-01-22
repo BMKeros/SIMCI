@@ -81,11 +81,11 @@
 				);
 
 				$campos = array(
-					'nombre' => $catalogo->nombre,
-					'descripcion' => $catalogo->descripcion,
-					'especificaciones' => $catalogo->especificaciones,
-					'cod_unidad' => $catalogo->cod_unidad,
-					'cod_tipo_objeto' => $catalogo->cod_tipo_objeto
+					'nombre' => $nombre,
+					'descripcion' => $descripcion,
+					'especificaciones' => $especificaciones,
+					'cod_unidad' => $cod_unidad,
+					'cod_tipo_objeto' => $cod_tipo_objeto
 				);
 
 				$mensajes = array(
@@ -103,8 +103,13 @@
 					return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
 				}
 				else{
+					$catalogo->nombre = $nombre;
+					$catalogo->descripcion = $descripcion;
+					$catalogo->especificaciones = $especificaciones;
+					$catalogo->cod_unidad = $cod_unidad;
+					$catalogo->cod_tipo_objeto = $cod_tipo_objeto;
 					$catalogo->save();
-
+					
 					return Response::json(array('resultado' => true, 'mensajes' => array('Objetos creado con exito')));
 				}
 			}
