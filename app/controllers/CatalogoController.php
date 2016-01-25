@@ -72,8 +72,8 @@
 				'nombre' => 'required|min:5|max:100', 
 				'descripcion' => 'required|min:5|max:200',
 				'especificaciones' => 'required|min:5|max:200',
-				'cod_unidad' => 'required|numeric|exists:catalogo_objetos,cod_unidad',
-				'cod_tipo_objeto' => 'required|numeric|exists:catalogo_objetos,cod_tipo_objeto'
+				'cod_unidad' => 'required|numeric|exists:unidades,cod_unidad',
+				'cod_tipo_objeto' => 'required|numeric|exists:tipo_objetos,id'
 			);
 
 			$campos = array(
