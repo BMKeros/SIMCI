@@ -152,7 +152,7 @@ Form::macro('select_unidades', function($atributos = null){
 		$html .= '<option value="">Unidades</option>';
 		
 		foreach ($unidades as $unidad) {
-			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->descripcion);
+			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->nombre);
 		}
 		
 		$html .= '</select>';
