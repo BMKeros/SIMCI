@@ -118,10 +118,10 @@
 		    	.sidebar({
 		    		transition:'overlay',
 		    		dimPage: false,
-		    		context: 'body',
+		    		context: $('.contenedorPadre'),
 		    	})
 		    	.sidebar('toggle');
 		  	});
-		});context
+		});
 	</script>
 @stop

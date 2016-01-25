@@ -20,8 +20,10 @@
 	</head>
 
 	<body>
-
-		@yield('contenido-body-master')
+		
+		<div class="contenedorPadre" id="contenedorPadre">
+			@yield('contenido-body-master')
+		</div>
 
 
 		<script src="/bower_components/jquery/jquery.min.js"></script>
