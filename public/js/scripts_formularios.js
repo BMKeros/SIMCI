@@ -207,4 +207,67 @@ var reglas_formulario_crear_usuario = {
     },
    inline: true
 };
-
+var reglas_formulario_crear_objeto = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      nombre: {
+        identifier: 'nombre',
+        rules:[
+            {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+           },
+           {
+               type:'minLength[5]',
+               prompt:'Este campo debe contener minimo {ruleValue} caracteres'
+            },
+       ]
+      },
+      especificaciones:{
+        identifier: 'especificaciones',
+        rules:[
+          {
+            type:'empty',
+              prompt:'Este campo no debe quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          }
+        ]
+      },
+      descripcion:{
+        identifier: 'descripcion',
+        rules:[
+          {
+            type:'empty',
+              prompt:'Este campo no debe quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          }
+        ]
+      },
+      cod_unidad:{
+        identifier: 'cod_unidad',
+        rules:[
+          {
+            type:'empty',
+              prompt:'Este campo no debe quedar vacio'
+          }
+        ]
+      },
+      cod_tipo_objeto:{
+        identifier: 'cod_tipo_objeto',
+        rules:[
+          {
+            type:'empty',
+              prompt:'Este campo no debe quedar vacio'
+          }
+        ]
+      }
+    },
+   inline: true
+};
