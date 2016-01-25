@@ -1,7 +1,17 @@
 /// Controlador para catalogo
 
-simci.controller('CatalogoController', ['$scope','$http','$log','$timeout','$route', '$routeParams', '$location', 
-  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location){
+simci.controller('CatalogoController', [
+  '$scope',
+  '$http',
+  '$log',
+  '$timeout',
+  '$route', 
+  '$routeParams', 
+  '$location',
+  'DTOptionsBuilder', 
+  'DTColumnBuilder',
+  '$compile', 
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -21,9 +31,8 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$timeout','$rou
       {
         nombre:"ver catalogo",
         descripcion: "Esta opcion le permitira ver los objetos del catalogo, a su vez tambien podra modificar o eliminar dichos objetos",
-        url: "#/catalogo/mostrar-catalogo"
-      },
-      
+        url: "#/catalogo/ver/todos"
+      }
     ];
     
     $log.info($routeParams);
@@ -91,7 +100,41 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$timeout','$rou
           } //If condicional
         }
     
-      }// If == '/usuarios/crear'
+      }// If == '/catalogo/registrar-objeto'
+
+      if($location.$$url == '/catalogo/ver/todos'){
+
+        $scope.opciones_tabla_objetos = DTOptionsBuilder.newOptions()
+          .withOption('ajax', {
+           url: '/api/catalogo/mostrar?type=paginacion',
+           type: 'GET'
+        })
+        .withDataProp('data')
+        .withPaginationType('full_numbers')
+        .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withOption('createdRow', function(row, data, dataIndex) {
+          $compile(angular.element(row).contents())($scope);
+        });
+      
+        $scope.columnas_tabla_objetos = [
+            DTColumnBuilder.newColumn('id').withTitle('ID').notSortable(),
+            DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
+            DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+              function(data, type, full) {
+                return data.data_unidad.nombre+' ('+data.data_unidad.abreviatura+')';
+            }).notSortable(),
+            DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable(),
+            
+            DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+              function(data, type, full) {
+                return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></a>
+                        <a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></a>  
+                        <a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></a>';
+            })
+        ];
+
+      }// If == '/catalogo/mostrar-catalogo'
     
   }]
 );
