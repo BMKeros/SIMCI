@@ -2,41 +2,7 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui selectable celled table">
-            <thead>
-               <tr>
-                  <th></th>
-                  <th>Nombre</th>
-                  <th>Descripcion</th>
-                  <th>Unidades</th>
-                  <th>acciones</th>
-                 
-               </tr>
-            </thead>
-         
-            <tbody>
-               <tr ng-repeat='x in [1]'>
-                  <td></td>
-                  <td>Nombre Producto</td> 
-                  <td rowspan="4">Formula</td>
-                  <td>23</td>
-                  <td class="three wide" >
-                  <div class="ui icon button blue activar-popup ver"  data-content="Ver Usuario">
-                     <i class="unhide icon"></i>
-                  </div>    
-                  
-                   <div class="ui icon button green activar-popup modificar"  data-content="Modificar Usuario">
-                       <i class="edit icon"></i>
-                     </div>    
-                     
-                     <div class="ui icon button red activar-popup remover"  data-content="Eliminar Usuario">
-                       <i class="remove icon"></i>
-                     </div>
-                    
-                  </td>
-               </tr>
-            </tbody>
-         </table>
+         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_objetos" dt-columns="columnas_tabla_objetos"  width="100%"></table>
       </div>
    </div>
 </div>
