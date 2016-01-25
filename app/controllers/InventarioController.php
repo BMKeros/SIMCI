@@ -6,7 +6,7 @@
 			$cod_dimension = Input::get('cod_dimension');
 			$cod_sub_dimension = Input::get('cod_sub_dimension');
 			$cod_agrupacion = Input::get('cod_agrupacion');
-			$cod_sub_agrupacion = Input::get('cod_sub_agrupacion');
+			//$cod_sub_agrupacion = Input::get('cod_sub_agrupacion');
 			$numero_orden = Input::get('numero_orden');
 			$cod_objeto = Input::get('cod_objeto');
 			$cantidad_disponible = Input::get('cantidad_disponible');
@@ -14,13 +14,13 @@
 			$recipientes_disponibles = Input::get('recipientes_disponibles');		
 
 			$reglas = array(
-				'cod_dimension' => 'required|numeric|exists:inventario,cod_dimension',
-				'cod_sub_dimension' =>'required|numeric|exists:inventario,cod_subdimension',
-				'cod_agrupacion' => 'required|numeric|exists:inventario,cod_agrupacion',
-				'cod_sub_agrupacion' => 'required|numeric|exists:inventario,cod_subagrupacion',
+				'cod_dimension' => 'required|numeric|exists:almacenes,cod_almacen',
+				'cod_sub_dimension' =>'required|numeric|exists:estantes,cod_estante',
+				'cod_agrupacion' => 'required|numeric|exists:tipo_objetos,id',
+				//'cod_sub_agrupacion' => 'exists:inventario,cod_subagrupacion',
 				'numero_orden' => 'required|numeric',
 				//pendiente evaluar si cod_objeto sera unique
-				'cod_objeto' => 'required|numeric|exists:inventario,cod_objeto',
+				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id',
 				'cantidad_disponible' => 'required',
 				//campos aun no se sabe si se dejaran o se quitaran
 				'usa_recipientes' => 'required|boolean',
@@ -31,7 +31,7 @@
 				'cod_dimension' => $cod_dimension,
 				'cod_sub_dimension' => $cod_sub_dimension,
 				'cod_agrupacion' => $cod_agrupacion,
-				'cod_sub_agrupacion' => $cod_sub_agrupacion,
+				//'cod_sub_agrupacion' => $cod_sub_agrupacion,
 				'numero_orden' => $numero_orden,
 				'cod_objeto' => $cod_objeto,
 				'cantidad_disponible' => $cantidad_disponible,
@@ -44,7 +44,8 @@
 				'integer' => 'El campo :attribute debe ser numerico',
 				'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
 				':attribute no existe',
-				'numeric' => 'El :attribute debe ser solo numeros'
+				'numeric' => 'El :attribute debe ser solo numeros',
+				'exists' => ':attribute no existe!'
 			);
 
 			$validacion = Validator::make($campos, $reglas, $mensajes);
@@ -58,7 +59,7 @@
 				$nuevo_elemento->cod_dimension = $cod_dimension;
 				$nuevo_elemento->cod_subdimension = $cod_sub_dimension;
 				$nuevo_elemento->cod_agrupacion = $cod_agrupacion;
-				$nuevo_elemento->cod_subagrupacion = $cod_sub_agrupacion;
+				//$nuevo_elemento->cod_subagrupacion = $cod_sub_agrupacion;
 				$nuevo_elemento->numero_orden = $numero_orden;
 				$nuevo_elemento->cod_objeto = $cod_objeto;
 				$nuevo_elemento->cantidad_disponible = $cantidad_disponible;
@@ -84,13 +85,11 @@
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
-				'cod_almacen' => 'required|integer',
-				'responsable' => 'required|integer',
+				'cod_almacen' => 'required|integer|unique:almacenes',
+				'responsable' => 'required|integer|exists:usuarios,id',
 
 				//pendientes por modificar si seran o no unicos
-				'primer_auxiliar' => 'required|integer',
-				'segundo_auxiliar' => 'required|integer',
-
+				'primer_auxiliar' => 'required|integer|exists:personas,id',
 				'descripcion' => 'required|min:3|max:8'
 			);
 
@@ -107,7 +106,8 @@
 				'integer' => 'El campo :attribute debe ser numerico',
 				'unique' => 'El campo :attribute ya existe, intente con otro',
 				'min' => 'El campo :attribute no debe tener menos de :min caracteres',
-				'max' => 'El campo :attribute no debe exceder los :max caracteres'
+				'max' => 'El campo :attribute no debe exceder los :max caracteres',
+				'exists' => ':attribute no existe'
 			);
 
 			$validacion = Validator::make($campos, $reglas, $mensajes);
@@ -135,7 +135,7 @@
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
-				'cod_estante' => 'required|integer|unique',
+				'cod_estante' => 'required|integer|unique:estantes',
 				'descripcion' => 'required|min:3|max:8'
 			);
 
