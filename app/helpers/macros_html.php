@@ -104,7 +104,7 @@ Form::macro('select_dimension', function($atributos = null){
 Form::macro('select_sub_dimension', function($atributos = null){
 	if($atributos){
 
-		$estantes = DB::table('estantes')->lists('descripcion', 'cod_estantes');
+		$estantes = DB::table('estantes')->lists('descripcion', 'cod_estante');
 
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
