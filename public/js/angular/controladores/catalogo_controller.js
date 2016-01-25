@@ -1,7 +1,7 @@
 /// Controlador para catalogo
 
-simci.controller('CatalogoController', ['$scope','$http','$log','$route', '$routeParams', '$location', 
-  function ($scope, $http, $log , $route, $routeParams, $location){
+simci.controller('CatalogoController', ['$scope','$http','$log','$timeout','$route', '$routeParams', '$location', 
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -35,8 +35,8 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$route', '$rout
 
         $scope.registrar_objeto = function(){
         
-         /* var formulario = $('#formulario_crear_objeto');
-          var is_valid_form = formulario.form(reglas_formulario_crear).form('is valid');
+          var formulario = $('#formulario_crear_objeto');
+          var is_valid_form = formulario.form(reglas_formulario_crear_objeto).form('is valid');
 
           if(is_valid_form){
             
@@ -88,9 +88,7 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$route', '$rout
               $('#btn-registrar').removeClass('loading').prop('disabled',false);
             });
             
-          } //If condicional*/
-
-          $log.info($scope.DatosForm);
+          } //If condicional
         }
     
       }// If == '/usuarios/crear'
