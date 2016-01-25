@@ -54,7 +54,7 @@
 <div class="header">Actualizar</div>
    <div class="content">
       <div class="ui form">
-        <form class="ui form" id="formulario_crear_usuario">
+         <form class="ui form" id="formulario_crear_usuario">
 
             <div class="field">
                <div class="two fields">
