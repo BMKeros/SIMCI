@@ -22,7 +22,7 @@
 					<div class="field">
 						<div class="field">
 							<label>Nombre del Objeto</label>
-			        		<input type="text" name="nombre_objeto" placeholder="Nombre" ng-model="DatosForm.nombre">
+			        		<input type="text" name="nombre" placeholder="Nombre" ng-model="DatosForm.nombre">
 			        	</div>
 				    </div>
 				</div>
@@ -32,12 +32,12 @@
 			      		
 						 	<div class="field">
 						    	<label>Especificacion del Objeto</label>
-						    	<textarea placeholder="Especificaciones del Objeto" ng-model="DatosForm.especificaciones"></textarea>
+						    	<textarea placeholder="Especificaciones del Objeto" ng-model="DatosForm.especificaciones" name="especificaciones"></textarea>
 						  	</div>
 						  	
 						  	<div class="field">
 							    <label>Descripcion del Objeto</label>
-							    <textarea placeholder="Descripcion del Objeto" ng-model="DatosForm.descripcion"></textarea>
+							    <textarea placeholder="Descripcion del Objeto" ng-model="DatosForm.descripcion" name="descripcion"></textarea>
 							</div>
 						
 				    </div>
