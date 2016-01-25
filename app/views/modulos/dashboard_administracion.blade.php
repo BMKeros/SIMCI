@@ -118,7 +118,7 @@
 		    	.sidebar({
 		    		transition:'overlay',
 		    		dimPage: false,
-		    		context: $('.contenedorPadre'),
+		    		context: 'body',
 		    	})
 		    	.sidebar('toggle');
 		  	});
