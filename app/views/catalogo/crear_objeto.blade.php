@@ -49,12 +49,12 @@
 				    <div class="two fields">
 				      	<div class="field">
 				      		<label>Unidad</label>
-				      		{{ Form::select_unidades (array('name'=>'cod_unidad', 'id'=>'unidad','ng-modal'=>'DatosForm.cod_unidad'))}}
+				      		{{ Form::select_unidades (array('name'=>'cod_unidad', 'id'=>'unidad','ng-model'=>'DatosForm.cod_unidad'))}}
 			     		</div>
 
 			     		<div class="field">
 			     			<label>Tipo de Objeto</label>
-			     			{{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto', 'ng-modal'=>'DatosForm.cod_tipo_objeto')) }}
+			     			{{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto', 'ng-model'=>'DatosForm.cod_tipo_objeto')) }}
 						</div>
 				    </div>
 				</div>
@@ -69,7 +69,7 @@
 </div>
 
 <script>
-$(document).ready(function(){
-	$('#formulario_crear_objeto').form(reglas_formulario_crear_usuario)
-	});
+	$('.ui.dropdown').dropdown();
+//$(document).ready(function(){
+//$('#formulario_crear_objeto').form(reglas_formulario_crear_usuario)});
 </script>
