@@ -144,7 +144,7 @@ Form::macro('select_agrupacion', function($atributos = null){
 Form::macro('select_unidades', function($atributos = null){
 	if($atributos){
 
-		$unidades = DB::table('unidades')->select('cod_unidad', 'descripcion', 'abreviatura')->get();
+		$unidades = DB::table('unidades')->select('cod_unidad', 'nombre', 'abreviatura')->get();
 	
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
