@@ -1,7 +1,17 @@
 
 /// Controlador para usuarios
 
-simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$route', '$routeParams', '$location','$compile','DTOptionsBuilder', 'DTColumnBuilder',
+simci.controller('UsuariosController', [
+  '$scope',
+  '$http',
+  '$log',
+  '$timeout',
+  '$route', 
+  '$routeParams', 
+  '$location',
+  '$compile',
+  'DTOptionsBuilder', 
+  'DTColumnBuilder',
   function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder){
     $scope.modulo = {};
 
@@ -121,15 +131,13 @@ simci.controller('UsuariosController', ['$scope','$http','$log','$timeout','$rou
       .withOption('serverSide', true)
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
-        $log.info(row);
-        $log.info(dataIndex);
       });
     
       $scope.columnas_tabla_usuarios = [
           DTColumnBuilder.newColumn('id').withTitle('ID').notSortable(),
           DTColumnBuilder.newColumn('usuario').withTitle('Usuario').notSortable(),
           DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
-          DTColumnBuilder.newColumn('attr_permisos').withTitle('Permiso').notSortable(),
+          DTColumnBuilder.newColumn('data_permisos').withTitle('Permiso').notSortable(),
           DTColumnBuilder.newColumn('cod_tipo_usuario').withTitle('Tipo de Usuario').notSortable(),
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
