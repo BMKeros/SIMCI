@@ -12,7 +12,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 	protected $table = 'usuarios';
 	protected $fillable = array('usuario', 'email', 'password', 'cod_permiso','cod_tipo_usuario','imagen','activo');
 
-	protected $visible = array('id','usuario', 'email', 'password', 'cod_permiso','cod_tipo_usuario','imagen','activo', 'data_permisos');
+	protected $visible = array('id','usuario', 'email', 'password', 'cod_permiso','cod_tipo_usuario','imagen','activo', 'data_permisos','data_tipo_usuario');
 	
 	protected $hidden = array('password', 'remember_token');
 
@@ -24,13 +24,20 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
         return $this->belongsToMany('Permiso','permisos_usuarios','usuario_id','cod_permiso');
     }
 
+    public function tipousuario(){
+    	return $this->belongsTo('TiposUsuario', 'cod_tipo_usuario');
+    }
 
-    public function getDataPermisosAttribute()
-    {
+
+    public function getDataPermisosAttribute(){
         return $this->permisos->toArray();
     }
 
-    protected $appends = ['data_permisos'];
+    public function getDataTipoUsuarioAttribute(){
+        return $this->tipousuario->toArray();
+    }
+
+    protected $appends = ['data_permisos','data_tipo_usuario'];
 
 
 	public function setPasswordAttribute($value){

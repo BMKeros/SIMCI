@@ -1,5 +1,3 @@
-@extends('layouts.plantilla_master')
-@section('contenido-body-master')
 <!--Bloque 1. Tabla Para Mostrar Permisos-->
 <div class="ui two column doubling stackable grid container">
     <div class="ui container centered grid">
@@ -138,8 +136,7 @@
    </div>
 </div>
 <!--Fin del Bloque 4-->
-@stop
-@section('js')
+
 <script>
 $('document').ready(function() {
 	$('.ui.button')
@@ -159,4 +156,3 @@ $('document').ready(function() {
   	
 });
 </script>
-@stop

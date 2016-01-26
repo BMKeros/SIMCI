@@ -14,9 +14,9 @@
          <table class="ui celled table capitalize">
             <tbody>
                <tr>
-                  <td><b>Nombre del Objeto:</b> <% data_objeto.nombre %></td>
+                  <td colspan="3"><b>Nombre del Objeto:</b> <% data_objeto.nombre %></td>
+                  <td colspan="1"><b>Tipo de Objeto:</b> <% data_objeto.data_tipo_objeto.nombre %></td>
                </tr>
-
                <tr>
                   <td colspan="4"><b>Descripcion:</b> 
                       <% data_objeto.descripcion %>
@@ -27,11 +27,7 @@
                   <td colspan="4"><b>Especificacion:</b>
                  	<% data_objeto.especificaciones %>
                   </td>
-               </tr>
-
-               <tr>
-                  <td colspan="3"><b>Tipo de Objeto:</b> <% data_objeto.data_tipo_objeto.nombre %></td>
-               </tr>
+               </tr>  
             </tbody>
 
             
@@ -137,7 +133,6 @@
    </div>
 </div>
 <!--Fin De Bloques-->
-
 <script>
 $(document).ready(function(){
 	$('.ui.icon.button')

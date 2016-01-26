@@ -116,7 +116,8 @@ simci.controller('CatalogoController', [
         .withOption('createdRow', function(row, data, dataIndex) {
           $compile(angular.element(row).contents())($scope);
           
-          angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
+          // 4 Celda de acciones en la tabla
+          angular.element($('td',row).eq(4).get(0)).css({'width':'130px'});
         });
       
         $scope.columnas_tabla_objetos = [
@@ -126,13 +127,14 @@ simci.controller('CatalogoController', [
               function(data, type, full) {
                 return data.data_unidad.nombre+' ('+data.data_unidad.abreviatura+')';
             }).notSortable(),
+
             DTColumnBuilder.newColumn('especificaciones').withTitle('Especificaciones').notSortable(),
             
             DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
               function(data, type, full) {
-                return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></a>
-                        <a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></a>  
-                        <a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></a>';
+                return '<button class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></button>
+                        <button class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></button>  
+                        <button class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></button>';
             })
         ];
 
