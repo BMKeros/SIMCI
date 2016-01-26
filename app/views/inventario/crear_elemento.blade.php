@@ -37,8 +37,8 @@
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
-				      		<label>Elemento del almacen</label>
-							{{ Form::select_agrupacion(array('name'=>'cod_agrupacion', 'id'=>'cod_agrupacion', 'ng-model'=>'cod_agrupacion')) }}
+				      		<label>Agrupacion</label>
+							{{-- Form::select_agrupacion(array('name'=>'cod_agrupacion', 'id'=>'cod_agrupacion', 'ng-model'=>'cod_agrupacion')) --}}
 			     		</div>
 
 			     		<div class="field">
@@ -47,7 +47,8 @@
 						</div>
 
 						<div class="field">
-							<label>Tipo Objeto</label>
+							<label>Objeto</label>
+
 						</div>
 		     		</div>
 				</div>
@@ -73,10 +74,23 @@
 						</div>
 					</div>
 					
+					<br>
+					
 					<div class="field">
-						<div class="ui toggle checkbox">
-						  	<input name="usa_recipiente" type="checkbox">
-						  	<label>Usar Recipiente</label>
+						<div class="two fields">
+							<div class="field">
+								<div class="ui toggle checkbox">
+								  	<input name="usa_recipiente" type="checkbox">
+								  	<label>Usar Recipiente</label>
+								</div>
+							</div>
+
+							<div class="field">
+								<div class="ui toggle checkbox">
+								  	<input name="usa_recipiente" type="checkbox">
+								  	<label>Elemento Movible</label>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
