@@ -2,7 +2,7 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui selectable celled table" datatable="" dt-options="opciones_tabla_usuarios" dt-columns="columnas_tabla_usuarios"  width="100%"></table>
+         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_usuarios" dt-columns="columnas_tabla_usuarios"  width="100%"></table>
       </div>
    </div>
 </div>
@@ -22,7 +22,7 @@
 
                <tr>
                   <td colspan="1"><b>Cedula:</b> <%data_usuario.persona.cedula%></td>
-                  <td colspan="2"><b>Sexo:</b> <% data_usuario.persona.attr_sexo.descripcion%></td>
+                  <td colspan="2"><b>Sexo:</b> <% data_usuario.persona.data_sexo.descripcion%></td>
                   <td colspan="4"><b>Fecha de Nacimiento:</b> <% data_usuario.persona.fecha_nacimiento%></td>
                </tr>
 
@@ -54,7 +54,7 @@
 <div class="header">Actualizar</div>
    <div class="content">
       <div class="ui form">
-        <form class="ui form" id="formulario_crear_usuario">
+         <form class="ui form" id="formulario_crear_usuario">
 
             <div class="field">
                <div class="two fields">

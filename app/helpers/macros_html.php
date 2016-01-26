@@ -104,7 +104,7 @@ Form::macro('select_dimension', function($atributos = null){
 Form::macro('select_sub_dimension', function($atributos = null){
 	if($atributos){
 
-		$estantes = DB::table('estantes')->lists('descripcion', 'cod_estantes');
+		$estantes = DB::table('estantes')->lists('descripcion', 'cod_estante');
 
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
@@ -141,10 +141,10 @@ Form::macro('select_agrupacion', function($atributos = null){
 	}
 });
 
-Form::macro('select_unidades', function($atributos = null){
+Form::macro('select_unidades', function($atributos = null, $selected = null){
 	if($atributos){
 
-		$unidades = DB::table('unidades')->select('cod_unidad', 'descripcion', 'abreviatura')->get();
+		$unidades = DB::table('unidades')->select('cod_unidad', 'nombre', 'abreviatura')->get();
 	
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
@@ -152,7 +152,7 @@ Form::macro('select_unidades', function($atributos = null){
 		$html .= '<option value="">Unidades</option>';
 		
 		foreach ($unidades as $unidad) {
-			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->descripcion);
+			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->nombre);	
 		}
 		
 		$html .= '</select>';

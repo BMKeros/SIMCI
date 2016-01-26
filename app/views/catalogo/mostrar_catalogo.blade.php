@@ -2,69 +2,35 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui selectable celled table">
-            <thead>
-               <tr>
-                  <th></th>
-                  <th>Nombre</th>
-                  <th>Descripcion</th>
-                  <th>Unidades</th>
-                  <th>acciones</th>
-                 
-               </tr>
-            </thead>
-         
-            <tbody>
-               <tr ng-repeat='x in [1]'>
-                  <td></td>
-                  <td>Nombre Producto</td> 
-                  <td rowspan="4">Formula</td>
-                  <td>23</td>
-                  <td class="three wide" >
-                  <div class="ui icon button blue activar-popup ver"  data-content="Ver Usuario">
-                     <i class="unhide icon"></i>
-                  </div>    
-                  
-                   <div class="ui icon button green activar-popup modificar"  data-content="Modificar Usuario">
-                       <i class="edit icon"></i>
-                     </div>    
-                     
-                     <div class="ui icon button red activar-popup remover"  data-content="Eliminar Usuario">
-                       <i class="remove icon"></i>
-                     </div>
-                    
-                  </td>
-               </tr>
-            </tbody>
-         </table>
+         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_objetos" dt-columns="columnas_tabla_objetos"  width="100%"></table>
       </div>
    </div>
 </div>
   
-<!--Bloque 2 -> Modale Ver Usuario-->
-<div class="ui modal mostrar">
+
+<div class="ui modal" id="modal_ver_objeto">
    <div class="header">Datos </div>
       <div class="content">
-         <table class="ui celled table">
+         <table class="ui celled table capitalize">
             <tbody>
                <tr>
-                  <td><b>Nombre del Objeto:</b> Nuevo objeto agregado.</td>
+                  <td><b>Nombre del Objeto:</b> <% data_objeto.nombre %></td>
                </tr>
 
                <tr>
                   <td colspan="4"><b>Descripcion:</b> 
-                      please contact the site's administrator.
+                      <% data_objeto.descripcion %>
                   </td>
                </tr>
 
                <tr>
                   <td colspan="4"><b>Especificacion:</b>
-                     please contact the site's administrator.
+                 	<% data_objeto.especificaciones %>
                   </td>
                </tr>
 
                <tr>
-                  <td colspan="3"><b>Tipo de Objeto:</b>Plastico</td>
+                  <td colspan="3"><b>Tipo de Objeto:</b> <% data_objeto.data_tipo_objeto.nombre %></td>
                </tr>
             </tbody>
 
@@ -75,27 +41,23 @@
          <div class="ui negative button">
               Atras
          </div>
-         <div class="ui positive button">
-            Aceptar
-         </div>
-         <div class="ui chackmark icon"></div>
       </div>
    </div>
  
 <!--Bloque 3 -> Modal Modificar Usuario-->
 
-<div class="ui modal actualizar">
+<div class="ui modal" id='modal_modificar_objeto'>
 <div class="header">Actualizar</div>
    <div class="content">
       <div class="ui form">
-        <form class="ui form" id="formulario_crear_objeto">
+        <form class="ui form" id="formulario_actualizar_objeto">
             <h3 class="ui centered dividing header">Actualizar datos del Objeto</h3>
             <br>
             <div class="field centered grid">
                <div class="three fields">
                   <div class="field">
                      <label>Nombre del Producto</label>
-                     <input type="text" name="nombre_pruducto" placeholder="Nombre">
+                     <input type="text" name="nombre" placeholder="Nombre" ng-model="DatosForm.nombre">
                   </div>
                 </div>
             </div>
@@ -105,12 +67,12 @@
                      
                      <div class="field">
                         <label>Especificacion del Producto</label>
-                        <textarea></textarea>
+                        <textarea ng-model="DatosForm.especificaciones"></textarea>
                      </div>
                      
                      <div class="field">
                          <label>Descripcion del Producto</label>
-                         <textarea></textarea>
+                         <textarea ng-model="DatosForm.descripcion"></textarea>
                      </div>
                   
                 </div>
@@ -122,12 +84,12 @@
                 <div class="two fields">
                      <div class="field">
                         <label>Unidad</label>
-                        {{ Form::select_unidades (array('name'=>'cod_unidad', 'id'=>'unidad','ng-modal'=>'unidad'))}}
+                        {{ Form::select_unidades (array('name'=>'cod_unidad', 'id'=>'unidad','ng-model'=>'DatosForm.cod_unidad'))}}
                   </div>
 
                   <div class="field">
                      <label>Tipo de Objeto</label>
-                     {{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto', 'ng-modal'=>'tipo_objeto')) }}
+                     {{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto','ng-model'=>'DatosForm.cod_tipo_objeto')) }}
                   </div>
                 </div>
             </div>

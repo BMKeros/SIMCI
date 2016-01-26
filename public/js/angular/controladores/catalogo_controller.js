@@ -1,7 +1,17 @@
 /// Controlador para catalogo
 
-simci.controller('CatalogoController', ['$scope','$http','$log','$timeout','$route', '$routeParams', '$location', 
-  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location){
+simci.controller('CatalogoController', [
+  '$scope',
+  '$http',
+  '$log',
+  '$timeout',
+  '$route', 
+  '$routeParams', 
+  '$location',
+  'DTOptionsBuilder', 
+  'DTColumnBuilder',
+  '$compile', 
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -21,9 +31,8 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$timeout','$rou
       {
         nombre:"ver catalogo",
         descripcion: "Esta opcion le permitira ver los objetos del catalogo, a su vez tambien podra modificar o eliminar dichos objetos",
-        url: "#/catalogo/mostrar-catalogo"
-      },
-      
+        url: "#/catalogo/ver/todos"
+      }
     ];
     
     $log.info($routeParams);
@@ -91,7 +100,86 @@ simci.controller('CatalogoController', ['$scope','$http','$log','$timeout','$rou
           } //If condicional
         }
     
-      }// If == '/usuarios/crear'
+      }// If == '/catalogo/registrar-objeto'
+
+      if($location.$$url == '/catalogo/ver/todos'){
+
+        $scope.opciones_tabla_objetos = DTOptionsBuilder.newOptions()
+          .withOption('ajax', {
+           url: '/api/catalogo/mostrar?type=paginacion',
+           type: 'GET'
+        })
+        .withDataProp('data')
+        .withPaginationType('full_numbers')
+        .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withOption('createdRow', function(row, data, dataIndex) {
+          $compile(angular.element(row).contents())($scope);
+          
+          angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
+        });
+      
+        $scope.columnas_tabla_objetos = [
+            DTColumnBuilder.newColumn('id').withTitle('ID').notSortable(),
+            DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
+            DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+              function(data, type, full) {
+                return data.data_unidad.nombre+' ('+data.data_unidad.abreviatura+')';
+            }).notSortable(),
+            DTColumnBuilder.newColumn('especificaciones').withTitle('Especificaciones').notSortable(),
+            
+            DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+              function(data, type, full) {
+                return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></a>
+                        <a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></a>  
+                        <a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></a>';
+            })
+        ];
+
+
+        ///Funciones 
+        $scope.modal_ver_objeto = function(id){
+          $scope.data_objeto = {};
+
+          $http({
+            method: 'GET',
+            url: '/api/catalogo/mostrar?type=objeto&id='+id,
+            data: $scope.DatosForm
+          }).then(function(data){
+            
+            $scope.data_objeto = data.data;
+
+            //Mostramos la modal
+            angular.element('#modal_ver_objeto').modal('show');
+          },function(data_error){
+            $log.info(data_error);
+          });
+        };
+
+        $scope.modal_modificar_objeto = function(id){
+          $http({
+            method: 'GET',
+            url: '/api/catalogo/mostrar?type=objeto&id='+id,
+            data: $scope.DatosForm
+          }).then(function(data){
+            $scope.DatosForm = data.data;
+
+            $log.info($scope.DatosForm)
+            //Mostramos la modal
+            angular.element('#modal_modificar_objeto').modal('show');
+            
+          },function(data_error){
+            $log.info(data_error);
+          });
+        };
+
+        $scope.modal_eliminar_usuario = function(id){
+          angular.element('#modal_eliminar_usuario').modal('show');
+        };
+
+      }// If == '/catalogo/mostrar-catalogo'
+
+
     
   }]
 );

@@ -52,11 +52,10 @@
           templateUrl: '/views/catalogo/crear_objeto',
           controller: 'CatalogoController'
         }).
-        when('/catalogo/mostrar-catalogo', {
+        when('/catalogo/ver/todos', {
           templateUrl: '/views/catalogo/mostrar_catalogo',
           controller: 'CatalogoController'
         }).
-
 
         otherwise({
           redirectTo: function(){

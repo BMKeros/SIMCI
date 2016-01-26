@@ -39,9 +39,9 @@
 						$data = Catalogo::paginate($length);	
 					}
 					else{
-
+						$data = Catalogo::where('nombre','ILIKE','%'.$value_search['value'].'%')->paginate($length);	
 					}
-
+					
 					$response = array(
 						"draw"=>$draw,
 						"page"=>$data->getCurrentPage(),
@@ -174,6 +174,7 @@
 			$id = Input::get('id');
 
 			$objeto = Catalogo::find($id);
+			
 			if(!is_null($objeto)){
 				$objeto->delete();
 				return Response::json(array('resultado' => true, 'mensajes' => array('Objetos eliminado con exito')));
