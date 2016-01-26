@@ -1,6 +1,4 @@
 <!--Bloque 1 -> Tabla Principal-->
-@extends('layouts.plantilla_master')
-@section('contenido-body-master')
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
@@ -29,7 +27,7 @@
                   <td colspan="4"><b>Especificacion:</b>
                  	<% data_objeto.especificaciones %>
                   </td>
-               </tr>
+               </tr>  
             </tbody>
 
             
@@ -135,9 +133,6 @@
    </div>
 </div>
 <!--Fin De Bloques-->
-@stop
-
-@section('js')
 <script>
 $(document).ready(function(){
 	$('.ui.icon.button')
@@ -159,4 +154,3 @@ $(document).ready(function(){
    });
 })
 </script>
-@stop
