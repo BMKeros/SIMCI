@@ -11,7 +11,7 @@
 			$cod_objeto = Input::get('cod_objeto');
 			$cantidad_disponible = Input::get('cantidad_disponible');
 			$usa_recipientes = Input::get('usa_recipientes');
-			$recipientes_disponibles = Input::get('recipientes_disponibles');		
+			$recipientes_disponibles = Input::get('recipientes_disponibles');
 
 			$reglas = array(
 				'cod_dimension' => 'required|numeric|exists:almacenes,cod_almacen',
@@ -74,6 +74,100 @@
 					//pendiente colocar o no del id de los objetos que se crean
 					)
 				);
+			}
+		}
+
+		public function postActualizarElemento($id){
+
+			$elemento = ElementoInventario::find($id);
+
+			if($elemento){
+				$cod_dimension = input_default(Input::get('cod_dimension'), $elemento->cod_dimension);
+				$cod_sub_dimension = input_default(Input::get('cod_sub_dimension'), $elemento->cod_subdimension);
+				$cod_agrupacion = input_default(Input::get('cod_agrupacion'), $elemento->cod_agrupacion);
+				//$cod_sub_agrupacion = input_default(Input::get('cod_sub_agrupacion'), $elemento->cod_subagrupacion);
+				$numero_orden = input_default(Input::get('numero_orden'), $elemento->numero_orden);
+				$cod_objeto = input_default(Input::get('cod_objeto'), $elemento->cod_objeto);
+				$cantidad_disponible = input_default(Input::get('cantidad_disponible'), $elemento->cantidad_disponible);
+				$usa_recipientes = input_default(Input::get('usa_recipientes'), $elemento->usa_recipientes);
+				$recipientes_disponibles = input_default(Input::get('recipientes_disponibles'), $elemento->recipientes_disponibles);
+
+				$reglas = array(
+					'cod_dimension' => 'required|exists:almacenes,cod_almacen',
+					'cod_sub_dimension' =>'required|exists:estantes,cod_estante',
+					'cod_agrupacion' => 'required|exists:tipo_objetos,id',
+					//'cod_sub_agrupacion' => 'exists:inventario,cod_subagrupacion',
+					'numero_orden' => 'required',
+					//pendiente evaluar si cod_objeto sera unique
+					'cod_objeto' => 'required|exists:catalogo_objetos,id',
+					'cantidad_disponible' => 'required',
+					//campos aun no se sabe si se dejaran o se quitaran
+					'usa_recipientes' => 'required|boolean',
+					'recipientes_disponibles' => 'required'
+				);
+
+				$campos = array(
+					'cod_dimension' => $cod_dimension,
+					'cod_sub_dimension' => $cod_sub_dimension,
+					'cod_agrupacion' => $cod_agrupacion,
+					//'cod_sub_agrupacion' => $cod_sub_agrupacion,
+					'numero_orden' => $numero_orden,
+					'cod_objeto' => $cod_objeto,
+					'cantidad_disponible' => $cantidad_disponible,
+					'usa_recipientes' => $usa_recipientes,
+					'recipientes_disponibles' => $recipientes_disponibles
+				);
+
+				$mensajes = array(
+					'required' => 'El campo :attribute es necesario',
+					'integer' => 'El campo :attribute debe ser numerico',
+					'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
+					':attribute no existe',
+					'numeric' => 'El :attribute debe ser solo numeros',
+					'exists' => ':attribute no existe!'
+				);
+
+				$validacion = Validator::make($campos, $reglas, $mensajes);
+
+				if($validacion->fails()){
+					return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+				}
+				else{
+					
+					$elemento->cod_dimension = $cod_dimension;
+					$elemento->cod_subdimension = $cod_sub_dimension;
+					$elemento->cod_agrupacion = $cod_agrupacion;
+					//elemento->cod_subagrupacion = $cod_sub_agrupacion;
+					$elemento->numero_orden = $numero_orden;
+					$elemento->cod_objeto = $cod_objeto;
+					$elemento->cantidad_disponible = $cantidad_disponible;
+					$elemento->usa_recipientes = $usa_recipientes;
+					$elemento->recipientes_disponibles = $recipientes_disponibles;
+
+					$elemento->save();
+
+					return Response::json(array(
+						'resultado' => true,
+						'mensajes' => 'Elemento Actualizado con exito.'
+						)
+					);
+				}
+			}
+			else{
+				return Response::json(array('resultado' => false, 'mensajes' => 'ID no existe'));
+			}
+		}
+
+		public function postEliminarElemento($id){
+		
+			$elemento = ElementoInventario::find($id);
+
+			if($elemento){
+				$elemento->delete();
+				return Response::json(array('resultado' => true, 'mensajes' => 'Elemento eliminado con exito'));
+			}
+			else{
+				return Response::json(array('resultado' => false, 'mensajes' => 'ID no existe'));	
 			}
 		}
 
