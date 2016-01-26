@@ -1,4 +1,6 @@
 <!--Bloque 1 -> Tabla Principal-->
+@extends('layouts.plantilla_master')
+@section('contenido-body-master')
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
@@ -14,9 +16,9 @@
          <table class="ui celled table capitalize">
             <tbody>
                <tr>
-                  <td><b>Nombre del Objeto:</b> <% data_objeto.nombre %></td>
+                  <td colspan="3"><b>Nombre del Objeto:</b> <% data_objeto.nombre %></td>
+                  <td colspan="1"><b>Tipo de Objeto:</b> <% data_objeto.data_tipo_objeto.nombre %></td>
                </tr>
-
                <tr>
                   <td colspan="4"><b>Descripcion:</b> 
                       <% data_objeto.descripcion %>
@@ -27,10 +29,6 @@
                   <td colspan="4"><b>Especificacion:</b>
                  	<% data_objeto.especificaciones %>
                   </td>
-               </tr>
-
-               <tr>
-                  <td colspan="3"><b>Tipo de Objeto:</b> <% data_objeto.data_tipo_objeto.nombre %></td>
                </tr>
             </tbody>
 
@@ -137,7 +135,9 @@
    </div>
 </div>
 <!--Fin De Bloques-->
+@stop
 
+@section('js')
 <script>
 $(document).ready(function(){
 	$('.ui.icon.button')
@@ -159,3 +159,4 @@ $(document).ready(function(){
    });
 })
 </script>
+@stop
