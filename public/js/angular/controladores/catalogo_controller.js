@@ -132,11 +132,12 @@ simci.controller('CatalogoController', [
             
             DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
               function(data, type, full) {
-                return '<button class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></button>
-                        <button class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></button>  
-                        <button class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></button>';
+                return '<div class="ui icon button blue pop" data-content="Ver Usuario" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></div>
+                        <div class="ui icon button green pop"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></div>  
+                        <div class="ui icon button red pop"  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></div>';
             })
         ];
+
 
 
         ///Funciones 

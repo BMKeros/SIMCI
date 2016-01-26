@@ -120,6 +120,11 @@ simci.controller('UsuariosController', [
 
     if($location.$$url == '/usuarios/ver/todos'){
 
+      $scope.tabla_usuarios = {};
+
+      //Variable que mantiene el id de usuario que se va a eliminar
+      $scope.id_usuario_eliminar = null;
+
       $scope.opciones_tabla_usuarios = DTOptionsBuilder.newOptions()
         .withOption('ajax', {
          url: '/api/usuarios/mostrar?type=paginacion',
@@ -197,8 +202,42 @@ simci.controller('UsuariosController', [
       };
 
       $scope.modal_eliminar_usuario = function(id){
+        //Seteamos a la variable el id del usuario que se va a eliminar
+        $scope.id_usuario_eliminar = id;
+
         angular.element('#modal_eliminar_usuario').modal('show');
       };
+
+      $scope.cerrar_modal_eliminar = function(){
+        angular.element('#modal_eliminar_usuario').modal('hide');
+      }
+
+      $scope.procesar_eliminar = function(){
+        
+        var id_usuario = $scope.id_usuario_eliminar;
+
+        $http({
+          method: 'POST',
+          url: '/api/usuarios/eliminar?id='+id_usuario,
+        }).then(function(data){
+          
+          if(data.data.resultado){
+            
+            //Cerramos la modal
+            $scope.cerrar_modal_eliminar();
+
+            //Recargamos la tabla
+            setTimeout(function(){
+              $scope.tabla_usuarios.reloadData(function(data){}, false);  
+            }, 500);                         
+          }
+          else{
+            $log.info(data);
+          }
+        },function(data_error){
+          $log.info(data_error);
+        });
+      }
 
     }// If
     
