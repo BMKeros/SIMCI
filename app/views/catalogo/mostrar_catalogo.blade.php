@@ -15,17 +15,19 @@
             <tbody>
                <tr>
                   <td colspan="3"><b>Nombre del Objeto:</b> <% data_objeto.nombre %></td>
-                  <td colspan="1"><b>Tipo de Objeto:</b> <% data_objeto.data_tipo_objeto.nombre %></td>
+                  <td colspan="1">
+                  	<b>Tipo de Objeto:</b><% data_objeto.data_tipo_objeto.nombre %>
+                  </td>
                </tr>
                <tr>
-                  <td colspan="4"><b>Descripcion:</b> 
-                      <% data_objeto.descripcion %>
+                  <td colspan="4"><b>Descripcion:</b><br>
+                      <p><% data_objeto.descripcion | uppercase %></p>
                   </td>
                </tr>
 
                <tr>
-                  <td colspan="4"><b>Especificacion:</b>
-                 	<% data_objeto.especificaciones %>
+                  <td colspan="4"><b>Especificacion:</b><br>
+                 	<p><% data_objeto.especificaciones | uppercase %></p>
                   </td>
                </tr>  
             </tbody>
@@ -40,7 +42,7 @@
       </div>
    </div>
  
-<!--Bloque 3 -> Modal Modificar Usuario-->
+<!--Bloque 3 -> Modal Modificar -->
 
 <div class="ui modal" id='modal_modificar_objeto'>
 <div class="header">Actualizar</div>
@@ -105,7 +107,7 @@
 
 
 
-<!--Bloque 4 -> Eliminar Usuario-->
+<!--Bloque 4 -> Eliminar -->
 <div class="ui basic modal eliminar">
    <i class="close icon"></i>
    <div class="header">
@@ -113,7 +115,7 @@
    </div>
    <div class="image content">
       <div class="image">
-        <i class="archive icon"></i>
+        <i class="trash outline icon"></i>
       </div>
       <div class="description">
         <p>Esta seguro que desea eliminar este Objeto?</p>
@@ -133,24 +135,7 @@
    </div>
 </div>
 <!--Fin De Bloques-->
+
 <script>
-$(document).ready(function(){
-	$('.ui.icon.button')
-  		.popup();
 
-  	$('.remover').on('click', function(){
-  		$('.eliminar')
-         .modal('show');
-  	});
-
-   $('.modificar').on('click', function(){
-      $('.actualizar')
-         .modal('show');
-   });
-
-    $('.ver').on('click', function(){
-      $('.mostrar')
-         .modal('show');
-   });
-})
 </script>
