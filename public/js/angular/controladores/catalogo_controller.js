@@ -115,6 +115,8 @@ simci.controller('CatalogoController', [
         .withOption('serverSide', true)
         .withOption('createdRow', function(row, data, dataIndex) {
           $compile(angular.element(row).contents())($scope);
+          
+          angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
         });
       
         $scope.columnas_tabla_objetos = [
@@ -124,7 +126,7 @@ simci.controller('CatalogoController', [
               function(data, type, full) {
                 return data.data_unidad.nombre+' ('+data.data_unidad.abreviatura+')';
             }).notSortable(),
-            DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable(),
+            DTColumnBuilder.newColumn('especificaciones').withTitle('Especificaciones').notSortable(),
             
             DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
               function(data, type, full) {
@@ -134,7 +136,50 @@ simci.controller('CatalogoController', [
             })
         ];
 
+
+        ///Funciones 
+        $scope.modal_ver_objeto = function(id){
+          $scope.data_objeto = {};
+
+          $http({
+            method: 'GET',
+            url: '/api/catalogo/mostrar?type=objeto&id='+id,
+            data: $scope.DatosForm
+          }).then(function(data){
+            
+            $scope.data_objeto = data.data;
+
+            //Mostramos la modal
+            angular.element('#modal_ver_objeto').modal('show');
+          },function(data_error){
+            $log.info(data_error);
+          });
+        };
+
+        $scope.modal_modificar_objeto = function(id){
+          $http({
+            method: 'GET',
+            url: '/api/catalogo/mostrar?type=objeto&id='+id,
+            data: $scope.DatosForm
+          }).then(function(data){
+            $scope.DatosForm = data.data;
+
+            $log.info($scope.DatosForm)
+            //Mostramos la modal
+            angular.element('#modal_modificar_objeto').modal('show');
+            
+          },function(data_error){
+            $log.info(data_error);
+          });
+        };
+
+        $scope.modal_eliminar_usuario = function(id){
+          angular.element('#modal_eliminar_usuario').modal('show');
+        };
+
       }// If == '/catalogo/mostrar-catalogo'
+
+
     
   }]
 );
