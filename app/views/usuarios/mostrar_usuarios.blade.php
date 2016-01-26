@@ -2,38 +2,73 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_usuarios" dt-columns="columnas_tabla_usuarios"  width="100%"></table>
+         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_usuarios" dt-columns="columnas_tabla_usuarios" dt-instance='tabla_usuarios' width="100%"></table>
       </div>
    </div>
 </div>
 
 <!--Bloque 2 -> Modale Ver Usuario-->
-<div class="ui modal" id="modal_ver_usuario">
+<div class="ui modal font-tag-p-15px" id="modal_ver_usuario">
    <div class="header">Datos </div>
       <div class="content">
          <table class="ui celled table">
             <tbody>
                <tr>
-                  <td colspan="2"><b>Primer Nombre:</b> <% data_usuario.persona.primer_nombre | capitalize %></td>
-                  <td colspan="2"><b>Segundo Nombre:</b> <% data_usuario.persona.segundo_nombre | capitalize %></td>
-                  <td colspan="2"><b>Primer Apellido:</b> <% data_usuario.persona.primer_apellido | capitalize %></td>
-                  <td colspan="2"><b>Segundo Apellido:</b> <% data_usuario.persona.segundo_apellido | capitalize %></td>
+            		<td colspan="2">
+               		<b>Primer Nombre:</b><br>
+               		<p><% data_usuario.persona.primer_nombre | capitalize %></p>
+               	</td>
+               	<td colspan="2">
+               		<b>Segundo Nombre:</b><br>
+               		<p><% data_usuario.persona.segundo_nombre | capitalize %></p>
+               	</td>
+               	<td colspan="2">
+               		<b>Primer Apellido:</b><br>
+               		<p><% data_usuario.persona.primer_apellido | capitalize %></p>
+               	</td>
+               	<td colspan="2">
+               		<b>Segundo Apellido: </b><br>
+               		<p><% data_usuario.persona.segundo_apellido | capitalize %></p>
+               	</td>
                </tr>
 
                <tr>
-                  <td colspan="1"><b>Cedula:</b> <%data_usuario.persona.cedula%></td>
-                  <td colspan="2"><b>Sexo:</b> <% data_usuario.persona.data_sexo.descripcion%></td>
-                  <td colspan="4"><b>Fecha de Nacimiento:</b> <% data_usuario.persona.fecha_nacimiento%></td>
+                  <td colspan="1">
+                  	<b>Cedula:</b><br>
+                  	<p><%data_usuario.persona.cedula%></p>
+                  </td>
+                  <td colspan="2">
+                  	<b>Sexo:</b><br> 
+                  	<p><% data_usuario.persona.data_sexo.descripcion%></p>
+                  </td>
+                  <td colspan="4">
+                  	<b>Fecha de Nacimiento:</b><br>
+                  	<p><% data_usuario.persona.fecha_nacimiento%></p>
+                  </td>
                </tr>
 
                <tr>
-                  <td colspan="4"><b>Usuario:</b> <% data_usuario.usuario.usuario | capitalize %></td>
-                  <td colspan="4"><b>Email:</b> <% data_usuario.usuario.email %></td>
+                  <td colspan="4">
+                  	<b>Usuario: </b><br>
+                  	<p><% data_usuario.usuario.usuario | capitalize %></p>
+                	</td>
+                  
+                  <td colspan="4">
+                  	<b>Email:</b><br>
+                  	<p><% data_usuario.usuario.email %> </p>
+                  </td>
                </tr>
 
                <tr>
-                  <td colspan="3"><b>Tipo Usuario:</b> <% data_usuario.usuario.cod_tipo_usuario %></td>
-                  <td colspan="5"><b>Permisos</b> Activo</td>
+                  <td colspan="3"><b>Tipo Usuario:</b><br>
+                  	<p><% data_usuario.usuario.data_tipo_usuario.descripcion %></p>
+                  </td>
+                  
+                  <td colspan="5"><b>Permisos: </b> 
+							<div class="ui label" ng-repeat="permiso in data_usuario.usuario.data_permisos">
+								<% permiso.nombre %>
+							</div>
+                  </td>
                </tr>
             </tbody>
          </table>
@@ -42,11 +77,7 @@
             <div class="ui negative button">
               Atras
             </div>
-            <div class="ui positive button">
-              Aceptar
-            </div>
-            <div class="ui chackmark icon"></div>
-         </div>
+      </div>
    </div>
 <!--Bloque 3 -> Modal Modificar Usuario-->
 
@@ -83,7 +114,7 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                     {{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos'))}}
+                     {{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos','ng-model'=>'data_usuario.usuario.data_permisos'))}}
                   </div>
 
                   <div class="eight wide field">
@@ -161,7 +192,7 @@
    </div>
    <div class="image content">
       <div class="image">
-        <i class="archive icon"></i>
+        <i class="trash outline icon"></i>
       </div>
       <div class="description">
         <p>Esta seguro que desea eliminar este usuario?</p>
@@ -169,15 +200,21 @@
    </div>
    <div class="actions">
       <div class="two fluid ui inverted buttons">
-         <div class="ui red basic inverted button">
+         <button class="ui red basic inverted button" ng-click="cerrar_modal_eliminar()">
             <i class="remove icon"></i>
             No
-         </div>
-         <div class="ui green basic inverted button">
+         </button>
+         <button class="ui green basic inverted button" ng-click="procesar_eliminar()">
             <i class="checkmark icon"></i>
             Yes
-         </div>
+         </button>
       </div>
    </div>
 </div>
 <!--Fin De Bloques-->
+
+<script>
+	$('ui.dropdown').dropdown();
+</script>
+
+

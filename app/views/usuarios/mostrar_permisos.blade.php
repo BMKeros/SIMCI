@@ -116,7 +116,7 @@
    </div>
    <div class="image content">
       <div class="image">
-        <i class="archive icon"></i>
+        <i class="trash outline icon"></i>
       </div>
       <div class="description">
         <p>Esta seguro que desea eliminar el permiso de este usuario?</p>
