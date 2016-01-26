@@ -141,7 +141,7 @@ Form::macro('select_agrupacion', function($atributos = null){
 	}
 });
 
-Form::macro('select_unidades', function($atributos = null){
+Form::macro('select_unidades', function($atributos = null, $selected = null){
 	if($atributos){
 
 		$unidades = DB::table('unidades')->select('cod_unidad', 'nombre', 'abreviatura')->get();
@@ -152,7 +152,7 @@ Form::macro('select_unidades', function($atributos = null){
 		$html .= '<option value="">Unidades</option>';
 		
 		foreach ($unidades as $unidad) {
-			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->nombre);
+			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->nombre);	
 		}
 		
 		$html .= '</select>';
