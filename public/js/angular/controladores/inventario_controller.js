@@ -15,12 +15,12 @@ simci.controller('InventarioController', ['$scope','$http','$log','$route', '$ro
       {
         nombre:"registrar elemento",
         descripcion: "Esta opcion le permitira crear nuevos elementos en el inventario",
-        url: "#/"
+        url: "#/inventario/registrar-elemento"
       },
       {
         nombre:"ver inventario",
         descripcion: "Esta opcion le permitira ver los elementos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
-        url: "#/"
+        url: "#/inventario/ver/todos"
       },
       {
         nombre:"crear almacen",

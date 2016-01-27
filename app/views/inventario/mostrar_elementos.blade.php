@@ -2,7 +2,7 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_elemento" dt-columns="columnas_tabla_elemento" dt-instance='tabla_elemento' width="100%"></table>
+         {{--  <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_elemento" dt-columns="columnas_tabla_elemento" dt-instance='tabla_elemento' width="100%"></table>--}}
       </div>
    </div>
 </div>

@@ -42,6 +42,16 @@
           controller: 'InventarioController'
         }).
 
+        when('/inventario/ver/todos', {
+          templateUrl: '/views/inventario/mostrar_elementos',
+          controller: 'InventarioController'
+        }).
+
+        when('/inventario/registrar-elemento', {
+          templateUrl: '/views/inventario/crear_elemento',
+          controller: 'InventarioController'
+        }).
+
 
         //Rutas para catalogo
         when('/catalogo', {
