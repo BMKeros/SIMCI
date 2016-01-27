@@ -320,7 +320,9 @@ class UsuariosController extends Controller {
 
 	}
 
-	public function postEliminarUsuario($id){
+	public function postEliminar(){
+		$id = Input::get('id');
+		
 		$usuario = Usuario::find($id);
 
 		if($usuario){
