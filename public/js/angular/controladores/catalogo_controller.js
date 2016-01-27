@@ -10,8 +10,9 @@ simci.controller('CatalogoController', [
   '$location',
   'DTOptionsBuilder', 
   'DTColumnBuilder',
-  '$compile', 
-  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile){
+  '$compile',
+  'ToolsService',
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile,ToolsService){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -40,7 +41,9 @@ simci.controller('CatalogoController', [
 
     if($location.$$url == '/catalogo/registrar-objeto'){
 
-      $scope.mostrar_mensaje = false;
+        $controller('HerramientasController', {$scope: $scope}); 
+
+        $scope.mostrar_mensaje = false;
 
         $scope.registrar_objeto = function(){
         
@@ -104,6 +107,9 @@ simci.controller('CatalogoController', [
 
       if($location.$$url == '/catalogo/ver/todos'){
 
+        $scope.tabla_objetos = {};
+        $scope.id_objeto_eliminar = null;
+
         $scope.opciones_tabla_objetos = DTOptionsBuilder.newOptions()
           .withOption('ajax', {
            url: '/api/catalogo/mostrar?type=paginacion',
@@ -137,8 +143,6 @@ simci.controller('CatalogoController', [
                         <div class="ui icon button red pop"  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></div>';
             })
         ];
-
-
 
         ///Funciones 
         $scope.modal_ver_objeto = function(id){
@@ -176,9 +180,43 @@ simci.controller('CatalogoController', [
           });
         };
 
-        $scope.modal_eliminar_usuario = function(id){
-          angular.element('#modal_eliminar_usuario').modal('show');
+        $scope.modal_eliminar_objeto = function(id){
+          //Seteamos a la variable el id del objetos que se va a eliminar
+          $scope.id_objeto_eliminar = id;
+
+          angular.element('#modal_eliminar_objeto').modal('show');
         };
+
+        $scope.cerrar_modal_eliminar = function(){
+          angular.element('#modal_eliminar_objeto').modal('hide');
+        }
+
+        $scope.procesar_eliminar = function(){
+          
+          var id_objeto = $scope.id_objeto_eliminar;
+
+          $http({
+            method: 'POST',
+            url: '/api/catalogo/eliminar?id='+id_objeto,
+          }).then(function(data){
+            
+            if(data.data.resultado){
+              
+              //Cerramos la modal
+              $scope.cerrar_modal_eliminar();
+
+              //Recargamos la tabla
+              setTimeout(function(){
+                $scope.tabla_objetos.reloadData(function(data){}, false);  
+              }, 500);                         
+            }
+            else{
+              $log.info(data);
+            }
+          },function(data_error){
+            $log.info(data_error);
+          });
+        }
 
       }// If == '/catalogo/mostrar-catalogo'
 

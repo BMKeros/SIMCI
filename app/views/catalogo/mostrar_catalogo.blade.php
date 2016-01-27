@@ -2,7 +2,7 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_objetos" dt-columns="columnas_tabla_objetos"  width="100%"></table>
+         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_objetos" dt-columns="columnas_tabla_objetos" dt-instance="tabla_objetos" width="100%"></table>
       </div>
    </div>
 </div>
@@ -14,9 +14,9 @@
          <table class="ui celled table capitalize">
             <tbody>
                <tr>
-                  <td colspan="3"><b>Nombre del Objeto:</b> <% data_objeto.nombre %></td>
+                  <td colspan="3"><b>Nombre del Objeto: </b> <% data_objeto.nombre %></td>
                   <td colspan="1">
-                  	<b>Tipo de Objeto:</b><% data_objeto.data_tipo_objeto.nombre %>
+                  	<b>Tipo de Objeto: </b> <% data_objeto.data_tipo_objeto.nombre %>
                   </td>
                </tr>
                <tr>
@@ -30,10 +30,8 @@
                  	<p><% data_objeto.especificaciones | uppercase %></p>
                   </td>
                </tr>  
-            </tbody>
-
-            
-         </table>
+            </tbody>  
+        </table>
       </div>
       <div class="actions">
          <div class="ui negative button">
@@ -108,7 +106,7 @@
 
 
 <!--Bloque 4 -> Eliminar -->
-<div class="ui basic modal eliminar">
+<div class="ui basic modal" id="modal_eliminar_objeto">
    <i class="close icon"></i>
    <div class="header">
       Eliminar Objeto!
@@ -123,11 +121,11 @@
    </div>
    <div class="actions">
       <div class="two fluid ui inverted buttons">
-         <div class="ui red basic inverted button">
+         <div class="ui red basic inverted button" ng-click="cerrar_modal_eliminar()">
             <i class="remove icon"></i>
             No
          </div>
-         <div class="ui green basic inverted button">
+         <div class="ui green basic inverted button" ng-click="procesar_eliminar()">
             <i class="checkmark icon"></i>
             Yes
          </div>

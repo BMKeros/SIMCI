@@ -11,6 +11,17 @@
     }
   });
   
+  /*simci.filter('cut_string', function(){
+    return function(string, num_char){
+      var infin = ((string.length > num_char)?'....':'');
+      return string.substring(0,num_char)+infin;
+    }
+  });*/
+
+  simci.factory('ToolsService', [function () {
+    return {};
+  }]);
+
   simci.directive("ngModelFile", [function () {
     return {
         scope: {
