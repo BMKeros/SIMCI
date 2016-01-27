@@ -41,7 +41,7 @@
 
 <!--Bloque 2. Modal para Ver Permiso-->
 <div class="ui modal" id="modal_ver_permiso">
-   	<div class="header">Permisos</div>
+   	<div class="header">Datos de los Permisos</div>
     <div class="content">
         <table class="ui celled table">
             <tbody>

@@ -9,7 +9,7 @@
   
 
 <div class="ui modal" id="modal_ver_objeto">
-   <div class="header">Datos </div>
+   <div class="header">Datos del Estante</div>
       <div class="content">
          <table class="ui celled table capitalize">
             <tbody>
@@ -43,12 +43,11 @@
 <!--Bloque 3 -> Modal Modificar -->
 
 <div class="ui modal" id='modal_modificar_objeto'>
-<div class="header">Actualizar</div>
+<div class="ui centered dividing header">Actualizar datos del Objeto</div>
    <div class="content">
       <div class="ui form">
         <form class="ui form" id="formulario_actualizar_objeto">
-            <h3 class="ui centered dividing header">Actualizar datos del Objeto</h3>
-            <br>
+          <br>
             <div class="field centered grid">
                <div class="three fields">
                   <div class="field">

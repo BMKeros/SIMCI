@@ -9,7 +9,7 @@
 
 <!--Bloque 2 -> Modale Ver Usuario-->
 <div class="ui modal font-tag-p-15px" id="modal_ver_usuario">
-   <div class="header">Datos </div>
+   <div class="header">Datos del Usuario</div>
       <div class="content">
          <table class="ui celled table">
             <tbody>
@@ -82,7 +82,7 @@
 <!--Bloque 3 -> Modal Modificar Usuario-->
 
 <div class="ui modal" id="modal_modificar_usuario">
-<div class="header">Actualizar</div>
+<div class="header">Actualizar datos del Usuario</div>
    <div class="content">
       <div class="ui form">
          <form class="ui form" id="formulario_crear_usuario">

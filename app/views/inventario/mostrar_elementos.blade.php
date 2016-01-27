@@ -9,7 +9,7 @@
 
 <!--Bloque 2. Mostrar Elemento-->
 <div class="ui modal" id="modal_ver_elemento">
-    <div class="header">Datos </div>
+    <div class="header">Datos del Almacen</div>
         <div class="content">
             <table class="ui celled table capitalize">
                 <tbody>
@@ -49,7 +49,7 @@
 <!--Bloque 3 -> Modal Modificar Elemento-->
 
 <div class="ui modal" id='modal_modificar_elemento'>
-<div class="header">Actualizar</div>
+<div class="header">Actualizar datos del almacen</div>
    <div class="content">
       <div class="ui form">
             <form class="ui form" id="formulario_crear_elemento">

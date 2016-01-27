@@ -16,7 +16,7 @@
 			</div>
 
 			<form class="ui form" id="formulario_crear_usuario">
-				<h3 class="ui centered dividing header">Crear Elemento</h3>
+				<h3 class="ui centered dividing header">Registrar Elemento</h3>
 				<br>
 				<div class="field">
 					<div class="two fields">
