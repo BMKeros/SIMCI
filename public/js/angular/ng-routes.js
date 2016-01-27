@@ -72,6 +72,10 @@
           templateUrl: '/views/catalogo/mostrar_catalogo',
           controller: 'CatalogoController'
         }).
+        when('/catalogo/registrar-unidad', {
+          templateUrl: '/views/catalogo/registrar_unidad',
+          controller: 'CatalogoController'
+        }).
 
         otherwise({
           redirectTo: function(){

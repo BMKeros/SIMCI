@@ -32,6 +32,11 @@ simci.controller('CatalogoController', [
         nombre:"ver catalogo",
         descripcion: "Esta opcion le permitira ver los objetos del catalogo, a su vez tambien podra modificar o eliminar dichos objetos",
         url: "#/catalogo/ver/todos"
+      },
+      {
+        nombre:"registrar-unidad",
+        descripcion: "Esta opcion le permitira ver añadir nuevas unidades al catalogo",
+        url: "#/catalogo/registrar-unidad"
       }
     ];
     
