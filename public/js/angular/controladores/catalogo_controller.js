@@ -11,8 +11,7 @@ simci.controller('CatalogoController', [
   'DTOptionsBuilder', 
   'DTColumnBuilder',
   '$compile',
-  'ToolsService',
-  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile,ToolsService){
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -40,8 +39,6 @@ simci.controller('CatalogoController', [
     $log.info($location);
 
     if($location.$$url == '/catalogo/registrar-objeto'){
-
-        $controller('HerramientasController', {$scope: $scope}); 
 
         $scope.mostrar_mensaje = false;
 
