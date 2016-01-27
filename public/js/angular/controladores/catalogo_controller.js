@@ -34,8 +34,8 @@ simci.controller('CatalogoController', [
         url: "#/catalogo/ver/todos"
       },
       {
-        nombre:"registrar-unidad",
-        descripcion: "Esta opcion le permitira ver añadir nuevas unidades al catalogo",
+        nombre:"registrar unidad",
+        descripcion: "Esta opcion le permitira añadir nuevas unidades al catalogo",
         url: "#/catalogo/registrar-unidad"
       }
     ];
