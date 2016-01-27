@@ -9,7 +9,7 @@
   
 
 <div class="ui modal" id="modal_ver_objeto">
-   <div class="header">Datos del Estante</div>
+   <div class="header">Datos del Objeto</div>
       <div class="content">
          <table class="ui celled table capitalize">
             <tbody>
