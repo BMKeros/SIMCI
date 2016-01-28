@@ -53,9 +53,8 @@
             <div class="header">Esta por modificar los datos del catalogo</div>
             <p>Reescriba los datos que desea modificar de su Registro </p>
          </div>
-      </div>
+      </div> 
       <div class="ui form">
-      <div class="ui icon <% mensaje_validacion.color %> message">
         <form class="ui form" id="formulario_actualizar_objeto">
           <br>
             <div class="field centered grid">
