@@ -11,7 +11,8 @@ simci.controller('CatalogoController', [
   'DTOptionsBuilder', 
   'DTColumnBuilder',
   '$compile',
-  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile){
+  'ToolsService',
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile,ToolsService){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -136,7 +137,10 @@ simci.controller('CatalogoController', [
                 return data.data_unidad.nombre+' ('+data.data_unidad.abreviatura+')';
             }).notSortable(),
 
-            DTColumnBuilder.newColumn('especificaciones').withTitle('Especificaciones').notSortable(),
+            DTColumnBuilder.newColumn(null).withTitle('Especificaciones').renderWith(
+            function(data, type, full) {
+                return ToolsService.cut_string(data.especificaciones,60);
+            }).notSortable(),
             
             DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
               function(data, type, full) {
