@@ -125,7 +125,7 @@ simci.controller('CatalogoController', [
           $compile(angular.element(row).contents())($scope);
           
           // 4 Celda de acciones en la tabla
-          angular.element($('td',row).eq(4).get(0)).css({'width':'130px'});
+          angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
         });
       
         $scope.columnas_tabla_objetos = [
