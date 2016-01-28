@@ -23,6 +23,14 @@
       cut_string: function(string, num_char){
         var infin = ((string.length > num_char)?'....':'');
         return string.substring(0,num_char)+infin;
+      },
+      loading_button: function(id_button,activado){
+        if(activado){
+          $('#'+id_button).addClass('loading').prop('disabled',true);
+        }
+        else{
+          $('#'+id_button).removeClass('loading').prop('disabled',false);
+        }
       }
     };
   }]);
