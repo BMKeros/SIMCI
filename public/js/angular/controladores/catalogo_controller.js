@@ -47,6 +47,7 @@ simci.controller('CatalogoController', [
     if($location.$$url == '/catalogo/registrar-objeto'){
 
         $scope.mostrar_mensaje = false;
+        $scope.mostrar_mensaje_modificacion = false;
 
         $scope.registrar_objeto = function(){
         
@@ -56,7 +57,7 @@ simci.controller('CatalogoController', [
           if(is_valid_form){
             
             //Activamos el loading
-            $('#btn-registrar').addClass('loading').prop('disabled',true);
+            ToolsService.loading_button('btn-registrar',true);
 
             $http({
               method: 'POST',
@@ -76,7 +77,7 @@ simci.controller('CatalogoController', [
 
                 $timeout(function(){
                   //Desactivamos el loading
-                  $('#btn-registrar').removeClass('loading').prop('disabled',false);
+                  ToolsService.loading_button('btn-registrar',false);
                   formulario.form('clear');
                 }, 0, false);
 
@@ -93,14 +94,14 @@ simci.controller('CatalogoController', [
               }
 
               //Desactivamos el loading
-              $('#btn-registrar').removeClass('loading').prop('disabled',false);
+              ToolsService.loading_button('btn-registrar',false);
 
             },function(data_error){
 
               console.log(data_error);
 
               //Desactivamos el loading
-              $('#btn-registrar').removeClass('loading').prop('disabled',false);
+              ToolsService.loading_button('btn-registrar',false);
             });
             
           } //If condicional
@@ -174,7 +175,9 @@ simci.controller('CatalogoController', [
         };
 
         $scope.modal_modificar_objeto = function(id){
-          
+          //Desactivamos los mensajes
+          $scope.mostrar_mensaje = false;
+
           $scope.id_objeto_actual = id;
           
           $http({
@@ -186,7 +189,6 @@ simci.controller('CatalogoController', [
             $scope.DatosForm.cod_tipo_objeto = $scope.DatosForm.cod_tipo_objeto.toString();
             $scope.DatosForm.cod_unidad = $scope.DatosForm.cod_unidad.toString();
 
-            $log.info($scope.DatosForm)
             //Mostramos la modal
             angular.element('#modal_modificar_objeto').modal('show');
             
@@ -198,21 +200,51 @@ simci.controller('CatalogoController', [
         $scope.procesar_modificar = function(){
           var id_objeto = $scope.id_objeto_actual;
 
-          $log.info($scope.DatosForm);
+          ToolsService.loading_button('btn-modificar',true);
+
           $http({
             method: 'POST',
             url: '/api/catalogo/actualizar-objeto?id='+id_objeto,
             data: $scope.DatosForm
           }).then(function(data){
+            if(data.data.resultado){
 
-            
-            $log.info(data);
-            
-            //Mostramos la modal
-            angular.element('#modal_modificar_objeto').modal('show');
+                $scope.mostrar_mensaje = true;
+                
+                $scope.mensaje_validacion = {
+                  titulo: 'Objeto modificado con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: []
+                };
+
+                //Desactivamos el loading
+                ToolsService.loading_button('btn-modificar',false);
+
+                setTimeout(function(){
+                  $scope.reload_tabla();
+                },500);
+
+            }else{
+              $scope.mostrar_mensaje = true;
+                
+              $scope.mensaje_validacion = {
+                titulo: 'Error al modificar el objeto',
+                icono: 'remove',
+                color: 'red',
+                mensajes: data.data.mensajes
+              };
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-modificar',false);
+            }
+
+            $log.info($scope.DatosForm);
             
           },function(data_error){
             $log.info(data_error);
+            //Desactivamos el loading
+            ToolsService.loading_button('btn-modificar',false);
           });
 
         };
@@ -256,7 +288,6 @@ simci.controller('CatalogoController', [
         }
 
       }// If == '/catalogo/mostrar-catalogo'
-
 
     
   }]
