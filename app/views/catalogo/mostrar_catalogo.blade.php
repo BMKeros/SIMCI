@@ -37,7 +37,7 @@
       </div>
       <div class="actions">
          <div class="ui negative button">
-              Atras
+            Cerrar
          </div>
       </div>
    </div>
@@ -104,9 +104,9 @@
       <div class="ui negative button">
         Cancelar
       </div>
-      <div class="ui positive button" ng-click="procesar_modificar();">
+      <button class="ui positive button" ng-click="procesar_modificar();">
         Actualizar
-      </div>
+      </button>
       <div class="ui chackmark icon"></div>
    </div>
 </div>

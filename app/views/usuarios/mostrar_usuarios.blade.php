@@ -75,7 +75,7 @@
       </div>
       <div class="actions">
             <div class="ui negative button">
-              Atras
+               Cerrar
             </div>
       </div>
    </div>
@@ -176,9 +176,9 @@
       <div class="ui negative button">
          No
       </div>
-      <div class="ui positive button">
-         Si
-      </div>
+      <button class="ui positive button">
+         Actualizar
+      </button>
       <div class="ui chackmark icon"></div>
    </div>
 </div>
