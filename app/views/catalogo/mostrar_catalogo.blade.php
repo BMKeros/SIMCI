@@ -37,7 +37,7 @@
       </div>
       <div class="actions">
          <div class="ui negative button">
-              Atras
+            Cerrar
          </div>
       </div>
    </div>

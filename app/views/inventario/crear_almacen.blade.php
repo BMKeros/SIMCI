@@ -51,8 +51,8 @@
 				<br>
 
 				<div class="field">
-					<div class="two fields">
-						<div class="field">
+					<div class="one fields">
+						<div class="ten wide field">
 							<label>Descripcion</label>
 							<textarea name="descripcion_almacen" placeholder="Descripcion Del Almacen"></textarea>
 						</div>
