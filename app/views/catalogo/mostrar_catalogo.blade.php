@@ -19,7 +19,7 @@
                <tr>
                   <td colspan="2"><b>Tipo de Objeto: </b> <% data_objeto.data_tipo_objeto.nombre %>
                   </td>
-                  <td colspan="2"><b>Unidad:</b>Unidad Registrada.</td>
+                  <td colspan="2"><b>Unidad:</b> <%data_objeto.data_unidad.nombre %> (<%data_objeto.data_unidad.abreviatura %>)</small></td>
                </tr>
                <tr>
                   <td colspan="4"><b>Descripcion:</b><br>
@@ -55,6 +55,7 @@
          </div>
       </div>
       <div class="ui form">
+      <div class="ui icon <% mensaje_validacion.color %> message">
         <form class="ui form" id="formulario_actualizar_objeto">
           <br>
             <div class="field centered grid">
