@@ -58,6 +58,16 @@
           controller: 'InventarioController'
         }).
 
+        when('/inventario/crear-almacen', {
+          templateUrl: '/views/inventario/crear_almacen',
+          controller: 'InventarioController'
+        }).
+
+         when('/inventario/registrar-estante', {
+          templateUrl: '/views/inventario/crear_estante',
+          controller: 'InventarioController'
+        }).
+
 
         //Rutas para catalogo
         when('/catalogo', {
