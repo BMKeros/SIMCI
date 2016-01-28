@@ -34,15 +34,6 @@
 				
 				<br>
 
-				<div class="two fields">
-					<div class="field">
-						<label>Descripcion</label>
-						<textarea name="descripcion_almacen" placeholder="Descripcion Del Almacen"></textarea>
-					</div>
-				</div>
-
-				<br>
-
 				<div class="field">
 					<div class="two fields">	
 						<div class="field">
@@ -53,6 +44,17 @@
 						<div class="field">
 							<label>Segundo Auxiliar</label>
 							<input type="text" placeholder="Aqui va es un Select">
+						</div>
+					</div>
+				</div>
+
+				<br>
+
+				<div class="field">
+					<div class="two fields">
+						<div class="field">
+							<label>Descripcion</label>
+							<textarea name="descripcion_almacen" placeholder="Descripcion Del Almacen"></textarea>
 						</div>
 					</div>
 				</div>
