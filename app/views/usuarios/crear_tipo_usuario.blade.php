@@ -31,7 +31,7 @@
 		        	<div class="nine wide field ui form">
 					  	<div class="field">
 					    	<label>Descripcion</label>
-					    		<textarea placeholder="Descripcion"></textarea>
+					    		<textarea name="des_tipo_usuario" placeholder="Descripcion"></textarea>
 					  	</div>
 					</div>
 		        </div>

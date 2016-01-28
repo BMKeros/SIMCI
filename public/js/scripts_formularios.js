@@ -199,10 +199,10 @@ var reglas_formulario_crear_usuario = {
           {
             type:'empty',
             prompt:'Este campo no puede quedar vacio'
-          },
+          }
           
         ]
-      },
+      }
       
     },
    inline: true
@@ -214,14 +214,19 @@ var reglas_formulario_crear_objeto = {
       nombre: {
         identifier: 'nombre',
         rules:[
-            {
-              type:'empty',
-              prompt:'Este campo no puede quedar vacio'
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
            },
            {
-               type:'minLength[5]',
-               prompt:'Este campo debe contener minimo {ruleValue} caracteres'
+              type:'minLength[5]',
+              prompt:'Este campo debe contener minimo {ruleValue} caracteres'
             },
+            {
+              type:'maxLength[100]',
+              prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+            }
+
        ]
       },
       especificaciones:{
@@ -235,6 +240,10 @@ var reglas_formulario_crear_objeto = {
             type:'minLength[5]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           }
+          {
+            type:'maxLength[200]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
         ]
       },
       descripcion:{
@@ -247,6 +256,10 @@ var reglas_formulario_crear_objeto = {
           {
             type:'minLength[5]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          }
+          {
+            type:'maxLength[200]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           }
         ]
       },
@@ -268,6 +281,210 @@ var reglas_formulario_crear_objeto = {
           }
         ]
       }
+    },
+   inline: true
+};
+
+var reglas_formulario_crear_almacen = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      cod_almacen: {
+        identifier: 'cod_almacen',
+        rules:[
+            {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+           },
+       ]
+      },
+      descripcion_almacen: {
+        identifier: 'descripcion',
+        rules:[
+            {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+           },
+           {
+              type:'minLength[4]',
+              prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+           },
+           {
+              type:'maxLength[8]',
+              prompt:'Este campo debe tener como maximo {ruleValue} caracteres'
+           }
+       ]
+      }
+      
+    },
+   inline: true
+};
+
+var reglas_formulario_crear_elemento = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      numero_orden: {
+        identifier: 'numero_orden',
+        rules:[
+            {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+           },
+       ]
+      },
+
+      objetos_disponibles: {
+        identifier: 'objetos_disponibles',
+        rules:[
+            {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+           },
+       ]
+      },
+
+      recipientes_disponibles: {
+        identifier: 'recipientes_disponibles',
+        rules:[
+            {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+           }
+       ]
+      }
+
+    },
+   inline: true
+};
+
+var reglas_formulario_crear_estante = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      descripcion_estante: {
+        identifier: 'descripcion_estante',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[4]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[8]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      }
+
+    },
+   inline: true
+};
+
+var reglas_formulario_crear_permisos = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      permiso: {
+        identifier: 'permiso',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[8]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[15]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      cod_permiso: {
+        identifier: 'cod_permiso',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[2]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[4]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+       ]
+      },
+
+      descripcion_permiso{
+        identifier: 'descripcion_permiso',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue}'
+          },
+          {
+            type:'maxLength[150]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      }
+    },
+   inline: true
+};
+
+var reglas_formulario_crear_tipo_usuario = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      des_tipo_usuario: {
+        identifier: 'des_tipo_usuario',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[20]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      cod_tipo_usuario: {
+        identifier: 'cod_tipo_usuario',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[2]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[4]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
     },
    inline: true
 };

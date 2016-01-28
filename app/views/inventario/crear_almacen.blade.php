@@ -27,7 +27,7 @@
 
 						<div class="field">
 							<label>Responsable</label>
-							<input type="text" placeholder="Aqui va es un Select">
+							<input type="text" name="responsable" placeholder="Aqui va es un Select">
 						</div>
 					</div>
 				</div>
@@ -37,7 +37,7 @@
 				<div class="two fields">
 					<div class="field">
 						<label>Descripcion</label>
-						<textarea placeholder="Descripcion Del Almacen"></textarea>
+						<textarea name="descripcion_almacen" placeholder="Descripcion Del Almacen"></textarea>
 					</div>
 				</div>
 

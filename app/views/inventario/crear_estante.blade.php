@@ -32,7 +32,7 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Descripcion del Estante</label>
-							<textarea placeholder="Descripcion del Estante"></textarea>
+							<textarea name="descripcion_estante" placeholder="Descripcion del Estante"></textarea>
 						</div>
 					</div>
 				</div>

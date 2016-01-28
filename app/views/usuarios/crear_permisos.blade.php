@@ -7,8 +7,8 @@
 				<div class="field centered grid">
 					<div class="two fields">
 						<div class="field">
-							<label>Permisos del Usuario</label>
-							<input type="text" name="permiso"placeholder="Nombre del Permiso">
+							<label>Nombre del Permiso</label>
+							<input type="text" name=" permiso"placeholder="Nombre del Permiso">
 			        		
 			        	</div>
 			        	<div class="field">
@@ -19,7 +19,7 @@
 
 				    <div class="field">
 				    	<label>Descripcion de Permiso</label>
-				    	<textarea "ng-modal Datos.Form.Descripcion" placeholder="Descripcion de Permiso"></textarea>
+				    	<textarea name="descripcion_permiso" "ng-modal Datos.Form.Descripcion" placeholder="Descripcion de Permiso"></textarea>
 				    </div>
 				</div>
 

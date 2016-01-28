@@ -62,7 +62,7 @@
 
 						<div class="field">
 							<label>Objetos Disponibles</label>
-							<input type="number" name="numero_orden" placeholder="5">
+							<input type="number" name="objetos_disponible" placeholder="5">
 						</div>
 
 						<div class="field">
