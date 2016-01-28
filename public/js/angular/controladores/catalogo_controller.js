@@ -30,7 +30,7 @@ simci.controller('CatalogoController', [
       },
       {
         nombre:"ver catalogo",
-        descripcion: "Esta opcion le permitira ver los objetos del catalogo, a su vez tambien podra modificar o eliminar dichos objetos",
+        descripcion: "Esta opcion le permitira ver, modificar o eliminar los objetos del catalogos",
         url: "#/catalogo/ver/todos"
       },
       {
@@ -110,7 +110,7 @@ simci.controller('CatalogoController', [
       if($location.$$url == '/catalogo/ver/todos'){
 
         $scope.tabla_objetos = {};
-        $scope.id_objeto_eliminar = null;
+        $scope.id_objeto_actual = null;
 
         $scope.opciones_tabla_objetos = DTOptionsBuilder.newOptions()
           .withOption('ajax', {
@@ -146,6 +146,10 @@ simci.controller('CatalogoController', [
             })
         ];
 
+        $scope.reload_tabla = function(){
+          $scope.tabla_objetos.reloadData(function(data){}, false); 
+        };
+
         ///Funciones 
         $scope.modal_ver_objeto = function(id){
           $scope.data_objeto = {};
@@ -166,12 +170,17 @@ simci.controller('CatalogoController', [
         };
 
         $scope.modal_modificar_objeto = function(id){
+          
+          $scope.id_objeto_actual = id;
+          
           $http({
             method: 'GET',
             url: '/api/catalogo/mostrar?type=objeto&id='+id,
-            data: $scope.DatosForm
           }).then(function(data){
+
             $scope.DatosForm = data.data;
+            $scope.DatosForm.cod_tipo_objeto = $scope.DatosForm.cod_tipo_objeto.toString();
+            $scope.DatosForm.cod_unidad = $scope.DatosForm.cod_unidad.toString();
 
             $log.info($scope.DatosForm)
             //Mostramos la modal
@@ -182,9 +191,31 @@ simci.controller('CatalogoController', [
           });
         };
 
+        $scope.procesar_modificar = function(){
+          var id_objeto = $scope.id_objeto_actual;
+
+          $log.info($scope.DatosForm);
+          $http({
+            method: 'POST',
+            url: '/api/catalogo/actualizar-objeto?id='+id_objeto,
+            data: $scope.DatosForm
+          }).then(function(data){
+
+            
+            $log.info(data);
+            
+            //Mostramos la modal
+            angular.element('#modal_modificar_objeto').modal('show');
+            
+          },function(data_error){
+            $log.info(data_error);
+          });
+
+        };
+
         $scope.modal_eliminar_objeto = function(id){
           //Seteamos a la variable el id del objetos que se va a eliminar
-          $scope.id_objeto_eliminar = id;
+          $scope.id_objeto_actual = id;
 
           angular.element('#modal_eliminar_objeto').modal('show');
         };
@@ -209,7 +240,7 @@ simci.controller('CatalogoController', [
 
               //Recargamos la tabla
               setTimeout(function(){
-                $scope.tabla_objetos.reloadData(function(data){}, false);  
+                $scope.reload_tabla();
               }, 500);                         
             }
             else{
