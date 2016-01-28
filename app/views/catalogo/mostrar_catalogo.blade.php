@@ -102,7 +102,7 @@
    </div>
    <div class="actions">
       <div class="ui negative button">
-        Cancelar
+        Cerrar
       </div>
       <button class="ui positive button" ng-click="procesar_modificar();">
         Actualizar

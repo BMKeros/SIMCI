@@ -132,7 +132,7 @@
    </div>
    <div class="actions">
       <div class="ui negative button">
-        No
+        Cerrar
       </div>
       <button class="ui positive button">
         Actualizar
