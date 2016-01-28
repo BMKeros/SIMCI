@@ -84,7 +84,7 @@
 
                   <div class="field">
                      <label>Tipo de Objeto</label>
-                     {{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto','ng-model'=>'DatosForm.cod_tipo_objeto')) }}
+                     {{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto','ng-model'=>"DatosForm.cod_tipo_objeto")) }}
                   </div>
                 </div>
             </div>
@@ -93,10 +93,10 @@
    </div>
    <div class="actions">
       <div class="ui negative button">
-         No
+        Cancelar
       </div>
-      <div class="ui positive button">
-         Si
+      <div class="ui positive button" ng-click="procesar_modificar();">
+        Actualizar
       </div>
       <div class="ui chackmark icon"></div>
    </div>
