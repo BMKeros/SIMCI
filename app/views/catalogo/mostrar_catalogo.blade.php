@@ -46,14 +46,22 @@
 
 <div class="ui modal" id='modal_modificar_objeto'>
 <div class="ui centered dividing header">Actualizar datos del Objeto</div>
+   
    <div class="content">
-      <div class="ui icon message">
-         <i class="write icon"></i>
-         <div class="content">
-            <div class="header">Esta por modificar los datos del catalogo</div>
-            <p>Reescriba los datos que desea modificar de su Registro </p>
-         </div>
-      </div> 
+
+   	<div ng-if="mostrar_mensaje">
+			<div class="ui icon <% mensaje_validacion.color %> message">
+				<i class="<% mensaje_validacion.icono %> icon"></i>
+				<div class="content">
+					<div class="header"><% mensaje_validacion.titulo %></div>
+					<ul class="list">
+						<li ng-repeat=" mensaje in mensaje_validacion.mensajes track by $index"><% mensaje | capitalize %></li>
+					</ul>
+				</div>
+			</div>
+			<br>
+		</div> 
+
       <div class="ui form">
         <form class="ui form" id="formulario_actualizar_objeto">
           <br>
@@ -101,12 +109,12 @@
       </div>
    </div>
    <div class="actions">
-      <div class="ui negative button">
+      <button class="ui negative button">
         Cancelar
-      </div>
-      <div class="ui positive button" ng-click="procesar_modificar();">
+      </button>
+      <button class="ui positive button" ng-click="procesar_modificar();" id="btn-modificar">
         Actualizar
-      </div>
+      </button>
       <div class="ui chackmark icon"></div>
    </div>
 </div>
