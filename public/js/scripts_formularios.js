@@ -239,7 +239,7 @@ var reglas_formulario_crear_objeto = {
           {
             type:'minLength[5]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
-          }
+          },
           {
             type:'maxLength[200]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
@@ -256,7 +256,7 @@ var reglas_formulario_crear_objeto = {
           {
             type:'minLength[5]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
-          }
+          },
           {
             type:'maxLength[200]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
@@ -424,7 +424,7 @@ var reglas_formulario_crear_permisos = {
        ]
       },
 
-      descripcion_permiso{
+      descripcion_permiso: {
         identifier: 'descripcion_permiso',
         rules:[
           {
