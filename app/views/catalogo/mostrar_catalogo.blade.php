@@ -47,6 +47,13 @@
 <div class="ui modal" id='modal_modificar_objeto'>
 <div class="ui centered dividing header">Actualizar datos del Objeto</div>
    <div class="content">
+      <div class="ui icon message">
+         <i class="write icon"></i>
+         <div class="content">
+            <div class="header">Esta por modificar los datos del catalogo</div>
+            <p>Reescriba los datos que desea modificar de su Registro </p>
+         </div>
+      </div>
       <div class="ui form">
         <form class="ui form" id="formulario_actualizar_objeto">
           <br>
