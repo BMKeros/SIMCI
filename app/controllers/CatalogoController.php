@@ -52,6 +52,26 @@
 
 				break;
 
+				case 'query':
+
+					$value_search = Input::get('query');
+					
+					if(quitar_espacios($value_search) != ''){
+						
+						$data = DB::table('catalogo_objetos')
+						//DB::raw('concat(UPPER(LEFT(nombre,1))::text , LOWER(SUBSTRING(nombre,2,length(nombre)))::text) as name', 'id as value')
+							->select('nombre as name', 'id as value')
+							->where('nombre','ILIKE','%'.$value_search.'%')
+							->get();
+
+
+						$response = array("success"=>true, "results" => $data);
+					}
+					else{
+						$response = array("success"=>false, "results" => array());
+					}
+				break;
+
 				default:
 					$response = Catalogo::all();
 				break;

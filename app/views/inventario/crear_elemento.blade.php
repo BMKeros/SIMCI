@@ -46,7 +46,14 @@
 
 						<div class="field">
 							<label>Objeto</label>
-
+							<div>
+								<div class="ui search selection dropdown capitalize buscar_objeto">
+					             	<input value="" type="hidden" placeholder="Buscar Elemento">
+					              	<i class="dropdown icon"></i>
+					              	<input tabindex="0" class="search" type="text">
+					              	<div class="text"></div>
+								</div>
+							</div>
 						</div>
 		     		</div>
 				</div>
@@ -97,3 +104,15 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$('.buscar_objeto').dropdown({
+	apiSettings: {
+	  	method: 'GET',
+	  	dataType: 'JSON',
+	  	url: '/api/catalogo/mostrar?type=query&query={query}',
+	    maxSelections: 3
+  	},
+  	saveRemote:false
+});
+</script>
