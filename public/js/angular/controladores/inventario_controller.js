@@ -25,12 +25,12 @@ simci.controller('InventarioController', ['$scope','$http','$log','$route', '$ro
       {
         nombre:"crear almacen",
         descripcion: "Opcion para crear nuevos almacenes",
-        url: "#/"
+        url: "#/inventario/crear-almacen"
       },
       {
         nombre:"crear estante",
         descripcion: "Opcion para crear nuevos estantes",
-        url: "#/"
+        url: "#/inventario/registrar-estante"
       },
       {
         nombre:"crear agrupacion",
