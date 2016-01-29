@@ -15,7 +15,7 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="formulario_crear_objeto">
+			<form class="ui form" id="formulario_crear_unidad">
 				<h3 class="ui centered dividing header">Registrar Unidades</h3>
 				
 				<br>
@@ -24,7 +24,7 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Nombre de la unidad</label>
-							<input type="text" name="nom_unidad" placeholder="Nombre de la Unidad">
+							<input type="text" name="nombre" placeholder="Nombre de la Unidad">
 						</div>
 
 						<div class="field">
