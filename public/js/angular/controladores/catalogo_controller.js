@@ -186,11 +186,13 @@ simci.controller('CatalogoController', [
           }).then(function(data){
 
             $scope.DatosForm = data.data;
-            $scope.DatosForm.cod_tipo_objeto = $scope.DatosForm.cod_tipo_objeto.toString();
+            $scope.DatosForm.cod_clase_objeto = $scope.DatosForm.cod_clase_objeto.toString();
             $scope.DatosForm.cod_unidad = $scope.DatosForm.cod_unidad.toString();
 
-            //Mostramos la modal
-            angular.element('#modal_modificar_objeto').modal('show');
+            setTimeout(function(){
+              //Mostramos la modal
+              angular.element('#modal_modificar_objeto').modal('show');
+            },300);
             
           },function(data_error){
             $log.info(data_error);

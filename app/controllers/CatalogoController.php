@@ -143,7 +143,7 @@
 				$descripcion = input_default(Input::get('descripcion'),$objeto->descripcion);
 				$especificaciones = input_default(Input::get('especificaciones'),$objeto->especificaciones);
 				$cod_unidad = input_default(Input::get('cod_unidad'),$objeto->cod_unidad);
-				$cod_tipo_objeto = input_default(Input::get('cod_clase_objeto'),$objeto->cod_clase_objeto);
+				$cod_clase_objeto = input_default(Input::get('cod_clase_objeto'),$objeto->cod_clase_objeto);
 
 				$reglas = array(
 					'nombre' => 'required|min:5|max:100', 
