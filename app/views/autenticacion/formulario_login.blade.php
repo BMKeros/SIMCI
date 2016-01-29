@@ -72,6 +72,54 @@
 			</div>
 		</div>
 	</div>
+
+	<br>
+
+	<br>
+
+	<br>
+
+	<div class="ui vertical footer segment">
+		<div class="ui center aligned container">
+			<div class="ui stackable inverted grid">
+				<div class="two wide column">
+					<i class="css3 icon"></i>
+					<a href="#">
+						CSS3
+					</a>
+				</div>
+
+				<div class="two wide column">
+					<i class="html5 icon"></i>
+					<a href="#">
+						HTML
+					</a> 
+				</div>
+
+				<div class="two wide column">
+					<i class="github icon"></i>
+					<a href="#">
+						Gitlab
+					</a>
+				</div>
+
+				<div class="two wide column">
+	      			<a href="#" class="header item">
+			        	<img src="/img/php.png" width="16" height="16">
+			        	&nbsp;&nbsp;PHP
+			      	</a>
+				</div>
+				
+				
+				<div class="two wide column">
+	      			<a href="#" class="header item">
+			        	<img src="/img/laravel.png" width="16" height="16">
+			        	&nbsp;&nbsp;Laravel
+			      	</a>
+				</div>
+			</div>
+		</div>
+	</div>
 @stop
 
 
