@@ -19,7 +19,7 @@ class CrearTablaCatalogoObjetos extends Migration {
 			$table->string('descripcion',200);
 			$table->string('especificaciones',200);
 			$table->integer('cod_unidad');
-			$table->integer('cod_tipo_objeto');
+			$table->integer('cod_clase_objeto');
 			$table->nullableTimestamps();
 		});
 	}
