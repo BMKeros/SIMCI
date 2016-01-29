@@ -17,7 +17,7 @@
                   <td><b>Nombre del Objeto: </b> <% data_objeto.nombre %></td>
                </tr>
                <tr>
-                  <td colspan="2"><b>Tipo de Objeto: </b> <% data_objeto.data_tipo_objeto.nombre %>
+                  <td colspan="2"><b>Clase de Objeto: </b> <% data_objeto.data_clase_objeto.nombre %>
                   </td>
                   <td colspan="2"><b>Unidad:</b> <%data_objeto.data_unidad.nombre %> (<%data_objeto.data_unidad.abreviatura %>)</small></td>
                </tr>
@@ -100,8 +100,8 @@
                   </div>
 
                   <div class="field">
-                     <label>Tipo de Objeto</label>
-                     {{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto','ng-model'=>"DatosForm.cod_tipo_objeto")) }}
+                     <label>Clase de Objeto</label>
+                     {{ Form::select_agrupacion(array('name'=>'cod_clase_objeto', 'id'=>'clase_objeto','ng-model'=>"DatosForm.cod_clase_objeto")) }}
                   </div>
                 </div>
             </div>
