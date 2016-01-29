@@ -36,7 +36,11 @@
 					$draw = Input::get('draw',1);
 
 					if(quitar_espacios($value_search['value']) == ''){
-						$data = Catalogo::paginate($length);	
+						//$data = Catalogo::paginate($length);	
+						$data = DB::table('catalogo_objetos as CO')
+							->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
+							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
+							->paginate($length);
 					}
 					else{
 						//$data = Catalogo::where('nombre','ILIKE','%'.$value_search['value'].'%')->paginate($length);	
