@@ -12,7 +12,7 @@ class CrearTablaTipoObjetos extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tipo_objetos', function($table)
+		Schema::create('clase_objetos', function($table)
 		{
 			$table->increments('id');
 			$table->string('nombre',30);
@@ -28,7 +28,7 @@ class CrearTablaTipoObjetos extends Migration {
 	 */
 	public function down()
 	{
-		drop_cascade('tipo_objetos');
+		drop_cascade('clase_objetos');
 	}
 
 }
