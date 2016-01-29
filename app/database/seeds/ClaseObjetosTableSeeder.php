@@ -1,11 +1,11 @@
 <?php
 
-class TipoObjetosTableSeeder extends Seeder {
+class ClaseObjetosTableSeeder extends Seeder {
 
 
     public function run()
     {
-       DB::table('tipo_objetos')->delete();
+       DB::table('clase_objetos')->delete();
 
         $campos = array(
         	array('nombre' => 'Reactivo', 'descripcion' => 'reactivos quimicos'),
@@ -13,6 +13,6 @@ class TipoObjetosTableSeeder extends Seeder {
             array('nombre' => 'Equipo', 'descripcion'=> 'equipos de laboratorio')
         );
 
-        DB::table('tipo_objetos')->insert($campos);
+        DB::table('clase_objetos')->insert($campos);
     }
 }
