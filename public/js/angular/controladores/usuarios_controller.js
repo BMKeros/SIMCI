@@ -172,11 +172,23 @@ simci.controller('UsuariosController', [
 
         $http({
           method: 'GET',
-          url: '/api/usuarios/mostrar?type=usuario_full&id='+id,
-          data: $scope.DatosForm
+          url: '/api/usuarios/mostrar?type=usuario_full&id='+id
         }).then(function(data){
-          $log.info(data);
-          $scope.data_usuario = data.data;
+          
+          $scope.DatosForm = {
+            usuario: data.data.usuario.usuario,
+            email: data.data.usuario.email,
+            tipo_usuario: data.data.usuario.cod_tipo_usuario,
+            permisos: data.data.usuario.data_permisos,
+            activo: data.data.usuario.activo,
+            primer_nombre: data.data.persona.primer_nombre,
+            segundo_nombre: data.data.persona.segundo_nombre,
+            primer_apellido: data.data.persona.primer_apellido,
+            segundo_apellido: data.data.persona.segundo_apellido,
+            cedula: data.data.persona.cedula,
+            sexo: data.data.persona.sexo_id.toString(),
+            fecha_nacimiento: data.data.persona.fecha_nacimiento,
+          };
 
           //Mostramos la modal
           angular.element('#modal_ver_usuario').modal('show');
