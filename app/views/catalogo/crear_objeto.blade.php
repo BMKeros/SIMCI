@@ -53,7 +53,7 @@
 			     		</div>
 
 			     		<div class="field">
-			     			<label>Tipo de Objeto</label>
+			     			<label>Clase de Objeto</label>
 			     			{{ Form::select_agrupacion(array('name'=>'cod_tipo_objeto', 'id'=>'tipo_objeto', 'ng-model'=>'DatosForm.cod_tipo_objeto')) }}
 						</div>
 				    </div>
