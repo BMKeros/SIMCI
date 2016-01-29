@@ -157,25 +157,6 @@ class UsuariosController extends Controller {
 		
 	}
 
-	public function postActualizarUsuario($id){
-
-		$usuario = Usuario::find($id);
-
-		$usuario->usuario = Input::get('');
-		$usuario->email = Input::get('');
-		$usuario->password = Input::get('');
-		$usuario->permiso_id = Input::get('');
-		$usuario->tipo_id = Input::get('');
-		$usuario->activo = Input::get('') ;
-		
-		if($usuario->save()){
-			return View::make('/')->with('registro con exito');
-		}
-		else{
-			return View::make('/')->with('mensaje', 'error registro no exitoso');
-		}
-	}
-
 	public function postCrearUsuarioCompleto(){
 
 		DB::beginTransaction();
@@ -317,8 +298,133 @@ class UsuariosController extends Controller {
 				)
 			);
 		}
-
 	}
+
+
+	public function postActualizarUsuarioCompleto(){
+		$id = Input::get('id');
+
+		$usuario = Usuario::find($id);
+		
+		if(!is_null($usuario)){
+			//Datos del usuario
+			$usuario = input_default(Input::get('usuario'));
+			$email = input_default(Input::get('email'));
+			$password = input_default(Input::get('password'));
+			$tipo_usuario = input_default(Input::get('tipo_usuario'));
+			$permisos = input_default(Input::get('permisos'));
+			$imagen = Input::file('imagen');
+			$activo = input_default(Input::get('activo'));
+
+			//Datos personales
+			$p_nombre = input_default(Input::get('primer_nombre'));
+			$s_nombre = input_default(Input::get('segundo_nombre'));
+			$p_apellido = input_default(Input::get('primer_apellido'));
+			$s_apellido = input_default(Input::get('segundo_apellido'));
+			$cedula = input_default(Input::get('cedula'));
+			$sexo = input_default(Input::get('sexo'));
+			$fecha_nacimiento = input_default(Input::get('fecha_nacimiento'));
+
+	        $reglas = array(
+	            'usuario' =>'required|max:15|min:5|alpha_num' ,
+	            'email' =>'required|email|max:50' ,
+	            'password' => 'required|min:5',
+	            'tipo_usuario'=> 'required|exists:tipos_usuario,codigo',
+	            'permisos' => 'required|exists:permisos,codigo',
+	            'imagen' => 'mimes:jpeg,bmp,png',
+	            'activo' => 'boolean',
+	            
+	            //Reglas persona
+	            'cedula' =>'required|digits:8|unique:personas|numeric',
+	        	'fecha_nacimiento' => 'required|date_format:Y-m-d',
+	        	'primer_nombre' => 'required|alpha|max:15',
+	        	'primer_apellido' => 'required|alpha|max:15',
+	        	'segundo_nombre' => 'alpha|max:15',
+	        	'segundo_apellido' => 'alpha|max:15',
+	        	'sexo' => 'required|exists:sexos,id|numeric'
+	        );
+
+	        $campos = array(
+	        	'usuario'=>$usuario,
+	            'email'=>$email,
+	            'password'=>$password,
+	            'tipo_usuario'=> $tipo_usuario,
+	            'permisos' => $permisos,
+	            'imagen' => $imagen,
+	            'activo' => $activo,
+	            
+	            //Campos persona
+	            'cedula'=>$cedula,
+	        	'fecha_nacimiento' => $fecha_nacimiento,
+	        	'primer_nombre' => $p_nombre,
+	        	'primer_apellido' => $p_apellido,
+	        	'segundo_nombre' => $s_nombre,
+	        	'segundo_apellido' => $s_apellido,
+	        	'sexo' => $sexo
+	        );
+
+	        $mensajes = array(
+	            'unique' => ':attribute ya existe',
+	            'required' => ':attribute no puede estar en blanco',
+	            'exists' => ':attribute no existe',
+	            'max' => ':attribute debe tener un maximo de :max caracteres',
+	            'min' => ':attribute debe tener un minimo de :min caracteres',
+	            'mimes' => ':attribute extensiones validas [JPG, PNG, BMP]',
+	            'alpha_num' => ':attribute de contener caracteres alfanumericos',
+	        	'alpha' => ':attribute debe contener solo caracteres',
+	        	'date_format' => ':attribute debe tener este formato YY-MM-DD',
+	        	'numeric' => ':attribute debe tener solo numeros',
+	        	'digits' => ':attribute debe tener solo :digits digitos',
+	        );
+
+	        $validacion = Validator::make($campos,$reglas,$mensajes);
+	        
+
+			if($validacion->fails()){
+				return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
+			}
+			else{
+
+				$usuario->usuario = $usuario;
+				$usuario->email = $email;
+				$usuario->password = $password;
+				$usuario->cod_tipo_usuario = $tipo_usuario;
+
+				if($imagen){
+					$usuario->imagen  = PATH_IMAGENES.cargar_crear_imagen_usuario($imagen,$usuario->usuario);
+				}
+				if($activo){
+					$usuario->activo = $activo;
+				}
+
+				/*$nuevo_usuario->permisos()->attach($permisos);
+
+
+				$persona = $usuario->persona();
+
+				$persona->primer_nombre = $p_nombre;
+				$persona->primer_apellido = $p_apellido;
+				$persona->segundo_nombre = $s_nombre;
+				$persona->segundo_apellido = $s_apellido;
+				$persona->cedula = $cedula;
+				$persona->sexo_id = $sexo;
+				$persona->fecha_nacimiento = $fecha_nacimiento;
+
+				$usuario->persona()->associate($persona);**/
+
+				$usuario->save();
+				
+			}
+
+		}else{
+			return Response::json(array(
+				'resultado'=>false, 
+				'mensajes'=>array('Usuario no existe')
+				)
+			);
+		}
+	}
+
 
 	public function postEliminar(){
 		$id = Input::get('id');
