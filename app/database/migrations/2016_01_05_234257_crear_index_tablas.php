@@ -65,8 +65,8 @@ class CrearIndexTablas extends Migration {
 			$table->foreign('cod_unidad')->references('cod_unidad')
 				->on('unidades');
 				//->obDelete('cascade');
-			$table->foreign('cod_tipo_objeto')->references('id')
-				->on('tipo_objetos');
+			$table->foreign('cod_clase_objeto')->references('id')
+				->on('clase_objetos');
 				//->onDelete('cascade');
 		});
 	}	
