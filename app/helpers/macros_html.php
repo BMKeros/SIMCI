@@ -141,6 +141,26 @@ Form::macro('select_agrupacion', function($atributos = null){
 	}
 });
 
+Form::macro('select_clase_objeto', function($atributos = null){
+	if($atributos){
+
+		$tipo_objetos = DB::table('clase_objetos')->lists('nombre', 'id');
+
+		$default_values = array('class'=>"ui dropdown capitalize");
+		
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
+		$html .= '<option value="">Clase de Objeto</option>';
+		
+		foreach ($tipo_objetos as $key => $value) {
+			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
+		}
+		
+		$html .= '</select>';
+
+		return $html;
+	}
+});
+
 Form::macro('select_unidades', function($atributos = null, $selected = null){
 	if($atributos){
 
