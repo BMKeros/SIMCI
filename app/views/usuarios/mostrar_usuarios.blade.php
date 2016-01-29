@@ -9,7 +9,7 @@
 
 <!--Bloque 2 -> Modale Ver Usuario-->
 <div class="ui modal font-tag-p-15px" id="modal_ver_usuario">
-   <div class="header">Datos del Usuario</div>
+   <div class="header">Datos del Usuario </div>
       <div class="content">
          <table class="ui celled table">
             <tbody>
@@ -90,11 +90,11 @@
             <div class="field">
                <div class="two fields">
                  <div class="field">
-                   <input type="text" name="usuario" placeholder="Usuario" ng-model="data_usuario.usuario.usuario">
+                   <input type="text" name="usuario" placeholder="Usuario" ng-model="DatosForm.usuario">
                  </div>
 
                   <div class="eight wide field">
-                     <input type="text" name="email" placeholder="Direccion Email" ng-model="data_usuario.usuario.email">
+                     <input type="text" name="email" placeholder="Direccion Email" ng-model="DatosForm.email">
                   </div>
                </div>
             </div>
@@ -114,11 +114,11 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                     {{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos','ng-model'=>'data_usuario.usuario.data_permisos'))}}
+                     {{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos','ng-model'=>'DatosForm.permisos'))}}
                   </div>
 
                   <div class="eight wide field">
-                     {{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario','ng-model'=>'data_usuario.usuario.cod_tipo_usuario'))}}
+                     {{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario','ng-model'=>'DatosForm.tipo_usuario'))}}
                   </div>
                </div>
             </div>
@@ -129,11 +129,11 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                     <input type="text" name="primer_nombre" placeholder="Primer Nombre" ng-model="data_usuario.persona.primer_nombre">
+                     <input type="text" name="primer_nombre" placeholder="Primer Nombre" ng-model="DatosForm.primer_nombre">
                   </div>
                 
                   <div class="two field">
-                     <input type="text" name="segundo_nombre" placeholder="Segundo Nombre" ng-model="data_usuario.persona.segundo_nombre">
+                     <input type="text" name="segundo_nombre" placeholder="Segundo Nombre" ng-model="DatosForm.segundo_nombre">
                   </div>
                </div>
             </div>
@@ -141,11 +141,11 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">  
-                     <input type="text" name="primer_apellido" placeholder="Primer Apellido" ng-model="data_usuario.persona.primer_apellido">
+                     <input type="text" name="primer_apellido" placeholder="Primer Apellido" ng-model="DatosForm.primer_apellido">
                   </div>
 
                   <div class="two field">
-                     <input type="text" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="data_usuario.persona.segundo_apellido">
+                     <input type="text" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="DatosForm.segundo_apellido">
                   </div>
                </div>
             </div>
@@ -153,11 +153,11 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                     <input type="text" name="cedula" placeholder="Cedula" ng-model="data_usuario.persona.cedula">
+                     <input type="text" name="cedula" placeholder="Cedula" ng-model="DatosForm.cedula">
                   </div>
 
                   <div class="two field">
-                     <input type="date" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="data_usuario.persona.fecha_nacimiento">
+                     <input type="text" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.fecha_nacimiento">
                   </div>
                </div>
             </div>
@@ -165,7 +165,7 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
-                    {{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo','ng-model'=>"data_usuario.persona.sexo.id"))}}
+                    {{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo','ng-model'=>"DatosForm.sexo"))}}
                   </div>
                </div>
             </div>
