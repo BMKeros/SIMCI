@@ -135,7 +135,7 @@ simci.controller('CatalogoController', [
             DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
             DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
               function(data, type, full) {
-                return data.data_unidad.nombre+' ('+data.data_unidad.abreviatura+')';
+                return data.nombre_unidad+' ('+data.abreviatura_unidad+')';
             }).notSortable(),
 
             DTColumnBuilder.newColumn(null).withTitle('Especificaciones').renderWith(
