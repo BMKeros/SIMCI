@@ -27,17 +27,26 @@ simci.controller('CatalogoController', [
       {
         nombre:"registrar objeto",
         descripcion: "Esta opcion le permitira añadir nuevos objetos al catalogo",
-        url: "#/catalogo/registrar-objeto"
+        url: "#/catalogo/registrar-objeto",
+        icono: 'save'
       },
       {
         nombre:"ver catalogo",
         descripcion: "Esta opcion le permitira ver, modificar o eliminar los objetos del catalogos",
-        url: "#/catalogo/ver/todos"
+        url: "#/catalogo/ver/todos",
+        icono: 'eye'
       },
       {
         nombre:"registrar unidad",
-        descripcion: "Esta opcion le permitira añadir nuevas unidades al catalogo",
-        url: "#/catalogo/registrar-unidad"
+        descripcion: "Esta opcion le permitira añadir nuevas unidades para objetos del catalogo",
+        url: "#/catalogo/registrar-unidad",
+        icono: 'save'
+      },
+      {
+        nombre:"registrar clase",
+        descripcion: "Esta opcion le permitira añadir nuevas clases para objetos del objetos",
+        url: "#/catalogo/registrar-unidad",
+        icono: 'save'
       }
     ];
     
@@ -287,9 +296,73 @@ simci.controller('CatalogoController', [
           },function(data_error){
             $log.info(data_error);
           });
-        }
+        } // procesar eliminar
+      }// If == '/catalogo/ver/todos
 
-      }// If == '/catalogo/mostrar-catalogo'
+
+      if($location.$$url == '/catalogo/registrar-unidad'){
+
+        $scope.mostrar_mensaje = false;
+
+        $scope.registrar_unidad = function(){
+        
+          var formulario = $('#formulario_crear_unidad');
+          var is_valid_form = formulario.form(reglas_formulario_crear_unidad).form('is valid');
+
+          if(is_valid_form){
+            
+            //Activamos el loading
+            ToolsService.loading_button('btn-registrar',true);
+
+            $http({
+              method: 'POST',
+              url: '/api/catalogo/registrar-unidad',
+              data: $scope.DatosForm
+            }).then(function(data){
+
+              if(data.data.resultado){
+                
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Unidad creada con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: ['La unidad ha sido creada']
+                };
+
+                $timeout(function(){
+                  //Desactivamos el loading
+                  ToolsService.loading_button('btn-registrar',false);
+                  formulario.form('clear');
+                }, 0, false);
+
+              }
+              else{
+
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Hubo un error al guardar la informacion',
+                  icono: 'remove',
+                  color: 'red',
+                  mensajes: data.data.mensajes
+                };
+              }
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+
+            },function(data_error){
+
+              console.log(data_error);
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+            });
+            
+          } //If condicional
+        }
+    
+      }// If == '/catalogo/registrar-objeto'
 
     
   }]
