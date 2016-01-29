@@ -40,6 +40,7 @@
 						$data = DB::table('catalogo_objetos as CO')
 							->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
 							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
+							->orderBy('id','asc')
 							->paginate($length);
 					}
 					else{
@@ -48,6 +49,7 @@
 							->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
 							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
 							->where('CO.nombre', 'ILIKE', '%'.$value_search['value'].'%')
+							->orderBy('id','asc')
 							->paginate($length);
 					}
 					
