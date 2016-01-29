@@ -27,27 +27,32 @@ simci.controller('UsuariosController', [
       {
         nombre:"crear usuarios",
         descripcion: "Opcion para crear nuevos usuarios en el sistema",
-        url: "#/usuarios/crear"
+        url: "#/usuarios/crear",
+        icono: 'user'
       },
       {
         nombre:"ver usuarios",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los usuarios registrados en el sistema",
-        url: "#/usuarios/ver/todos"
+        url: "#/usuarios/ver/todos",
+        icono: 'eye'
       },
       {
         nombre:"crear permisos",
         descripcion: "Opcion se podran crear nuevos permisos de usuarios para el sistema",
-        url: "#/usuarios/crear/permiso"
+        url: "#/usuarios/crear/permiso",
+        icono: 'user'
       },
       {
         nombre:"ver permisos",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los permisos registrados en el sistema",
-        url: "#/usuarios/mostrar/permisos"
+        url: "#/usuarios/mostrar/permisos",
+        icono: 'user'
       },
       {
         nombre:"crear tipos de usuario",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los permisos registrados en el sistema",
-        url: "#/usuarios/crear/tipo-usuario"
+        url: "#/usuarios/crear/tipo-usuario",
+        icono: 'user'
       },
     ];
     

@@ -15,32 +15,38 @@ simci.controller('InventarioController', ['$scope','$http','$log','$route', '$ro
       {
         nombre:"registrar elemento",
         descripcion: "Esta opcion le permitira crear nuevos elementos en el inventario",
-        url: "#/inventario/registrar-elemento"
+        url: "#/inventario/registrar-elemento",
+        icono: 'user'
       },
       {
         nombre:"ver inventario",
         descripcion: "Esta opcion le permitira ver los elementos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
-        url: "#/inventario/ver/todos"
+        url: "#/inventario/ver/todos",
+        icono: 'user'
       },
       {
         nombre:"crear almacen",
         descripcion: "Opcion para crear nuevos almacenes",
-        url: "#/inventario/crear-almacen"
+        url: "#/inventario/crear-almacen",
+        icono: 'user'
       },
       {
         nombre:"crear estante",
         descripcion: "Opcion para crear nuevos estantes",
-        url: "#/inventario/registrar-estante"
+        url: "#/inventario/registrar-estante",
+        icono: 'user'
       },
       {
         nombre:"crear agrupacion",
         descripcion: "Esta opcion le permitira crear las agrupaciones por las cuales se ordenaran los elementos",
-        url: "#/"
+        url: "#/",
+        icono: 'user'
       },
       {
         nombre:"crear subagrupacion",
         descripcion: "Opcion para crear alguna caracteristica por la cual tambien ordenar elementos",
-        url: "#/"
+        url: "#/",
+        icono: 'user'
       },
       
     ];
