@@ -272,8 +272,8 @@ var reglas_formulario_crear_objeto = {
           }
         ]
       },
-      cod_tipo_objeto:{
-        identifier: 'cod_tipo_objeto',
+      cod_clase_objeto:{
+        identifier: 'cod_clase_objeto',
         rules:[
           {
             type:'empty',
