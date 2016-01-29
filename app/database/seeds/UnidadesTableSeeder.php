@@ -8,10 +8,10 @@ class UnidadesTableSeeder extends Seeder {
        DB::table('unidades')->delete();
 
         $campos = array(
-        	array('cod_unidad' => '1', 'nombre' => 'mililitros', 'abreviatura'=>'ML'),
-        	array('cod_unidad' => '2', 'nombre' => 'miligramos', 'abreviatura'=>'MG'),
-        	array('cod_unidad' => '3', 'nombre' => 'gramos', 'abreviatura'=>'G'),
-        	array('cod_unidad' => '4', 'nombre' => 'kilogramos', 'abreviatura'=>'KG'),
+        	array('nombre' => 'mililitros', 'abreviatura'=>'ML'),
+        	array('nombre' => 'miligramos', 'abreviatura'=>'MG'),
+        	array('nombre' => 'gramos', 'abreviatura'=>'G'),
+        	array('nombre' => 'kilogramos', 'abreviatura'=>'KG'),
         );
 
         DB::table('unidades')->insert($campos);

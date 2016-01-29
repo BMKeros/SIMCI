@@ -39,7 +39,12 @@
 						$data = Catalogo::paginate($length);	
 					}
 					else{
-						$data = Catalogo::where('nombre','ILIKE','%'.$value_search['value'].'%')->paginate($length);	
+						//$data = Catalogo::where('nombre','ILIKE','%'.$value_search['value'].'%')->paginate($length);	
+						$data = DB::table('catalogo_objetos as CO')
+							->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
+							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
+							->where('CO.nombre', 'ILIKE', '%'.$value_search['value'].'%')
+							->paginate($length);
 					}
 					
 					$response = array(
@@ -201,6 +206,44 @@
 			}
 			else{
 				return Response::json(array('resultado' => false, 'mensajes' => array('Objeto no encontrado')));
+			}
+		}
+
+		public function postRegistrarUnidad(){
+			$nombre = Input::get('nombre');
+			$abreviatura = Input::get('abreviatura');
+			
+			$reglas = array(
+				'nombre' => 'required|min:5|max:50', 
+				'abreviatura' => 'required|min:2|max:10',
+			);
+
+			$campos = array(
+				'nombre' => $nombre,
+				'abreviatura' => $abreviatura
+			);
+
+			$mensajes = array(
+				'required' => 'El campo :attribute es necesario',
+				'min' => 'El campo :attribute no debe contener menos de :min caracteres',
+				'max' => 'El campo :attribute no debe exceder los :max caracteres',
+				'unique' => 'El campo :attribute ya existe.'
+			);
+
+			$validacion = Validator::make($campos, $reglas, $mensajes);
+
+			if($validacion->fails()){
+				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+			}
+			else{
+				$unidad = new Unidad;
+
+				$unidad->nombre = $abreviatura;
+				$unidad->abreviatura = $abreviatura;
+				
+				$unidad->save();
+
+				return Response::json(array('resultado' => true, 'mensajes' => 'Nueva Unidad creada con exito'));
 			}
 		}
 	}
