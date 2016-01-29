@@ -488,3 +488,47 @@ var reglas_formulario_crear_tipo_usuario = {
     },
    inline: true
 };
+
+var reglas_formulario_crear_unidad = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      nombre: {
+        identifier: 'nombre',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[3]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[50]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      abreviatura: {
+        identifier: 'abreviatura',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[1]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[10]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+    },
+   inline: true
+};
