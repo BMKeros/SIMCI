@@ -45,7 +45,7 @@ simci.controller('CatalogoController', [
       {
         nombre:"registrar clase",
         descripcion: "Esta opcion le permitira añadir nuevas clases para objetos del objetos",
-        url: "#/catalogo/registrar-unidad",
+        url: "#/catalogo/registrar-clase",
         icono: 'save'
       }
     ];

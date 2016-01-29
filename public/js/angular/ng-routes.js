@@ -86,6 +86,10 @@
           templateUrl: '/views/catalogo/registrar_unidad',
           controller: 'CatalogoController'
         }).
+        when('/catalogo/registrar-clase', {
+          templateUrl: '/views/catalogo/registrar_clase_objeto',
+          controller: 'CatalogoController' 
+        }).
 
         otherwise({
           redirectTo: function(){
