@@ -86,14 +86,14 @@
 			$descripcion = Input::get('descripcion');
 			$especificaciones = Input::get('especificaciones');
 			$cod_unidad = Input::get('cod_unidad');
-			$cod_tipo_objeto = Input::get('cod_tipo_objeto');
+			$cod_clase_objeto = Input::get('cod_clase_objeto');
 
 			$reglas = array(
 				'nombre' => 'required|min:5|max:100', 
 				'descripcion' => 'required|min:5|max:200',
 				'especificaciones' => 'required|min:5|max:200',
 				'cod_unidad' => 'required|numeric|exists:unidades,cod_unidad',
-				'cod_tipo_objeto' => 'required|numeric|exists:tipo_objetos,id'
+				'cod_clase_objeto' => 'required|numeric|exists:clase_objetos,id'
 			);
 
 			$campos = array(
@@ -101,7 +101,7 @@
 				'descripcion' => $descripcion,
 				'especificaciones' => $especificaciones,
 				'cod_unidad' => $cod_unidad,
-				'cod_tipo_objeto' => $cod_tipo_objeto
+				'cod_clase_objeto' => $cod_clase_objeto
 			);
 
 			$mensajes = array(
@@ -125,7 +125,7 @@
 				$catalogo->descripcion = $descripcion;
 				$catalogo->especificaciones = $especificaciones;
 				$catalogo->cod_unidad = $cod_unidad;
-				$catalogo->cod_tipo_objeto = $cod_tipo_objeto;
+				$catalogo->cod_clase_objeto = $cod_clase_objeto;
 
 				$catalogo->save();
 
@@ -143,14 +143,14 @@
 				$descripcion = input_default(Input::get('descripcion'),$objeto->descripcion);
 				$especificaciones = input_default(Input::get('especificaciones'),$objeto->especificaciones);
 				$cod_unidad = input_default(Input::get('cod_unidad'),$objeto->cod_unidad);
-				$cod_tipo_objeto = input_default(Input::get('cod_tipo_objeto'),$objeto->cod_tipo_objeto);
+				$cod_tipo_objeto = input_default(Input::get('cod_clase_objeto'),$objeto->cod_clase_objeto);
 
 				$reglas = array(
 					'nombre' => 'required|min:5|max:100', 
 					'descripcion' => 'required|min:5|max:200',
 					'especificaciones' => 'required|min:5|max:200',
 					'cod_unidad' => 'required|numeric|exists:unidades,cod_unidad',
-					'cod_tipo_objeto' => 'required|numeric|exists:tipo_objetos,id'
+					'cod_clase_objeto' => 'required|numeric|exists:clase_objetos,id'
 				);
 
 				$campos = array(
@@ -158,7 +158,7 @@
 					'descripcion' => $descripcion,
 					'especificaciones' => $especificaciones,
 					'cod_unidad' => $cod_unidad,
-					'cod_tipo_objeto' => $cod_tipo_objeto
+					'cod_clase_objeto' => $cod_clase_objeto
 				);
 
 				$mensajes = array(
@@ -179,7 +179,7 @@
 					$objeto->descripcion = $descripcion;
 					$objeto->especificaciones = $especificaciones;
 					$objeto->cod_unidad = $cod_unidad;
-					$objeto->cod_tipo_objeto = $cod_tipo_objeto;
+					$objeto->cod_clase_objeto = $cod_clase_objeto;
 					$objeto->save();
 
 					return Response::json(array('resultado' => true, 'mensajes' => array('Objetos creado con exito')));
