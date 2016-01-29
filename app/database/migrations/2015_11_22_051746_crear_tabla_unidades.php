@@ -14,8 +14,7 @@ class CrearTablaUnidades extends Migration {
 	{
 		Schema::create('unidades', function(Blueprint $table)
 		{
-			$table->integer('cod_unidad');
-			$table->primary('cod_unidad');
+			$table->increments('cod_unidad');
 			$table->string('nombre', 50);
 			$table->string('abreviatura', 10);
 			$table->nullableTimestamps();
