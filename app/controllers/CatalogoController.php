@@ -1,3 +1,4 @@
+
 <?php  
 	class CatalogoController extends Controller{
 
@@ -244,12 +245,50 @@
 			else{
 				$unidad = new Unidad;
 
-				$unidad->nombre = $abreviatura;
+				$unidad->nombre = $nombre;
 				$unidad->abreviatura = $abreviatura;
 				
 				$unidad->save();
 
 				return Response::json(array('resultado' => true, 'mensajes' => 'Nueva Unidad creada con exito'));
+			}
+		}
+
+		public function postRegistrarClaseObjeto(){
+			$nombre = Input::get('nombre');
+			$descripcion = Input::get('descripcion');
+			
+			$reglas = array(
+				'nombre' => 'required|min:5|max:50', 
+				'descripcion' => 'required|min:5|max:50',
+			);
+
+			$campos = array(
+				'nombre' => $nombre,
+				'descripcion' => $descripcion
+			);
+
+			$mensajes = array(
+				'required' => 'El campo :attribute es necesario',
+				'min' => 'El campo :attribute no debe contener menos de :min caracteres',
+				'max' => 'El campo :attribute no debe exceder los :max caracteres',
+				'unique' => 'El campo :attribute ya existe.'
+			);
+
+			$validacion = Validator::make($campos, $reglas, $mensajes);
+
+			if($validacion->fails()){
+				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+			}
+			else{
+				$clase_objeto = new ClaseObjeto;
+
+				$clase_objeto->nombre = $nombre;
+				$clase_objeto->descripcion = $descripcion;
+				
+				$clase_objeto->save();
+
+				return Response::json(array('resultado' => true, 'mensajes' => 'Nueva Clase de Objeto creada con exito'));
 			}
 		}
 	}

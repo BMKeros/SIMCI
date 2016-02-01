@@ -19,7 +19,7 @@ class CrearTablaAlmacenes extends Migration {
 			$table->integer('responsable');
 			$table->integer('primer_auxiliar')->nullable();
 			$table->integer('segundo_auxiliar')->nullable();
-			$table->string('descripcion', 8);
+			$table->string('descripcion', 15);
 			
 			$table->nullableTimestamps();
 		});
