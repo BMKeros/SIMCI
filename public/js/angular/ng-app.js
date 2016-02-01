@@ -10,16 +10,10 @@
       return (!!input) ? input.replace(reg, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();}) : '';
     }
   });
-  
-  /*simci.filter('cut_string', function(){
-    return function(string, num_char){
-      var infin = ((string.length > num_char)?'....':'');
-      return string.substring(0,num_char)+infin;
-    }
-  });*/
 
   simci.factory('ToolsService', [function () {
     return {
+      //Funcion para cortar el string dependiendo del numero de caracteres por parametros
       cut_string: function(string, num_char){
         var infin = ((string.length > num_char)?'....':'');
         return string.substring(0,num_char)+infin;
@@ -31,6 +25,11 @@
         else{
           $('#'+id_button).removeClass('loading').prop('disabled',false);
         }
+      },
+      //Funcion para recargar el cache que causa el ng-route
+      reload_template_cache: function($ROUTE, $TEMPLATE_CACHE){
+        var URLTemplate = $ROUTE.current.loadedTemplateUrl;
+        $TEMPLATE_CACHE.remove(URLTemplate); 
       }
     };
   }]);
