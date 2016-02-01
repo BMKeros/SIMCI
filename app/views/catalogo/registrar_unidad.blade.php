@@ -24,12 +24,12 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Nombre de la unidad</label>
-							<input type="text" name="nombre" placeholder="Nombre de la Unidad">
+							<input type="text" name="nombre" placeholder="Nombre de la Unidad" ng-model="DatosForm.nombre">
 						</div>
 
 						<div class="field">
 							<label>Abreviatura</label>
-							<input type="text" name="abreviatura" placeholder="Abreviatura de la Unidad">
+							<input type="text" name="abreviatura" placeholder="Abreviatura de la Unidad" ng-model="DatosForm.abreviatura">
 						</div>
 					</div>
 				</div>
