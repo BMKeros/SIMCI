@@ -12,7 +12,8 @@ simci.controller('CatalogoController', [
   'DTColumnBuilder',
   '$compile',
   'ToolsService',
-  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile,ToolsService){
+  '$templateCache',
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile,ToolsService,$templateCache){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -54,6 +55,8 @@ simci.controller('CatalogoController', [
     $log.info($location);
 
     if($location.$$url == '/catalogo/registrar-objeto'){
+
+        ToolsService.reload_template_cache($route,$templateCache);
 
         $scope.mostrar_mensaje = false;
         $scope.mostrar_mensaje_modificacion = false;
@@ -303,6 +306,7 @@ simci.controller('CatalogoController', [
       if($location.$$url == '/catalogo/registrar-unidad'){
 
         $scope.mostrar_mensaje = false;
+        $scope.DatosForm = {};
 
         $scope.registrar_unidad = function(){
         

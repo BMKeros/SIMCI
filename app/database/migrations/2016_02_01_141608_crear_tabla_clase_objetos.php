@@ -31,4 +31,4 @@ class CrearTablaClaseObjetos extends Migration {
 		drop_cascade('clase_objetos');
 	}
 
-}
+}	
