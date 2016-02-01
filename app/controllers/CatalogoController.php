@@ -244,7 +244,7 @@
 			else{
 				$unidad = new Unidad;
 
-				$unidad->nombre = $abreviatura;
+				$unidad->nombre = $nombre;
 				$unidad->abreviatura = $abreviatura;
 				
 				$unidad->save();
