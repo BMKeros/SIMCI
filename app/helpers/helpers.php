@@ -87,5 +87,7 @@ function crear_codigo_tipo_usuario($numero = 1){
 }
 
 function crear_codigo_permiso($numero = 1){
+	//Se le debe incrementar uno porque va a ser un nuevo registro
+	$numero = $numero+1;
 	return sprintf("%s%s",CODIGO_PERMISO,agregar_ceros($numero,1));
 }
