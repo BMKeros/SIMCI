@@ -83,6 +83,8 @@ function agregar_ceros($numero = 0, $cantidad_ceros = 1){
 }
 
 function crear_codigo_tipo_usuario($numero = 1){
+	//Se le debe incrementar uno porque va a ser un nuevo registro
+	$numero = $numero+1;
 	return sprintf("%s%s",CODIGO_TIPO_USUARIO,agregar_ceros($numero,1));
 }
 
