@@ -67,3 +67,19 @@ function cargar_crear_imagen_usuario($archivo = null,$name_usuario = ""){
 		return null;
 	}
 }
+
+function agregar_ceros($numero = 0, $cantidad_ceros = 1){
+	$ceros = "";
+	for($i=0;$i<$cantidad_ceros;$i++){
+		$ceros .= "0"; 
+	}
+	return ($numero > 0 && $numero < 10 )?( sprintf("%s%d",$ceros,$numero)):((String)$numero);
+}
+
+function crear_codigo_tipo_usuario($numero = 1){
+	return sprintf("%s%s",CODIGO_TIPO_USUARIO,agregar_ceros($numero,2));
+}
+
+function crear_codigo_permiso($numero = 1){
+	return sprintf("%s%s",CODIGO_PERMISO,agregar_ceros($numero,2));
+}
