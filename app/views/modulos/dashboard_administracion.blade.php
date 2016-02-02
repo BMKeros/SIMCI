@@ -54,18 +54,18 @@
 		</a>	
 	
 	   	<a class="item">
-  			<i class="mail icon"></i>
-  			Messages
+  			<i class="edit icon"></i>
+  			Ordenes
 		</a>
 	
 		<a class="item">
-  			<i class="chat icon"></i>
-  			Discussions
+  			<i class="lab icon"></i>
+  			Laboratorio
 		</a>
 	
     	<a class="item">
-	      	<i class="trophy icon"></i>
-	      	Achievements
+	      	<i class="file text outline icon"></i>
+	      	Reportes
     	</a>
 	
     	<a class="item">
