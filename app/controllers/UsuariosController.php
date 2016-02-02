@@ -493,9 +493,11 @@ class UsuariosController extends Controller {
 
 	public function postRegistrarTipoUsuario(){
 		
+		$nombre = Input::get('nombre');
 		$descripcion = Input::get('descripcion');
 
 		$reglas = array(
+			'nombre' => 'required|min:5|max:15|unique:tipos_usuario',
             'descripcion' => 'required|min:5|max:150'
         );
 
@@ -506,7 +508,8 @@ class UsuariosController extends Controller {
         $mensajes = array(
             'required' => ':attribute no puede estar en blanco',
             'max' => ':attribute debe tener un maximo de :max caracteres',
-            'min' => ':attribute debe tener un minimo de :min caracteres'
+            'min' => ':attribute debe tener un minimo de :min caracteres',
+            'unique' => 'El campo :attribute ya existe.'
         );
 
         $validacion = Validator::make($campos, $reglas, $mensajes);
@@ -521,6 +524,7 @@ class UsuariosController extends Controller {
 
         	//comentado porque al codigo se le igualara a una funcion ya esta probada y funciona (y)
         	$nuevo_TipoUsuario->codigo = crear_codigo_tipo_usuario($num_tipo_usuario);
+        	$nuevo_TipoUsuario->nombre = $nombre;
         	$nuevo_TipoUsuario->descripcion = $descripcion;
 
         	$nuevo_TipoUsuario->save();
