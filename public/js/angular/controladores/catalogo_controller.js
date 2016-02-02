@@ -376,7 +376,7 @@ simci.controller('CatalogoController', [
         $scope.registrar_objeto = function(){
         
           var formulario = $('#formulario_crear_clase_objeto');
-          var is_valid_form = formulario.form(reglas_formulario_crear_unidad).form('is valid');
+          var is_valid_form = formulario.form(reglas_formulario_crear_clase_objeto).form('is valid');
 
           if(is_valid_form){
             
