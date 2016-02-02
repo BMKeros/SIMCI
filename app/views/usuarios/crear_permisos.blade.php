@@ -28,7 +28,7 @@
 
 				    <div class="field">
 				    	<label>Descripcion de Permiso</label>
-				    	<textarea name="descripcion" placeholder="Descripcion de Permiso" ng-model="DatosForm.descripcion"></textarea>
+				    	<textarea name="descripcion" placeholder="Descripcion de Permiso" ng-model="DatosForm.descripcion" rows="4"></textarea>
 				    </div>
 				</div>
 

@@ -12,7 +12,8 @@ simci.controller('UsuariosController', [
   '$compile',
   'DTOptionsBuilder', 
   'DTColumnBuilder',
-  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder){
+  'ToolsService',
+  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService){
     $scope.modulo = {};
 
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -257,9 +258,136 @@ simci.controller('UsuariosController', [
         },function(data_error){
           $log.info(data_error);
         });
-      }
+      }// Procesar eliminar
 
     }// If
+
+    if($location.$$url == '/usuarios/crear/permiso'){
+        $scope.mostrar_mensaje = false;
+        $scope.DatosForm = {};
+
+        $scope.registrar_permiso = function(){
+        
+          var formulario = $('#formulario_crear_permiso');
+          var is_valid_form = formulario.form(reglas_formulario_crear_permiso).form('is valid');
+
+          if(is_valid_form){
+            
+            //Activamos el loading
+            ToolsService.loading_button('btn-registrar',true);
+
+            $http({
+              method: 'POST',
+              url: '/api/usuarios/registrar-permiso',
+              data: $scope.DatosForm
+            }).then(function(data){
+
+              if(data.data.resultado){
+                
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Permiso creado con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: ['Permiso registrado en la base de datos']
+                };
+
+                $timeout(function(){
+                  //Desactivamos el loading
+                  ToolsService.loading_button('btn-registrar',false);
+                  formulario.form('clear');
+                }, 0, false);
+
+              }
+              else{
+
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Hubo un error al guardar la informacion',
+                  icono: 'remove',
+                  color: 'red',
+                  mensajes: data.data.mensajes
+                };
+              }
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+
+            },function(data_error){
+
+              console.log(data_error);
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+            });
+            
+          } //If condicional
+        }
+      }// If == '/usuarios/crear/permiso'
+
+      if($location.$$url == '/usuarios/crear/tipo-usuario'){
+        $scope.mostrar_mensaje = false;
+        $scope.DatosForm = {};
+
+        $scope.registrar_tipo_usuario = function(){
+        
+          var formulario = $('#formulario_crear_tipo_usuario');
+          var is_valid_form = formulario.form(reglas_formulario_crear_tipo_usuario).form('is valid');
+
+          if(is_valid_form){
+            
+            //Activamos el loading
+            ToolsService.loading_button('btn-registrar',true);
+
+            $http({
+              method: 'POST',
+              url: '/api/usuarios/registrar-tipo-usuario',
+              data: $scope.DatosForm
+            }).then(function(data){
+
+              if(data.data.resultado){
+                
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Tipo de usuario creado con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: ['Tipo de usuario guardado en la base de datos']
+                };
+
+                $timeout(function(){
+                  //Desactivamos el loading
+                  ToolsService.loading_button('btn-registrar',false);
+                  formulario.form('clear');
+                }, 0, false);
+
+              }
+              else{
+
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Hubo un error al guardar la informacion',
+                  icono: 'remove',
+                  color: 'red',
+                  mensajes: data.data.mensajes
+                };
+              }
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+
+            },function(data_error){
+
+              console.log(data_error);
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+            });
+            
+          } //If condicional
+        }
+      }// If == '/catalogo/registrar-clase'
+
     
   }]
 );

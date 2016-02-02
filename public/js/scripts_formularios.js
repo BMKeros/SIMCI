@@ -396,7 +396,7 @@ var reglas_formulario_crear_permiso = {
             prompt:'Este campo no puede quedar vacio'
           },
           {
-            type:'minLength[8]',
+            type:'minLength[4]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
