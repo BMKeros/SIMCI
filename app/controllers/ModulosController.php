@@ -17,4 +17,12 @@ class ModulosController extends Controller {
 	public function getEstudiantes(){
 		return View::make('modulos.dashboard_estudiante');
 	}
+
+	public function getAlmacenistas(){
+		return View::make('modulos.dashboard_almacenista');
+	}
+
+	public function getSupervisores(){
+		return View::make('modulos.dashboard_supervisor');
+	}
 }

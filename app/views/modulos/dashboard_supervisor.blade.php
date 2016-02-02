@@ -1,7 +1,7 @@
 @extends('layouts.plantilla_master')
 
 @section('titulo')
-	<title>SIMCI - Estudiante</title>
+	<title>SIMCI - Supervisor</title>
 @stop
 
 @section('contenido-body-master')
@@ -17,7 +17,7 @@
       			<div class="right menu">
       				<a class="item">
       					Notificaciones
-      					<div class="ui red label">3</div>
+      					<div class="ui red label">10</div>
       				</a>
 			      	<div class="ui simple dropdown item">
 	  					{{-- ucfirst(Auth::user()->usuario )--}}	

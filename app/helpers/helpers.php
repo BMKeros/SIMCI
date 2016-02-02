@@ -17,6 +17,12 @@ function redirect_por_tipo($tipo_usuario = null){
 	else if($tipo_usuario == TIPO_USER_PROFESOR){
 		return Redirect::action('ModulosController@getProfesores');	
 	}
+	else if($tipo_usuario == TIPO_USER_SUPERVISOR){
+		return Redirect::action('ModulosController@getSupervisor');
+	}
+	else if($tipo_usuario == TIPO_USER_ALMACENISTA){
+		return Redirect::action('ModulosController@getAlmacenista');	
+	}	
 	else{
 		Auth::logout();
 		return Redirect::to('/')->with(array('mensaje_alerta'=>"Error ha ocurrido un problema con su tipo de usuario"));		
