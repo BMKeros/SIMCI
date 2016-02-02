@@ -10,6 +10,20 @@ class Permiso extends Eloquent{
 	public function usuarios(){
         return $this->belongsToMany('Usuario','permisos_usuarios','cod_permiso','usuario_id');
     }
+
+
+	public function setNombreAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['nombre']=strtolower($value);
+		}
+	}
+
+
+	public function setDescripcionAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['descripcion']=strtolower($value);
+		}
+	}
 }
 
 

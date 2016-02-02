@@ -45,4 +45,10 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 			$this->attributes['password'] = Hash::make($value);
 		}
 	}
+
+	public function setUsuarioAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['usuario']=strtolower($value);
+		}
+	}
 }
