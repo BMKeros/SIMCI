@@ -13,3 +13,9 @@ define('TIPO_USER_SUPERVISOR','TU06');
 /// PATH
 
 define('PATH_IMAGENES','/uploads/imagenes/');
+
+
+//NOMENCLATURAS
+
+define('CODIGO_TIPO_USUARIO','TU');
+define('CODIGO_PERMISO','PU');
