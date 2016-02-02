@@ -166,13 +166,13 @@ Form::macro('select_unidades', function($atributos = null, $selected = null){
 
 		$unidades = DB::table('unidades')->select('cod_unidad', 'nombre', 'abreviatura')->get();
 	
-		$default_values = array('class'=>"ui dropdown capitalize");
+		$default_values = array('class'=>"ui dropdown search capitalize");
 		
 		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
 		$html .= '<option value="">Unidades</option>';
 		
 		foreach ($unidades as $unidad) {
-			$html .= sprintf('<option value="%s">[%s] - %s</option>', $unidad->cod_unidad, $unidad->abreviatura, $unidad->nombre);	
+			$html .= sprintf('<option value="%s">%s - [%s]</option>', $unidad->cod_unidad, $unidad->nombre, $unidad->abreviatura);	
 		}
 		
 		$html .= '</select>';
