@@ -453,7 +453,6 @@ class UsuariosController extends Controller {
 		$descripcion = Input::get('descripcion');
 
 		$reglas = array(
-        	'codigo' =>'required|min:2|max:4|alpha_num',
             'nombre' =>'required|min:5|max:15|unique:permisos',
             'descripcion' => 'required|min:5|max:150'
         );
@@ -468,7 +467,6 @@ class UsuariosController extends Controller {
             'required' => ':attribute no puede estar en blanco',
             'max' => ':attribute debe tener un maximo de :max caracteres',
             'min' => ':attribute debe tener un minimo de :min caracteres',
-            'alpha_num' => ':attribute de contener caracteres alfanumericos',
         );
 
         $validacion = Validator::make($campos, $reglas, $mensajes);
