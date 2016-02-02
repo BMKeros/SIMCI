@@ -17,7 +17,7 @@ class CrearTablaTiposUsuario extends Migration {
 			$table->string('codigo',4);
 			$table->primary('codigo');
 			$table->string('nombre', 15);
-			$table->string('descripcion',30);
+			$table->string('descripcion',50);
 			$table->nullableTimestamps();
 		});
 	}
