@@ -368,6 +368,70 @@ simci.controller('CatalogoController', [
     
       }// If == '/catalogo/registrar-objeto'
 
+
+      if($location.$$url == '/catalogo/registrar-clase'){
+        $scope.mostrar_mensaje = false;
+        $scope.DatosForm = {};
+
+        $scope.registrar_objeto = function(){
+        
+          var formulario = $('#formulario_crear_clase_objeto');
+          var is_valid_form = formulario.form(reglas_formulario_crear_unidad).form('is valid');
+
+          if(is_valid_form){
+            
+            //Activamos el loading
+            ToolsService.loading_button('btn-registrar',true);
+
+            $http({
+              method: 'POST',
+              url: '/api/catalogo/registrar-clase-objeto',
+              data: $scope.DatosForm
+            }).then(function(data){
+
+              if(data.data.resultado){
+                
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Clase creada con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: ['Nueva clase de objeto creada']
+                };
+
+                $timeout(function(){
+                  //Desactivamos el loading
+                  ToolsService.loading_button('btn-registrar',false);
+                  formulario.form('clear');
+                }, 0, false);
+
+              }
+              else{
+
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Hubo un error al guardar la informacion',
+                  icono: 'remove',
+                  color: 'red',
+                  mensajes: data.data.mensajes
+                };
+              }
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+
+            },function(data_error){
+
+              console.log(data_error);
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+            });
+            
+          } //If condicional
+        }
+      }// If == '/catalogo/registrar-clase'
+
     
   }]
 );

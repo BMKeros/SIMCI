@@ -15,14 +15,14 @@
 				<br>
 			</div>
 			
-			<form class="ui form" id="formulario_registrar_clase_objeto">
+			<form class="ui form" id="formulario_crear_clase_objeto">
 				<h3 class="ui centered dividing header">Crear Clase de Objeto</h3>
 
 				<div class="field">
 					<div class="six wide field">
 						<div class="field">
 							<label>Nombre</label>
-			        		<input type="text" name="nombre" value="" placeholder="Nombre de la Clase">
+			        		<input type="text" name="nombre" ng-model="DatosForm.nombre" placeholder="Nombre de la Clase">
 			        	</div>
 			        </div>
 		        </div>
@@ -31,7 +31,7 @@
 		        	<div class="nine wide field ui form">
 					  	<div class="field">
 					    	<label>Descripcion</label>
-					    		<textarea name="descripcion" placeholder="Descripcion de la clase"></textarea>
+					    		<textarea name="descripcion" placeholder="Descripcion de la clase" ng-model="DatosForm.descripcion"></textarea>
 					  	</div>
 					</div>
 		        </div>
