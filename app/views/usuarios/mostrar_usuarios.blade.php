@@ -82,18 +82,20 @@
 <!--Bloque 3 -> Modal Modificar Usuario-->
 
 <div class="ui modal" id="modal_modificar_usuario">
-<div class="header">Actualizar datos del Usuario</div>
+<div class="header">Actualizar Usuario</div>
    <div class="content">
       <div class="ui form">
          <form class="ui form" id="formulario_crear_usuario">
-
+             <h4 class="ui dividing header">Datos de Usuario</h4>
             <div class="field">
                <div class="two fields">
                  <div class="field">
+                  <label>Usuario</label>
                    <input type="text" name="usuario" placeholder="Usuario" ng-model="DatosForm.usuario">
                  </div>
 
                   <div class="eight wide field">
+                     <label>Direccion Email</label>
                      <input type="text" name="email" placeholder="Direccion Email" ng-model="DatosForm.email">
                   </div>
                </div>
@@ -101,11 +103,13 @@
 
             <div class="field">
                <div class="two fields">
-                  <div class="field">  
+                  <div class="field">
+                     <label>Password</label>  
                      <input type="password" name="password" placeholder="Password">
                   </div>
 
                   <div class="two field">
+                     <label>Confirmar Password</label>
                      <input type="password" name="password_confirmacion" placeholder="Confirmar Password">
                   </div>
                </div>
@@ -114,10 +118,12 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
+                     <label>Tipo de Permiso</label>
                      {{Form::select_permisos(array('name' => 'permisos', 'id' => 'permisos','ng-model'=>'DatosForm.permisos'))}}
                   </div>
 
                   <div class="eight wide field">
+                     <label>Tipo de Usuario</label>
                      {{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario','ng-model'=>'DatosForm.tipo_usuario'))}}
                   </div>
                </div>
@@ -129,10 +135,12 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
+                     <label>Primer Nombre</label>
                      <input type="text" name="primer_nombre" placeholder="Primer Nombre" ng-model="DatosForm.primer_nombre">
                   </div>
                 
                   <div class="two field">
+                     <label>Segundo Nombre</label>
                      <input type="text" name="segundo_nombre" placeholder="Segundo Nombre" ng-model="DatosForm.segundo_nombre">
                   </div>
                </div>
@@ -140,11 +148,13 @@
 
             <div class="field">
                <div class="two fields">
-                  <div class="field">  
+                  <div class="field">
+                     <label>Primer Apellido</label>
                      <input type="text" name="primer_apellido" placeholder="Primer Apellido" ng-model="DatosForm.primer_apellido">
                   </div>
 
                   <div class="two field">
+                     <label>Segundo Apellido</label>
                      <input type="text" name="segundo_apellido" placeholder="Segundo Apellido" ng-model="DatosForm.segundo_apellido">
                   </div>
                </div>
@@ -153,10 +163,12 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
+                     <label>Cedula</label>
                      <input type="text" name="cedula" placeholder="Cedula" ng-model="DatosForm.cedula">
                   </div>
 
                   <div class="two field">
+                     <label>Fecha de Nacimiento</label>
                      <input type="text" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.fecha_nacimiento">
                   </div>
                </div>
@@ -165,6 +177,7 @@
             <div class="field">
                <div class="two fields">
                   <div class="field">
+                  <label>Sexo</label>
                     {{Form::select_sexo(array('id' => 'sexo', 'name' => 'sexo','ng-model'=>"DatosForm.sexo"))}}
                   </div>
                </div>
