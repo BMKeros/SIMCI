@@ -461,7 +461,7 @@ var reglas_formulario_crear_tipo_usuario = {
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
-            type:'maxLength[30]',
+            type:'maxLength[50]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           }
         ]
