@@ -51,7 +51,7 @@ Form::macro('select_sexo', function($atributos = null){
 Form::macro('select_tipo_usuario', function($atributos = null){
 	
 	if($atributos){
-		$tipo_usuario = DB::table('tipos_usuario')->lists('descripcion', 'codigo');
+		$tipo_usuario = DB::table('tipos_usuario')->lists('nombre', 'codigo');
 		
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
