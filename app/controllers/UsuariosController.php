@@ -498,10 +498,11 @@ class UsuariosController extends Controller {
 
 		$reglas = array(
 			'nombre' => 'required|min:5|max:15|unique:tipos_usuario',
-            'descripcion' => 'required|min:5|max:150'
+            'descripcion' => 'required|min:5|max:50'
         );
 
 	    $campos = array(
+	    	'nombre' => $nombre,
 	        'descripcion'=>$descripcion
 	    );
 
