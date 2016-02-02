@@ -22,7 +22,7 @@ class ModulosController extends Controller {
 		return View::make('modulos.dashboard_almacenista');
 	}
 
-	public function getSupervisores(){
+	public function getSupervisor(){
 		return View::make('modulos.dashboard_supervisor');
 	}
 }
