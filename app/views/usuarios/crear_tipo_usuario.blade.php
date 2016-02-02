@@ -15,14 +15,14 @@
 				<br>
 			</div>
 			
-			<form class="ui form" id="formulario_crear_permisos_usuarios">
+			<form class="ui form" id="formulario_crear_tipo_usuario">
 				<h3 class="ui centered dividing header">Crear Tipo de Usuario</h3>
 
 				<div class="field">
 					<div class="six wide field">
 						<div class="field">
-							<label>Codigo</label>
-			        		<input type="text" name="tipo_usuario" value="" placeholder="Tipo de Usuario">
+							<label>Nombre</label>
+			        		<input type="text" name="nombre"  placeholder="Nombre tipo de usuario" ng-model="DatosForm.nombre">
 			        	</div>
 			        </div>
 		        </div>
@@ -31,11 +31,11 @@
 		        	<div class="nine wide field ui form">
 					  	<div class="field">
 					    	<label>Descripcion</label>
-					    		<textarea name="des_tipo_usuario" placeholder="Descripcion"></textarea>
+					    		<textarea name="descripcion" placeholder="Descripcion" ng-model="DatosForm.descripcion" rows="4"></textarea>
 					  	</div>
 					</div>
 		        </div>
-	        <div class="ui big right floated submit button green" ng-click="registrar_objeto()" id="btn-registrar"> Registrar
+	        <div class="ui big right floated submit button green" ng-click="registrar_tipo_usuario()" id="btn-registrar"> Registrar
 			</div>
 			</form>
 		</div>
