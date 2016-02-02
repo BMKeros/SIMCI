@@ -23,6 +23,27 @@ class Catalogo extends Eloquent{
     }
 
     protected $appends = array('data_unidad', 'data_clase_objeto');
+
+
+	public function setNombreAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['nombre']=strtolower($value);
+		}
+	}
+
+
+	public function setDescripcionAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['descripcion']=strtolower($value);
+		}
+	}
+
+
+	public function setEspecificacionesAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['especificaciones']=strtolower($value);
+		}
+	}
 }
 
 ?>

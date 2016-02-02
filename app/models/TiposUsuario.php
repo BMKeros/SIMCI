@@ -11,4 +11,10 @@ class TiposUsuario extends Eloquent {
     {
         return $this->belongsTo('Usuario');
     }
+
+    public function setDescripcionAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['descripcion']=strtolower($value);
+		}
+	}
 }

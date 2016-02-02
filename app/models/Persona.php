@@ -20,6 +20,36 @@ class Persona Extends Eloquent{
     }
 
     protected $appends = ['data_sexo'];
+
+
+	public function setPrimerNombreAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['primer_nombre']=strtolower($value);
+		}
+	}
+
+
+	public function setSegundoNombreAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['segundo_nombre']=strtolower($value);
+		}
+	}
+
+
+	public function setPrimerApellidoAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['primer_apellido']=strtolower($value);
+		}
+	}
+
+
+	public function setSegundoApellidoAttibute($value){
+		if (!empty($value)) {
+			$this->attributes['segundo_apellido']=strtolower($value);
+		}
+	}
+
+	
 }
 
 ?>
