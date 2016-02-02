@@ -446,6 +446,91 @@ class UsuariosController extends Controller {
 				)
 			);
 		}
+	}
+
+	public function postRegistrarPermiso(){
+		$nombre = Input::get('nombre');
+		$descripcion = Input::get('descripcion');
+
+		$reglas = array(
+        	'codigo' =>'required|min:2|max:4|alpha_num',
+            'nombre' =>'required|min:5|max:15|unique:permisos',
+            'descripcion' => 'required|min:5|max:150'
+        );
+
+	    $campos = array(
+	        'nombre'=>$nombre,
+	        'descripcion'=>$descripcion
+	    );
+
+        $mensajes = array(
+            'unique' => ':attribute ya existe',
+            'required' => ':attribute no puede estar en blanco',
+            'max' => ':attribute debe tener un maximo de :max caracteres',
+            'min' => ':attribute debe tener un minimo de :min caracteres',
+            'alpha_num' => ':attribute de contener caracteres alfanumericos',
+        );
+
+        $validacion = Validator::make($campos, $reglas, $mensajes);
+
+        if($validacion->fails()){
+        	return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
+        }
+        else{
+        	$nuevo_permiso = new Permiso;
+
+        	$num_perimso = DB::table('permisos')->count();
+
+        	//comentado porque al codigo se le igualara a una funcion ya esta probada y funciona (y)
+        	$nuevo_permiso->codigo = crear_codigo_permiso($num_perimso);
+        	$nuevo_permiso->nombre = $nombre;
+        	$nuevo_permiso->descripcion = $descripcion;
+
+        	$nuevo_permiso->save();
+
+        	return Response::json(array('resultado' => true, 'mensajes' => 'Permiso creado con exito.'));
+        }
+
+	}
+
+	public function postRegistrarTipoUsuario(){
+		
+		$descripcion = Input::get('descripcion');
+
+		$reglas = array(
+            'descripcion' => 'required|min:5|max:150'
+        );
+
+	    $campos = array(
+	        'descripcion'=>$descripcion
+	    );
+
+        $mensajes = array(
+            'required' => ':attribute no puede estar en blanco',
+            'max' => ':attribute debe tener un maximo de :max caracteres',
+            'min' => ':attribute debe tener un minimo de :min caracteres'
+        );
+
+        $validacion = Validator::make($campos, $reglas, $mensajes);
+
+        if($validacion->fails()){
+        	return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
+        }
+        else{
+        	$nuevo_TipoUsuario = new TiposUsuario;
+
+        	$num_tipo_usuario = DB::table('tipos_usuario')->count();
+
+        	//comentado porque al codigo se le igualara a una funcion ya esta probada y funciona (y)
+        	$nuevo_TipoUsuario->codigo = crear_codigo_tipo_usuario($num_tipo_usuario);
+        	$nuevo_TipoUsuario->descripcion = $descripcion;
+
+        	$nuevo_TipoUsuario->save();
+
+        	return Response::json(array('resultado' => true, 'mensajes' => 'Tipo de Usuario creado con exito.'));
+        }
+
+
 	}	
 }
 
