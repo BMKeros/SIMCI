@@ -10,7 +10,7 @@ Form::macro('select_permisos', function($atributos = null){
 		$html .= '<option value="">Permisos</option>';
 		        
 		foreach ($permisos as $key => $value){
-		    $html .= sprintf('<option value="%s">%s</option>', $key, $value);
+		    $html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
 		}    
 		$html .= '</select>';
 
@@ -34,7 +34,7 @@ Form::macro('select_sexo', function($atributos = null){
 		$html .= '<option value="">Sexo</option>';
 		
 		foreach ($sexo as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
 		}
 
 		$html .= '</select>';
@@ -59,7 +59,7 @@ Form::macro('select_tipo_usuario', function($atributos = null){
 		$html .= '<option value="">Tipo Usuario</option>';
 		
 		foreach ($tipo_usuario as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -87,7 +87,7 @@ Form::macro('select_dimension', function($atributos = null){
 		$html .= '<option value="">Dimensión</option>';
 		
 		foreach ($almacenes as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -112,7 +112,7 @@ Form::macro('select_sub_dimension', function($atributos = null){
 		$html .= '<option value="">Sub-Dimension</option>';
 		
 		foreach ($estantes as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -132,7 +132,7 @@ Form::macro('select_agrupacion', function($atributos = null){
 		$html .= '<option value="">Tipo de Objeto</option>';
 		
 		foreach ($tipo_objetos as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -152,7 +152,7 @@ Form::macro('select_clase_objeto', function($atributos = null){
 		$html .= '<option value="">Clase de Objeto</option>';
 		
 		foreach ($tipo_objetos as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, $value);
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -172,7 +172,7 @@ Form::macro('select_unidades', function($atributos = null, $selected = null){
 		$html .= '<option value="">Unidades</option>';
 		
 		foreach ($unidades as $unidad) {
-			$html .= sprintf('<option value="%s">%s - [%s]</option>', $unidad->cod_unidad, $unidad->nombre, $unidad->abreviatura);	
+			$html .= sprintf('<option value="%s">%s - [%s]</option>', $unidad->cod_unidad, ucfirst($unidad->nombre), $unidad->abreviatura);	
 		}
 		
 		$html .= '</select>';
