@@ -384,12 +384,12 @@ var reglas_formulario_crear_estante = {
    inline: true
 };
 
-var reglas_formulario_crear_permisos = {
+var reglas_formulario_crear_permiso = {
    on: 'blur',
    duration: 40,
    fields: {
-      permiso: {
-        identifier: 'permiso',
+      nombre: {
+        identifier: 'nombre',
         rules:[
           {
             type:'empty',
@@ -406,26 +406,8 @@ var reglas_formulario_crear_permisos = {
         ]
       },
 
-      cod_permiso: {
-        identifier: 'cod_permiso',
-        rules:[
-          {
-            type:'empty',
-            prompt:'Este campo no puede quedar vacio'
-          },
-          {
-            type:'minLength[2]',
-            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
-          },
-          {
-            type:'maxLength[4]',
-            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
-          }
-       ]
-      },
-
-      descripcion_permiso: {
-        identifier: 'descripcion_permiso',
+      descripcion: {
+        identifier: 'descripcion',
         rules:[
           {
             type:'empty',
@@ -449,8 +431,8 @@ var reglas_formulario_crear_tipo_usuario = {
    on: 'blur',
    duration: 40,
    fields: {
-      des_tipo_usuario: {
-        identifier: 'des_tipo_usuario',
+      nombre: {
+        identifier: 'nombre',
         rules:[
           {
               type:'empty',
@@ -461,25 +443,25 @@ var reglas_formulario_crear_tipo_usuario = {
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
-            type:'maxLength[20]',
+            type:'maxLength[15]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           }
         ]
       },
 
-      cod_tipo_usuario: {
-        identifier: 'cod_tipo_usuario',
+      descripcion: {
+        identifier: 'descripcion',
         rules:[
           {
               type:'empty',
               prompt:'Este campo no puede quedar vacio'
           },
           {
-            type:'minLength[2]',
+            type:'minLength[5]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
-            type:'maxLength[4]',
+            type:'maxLength[30]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           }
         ]
