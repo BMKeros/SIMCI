@@ -43,12 +43,12 @@ simci.controller('UsuariosController', [
         url: "#/usuarios/crear/permiso",
         icono: 'user'
       },
-      {
+      /*{
         nombre:"ver permisos",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los permisos registrados en el sistema",
         url: "#/usuarios/mostrar/permisos",
         icono: 'eye'
-      },
+      },*/
       {
         nombre:"crear tipos de usuario",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los permisos registrados en el sistema",
