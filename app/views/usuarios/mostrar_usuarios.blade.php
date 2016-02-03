@@ -183,7 +183,7 @@
 
                   <div class="two field">
                      <label>Fecha de Nacimiento</label>
-                     <input type="text" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.fecha_nacimiento">
+                     <input type="text" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.fecha_nacimiento">
                   </div>
                </div>
             </div>
@@ -242,6 +242,11 @@
 
 <script>
 	$('.ui.dropdown').dropdown();
+
+	var picker = new Pikaday({ 
+		field: document.getElementById('fecha_nacimiento'),
+		i18n: TOOLS_APP.lenguaje_pikaday
+	});
 </script>
 
 

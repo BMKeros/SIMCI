@@ -132,5 +132,8 @@
   	});
   	$('.checkbox').checkbox();
 
-  	 var picker = new Pikaday({ field: document.getElementById('fecha_nacimiento') });
+  	var picker = new Pikaday({ 
+		field: document.getElementById('fecha_nacimiento'),
+		i18n: TOOLS_APP.lenguaje_pikaday
+	});
 </script>
