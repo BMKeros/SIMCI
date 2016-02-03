@@ -304,38 +304,54 @@ class UsuariosController extends Controller {
 	public function postActualizarUsuarioCompleto(){
 		$id = Input::get('id');
 
-		$usuario = Usuario::find($id);
+		$usuario_actual = Usuario::find($id);
 		
-		if(!is_null($usuario)){
+		if(!is_null($usuario_actual)){
+			
+			DB::beginTransaction();
+			
 			//Datos del usuario
-			$usuario = input_default(Input::get('usuario'));
-			$email = input_default(Input::get('email'));
-			$password = input_default(Input::get('password'));
-			$tipo_usuario = input_default(Input::get('tipo_usuario'));
-			$permisos = input_default(Input::get('permisos'));
+			$usuario = input_default(Input::get('usuario'),$usuario_actual->usuario);
+			$email = input_default(Input::get('email'),$usuario_actual->email);
+			$password = Input::get('password');
+			$tipo_usuario = input_default(Input::get('tipo_usuario'),$usuario_actual->cod_tipo_usuario);
+			$permisos = Input::get('permisos');
 			$imagen = Input::file('imagen');
-			$activo = input_default(Input::get('activo'));
+			$activo = input_default(Input::get('activo'),$usuario_actual->activo);
 
-			//Datos personales
-			$p_nombre = input_default(Input::get('primer_nombre'));
-			$s_nombre = input_default(Input::get('segundo_nombre'));
-			$p_apellido = input_default(Input::get('primer_apellido'));
-			$s_apellido = input_default(Input::get('segundo_apellido'));
-			$cedula = input_default(Input::get('cedula'));
-			$sexo = input_default(Input::get('sexo'));
-			$fecha_nacimiento = input_default(Input::get('fecha_nacimiento'));
+			if($usuario_actual->persona){
+				//Datos personaless
+				$p_nombre = input_default(Input::get('primer_nombre'),$usuario_actual->persona->primer_nombre);
+				$s_nombre = input_default(Input::get('segundo_nombre'),$usuario_actual->persona->segundo_nombre);
+				$p_apellido = input_default(Input::get('primer_apellido'),$usuario_actual->persona->primer_apellido);
+				$s_apellido = input_default(Input::get('segundo_apellido'),$usuario_actual->persona->segundo_apellido);
+				$cedula = input_default(Input::get('cedula'),$usuario_actual->persona->cedula);
+				$sexo = input_default(Input::get('sexo'),$usuario_actual->persona->sexo_id);
+				$fecha_nacimiento = input_default(Input::get('fecha_nacimiento'),$usuario_actual->persona->fecha_nacimiento);	
+			}
+			else{
+				//Datos personaless
+				$p_nombre = Input::get('primer_nombre');
+				$s_nombre = Input::get('segundo_nombre');
+				$p_apellido = Input::get('primer_apellido');
+				$s_apellido = Input::get('segundo_apellido');
+				$cedula = Input::get('cedula');
+				$sexo = Input::get('sexo');
+				$fecha_nacimiento = Input::get('fecha_nacimiento');
+			}
+			
 
 	        $reglas = array(
 	            'usuario' =>'required|max:15|min:5|alpha_num' ,
 	            'email' =>'required|email|max:50' ,
-	            'password' => 'required|min:5',
+	            //'password' => 'required|min:5',
 	            'tipo_usuario'=> 'required|exists:tipos_usuario,codigo',
 	            'permisos' => 'required|exists:permisos,codigo',
 	            'imagen' => 'mimes:jpeg,bmp,png',
 	            'activo' => 'boolean',
 	            
 	            //Reglas persona
-	            'cedula' =>'required|digits:8|unique:personas|numeric',
+	            'cedula' =>'required|digits:8',
 	        	'fecha_nacimiento' => 'required|date_format:Y-m-d',
 	        	'primer_nombre' => 'required|alpha|max:15',
 	        	'primer_apellido' => 'required|alpha|max:15',
@@ -385,35 +401,90 @@ class UsuariosController extends Controller {
 			}
 			else{
 
-				$usuario->usuario = $usuario;
-				$usuario->email = $email;
-				$usuario->password = $password;
-				$usuario->cod_tipo_usuario = $tipo_usuario;
+				try{
 
-				if($imagen){
-					$usuario->imagen  = PATH_IMAGENES.cargar_crear_imagen_usuario($imagen,$usuario->usuario);
-				}
-				if($activo){
-					$usuario->activo = $activo;
-				}
+					$usuario_actual->usuario = $usuario;
+					$usuario_actual->email = $email;
+					$usuario_actual->password = $password;
+					$usuario_actual->cod_tipo_usuario = $tipo_usuario;
 
-				/*$nuevo_usuario->permisos()->attach($permisos);
+					if($imagen){
+						$usuario_actual->imagen  = PATH_IMAGENES.cargar_crear_imagen_usuario($imagen,$usuario_actual->usuario);
+					}
+					if($activo){
+						$usuario_actual->activo = $activo;
+					}
 
+					if($usuario_actual->permisos){
+						$usuario_actual->permisos()->detach();
+						$usuario_actual->permisos()->attach($permisos);
 
-				$persona = $usuario->persona();
+					}else{
+						$usuario_actual->permisos()->attach($permisos);
+					}
+					
+					if($usuario_actual->persona){
+						$persona = $usuario_actual->persona();
+					}
+					else{
+						$persona = new Persona;
 
-				$persona->primer_nombre = $p_nombre;
-				$persona->primer_apellido = $p_apellido;
-				$persona->segundo_nombre = $s_nombre;
-				$persona->segundo_apellido = $s_apellido;
-				$persona->cedula = $cedula;
-				$persona->sexo_id = $sexo;
-				$persona->fecha_nacimiento = $fecha_nacimiento;
+						$persona->primer_nombre = $p_nombre;
+						$persona->primer_apellido = $p_apellido;
+						$persona->segundo_nombre = $s_nombre;
+						$persona->segundo_apellido = $s_apellido;
+						$persona->cedula = $cedula;
+						$persona->sexo_id = $sexo;
+						$persona->fecha_nacimiento = $fecha_nacimiento;
+					}
 
-				$usuario->persona()->associate($persona);**/
+					if($usuario_actual->persona){
+						$campos = array(
+							'primer_nombre' => $p_nombre,
+							'primer_apellido' => $p_apellido,
+							'segundo_nombre' => $s_nombre,
+							'segundo_apellido' => $s_apellido,
+							'cedula' => $cedula,
+							'sexo_id' => $sexo,
+							'fecha_nacimiento' => $fecha_nacimiento
+						);
 
-				$usuario->save();
+						$usuario_actual->persona()->update($campos);
+
+					}else{
+						$usuario_actual->persona()->save($persona);
+					}
+					
+
+					$usuario_actual->save();
 				
+				}
+				catch(ValidationException $e){
+					DB::rollBack();
+
+					return Response::json(array(
+						'resultado'=>false, 
+						'mensajes'=> $e->getErrors()
+					));
+				}
+				catch(\Exception $e){
+					DB::rollBack();
+
+					return Response::json(array(
+						'resultado'=>false, 
+						'mensajes'=> array($e->getMessage())
+					),500);
+				}
+
+				
+				DB::commit();
+
+				return Response::json(array(
+					'resultado'=>true, 
+					'mensajes'=>array('Usuario actualizado con exito')
+					)
+				);
+		
 			}
 
 		}else{
