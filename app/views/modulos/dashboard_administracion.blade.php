@@ -58,7 +58,7 @@
   			Ordenes
 		</a>
 	
-		<a class="item">
+		<a class="item" ng-href="#/laboratorio">
   			<i class="lab icon"></i>
   			Laboratorio
 		</a>
