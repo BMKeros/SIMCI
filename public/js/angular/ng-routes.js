@@ -91,6 +91,21 @@
           controller: 'CatalogoController' 
         }).
 
+        //Rutas laboratorio
+        when('/laboratorio', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'LaboratorioController'
+        }).
+        when('/laboratorio/crear-laboratorio', {
+          templateUrl: '/views/laboratorio/crear_laboratorio',
+          controller: 'LaboratorioController' 
+        }).
+        when('/laboratorio/ver/todos', {
+          templateUrl: '/views/laboratorio/mostrar_laboratorio',
+          controller: 'LaboratorioController' 
+        }).
+
+
         otherwise({
           redirectTo: function(){
 
