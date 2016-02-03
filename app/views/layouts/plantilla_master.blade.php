@@ -12,7 +12,8 @@
 	  	<link rel="stylesheet" href="/semantic/semantic.min.css" />
 	  	<link rel="stylesheet" href="/css/styles.css" />
 	  	<link rel="stylesheet" href="/bower_components/datatables/media/css/jquery.dataTables.min.css">
-
+	  	<link rel="stylesheet" href="/bower_components/pikaday/css/pikaday.css">
+		
 		@section('css')
 		@show
 
@@ -33,7 +34,8 @@
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
 		<script src="/js/moment-with-locales.min.js"></script>
-		
+		<script src="/bower_components/pikaday/pikaday.js"></script>
+
 		<script src="/js/scripts_app.js"></script>
 		<script src="/js/scripts_formularios.js"></script>
 		<script src="/js/angular/ng-app.js"></script>
