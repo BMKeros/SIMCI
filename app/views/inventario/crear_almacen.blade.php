@@ -21,11 +21,6 @@
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
-							<label>Codigo del Almacen</label>
-							<input type="text" name="cod_almacen" placeholder="Codigo del Almacen">
-						</div>
-
-						<div class="field">
 							<label>Responsable</label>
 							<input type="text" name="responsable" placeholder="Aqui va es un Select">
 						</div>
@@ -54,7 +49,7 @@
 					<div class="one fields">
 						<div class="ten wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion_almacen" placeholder="Descripcion Del Almacen"></textarea>
+							<textarea name="descripcion_almacen" placeholder="Descripcion Del Almacen" rows="4"></textarea>
 						</div>
 					</div>
 				</div>
