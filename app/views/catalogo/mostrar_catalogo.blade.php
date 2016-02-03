@@ -151,5 +151,5 @@
 <!--Fin De Bloques-->
 
 <script>
-
+	$('.ui.dropdown').dropdown();
 </script>
