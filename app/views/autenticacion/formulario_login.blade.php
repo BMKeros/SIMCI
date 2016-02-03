@@ -70,56 +70,108 @@
 					</div>
 				</div>
 			</div>
-			<div class="ui fixed bottom sticky">
-				<div class="ui grid centered">
-					<div class="three wide column">
-						<i class="css3 icon"></i>
-						<a href="#">
-							CSS3
-						</a>
-					</div>
 
-					<div class="three wide column">
-						<i class="html5 icon"></i>
-						<a href="#">
-							HTML
-						</a> 
-					</div>
-
-					<div class="three wide column">
-						<i class="github icon"></i>
-						<a href="#">
-							Gitlab
-						</a>
-					</div>
-
-					<div class="three wide column">
+			<div class="ui grid centered" style="padding-top:25%">
+				<div class="eight column row">
+					<div class="column">
 		      			<a href="#" class="header item">
 				        	<img src="/img/php.png" width="16" height="16">
 				        	&nbsp;&nbsp;PHP
 				      	</a>
 					</div>
+
+					<div class="column">
+						<i class="html5 icon"></i>
+						<a href="#">
+							HTML
+						</a> 
+					</div>
 					
 					
-					<div class="three wide column">
+					<div class="column">
 		      			<a href="#" class="header item">
 				        	<img src="/img/laravel.png" width="16" height="16">
 				        	&nbsp;&nbsp;Laravel
 				      	</a>
 					</div>
 
-					<div class="three wide column">
+					<div class="column">
+						<i class="css3 icon"></i>
+						<a href="#">
+							CSS3
+						</a>
+					</div>
+
+					<div class="column">
 		      			<a href="#" class="header item">
 				        	<img src="/img/open3.png" width="16" height="16">
 				        	&nbsp;&nbsp;Source
 				      	</a>
-					</div>
-				</div>
-				<br>
-				<div class="Probando">
-					
+			      	</div>
+
+			      	<div class="column">
+		      			<a href="#" class="header item">
+				        	<img src="/img/semantic.png" width="16" height="16">
+				        	&nbsp;&nbsp;Semantic
+				      	</a>
+			      	</div>
 				</div>
 			</div>
+			
+
+			<!--div class="ui grid six column">
+				<div class="ui fixed bottom sticky">
+					<div class="ui grid centered">
+						<div class="four wide column">
+							<i class="css3 icon"></i>
+							<a href="#">
+								CSS3
+							</a>
+						</div>
+
+
+						<div class="four wide column">
+			      			<a href="#" class="header item">
+					        	<img src="/img/php.png" width="16" height="16">
+					        	&nbsp;&nbsp;PHP
+					      	</a>
+						</div>
+
+						<div class="four wide column">
+							<i class="html5 icon"></i>
+							<a href="#">
+								HTML
+							</a> 
+						</div>
+						
+						
+						<div class="four wide column">
+			      			<a href="#" class="header item">
+					        	<img src="/img/laravel.png" width="16" height="16">
+					        	&nbsp;&nbsp;Laravel
+					      	</a>
+						</div>
+
+					<div class="two wide column">
+	      			<a href="#" class="header item">
+			        	<img src="/img/open3.png" width="16" height="16">
+			        	&nbsp;&nbsp;Source
+			      	</a>
+			      	</div>
+				</div>
+
+
+				<div class="eight wide column">
+	      			<p><a href="#" class="hider item">Probando el texto que se ajuste</p></a>
+				</div>
+
+
+				<div class="six wide column">
+					<p> <a href="#" class="hide item">Probando el Texto a que se ajust</a></p>
+				</div>
+					</div>
+				</div>
+			</div-->
 		</div>
 	</div>
 
