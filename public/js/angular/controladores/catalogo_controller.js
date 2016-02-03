@@ -163,10 +163,6 @@ simci.controller('CatalogoController', [
             })
         ];
 
-        $scope.reload_tabla = function(){
-          $scope.tabla_objetos.reloadData(function(data){}, false); 
-        };
-
         ///Funciones 
         $scope.modal_ver_objeto = function(id){
           $scope.data_objeto = {};
@@ -241,7 +237,7 @@ simci.controller('CatalogoController', [
                 ToolsService.loading_button('btn-modificar',false);
 
                 setTimeout(function(){
-                  $scope.reload_tabla();
+                  ToolsService.reload_tabla($scope,'tabla_objetos',function(){});
                 },500);
 
             }else{
@@ -295,7 +291,7 @@ simci.controller('CatalogoController', [
 
               //Recargamos la tabla
               setTimeout(function(){
-                $scope.reload_tabla();
+                ToolsService.reload_tabla($scope,'tabla_objetos',function(){});
               }, 500);                         
             }
             else{
