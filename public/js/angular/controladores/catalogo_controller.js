@@ -202,8 +202,13 @@ simci.controller('CatalogoController', [
             $scope.DatosForm.cod_unidad = $scope.DatosForm.cod_unidad.toString();
 
             setTimeout(function(){
+              //Setteamos los valores de los dropdown
+              angular.element('#unidad').dropdown('set selected',$scope.DatosForm.cod_unidad);
+              angular.element('#clase_objeto').dropdown('set selected',$scope.DatosForm.cod_clase_objeto);
+              
               //Mostramos la modal
               angular.element('#modal_modificar_objeto').modal('show');
+
             },300);
             
           },function(data_error){
