@@ -10,9 +10,9 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
 	use UserTrait, RemindableTrait;
 
 	protected $table = 'usuarios';
-	protected $fillable = array('usuario', 'email', 'password', 'cod_permiso','cod_tipo_usuario','imagen','activo');
+	protected $fillable = array('usuario', 'email', 'password','cod_tipo_usuario','imagen','activo');
 
-	protected $visible = array('id','usuario', 'email', 'password', 'cod_permiso','cod_tipo_usuario','imagen','activo', 'data_permisos','data_tipo_usuario');
+	protected $visible = array('id','usuario', 'email', 'password','cod_tipo_usuario','imagen','activo', 'data_permisos','data_tipo_usuario');
 	
 	protected $hidden = array('password', 'remember_token');
 
