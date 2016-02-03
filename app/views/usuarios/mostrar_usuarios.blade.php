@@ -85,6 +85,20 @@
 <div class="header">Actualizar Usuario</div>
    <div class="content">
       <div class="ui form">
+      
+      	<div ng-if="mostrar_mensaje">
+			<div class="ui icon <% mensaje_validacion.color %> message">
+				<i class="<% mensaje_validacion.icono %> icon"></i>
+				<div class="content">
+					<div class="header"><% mensaje_validacion.titulo %></div>
+					<ul class="list">
+						<li ng-repeat=" mensaje in mensaje_validacion.mensajes track by $index"><% mensaje | capitalize %></li>
+					</ul>
+				</div>
+			</div>
+			<br>
+		</div>
+
          <form class="ui form" id="formulario_crear_usuario">
              <h4 class="ui dividing header">Datos de Usuario</h4>
             <div class="field">
@@ -189,7 +203,7 @@
       <div class="ui negative button">
          Cerrar
       </div>
-      <button class="ui positive button">
+      <button class="ui positive button" ng-click="procesar_modificar()" id="btn-modificar">
          Actualizar
       </button>
       <div class="ui chackmark icon"></div>
