@@ -10,6 +10,14 @@
       var infin = ((string.length > num_char)?'....':'');
       return string.substring(0,num_char)+infin;
     },
+
+    lenguaje_pikaday: {
+      previousMonth : 'Anterior Mes',
+      nextMonth     : 'Siguiente Mes',
+      months        : ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+      weekdays      : ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
+      weekdaysShort : ['Dom','Lun','Mar','Mie','Jue','Vie','Sab']
+    }
   };
 
   window.TOOLS_APP = TOOLS;
