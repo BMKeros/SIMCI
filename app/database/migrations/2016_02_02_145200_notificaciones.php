@@ -20,7 +20,7 @@ class Notificaciones extends Migration {
 			$table->time('hora');
 			$table->integer('emisor');
 			$table->integer('receptor');
-			$table->boolean('visto');
+			$table->boolean('visto')->default(false);
 			$table->nullableTimestamps();
 		});
 	}

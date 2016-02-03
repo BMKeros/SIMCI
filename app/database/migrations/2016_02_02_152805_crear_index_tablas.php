@@ -69,6 +69,18 @@ class CrearIndexTablas extends Migration {
 				->on('clase_objetos');
 				//->onDelete('cascade');
 		});
+
+		//NOTIFICACIONES
+		Schema::table('notificaciones', function($table){
+			$table->foreign('mensaje_id')->references('id')
+				->on('mensajes');
+
+			$table->foreign('emisor')->references('id')
+				->on('usuarios');
+
+			$table->foreign('receptor')->references('id')
+				->on('usuarios');
+		});
 	}	
 
 
