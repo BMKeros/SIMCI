@@ -30,6 +30,10 @@
       reload_template_cache: function($ROUTE, $TEMPLATE_CACHE){
         var URLTemplate = $ROUTE.current.loadedTemplateUrl;
         $TEMPLATE_CACHE.remove(URLTemplate); 
+      },
+      //Funcion para recargar las tablas de datatables
+      reload_tabla: function($SCOPE,NOMBRE_TABLA,CALLBACK){
+          $SCOPE[NOMBRE_TABLA].reloadData(CALLBACK, false); 
       }
     };
   }]);
