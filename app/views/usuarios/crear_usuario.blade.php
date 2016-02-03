@@ -107,7 +107,7 @@
 
 						<div class="field">
 							<label>Fecha de nacimiento</label>
-							<input type="text" name="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.fecha_nacimiento">
+							<input type="text" name="fecha_nacimiento" id="fecha_nacimiento" placeholder="Fecha Nacimieto" ng-model="DatosForm.fecha_nacimiento">
 						</div>
 
 						<div class="field">
@@ -131,4 +131,6 @@
     	maxSelections: 3
   	});
   	$('.checkbox').checkbox();
+
+  	 var picker = new Pikaday({ field: document.getElementById('fecha_nacimiento') });
 </script>
