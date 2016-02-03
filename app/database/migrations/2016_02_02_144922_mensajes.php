@@ -15,7 +15,7 @@ class Mensajes extends Migration {
 		Schema::create('mensajes', function($table)
 		{
 			$table->increments('id');
-			$table->string('mensaje');
+			$table->string('mensaje', 200);
 			$table->nullableTimestamps();
 		});
 	}
