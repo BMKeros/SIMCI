@@ -70,6 +70,4 @@
 
 <script>
 	$('.ui.dropdown').dropdown();
-//$(document).ready(function(){
-//$('#formulario_crear_objeto').form(reglas_formulario_crear_usuario)});
 </script>

@@ -79,8 +79,8 @@
             </div>
       </div>
    </div>
+   
 <!--Bloque 3 -> Modal Modificar Usuario-->
-
 <div class="ui modal" id="modal_modificar_usuario">
 <div class="header">Actualizar Usuario</div>
    <div class="content">
@@ -227,7 +227,7 @@
 <!--Fin De Bloques-->
 
 <script>
-	$('ui.dropdown').dropdown();
+	$('.ui.dropdown').dropdown();
 </script>
 
 
