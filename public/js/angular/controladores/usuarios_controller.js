@@ -127,7 +127,8 @@ simci.controller('UsuariosController', [
     if($location.$$url == '/usuarios/ver/todos'){
 
       $scope.tabla_usuarios = {};
-
+      $scope.id_objeto_actual = null;
+      
       //Variable que mantiene el id de usuario que se va a eliminar
       $scope.id_usuario_eliminar = null;
 
@@ -191,12 +192,14 @@ simci.controller('UsuariosController', [
       };
 
       $scope.modal_modificar_usuario = function(id){
+
+        $scope.id_usuario_actual = id;
+
         $http({
           method: 'GET',
           url: '/api/usuarios/mostrar?type=usuario_full&id='+id,
           data: $scope.DatosForm
         }).then(function(data){
-          $log.info(data);
           $scope.data_usuario = data.data;
 
           $scope.DatosForm = {
@@ -234,6 +237,58 @@ simci.controller('UsuariosController', [
         });
       };
 
+      $scope.procesar_modificar = function(){
+          var id_usuario = $scope.id_usuario_actual;
+
+          ToolsService.loading_button('btn-modificar',true);
+
+          $http({
+            method: 'POST',
+            url: '/api/usuarios/actualizar-usuario-completo?id='+id_usuario,
+            data: $scope.DatosForm
+          }).then(function(data){
+            if(data.data.resultado){
+
+                $scope.mostrar_mensaje = true;
+                
+                $scope.mensaje_validacion = {
+                  titulo: 'Usuario modificado con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: []
+                };
+
+                //Desactivamos el loading
+                ToolsService.loading_button('btn-modificar',false);
+
+                setTimeout(function(){
+                  ToolsService.reload_tabla($scope,'tabla_usuarios',function(){});
+                },500);
+
+            }else{
+              $scope.mostrar_mensaje = true;
+                
+              $scope.mensaje_validacion = {
+                titulo: 'Error al modificar el usuario',
+                icono: 'remove',
+                color: 'red',
+                mensajes: data.data.mensajes
+              };
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-modificar',false);
+            }
+
+            $log.info($scope.DatosForm);
+            
+          },function(data_error){
+            $log.info(data_error);
+            //Desactivamos el loading
+            ToolsService.loading_button('btn-modificar',false);
+          });
+
+        };
+
       $scope.modal_eliminar_usuario = function(id){
         //Seteamos a la variable el id del usuario que se va a eliminar
         $scope.id_usuario_eliminar = id;
@@ -261,7 +316,7 @@ simci.controller('UsuariosController', [
 
             //Recargamos la tabla
             setTimeout(function(){
-              $scope.tabla_usuarios.reloadData(function(data){}, false);  
+              ToolsService.reload_tabla($scope,'tabla_usuarios',function(data){});
             }, 500);                         
           }
           else{
