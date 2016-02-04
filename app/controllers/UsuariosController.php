@@ -189,7 +189,7 @@ class UsuariosController extends Controller {
             'activo' => 'boolean',
             
             //Reglas persona
-            'cedula' =>'required|digits:8|unique:personas|numeric',
+            'cedula' =>'required|Digits Between:7,8|unique:personas|numeric',
         	'fecha_nacimiento' => 'required|date_format:Y-m-d',
         	'primer_nombre' => 'required|alpha|max:15',
         	'primer_apellido' => 'required|alpha|max:15',
@@ -227,8 +227,7 @@ class UsuariosController extends Controller {
             'alpha_num' => ':attribute de contener caracteres alfanumericos',
         	'alpha' => ':attribute debe contener solo caracteres',
         	'date_format' => ':attribute debe tener este formato YY-MM-DD',
-        	'numeric' => ':attribute debe tener solo numeros',
-        	'digits' => ':attribute debe tener solo :digits digitos',
+        	'numeric' => ':attribute debe tener solo numeros'
         );
 
         $validacion = Validator::make($campos,$reglas,$mensajes);

@@ -14,8 +14,8 @@ class CrearTablaAlmacenes extends Migration {
 	{
 		Schema::create('almacenes', function(Blueprint $table)
 		{
-			$table->increments('id');
 			$table->integer('cod_almacen');
+			$table->primary('cod_almacen');
 			$table->integer('responsable');
 			$table->integer('primer_auxiliar')->nullable();
 			$table->integer('segundo_auxiliar')->nullable();
