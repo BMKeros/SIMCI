@@ -7,6 +7,12 @@ function drop_cascade($table = null){
 	}
 }
 
+function reset_secuencia($table = null){
+	if( Schema::hasTable($table) ){
+		DB::statement('ALTER SEQUENCE '.$table.'_id_seq RESTART WITH 1');
+	}
+}
+
 function redirect_por_tipo($tipo_usuario = null){
 	if($tipo_usuario == TIPO_USER_ROOT ){
 		return Redirect::action('ModulosController@getAdministracion');	
