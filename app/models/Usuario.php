@@ -30,6 +30,10 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     public function nombre_corto(){
     	return ucfirst($this->persona->primer_nombre).' '.ucfirst($this->persona->primer_apellido);
     }
+    public function nombre_tipo_usuario(){
+    	return ucfirst($this->tipousuario->nombre);
+    }
+
 
 
     public function getDataPermisosAttribute(){
