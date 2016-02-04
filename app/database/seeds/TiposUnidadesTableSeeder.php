@@ -5,7 +5,9 @@ class TiposUnidades extends Seeder {
 
     public function run()
     {
-       DB::table('tipos_unidades')->delete();
+       	DB::table('tipos_unidades')->delete();
+       	
+       	reset_secuencia('tipos_unidades');
 
         $campos = array(
         	array('nombre' => 'longitud'),
