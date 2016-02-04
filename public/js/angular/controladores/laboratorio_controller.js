@@ -20,8 +20,8 @@ simci.controller('LaboratorioController', [
 
     $scope.modulo.nombre = "Laboratorio";
     $scope.modulo.icono = {
-      tipo: "book",
-      color: "red"
+      tipo: "lab",
+      color: "purple"
     };
     
     $scope.modulo.opciones = [
