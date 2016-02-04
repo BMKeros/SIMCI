@@ -14,7 +14,7 @@ simci.controller('InventarioController', ['$scope','$http','$log','$route', '$ro
     $scope.modulo.opciones = [
       {
         nombre:"registrar elemento",
-        descripcion: "Esta opcion le permitira crear nuevos elementos en el inventario",
+        descripcion: "Esta opcion le permitira registrar nuevos elementos en el inventario",
         url: "#/inventario/registrar-elemento",
         icono: 'user'
       },

@@ -3,7 +3,7 @@
   var TOOLS = {
     ver_reloj: function(){
       setInterval(function(){
-        angular.element('#reloj').text(moment().format('h:mm:ss A'))
+        angular.element('#reloj').text(moment().format('H:mm:ss A'))
       },1000);
     },
     cut_string: function(string, num_char){

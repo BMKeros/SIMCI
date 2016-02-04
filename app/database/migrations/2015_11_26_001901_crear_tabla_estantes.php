@@ -14,8 +14,8 @@ class CrearTablaEstantes extends Migration {
 	{
 		Schema::create('estantes', function(Blueprint $table)
 		{
-			$table->increments('id');
 			$table->integer('cod_estante');
+			$table->primary('cod_estante');
 			$table->string('descripcion', 15);
 			
 			$table->nullableTimestamps();
