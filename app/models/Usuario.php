@@ -28,7 +28,7 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     	return $this->belongsTo('TiposUsuario', 'cod_tipo_usuario');
     }
     public function nombre_corto(){
-    	return ucfirst($this->personas->primer_nombre).' '.ucfirst($this->personas->primer_apellido);
+    	return ucfirst($this->persona->primer_nombre).' '.ucfirst($this->persona->primer_apellido);
     }
 
 
