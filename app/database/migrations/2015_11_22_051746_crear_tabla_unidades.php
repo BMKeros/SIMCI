@@ -17,6 +17,7 @@ class CrearTablaUnidades extends Migration {
 			$table->increments('cod_unidad');
 			$table->string('nombre', 50);
 			$table->string('abreviatura', 10);
+			$table->integer('tipo_unidad');
 			$table->nullableTimestamps();
 		});
 	}
