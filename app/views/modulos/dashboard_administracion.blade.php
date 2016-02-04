@@ -15,10 +15,32 @@
       			</a>
       			
       			<div class="right menu">
-      				<a class="item">
-      					Notificaciones
-      					<div class="ui red label">22</div>
-      				</a>
+      				
+      				<div class="ui pointing dropdown link item">
+    					<span class="text">Notificaciones</span>
+    					<div class="ui red label">22</div>
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
+      						<div class="header">Novedades</div>
+      						<div class="item">
+        						<i class="dropdown icon"></i>
+        						<span class="text">Clothing</span>
+        						<div class="menu">
+						        	<div class="header">Mens</div>
+						          	<div class="item">Shirts</div>
+						          	<div class="item">Pants</div>
+						          	<div class="item">Jeans</div>
+						          	<div class="item">Shoes</div>
+						          	<div class="divider"></div>
+						          	<div class="header">Womens</div>
+						          	<div class="item">Dresses</div>
+						          	<div class="item">Shoes</div>
+						          	<div class="item">Bags</div>
+        						</div>
+      						</div>
+      					</div>
+      				</div>
+
 			      	<div class="ui simple dropdown item">
 	  					{{ ucfirst(Auth::user()->usuario )}}	
 				     	<i class="dropdown icon"></i>
@@ -80,7 +102,7 @@
 	</div>
 
 	<!-- Boton para abrir el menu -->
-	<div class="ui animated fade big launch button" id="btn-abrir-menu">
+	<div class="ui fixed animated fade big launch button" id="btn-abrir-menu">
 		<div class="hidden content">
 			Menu
 		</div>
@@ -122,6 +144,8 @@
 		    	})
 		    	.sidebar('toggle');
 		  	});
+
+		  	$('.ui.dropdown').dropdown();
 		});
 	</script>
 @stop
