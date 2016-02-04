@@ -16,38 +16,45 @@
       			
       			<div class="right menu">
       				
-      				<div class="ui pointing dropdown link item">
+      				<div class="ui simple dropdown link item">
     					<span class="text">Notificaciones</span>
     					<div class="ui red label">22</div>
     					<i class="dropdown icon"></i>
     					<div class="menu">
       						<div class="header">Novedades</div>
+      						<div class="header">Mens</div>
+				          	<div class="item">Shirts</div>
+				          	<div class="item">Pants</div>
+				          	<div class="item">Jeans</div>
+				        </div>
+      				</div>
+
+      				<div class="ui simple dropdown item">
+    					<span class="text">Usuario</span>
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
       						<div class="item">
-        						<i class="dropdown icon"></i>
-        						<span class="text">Clothing</span>
-        						<div class="menu">
-						        	<div class="header">Mens</div>
-						          	<div class="item">Shirts</div>
-						          	<div class="item">Pants</div>
-						          	<div class="item">Jeans</div>
-						          	<div class="item">Shoes</div>
-						          	<div class="divider"></div>
-						          	<div class="header">Womens</div>
-						          	<div class="item">Dresses</div>
-						          	<div class="item">Shoes</div>
-						          	<div class="item">Bags</div>
-        						</div>
+        						<div class="ui card">
+  									<div class="image">
+    									<img src="{{ Auth::user()->imagen }}">
+  									</div>
+  									<div class="content">
+    									<a class="header">{{ ucfirst(Auth::user()->usuario) }}</a>
+    									<div class="meta">
+      										<span class="date">Tipo: {{ Auth::user()->nombre_tipo_usuario() }}</span>
+    									</div>
+    									<div class="description">
+      										{{ Auth::user()->nombre_corto()}}
+    									</div>
+  									</div>
+  									<div class="extra content">
+    									<a href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
+  									</div>
+								</div>
       						</div>
       					</div>
       				</div>
 
-			      	<div class="ui simple dropdown item">
-	  					{{ ucfirst(Auth::user()->usuario )}}	
-				     	<i class="dropdown icon"></i>
-				      	<div class="menu">
-				        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
-				      	</div>
-				    </div>
 				</div>
     		</div>
 		</div>
@@ -145,7 +152,9 @@
 		    	.sidebar('toggle');
 		  	});
 
-		  	$('.ui.dropdown').dropdown();
+		  	/*$('.ui.dropdown').dropdown({
+		  		transition: 'drop'
+		  	});*/
 		});
 	</script>
 @stop
