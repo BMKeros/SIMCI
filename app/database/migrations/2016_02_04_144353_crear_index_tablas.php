@@ -81,6 +81,13 @@ class CrearIndexTablas extends Migration {
 			$table->foreign('receptor')->references('id')
 				->on('usuarios');
 		});
+
+		//UNIDADES
+		Schema::table('unidades', function($table){
+			$table->foreign('tipo_unidad')->references('id')
+				->on('tipos_unidades');
+		});
+
 	}	
 
 
