@@ -1,6 +1,6 @@
 <?php
 
-class TiposUnidades extends Seeder {
+class TiposUnidadesTableSeeder extends Seeder {
 
 
     public function run()

@@ -1,9 +1,9 @@
-<?php
+<?php  
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Mensajes extends Migration {
+class CrearTablaMensajes extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,7 +12,7 @@ class Mensajes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('mensajes', function($table)
+		Schema::create('mensajes', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->string('mensaje', 200);
@@ -31,3 +31,5 @@ class Mensajes extends Migration {
 	}
 
 }
+
+?>

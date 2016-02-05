@@ -20,7 +20,7 @@ class CrearTablaUsuarios extends Migration {
 			$table->string('email', 60)->unique();
 			$table->string('password');
 			$table->string('cod_tipo_usuario',4);
-			$table->string('imagen',100)->default('/');
+			$table->string('imagen',100)->default('/img/perfil-default.jpg');
 			$table->boolean('activo')->default(true);
 			$table->rememberToken();
 			$table->nullableTimestamps();

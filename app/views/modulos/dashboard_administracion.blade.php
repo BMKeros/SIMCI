@@ -15,17 +15,46 @@
       			</a>
       			
       			<div class="right menu">
-      				<a class="item">
-      					Notificaciones
-      					<div class="ui red label">22</div>
-      				</a>
-			      	<div class="ui simple dropdown item">
-	  					{{ ucfirst(Auth::user()->usuario )}}	
-				     	<i class="dropdown icon"></i>
-				      	<div class="menu">
-				        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
-				      	</div>
-				    </div>
+      				
+      				<div class="ui simple dropdown link item">
+    					<span class="text">Notificaciones</span>
+    					<div class="ui red label">22</div>
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
+      						<div class="header">Novedades</div>
+      						<div class="header">Mens</div>
+				          	<div class="item">Shirts</div>
+				          	<div class="item">Pants</div>
+				          	<div class="item">Jeans</div>
+				        </div>
+      				</div>
+
+      				<div class="ui simple dropdown item">
+    					<span class="text">Usuario</span>
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
+      						<div class="item">
+        						<div class="ui card">
+  									<div class="image">
+    									<img src="{{ Auth::user()->imagen }}">
+  									</div>
+  									<div class="content">
+    									<a class="header">{{ ucfirst(Auth::user()->usuario) }}</a>
+    									<div class="meta">
+      										<span class="date">Tipo: {{ Auth::user()->nombre_tipo_usuario() }}</span>
+    									</div>
+    									<div class="description">
+      										{{ Auth::user()->nombre_corto()}}
+    									</div>
+  									</div>
+  									<div class="extra content">
+    									<a href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
+  									</div>
+								</div>
+      						</div>
+      					</div>
+      				</div>
+
 				</div>
     		</div>
 		</div>
@@ -80,7 +109,7 @@
 	</div>
 
 	<!-- Boton para abrir el menu -->
-	<div class="ui animated fade big launch button" id="btn-abrir-menu">
+	<div class="ui fixed animated fade big launch button" id="btn-abrir-menu">
 		<div class="hidden content">
 			Menu
 		</div>
@@ -122,6 +151,10 @@
 		    	})
 		    	.sidebar('toggle');
 		  	});
+
+		  	/*$('.ui.dropdown').dropdown({
+		  		transition: 'drop'
+		  	});*/
 		});
 	</script>
 @stop

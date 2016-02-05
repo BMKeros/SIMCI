@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ObjetosLaboratorio extends Migration {
+class CrearTablaObjetosLaboratorio extends Migration {
 
 	/**
 	 * Run the migrations.

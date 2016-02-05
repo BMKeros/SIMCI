@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearLaboratoriosTable extends Migration {
+class CrearTablaLaboratorios extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -14,8 +14,8 @@ class CrearLaboratoriosTable extends Migration {
 	{
 		Schema::create('laboratorios', function($table)
 		{
-			$table->string('cod_laboratorio');
-			$table->primary('cod_laboratorio');
+			$table->string('codigo', 4);
+			$table->primary('codigo');
 			$table->string('nombre', 40);
 			$table->string('descripcion', 150)->nullable();
 			$table->timestamps();

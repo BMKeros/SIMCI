@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 		// haya problema con las hijas que dependen de ellas
 
 		$this->call('PermisosTableSeeder');
+		$this->call('TiposUnidadesTableSeeder');
 		$this->call('TiposUsuarioTableSeeder');
 		$this->call('UnidadesTableSeeder');
 		$this->call('ClaseObjetosTableSeeder');
