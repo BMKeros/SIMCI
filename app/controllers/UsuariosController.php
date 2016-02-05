@@ -550,7 +550,7 @@ class UsuariosController extends Controller {
         	$num_perimso = DB::table('permisos')->count();
 
         	//comentado porque al codigo se le igualara a una funcion ya esta probada y funciona (y)
-        	$nuevo_permiso->codigo = crear_codigo_permiso($num_perimso);
+        	$nuevo_permiso->codigo = crear_codigo($num_perimso,"PERMISO");
         	$nuevo_permiso->nombre = $nombre;
         	$nuevo_permiso->descripcion = $descripcion;
 
@@ -594,7 +594,7 @@ class UsuariosController extends Controller {
         	$num_tipo_usuario = DB::table('tipos_usuario')->count();
 
         	//comentado porque al codigo se le igualara a una funcion ya esta probada y funciona (y)
-        	$nuevo_TipoUsuario->codigo = crear_codigo_tipo_usuario($num_tipo_usuario);
+        	$nuevo_TipoUsuario->codigo = crear_codigo($num_tipo_usuario,"TIPO_USUARIO");
         	$nuevo_TipoUsuario->nombre = $nombre;
         	$nuevo_TipoUsuario->descripcion = $descripcion;
 
