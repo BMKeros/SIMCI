@@ -15,46 +15,46 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="formulario_crear_usuario">
-				<h3 class="ui centered dividing header">Crear Almacen</h3>
+			<form class="ui form" id="formulario_registrar_almacen">
+				<h3 class="ui centered dividing header">Registrar Almacen</h3>
 				<br>
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
 							<label>Responsable</label>
-							<input type="text" name="responsable" placeholder="Aqui va es un Select">
+							<input type="text" name="responsable" placeholder="Aqui va es un Select" ng-model="DatosForm.responsable">
 						</div>
 					</div>
 				</div>
-				
-				<br>
 
 				<div class="field">
 					<div class="two fields">	
 						<div class="field">
 							<label>Primer Auxiliar</label>
-							<input type="text" placeholder="Aqui va es un Select">
+							<input type="text" placeholder="Aqui va es un Select" ng-model="DatosForm.primer_auxiliar">
 						</div>
 
 						<div class="field">
 							<label>Segundo Auxiliar</label>
-							<input type="text" placeholder="Aqui va es un Select">
+							<input type="text" placeholder="Aqui va es un Select" ng-model="DatosForm.segundo_auxiliar">
 						</div>
 					</div>
 				</div>
-
-				<br>
 
 				<div class="field">
 					<div class="one fields">
 						<div class="ten wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion_almacen" placeholder="Descripcion Del Almacen" rows="4"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion del Almacen" rows="4" ng-model="DatosForm.descripcion"></textarea>
 						</div>
 					</div>
 				</div>
-				<div class="ui right floated submit big button green">Registrar</div>
+				<div class="ui right floated submit big button green" ng-click="registrar_almacen()" id="btn-registrar">Registrar</div>
 			</form>
 		</div>
 	</div>
 </div>
+
+<script>
+	$('.ui.dropdown').dropdown();
+</script>
