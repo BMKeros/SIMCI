@@ -558,3 +558,5 @@ var reglas_formulario_crear_clase_objeto = {
     },
    inline: true
 };
+
+var reglas_formulario_registrar_almacen = {};
