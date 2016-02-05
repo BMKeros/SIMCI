@@ -79,7 +79,7 @@ Form::macro('select_tipo_usuario', function($atributos = null){
 Form::macro('select_dimension', function($atributos = null){
 	if($atributos){
 
-		$almacenes = DB::table('almacenes')->lists('descripcion', 'cod_almacen');
+		$almacenes = DB::table('almacenes')->lists('descripcion', 'codigo');
 
 		$default_values = array('class'=>"ui dropdown capitalize");
 		

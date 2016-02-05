@@ -88,14 +88,28 @@ function agregar_ceros($numero = 0, $cantidad_ceros = 1){
 	return ($numero > 0 && $numero < 10 )?( sprintf("%s%d",$ceros,$numero)):((String)$numero);
 }
 
-function crear_codigo_tipo_usuario($numero = 1){
-	//Se le debe incrementar uno porque va a ser un nuevo registro
-	$numero = $numero+1;
-	return sprintf("%s%s",CODIGO_TIPO_USUARIO,agregar_ceros($numero,1));
-}
+function crear_codigo($numero = 1, $tipo_codigo = null){
+	if($tipo_codigo){
+		$numero = $numero+1;
 
-function crear_codigo_permiso($numero = 1){
-	//Se le debe incrementar uno porque va a ser un nuevo registro
-	$numero = $numero+1;
-	return sprintf("%s%s",CODIGO_PERMISO,agregar_ceros($numero,1));
+		$tipo_codigo = strtoupper($tipo_codigo);
+
+		if($tipo_codigo == "ALMACEN"){
+			$codigo_tmp = CODIGO_ALMACEN;
+		}
+		else if($tipo_codigo == "PERMISO"){
+			$codigo_tmp = CODIGO_PERMISO;
+		}
+		else if($tipo_codigo == "TIPO_USUARIO"){
+			$codigo_tmp = CODIGO_TIPO_USUARIO;
+		}
+		else{
+			$codigo_tmp = '';
+		}		
+
+		return sprintf("%s%s",$codigo_tmp,agregar_ceros($numero,1));
+	}
+	else{
+		return null;
+	}
 }
