@@ -58,7 +58,7 @@
           controller: 'InventarioController'
         }).
 
-        when('/inventario/crear-almacen', {
+        when('/inventario/registrar-almacen', {
           templateUrl: '/views/inventario/crear_almacen',
           controller: 'InventarioController'
         }).
