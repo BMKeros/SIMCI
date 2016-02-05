@@ -172,23 +172,19 @@
 		}
 
 		public function postRegistrarAlmacen(){
-			$cod_almacen = Input::get('cod_almacen');
 			$responsable = Input::get('responsable');
 			$primer_auxiliar = Input::get('primer_auxiliar');
 			$segundo_auxiliar = Input::get('segundo_auxiliar');
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
-				'cod_almacen' => 'required|integer|unique:almacenes',
-				'responsable' => 'required|integer|exists:usuarios,id',
-
+				'responsable' => 'required|integer|exists:personas,id',
 				//pendientes por modificar si seran o no unicos
 				'primer_auxiliar' => 'required|integer|exists:personas,id',
-				'descripcion' => 'required|min:3|max:8'
+				'descripcion' => 'required|min:3|max:150'
 			);
 
 			$campos = array(
-				'cod_almacen' => $cod_almacen,
 				'responsable' => $responsable,
 				'primer_auxiliar' => $primer_auxiliar,
 				'segundo_auxiliar' => $segundo_auxiliar,
@@ -212,7 +208,9 @@
 			else{
 				$nuevo_almacen = new Almacen;
 
-				$nuevo_almacen->cod_almacen = $cod_almacen;
+				$num_almacen = DB::table('almacenes')->count();
+
+				$nuevo_almacen->codigo = crear_codigo($num_almacen,"ALMACEN");
 				$nuevo_almacen->responsable = $responsable;
 				$nuevo_almacen->primer_auxiliar = $primer_auxiliar;
 				$nuevo_almacen->segundo_auxiliar = $segundo_auxiliar;
