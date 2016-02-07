@@ -34,7 +34,40 @@
       //Funcion para recargar las tablas de datatables
       reload_tabla: function($SCOPE,NOMBRE_TABLA,CALLBACK){
           $SCOPE[NOMBRE_TABLA].reloadData(CALLBACK, false); 
-      }
+      },
+      //Funcion para devolver el mensaje con respecto al codigo http
+      get_mensaje_http: function(data_ajax){
+        var objeto = {};
+
+        switch(data_ajax.status) {
+          case 401:
+            objeto = {
+                titulo: "Upss, Acceso no autorizado, inicie sesion porfavor. Estado["+data_ajax.status+"]",
+                icono: 'ban',
+                color: 'red',
+                mensajes: data_ajax.data
+              };
+            break;
+          case 403:
+              objeto = {
+                titulo: "Upss, Hubo un problema con sus permisos. Estado["+data_ajax.status+"]",
+                icono: 'ban',
+                color: 'red',
+                mensajes: data_ajax.data
+              };
+            break;
+          case 500:
+              objeto = {
+                titulo:"Upss, Ocurrio un error en el servidor. Estado["+data_ajax.status+"]",
+                icono: 'remove',
+                color: 'red',
+                mensajes: data_ajax.data
+              };
+            break;
+        }
+
+        return objeto;
+      },
     };
   }]);
 
