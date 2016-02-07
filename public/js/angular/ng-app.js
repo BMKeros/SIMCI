@@ -36,7 +36,7 @@
           $SCOPE[NOMBRE_TABLA].reloadData(CALLBACK, false); 
       },
       //Funcion para devolver el mensaje con respecto al codigo http
-      get_mensaje_http: function(data_ajax){
+      get_mensaje_fail_http: function(data_ajax){
         var objeto = {};
 
         switch(data_ajax.status) {
