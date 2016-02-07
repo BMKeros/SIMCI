@@ -126,7 +126,8 @@ simci.controller('InventarioController', [
 
             },function(data_error){
 
-              console.log(data_error);
+              $scope.mostrar_mensaje = true;
+              $scope.mensaje_validacion = ToolsService.get_mensaje_fail_http(data_error);
 
               //Desactivamos el loading
               ToolsService.loading_button('btn-registrar',false);
@@ -135,6 +136,31 @@ simci.controller('InventarioController', [
         } //If condicional
       }
     }///inventario/registrar-almacen
+
+    if($location.$$url == "/inventario/ver/todos"){
+      $scope.tabla_elementos = {};
+      $scope.id_elemento_actual = null;
+
+      $scope.opciones_tabla_elementos = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+         url: '/api/inventario/mostrar?type=paginacion',
+         type: 'GET'
+      })
+      .withDataProp('data')
+      .withPaginationType('full_numbers')
+      .withOption('processing', true)
+      .withOption('serverSide', true)
+      .withOption('createdRow', function(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+        
+        // 4 Celda de acciones en la tabla
+        //angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
+      });
+    
+      $scope.columnas_tabla_elementos = [
+          DTColumnBuilder.newColumn('id').withTitle('ID').notSortable()
+      ];
+    }// inventario/ver/todos"
 
 
 
