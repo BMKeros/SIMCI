@@ -28,10 +28,11 @@ Route::get('/views/{folder}/{name_template}', function($folder,$name_template) {
 
 //Aqui van todos los controladores que se prestaran como api
 Route::group(array('prefix' => 'api'), function(){
-	Route::controller('/usuarios', 'UsuariosController');//ruta para los usuarios
-	Route::controller('/personas', 'PersonasController');//ruta para los personas
+	Route::controller('/usuarios', 'UsuariosController');
+	Route::controller('/personas', 'PersonasController');
   Route::controller('/inventario', 'InventarioController');
   Route::controller('/catalogo', 'CatalogoController');
+  Route::controller('/laboratorio', 'LaboratorioController');
 });
 
 

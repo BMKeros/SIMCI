@@ -9,7 +9,7 @@ class UsuariosController extends Controller {
 	public function getMostrar(){
 		$tipo_busqueda = Input::get('type', 'todos');
 		$id_usuario = Input::get('id', null);
-		$orden = Input::get('ordenar','asc');
+		$orden = Input::get('ordenar','id');
 
 		switch($tipo_busqueda){
 			case 'todos':
@@ -56,7 +56,7 @@ class UsuariosController extends Controller {
 				$draw = Input::get('draw',1);
 
 				if(quitar_espacios($value_search['value']) == ''){
-					$data = Usuario::paginate($length);	
+					$data = Usuario::orderBy($orden)->paginate($length);	
 				}
 				else{
 

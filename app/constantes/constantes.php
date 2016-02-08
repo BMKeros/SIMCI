@@ -19,4 +19,7 @@ define('PATH_IMAGENES','/uploads/imagenes/');
 
 define('CODIGO_TIPO_USUARIO','TU');
 define('CODIGO_PERMISO','PU');
+
 define('CODIGO_ALMACEN','AL');
+
+define('CODIGO_LABORATORIO', 'LA');
