@@ -15,6 +15,7 @@
 				<br>
 			</div>
 
+
 			<form class="ui form" id="formulario_registrar_almacen">
 				<h3 class="ui centered dividing header">Registrar Almacen</h3>
 				<br>

@@ -559,4 +559,49 @@ var reglas_formulario_crear_clase_objeto = {
    inline: true
 };
 
+
 var reglas_formulario_registrar_almacen = {};
+
+var reglas_formulario_registrar_laboratorio = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      nombre: {
+        identifier: 'nombre',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[40]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      descripcion: {
+        identifier: 'descripcion',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[150]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+    },
+   inline: true
+};

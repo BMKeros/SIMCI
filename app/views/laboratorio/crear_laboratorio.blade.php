@@ -15,7 +15,7 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="formulario_crear_objeto">
+			<form class="ui form" id="formulario_crear_laboratorio">
 				<h3 class="ui centered dividing header">Registrar Laboratorio</h3>
 				<br>
 				<div class="field">
