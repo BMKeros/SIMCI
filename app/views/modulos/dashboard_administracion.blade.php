@@ -92,7 +92,7 @@
   			Laboratorio
 		</a>
 	
-    	<a class="item">
+    	<a class="item" ng-href="#/reporte">
 	      	<i class="file text outline icon"></i>
 	      	Reportes
     	</a>

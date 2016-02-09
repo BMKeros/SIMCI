@@ -41,5 +41,14 @@ class UsuariosTableSeeder extends Seeder {
         $usuario->cod_tipo_usuario = TIPO_USER_ALMACENISTA;
         
         $usuario->save();
+
+        $usuario = new Usuario;
+
+        $usuario->usuario = 'estudiante';
+        $usuario->email = 'estudiante@gmail.com';
+        $usuario->password = 'estudiante';
+        $usuario->cod_tipo_usuario = TIPO_USER_ESTUDIANTE;
+        
+        $usuario->save();
     }
 }

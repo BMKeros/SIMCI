@@ -38,45 +38,12 @@
   			Inicio
 		</a>
 	
-		<a class="item">
-  			<i class="user layout icon"></i>
-  			Usuarios
+		<a class="item" ng-href="#/consulta">
+  			<i class="call icon"></i>
+  			Consultas
 		</a>
 	
-		<a class="item">
-  			<i class="book icon"></i>
-  			Catalogo
-		</a>
-
-		<a class="item">
-  			<i class="archive icon"></i>
-  			Inventario
-		</a>	
-	
-	   	<a class="item">
-  			<i class="mail icon"></i>
-  			Messages
-		</a>
-	
-		<a class="item">
-  			<i class="chat icon"></i>
-  			Discussions
-		</a>
-	
-    	<a class="item">
-	      	<i class="trophy icon"></i>
-	      	Achievements
-    	</a>
-	
-    	<a class="item">
-	      	<i class="shop icon"></i>
-	      	Store
-    	</a>
-	
-    	<a class="item">
-	      	<i class="settings icon"></i>
-	      	Settings
-    	</a>
+		
 	</div>
 
 	<!-- Boton para abrir el menu -->
