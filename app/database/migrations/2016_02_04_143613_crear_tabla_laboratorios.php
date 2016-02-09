@@ -18,7 +18,7 @@ class CrearTablaLaboratorios extends Migration {
 			$table->primary('codigo');
 			$table->string('nombre', 40);
 			$table->string('descripcion', 150)->nullable();
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

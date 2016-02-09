@@ -14,7 +14,7 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="formulario_crear_usuario">
+			<form class="ui form" id="formulario_crear_estante">
 				<h3 class="ui centered dividing header">Crear Estante</h3>
 				<br>
 				<div class="field">
