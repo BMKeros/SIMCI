@@ -2,7 +2,7 @@
 	class InventarioController extends controller{
 		
 		public function __construct(){
-        	$this->beforeFilter('APICheckPermisos');
+        	//$this->beforeFilter('APICheckPermisos');
 		}
 		
 		public function postRegistrarElemento(){
