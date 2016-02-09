@@ -68,7 +68,68 @@
 
         return objeto;
       },
-    };
+      //Funcion para el registro dinamico de todos los controladores
+      registrar_dinamico: function($_SCOPE,$_HTTP,$_TIMEOUT,opciones){
+        var global_this = this;
+            
+        return function(){
+        
+          var formulario = $('#'+opciones.formulario.id);
+          var is_valid_form = formulario.form(opciones.formulario.reglas).form('is valid');
+
+          if(is_valid_form){
+            
+            //Activamos el loading
+            global_this.loading_button('btn-registrar',true);    
+
+            $_HTTP({
+              method: 'POST',
+              url: opciones.url,
+              data: $_SCOPE.DatosForm
+            }).then(function(data){
+
+              if(data.data.resultado){
+                
+                $_SCOPE.mostrar_mensaje = true;
+                $_SCOPE.mensaje_validacion = {
+                  titulo: opciones.exito.titulo,
+                  icono: opciones.exito.icono || 'checkmark',
+                  color: opciones.exito.color || 'green',
+                  mensajes: opciones.exito.mensajes
+                };
+
+                $_TIMEOUT(function(){
+                  //Desactivamos el loading
+                  global_this.loading_button('btn-registrar',false);    
+                  formulario.form('clear');
+                }, 0, false);
+
+              }
+              else{
+
+                $_SCOPE.mostrar_mensaje = true;
+                $_SCOPE.mensaje_validacion = {
+                  titulo: 'Hubo un error al guardar el formulario',
+                  icono: 'remove',
+                  color: 'red',
+                  mensajes: data.data.mensajes
+                };
+              }
+
+              //Desactivamos el loading
+              global_this.loading_button('btn-registrar',false);
+
+            },function(data_error){
+              $_SCOPE.mostrar_mensaje = true;
+              $_SCOPE.mensaje_validacion = global_this.get_mensaje_fail_http(data_error);
+
+              //Desactivamos el loading
+              global_this.loading_button('btn-registrar',false);
+            });
+          }
+        }
+      }
+    }
   }]);
 
   simci.directive("ngModelFile", [function () {

@@ -77,7 +77,7 @@ simci.controller('InventarioController', [
     if($location.$$url == "/inventario/registrar-almacen"){
       $scope.mostrar_mensaje = false;
       
-      $scope.registrar_almacen = function(){
+      /*$scope.registrar_almacen = function(){
         
         var formulario = $('#formulario_registrar_almacen');
         var is_valid_form = formulario.form(reglas_formulario_registrar_almacen).form('is valid');
@@ -134,7 +134,19 @@ simci.controller('InventarioController', [
             });
             
         } //If condicional
-      }
+      }*/
+
+      $scope.registrar_almacen = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/inventario/registrar-almacen',
+        formulario:{
+          id:'formulario_registrar_almacen',
+          reglas: reglas_formulario_registrar_almacen
+        },
+        exito:{
+          titulo: 'Almacen creado con exito',
+          mensajes: ['El almacen ha sido registrado en la base de datos.']
+        }
+      });
     }///inventario/registrar-almacen
 
     if($location.$$url == "/inventario/ver/todos"){
