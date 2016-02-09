@@ -122,3 +122,12 @@ Route::filter('APICheckGuest', function()
 		return Response::make('Acceso no autorizado, inicie sesion porfavor', 401);
 	}
 });
+
+Route::filter('APICheckPermisos', function()
+{
+	if(Auth::user()->cod_tipo_usuario != TIPO_USER_PROFESOR){
+		return Response::json(['No tiene permisos para realizar esta accion'], 403);
+	}
+});
+
+

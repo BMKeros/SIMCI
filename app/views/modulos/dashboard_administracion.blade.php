@@ -16,21 +16,20 @@
       			
       			<div class="right menu">
       				
-      				<div class="ui simple dropdown link item">
-    					<span class="text">Notificaciones</span>
+      				<div class="ui pointing dropdown link item">
+    					Notificaciones
     					<div class="ui red label">22</div>
     					<i class="dropdown icon"></i>
     					<div class="menu">
       						<div class="header">Novedades</div>
-      						<div class="header">Mens</div>
-				          	<div class="item">Shirts</div>
-				          	<div class="item">Pants</div>
-				          	<div class="item">Jeans</div>
+				          	<a class="item">Shirts</a>
+				          	<a class="item">Pants</a>
+				          	<a class="item">Jeans</a>
 				        </div>
       				</div>
 
-      				<div class="ui simple dropdown item">
-    					<span class="text">Usuario</span>
+      				<div class="ui dropdown item">
+						Usuario
     					<i class="dropdown icon"></i>
     					<div class="menu">
       						<div class="item">
@@ -152,9 +151,9 @@
 		    	.sidebar('toggle');
 		  	});
 
-		  	/*$('.ui.dropdown').dropdown({
+		  	$('.ui.dropdown').dropdown({
 		  		transition: 'drop'
-		  	});*/
+		  	});
 		});
 	</script>
 @stop

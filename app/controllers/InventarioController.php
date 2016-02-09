@@ -1,6 +1,10 @@
 <?php 	 
 	class InventarioController extends controller{
 		
+		public function __construct(){
+        	//$this->beforeFilter('APICheckPermisos');
+		}
+		
 		public function postRegistrarElemento(){
 
 			$cod_dimension = Input::get('cod_dimension');

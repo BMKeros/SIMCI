@@ -77,7 +77,7 @@ simci.controller('InventarioController', [
     if($location.$$url == "/inventario/registrar-almacen"){
       $scope.mostrar_mensaje = false;
       
-      $scope.registrar_almacen = function(){
+      /*$scope.registrar_almacen = function(){
         
         var formulario = $('#formulario_registrar_almacen');
         var is_valid_form = formulario.form(reglas_formulario_registrar_almacen).form('is valid');
@@ -126,15 +126,53 @@ simci.controller('InventarioController', [
 
             },function(data_error){
 
-              console.log(data_error);
+              $scope.mostrar_mensaje = true;
+              $scope.mensaje_validacion = ToolsService.get_mensaje_fail_http(data_error);
 
               //Desactivamos el loading
               ToolsService.loading_button('btn-registrar',false);
             });
             
         } //If condicional
-      }
+      }*/
+
+      $scope.registrar_almacen = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/inventario/registrar-almacen',
+        formulario:{
+          id:'formulario_registrar_almacen',
+          reglas: reglas_formulario_registrar_almacen
+        },
+        exito:{
+          titulo: 'Almacen creado con exito',
+          mensajes: ['El almacen ha sido registrado en la base de datos.']
+        }
+      });
     }///inventario/registrar-almacen
+
+    if($location.$$url == "/inventario/ver/todos"){
+      $scope.tabla_elementos = {};
+      $scope.id_elemento_actual = null;
+
+      $scope.opciones_tabla_elementos = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+         url: '/api/inventario/mostrar?type=paginacion',
+         type: 'GET'
+      })
+      .withDataProp('data')
+      .withPaginationType('full_numbers')
+      .withOption('processing', true)
+      .withOption('serverSide', true)
+      .withOption('createdRow', function(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+        
+        // 4 Celda de acciones en la tabla
+        //angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
+      });
+    
+      $scope.columnas_tabla_elementos = [
+          DTColumnBuilder.newColumn('id').withTitle('ID').notSortable()
+      ];
+    }// inventario/ver/todos"
 
 
 

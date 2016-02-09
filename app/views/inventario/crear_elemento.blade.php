@@ -106,13 +106,14 @@
 </div>
 
 <script>
+$('.ui.dropdown').dropdown();
 $('.buscar_objeto').dropdown({
 	apiSettings: {
 	  	method: 'GET',
 	  	dataType: 'JSON',
 	  	url: '/api/catalogo/mostrar?type=query&query={query}',
-	    maxSelections: 3
   	},
   	saveRemote:false
 });
+
 </script>
