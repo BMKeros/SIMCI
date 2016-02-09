@@ -105,6 +105,31 @@
           controller: 'LaboratorioController' 
         }).
 
+        //Rutas Reportes
+        when('/reporte', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'ReporteController'
+        }).
+        when('/reporte/crear-reporte', {
+          templateUrl: '/views/reportes/crear_reportes',
+          controller: 'ReporteController'
+        }).
+        when('/reporte/ver/todos', {
+          templateUrl: '/views/reportes/mostrar_reportes',
+          controller: 'ReporteController'
+        }).
+
+ 		//Rutas Consulta
+        when('/consulta', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'ConsultaController'
+        }).
+        when('/consulta/realizar-consultas', {
+          templateUrl: '/views/estudiantes/crear_consultas',
+          controller: 'ConsultaController'
+        }).
+
+
 
         otherwise({
           redirectTo: function(){
