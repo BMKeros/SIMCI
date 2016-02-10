@@ -81,7 +81,7 @@
   			Inventario
 		</a>	
 	
-	   	<a class="item">
+	   	<a class="item" ng-href="#/ordenes">
   			<i class="edit icon"></i>
   			Ordenes
 		</a>
@@ -96,9 +96,9 @@
 	      	Reportes
     	</a>
 	
-    	<a class="item">
-	      	<i class="shop icon"></i>
-	      	Store
+    	<a class="item" ng-href="#/documentos">
+	      	<i class="travel icon"></i>
+	      	Documentos
     	</a>
 	
     	<a class="item">

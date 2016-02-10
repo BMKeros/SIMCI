@@ -104,6 +104,14 @@
           templateUrl: '/views/laboratorio/mostrar_laboratorio',
           controller: 'LaboratorioController' 
         }).
+         when('/laboratorio/registrar-stock', {
+          templateUrl: '/views/laboratorio/registrar_stock',
+          controller: 'LaboratorioController' 
+        }).
+          when('/laboratorio/mover-stock', {
+          templateUrl: '/views/laboratorio/mover_stock',
+          controller: 'LaboratorioController' 
+        }).
 
         //Rutas Reportes
         when('/reporte', {
@@ -125,8 +133,36 @@
           controller: 'ConsultaController'
         }).
         when('/consulta/realizar-consultas', {
-          templateUrl: '/views/estudiantes/crear_consultas',
+          templateUrl: '/views/consultas/crear_consultas',
           controller: 'ConsultaController'
+        }).
+
+        //Rutas Ordenes
+        when('/ordenes', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'OrdenesController'
+        }).
+        when('/ordenes/crear-ordenes', {
+          templateUrl: '/views/ordenes/crear_ordenes',
+          controller: 'OrdenesController'
+        }).
+        when('/ordenes/ver/todos', {
+          templateUrl: '/views/ordenes/mostrar_ordenes',
+          controller: 'OrdenesController'
+        }).
+
+        //Rutas Documentos
+        when('/documentos', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'DocumentosController'
+        }).
+        when('/documentos/enviar-documentos', {
+          templateUrl: '/views/documentos/enviar_documentos',
+          controller: 'DocumentosController'
+        }).
+        when('/ordenes/recibir/mostrar-todos', {
+          templateUrl: '/views/documentos/mostrar_enviar_documentos',
+          controller: 'DocumentosController'
         }).
 
 
