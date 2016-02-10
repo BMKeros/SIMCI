@@ -19,7 +19,6 @@ Form::macro('select_permisos', function($atributos = null){
 	else{
 		return Form::select('');
 	}
-
 });
 
 
@@ -179,6 +178,42 @@ Form::macro('select_unidades', function($atributos = null, $selected = null){
 
 		return $html;
 	}
+});
+
+Form::macro('select_responsables', function($atributos = null, $selected = null){
+
+	$usuarios = DB::table('usuarios')->lists('usuario', 'id');
+
+	$default_values = array('class'=>"ui dropdown search capitalize");
+
+	$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
+	$html .= '<option value="">Responsables</option>';
+		
+	foreach ($usuarios as $key => $value) {
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+	}
+		
+	$html .= '</select>';
+
+	return $html;
+});
+
+Form::macro('select_auxiliar', function($atributos = null, $selected = null){
+
+	$personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'id')->get();
+
+	$default_values = array('class'=>"ui dropdown search capitalize");
+
+	$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
+		$html .= '<option value="">Primer Auxiliar</option>';
+		
+	foreach ($personas as $persona) {
+		$html .= sprintf('<option value="%s">%s %s</option>', $persona->id, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido));	
+	}
+		
+	$html .= '</select>';
+
+	return $html;
 });
 
 ?>

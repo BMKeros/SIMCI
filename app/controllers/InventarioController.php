@@ -265,7 +265,6 @@
 			}
 		}
 
-
 		public function postRegistrarAgrupacion(){
 			$nombre = Input::get('nombre');
 			$descripcion = Input::get('descripcion');
