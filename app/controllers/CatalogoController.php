@@ -11,16 +11,27 @@
 			switch($tipo_busqueda){
 				case 'todos':
 					if($orden){
+						//esta aun falta porque no se que campos necesita
 						$response = Catalogo::orderBy('id', $orden)->get();
 					}
 					else{
-						$response = Catalogo::all();	
+						//esta aun le falta porque no se que campos necesita
+						//$response = Catalogo::all();
+						$response = DB::table('catalogo_objetos')->get();
 					}
 				break;
 
 				case 'objeto':
 					if($id_objeto){
-						$response = Catalogo::find($id_objeto);
+						//$response = Catalogo::find($id_objeto);
+
+						$response = DB::table('catalogo_objetos as CO')
+							->select('CO.nombre', 'CO.descripcion', 'CO.especificaciones', 'clase_objetos.nombre as nombre_clase', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
+							->join('clase_objetos', 'clase_objetos.id', '=', 'CO.cod_clase_objeto')
+							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
+							->where('CO.id', '=', $id_objeto)
+							->get();
+							
 
 						if(is_null($response)){
 							$response = array();
