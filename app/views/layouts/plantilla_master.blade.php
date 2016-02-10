@@ -35,6 +35,7 @@
 		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
 		<script src="/js/moment-with-locales.min.js"></script>
 		<script src="/bower_components/pikaday/pikaday.js"></script>
+		<script src="/bower_components/howler.js/howler.min.js"></script>
 
 		<script src="/js/scripts_app.js"></script>
 		<script src="/js/scripts_formularios.js"></script>
@@ -47,7 +48,10 @@
 		<script>
 
 			$(document).ready(function(){
-				TOOLS_APP.ver_reloj();			
+				TOOLS_APP.ver_reloj();
+				var sound = new Howl({
+  					urls: ['/sonidos/sound-noti1.wav']
+				}).play();			
 			});
 			
 		</script>

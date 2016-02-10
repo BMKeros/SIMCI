@@ -15,7 +15,7 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="formulario_crear_usuario">
+			<form class="ui form" id="formulario_crear_elemento">
 				<h3 class="ui centered dividing header">Registrar Elemento</h3>
 				<br>
 				<div class="field">
@@ -106,13 +106,14 @@
 </div>
 
 <script>
+$('.ui.dropdown').dropdown();
 $('.buscar_objeto').dropdown({
 	apiSettings: {
 	  	method: 'GET',
 	  	dataType: 'JSON',
 	  	url: '/api/catalogo/mostrar?type=query&query={query}',
-	    maxSelections: 3
   	},
   	saveRemote:false
 });
+
 </script>

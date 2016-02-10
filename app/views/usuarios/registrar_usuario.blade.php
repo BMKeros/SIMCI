@@ -4,7 +4,7 @@
 	    	<div class="ten wide column">
 			  	<div class="column">
 
-   			    	<form class="ui form" id="">
+   			    	<form class="ui form" id="formulario_registrar_usuario">
 	   			    	<div ng-if="mostrar_mensaje">
 							<div class="ui icon <% mensaje_validacion.color %> message">
 								<i class="<% mensaje_validacion.icono %> icon"></i>
