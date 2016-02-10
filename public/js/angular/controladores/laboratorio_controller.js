@@ -57,6 +57,71 @@ simci.controller('LaboratorioController', [
 
     ];
 
+    $log.info($routeParams);
+    $log.info($location);
+
+    if($location.$$url == '/laboratorio/crear-laboratorio'){
+        $scope.mostrar_mensaje = false;
+        $scope.DatosForm = {};
+
+        $scope.registrar_laboratorio = function(){
+        
+          var formulario = $('#formulario_crear_laboratorio');
+          var is_valid_form = formulario.form(reglas_formulario_registrar_laboratorio).form('is valid');
+
+          if(is_valid_form){
+            
+            //Activamos el loading
+            ToolsService.loading_button('btn-registrar',true);
+
+            $http({
+              method: 'POST',
+              url: '/api/laboratorio/registrar-laboratorio',
+              data: $scope.DatosForm
+            }).then(function(data){
+
+              if(data.data.resultado){
+                
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Laboratoiro creado con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: ['Nuevo Laboratorio creado']
+                };
+
+                $timeout(function(){
+                  //Desactivamos el loading
+                  ToolsService.loading_button('btn-registrar',false);
+                  formulario.form('clear');
+                }, 0, false);
+
+              }
+              else{
+
+                $scope.mostrar_mensaje = true;
+                $scope.mensaje_validacion = {
+                  titulo: 'Hubo un error al guardar la informacion',
+                  icono: 'remove',
+                  color: 'red',
+                  mensajes: data.data.mensajes
+                };
+              }
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+
+            },function(data_error){
+
+              console.log(data_error);
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-registrar',false);
+            });
+            
+          } //If condicional
+        }
+      }// If == '/catalogo/registrar-clase'
 
   }]
 );
