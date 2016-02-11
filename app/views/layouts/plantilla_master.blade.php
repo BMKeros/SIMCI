@@ -13,6 +13,12 @@
 	  	<link rel="stylesheet" href="/css/styles.css" />
 	  	<link rel="stylesheet" href="/bower_components/datatables/media/css/jquery.dataTables.min.css">
 	  	<link rel="stylesheet" href="/bower_components/pikaday/css/pikaday.css">
+
+	  	<script>
+	  		if(typeof(Storage) === "undefined") {
+	  			alert("Su navegador no soporta algunos complementos de esta aplicacion \nPorfavor actualice su navegador para continuar");
+			}	
+	  	</script>
 		
 		@section('css')
 		@show
@@ -51,7 +57,8 @@
 				TOOLS_APP.ver_reloj();
 				TOOLS_APP.listen_notificaciones();
 			});
-			
+	
+			localStorage.setItem('data_usuario','{{ (empty($data_usuario))?(null):($data_usuario) }}');
 		</script>
 
 		@section('js')

@@ -637,12 +637,14 @@ var reglas_formulario_registrar_sub_dimension = {
    fields: {
 
       codigo: {
-        identifier: 'codigo',
+        identifier: 'cod_estante',
         rules:[
           {
               type:'empty',
               prompt:'Este campo no puede quedar vacio'
-          },
+          }
+        ]
+      },
 
       descripcion: {
         identifier: 'descripcion',
@@ -664,4 +666,4 @@ var reglas_formulario_registrar_sub_dimension = {
 
     },
    inline: true
- };
+};
