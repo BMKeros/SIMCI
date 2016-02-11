@@ -32,7 +32,7 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Descripcion del Estante</label>
-							<textarea name="descripcion_estante" placeholder="Descripcion del Estante" ng-model="DatosForm.descripcion"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion del Estante" ng-model="DatosForm.descripcion"></textarea>
 						</div>
 					</div>
 				</div>

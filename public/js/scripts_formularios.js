@@ -560,8 +560,6 @@ var reglas_formulario_crear_clase_objeto = {
 };
 
 
-var reglas_formulario_registrar_almacen = {};
-
 var reglas_formulario_registrar_laboratorio = {
    on: 'blur',
    duration: 40,
@@ -605,3 +603,65 @@ var reglas_formulario_registrar_laboratorio = {
     },
    inline: true
 };
+
+
+var reglas_formulario_registrar_almacen = {
+  on: 'blur',
+   duration: 40,
+   fields: {
+      descripcion: {
+        identifier: 'descripcion',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[150]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+    },
+   inline: true
+ };
+
+var reglas_formulario_registrar_estante = {
+  on: 'blur',
+    duration: 40,
+    fields: {
+
+      codigo: {
+        identifier: 'codigo_estante',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+
+      descripcion: {
+        identifier: 'descripcion',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[15]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+    },
+   inline: true
+ };
