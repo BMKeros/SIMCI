@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaSubDimension extends Migration {
+class CrearTablaSubAgrupacion extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,11 +12,12 @@ class CrearTablaSubDimension extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sub_dimensiones', function(Blueprint $table)
+		Schema::create('sub_agrupaciones', function(Blueprint $table)
 		{
 			$table->string('codigo', 3);
 			$table->primary('codigo');
-			$table->string('descripcion', 50);
+			$table->string('nombre');
+			$table->string('descripcion');
 			$table->nullableTimestamps();
 		});
 	}
@@ -28,7 +29,7 @@ class CrearTablaSubDimension extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('sub_dimensiones');
+		Schema::drop('sub_agrupaciones');
 	}
 
 }

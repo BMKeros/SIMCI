@@ -16,8 +16,8 @@ class CrearTablaAgrupacion extends Migration {
 		{
 			$table->string('codigo', 3);
 			$table->primary('codigo');
-			$table->string('nombre');
-			$table->string('descripcion');
+			$table->string('nombre', 20);
+			$table->string('descripcion', 50);
 			$table->nullableTimestamps();
 		});
 	}
