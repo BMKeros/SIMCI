@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTablaEstantes extends Migration {
+class CrearTablaSubDimension extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,11 @@ class CrearTablaEstantes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('estantes', function(Blueprint $table)
+		Schema::create('sub_dimensiones', function(Blueprint $table)
 		{
-			$table->integer('cod_estante');
-			$table->primary('cod_estante');
-			$table->string('descripcion', 15);
-			
+			$table->string('codigo', 3);
+			$table->primary('codigo');
+			$table->string('descripcion');
 			$table->nullableTimestamps();
 		});
 	}
@@ -29,7 +28,7 @@ class CrearTablaEstantes extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('estantes');
+		Schema::drop('sub_dimensiones');
 	}
 
 }
