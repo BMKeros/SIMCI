@@ -1,7 +1,8 @@
 <?php  
 class Agrupacion extends Eloquent{
-	protected $table = 'tipo_objetos';
-	protected $fillable = array('nombre', 'descripcion');
+	protected $table = 'agrupaciones';
+	protected $fillable = array('codigo' , 'nombre', 'descripcion');
+	protected $primary = 'codigo';
 
 	public function setNombreAttribute($value){
 		if (! empty($value)) {
