@@ -143,7 +143,7 @@
           controller: 'OrdenesController'
         }).
         when('/ordenes/crear-ordenes', {
-          templateUrl: '/views/ordenes/crear_ordenes',
+          templateUrl: '/views/ordenes/generar_ordenes',
           controller: 'OrdenesController'
         }).
         when('/ordenes/ver/todos', {
