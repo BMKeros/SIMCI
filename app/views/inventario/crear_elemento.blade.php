@@ -26,7 +26,7 @@
 			     		</div>
 
 			     		<div class="field">
-				      		<label>SubDimension</label>
+				      		<label>Sub Dimension</label>
 								{{  Form::select_sub_dimension(array('name'=>'cod_sub_dimension','id'=>'cod_sub_dimension', 'ng-model'=>'cod_sub_dimension')) }}
 						</div>
 		     		</div>
