@@ -642,7 +642,9 @@ var reglas_formulario_registrar_sub_dimension = {
           {
               type:'empty',
               prompt:'Este campo no puede quedar vacio'
-          },
+          }
+        ]
+      },
 
       descripcion: {
         identifier: 'descripcion',
