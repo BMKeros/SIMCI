@@ -17,6 +17,9 @@ simci.controller('CatalogoController', [
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    //Esta variable debe estar en todos los controladores
+    //Contiene la data del usuario que esta logueado
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
 
     $scope.modulo.nombre = "Catalogo";
     $scope.modulo.icono = {
@@ -29,25 +32,26 @@ simci.controller('CatalogoController', [
         nombre:"registrar objeto",
         descripcion: "Esta opcion le permitira añadir nuevos objetos al catalogo",
         url: "#/catalogo/registrar-objeto",
-        icono: 'write'
+        icono: 'write',
+        show_in: [TIPO_USER_ROOT]
       },
       {
         nombre:"ver catalogo",
         descripcion: "Esta opcion le permitira ver, modificar o eliminar los objetos del catalogos",
         url: "#/catalogo/ver/todos",
-        icono: 'eye'
+        icono: 'eye',
       },
       {
         nombre:"registrar unidad",
         descripcion: "Esta opcion le permitira añadir nuevas unidades para objetos del catalogo",
         url: "#/catalogo/registrar-unidad",
-        icono: 'write'
+        icono: 'write',
       },
       {
         nombre:"registrar clase",
         descripcion: "Esta opcion le permitira añadir nuevas clases para objetos del objetos",
         url: "#/catalogo/registrar-clase",
-        icono: 'write'
+        icono: 'write',
       }
     ];
     
