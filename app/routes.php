@@ -32,7 +32,7 @@ Route::group(array('prefix' => 'api'), function(){
 	Route::controller('/personas', 'PersonasController');
   Route::controller('/inventario', 'InventarioController');
   Route::controller('/catalogo', 'CatalogoController');
-  Route::controller('/laboratorio', 'LaboratorioController');
+  //Route::controller('/laboratorio', 'LaboratorioController');
 });
 
 
