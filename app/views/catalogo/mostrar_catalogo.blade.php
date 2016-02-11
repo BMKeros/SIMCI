@@ -17,9 +17,9 @@
                   <td><b>Nombre del Objeto: </b> <% data_objeto.nombre %></td>
                </tr>
                <tr>
-                  <td colspan="2"><b>Clase de Objeto: </b> <% data_objeto.data_clase_objeto.nombre %>
+                  <td colspan="2"><b>Clase de Objeto: </b> <% data_objeto.nombre_clase %>
                   </td>
-                  <td colspan="2"><b>Unidad:</b> <%data_objeto.data_unidad.nombre %> (<%data_objeto.data_unidad.abreviatura %>)</small></td>
+                  <td colspan="2"><b>Unidad:</b> <%data_objeto.nombre_unidad %> (<%data_objeto.abreviatura_unidad %>)</small></td>
                </tr>
                <tr>
                   <td colspan="4"><b>Descripcion:</b><br>

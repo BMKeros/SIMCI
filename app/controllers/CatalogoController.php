@@ -26,11 +26,11 @@
 						//$response = Catalogo::find($id_objeto);
 
 						$response = DB::table('catalogo_objetos as CO')
-							->select('CO.nombre', 'CO.descripcion', 'CO.especificaciones', 'clase_objetos.nombre as nombre_clase', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
+							->select('CO.nombre', 'CO.descripcion', 'CO.especificaciones', 'CO.cod_clase_objeto', 'clase_objetos.nombre as nombre_clase', 'CO.cod_unidad', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
 							->join('clase_objetos', 'clase_objetos.id', '=', 'CO.cod_clase_objeto')
 							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
 							->where('CO.id', '=', $id_objeto)
-							->get();
+							->first();
 							
 
 						if(is_null($response)){
