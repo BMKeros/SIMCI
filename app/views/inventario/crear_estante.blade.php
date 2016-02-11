@@ -21,7 +21,7 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Codigo del Estante</label>
-							<input type="text" name="cod_estante" placeholder="Codigo del Estante">
+							<input type="text" name="cod_estante" placeholder="Codigo del Estante" ng-model="DatosForm.cod_estante">
 						</div>
 					</div>
 				</div>
@@ -32,11 +32,11 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Descripcion del Estante</label>
-							<textarea name="descripcion_estante" placeholder="Descripcion del Estante"></textarea>
+							<textarea name="descripcion_estante" placeholder="Descripcion del Estante" ng-model="DatosForm.descripcion"></textarea>
 						</div>
 					</div>
 				</div>
-				<div class="ui right floated submit big button green">Registrar</div>
+				<div class="ui right floated submit big button green" ng-click="registrar_estante()" id="btn-registrar">Registrar</div>
 			</form>
 		</div>
 	</div>

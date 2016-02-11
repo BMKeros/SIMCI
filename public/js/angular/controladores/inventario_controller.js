@@ -145,9 +145,26 @@ simci.controller('InventarioController', [
         exito:{
           titulo: 'Almacen creado con exito',
           mensajes: ['El almacen ha sido registrado en la base de datos.']
-        }
+        }///inventario/registrar-almacen
       });
-    }///inventario/registrar-almacen
+    }
+
+    if($location.$$url == "/inventario/registrar-estante"){
+      $scope.mostrar_mensaje = false;
+
+      $scope.registrar_estante = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/inventario/registrar-estante',
+
+        formulario:{
+          id:'formulario_crear_estante',
+          reglas: reglas_formulario_registrar_estante
+        },
+        exito:{
+          titulo: 'Estante creado con exito',
+          mensajes: ['El estante ha sido registrado en la base de datos.']
+        }///inventario/registrar-estante
+      });
+    }
 
     if($location.$$url == "/inventario/ver/todos"){
       $scope.tabla_elementos = {};
@@ -172,11 +189,6 @@ simci.controller('InventarioController', [
       $scope.columnas_tabla_elementos = [
           DTColumnBuilder.newColumn('id').withTitle('ID').notSortable()
       ];
-    }// inventario/ver/todos"
-
-
-
-
-    
+    }// inventario/ver/todos"  
   }]
 );

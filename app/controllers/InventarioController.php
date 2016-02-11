@@ -227,6 +227,7 @@
 		}
 
 		public function postRegistrarEstante(){
+			
 			$cod_estante = Input::get('cod_estante');
 			$descripcion = Input::get('descripcion');
 
@@ -251,7 +252,7 @@
 			$validacion = Validator::make($campos, $reglas, $mensajes);
 
 			if($validacion->fails()){
-				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages->all()));
+				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
 			}
 			else{
 				$nuevo_estantes = new Estante;
