@@ -50,7 +50,14 @@ simci.controller('LaboratorioController', [
 
       {
         nombre:"mostrar stock",
-        descripcion: "Esta opcion le permitira ver los nuevos stock del laboratorios y moverlos a nuevos laboratorios",
+        descripcion: "Esta opcion le permitira ver los nuevos stock y moverlos a nuevos laboratorios",
+        url: "#/laboratorio/mostrar-stock",
+        icono: 'save'
+      },
+
+       {
+        nombre:"mover stock",
+        descripcion: "Esta opcion le permitira mover los stock del laboratorios y moverlos a nuevos laboratorios",
         url: "#/laboratorio/mover-stock",
         icono: 'save'
       }
