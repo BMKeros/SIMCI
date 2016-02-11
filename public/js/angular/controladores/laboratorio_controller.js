@@ -29,14 +29,14 @@ simci.controller('LaboratorioController', [
         nombre:"registrar laboratorio",
         descripcion: "Esta opcion le permitira añadir nuevos laboratorios",
         url: "#/laboratorio/crear-laboratorio",
-        icono: 'save'
+        icono: 'write'
       },
       
       {
         nombre:"mostrar laboratorio",
         descripcion: "Esta opcion le permitira ver los nuevos laboratorios",
         url: "#/laboratorio/ver/todos",
-        icono: 'save'
+        icono: 'unhide'
       },
 
 
@@ -44,7 +44,7 @@ simci.controller('LaboratorioController', [
         nombre:"agregar stock",
         descripcion: "Esta opcion le permitira agregar nuevos stock al laboratorios",
         url: "#/laboratorio/registrar-stock",
-        icono: 'save'
+        icono: 'plus'
       },
 
 
@@ -52,14 +52,14 @@ simci.controller('LaboratorioController', [
         nombre:"mostrar stock",
         descripcion: "Esta opcion le permitira ver los nuevos stock y moverlos a nuevos laboratorios",
         url: "#/laboratorio/mostrar-stock",
-        icono: 'save'
+        icono: 'eye'
       },
 
        {
         nombre:"mover stock",
         descripcion: "Esta opcion le permitira mover los stock del laboratorios y moverlos a nuevos laboratorios",
         url: "#/laboratorio/mover-stock",
-        icono: 'save'
+        icono: 'external'
       }
 
     ];
