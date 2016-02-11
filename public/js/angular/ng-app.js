@@ -11,6 +11,12 @@
     }
   });
 
+  simci.filter('inArray', function() {
+    return function(array, value) {
+        return array.indexOf(value) !== -1;
+    };
+  });
+
   simci.factory('ToolsService', [function () {
     return {
       //Funcion para cortar el string dependiendo del numero de caracteres por parametros
