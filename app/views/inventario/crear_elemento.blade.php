@@ -21,38 +21,36 @@
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
-				      		<label>Dimension</label>
+				      		<label>Almacen</label>
 							{{  Form::select_dimension(array('name'=>'cod_dimension','id'=>'cod_dimension', 'ng-model'=>'cod_dimension')) }}
 			     		</div>
 
 			     		<div class="field">
-				      		<label>Sub-Dimension</label>
+				      		<label>SubDimension</label>
 								{{  Form::select_sub_dimension(array('name'=>'cod_sub_dimension','id'=>'cod_sub_dimension', 'ng-model'=>'cod_sub_dimension')) }}
 						</div>
 		     		</div>
 				</div>
 
 				<div class="field">
-					<div class="two fields">
+					<div class="three fields">
 						<div class="field">
 				      		<label>Agrupacion</label>
 							{{-- Form::select_agrupacion(array('name'=>'cod_agrupacion', 'id'=>'cod_agrupacion', 'ng-model'=>'cod_agrupacion')) --}}
 			     		</div>
 
 			     		<div class="field">
-				      		<label>Sub-agrupacion</label>
+				      		<label>Sub Agrupacion</label>
 							{{-- Form::select_sub_agrupacion(array('name'=>'cod_sub_agrupacion', 'id'=>'cod_sub_agrupacion', 'ng-model'=>'cod_sub_agrupacion')) --}}
 						</div>
 
 						<div class="field">
 							<label>Objeto</label>
-							<div>
-								<div class="ui search selection dropdown capitalize buscar_objeto">
-					             	<input value="" type="hidden" placeholder="Buscar Elemento">
-					              	<i class="dropdown icon"></i>
-					              	<input tabindex="0" class="search" type="text">
-					              	<div class="text"></div>
-								</div>
+							<div class="ui search selection dropdown capitalize buscar_objeto">
+				             	<input value="" type="hidden" placeholder="Buscar Elemento">
+				              	<i class="dropdown icon"></i>
+				              	<input tabindex="0" class="search" type="text">
+				              	<div class="text"></div>
 							</div>
 						</div>
 		     		</div>
