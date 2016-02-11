@@ -76,65 +76,6 @@ simci.controller('InventarioController', [
 
     if($location.$$url == "/inventario/registrar-almacen"){
       $scope.mostrar_mensaje = false;
-      
-      /*$scope.registrar_almacen = function(){
-        
-        var formulario = $('#formulario_registrar_almacen');
-        var is_valid_form = formulario.form(reglas_formulario_registrar_almacen).form('is valid');
-
-        if(is_valid_form){
-            
-            //Activamos el loading
-            ToolsService.loading_button('btn-registrar',true);    
-
-            $http({
-              method: 'POST',
-              url: '/api/inventario/registrar-almacen',
-              data: $scope.DatosForm
-            }).then(function(data){
-
-              if(data.data.resultado){
-                
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Almacen creado con exito',
-                  icono: 'checkmark',
-                  color: 'green',
-                  mensajes: ['El almacen ha sido registrado en la base de datos.']
-                };
-
-                $timeout(function(){
-                  //Desactivamos el loading
-                  ToolsService.loading_button('btn-registrar',false);    
-                  formulario.form('clear');
-                }, 0, false);
-
-              }
-              else{
-
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Hubo un error al guardar el formulario',
-                  icono: 'remove',
-                  color: 'red',
-                  mensajes: data.data.mensajes
-                };
-              }
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-
-            },function(data_error){
-
-              $scope.mostrar_mensaje = true;
-              $scope.mensaje_validacion = ToolsService.get_mensaje_fail_http(data_error);
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-            });
-            
-        } //If condicional
-      }*/
 
       $scope.registrar_almacen = ToolsService.registrar_dinamico($scope,$http,$timeout,{
         url: '/api/inventario/registrar-almacen',

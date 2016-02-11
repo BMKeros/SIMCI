@@ -631,18 +631,20 @@ var reglas_formulario_registrar_almacen = {
    inline: true
  };
 
-var reglas_formulario_registrar_estante = {
+var reglas_formulario_registrar_sub_dimension = {
   on: 'blur',
    duration: 40,
    fields: {
 
       codigo: {
-        identifier: 'codigo',
+        identifier: 'cod_estante',
         rules:[
           {
               type:'empty',
               prompt:'Este campo no puede quedar vacio'
-          },
+          }
+        ]
+      },
 
       descripcion: {
         identifier: 'descripcion',
@@ -664,4 +666,4 @@ var reglas_formulario_registrar_estante = {
 
     },
    inline: true
- };
+};

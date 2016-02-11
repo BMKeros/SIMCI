@@ -23,7 +23,7 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Responsable</label>
-							{{ Form::select_responsables (array('name'=>'responsable', 'id'=>'responsable','ng-model'=>'DatosForm.responsable'))}}
+							{{ Form::select_personas (array('name'=>'persona', 'id'=>'persona','ng-model'=>'DatosForm.persona'))}}
 						</div>
 					</div>
 				</div>
@@ -32,12 +32,12 @@
 					<div class="two fields">	
 						<div class="field">
 							<label>Primer Auxiliar</label>
-							{{ Form::select_auxiliar (array('name'=>'primer_auxiliar', 'id'=>'primer_auxiliar','ng-model'=>'DatosForm.primer_auxiliar'))}}
+							{{ Form::select_personas (array('name'=>'primer_auxiliar', 'id'=>'primer_auxiliar','ng-model'=>'DatosForm.primer_auxiliar'))}}
 						</div>
 
 						<div class="field">
 							<label>Segundo Auxiliar</label>
-							{{ Form::select_auxiliar (array('name'=>'segundo_auxiliar', 'id'=>'segundo_auxiliar','ng-model'=>'DatosForm.segundo_auxiliar'))}}
+							{{ Form::select_personas (array('name'=>'segundo_auxiliar', 'id'=>'segundo_auxiliar','ng-model'=>'DatosForm.segundo_auxiliar'))}}
 						</div>
 					</div>
 				</div>
