@@ -33,6 +33,14 @@
 
   window.TOOLS_APP = TOOLS;
 
+  //Constantes de tipos de usuario
+  window.TIPO_USER_ROOT = 'TU01';
+  window.TIPO_USER_ADMIN = 'TU02';
+  window.TIPO_USER_PROFESOR = 'TU03';
+  window.TIPO_USER_ESTUDIANTE = 'TU04';
+  window.TIPO_USER_ALMACENISTA = 'TU05';
+  window.TIPO_USER_SUPERVISOR = 'TU06';
+
 })();
 
 
