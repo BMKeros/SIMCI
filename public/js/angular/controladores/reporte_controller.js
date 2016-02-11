@@ -29,14 +29,14 @@ simci.controller('ReporteController', [
         nombre:"crear reporte",
         descripcion: "Esta opcion le permitira crear reportes",
         url: "#/reporte/crear-reporte",
-        icono: 'save'
+        icono: 'write'
       },
       
       {
         nombre:"mostrar reporte",
         descripcion: "Esta opcion le permitira ver los reportes existentes",
         url: "#/reporte/ver/todos",
-        icono: 'save'
+        icono: 'eye'
       }
 
     ];

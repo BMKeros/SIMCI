@@ -29,14 +29,14 @@ simci.controller('DocumentosController', [
         nombre:"crear documentos",
         descripcion: "Esta opcion le permitira enviar documentos",
         url: "#/documentos/enviar-documentos",
-        icono: 'save'
+        icono: 'write'
       },
 
       {
         nombre:"mostrar documentos",
         descripcion: "Esta opcion le permitira mostrar los documentos enviados y recibidos",
         url: "#/documentos/recibir/mostrar-todos",
-        icono: 'save'
+        icono: 'unhide'
       }
       
 

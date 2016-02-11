@@ -37,7 +37,7 @@
 
 						<div class="field">
 							<label>Segundo Auxiliar</label>
-							{{ Form::select_personas (array('name'=>'segundo_auxiliar', 'id'=>'segundo_auxiliar','ng-model'=>'DatosForm.segundo_auxiliar'))}}
+							{{ Form::select_persona (array('name'=>'segundo_auxiliar', 'id'=>'segundo_auxiliar','ng-model'=>'DatosForm.segundo_auxiliar'))}}
 						</div>
 					</div>
 				</div>

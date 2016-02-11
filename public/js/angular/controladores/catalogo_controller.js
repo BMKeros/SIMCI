@@ -29,7 +29,7 @@ simci.controller('CatalogoController', [
         nombre:"registrar objeto",
         descripcion: "Esta opcion le permitira añadir nuevos objetos al catalogo",
         url: "#/catalogo/registrar-objeto",
-        icono: 'save'
+        icono: 'write'
       },
       {
         nombre:"ver catalogo",
@@ -41,13 +41,13 @@ simci.controller('CatalogoController', [
         nombre:"registrar unidad",
         descripcion: "Esta opcion le permitira añadir nuevas unidades para objetos del catalogo",
         url: "#/catalogo/registrar-unidad",
-        icono: 'save'
+        icono: 'write'
       },
       {
         nombre:"registrar clase",
         descripcion: "Esta opcion le permitira añadir nuevas clases para objetos del objetos",
         url: "#/catalogo/registrar-clase",
-        icono: 'save'
+        icono: 'write'
       }
     ];
     

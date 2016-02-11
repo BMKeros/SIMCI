@@ -29,14 +29,14 @@ simci.controller('OrdenesController', [
         nombre:"generar ordenes",
         descripcion: "Esta opcion le permitira crear ordenes",
         url: "#/ordenes/crear-ordenes",
-        icono: 'save'
+        icono: 'write'
       },
       
       {
         nombre:"mostrar ordenes",
         descripcion: "Esta opcion le permitira ver las ordenes existentes",
         url: "#/ordenes/ver/todos",
-        icono: 'save'
+        icono: 'unhide'
       }
 
     ];

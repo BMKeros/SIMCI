@@ -29,7 +29,7 @@ simci.controller('ConsultaController', [
         nombre:"consulta",
         descripcion: "Esta opcion le permitira observar la disponibilidad del inventario y realizar busquedas",
         url: "#/consulta/realizar-consultas",
-        icono: 'save'
+        icono: 'unhide'
       },
       
 
