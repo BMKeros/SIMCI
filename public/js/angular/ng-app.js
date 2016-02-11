@@ -13,7 +13,7 @@
 
   simci.filter('inArray', function() {
     return function(array, value) {
-        return array.indexOf(value) !== -1;
+        return Array.isArray(array) && array.indexOf(value) !== -1;
     };
   });
 
@@ -73,6 +73,10 @@
         }
 
         return objeto;
+      },
+      //Funcion para obtener la data del usuario guardada en el localstorage
+      get_data_user_localstorage: function(){
+        return JSON.parse(localStorage.getItem('data_usuario'));
       },
       //Funcion para el registro dinamico de todos los controladores
       registrar_dinamico: function($_SCOPE,$_HTTP,$_TIMEOUT,opciones){
