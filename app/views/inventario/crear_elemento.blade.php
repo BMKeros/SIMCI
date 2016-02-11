@@ -21,12 +21,12 @@
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
-				      		<label>Almacen</label>
+				      		<label>Dimension</label>
 							{{  Form::select_dimension(array('name'=>'cod_dimension','id'=>'cod_dimension', 'ng-model'=>'cod_dimension')) }}
 			     		</div>
 
 			     		<div class="field">
-				      		<label>Estantes</label>
+				      		<label>Sub-Dimension</label>
 								{{  Form::select_sub_dimension(array('name'=>'cod_sub_dimension','id'=>'cod_sub_dimension', 'ng-model'=>'cod_sub_dimension')) }}
 						</div>
 		     		</div>
@@ -40,7 +40,7 @@
 			     		</div>
 
 			     		<div class="field">
-				      		<label>Sub-agrupaciones del Producto</label>
+				      		<label>Sub-agrupacion</label>
 							{{-- Form::select_sub_agrupacion(array('name'=>'cod_sub_agrupacion', 'id'=>'cod_sub_agrupacion', 'ng-model'=>'cod_sub_agrupacion')) --}}
 						</div>
 

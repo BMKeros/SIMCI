@@ -15,17 +15,45 @@
       			</a>
       			
       			<div class="right menu">
-      				<a class="item">
-      					Notificaciones
-      					<div class="ui red label">10</div>
-      				</a>
-			      	<div class="ui simple dropdown item">
-	  					{{-- ucfirst(Auth::user()->usuario )--}}	
-				     	<i class="dropdown icon"></i>
-				      	<div class="menu">
-				        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
-				      	</div>
-				    </div>
+      				
+      				<div class="ui pointing dropdown link item">
+    					Notificaciones
+    					<div class="ui red label">22</div>
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
+      						<div class="header">Novedades</div>
+				          	<a class="item">Shirts</a>
+				          	<a class="item">Pants</a>
+				          	<a class="item">Jeans</a>
+				        </div>
+      				</div>
+
+      				<div class="ui dropdown item">
+						Usuario
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
+      						<div class="item">
+        						<div class="ui card">
+  									<div class="image">
+    									<img src="{{ Auth::user()->imagen }}">
+  									</div>
+  									<div class="content">
+    									<a class="header">{{ ucfirst(Auth::user()->usuario) }}</a>
+    									<div class="meta">
+      										<span class="date">Tipo: {{ Auth::user()->nombre_tipo_usuario() }}</span>
+    									</div>
+    									<div class="description">
+      										{{ Auth::user()->nombre_corto()}}
+    									</div>
+  									</div>
+  									<div class="extra content">
+    									<a href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
+  									</div>
+								</div>
+      						</div>
+      					</div>
+      				</div>
+
 				</div>
     		</div>
 		</div>
@@ -96,6 +124,10 @@
 		    		context: 'body',
 		    	})
 		    	.sidebar('toggle');
+		  	});
+
+		  	$('.ui.dropdown').dropdown({
+		  		transition: 'drop'
 		  	});
 		});
 	</script>

@@ -49,9 +49,7 @@
 
 			$(document).ready(function(){
 				TOOLS_APP.ver_reloj();
-				var sound = new Howl({
-  					urls: ['/sonidos/sound-noti1.wav']
-				}).play();			
+				TOOLS_APP.listen_notificaciones();
 			});
 			
 		</script>

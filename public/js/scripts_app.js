@@ -1,6 +1,17 @@
 (function(){
   
   var TOOLS = {
+    intervalo_notificaciones: 600000
+    ,
+    sonido_notificacion: function(){
+      return new Howl({ urls: ['/sonidos/sound-noti1.wav'] });
+    },
+    listen_notificaciones: function(){
+      var sound = this.sonido_notificacion();
+      setInterval(function(){
+        sound.play();
+      },this.intervalo_notificaciones);
+    },
     ver_reloj: function(){
       setInterval(function(){
         angular.element('#reloj').text(moment().format('H:mm:ss A'))
