@@ -26,7 +26,7 @@ simci.controller('OrdenesController', [
     
     $scope.modulo.opciones = [
       {
-        nombre:"crear ordenes",
+        nombre:"generar ordenes",
         descripcion: "Esta opcion le permitira crear ordenes",
         url: "#/ordenes/crear-ordenes",
         icono: 'save'

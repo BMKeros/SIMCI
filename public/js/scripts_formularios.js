@@ -633,11 +633,11 @@ var reglas_formulario_registrar_almacen = {
 
 var reglas_formulario_registrar_estante = {
   on: 'blur',
-    duration: 40,
-    fields: {
+   duration: 40,
+   fields: {
 
       codigo: {
-        identifier: 'codigo_estante',
+        identifier: 'codigo',
         rules:[
           {
               type:'empty',
@@ -656,11 +656,11 @@ var reglas_formulario_registrar_estante = {
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
-            type:'maxLength[15]',
+            type:'maxLength[150]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           }
         ]
-      },
+      }
 
     },
    inline: true
