@@ -61,63 +61,18 @@ simci.controller('CatalogoController', [
         $scope.mostrar_mensaje = false;
         $scope.mostrar_mensaje_modificacion = false;
 
-        $scope.registrar_objeto = function(){
-        
-          var formulario = $('#formulario_crear_objeto');
-          var is_valid_form = formulario.form(reglas_formulario_crear_objeto).form('is valid');
+        $scope.registrar_objeto = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+          url: '/api/catalogo/registrar-objeto',
+          formulario:{
+            id:'formulario_crear_objeto',
+            reglas: reglas_formulario_crear_objeto
+          },
+          exito:{
+            titulo: 'Objeto creado con exito',
+            mensajes: ['El Objeto ha sido agregado al catalogo.']
+          }
+        });
 
-          if(is_valid_form){
-            
-            //Activamos el loading
-            ToolsService.loading_button('btn-registrar',true);
-
-            $http({
-              method: 'POST',
-              url: '/api/catalogo/registrar-objeto',
-              data: $scope.DatosForm
-            }).then(function(data){
-
-              if(data.data.resultado){
-                
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Objeto creado con exito',
-                  icono: 'checkmark',
-                  color: 'green',
-                  mensajes: ['El Objeto ha sido agregado al catalogo.']
-                };
-
-                $timeout(function(){
-                  //Desactivamos el loading
-                  ToolsService.loading_button('btn-registrar',false);
-                  formulario.form('clear');
-                }, 0, false);
-
-              }
-              else{
-
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Hubo un error al guardar la informacion',
-                  icono: 'remove',
-                  color: 'red',
-                  mensajes: data.data.mensajes
-                };
-              }
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-
-            },function(data_error){
-
-              console.log(data_error);
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-            });
-            
-          } //If condicional
-        }
     
       }// If == '/catalogo/registrar-objeto'
 

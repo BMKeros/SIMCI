@@ -39,7 +39,7 @@ simci.controller('UsuariosController', [
       },
       {
         nombre:"crear permisos",
-        descripcion: "Opcion se podran crear nuevos permisos de usuarios para el sistema",
+        descripcion: "Opcion para crear nuevos permisos de usuarios para el sistema",
         url: "#/usuarios/crear/permiso",
         icono: 'user'
       },
@@ -51,7 +51,7 @@ simci.controller('UsuariosController', [
       },*/
       {
         nombre:"crear tipos de usuario",
-        descripcion: "Opcion para Ver, Actualizar, Eliminar los permisos registrados en el sistema",
+        descripcion: "Opcion para crear nuevos tipos de usuarios",
         url: "#/usuarios/crear/tipo-usuario",
         icono: 'user'
       },
@@ -64,63 +64,17 @@ simci.controller('UsuariosController', [
         
         $scope.mostrar_mensaje = false;
 
-        $scope.registrar_usuario = function(){
-        
-          var formulario = $('#formulario_crear_usuario');
-          var is_valid_form = formulario.form(reglas_formulario_crear_usuario).form('is valid');
-
-          if(is_valid_form){
-            
-            //Activamos el loading
-            $('#btn-registrar').addClass('loading').prop('disabled',true);
-
-            $http({
-              method: 'POST',
-              url: '/api/usuarios/crear-usuario-completo',
-              data: $scope.DatosForm
-            }).then(function(data){
-
-              if(data.data.resultado){
-                
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Usuario creado con exito',
-                  icono: 'checkmark',
-                  color: 'green',
-                  mensajes: ['El usuario ha sido almacenado en la base de datos.']
-                };
-
-                $timeout(function(){
-                  //Desactivamos el loading
-                  $('#btn-registrar').removeClass('loading').prop('disabled',false);
-                  formulario.form('clear');
-                }, 0, false);
-
-              }
-              else{
-
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Hubo un error al guardar el formulario',
-                  icono: 'remove',
-                  color: 'red',
-                  mensajes: data.data.mensajes
-                };
-              }
-
-              //Desactivamos el loading
-              $('#btn-registrar').removeClass('loading').prop('disabled',false);
-
-            },function(data_error){
-
-              console.log(data_error);
-
-              //Desactivamos el loading
-              $('#btn-registrar').removeClass('loading').prop('disabled',false);
-            });
-            
-          } //If condicional
-        }
+        $scope.registrar_usuario = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+          url: '/api/usuarios/crear-usuario-completo',
+          formulario:{
+            id:'formulario_crear_usuario',
+            reglas: reglas_formulario_crear_usuario
+          },
+          exito:{
+            titulo: 'Usuario creado con exito',
+            mensajes: ['El usuario ha sido almacenado en la base de datos.']
+          }
+        });
     
     }// If == '/usuarios/crear'
 
@@ -333,126 +287,34 @@ simci.controller('UsuariosController', [
         $scope.mostrar_mensaje = false;
         $scope.DatosForm = {};
 
-        $scope.registrar_permiso = function(){
-        
-          var formulario = $('#formulario_crear_permiso');
-          var is_valid_form = formulario.form(reglas_formulario_crear_permiso).form('is valid');
-
-          if(is_valid_form){
-            
-            //Activamos el loading
-            ToolsService.loading_button('btn-registrar',true);
-
-            $http({
-              method: 'POST',
-              url: '/api/usuarios/registrar-permiso',
-              data: $scope.DatosForm
-            }).then(function(data){
-
-              if(data.data.resultado){
-                
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Permiso creado con exito',
-                  icono: 'checkmark',
-                  color: 'green',
-                  mensajes: ['Permiso registrado en la base de datos']
-                };
-
-                $timeout(function(){
-                  //Desactivamos el loading
-                  ToolsService.loading_button('btn-registrar',false);
-                  formulario.form('clear');
-                }, 0, false);
-
-              }
-              else{
-
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Hubo un error al guardar la informacion',
-                  icono: 'remove',
-                  color: 'red',
-                  mensajes: data.data.mensajes
-                };
-              }
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-
-            },function(data_error){
-
-              console.log(data_error);
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-            });
-            
-          } //If condicional
-        }
+        $scope.registrar_permiso = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+          url: '/api/usuarios/registrar-permiso',
+          formulario:{
+            id:'formulario_crear_permiso',
+            reglas: reglas_formulario_crear_permiso
+          },
+          exito:{
+            titulo: 'Permiso creado con exito',
+            mensajes: ['Permiso registrado en la base de datos.']
+          }
+        });
       }// If == '/usuarios/crear/permiso'
 
       if($location.$$url == '/usuarios/crear/tipo-usuario'){
         $scope.mostrar_mensaje = false;
         $scope.DatosForm = {};
 
-        $scope.registrar_tipo_usuario = function(){
-        
-          var formulario = $('#formulario_crear_tipo_usuario');
-          var is_valid_form = formulario.form(reglas_formulario_crear_tipo_usuario).form('is valid');
-
-          if(is_valid_form){
-            
-            //Activamos el loading
-            ToolsService.loading_button('btn-registrar',true);
-
-            $http({
-              method: 'POST',
-              url: '/api/usuarios/registrar-tipo-usuario',
-              data: $scope.DatosForm
-            }).then(function(data){
-
-              if(data.data.resultado){
-                
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Tipo de usuario creado con exito',
-                  icono: 'checkmark',
-                  color: 'green',
-                  mensajes: ['Tipo de usuario guardado en la base de datos']
-                };
-
-                $timeout(function(){
-                  //Desactivamos el loading
-                  ToolsService.loading_button('btn-registrar',false);
-                  formulario.form('clear');
-                }, 0, false);
-
-              }
-              else{
-
-                $scope.mostrar_mensaje = true;
-                $scope.mensaje_validacion = {
-                  titulo: 'Hubo un error al guardar la informacion',
-                  icono: 'remove',
-                  color: 'red',
-                  mensajes: data.data.mensajes
-                };
-              }
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-
-            },function(data_error){
-
-              console.log(data_error);
-
-              //Desactivamos el loading
-              ToolsService.loading_button('btn-registrar',false);
-            });
-            
-          } //If condicional
-        }
+        $scope.registrar_tipo_usuario = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+          url: '/api/usuarios/registrar-tipo-usuario',
+          formulario:{
+            id:'formulario_crear_tipo_usuario',
+            reglas: reglas_formulario_crear_tipo_usuario
+          },
+          exito:{
+            titulo: 'Tipo de usuario creado con exito',
+            mensajes: ['Tipo de usuario guardado en la base de datos.']
+          }
+        });
       }// If == '/catalogo/registrar-clase'
 
     
