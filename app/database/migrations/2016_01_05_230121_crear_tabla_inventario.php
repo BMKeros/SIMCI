@@ -18,7 +18,7 @@ class CrearTablaInventario extends Migration {
 			$table->integer('cod_dimension');
 			$table->integer('cod_subdimension');
 			$table->integer('cod_agrupacion');
-			//$table->integer('cod_subagrupacion');
+			$table->integer('cod_subagrupacion');
 			$table->integer('numero_orden');
 			$table->integer('cod_objeto');
 			$table->decimal('cantidad_disponible');
