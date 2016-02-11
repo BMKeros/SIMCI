@@ -1,7 +1,8 @@
 (function(){
   
   var TOOLS = {
-    intervalo_notificaciones: 100000,
+    intervalo_notificaciones: 600000
+    ,
     sonido_notificacion: function(){
       return new Howl({ urls: ['/sonidos/sound-noti1.wav'] });
     },
