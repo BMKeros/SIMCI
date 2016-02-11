@@ -631,7 +631,7 @@ var reglas_formulario_registrar_almacen = {
    inline: true
  };
 
-var reglas_formulario_registrar_estante = {
+var reglas_formulario_registrar_sub_dimension = {
   on: 'blur',
    duration: 40,
    fields: {
