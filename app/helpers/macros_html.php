@@ -180,25 +180,7 @@ Form::macro('select_unidades', function($atributos = null, $selected = null){
 	}
 });
 
-Form::macro('select_responsables', function($atributos = null, $selected = null){
-
-	$usuarios = DB::table('usuarios')->lists('usuario', 'id');
-
-	$default_values = array('class'=>"ui dropdown search capitalize");
-
-	$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
-	$html .= '<option value="">Responsables</option>';
-		
-	foreach ($usuarios as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
-	}
-		
-	$html .= '</select>';
-
-	return $html;
-});
-
-Form::macro('select_auxiliar', function($atributos = null, $selected = null){
+Form::macro('select_personas', function($atributos = null, $selected = null){
 
 	$personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'id')->get();
 
