@@ -9,11 +9,16 @@ define('TIPO_USER_ESTUDIANTE','TU04');
 define('TIPO_USER_ALMACENISTA','TU05');
 define('TIPO_USER_SUPERVISOR','TU06');
 
+//sexo
+
+define('SEXO_MASCULINO', 10);
+define('SEXO_FEMENINO', 20);
 
 /// PATH
-
 define('PATH_IMAGENES','/uploads/imagenes/');
-
+define('PATH_AVATAR_MASCULINO', '/img/masculino.jpg');
+define('PATH_AVATAR_FEMENINO', '/img/femenino.jpg');
+define('PATH_NO_AVATAR', '/img/no-avatar.png');
 
 //NOMENCLATURAS
 
