@@ -17,6 +17,8 @@ simci.controller('LaboratorioController', [
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
+
 
     $scope.modulo.nombre = "Laboratorio";
     $scope.modulo.icono = {
@@ -29,14 +31,16 @@ simci.controller('LaboratorioController', [
         nombre:"registrar laboratorio",
         descripcion: "Esta opcion le permitira añadir nuevos laboratorios",
         url: "#/laboratorio/crear-laboratorio",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
       
       {
         nombre:"mostrar laboratorio",
         descripcion: "Esta opcion le permitira ver los nuevos laboratorios",
         url: "#/laboratorio/ver/todos",
-        icono: 'unhide'
+        icono: 'unhide',
+        show_in:[TIPO_USER_ROOT]
       },
 
 
@@ -44,7 +48,8 @@ simci.controller('LaboratorioController', [
         nombre:"agregar stock",
         descripcion: "Esta opcion le permitira agregar nuevos stock al laboratorios",
         url: "#/laboratorio/registrar-stock",
-        icono: 'plus'
+        icono: 'plus',
+        show_in:[TIPO_USER_ROOT]
       },
 
 
@@ -52,14 +57,16 @@ simci.controller('LaboratorioController', [
         nombre:"mostrar stock",
         descripcion: "Esta opcion le permitira ver los nuevos stock y moverlos a nuevos laboratorios",
         url: "#/laboratorio/mostrar-stock",
-        icono: 'eye'
+        icono: 'eye',
+        show_in:[TIPO_USER_ROOT]
       },
 
        {
         nombre:"mover stock",
         descripcion: "Esta opcion le permitira mover los stock del laboratorios y moverlos a nuevos laboratorios",
         url: "#/laboratorio/mover-stock",
-        icono: 'external'
+        icono: 'external',
+        show_in:[TIPO_USER_ROOT]
       }
 
     ];

@@ -17,6 +17,8 @@ simci.controller('InventarioController', [
     $scope.modulo = {};
 
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
+
 
     $scope.modulo.nombre = "Inventario";
     $scope.modulo.icono = {
@@ -29,43 +31,50 @@ simci.controller('InventarioController', [
         nombre:"registrar elemento",
         descripcion: "Esta opcion le permitira registrar nuevos elementos en el inventario",
         url: "#/inventario/registrar-elemento",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"entrada / salida",
         descripcion: "Esta opcion le permitira dar entrada o salida al los objetos del inventario",
         url: "#/inventario/ver/todos",
-        icono: 'compress'
+        icono: 'compress',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"ver inventario",
         descripcion: "Esta opcion le permitira ver los elementos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
         url: "#/inventario/ver/todos",
-        icono: 'eye'
+        icono: 'eye',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"registrar almacen",
         descripcion: "Opcion para crear nuevos almacenes",
         url: "#/inventario/registrar-almacen",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"sub dimension",
         descripcion: "Opcion para crear sub dimenciones",
         url: "#/inventario/registrar-estante",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"crear agrupacion",
         descripcion: "Esta opcion le permitira crear las agrupaciones por las cuales se ordenaran los elementos",
         url: "#/",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"crear subagrupacion",
         descripcion: "Opcion para crear alguna caracteristica por la cual tambien ordenar elementos",
         url: "#/",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
       
     ];

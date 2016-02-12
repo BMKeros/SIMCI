@@ -17,6 +17,7 @@ simci.controller('DocumentosController', [
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
 
     $scope.modulo.nombre = "Documentos";
     $scope.modulo.icono = {
@@ -29,14 +30,16 @@ simci.controller('DocumentosController', [
         nombre:"crear documentos",
         descripcion: "Esta opcion le permitira enviar documentos",
         url: "#/documentos/enviar-documentos",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
 
       {
         nombre:"mostrar documentos",
         descripcion: "Esta opcion le permitira mostrar los documentos enviados y recibidos",
         url: "#/documentos/recibir/mostrar-todos",
-        icono: 'unhide'
+        icono: 'unhide',
+        show_in:[TIPO_USER_ROOT]
       }
       
 

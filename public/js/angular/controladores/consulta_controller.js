@@ -17,6 +17,8 @@ simci.controller('ConsultaController', [
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
+
 
     $scope.modulo.nombre = "Consulta";
     $scope.modulo.icono = {
@@ -29,7 +31,8 @@ simci.controller('ConsultaController', [
         nombre:"consulta",
         descripcion: "Esta opcion le permitira observar la disponibilidad del inventario y realizar busquedas",
         url: "#/consulta/realizar-consultas",
-        icono: 'unhide'
+        icono: 'unhide',
+        show_in: [TIPO_USER_ROOT]
       },
       
 

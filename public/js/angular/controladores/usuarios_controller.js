@@ -17,6 +17,8 @@ simci.controller('UsuariosController', [
     $scope.modulo = {};
 
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
+
 
     $scope.modulo.nombre = "Usuarios";
     $scope.modulo.icono = {
@@ -29,19 +31,22 @@ simci.controller('UsuariosController', [
         nombre:"crear usuarios",
         descripcion: "Opcion para crear nuevos usuarios en el sistema",
         url: "#/usuarios/crear",
-        icono: 'user'
+        icono: 'user',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"ver usuarios",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los usuarios registrados en el sistema",
         url: "#/usuarios/ver/todos",
-        icono: 'eye'
+        icono: 'eye',
+        show_in:[TIPO_USER_ROOT]
       },
       {
         nombre:"crear permisos",
         descripcion: "Opcion para crear nuevos permisos de usuarios para el sistema",
         url: "#/usuarios/crear/permiso",
-        icono: 'user'
+        icono: 'user',
+        show_in:[TIPO_USER_ROOT]
       },
       /*{
         nombre:"ver permisos",

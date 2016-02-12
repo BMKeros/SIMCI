@@ -17,6 +17,8 @@ simci.controller('ReporteController', [
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
+
 
     $scope.modulo.nombre = "Reporte";
     $scope.modulo.icono = {
@@ -29,14 +31,16 @@ simci.controller('ReporteController', [
         nombre:"crear reporte",
         descripcion: "Esta opcion le permitira crear reportes",
         url: "#/reporte/crear-reporte",
-        icono: 'write'
+        icono: 'write',
+        show_in:[TIPO_USER_ROOT]
       },
       
       {
         nombre:"mostrar reporte",
         descripcion: "Esta opcion le permitira ver los reportes existentes",
         url: "#/reporte/ver/todos",
-        icono: 'eye'
+        icono: 'eye',
+        show_in:[TIPO_USER_ROOT]
       }
 
     ];

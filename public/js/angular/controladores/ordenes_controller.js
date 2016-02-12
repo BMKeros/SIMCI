@@ -17,6 +17,8 @@ simci.controller('OrdenesController', [
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
+    $scope.data_global_user = ToolsService.get_data_user_localstorage();
+
 
     $scope.modulo.nombre = "Ordenes";
     $scope.modulo.icono = {
@@ -29,14 +31,16 @@ simci.controller('OrdenesController', [
         nombre:"generar ordenes",
         descripcion: "Esta opcion le permitira crear ordenes",
         url: "#/ordenes/crear-ordenes",
-        icono: 'write'
+        icono: 'write',
+        show_in: [TIPO_USER_ROOT]
       },
       
       {
         nombre:"mostrar ordenes",
         descripcion: "Esta opcion le permitira ver las ordenes existentes",
         url: "#/ordenes/ver/todos",
-        icono: 'unhide'
+        icono: 'unhide',
+        show_in: [TIPO_USER_ROOT]
       }
 
     ];

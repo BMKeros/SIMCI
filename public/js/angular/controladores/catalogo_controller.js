@@ -25,6 +25,7 @@ simci.controller('CatalogoController', [
     $scope.modulo.icono = {
       tipo: "book",
       color: "orange"
+
     };
     
     $scope.modulo.opciones = [
@@ -40,18 +41,21 @@ simci.controller('CatalogoController', [
         descripcion: "Esta opcion le permitira ver, modificar o eliminar los objetos del catalogos",
         url: "#/catalogo/ver/todos",
         icono: 'eye',
+        show_in: [TIPO_USER_ROOT]
       },
       {
         nombre:"registrar unidad",
         descripcion: "Esta opcion le permitira añadir nuevas unidades para objetos del catalogo",
         url: "#/catalogo/registrar-unidad",
         icono: 'write',
+        show_in: [TIPO_USER_ROOT]
       },
       {
         nombre:"registrar clase",
         descripcion: "Esta opcion le permitira añadir nuevas clases para objetos del objetos",
         url: "#/catalogo/registrar-clase",
         icono: 'write',
+        show_in: [TIPO_USER_ROOT]
       }
     ];
     
