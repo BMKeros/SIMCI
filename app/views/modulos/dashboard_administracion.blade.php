@@ -29,6 +29,7 @@
       				</div>
 
       				<div class="ui dropdown item">
+      					<img class="ui right spaced avatar image" src="{{ Auth::user()->get_avatar() }}">
 						Usuario
     					<i class="dropdown icon"></i>
     					<div class="menu">
