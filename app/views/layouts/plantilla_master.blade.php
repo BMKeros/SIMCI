@@ -28,7 +28,7 @@
 
 	<body>
 		
-		<div class="contenedorPadre" id="contenedorPadre">
+		<div class="contenedorPadre">
 			@yield('contenido-body-master')
 		</div>
 
