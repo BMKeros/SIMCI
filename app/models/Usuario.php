@@ -34,7 +34,19 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     	return ucfirst($this->tipousuario->nombre);
     }
 
-
+    public function get_avatar(){
+    	if($this->persona){
+    		if($this->persona->sexo_id == SEXO_MASCULINO){
+    			return PATH_AVATAR_MASCULINO;
+    		}
+    		else{
+    			return PATH_AVATAR_FEMENINO;
+    		}
+    	}
+    	else{
+    		return PATH_NO_AVATAR;
+    	}
+    }
 
     public function getDataPermisosAttribute(){
         return $this->permisos->toArray();
