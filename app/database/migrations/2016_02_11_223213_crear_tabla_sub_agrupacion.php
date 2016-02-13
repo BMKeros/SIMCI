@@ -12,12 +12,12 @@ class CrearTablaSubAgrupacion extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sub_agrupaciones', function(Blueprint $table)
+		Schema::create('sub_agrupaciones', function($table)
 		{
 			$table->string('codigo', 3);
 			$table->primary('codigo');
-			$table->string('nombre');
-			$table->string('descripcion');
+			$table->string('nombre', 50);
+			$table->string('descripcion', 50);
 			$table->nullableTimestamps();
 		});
 	}

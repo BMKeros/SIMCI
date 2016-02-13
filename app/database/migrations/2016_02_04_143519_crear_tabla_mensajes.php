@@ -12,7 +12,7 @@ class CrearTablaMensajes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('mensajes', function(Blueprint $table)
+		Schema::create('mensajes', function($table)
 		{
 			$table->increments('id');
 			$table->string('mensaje', 200);

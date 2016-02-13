@@ -12,7 +12,7 @@ class CrearTablaPersonas extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('personas', function(Blueprint $table)
+		Schema::create('personas', function($table)
 		{
 			$table->increments('id');
 			$table->string('primer_nombre', 15);

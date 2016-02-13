@@ -12,11 +12,11 @@ class CrearTablaAgrupacion extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('agrupaciones', function(Blueprint $table)
+		Schema::create('agrupaciones', function($table)
 		{
 			$table->string('codigo', 3);
 			$table->primary('codigo');
-			$table->string('nombre', 20);
+			$table->string('nombre', 50);
 			$table->string('descripcion', 50);
 			$table->nullableTimestamps();
 		});
@@ -29,7 +29,7 @@ class CrearTablaAgrupacion extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('agrupaciones');
+		drop_cascade('agrupaciones');
 	}
 
 }

@@ -15,10 +15,10 @@ class CrearTablaInventario extends Migration {
 		Schema::create('inventario', function($table)
 		{
 			$table->increments('id');
-			$table->integer('cod_dimension');
-			$table->integer('cod_subdimension');
-			$table->integer('cod_agrupacion');
-			$table->integer('cod_subagrupacion');
+			$table->string('cod_dimension', 4);
+			$table->string('cod_subdimension', 3);
+			$table->string('cod_agrupacion', 3);
+			$table->string('cod_subagrupacion', 3);
 			$table->integer('numero_orden');
 			$table->integer('cod_objeto');
 			$table->decimal('cantidad_disponible');

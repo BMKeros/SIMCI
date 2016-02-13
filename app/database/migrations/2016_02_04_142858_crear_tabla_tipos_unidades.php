@@ -12,7 +12,7 @@ class CrearTablaTiposUnidades extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('tipos_unidades', function(Blueprint $table)
+		Schema::create('tipos_unidades', function($table)
 		{
 			$table->increments('id');
 			$table->string('nombre',20);

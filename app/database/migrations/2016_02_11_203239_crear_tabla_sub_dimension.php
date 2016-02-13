@@ -12,7 +12,7 @@ class CrearTablaSubDimension extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('sub_dimensiones', function(Blueprint $table)
+		Schema::create('sub_dimensiones', function($table)
 		{
 			$table->string('codigo', 3);
 			$table->primary('codigo');
@@ -28,7 +28,7 @@ class CrearTablaSubDimension extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('sub_dimensiones');
+		drop_cascade('sub_dimensiones');
 	}
 
 }
