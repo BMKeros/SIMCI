@@ -32,7 +32,7 @@ simci.controller('LaboratorioController', [
         descripcion: "Esta opcion le permitira añadir nuevos laboratorios",
         url: "#/laboratorio/crear-laboratorio",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       
       {
@@ -40,7 +40,7 @@ simci.controller('LaboratorioController', [
         descripcion: "Esta opcion le permitira ver los nuevos laboratorios",
         url: "#/laboratorio/ver/todos",
         icono: 'unhide',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
 
 
