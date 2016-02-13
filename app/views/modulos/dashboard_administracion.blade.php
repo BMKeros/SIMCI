@@ -142,12 +142,14 @@
 	<script>
 		$(document).ready(function(){
 
+			$('#contenedorPadre').addClass('backgroundPadre');
+
 			$("#btn-abrir-menu").click(function(){
 		    	$('#menu-administracion')
 		    	.sidebar({
 		    		transition:'overlay',
-		    		dimPage: false,
-		    		context: 'body',
+		    		dimPage: true,
+		    		context: $('body'),
 		    	})
 		    	.sidebar('toggle');
 		  	});
