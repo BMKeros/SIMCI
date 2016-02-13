@@ -15,17 +15,46 @@
       			</a>
       			
       			<div class="right menu">
-      				<a class="item">
-      					Notificaciones
-      					<div class="ui red label">10</div>
-      				</a>
-			      	<div class="ui simple dropdown item">
-	  					{{-- ucfirst(Auth::user()->usuario )--}}	
-				     	<i class="dropdown icon"></i>
-				      	<div class="menu">
-				        	<a class="item" href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
-				      	</div>
-				    </div>
+      				
+      				<div class="ui pointing dropdown link item">
+    					Notificaciones
+    					<div class="ui red label">22</div>
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
+      						<div class="header">Novedades</div>
+				          	<a class="item">Shirts</a>
+				          	<a class="item">Pants</a>
+				          	<a class="item">Jeans</a>
+				        </div>
+      				</div>
+
+      				<div class="ui dropdown item">
+      					<img class="ui right spaced avatar image" src="{{ Auth::user()->get_avatar() }}">
+						Usuario
+    					<i class="dropdown icon"></i>
+    					<div class="menu">
+      						<div class="item">
+        						<div class="ui card">
+  									<div class="image">
+    									<img src="{{ Auth::user()->imagen }}">
+  									</div>
+  									<div class="content">
+    									<a class="header">{{ ucfirst(Auth::user()->usuario) }}</a>
+    									<div class="meta">
+      										<span class="date">Tipo: {{ Auth::user()->nombre_tipo_usuario() }}</span>
+    									</div>
+    									<div class="description">
+      										{{ Auth::user()->nombre_corto()}}
+    									</div>
+  									</div>
+  									<div class="extra content">
+    									<a href="/autenticacion/logout"><i class="settings icon"></i>Salir</a>
+  									</div>
+								</div>
+      						</div>
+      					</div>
+      				</div>
+
 				</div>
     		</div>
 		</div>
@@ -38,39 +67,39 @@
   			Inicio
 		</a>
 	
-		<a class="item">
+		<a class="item" ng-href="#/usuarios">
   			<i class="user layout icon"></i>
   			Usuarios
 		</a>
 	
-		<a class="item">
+		<a class="item" ng-href="#/catalogo">
   			<i class="book icon"></i>
   			Catalogo
 		</a>
 
-		<a class="item">
+		<a class="item" ng-href="#/inventario">
   			<i class="archive icon"></i>
   			Inventario
 		</a>	
 	
-	   	<a class="item">
-  			<i class="mail icon"></i>
-  			Messages
+	   <a class="item" ng-href="#/ordenes">
+  			<i class="edit icon"></i>
+  			Ordenes
 		</a>
 	
-		<a class="item">
-  			<i class="chat icon"></i>
-  			Discussions
+		<a class="item" ng-href="#/laboratorio">
+  			<i class="lab icon"></i>
+  			Laboratorio
 		</a>
 	
-    	<a class="item">
-	      	<i class="trophy icon"></i>
-	      	Achievements
+    	<a class="item" ng-href="#/reporte">
+	      	<i class="file text outline icon"></i>
+	      	Reportes
     	</a>
 	
-    	<a class="item">
-	      	<i class="shop icon"></i>
-	      	Store
+    	<a class="item" ng-href="#/documentos">
+	      	<i class="travel icon"></i>
+	      	Documentos
     	</a>
 	
     	<a class="item">
@@ -113,14 +142,20 @@
 	<script>
 		$(document).ready(function(){
 
+			$('#contenedorPadre').addClass('backgroundPadre');
+
 			$("#btn-abrir-menu").click(function(){
 		    	$('#menu-administracion')
 		    	.sidebar({
 		    		transition:'overlay',
-		    		dimPage: false,
-		    		context: 'body',
+		    		dimPage: true,
+		    		context: $('body'),
 		    	})
 		    	.sidebar('toggle');
+		  	});
+
+		  	$('.ui.dropdown').dropdown({
+		  		transition: 'drop'
 		  	});
 		});
 	</script>
