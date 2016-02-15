@@ -39,7 +39,7 @@ simci.controller('UsuariosController', [
         descripcion: "Opcion para Ver, Actualizar, Eliminar los usuarios registrados en el sistema",
         url: "#/usuarios/ver/todos",
         icono: 'eye',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
       {
         nombre:"crear permisos",
@@ -58,7 +58,8 @@ simci.controller('UsuariosController', [
         nombre:"crear tipos de usuario",
         descripcion: "Opcion para crear nuevos tipos de usuarios",
         url: "#/usuarios/crear/tipo-usuario",
-        icono: 'user'
+        icono: 'user',
+        show_in:[TIPO_USER_ROOT]
       },
     ];
     
