@@ -518,49 +518,6 @@ class UsuariosController extends Controller {
 		}
 	}
 
-	public function postRegistrarPermiso(){
-		$nombre = Input::get('nombre');
-		$descripcion = Input::get('descripcion');
-
-		$reglas = array(
-            'nombre' =>'required|min:5|max:15|unique:permisos',
-            'descripcion' => 'required|min:5|max:150'
-        );
-
-	    $campos = array(
-	        'nombre'=>$nombre,
-	        'descripcion'=>$descripcion
-	    );
-
-        $mensajes = array(
-            'unique' => ':attribute ya existe',
-            'required' => ':attribute no puede estar en blanco',
-            'max' => ':attribute debe tener un maximo de :max caracteres',
-            'min' => ':attribute debe tener un minimo de :min caracteres',
-        );
-
-        $validacion = Validator::make($campos, $reglas, $mensajes);
-
-        if($validacion->fails()){
-        	return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
-        }
-        else{
-        	$nuevo_permiso = new Permiso;
-
-        	$num_perimso = DB::table('permisos')->count();
-
-        	//comentado porque al codigo se le igualara a una funcion ya esta probada y funciona (y)
-        	$nuevo_permiso->codigo = crear_codigo($num_perimso,"PERMISO");
-        	$nuevo_permiso->nombre = $nombre;
-        	$nuevo_permiso->descripcion = $descripcion;
-
-        	$nuevo_permiso->save();
-
-        	return Response::json(array('resultado' => true, 'mensajes' => 'Permiso creado con exito.'));
-        }
-
-	}
-
 	public function postRegistrarTipoUsuario(){
 		
 		$nombre = Input::get('nombre');

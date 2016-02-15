@@ -14,7 +14,7 @@ class CrearTablaPermisos extends Migration {
 	{
 		Schema::create('permisos', function($table)
 		{
-			$table->string('codigo',4);
+			$table->string('codigo',5);
 			$table->primary('codigo');
 			$table->string('nombre',15);
 			$table->string('descripcion',150);

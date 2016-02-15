@@ -103,6 +103,12 @@ function crear_codigo($numero = 1, $tipo_codigo = null){
 		else if($tipo_codigo == "TIPO_USUARIO"){
 			$codigo_tmp = CODIGO_TIPO_USUARIO;
 		}
+		else if($tipo_codigo == "INVENTARIO"){
+			$codigo_tmp = CODIGO_TIPO_INVENTARIO;	
+		}
+		else if($tipo_codigo == "LABORATORIO"){
+			$codigo_tmp = CODIGO_TIPO_LABORATORIO;	
+		}
 		else{
 			$codigo_tmp = '';
 		}		
@@ -112,16 +118,4 @@ function crear_codigo($numero = 1, $tipo_codigo = null){
 	else{
 		return null;
 	}
-}
-
-function crear_codigo_permiso($numero = 1){
-	//Se le debe incrementar uno porque va a ser un nuevo registro
-	$numero = $numero+1;
-	return sprintf("%s%s",CODIGO_PERMISO,agregar_ceros($numero,1));
-}
-
-function crear_codigo_laboratorio($numero = 1){
-	//Se le debe incrementar uno porque va a ser un nuevo registro
-	$numero = $numero+1;
-	return sprintf("%s%s",CODIGO_LABORATORIO,agregar_ceros($numero,1));
 }

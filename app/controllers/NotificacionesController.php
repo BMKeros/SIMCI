@@ -3,6 +3,84 @@
 		
 		//falta por desarrollar
 		public function getMostrar(){
+			$tipo_busqueda = Input::get('type', 'todos');
+			$id_usuario = Input::get('id_usuario', null);
+			$contar = Input::get('contar', false);
+
+			$orden = Input::get('ordenar', 'fecha');
+			$visto = Input::get('visto', false);
+
+			if(is_null($id_usuario)){
+				return Response::json(array(
+						'resultado' => false, 
+						'mensajes' => array('debe especificar el ID del usuario')), 404
+				);
+			}
+
+			switch($tipo_busqueda){
+				case 'todos':
+					if($contar){
+						
+						//consulta para saber numero de notificaciones del usuario
+						$response = DB::table('notificaciones as NO')
+							->where('NO.visto', '=', $visto)
+							->where('NO.receptor', '=', $id_usuario)
+							->count();
+					}
+					else{
+
+						//consulta para saber las notificaciones del usuario
+						$response = DB::table('notificaciones as NO')
+							->select('NO.id', 'NO.fecha', 'NO.hora', 'NO.visto', 'mensajes.id as id_mensaje', 'mensajes.mensaje', 'usuarios.id as id_usuario', 'usuarios.usuario')
+							->join('usuarios', 'usuarios.id', '=', 'NO.emisor')
+							->join('mensajes', 'mensajes.id', '=', 'NO.mensaje_id')
+							->where('NO.receptor', '=', $id_usuario)
+							->where('NO.visto', '=', $visto)
+							->orderBy('NO.fecha')
+							->get();
+					}
+				break;
+
+				case 'paginacion':
+					$length = Input::get('length', 10);
+					$value_search = Input::get('search');
+					$draw = Input::get('draw',1);
+
+					if(quitar_espacios($value_search['value']) == ''){
+						//$data = Usuario::orderBy($orden)->paginate($length);	
+						
+						$response = DB::table('notificaciones as NO')
+							->select('NO.id', 'NO.fecha', 'NO.hora', 'NO.visto', 'mensajes.id as id_mensaje', 'mensajes.mensaje', 'usuarios.id as id_usuario', 'usuarios.usuario')
+							->join('usuarios', 'usuarios.id', '=', 'NO.emisor')
+							->join('mensajes', 'mensajes.id', '=', 'NO.mensaje_id')
+							->where('NO.receptor', '=', $id_usuario)
+							->orderBy('fecha')
+							->paginate($length);
+
+					}
+					else{
+
+						$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->paginate($length);	
+					}
+					
+
+					$response = array(
+						"draw"=>$draw,
+						"page"=>$data->getCurrentPage(),
+						"recordsTotal"=>$data->getTotal(),
+						"recordsFiltered"=> $data->count(),
+						"data" => $data->all()
+					);
+
+				break;
+
+				default:
+					$response = Usuario::all();
+				break;
+
+			}
+
+			return Response::json($response);
 
 		}
 
