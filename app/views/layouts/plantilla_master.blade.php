@@ -59,6 +59,8 @@
 			});
 	
 			localStorage.setItem('data_usuario','{{ (empty($data_usuario))?(null):($data_usuario) }}');
+
+			$('.ui.dropdown').dropdown();
 		</script>
 
 		@section('js')
