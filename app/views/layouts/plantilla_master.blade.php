@@ -52,13 +52,12 @@
 		
 		
 		<script>
+			localStorage.setItem('data_usuario','{{ (empty($data_usuario))?(null):($data_usuario) }}');
 
 			$(document).ready(function(){
 				TOOLS_APP.ver_reloj();
 				TOOLS_APP.listen_notificaciones();
 			});
-	
-			localStorage.setItem('data_usuario','{{ (empty($data_usuario))?(null):($data_usuario) }}');
 
 			$('.ui.dropdown').dropdown();
 		</script>
