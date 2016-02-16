@@ -48,6 +48,19 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     	}
     }
 
+    //Funcion para verificar si el usuario posee los permisos que se reciben por parametros
+    public function check_permisos($permisos_verificar = array()){
+    	if(!empty($permisos_verificar)){
+    		$permisos_usuario = get_array_permisos_usuario($this->id);
+    		foreach ($permisos_usuario as $value) {
+    			if(in_array($value, $permisos_verificar)){
+    				return true;
+    			}
+    		}
+    	}
+    	return false;
+    }
+
     public function getDataPermisosAttribute(){
         return $this->permisos->toArray();
     }
