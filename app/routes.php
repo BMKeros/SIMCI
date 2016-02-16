@@ -41,4 +41,3 @@ Route::group(array('prefix' => 'api'), function(){
 Route::controller('/autenticacion', 'AutenticacionController');
 Route::controller('/buscar', 'BusquedasController');//ruta para todas las busquedas del sistema
 Route::controller('/modulos', 'ModulosController');
-
