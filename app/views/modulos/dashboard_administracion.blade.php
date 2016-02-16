@@ -18,7 +18,7 @@
       				
       				<div class="ui pointing dropdown link item">
     					Notificaciones
-    					<div class="ui red label">22</div>
+    					<div class="ui red label" id="label_num_notificaciones">0</div>
     					<i class="dropdown icon"></i>
     					<div class="menu">
       						<div class="header">Novedades</div>
