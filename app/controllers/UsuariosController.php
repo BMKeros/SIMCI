@@ -3,7 +3,7 @@
 class UsuariosController extends Controller {
 	
 	public function __construct(){
-        //$this->beforeFilter('APICheckGuest', array('except' => ''));
+        //$this->beforeFilter('APICheckPermisos', array('except' => ''));
 	}
 
 	public function getMostrar(){

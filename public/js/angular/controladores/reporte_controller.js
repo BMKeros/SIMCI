@@ -32,7 +32,7 @@ simci.controller('ReporteController', [
         descripcion: "Esta opcion le permitira crear reportes",
         url: "#/reporte/crear-reporte",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
       
       {
@@ -40,7 +40,7 @@ simci.controller('ReporteController', [
         descripcion: "Esta opcion le permitira ver los reportes existentes",
         url: "#/reporte/ver/todos",
         icono: 'eye',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       }
 
     ];

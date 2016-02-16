@@ -49,7 +49,7 @@ simci.controller('LaboratorioController', [
         descripcion: "Esta opcion le permitira agregar nuevos stock al laboratorios",
         url: "#/laboratorio/registrar-stock",
         icono: 'plus',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
 
 
@@ -58,7 +58,7 @@ simci.controller('LaboratorioController', [
         descripcion: "Esta opcion le permitira ver los nuevos stock y moverlos a nuevos laboratorios",
         url: "#/laboratorio/mostrar-stock",
         icono: 'eye',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
 
        {
@@ -66,7 +66,7 @@ simci.controller('LaboratorioController', [
         descripcion: "Esta opcion le permitira mover los stock del laboratorios y moverlos a nuevos laboratorios",
         url: "#/laboratorio/mover-stock",
         icono: 'external',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       }
 
     ];

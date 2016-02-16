@@ -39,20 +39,24 @@ simci.controller('InventarioController', [
         descripcion: "Esta opcion le permitira dar entrada o salida al los objetos del inventario",
         url: "#/inventario/ver/todos",
         icono: 'compress',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_PROFESOR]
       },
       {
         nombre:"ver inventario",
         descripcion: "Esta opcion le permitira ver los elementos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
         url: "#/inventario/ver/todos",
         icono: 'eye',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
       {
         nombre:"registrar almacen",
         descripcion: "Opcion para crear nuevos almacenes",
-        url: "#/inventario/registrar-almacen",
         icono: 'write',
+        ver_dropdown: true,
+        opciones_dropdown: [
+          { nombre:"registrar-almacen",url: "#/inventario/registrar-almacen"},
+          { nombre:"modificar-almacen", url:"#/inventario/mostrar-almacen"}
+        ],
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {

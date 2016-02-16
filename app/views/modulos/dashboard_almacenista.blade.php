@@ -66,12 +66,7 @@
   			<i class="home icon"></i>
   			Inicio
 		</a>
-	
-		<a class="item" ng-href="#/usuarios">
-  			<i class="user layout icon"></i>
-  			Usuarios
-		</a>
-	
+
 		<a class="item" ng-href="#/catalogo">
   			<i class="book icon"></i>
   			Catalogo
@@ -101,6 +96,11 @@
 	      	<i class="travel icon"></i>
 	      	Documentos
     	</a>
+
+    	<a class="item" ng-href="#/consulta">
+  			<i class="call icon"></i>
+  			Consultas
+		</a>
 	
     	<a class="item">
 	      	<i class="settings icon"></i>
