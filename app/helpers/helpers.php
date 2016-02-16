@@ -120,18 +120,6 @@ function crear_codigo($numero = 1, $tipo_codigo = null){
 	}
 }
 
-function crear_codigo_permiso($numero = 1){
-	//Se le debe incrementar uno porque va a ser un nuevo registro
-	$numero = $numero+1;
-	return sprintf("%s%s",CODIGO_PERMISO,agregar_ceros($numero,1));
-}
-
-function crear_codigo_laboratorio($numero = 1){
-	//Se le debe incrementar uno porque va a ser un nuevo registro
-	$numero = $numero+1;
-	return sprintf("%s%s",CODIGO_LABORATORIO,agregar_ceros($numero,1));
-}
-
 function get_array_permisos_usuario($id_usuario = null){
 	if(is_null($id_usuario)){
 		return array();
