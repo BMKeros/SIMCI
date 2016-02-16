@@ -9,9 +9,10 @@
     listen_notificaciones: function(){
       var sound = this.sonido_notificacion();
       setInterval(function(){
-        $.ajax({ url:'/api/notificaciones/mostrar?id_usuario=1&contar=true' })
+        var id_user = localStorage.getItem('id_usuario');
+        $.ajax({ url:'/api/notificaciones/mostrar?id_usuario='+id_user+'&contar=true' })
         .done(function(data){
-          if(data != 0){
+          if(data.datos != 0){
             $("#label_num_notificaciones").html(data);
             sound.play();
           }
