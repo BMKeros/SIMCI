@@ -32,49 +32,53 @@ simci.controller('InventarioController', [
         descripcion: "Esta opcion le permitira registrar nuevos elementos en el inventario",
         url: "#/inventario/registrar-elemento",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
         nombre:"entrada / salida",
         descripcion: "Esta opcion le permitira dar entrada o salida al los objetos del inventario",
         url: "#/inventario/ver/todos",
         icono: 'compress',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_PROFESOR]
       },
       {
         nombre:"ver inventario",
         descripcion: "Esta opcion le permitira ver los elementos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
         url: "#/inventario/ver/todos",
         icono: 'eye',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
       {
         nombre:"registrar almacen",
         descripcion: "Opcion para crear nuevos almacenes",
-        url: "#/inventario/registrar-almacen",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT]
+        ver_dropdown: true,
+        opciones_dropdown: [
+          { nombre:"registrar-almacen",url: "#/inventario/registrar-almacen"},
+          { nombre:"modificar-almacen", url:"#/inventario/mostrar-almacen"}
+        ],
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
         nombre:"sub dimension",
         descripcion: "Opcion para crear sub dimenciones",
         url: "#/inventario/registrar-estante",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
         nombre:"crear agrupacion",
         descripcion: "Esta opcion le permitira crear las agrupaciones por las cuales se ordenaran los elementos",
         url: "#/",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
         nombre:"crear subagrupacion",
         descripcion: "Opcion para crear alguna caracteristica por la cual tambien ordenar elementos",
         url: "#/",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       
     ];

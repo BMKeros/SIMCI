@@ -30,7 +30,7 @@ class ModulosController extends Controller {
 		return View::make('modulos.dashboard_estudiante')->with('data_usuario',$data);
 	}
 
-	public function getAlmacenistas(){
+	public function getAlmacenista(){
 		$data = $this->get_data_usuario();
 		return View::make('modulos.dashboard_almacenista')->with('data_usuario',$data);
 	}

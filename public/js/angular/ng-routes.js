@@ -26,17 +26,6 @@
           templateUrl: '/views/usuarios/principal_usuarios',
           controller: 'UsuariosController'
         }).
-
-        when('/usuarios/crear/permiso', {
-          templateUrl: '/views/usuarios/crear_permisos',
-          controller: 'UsuariosController'
-        }).
-
-        when('/usuarios/mostrar/permisos', {
-          templateUrl: '/views/usuarios/mostrar_permisos',
-          controller: 'UsuariosController'
-        }).
-
         when('/usuarios/crear/tipo-usuario', {
           templateUrl: '/views/usuarios/crear_tipo_usuario',
           controller: 'UsuariosController'

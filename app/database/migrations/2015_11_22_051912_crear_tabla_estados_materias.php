@@ -12,7 +12,7 @@ class CrearTablaEstadosMaterias extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('estados_materia', function(Blueprint $table)
+		Schema::create('estados_materia', function($table)
 		{
 			$table->integer('cod_estado');
 			$table->primary('cod_estado');

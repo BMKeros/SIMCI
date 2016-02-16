@@ -34,28 +34,28 @@ simci.controller('CatalogoController', [
         descripcion: "Esta opcion le permitira añadir nuevos objetos al catalogo",
         url: "#/catalogo/registrar-objeto",
         icono: 'write',
-        show_in: [TIPO_USER_ROOT]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
         nombre:"ver catalogo",
         descripcion: "Esta opcion le permitira ver, modificar o eliminar los objetos del catalogos",
         url: "#/catalogo/ver/todos",
         icono: 'eye',
-        show_in: [TIPO_USER_ROOT]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_PROFESOR,TIPO_USER_SUPERVISOR]
       },
       {
         nombre:"registrar unidad",
         descripcion: "Esta opcion le permitira añadir nuevas unidades para objetos del catalogo",
         url: "#/catalogo/registrar-unidad",
         icono: 'write',
-        show_in: [TIPO_USER_ROOT]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
         nombre:"registrar clase",
         descripcion: "Esta opcion le permitira añadir nuevas clases para objetos del objetos",
         url: "#/catalogo/registrar-clase",
         icono: 'write',
-        show_in: [TIPO_USER_ROOT]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       }
     ];
     

@@ -101,6 +101,11 @@
 	      	<i class="travel icon"></i>
 	      	Documentos
     	</a>
+
+    	<a class="item" ng-href="#/consulta">
+  			<i class="call icon"></i>
+  			Consultas
+		</a>
 	
     	<a class="item">
 	      	<i class="settings icon"></i>

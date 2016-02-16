@@ -12,7 +12,7 @@ class CrearTablaClasificacionElementos extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('clasificacion_elementos', function(Blueprint $table)
+		Schema::create('clasificacion_elementos', function($table)
 		{
 			$table->integer('cod_clasificacion');
 			$table->primary('cod_clasificacion');

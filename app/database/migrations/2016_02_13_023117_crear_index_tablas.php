@@ -88,6 +88,24 @@ class CrearIndexTablas extends Migration {
 				->on('tipos_unidades');
 		});
 
+		//INVENTARIO
+		Schema::table('inventario', function($table){
+			$table->foreign('cod_dimension')->references('codigo')
+				->on('almacenes');
+
+			$table->foreign('cod_subdimension')->references('codigo')
+				->on('sub_dimensiones');
+
+			$table->foreign('cod_agrupacion')->references('codigo')
+				->on('agrupaciones');
+
+			/*$table->foreign('cod_subagrupacion')->references('codigo')
+				->on('sub_agrupaciones');*/
+
+			$table->foreign('cod_objeto')->references('id')
+				->on('catalogo_objetos');
+		});
+
 	}	
 
 

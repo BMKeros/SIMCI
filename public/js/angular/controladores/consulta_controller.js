@@ -32,7 +32,7 @@ simci.controller('ConsultaController', [
         descripcion: "Esta opcion le permitira observar la disponibilidad del inventario y realizar busquedas",
         url: "#/consulta/realizar-consultas",
         icono: 'unhide',
-        show_in: [TIPO_USER_ROOT]
+        show_in: [TIPO_USER_ROOT,TIPO_USER_PROFESOR, TIPO_USER_SUPERVISOR, TIPO_USER_ESTUDIANTE, TIPO_USER_ALMACENISTA]
       },
       
 

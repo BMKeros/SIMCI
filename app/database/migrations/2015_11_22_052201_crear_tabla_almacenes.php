@@ -12,7 +12,7 @@ class CrearTablaAlmacenes extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('almacenes', function(Blueprint $table)
+		Schema::create('almacenes', function($table)
 		{
 			$table->string('codigo',4);
 			$table->primary('codigo');

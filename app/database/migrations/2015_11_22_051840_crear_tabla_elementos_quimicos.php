@@ -12,7 +12,7 @@ class CrearTablaElementosQuimicos extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('elementos_quimicos', function(Blueprint $table)
+		Schema::create('elementos_quimicos', function($table)
 		{
 			$table->increments('id');
 			$table->integer('periodo');

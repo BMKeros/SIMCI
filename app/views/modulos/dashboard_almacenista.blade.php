@@ -1,7 +1,7 @@
 @extends('layouts.plantilla_master')
 
 @section('titulo')
-	<title>SIMCI - Supervisor</title>
+	<title>SIMCI - Almacenista</title>
 @stop
 
 @section('contenido-body-master')
@@ -66,12 +66,7 @@
   			<i class="home icon"></i>
   			Inicio
 		</a>
-	
-		<a class="item" ng-href="#/usuarios">
-  			<i class="user layout icon"></i>
-  			Usuarios
-		</a>
-	
+
 		<a class="item" ng-href="#/catalogo">
   			<i class="book icon"></i>
   			Catalogo
@@ -82,7 +77,7 @@
   			Inventario
 		</a>	
 	
-	   	<a class="item" ng-href="#/ordenes">
+	   <a class="item" ng-href="#/ordenes">
   			<i class="edit icon"></i>
   			Ordenes
 		</a>

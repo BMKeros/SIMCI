@@ -29,6 +29,7 @@
       				</div>
 
       				<div class="ui dropdown item">
+      					<img class="ui right spaced avatar image" src="{{ Auth::user()->get_avatar() }}">
 						Usuario
     					<i class="dropdown icon"></i>
     					<div class="menu">
@@ -60,15 +61,31 @@
 	</header>
 
 
+
 	<div class="ui left vertical inverted labeled icon sidebar menu" id="menu-administracion">
 		<a class="item" href="#">
   			<i class="home icon"></i>
   			Inicio
 		</a>
+
+		<a class="item" ng-href="#/laboratorio">
+	      	<i class="lab icon"></i>
+	      	Laboratorios
+    	</a>
+
+    	<a class="item" ng-href="#/inventario">
+  			<i class="archive icon"></i>
+  			Inventario
+		</a>
+
+		<a class="item" ng-href="#/catalogo">
+  			<i class="book icon"></i>
+  			Catalogo
+		</a>
 	
-		<a class="item" ng-href="#/usuarios">
-  			<i class="user layout icon"></i>
-  			Usuarios
+		<a class="item" ng-href="#/ordenes">
+  			<i class="edit icon"></i>
+  			Ordenes
 		</a>
 	
     	<a class="item" ng-href="#/reporte">
@@ -76,9 +93,19 @@
 	      	Reportes
     	</a>
 
-    	<a class="item" ng-href="#/laboratorio">
-	      	<i class="lab icon"></i>
-	      	Laboratorios
+		<a class="item" ng-href="#/documentos">
+	      	<i class="travel icon"></i>
+	      	Documentos
+    	</a>
+
+    	<a class="item" ng-href="#/consulta">
+  			<i class="call icon"></i>
+  			Consultas
+		</a>
+	
+    	<a class="item">
+	      	<i class="settings icon"></i>
+	      	Settings
     	</a>
 	</div>
 

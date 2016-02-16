@@ -39,26 +39,15 @@ simci.controller('UsuariosController', [
         descripcion: "Opcion para Ver, Actualizar, Eliminar los usuarios registrados en el sistema",
         url: "#/usuarios/ver/todos",
         icono: 'eye',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
-      {
-        nombre:"crear permisos",
-        descripcion: "Opcion para crear nuevos permisos de usuarios para el sistema",
-        url: "#/usuarios/crear/permiso",
-        icono: 'user',
-        show_in:[TIPO_USER_ROOT]
-      },
-      /*{
-        nombre:"ver permisos",
-        descripcion: "Opcion para Ver, Actualizar, Eliminar los permisos registrados en el sistema",
-        url: "#/usuarios/mostrar/permisos",
-        icono: 'eye'
-      },*/
+      
       {
         nombre:"crear tipos de usuario",
         descripcion: "Opcion para crear nuevos tipos de usuarios",
         url: "#/usuarios/crear/tipo-usuario",
-        icono: 'user'
+        icono: 'user',
+        show_in:[TIPO_USER_ROOT]
       },
     ];
     
@@ -287,23 +276,6 @@ simci.controller('UsuariosController', [
       }// Procesar eliminar
 
     }// If
-
-    if($location.$$url == '/usuarios/crear/permiso'){
-        $scope.mostrar_mensaje = false;
-        $scope.DatosForm = {};
-
-        $scope.registrar_permiso = ToolsService.registrar_dinamico($scope,$http,$timeout,{
-          url: '/api/usuarios/registrar-permiso',
-          formulario:{
-            id:'formulario_crear_permiso',
-            reglas: reglas_formulario_crear_permiso
-          },
-          exito:{
-            titulo: 'Permiso creado con exito',
-            mensajes: ['Permiso registrado en la base de datos.']
-          }
-        });
-      }// If == '/usuarios/crear/permiso'
 
       if($location.$$url == '/usuarios/crear/tipo-usuario'){
         $scope.mostrar_mensaje = false;
