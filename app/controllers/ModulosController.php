@@ -8,6 +8,7 @@ class ModulosController extends Controller {
 	protected function get_data_usuario(){
 		return json_encode(
 			array(
+				'id_usuario'=> Auth::id(),
 				'usuario'=> Auth::user()->usuario,
 				'email' => Auth::user()->email,
 				'tipo_usuario' => Auth::user()->cod_tipo_usuario
