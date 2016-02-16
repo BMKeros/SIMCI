@@ -1,7 +1,7 @@
 (function(){
   
   var TOOLS = {
-    intervalo_notificaciones: 600000
+    intervalo_notificaciones: 10000
     ,
     sonido_notificacion: function(){
       return new Howl({ urls: ['/sonidos/sound-noti1.wav'] });
@@ -9,13 +9,13 @@
     listen_notificaciones: function(){
       var sound = this.sonido_notificacion();
       setInterval(function(){
-        var id_user = localStorage.getItem('id_usuario');
-        $.ajax({ url:'/api/notificaciones/mostrar?id_usuario='+id_user+'&contar=true' })
+        var data = JSON.parse(localStorage.getItem('data_usuario'));
+        $.ajax({ url:'/api/notificaciones/mostrar?id_usuario='+data.id_usuario+'&contar=true' })
         .done(function(data){
           if(data.datos != 0){
-            $("#label_num_notificaciones").html(data);
             sound.play();
           }
+          $("#label_num_notificaciones").html(data.datos);
         });
       },this.intervalo_notificaciones);
     },
@@ -35,7 +35,14 @@
       months        : ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
       weekdays      : ['Domingo','Lunes','Martes','Miercoles','Jueves','Viernes','Sabado'],
       weekdaysShort : ['Dom','Lun','Mar','Mie','Jue','Vie','Sab']
-    }
+    },
+    cargar_data_localstorage: function(){
+      var data = localStorage.getItem('data_usuario');
+      var data_convertida = JSON.parse(data);
+      for(key in data_convertida){
+        localStorage.setItem(key, data_convertida[key]);
+      }
+    },
   };
 
   window.TOOLS_APP = TOOLS;
