@@ -123,9 +123,11 @@ Route::filter('APICheckGuest', function()
 	}
 });
 
-Route::filter('APICheckPermisos', function()
+Route::filter('APICheckPermisos', function($route, $request)
 {
-	if(Auth::user()->cod_tipo_usuario != TIPO_USER_PROFESOR){
+	$permisos_front = Input::get('lista_permisos', []);
+
+	if(!Auth::user()->check_permisos($permisos_front)){
 		return Response::json(['No tiene permisos para realizar esta accion'], 403);
 	}
 });
