@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -33,11 +33,9 @@ Route::group(array('prefix' => 'api'), function(){
 	Route::controller('/inventario', 'InventarioController');
 	Route::controller('/catalogo', 'CatalogoController');
 	Route::controller('/laboratorio', 'LaboratorioController');
-  Route::controller('/notificaciones', 'NotificacionesController');
-
+  	Route::controller('/notificaciones', 'NotificacionesController');
 });
 
-
 Route::controller('/autenticacion', 'AutenticacionController');
-Route::controller('/buscar', 'BusquedasController');//ruta para todas las busquedas del sistema
+Route::controller('/buscar', 'BusquedasController');
 Route::controller('/modulos', 'ModulosController');
