@@ -5,7 +5,7 @@
 		public function getMostrar(){
 			$tipo_busqueda = Input::get('type', 'todos');
 			$id_usuario = Input::get('id_usuario', null);
-			$contar = Input::get('contar', false);
+			$contar = (bool)Input::get('contar', false);
 
 			$orden = Input::get('ordenar', 'fecha');
 			$visto = Input::get('visto', false);
@@ -22,15 +22,20 @@
 					if($contar){
 						
 						//consulta para saber numero de notificaciones del usuario
-						$response = DB::table('notificaciones as NO')
+						$consulta = DB::table('notificaciones as NO')
 							->where('NO.visto', '=', $visto)
 							->where('NO.receptor', '=', $id_usuario)
 							->count();
+
+						$response = array(
+							'resultado' => true,
+							'datos' => $consulta
+						);
 					}
 					else{
 
 						//consulta para saber las notificaciones del usuario
-						$response = DB::table('notificaciones as NO')
+						$consulta = DB::table('notificaciones as NO')
 							->select('NO.id', 'NO.fecha', 'NO.hora', 'NO.visto', 'mensajes.id as id_mensaje', 'mensajes.mensaje', 'usuarios.id as id_usuario', 'usuarios.usuario')
 							->join('usuarios', 'usuarios.id', '=', 'NO.emisor')
 							->join('mensajes', 'mensajes.id', '=', 'NO.mensaje_id')
@@ -38,6 +43,11 @@
 							->where('NO.visto', '=', $visto)
 							->orderBy('NO.fecha')
 							->get();
+
+						$response = array(
+							'resultado' => true,
+							'datos' => $consulta
+						);
 					}
 				break;
 
