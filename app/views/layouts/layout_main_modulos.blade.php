@@ -30,12 +30,26 @@
                      <% opcion.descripcion %>
                   </div>
                </div>
-                  <div class="extra content" ng-if="!opcion.ver_dropdown">
+                  <div class="extra content" ng-if="opcion.ver_dropdown">
+                     <div class="ui two buttons">
+                        <div class="ui compact menu">
+                           <div class="ui simple dropdown item">
+                              Opciones
+                              <i class="dropdown icon"></i>
+                              <div class="menu">
+                                 <a href="<% opt.url %>" class="item" ng-repeat="opt in opcion.opciones_dropdown"> <%opt.nombre | filter:capitalize%>
+                                 </a>
+                              </div>
+                           </div>
+                        </div>   
+                     </div>
+                  </div>
+                  <!--Este mostrara el bottun acceder normal-->
+                   <div class="extra content" ng-if="!opcion.ver_dropdown">
                         <div class="ui two buttons">
                            <a class="ui basic green button" href="<% opcion.url %>">Acceder</a>
                         </div>
                   </div>
-               
             </div>
          </div>
 
