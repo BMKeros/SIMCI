@@ -9,7 +9,13 @@
     listen_notificaciones: function(){
       var sound = this.sonido_notificacion();
       setInterval(function(){
-        sound.play();
+        $.ajax({ url:'/api/notificaciones/mostrar?id_usuario=1&contar=true' })
+        .done(function(data){
+          if(data != 0){
+            $("#label_num_notificaciones").html(data);
+            sound.play();
+          }
+        });
       },this.intervalo_notificaciones);
     },
     ver_reloj: function(){
