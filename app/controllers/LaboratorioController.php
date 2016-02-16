@@ -37,8 +37,7 @@
 				$num_lab = DB::table('laboratorios')->count();
 
 				$laboratorio = new Laboratorio;
-
-				$laboratorio->codigo = crear_codigo_laboratorio($num_lab);
+				$laboratorio->codigo = crear_codigo($num_lab, 'LABORATORIO');
 				$laboratorio->nombre = $nombre;
 				$laboratorio->descripcion = $descripcion;
 				
