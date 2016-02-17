@@ -125,7 +125,7 @@ Form::macro('select_sub_dimension', function($atributos = null){
 Form::macro('select_agrupacion', function($atributos = null){
 	if($atributos){
 
-		$tipo_objetos = DB::table('tipo_objetos')->lists('nombre', 'id');
+		$tipo_objetos = DB::table('agrupaciones')->lists('nombre', 'id');
 
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
