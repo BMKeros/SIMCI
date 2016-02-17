@@ -21,6 +21,10 @@
 	background-color: #FFB177 !important;
 }
 
+.espacio_top{
+  margin-top: 8%;
+}
+
 .espacio_buttom{
 	margin-bottom: 100px;
 }

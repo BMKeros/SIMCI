@@ -60,8 +60,6 @@
 				TOOLS_APP.ver_reloj();
 				TOOLS_APP.listen_notificaciones();
 			});
-
-			$('.ui.dropdown').dropdown();
 		</script>
 
 		@section('js')

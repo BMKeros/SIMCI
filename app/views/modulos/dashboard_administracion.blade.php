@@ -116,19 +116,8 @@
 	      	Settings
     	</a>
 	</div>
-
-	<!-- Boton para abrir el menu 
-	<div class="ui fixed animated fade big launch button" id="btn-abrir-menu">
-		<div class="hidden content">
-			Menu
-		</div>
-		<div class="visible content">
-			<i class="sidebar icon"></i>
-		</div>
-	</div>
-	-->
 	
-	<div class="ui container espacio_buttom">
+	<div class="ui container espacio_buttom espacio_top">
 		<div ng-view>
 			<!--<div class="ui container">
 			  <div class="ui active inverted dimmer">
