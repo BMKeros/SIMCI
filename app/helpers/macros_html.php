@@ -125,12 +125,33 @@ Form::macro('select_sub_dimension', function($atributos = null){
 Form::macro('select_agrupacion', function($atributos = null){
 	if($atributos){
 
-		$tipo_objetos = DB::table('agrupaciones')->lists('nombre', 'id');
+		$tipo_objetos = DB::table('agrupaciones')->lists('nombre', 'codigo');
 
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
 		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
-		$html .= '<option value="">Tipo de Objeto</option>';
+		$html .= '<option value="">falta colocar nombre aqui</option>';
+		
+		foreach ($tipo_objetos as $key => $value) {
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+		}
+		
+		$html .= '</select>';
+
+		return $html;
+	}
+});
+
+
+Form::macro('select_sub_agrupacion', function($atributos = null){
+	if($atributos){
+
+		$tipo_objetos = DB::table('sub_agrupaciones')->lists('nombre', 'codigo');
+
+		$default_values = array('class'=>"ui dropdown capitalize");
+		
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
+		$html .= '<option value="">falta colocar nombre aqui</option>';
 		
 		foreach ($tipo_objetos as $key => $value) {
 			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));

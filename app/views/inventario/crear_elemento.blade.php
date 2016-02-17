@@ -36,12 +36,12 @@
 					<div class="three fields">
 						<div class="field">
 				      		<label>Agrupacion</label>
-							{{-- Form::select_agrupacion(array('name'=>'cod_agrupacion', 'id'=>'cod_agrupacion', 'ng-model'=>'cod_agrupacion')) --}}
+							{{ Form::select_agrupacion(array('name'=>'cod_agrupacion', 'id'=>'cod_agrupacion', 'ng-model'=>'cod_agrupacion')) }}
 			     		</div>
 
 			     		<div class="field">
 				      		<label>Sub Agrupacion</label>
-							{{-- Form::select_sub_agrupacion(array('name'=>'cod_sub_agrupacion', 'id'=>'cod_sub_agrupacion', 'ng-model'=>'cod_sub_agrupacion')) --}}
+							{{ Form::select_sub_agrupacion(array('name'=>'cod_sub_agrupacion', 'id'=>'cod_sub_agrupacion', 'ng-model'=>'cod_sub_agrupacion')) }}
 						</div>
 
 						<div class="field">
