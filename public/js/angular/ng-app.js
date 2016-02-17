@@ -1,5 +1,5 @@
 (function(){
-  var simci = angular.module('SIMCI', ['ngRoute','datatables'], function($interpolateProvider) {
+  var simci = angular.module('SIMCI', ['ngRoute','datatables','ngAlertify'], function($interpolateProvider) {
           $interpolateProvider.startSymbol('<%');
           $interpolateProvider.endSymbol('%>');
   });
