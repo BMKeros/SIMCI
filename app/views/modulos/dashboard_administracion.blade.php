@@ -9,6 +9,10 @@
 	<header>
   		<div class="ui fixed menu">
     		<div class="ui container">
+    			<a class="item"  id="btn-abrir-menu">
+					<i class="sidebar icon"></i>
+    			</a>
+
     			<a href="#" class="header item">
         			<img class="logo" src="/img/logo.png">
         			&nbsp;&nbsp;&nbsp;SIMCI
@@ -113,7 +117,7 @@
     	</a>
 	</div>
 
-	<!-- Boton para abrir el menu -->
+	<!-- Boton para abrir el menu 
 	<div class="ui fixed animated fade big launch button" id="btn-abrir-menu">
 		<div class="hidden content">
 			Menu
@@ -122,6 +126,7 @@
 			<i class="sidebar icon"></i>
 		</div>
 	</div>
+	-->
 	
 	<div class="ui container espacio_buttom">
 		<div ng-view>
