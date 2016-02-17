@@ -57,6 +57,11 @@
           controller: 'InventarioController'
         }).
 
+         when('/inventario/mostrar-almacen', {
+          templateUrl: '/views/inventario/mostrar_elementos',
+          controller: 'InventarioController'
+        }).
+
 
         //Rutas para catalogo
         when('/catalogo', {
