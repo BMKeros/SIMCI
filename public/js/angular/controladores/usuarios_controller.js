@@ -13,7 +13,12 @@ simci.controller('UsuariosController', [
   'DTOptionsBuilder', 
   'DTColumnBuilder',
   'ToolsService',
-  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService){
+  'alertify',
+  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService,alertify){
+    
+    alertify.logPosition('buttom right');
+    alertify.success("Estas en el modulo de usuarios!");
+
     $scope.modulo = {};
 
     $scope.DatosForm = {}; // Objeto para los datos de formulario
