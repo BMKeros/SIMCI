@@ -4,6 +4,14 @@
           $interpolateProvider.endSymbol('%>');
   });
 
+  simci.run(function(alertify,DTDefaultOptions){
+    //alertify.logPosition('');
+    alertify.success("Bienvenido a SIMCI..");
+
+    //Lenguaje español para datatable
+    DTDefaultOptions.setLanguageSource('/spanish.json');
+  });
+
   simci.filter('capitalize', function() {
     return function(input, all) {
       var reg = (all) ? /([^\W_]+[^\s-]*) */g : /([^\W_]+[^\s-]*)/;
