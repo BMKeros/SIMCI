@@ -105,12 +105,12 @@ Form::macro('select_dimension', function($atributos = null){
 Form::macro('select_sub_dimension', function($atributos = null){
 	if($atributos){
 
-		$estantes = DB::table('estantes')->lists('descripcion', 'cod_estante');
+		$estantes = DB::table('sub_dimensiones')->lists('descripcion', 'codigo');
 
 		$default_values = array('class'=>"ui dropdown capitalize");
 		
 		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
-		$html .= '<option value="">Sub-Dimension</option>';
+		$html .= '<option value="">Sub Dimension</option>';
 		
 		foreach ($estantes as $key => $value) {
 			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
