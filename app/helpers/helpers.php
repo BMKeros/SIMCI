@@ -109,6 +109,9 @@ function crear_codigo($numero = 1, $tipo_codigo = null){
 		else if($tipo_codigo == "LABORATORIO"){
 			$codigo_tmp = CODIGO_TIPO_LABORATORIO;	
 		}
+		else if($tipo_codigo == "AGRUPACION"){
+			$codigo_tmp = CODIGO_AGRUPACION;
+		}
 		else{
 			$codigo_tmp = '';
 		}		
