@@ -58,7 +58,9 @@ Form::macro('select_tipo_usuario', function($atributos = null){
 		$html .= '<option value="">Tipo Usuario</option>';
 		
 		foreach ($tipo_usuario as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+			if($key != TIPO_USER_ROOT){
+				$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+			}	
 		}
 		
 		$html .= '</select>';
