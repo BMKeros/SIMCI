@@ -88,7 +88,7 @@ Form::macro('select_dimension', function($atributos = null){
 		$html .= '<option value="">Dimensión</option>';
 		
 		foreach ($almacenes as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+			$html .= sprintf('<option value="%s">%s - %s</option>', $key, strtoupper($key),ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -113,7 +113,7 @@ Form::macro('select_sub_dimension', function($atributos = null){
 		$html .= '<option value="">Sub Dimension</option>';
 		
 		foreach ($estantes as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+			$html .= sprintf('<option value="%s">%s - %s</option>', $key,strtoupper($key), ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -133,7 +133,7 @@ Form::macro('select_agrupacion', function($atributos = null){
 		$html .= '<option value="">Agrupacion</option>';
 		
 		foreach ($agrupaciones as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+			$html .= sprintf('<option value="%s">%s - %s</option>', $key, strtoupper($key),ucfirst($value));
 		}
 		
 		$html .= '</select>';
@@ -154,7 +154,7 @@ Form::macro('select_sub_agrupacion', function($atributos = null){
 		$html .= '<option value="">Sub agrupacion</option>';
 		
 		foreach ($sub_agrupaciones as $key => $value) {
-			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+			$html .= sprintf('<option value="%s">%s - %s</option>', $key, strtoupper($key),ucfirst($value));
 		}
 		
 		$html .= '</select>';
