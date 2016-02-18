@@ -257,7 +257,7 @@
 			else{
 				$nuevo_estantes = new SubDimension;
 
-				$nuevo_estantes->codigo = strtoupper($codigo);
+				$nuevo_estantes->codigo = $codigo;
 				$nuevo_estantes->descripcion = $descripcion;
 
 				$nuevo_estantes->save();
