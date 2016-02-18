@@ -86,6 +86,24 @@ simci.controller('InventarioController', [
     $log.info($routeParams);
     $log.info($location);
 
+    
+    if($location.$$url == "/inventario/registrar-elemento"){
+      $scope.mostrar_mensaje = false;
+
+      $scope.registrar_elemento = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/inventario/registrar-elemento',
+        formulario:{
+          id:'formulario_registrar_elemento',
+          reglas: reglas_formulario_registrar_elemento
+        },
+        exito:{
+          titulo: 'Elemento registrado con exito',
+          mensajes: ['El elemento ha sido registrado en la base de datos.']
+        }///inventario/registrar-elemento
+      });
+    }
+
+
 
     if($location.$$url == "/inventario/registrar-almacen"){
       $scope.mostrar_mensaje = false;

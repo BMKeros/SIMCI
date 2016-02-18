@@ -15,7 +15,7 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="formulario_crear_elemento">
+			<form class="ui form" id="formulario_registrar_elemento">
 				<h3 class="ui centered dividing header">Registrar Elemento</h3>
 				<br>
 				<div class="field">
@@ -47,7 +47,7 @@
 						<div class="field">
 							<label>Objeto</label>
 							<div class="ui search selection dropdown capitalize buscar_objeto">
-				             	<input value="" type="hidden" placeholder="Buscar Elemento">
+				             	<input value="" type="hidden" placeholder="Buscar Elemento" ng-model="DatosForm.cod_objeto" name="cod_objeto">
 				              	<i class="dropdown icon"></i>
 				              	<input tabindex="0" class="search" type="text">
 				              	<div class="text"></div>
@@ -62,17 +62,17 @@
 					<div class="three fields">
 						<div class="field">
 							<label>Numero de Organizacion</label>
-							<input type="number" name="numero_orden" placeholder="Numero de organizacion">
+							<input type="number" name="numero_orden" placeholder="0" ng-model="DatosForm.numero_orden">
 						</div>
 
 						<div class="field">
-							<label>Objetos Disponibles</label>
-							<input type="number" name="objetos_disponible" placeholder="5">
+							<label>Cantidad Disponible</label>
+							<input type="number" name="cantidad_disponible" placeholder="0" ng-model="cantidad_disponible">
 						</div>
 
-						<div class="field">
+						<div class="field" ng-show="DatosForm.usa_recipientes">
 							<label>Recipientes Disponibles</label>
-							<input type="number" name="recipientes_disponibles" placeholder="56">
+							<input type="number" name="recipientes_disponibles" placeholder="0" ng-model="DatosForm.recipientes_disponibles">
 
 						</div>
 					</div>
@@ -83,21 +83,21 @@
 						<div class="two fields">
 							<div class="field">
 								<div class="ui toggle checkbox">
-								  	<input name="usa_recipiente" type="checkbox">
+								  	<input name="usa_recipiente" type="checkbox" ng-model="DatosForm.usa_recipientes">
 								  	<label>Usar Recipiente</label>
 								</div>
 							</div>
 
 							<div class="field">
 								<div class="ui toggle checkbox">
-								  	<input name="usa_recipiente" type="checkbox">
+								  	<input name="elemento_movible" type="checkbox" ng-model="DatosForm.elemento_movible">
 								  	<label>Elemento Movible</label>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			<div class="ui right floated submit big button green">Registrar</div>
+			<div class="ui right floated submit big button green" id="btn-registrar" ng-click="registrar_elemento()">Registrar</div>
 			</form>
 		</div>
 	</div>

@@ -667,3 +667,86 @@ var reglas_formulario_registrar_sub_dimension = {
     },
    inline: true
 };
+
+var reglas_formulario_registrar_elemento = {
+  on: 'blur',
+   duration: 40,
+   fields: {
+
+      cod_dimension: {
+        identifier: 'cod_dimension',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          }
+        ]
+      },
+      cod_sub_dimension: {
+        identifier: 'cod_sub_dimension',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          }
+        ]
+      },
+      cod_agrupacion: {
+        identifier: 'cod_agrupacion',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          }
+        ]
+      },
+      cod_sub_agrupacion: {
+        identifier: 'cod_sub_agrupacion',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          }
+        ]
+      },
+
+      cod_objeto: {
+        identifier: 'cod_objeto',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+        ]
+      },
+
+      numero_orden: {
+        identifier: 'numero_orden',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+              type:'integer',
+              prompt:'Este campo solo debe contener numeros enteros'
+          },
+        ]
+      },
+      cantidad_disponible: {
+        identifier: 'cantidad_disponible',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+              type:'number',
+              prompt:'Este campo solo debe contener numeros'
+          },
+        ]
+      }
+
+    },
+   inline: true
+};
