@@ -637,7 +637,7 @@ var reglas_formulario_registrar_sub_dimension = {
    fields: {
 
       codigo: {
-        identifier: 'cod_estante',
+        identifier: 'codigo',
         rules:[
           {
               type:'empty',

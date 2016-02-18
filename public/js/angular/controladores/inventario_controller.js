@@ -62,7 +62,7 @@ simci.controller('InventarioController', [
       {
         nombre:"sub dimension",
         descripcion: "Opcion para crear sub dimenciones",
-        url: "#/inventario/registrar-estante",
+        url: "#/inventario/registrar-sub-dimension",
         icono: 'write',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
@@ -121,15 +121,15 @@ simci.controller('InventarioController', [
       });
     }
 
-    if($location.$$url == "/inventario/registrar-estante"){
+    if($location.$$url == "/inventario/registrar-sub-dimension"){
       $scope.mostrar_mensaje = false;
 
-      $scope.registrar_estante = ToolsService.registrar_dinamico($scope,$http,$timeout,{
-        url: '/api/inventario/registrar-estante',
+      $scope.registrar_sub_dimension = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/inventario/registrar-sub-dimension',
 
         formulario:{
-          id:'formulario_crear_estante',
-          reglas: reglas_formulario_registrar_estante
+          id:'reglas_formulario_registrar_sub_dimension',
+          reglas: reglas_formulario_registrar_sub_dimension
         },
         exito:{
           titulo: 'Estante creado con exito',

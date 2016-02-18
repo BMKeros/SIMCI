@@ -14,14 +14,14 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="formulario_crear_estante">
+			<form class="ui form" id="reglas_formulario_registrar_sub_dimension">
 				<h3 class="ui centered dividing header">Crear Estante</h3>
 				<br>
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
 							<label>Codigo del Estante</label>
-							<input type="text" name="cod_estante" placeholder="Codigo del Estante" ng-model="DatosForm.cod_estante">
+							<input type="text" name="codigo" placeholder="Codigo del Estante" ng-model="DatosForm.codigo">
 						</div>
 					</div>
 				</div>
@@ -36,7 +36,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="ui right floated submit big button green" ng-click="registrar_estante()" id="btn-registrar">Registrar</div>
+				<div class="ui right floated submit big button green" ng-click="registrar_sub_dimension()" id="btn-registrar">Registrar</div>
 			</form>
 		</div>
 	</div>

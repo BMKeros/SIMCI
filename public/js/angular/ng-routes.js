@@ -52,7 +52,7 @@
           controller: 'InventarioController'
         }).
 
-         when('/inventario/registrar-estante', {
+         when('/inventario/registrar-sub-dimension', {
           templateUrl: '/views/inventario/crear_estante',
           controller: 'InventarioController'
         }).
