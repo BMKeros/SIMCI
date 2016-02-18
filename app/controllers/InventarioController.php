@@ -74,9 +74,9 @@
 
 				return Response::json(array(
 					'resultado' => true,
-					'mensajes' => 'Nuevo Elemento creado con exito.',
+					'mensajes' => array('Nuevo Elemento creado con exito.',
 					//pendiente colocar o no del id de los objetos que se crean
-					)
+					))
 				);
 			}
 		}
@@ -107,7 +107,7 @@
 					'cantidad_disponible' => 'required',
 					//campos aun no se sabe si se dejaran o se quitaran
 					'usa_recipientes' => 'required|boolean',
-					'recipientes_disponibles' => 'required'
+					'recipientes_disponibles' => 'numeric'
 				);
 
 				$campos = array(
@@ -222,22 +222,22 @@
 
 				$nuevo_almacen->save();
 
-				return Response::json(array('resultado' => true, 'mensajes' => 'Nuevo Almacen creado con exito.'));
+				return Response::json(array('resultado' => true, 'mensajes' => array('Nuevo Almacen creado con exito.')));
 			}
 		}
 
-		public function postRegistrarEstante(){
+		public function postRegistrarSubDimension(){
 			
-			$cod_estante = Input::get('cod_estante');
+			$codigo = Input::get('codigo');
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
-				'cod_estante' => 'required|integer|unique:estantes',
-				'descripcion' => 'required|min:3|max:8'
+				'codigo' => 'required|unique:sub_dimensiones',
+				'descripcion' => 'required|min:3|max:50'
 			);
 
 			$campos = array(
-				'cod_estante' => $cod_estante,
+				'codigo' => $codigo,
 				'descripcion' => $descripcion
 			);
 
@@ -255,14 +255,14 @@
 				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
 			}
 			else{
-				$nuevo_estantes = new Estante;
+				$nuevo_estantes = new SubDimension;
 
-				$nuevo_estantes->cod_estante = $cod_estante;
+				$nuevo_estantes->codigo = strtoupper($codigo);
 				$nuevo_estantes->descripcion = $descripcion;
 
 				$nuevo_estantes->save();
 
-				return Response::json(array('resultado' => true, 'mensajes' => 'Nuevo Estante creado con exito.'));
+				return Response::json(array('resultado' => true, 'mensajes' => array('Nuevo Estante creado con exito.')));
 			}
 		}
 
@@ -299,7 +299,7 @@
 
 				$nuevo_objeto->save();
 
-				return Response::json(array('resultado' => true, 'mensajes' => 'Nuevo Objeto creado con exito.'));
+				return Response::json(array('resultado' => true, 'mensajes' => array('Nuevo Objeto creado con exito.')));
 			}
 		}
 	}
