@@ -62,6 +62,11 @@
           controller: 'InventarioController'
         }).
 
+         when('/inventario/registrar-agrupacion', {
+          templateUrl: '/views/inventario/crear_agrupacion',
+          controller: 'InventarioController'
+        }).
+
 
         //Rutas para catalogo
         when('/catalogo', {

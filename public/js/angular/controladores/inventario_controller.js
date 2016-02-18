@@ -69,7 +69,7 @@ simci.controller('InventarioController', [
       {
         nombre:"crear agrupacion",
         descripcion: "Esta opcion le permitira crear las agrupaciones por las cuales se ordenaran los elementos",
-        url: "#/",
+        url: "#/inventario/registrar-agrupacion",
         icono: 'write',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
