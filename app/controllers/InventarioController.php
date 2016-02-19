@@ -262,7 +262,7 @@
 
 				$nuevo_estantes->save();
 
-				return Response::json(array('resultado' => true, 'mensajes' => array('Nuevo Estante creado con exito.')));
+				return Response::json(array('resultado' => true, 'mensajes' => array('Nueva Sub Dimension creado con exito.')));
 			}
 		}
 
