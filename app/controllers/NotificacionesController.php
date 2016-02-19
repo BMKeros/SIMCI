@@ -10,7 +10,7 @@
 			$orden = Input::get('ordenar', 'fecha');
 			$visto = Input::get('visto', false);
 
-			if(is_null($id_usuario) || $id_usuario != "null"){
+			if(is_null($id_usuario) || $id_usuario == "null"){
 				return Response::json(array(
 						'resultado' => false, 
 						'mensajes' => array('debe especificar el ID del usuario')), 404
