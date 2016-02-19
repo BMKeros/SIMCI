@@ -15,15 +15,15 @@
 			</div>
 
 			<form class="ui form" id="reglas_formulario_registrar_agrupacion">
-				<h3 class="ui centered dividing header">Agrupacion</h3>
+				<h3 class="ui centered dividing header">Crear agrupacion</h3>
 				<br>
 				<div class="field">
-					<div class="two fields">
-						<div class="field">
+					<div class="fields">
+						<div class="four wide field">
 							<label>Codigo</label>
 							<input type="text" name="codigo" placeholder="Codigo para la agrupacion" ng-model="DatosForm.codigo">
 						</div>
-						<div class="field">
+						<div class="ten wide field">
 							<label>Nombre</label>
 							<input type="text" name="nombre" placeholder="Nombre de la agrupacion" ng-model="DatosForm.nombre">
 						</div>
@@ -33,10 +33,10 @@
 				<br>
 
 				<div class="field">
-					<div class="two fields">
-						<div class="field">
+					<div class="fields">
+						<div class="fourteen wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion" placeholder="Descripcion para la agrupacion" ng-model="DatosForm.descripcion"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion para la agrupacion" ng-model="DatosForm.descripcion" rows="4"></textarea>
 						</div>
 					</div>
 				</div>
