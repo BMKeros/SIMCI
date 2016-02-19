@@ -133,7 +133,7 @@ simci.controller('InventarioController', [
         },
         exito:{
           titulo: 'Estante creado con exito',
-          mensajes: ['El estante ha sido registrado en la base de datos.']
+          mensajes: ['La Sub Dimension ha sido registrado en la base de datos.']
         }///inventario/registrar-estante
       });
     }
