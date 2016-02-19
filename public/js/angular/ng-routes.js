@@ -164,8 +164,12 @@
           templateUrl: '/views/documentos/enviar_documentos',
           controller: 'DocumentosController'
         }).
-        when('/ordenes/recibir/mostrar-todos', {
-          templateUrl: '/views/documentos/mostrar_enviar_documentos',
+        when('/ordenes/recibir/subir-documentos', {
+          templateUrl: '/views/documentos/subir_documentos',
+          controller: 'DocumentosController'
+        }).       
+        when('/ordenes/recibir/mostrar/todos', {
+          templateUrl: '/views/documentos/mostrar_documentos',
           controller: 'DocumentosController'
         }).
 

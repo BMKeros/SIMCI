@@ -27,7 +27,7 @@ simci.controller('DocumentosController', [
     
     $scope.modulo.opciones = [
       {
-        nombre:"crear documentos",
+        nombre:"enviar documentos",
         descripcion: "Esta opcion le permitira enviar documentos",
         url: "#/documentos/enviar-documentos",
         icono: 'write',
@@ -35,9 +35,17 @@ simci.controller('DocumentosController', [
       },
 
       {
+        nombre:"subir documentos",
+        descripcion: "Esta opcion le permitira mostrar los documentos enviados y recibidos",
+        url: "#/documentos/subir-documentos",
+        icono: 'unhide',
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+      },
+
+      {
         nombre:"mostrar documentos",
         descripcion: "Esta opcion le permitira mostrar los documentos enviados y recibidos",
-        url: "#/documentos/recibir/mostrar-todos",
+        url: "#/documentos/mostrar/todos",
         icono: 'unhide',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       }
