@@ -185,6 +185,7 @@
 				'responsable' => 'required|integer|exists:personas,id',
 				//pendientes por modificar si seran o no unicos
 				'primer_auxiliar' => 'required|integer|exists:personas,id',
+				'segundo_auxiliar' => 'required|integer|exists:personas,id',
 				'descripcion' => 'required|min:3|max:150'
 			);
 
@@ -232,7 +233,7 @@
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
-				'codigo' => 'required|unique:sub_dimensiones',
+				'codigo' => 'required|unique:sub_dimensiones|min:2|max:3',
 				'descripcion' => 'required|min:3|max:50'
 			);
 
@@ -243,7 +244,6 @@
 
 			$mensajes = array(
 				'required' => 'El campo :attribute es obligatorio',
-				'integer' => 'El campo :attribute debe ser numerico',
 				'unique' => 'El campo :attribute ya existe, intente con otro',
 				'min' => 'El campo :attribute no debe tener menos de :min caracteres',
 				'max' => 'El campo :attribute no debe exceder los :max caracteres'
@@ -267,20 +267,24 @@
 		}
 
 		public function postRegistrarAgrupacion(){
+			$codigo = Input::get('codigo');
 			$nombre = Input::get('nombre');
 			$descripcion = Input::get('descripcion');
 
 			$reglas = array(
-				'nombre' => 'required|min:5|max:30',
+				'codigo' => 'required|unique:agrupaciones|min:1|max:3',
+				'nombre' => 'required|min:5|max:50',
 				'descripcion' => 'min:5|max:50'
 			);
 
 			$campos = array(
+				'codigo' => $codigo,
 				'nombre' => $nombre,
 				'descripcion' => $descripcion
 			);
 
 			$mensajes = array(
+				'unique' => 'El campo :attribute ya existe, intente con otro',
 				'required' => 'El campo :attribute es obligatorio',
 				'min' => 'El campo :attribute no debe tener menos de :min caracteres',
 				'max' => 'El campo :attribute no debe exceder los :max caracteres'
@@ -289,17 +293,60 @@
 			$validacion = Validator::make($campos, $reglas, $mensajes);
 
 			if($validacion->fails()){
-				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages->all()));
+				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
 			}
 			else{
-				$nuevo_objeto = new Agrupacion;
+				$agrupacion = new Agrupacion;
 
-				$nuevo_objeto->nombre = $nombre;
-				$nuevo_objeto->descripcion = $descripcion;
+				$agrupacion->codigo = $codigo;
+				$agrupacion->nombre = $nombre;
+				$agrupacion->descripcion = $descripcion;
 
-				$nuevo_objeto->save();
+				$agrupacion->save();
 
-				return Response::json(array('resultado' => true, 'mensajes' => array('Nuevo Objeto creado con exito.')));
+				return Response::json(array('resultado' => true, 'mensajes' => array('Nueva agrupacion creado con exito.')));
+			}
+		}
+
+		public function postRegistrarSubAgrupacion(){
+			$codigo = Input::get('codigo');
+			$nombre = Input::get('nombre');
+			$descripcion = Input::get('descripcion');
+
+			$reglas = array(
+				'codigo' => 'required|unique:sub_agrupaciones|min:1|max:3',
+				'nombre' => 'required|min:5|max:50',
+				'descripcion' => 'min:5|max:50'
+			);
+
+			$campos = array(
+				'codigo' => $codigo,
+				'nombre' => $nombre,
+				'descripcion' => $descripcion
+			);
+
+			$mensajes = array(
+				'unique' => 'El campo :attribute ya existe, intente con otro',
+				'required' => 'El campo :attribute es obligatorio',
+				'min' => 'El campo :attribute no debe tener menos de :min caracteres',
+				'max' => 'El campo :attribute no debe exceder los :max caracteres'
+			);
+
+			$validacion = Validator::make($campos, $reglas, $mensajes);
+
+			if($validacion->fails()){
+				return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+			}
+			else{
+				$sub_agrupacion = new SubAgrupacion;
+
+				$sub_agrupacion->codigo = $codigo;
+				$sub_agrupacion->nombre = $nombre;
+				$sub_agrupacion->descripcion = $descripcion;
+
+				$sub_agrupacion->save();
+
+				return Response::json(array('resultado' => true, 'mensajes' => array('Nueva sub-agrupacion creado con exito.')));
 			}
 		}
 	}

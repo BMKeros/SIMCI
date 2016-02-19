@@ -2,7 +2,7 @@
 class Agrupacion extends Eloquent{
 	protected $table = 'agrupaciones';
 	protected $fillable = array('codigo' , 'nombre', 'descripcion');
-	protected $primary = 'codigo';
+	protected $primaryKey = 'codigo';
 
 	public function setNombreAttribute($value){
 		if (! empty($value)) {

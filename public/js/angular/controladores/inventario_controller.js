@@ -138,6 +138,23 @@ simci.controller('InventarioController', [
       });
     }
 
+    if($location.$$url == "/inventario/registrar-agrupacion"){
+      $scope.mostrar_mensaje = false;
+
+      $scope.registrar_agrupacion = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/inventario/registrar-agrupacion',
+
+        formulario:{
+          id:'reglas_formulario_registrar_agrupacion',
+          reglas: reglas_formulario_registrar_agrupacion
+        },
+        exito:{
+          titulo: 'Estante creado con exito',
+          mensajes: ['El estante ha sido registrado en la base de datos.']
+        }///inventario/registrar-estante
+      });
+    }
+
     if($location.$$url == "/inventario/ver/todos"){
       $scope.tabla_elementos = {};
       $scope.id_elemento_actual = null;
