@@ -60,7 +60,7 @@ simci.controller('InventarioController', [
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
-        nombre:"sub dimension",
+        nombre:"crear sub dimension",
         descripcion: "Opcion para crear sub dimenciones",
         url: "#/inventario/registrar-sub-dimension",
         icono: 'write',
@@ -74,9 +74,9 @@ simci.controller('InventarioController', [
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       {
-        nombre:"crear subagrupacion",
+        nombre:"crear sub agrupacion",
         descripcion: "Opcion para crear alguna caracteristica por la cual tambien ordenar elementos",
-        url: "#/",
+        url: "#/inventario/registrar-sub-agrupacion",
         icono: 'write',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },

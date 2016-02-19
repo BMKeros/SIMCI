@@ -14,18 +14,18 @@
 				<br>
 			</div>
 
-			<form class="ui form" id="reglas_formulario_registrar_agrupacion">
-				<h3 class="ui centered dividing header">Crear agrupacion</h3>
+			<form class="ui form" id="reglas_formulario_registrar_sub_agrupacion">
+				<h3 class="ui centered dividing header">Crear sub agrupacion</h3>
 				<br>
 				<div class="field">
 					<div class="fields">
-						<div class="four wide field">
+						<div class="five wide field">
 							<label>Codigo</label>
-							<input type="text" name="codigo" placeholder="Codigo de agrupacion" ng-model="DatosForm.codigo">
+							<input type="text" name="codigo" placeholder="Codigo de sub agrupacion" ng-model="DatosForm.codigo">
 						</div>
-						<div class="ten wide field">
+						<div class="nine wide field">
 							<label>Nombre</label>
-							<input type="text" name="nombre" placeholder="Nombre de agrupacion" ng-model="DatosForm.nombre">
+							<input type="text" name="nombre" placeholder="Nombre de sub agrupacion" ng-model="DatosForm.nombre">
 						</div>
 					</div>
 				</div>
@@ -36,11 +36,11 @@
 					<div class="fields">
 						<div class="fourteen wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion" placeholder="Descripcion de agrupacion" ng-model="DatosForm.descripcion" rows="4"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion de sub agrupacion" ng-model="DatosForm.descripcion" rows="4"></textarea>
 						</div>
 					</div>
 				</div>
-				<div class="ui right floated submit big button green" ng-click="registrar_agrupacion()" id="btn-registrar">Registrar</div>
+				<div class="ui right floated submit big button green" ng-click="registrar_sub_agrupacion()" id="btn-registrar">Registrar</div>
 			</form>
 		</div>
 	</div>
