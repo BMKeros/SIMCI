@@ -21,7 +21,7 @@
 					<div class="fields">
 						<div class="four wide field">
 							<label>Codigo</label>
-							<input type="text" name="codigo" placeholder="Codigo de agrupacion" ng-model="DatosForm.codigo">
+							<input type="text" name="codigo" placeholder="Codigo de agrupacion" ng-model="DatosForm.codigo" ng-keyup="tools_input.upper($event)">
 						</div>
 						<div class="ten wide field">
 							<label>Nombre</label>
@@ -36,7 +36,7 @@
 					<div class="fields">
 						<div class="fourteen wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion" placeholder="Descripcion de agrupacion" ng-model="DatosForm.descripcion" rows="4"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion de agrupacion" ng-model="DatosForm.agrupacion" rows="4"></textarea>
 						</div>
 					</div>
 				</div>

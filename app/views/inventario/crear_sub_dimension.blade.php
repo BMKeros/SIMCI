@@ -21,7 +21,7 @@
 					<div class="fields">
 						<div class="four wide field">
 							<label>Codigo</label>
-							<input type="text" name="codigo" placeholder="Codigo subdimencion" ng-model="DatosForm.codigo" ng-keyup="DatosForm.codigo = DatosForm.codigo.toUpperCase()">
+							<input type="text" name="codigo" placeholder="Codigo sub dimencion" ng-model="DatosForm.codigo" ng-keyup="DatosForm.codigo = DatosForm.codigo.toUpperCase()">
 						</div>
 					</div>
 				</div>
@@ -29,10 +29,10 @@
 				<br>
 
 				<div class="field">
-					<div class="two fields">
-						<div class="field">
+					<div class="fields">
+						<div class="fourteen wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion" placeholder="Descripcion de la sub dimencion" ng-model="DatosForm.descripcion"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion de sub dimencion" ng-model="DatosForm.sub_dimencion" rows="4"></textarea>
 						</div>
 					</div>
 				</div>

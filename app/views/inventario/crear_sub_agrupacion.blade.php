@@ -21,7 +21,7 @@
 					<div class="fields">
 						<div class="five wide field">
 							<label>Codigo</label>
-							<input type="text" name="codigo" placeholder="Codigo de sub agrupacion" ng-model="DatosForm.codigo">
+							<input type="text" name="codigo" placeholder="Codigo de sub agrupacion" ng-model="DatosForm.codigo"ng-keyup="tools_input.upper($event)">
 						</div>
 						<div class="nine wide field">
 							<label>Nombre</label>
