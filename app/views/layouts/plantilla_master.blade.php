@@ -13,7 +13,9 @@
 	  	<link rel="stylesheet" href="/css/styles.css" />
 	  	<link rel="stylesheet" href="/bower_components/datatables/media/css/jquery.dataTables.min.css">
 	  	<link rel="stylesheet" href="/bower_components/pikaday/css/pikaday.css">
-	  	<link rel="stylesheet" href="/bower_components/alertify.js/dist/css/alertify.css">
+	  	<!-- AlertifyJs Css -->
+	  	<link rel="stylesheet" href="/bower_components/alertifyjs/css/alertify.min.css">
+	  	<link rel="stylesheet" href="/bower_components/alertifyjs/css/themes/semantic.min.css">
 
 	  	<script>
 	  		if(typeof(Storage) === "undefined") {
@@ -40,7 +42,11 @@
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
-		<script src="/bower_components/alertify.js/dist/js/ngAlertify.js"></script>
+		<script src="/bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.min.js"></script>
+		<script src="/bower_components/datatables/plugins/columnfilter/angular-datatables.columnfilter.min.js"></script>
+		<!-- alertifyJs -->
+		<script src="/bower_components/alertifyjs/alertify.min.js"></script>
+		
 		<script src="/js/moment-with-locales.min.js"></script>
 		<script src="/bower_components/pikaday/pikaday.js"></script>
 		<script src="/bower_components/howler.js/howler.min.js"></script>
