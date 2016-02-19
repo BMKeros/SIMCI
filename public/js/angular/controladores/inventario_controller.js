@@ -133,7 +133,7 @@ simci.controller('InventarioController', [
         },
         exito:{
           titulo: 'Estante creado con exito',
-          mensajes: ['El estante ha sido registrado en la base de datos.']
+          mensajes: ['La sub dimension ha sido registrado en la base de datos.']
         }///inventario/registrar-estante
       });
     }
@@ -150,8 +150,25 @@ simci.controller('InventarioController', [
         },
         exito:{
           titulo: 'Estante creado con exito',
-          mensajes: ['El estante ha sido registrado en la base de datos.']
-        }///inventario/registrar-estante
+          mensajes: ['La agrupacion ha sido registrado en la base de datos.']
+        }///inventario/registrar-agrupacion
+      });
+    }
+
+    if($location.$$url == "/inventario/registrar-sub-agrupacion"){
+      $scope.mostrar_mensaje = false;
+
+      $scope.registrar_sub_agrupacion = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/inventario/registrar-sub-agrupacion',
+
+        formulario:{
+          id:'reglas_formulario_registrar_sub_agrupacion',
+          reglas: reglas_formulario_registrar_sub_agrupacion
+        },
+        exito:{
+          titulo: 'Estante creado con exito',
+          mensajes: ['La sub agrupacion ha sido registrado en la base de datos.']
+        }///inventario/registrar-sub-agrupacion
       });
     }
 
