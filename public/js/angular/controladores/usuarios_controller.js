@@ -13,8 +13,7 @@ simci.controller('UsuariosController', [
   'DTOptionsBuilder', 
   'DTColumnBuilder',
   'ToolsService',
-  'alertify',
-  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService,alertify){
+  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService){
   
     $scope.modulo = {};
 
