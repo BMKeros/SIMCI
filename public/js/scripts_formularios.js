@@ -668,6 +668,70 @@ var reglas_formulario_registrar_sub_dimension = {
    inline: true
 };
 
+var reglas_formulario_registrar_agrupacion = {
+  on: 'blur',
+   duration: 40,
+   fields: {
+
+      codigo: {
+        identifier: 'codigo',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[1]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[3]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      nombre: {
+        identifier: 'nombre',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede estar vacio'
+
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[150]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      descripcion: {
+        identifier: 'descripcion',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[50]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      }
+
+    },
+    inline: true
+};
+
 var reglas_formulario_registrar_elemento = {
   on: 'blur',
    duration: 40,
