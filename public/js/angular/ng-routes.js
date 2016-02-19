@@ -53,12 +53,17 @@
         }).
 
          when('/inventario/registrar-sub-dimension', {
-          templateUrl: '/views/inventario/crear_estante',
+          templateUrl: '/views/inventario/sub_dimension',
           controller: 'InventarioController'
         }).
 
          when('/inventario/mostrar-almacen', {
           templateUrl: '/views/inventario/mostrar_elementos',
+          controller: 'InventarioController'
+        }).
+
+         when('/inventario/registrar-agrupacion', {
+          templateUrl: '/views/inventario/crear_agrupacion',
           controller: 'InventarioController'
         }).
 

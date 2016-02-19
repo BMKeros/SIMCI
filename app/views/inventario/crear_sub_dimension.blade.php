@@ -15,13 +15,13 @@
 			</div>
 
 			<form class="ui form" id="reglas_formulario_registrar_sub_dimension">
-				<h3 class="ui centered dividing header">Crear Estante</h3>
+				<h3 class="ui centered dividing header">Sub Dimension</h3>
 				<br>
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
-							<label>Codigo del Estante</label>
-							<input type="text" name="codigo" placeholder="Codigo del Estante" ng-model="DatosForm.codigo">
+							<label>Codigo</label>
+							<input type="text" name="codigo" placeholder="Codigo para la subdimencion" ng-model="DatosForm.codigo">
 						</div>
 					</div>
 				</div>
@@ -31,8 +31,8 @@
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
-							<label>Descripcion del Estante</label>
-							<textarea name="descripcion" placeholder="Descripcion del Estante" ng-model="DatosForm.descripcion"></textarea>
+							<label>Descripcion</label>
+							<textarea name="descripcion" placeholder="Descripcion para la sub dimencion" ng-model="DatosForm.descripcion"></textarea>
 						</div>
 					</div>
 				</div>
