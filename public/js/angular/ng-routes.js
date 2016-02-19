@@ -53,7 +53,7 @@
         }).
 
          when('/inventario/registrar-sub-dimension', {
-          templateUrl: '/views/inventario/sub_dimension',
+          templateUrl: '/views/inventario/crear_sub_dimension',
           controller: 'InventarioController'
         }).
 

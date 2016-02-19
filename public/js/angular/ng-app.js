@@ -1,13 +1,11 @@
 (function(){
-  var simci = angular.module('SIMCI', ['ngRoute','datatables','ngAlertify'], function($interpolateProvider) {
+  var simci = angular.module('SIMCI', ['ngRoute','datatables'], function($interpolateProvider) {
           $interpolateProvider.startSymbol('<%');
           $interpolateProvider.endSymbol('%>');
   });
 
-  simci.run(function(alertify,DTDefaultOptions){
-    //alertify.logPosition('');
-    alertify.success("Bienvenido a SIMCI..");
-
+  simci.run(function(DTDefaultOptions){
+    alertify.success('Ready!');
     //Lenguaje español para datatable
     DTDefaultOptions.setLanguageSource('/spanish.json');
   });
