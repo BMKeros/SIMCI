@@ -13,12 +13,8 @@ simci.controller('UsuariosController', [
   'DTOptionsBuilder', 
   'DTColumnBuilder',
   'ToolsService',
-  'alertify',
-  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService,alertify){
-    
-    alertify.logPosition('buttom right');
-    alertify.success("Estas en el modulo de usuarios!");
-
+  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService){
+  
     $scope.modulo = {};
 
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -91,6 +87,19 @@ simci.controller('UsuariosController', [
          type: 'GET'
       })
       .withDataProp('data')
+      .withColumnFilter({
+            aoColumns: [{
+                type: 'number'
+            }, {
+                type: 'text',
+                bRegex: true,
+                bSmart: true
+            }, {
+                type: 'select',
+                bRegex: false,
+                values: ['Yoda', 'Titi', 'Kyle', 'Bar', 'Whateveryournameis']
+            }]
+      })
       .withPaginationType('full_numbers')
       .withOption('processing', true)
       .withOption('serverSide', true)
