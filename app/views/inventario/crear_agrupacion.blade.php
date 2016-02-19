@@ -20,13 +20,12 @@
 				<div class="field">
 					<div class="two fields">
 						<div class="field">
-							<label>Nombre</label>
-							<input type="text" name="nombre" placeholder="Nombre de la agrupacion" ng-model="DatosForm.agrupacion">
-						</div>
-
-						<div class="field">
 							<label>Codigo</label>
-							<input type="text" name="codigo" placeholder="Codigo para la agrupacion" ng-model="DatosForm.agrupacion">
+							<input type="text" name="codigo" placeholder="Codigo para la agrupacion" ng-model="DatosForm.codigo">
+						</div>
+						<div class="field">
+							<label>Nombre</label>
+							<input type="text" name="nombre" placeholder="Nombre de la agrupacion" ng-model="DatosForm.nombre">
 						</div>
 					</div>
 				</div>
@@ -37,7 +36,7 @@
 					<div class="two fields">
 						<div class="field">
 							<label>Descripcion</label>
-							<textarea name="descripcion" placeholder="Descripcion para la agrupacion" ng-model="DatosForm.agrupacion"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion para la agrupacion" ng-model="DatosForm.descripcion"></textarea>
 						</div>
 					</div>
 				</div>
