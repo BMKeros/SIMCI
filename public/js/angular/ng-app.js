@@ -4,10 +4,13 @@
           $interpolateProvider.endSymbol('%>');
   });
 
-  simci.run(function(DTDefaultOptions){
-    alertify.success('Ready!');
-    //Lenguaje español para datatable
-    DTDefaultOptions.setLanguageSource('/spanish.json');
+  simci.run(function($rootScope,DTDefaultOptions,ToolsService){
+      alertify.success('Ready!');
+      //Lenguaje español para datatable
+      DTDefaultOptions.setLanguageSource('/spanish.json');
+
+      //Asignar funciones en el scope global
+      $rootScope.input_upper = ToolsService.input_upper;  
   });
 
   simci.filter('capitalize', function() {
@@ -25,6 +28,12 @@
 
   simci.factory('ToolsService', [function () {
     return {
+      //Para convertir el valor de los input en mayuscula
+      input_upper: function(_event){
+        var input = angular.element(_event.currentTarget);
+        var value_upper = input.val().toUpperCase();
+        input.val(value_upper);
+      },
       //Funcion para cortar el string dependiendo del numero de caracteres por parametros
       cut_string: function(string, num_char){
         var infin = ((string.length > num_char)?'....':'');
