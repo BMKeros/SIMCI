@@ -10,7 +10,7 @@
       DTDefaultOptions.setLanguageSource('/spanish.json');
 
       //Asignar funciones en el scope global
-      $rootScope.input_upper = ToolsService.input_upper;  
+      $rootScope.tools_input = ToolsService.tools_input;  
   });
 
   simci.filter('capitalize', function() {
@@ -28,11 +28,13 @@
 
   simci.factory('ToolsService', [function () {
     return {
-      //Para convertir el valor de los input en mayuscula
-      input_upper: function(_event){
-        var input = angular.element(_event.currentTarget);
-        var value_upper = input.val().toUpperCase();
-        input.val(value_upper);
+      tools_input:{
+        //Para convertir el valor de los input en mayuscula
+        upper: function(_event){
+          var input = angular.element(_event.currentTarget);
+          var value_upper = input.val().toUpperCase();
+          input.val(value_upper);
+        }
       },
       //Funcion para cortar el string dependiendo del numero de caracteres por parametros
       cut_string: function(string, num_char){
