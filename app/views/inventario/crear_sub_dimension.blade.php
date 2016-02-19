@@ -21,7 +21,7 @@
 					<div class="fields">
 						<div class="four wide field">
 							<label>Codigo</label>
-							<input type="text" name="codigo" placeholder="Codigo subdimencion" ng-model="DatosForm.codigo" ng-keyup="DatosForm.codigo = DatosForm.codigo.toUpperCase()">
+							<input type="text" name="codigo" placeholder="Codigo subdimencion" ng-model="DatosForm.codigo" ng-keyup="input_upper($event)">
 						</div>
 					</div>
 				</div>
