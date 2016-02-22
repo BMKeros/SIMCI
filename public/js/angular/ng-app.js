@@ -193,8 +193,27 @@
           });
         }
     }
-}]);
-   
+  }]); 
+
+  simci.directive('ngUpdateHidden', [function () {
+    return {
+      restrict: 'AE', //attribute or element
+      scope: {},
+      replace: true,
+      require: 'ngModel',
+      link: function ($scope, elemento, attr, ngModel) {
+          $scope.$watch(ngModel, function (nuevo_val) {
+              elemento.val(nuevo_val);
+          });
+          elemento.change(function () { //bind the change event to hidden input
+              $scope.$apply(function () {
+                  ngModel.$setViewValue(elemento.val());
+              });
+          });
+      }
+    };
+  }]);
+
   //Seteamos de manera global la app simci
   window.simci = simci;
 
