@@ -495,6 +495,36 @@ class UsuariosController extends Controller {
 		}
 	}
 
+	public function postVerificar(){
+		$id = Input::get('id');
+
+		$persona_id = Persona::where('usuario_id', '=', $id)->get()->first();
+
+		if(!is_null($persona_id)){
+			$exists_relacion = DB::table('almacenes')
+	            ->where('responsable', '=', $persona_id->id)
+	        	->count();	
+		}
+		else{
+			$exists_relacion = 0;
+		}
+		
+		
+        if($exists_relacion){
+        	return Response::json(array(
+				'resultado'=>true, 
+				'mensajes'=> "No puede eliminar este usuario debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion."
+				)
+			);
+        }
+        else{
+        	return Response::json(array(
+				'resultado'=>false, 
+				'mensajes'=> "Confirme si desea eliminar"
+				)
+			);
+        }
+    }
 
 	public function postEliminar(){
 		$id = Input::get('id');

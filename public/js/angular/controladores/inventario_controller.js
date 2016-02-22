@@ -132,7 +132,7 @@ simci.controller('InventarioController', [
           reglas: reglas_formulario_registrar_sub_dimension
         },
         exito:{
-          titulo: 'Estante creado con exito',
+          titulo: 'Sub dimension creado con exito',
           mensajes: ['La sub dimension ha sido registrado en la base de datos.']
         }///inventario/registrar-estante
       });
@@ -149,7 +149,7 @@ simci.controller('InventarioController', [
           reglas: reglas_formulario_registrar_agrupacion
         },
         exito:{
-          titulo: 'Estante creado con exito',
+          titulo: 'Agrupacion creado con exito',
           mensajes: ['La agrupacion ha sido registrado en la base de datos.']
         }///inventario/registrar-agrupacion
       });
@@ -166,7 +166,7 @@ simci.controller('InventarioController', [
           reglas: reglas_formulario_registrar_sub_agrupacion
         },
         exito:{
-          titulo: 'Estante creado con exito',
+          titulo: 'Sub agrupacion creado con exito',
           mensajes: ['La sub agrupacion ha sido registrado en la base de datos.']
         }///inventario/registrar-sub-agrupacion
       });
