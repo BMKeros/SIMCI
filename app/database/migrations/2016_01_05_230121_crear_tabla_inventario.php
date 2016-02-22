@@ -24,7 +24,7 @@ class CrearTablaInventario extends Migration {
 			$table->decimal('cantidad_disponible');
 			$table->boolean('usa_recipientes');
 			$table->boolean('elemento_movible')->default(false);
-			$table->integer('recipientes_disponibles');
+			$table->integer('recipientes_disponibles')->nullable();
 			$table->nullableTimestamps();
 		});
 	}
