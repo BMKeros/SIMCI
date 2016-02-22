@@ -12,7 +12,8 @@ simci.controller('InventarioController', [
   'DTOptionsBuilder', 
   'DTColumnBuilder',
   'ToolsService',
-  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService){
+  '$templateCache',
+  function ($scope, $http, $log ,$timeout, $route, $routeParams, $location, $compile,DTOptionsBuilder, DTColumnBuilder,ToolsService, $templateCache){
     
     $scope.modulo = {};
 
@@ -115,6 +116,9 @@ simci.controller('InventarioController', [
 
 
     if($location.$$url == "/inventario/registrar-almacen"){
+      
+      ToolsService.reload_template_cache($route,$templateCache);
+
       $scope.mostrar_mensaje = false;
 
       $scope.registrar_almacen = ToolsService.registrar_dinamico($scope,$http,$timeout,{
