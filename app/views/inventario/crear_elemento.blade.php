@@ -47,7 +47,7 @@
 						<div class="field">
 							<label>Objeto</label>
 							<div class="ui search selection dropdown capitalize buscar_objeto">
-				             	<input value="" type="hidden" placeholder="Buscar Elemento" ng-model="DatosForm.cod_objeto" name="cod_objeto">
+				             	<input type="hidden" ng-model="DatosForm.cod_objeto" name="cod_objeto" ng-update-hidden>
 				              	<i class="dropdown icon"></i>
 				              	<input tabindex="0" class="search" type="text">
 				              	<div class="text"></div>
