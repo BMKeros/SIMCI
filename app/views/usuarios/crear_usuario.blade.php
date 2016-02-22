@@ -62,7 +62,7 @@
 				<div class="field">
 					<div class="ui toggle checkbox">
 						<label>Usuario activo</label>
-						<input type="checkbox" name="activo" ng-model="DatosForm.activo">
+						<input type="checkbox" name="activo" ng-model="DatosForm.activo" ng-init="DatosForm.activo = true">
 					</div>
 				</div>
 
