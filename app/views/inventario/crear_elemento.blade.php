@@ -62,17 +62,17 @@
 					<div class="three fields">
 						<div class="field">
 							<label>Numero de Organizacion</label>
-							<input type="number" name="numero_orden" placeholder="0" ng-model="DatosForm.numero_orden">
+							<input type="number" name="numero_orden" placeholder="0" min="1" ng-model="DatosForm.numero_orden">
 						</div>
 
 						<div class="field">
 							<label>Cantidad Disponible</label>
-							<input type="number" name="cantidad_disponible" placeholder="0" ng-model="cantidad_disponible">
+							<input type="number" name="cantidad_disponible" placeholder="0" min="1" ng-model="cantidad_disponible">
 						</div>
 
 						<div class="field" ng-show="DatosForm.usa_recipientes">
 							<label>Recipientes Disponibles</label>
-							<input type="number" name="recipientes_disponibles" placeholder="0" ng-model="DatosForm.recipientes_disponibles">
+							<input type="number" name="recipientes_disponibles" placeholder="0" min="1" ng-model="DatosForm.recipientes_disponibles">
 
 						</div>
 					</div>
