@@ -10,7 +10,7 @@
       DTDefaultOptions.setLanguageSource('/spanish.json');
 
       //Asignar funciones en el scope global
-      $rootScope.tools_input = ToolsService.tools_input;  
+      $rootScope.tools_input = ToolsService.tools_input; 
   });
 
   simci.filter('capitalize', function() {
@@ -34,7 +34,24 @@
           var input = angular.element(_event.currentTarget);
           var value_upper = input.val().toUpperCase();
           input.val(value_upper);
+        },
+        // Esto se tiene que acomodar //
+        quitar_caracteres: function(_event,_array_quitar){
+          var input = angular.element(_event.currentTarget);
+          var val = input.val().toString();
+          patron =/[0-9]/;
+          if(patron.test(_event.key)){
+            val[val.length-1]= '';
+          }
+          input.val(val);
+        },
+        cambiar_coma_punto: function(_event){
+          var input = angular.element(_event.currentTarget);
+          var input_val = input.val().toString();
+          var nuevo_val = input_val.replace(/,/,'.');
+          input.val(nuevo_val);
         }
+        // Esto se tiene que acomodar //
       },
       //Funcion para cortar el string dependiendo del numero de caracteres por parametros
       cut_string: function(string, num_char){

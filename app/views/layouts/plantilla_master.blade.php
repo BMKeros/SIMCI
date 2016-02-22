@@ -42,8 +42,9 @@
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
-		<script src="/bower_components/angular-datatables/dist/plugins/columnfilter/angular-datatables.columnfilter.min.js"></script>
-		<script src="/bower_components/datatables/plugins/columnfilter/angular-datatables.columnfilter.min.js"></script>
+		
+		<!-- plugins datatables -->
+		
 		<!-- alertifyJs -->
 		<script src="/bower_components/alertifyjs/alertify.min.js"></script>
 		

@@ -87,19 +87,6 @@ simci.controller('UsuariosController', [
          type: 'GET'
       })
       .withDataProp('data')
-      /*.withColumnFilter({
-            aoColumns: [{
-                type: 'number'
-            }, {
-                type: 'text',
-                bRegex: true,
-                bSmart: true
-            }, {
-                type: 'select',
-                bRegex: false,
-                values: ['Yoda', 'Titi', 'Kyle', 'Bar', 'Whateveryournameis']
-            }]
-      })*/
       .withPaginationType('full_numbers')
       .withOption('processing', true)
       .withOption('serverSide', true)
