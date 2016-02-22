@@ -42,7 +42,7 @@
           controller: 'InventarioController'  
         }).
 
-         when('/inventario/mostrar-elemento', {
+         when('/inventario/ver/todos', {
           templateUrl: '/views/inventario/mostrar_elemento',
           controller: 'InventarioController'
         }).

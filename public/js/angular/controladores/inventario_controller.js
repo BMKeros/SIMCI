@@ -39,7 +39,7 @@ simci.controller('InventarioController', [
       {
         nombre:"mostrar elementos",
         descripcion: "Esta opcion le permitira mostrar los elementos del inventario",
-        url: "#/inventario/mostrar-elemento",
+        url: "#/inventario/ver/todos",
         icono: 'unhide',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
