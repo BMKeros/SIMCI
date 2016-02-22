@@ -239,44 +239,52 @@ simci.controller('UsuariosController', [
         };
 
       $scope.modal_eliminar_usuario = function(id){
-        //Seteamos a la variable el id del usuario que se va a eliminar
-        $scope.id_usuario_eliminar = id;
+    
+        alertify.confirm('Seguro que desea eliminar este usuario!',
+          //onok consulta para verificar si tiene relaciones con otras tablas
+          function(){
+            $http({
+              method: 'POST',
+              url: '/api/usuarios/verificar?id='+id,
+            }).then(function(data){
+              //verificamos si el usuario tiene relacion en otras tablas
+              if(data.data.resultado){
+                alertify.alert(data.data.mensajes);
+              }
+              else{
+                //sino tiene relaciones, que confirme para que elimine el usuario
+                alertify.confirm(data.data.mensajes, 
+                  //onok para eliminar el usuairo
+                  function(){
+                    $http({
+                      method: 'POST',
+                      url: '/api/usuarios/eliminar?id='+id,
+                    }).then(function(data){
+                      
+                      if(data.data.resultado){
 
-        angular.element('#modal_eliminar_usuario').modal('show');
+                        //Recargamos la tabla
+                        setTimeout(function(){
+                          ToolsService.reload_tabla($scope,'tabla_usuarios',function(data){});
+                        }, 500);                         
+                      }
+                      else{
+                        $log.info(data);
+                      }
+                    },function(data_error){
+                      $log.info(data_error);
+                    });
+                  }
+                ).set('title', '¡Alerta!');
+              }
+            },
+            function(data_error){
+              $log.info(data_error);
+            });
+          }
+        ).set('title', '¡Alerta!');
       };
-
-      $scope.cerrar_modal_eliminar = function(){
-        angular.element('#modal_eliminar_usuario').modal('hide');
-      }
-
-      $scope.procesar_eliminar = function(){
-        
-        var id_usuario = $scope.id_usuario_eliminar;
-
-        $http({
-          method: 'POST',
-          url: '/api/usuarios/eliminar?id='+id_usuario,
-        }).then(function(data){
-          
-          if(data.data.resultado){
-            
-            //Cerramos la modal
-            $scope.cerrar_modal_eliminar();
-
-            //Recargamos la tabla
-            setTimeout(function(){
-              ToolsService.reload_tabla($scope,'tabla_usuarios',function(data){});
-            }, 500);                         
-          }
-          else{
-            $log.info(data);
-          }
-        },function(data_error){
-          $log.info(data_error);
-        });
-      }// Procesar eliminar
-
-    }// If
+    }// If == '/usuarios/ver-todos'
 
       if($location.$$url == '/usuarios/crear/tipo-usuario'){
         $scope.mostrar_mensaje = false;
