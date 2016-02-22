@@ -22,12 +22,12 @@
 					<div class="two fields">
 						<div class="field">
 				      		<label>Almacen</label>
-							{{  Form::select_dimension(array('name'=>'cod_dimension','id'=>'cod_dimension', 'ng-model'=>'cod_dimension')) }}
+							{{  Form::select_dimension(array('name'=>'cod_dimension','id'=>'cod_dimension', 'ng-model'=>'DatosForm.cod_dimension')) }}
 			     		</div>
 
 			     		<div class="field">
 				      		<label>Sub Dimension</label>
-								{{  Form::select_sub_dimension(array('name'=>'cod_sub_dimension','id'=>'cod_sub_dimension', 'ng-model'=>'cod_sub_dimension')) }}
+								{{  Form::select_sub_dimension(array('name'=>'cod_sub_dimension','id'=>'cod_sub_dimension', 'ng-model'=>'DatosForm.cod_sub_dimension')) }}
 						</div>
 		     		</div>
 				</div>
@@ -36,12 +36,12 @@
 					<div class="three fields">
 						<div class="field">
 				      		<label>Agrupacion</label>
-							{{ Form::select_agrupacion(array('name'=>'cod_agrupacion', 'id'=>'cod_agrupacion', 'ng-model'=>'cod_agrupacion')) }}
+							{{ Form::select_agrupacion(array('name'=>'cod_agrupacion', 'id'=>'cod_agrupacion', 'ng-model'=>'DatosForm.cod_agrupacion')) }}
 			     		</div>
 
 			     		<div class="field">
 				      		<label>Sub Agrupacion</label>
-							{{ Form::select_sub_agrupacion(array('name'=>'cod_sub_agrupacion', 'id'=>'cod_sub_agrupacion', 'ng-model'=>'cod_sub_agrupacion')) }}
+							{{ Form::select_sub_agrupacion(array('name'=>'cod_sub_agrupacion', 'id'=>'cod_sub_agrupacion', 'ng-model'=>'DatosForm.cod_sub_agrupacion')) }}
 						</div>
 
 						<div class="field">
@@ -67,7 +67,7 @@
 
 						<div class="field">
 							<label>Cantidad Disponible</label>
-							<input type="number" name="cantidad_disponible" placeholder="0" min="1" ng-model="cantidad_disponible">
+							<input type="number" name="cantidad_disponible" placeholder="0" min="1" ng-model="DatosForm.cantidad_disponible">
 						</div>
 
 						<div class="field" ng-show="DatosForm.usa_recipientes">
@@ -83,7 +83,7 @@
 						<div class="two fields">
 							<div class="field">
 								<div class="ui toggle checkbox">
-								  	<input name="usa_recipiente" type="checkbox" ng-model="DatosForm.usa_recipientes">
+								  	<input name="usa_recipientes" type="checkbox" ng-model="DatosForm.usa_recipientes" ng-init="DatosForm.usa_recipientes = false">
 								  	<label>Usar Recipiente</label>
 								</div>
 							</div>
