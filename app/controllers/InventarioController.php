@@ -10,41 +10,44 @@
 			$cod_dimension = Input::get('cod_dimension');
 			$cod_sub_dimension = Input::get('cod_sub_dimension');
 			$cod_agrupacion = Input::get('cod_agrupacion');
-			//$cod_sub_agrupacion = Input::get('cod_sub_agrupacion');
-			$numero_orden = Input::get('numero_orden');
+			$cod_sub_agrupacion = Input::get('cod_sub_agrupacion');
 			$cod_objeto = Input::get('cod_objeto');
+			$numero_orden = Input::get('numero_orden');
 			$cantidad_disponible = Input::get('cantidad_disponible');
 			$usa_recipientes = Input::get('usa_recipientes');
 			$recipientes_disponibles = Input::get('recipientes_disponibles');
+			$elemento_movible = Input::get('elemento_movible');
 
 			$reglas = array(
-				'cod_dimension' => 'required|numeric|exists:almacenes,cod_almacen',
-				'cod_sub_dimension' =>'required|numeric|exists:estantes,cod_estante',
-				'cod_agrupacion' => 'required|numeric|exists:tipo_objetos,id',
-				//'cod_sub_agrupacion' => 'exists:inventario,cod_subagrupacion',
+				'cod_dimension' => 'required|alpha_num|exists:almacenes,codigo',
+				'cod_sub_dimension' =>'required|alpha_num|exists:sub_dimensiones,codigo',
+				'cod_agrupacion' => 'required|alpha_num|exists:agrupaciones,codigo',
+				'cod_sub_agrupacion' => 'alpha_num|exists:sub_agrupaciones,codigo',
 				'numero_orden' => 'required|numeric',
-				//pendiente evaluar si cod_objeto sera unique
-				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id',
-				'cantidad_disponible' => 'required',
-				//campos aun no se sabe si se dejaran o se quitaran
+				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id|unique:inventario',
+				'cantidad_disponible' => 'required|numeric',
 				'usa_recipientes' => 'required|boolean',
-				'recipientes_disponibles' => 'required|numeric'
+				'recipientes_disponibles' => 'numeric',
+				'elemento_movible' => 'required|boolean'
 			);
 
 			$campos = array(
 				'cod_dimension' => $cod_dimension,
 				'cod_sub_dimension' => $cod_sub_dimension,
 				'cod_agrupacion' => $cod_agrupacion,
-				//'cod_sub_agrupacion' => $cod_sub_agrupacion,
+				'cod_sub_agrupacion' => $cod_sub_agrupacion,
 				'numero_orden' => $numero_orden,
 				'cod_objeto' => $cod_objeto,
 				'cantidad_disponible' => $cantidad_disponible,
 				'usa_recipientes' => $usa_recipientes,
-				'recipientes_disponibles' => $recipientes_disponibles
+				'recipientes_disponibles' => $recipientes_disponibles,
+				'elemento_movible' => $elemento_movible
 			);
 
 			$mensajes = array(
 				'required' => 'El campo :attribute es necesario',
+				'alpha_num' => 'El campo :attribute debe contener caracteres alfanumericos',
+				'unique' => 'El campo :attribute debe ser unico',
 				'integer' => 'El campo :attribute debe ser numerico',
 				'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
 				':attribute no existe',
@@ -234,7 +237,7 @@
 
 			$reglas = array(
 				'codigo' => 'required|unique:sub_dimensiones|min:2|max:3',
-				'descripcion' => 'required|min:3|max:50'
+				'descripcion' => 'required|min:2|max:50'
 			);
 
 			$campos = array(
