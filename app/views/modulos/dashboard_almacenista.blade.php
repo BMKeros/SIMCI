@@ -9,6 +9,10 @@
 	<header>
   		<div class="ui fixed menu">
     		<div class="ui container">
+				<a class="item"  id="btn-abrir-menu">
+					<i class="sidebar icon"></i>
+    			</a>
+
     			<a href="#" class="header item">
         			<img class="logo" src="/img/logo.png">
         			&nbsp;&nbsp;&nbsp;SIMCI
