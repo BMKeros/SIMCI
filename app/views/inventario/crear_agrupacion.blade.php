@@ -36,7 +36,7 @@
 					<div class="fields">
 						<div class="fourteen wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion" placeholder="Descripcion de agrupacion" ng-model="DatosForm.agrupacion" rows="4"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion de agrupacion" ng-model="DatosForm.descripcion" rows="4"></textarea>
 						</div>
 					</div>
 				</div>

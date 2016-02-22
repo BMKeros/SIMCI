@@ -32,7 +32,7 @@
 					<div class="fields">
 						<div class="fourteen wide field">
 							<label>Descripcion</label>
-							<textarea name="descripcion" placeholder="Descripcion de sub dimencion" ng-model="DatosForm.sub_dimencion" rows="4"></textarea>
+							<textarea name="descripcion" placeholder="Descripcion de sub dimencion" ng-model="DatosForm.descripcion" rows="4"></textarea>
 						</div>
 					</div>
 				</div>
