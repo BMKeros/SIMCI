@@ -66,12 +66,13 @@
 				$nuevo_elemento->cod_dimension = $cod_dimension;
 				$nuevo_elemento->cod_subdimension = $cod_sub_dimension;
 				$nuevo_elemento->cod_agrupacion = $cod_agrupacion;
-				//$nuevo_elemento->cod_subagrupacion = $cod_sub_agrupacion;
+				$nuevo_elemento->cod_subagrupacion = $cod_sub_agrupacion;
 				$nuevo_elemento->numero_orden = $numero_orden;
 				$nuevo_elemento->cod_objeto = $cod_objeto;
 				$nuevo_elemento->cantidad_disponible = $cantidad_disponible;
 				$nuevo_elemento->usa_recipientes = $usa_recipientes;
 				$nuevo_elemento->recipientes_disponibles = $recipientes_disponibles;
+				$nuevo_elemento->elemento_movible = $elemento_movible;
 
 				$nuevo_elemento->save();
 
