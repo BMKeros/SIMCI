@@ -57,11 +57,6 @@
           controller: 'InventarioController'
         }).
 
-        when('/inventario/mostrar-almancen', {
-          templateUrl: '/views/inventario/mostrar_elementos',
-          controller: 'InventarioController'
-        }).
-
         when('/inventario/registrar-agrupacion', {
           templateUrl: '/views/inventario/crear_agrupacion',
           controller: 'InventarioController'
