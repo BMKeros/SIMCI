@@ -205,7 +205,10 @@ Form::macro('select_unidades', function($atributos = null, $selected = null){
 
 Form::macro('select_personas', function($atributos = null, $selected = null){
 
-	$personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'id')->get();
+	$personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'personas.id')
+		->join('usuarios', 'usuarios.id', '=', 'personas.usuario_id')
+		->whereIn('usuarios.cod_tipo_usuario', array(TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA))
+		->get();
 
 	$default_values = array('class'=>"ui dropdown search capitalize");
 
