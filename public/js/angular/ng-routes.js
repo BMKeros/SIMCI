@@ -42,7 +42,7 @@
           controller: 'InventarioController'  
         }).
 
-         when('/inventario/mostrar-elemento', {
+         when('/inventario/ver/todos', {
           templateUrl: '/views/inventario/mostrar_elemento',
           controller: 'InventarioController'
         }).
@@ -54,11 +54,6 @@
 
          when('/inventario/registrar-sub-dimension', {
           templateUrl: '/views/inventario/crear_sub_dimension',
-          controller: 'InventarioController'
-        }).
-
-        when('/inventario/mostrar-almancen', {
-          templateUrl: '/views/inventario/mostrar_elementos',
           controller: 'InventarioController'
         }).
 
