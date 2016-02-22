@@ -90,7 +90,7 @@
 
 							<div class="field">
 								<div class="ui toggle checkbox">
-								  	<input name="elemento_movible" type="checkbox" ng-model="DatosForm.elemento_movible">
+								  	<input name="elemento_movible" type="checkbox" ng-model="DatosForm.elemento_movible" ng-init="DatosForm.elemento_movible = true">
 								  	<label>Elemento Movible</label>
 								</div>
 							</div>
