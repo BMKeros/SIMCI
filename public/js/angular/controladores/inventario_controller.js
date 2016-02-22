@@ -34,17 +34,26 @@ simci.controller('InventarioController', [
         icono: 'write',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
+
+      {
+        nombre:"mostrar elementos",
+        descripcion: "Esta opcion le permitira mostrar los elementos del inventario",
+        url: "#/inventario/mostrar-elemento",
+        icono: 'unhide',
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
+      },
+
       {
         nombre:"entrada / salida",
         descripcion: "Esta opcion le permitira dar entrada o salida al los objetos del inventario",
-        url: "#/inventario/ver/todos",
+        url: "#/",
         icono: 'compress',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_PROFESOR]
       },
       {
         nombre:"ver inventario",
         descripcion: "Esta opcion le permitira ver los elementos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
-        url: "#/inventario/ver/todos",
+        url: "#/",
         icono: 'eye',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
