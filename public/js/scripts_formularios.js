@@ -828,16 +828,6 @@ var reglas_formulario_registrar_elemento = {
           }
         ]
       },
-      cod_sub_agrupacion: {
-        identifier: 'cod_sub_agrupacion',
-        rules:[
-          {
-              type:'empty',
-              prompt:'Este campo no puede quedar vacio'
-          }
-        ]
-      },
-
       cod_objeto: {
         identifier: 'cod_objeto',
         rules:[
