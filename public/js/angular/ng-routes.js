@@ -43,7 +43,7 @@
         }).
 
          when('/inventario/ver/todos', {
-          templateUrl: '/views/inventario/mostrar_elemento',
+          templateUrl: '/views/inventario/mostrar_elementos',
           controller: 'InventarioController'
         }).
 
