@@ -33,17 +33,26 @@
                   <div class="extra content" ng-if="opcion.ver_dropdown">
                      <div class="ui two buttons">
                         <div class="ui compact menu">
-                           <div class="ui simple dropdown item">
-                              Opciones
-                              <i class="dropdown icon"></i>
-                              <div class="menu">
-                                 <a href="<% opt.url %>" class="item" ng-repeat="opt in opcion.opciones_dropdown"> <%opt.nombre | filter:capitalize%>
-                                 </a>
-                              </div>
-                           </div>
-                        </div>   
+                          
+                           <div class="ui floating labeled icon dropdown button" id="dropdown_acciones_menu">
+                           		<i class="filter icon"></i>
+							  	<span class="text">Seleccione una accion</span>
+							  	<div class="menu">
+							    	<div class="header">
+							      		<i class="tags icon"></i>
+							    	</div>
+							    
+							    	<div class="item" ng-repeat="opt in opcion.opciones_dropdown">
+							      		<div class="ui red empty circular label"></div>
+							      		<a href="<% opt.url %>"><% opt.nombre | capitalize %></a>
+							    	</div>
+							  	</div>
+							</div>
+                        </div> 
+
                      </div>
                   </div>
+                  
                   <!--Este mostrara el bottun acceder normal-->
                    <div class="extra content" ng-if="!opcion.ver_dropdown">
                         <div class="ui two buttons">
@@ -59,3 +68,13 @@
    </div>
 
 </div>
+
+<script>
+	$(document).ready(function(){
+
+		$("body").on("click", '#dropdown_acciones_menu', function (e, something) {
+        	$('.ui.dropdown').dropdown();
+    	});
+
+	});
+</script>
