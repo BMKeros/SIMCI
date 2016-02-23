@@ -4,6 +4,130 @@
 		public function __construct(){
         	//$this->beforeFilter('APICheckPermisos');
 		}
+
+		public function getMostrar(){
+
+			$tipo_busqueda = Input::get('type', 'todos');
+			//$id_elemento = Input::get('id', null);
+			$orden = Input::get('ordenar','asc');
+
+			switch($tipo_busqueda){
+				/*case 'todos':
+					if($orden){
+						//esta aun falta porque no se que campos necesita
+						$response = Catalogo::orderBy('id', $orden)->get();
+					}
+					else{
+						//esta aun le falta porque no se que campos necesita
+						//$response = Catalogo::all();
+						$response = DB::table('catalogo_objetos')->get();
+					}
+				break;
+
+				case 'objeto':
+					if($id_objeto){
+						//$response = Catalogo::find($id_objeto);
+
+						$response = DB::table('catalogo_objetos as CO')
+							->select('CO.nombre', 'CO.descripcion', 'CO.especificaciones', 'CO.cod_clase_objeto', 'clase_objetos.nombre as nombre_clase', 'CO.cod_unidad', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
+							->join('clase_objetos', 'clase_objetos.id', '=', 'CO.cod_clase_objeto')
+							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
+							->where('CO.id', '=', $id_objeto)
+							->first();
+							
+
+						if(is_null($response)){
+							$response = array();
+						}
+					}
+					else{
+						$response = array();
+					}
+				break;*/
+
+				case 'paginacion':
+					$length = Input::get('length', 10);
+					$value_search = Input::get('search');
+					$draw = Input::get('draw',1);
+
+					if(quitar_espacios($value_search['value']) == ''){	
+						$data = DB::table('inventario as INV')
+							->select('INV.cod_dimension', 
+								'INV.cod_subdimension', 
+								'INV.cod_agrupacion', 
+								'INV.cod_subagrupacion',
+								'INV.numero_orden',
+								'INV.cantidad_disponible',
+								'OBJ.nombre as nombre_objeto',
+								'UNI.nombre as nombre_unidad',
+								'UNI.abreviatura')
+							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
+							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
+							->orderBy('INV.id','asc')
+							->paginate($length);
+					}
+					else{	
+						$data = DB::table('inventario as INV')
+							->select('INV.cod_dimension', 
+								'INV.cod_subdimension', 
+								'INV.cod_agrupacion', 
+								'INV.cod_subagrupacion',
+								'INV.numero_orden',
+								'INV.cantidad_disponible',
+								'OBJ.nombre as nombre_objeto',
+								'UNI.nombre as nombre_unidad',
+								'UNI.abreviatura')
+							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
+							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
+							->where('OBJ.nombre', 'ILIKE', '%'.$value_search['value'].'%')
+							->orderBy('INV.id','asc')
+							->paginate($length);
+
+					}
+					
+					$response = array(
+						"draw"=>$draw,
+						"page"=>$data->getCurrentPage(),
+						"recordsTotal"=>$data->getTotal(),
+						"recordsFiltered"=> $data->count(),
+						"data" => $data->all()
+					);
+
+				break;
+
+				case 'query':
+
+					$value_search = Input::get('query');
+					
+					if(quitar_espacios($value_search) != ''){
+						
+						$data = DB::table('catalogo_objetos')
+							->select(DB::raw('capitalize(nombre) as name'), 'id as value')
+							->where('nombre','ILIKE','%'.$value_search.'%')
+							->get();
+
+
+						$response = array("success"=>true, "results" => $data);
+					}
+					else{
+						$data = DB::table('catalogo_objetos')
+							->select(DB::raw('capitalize(nombre) as name'), 'id as value')
+							->orderBy('name', 'desc')
+							->take(15)
+							->get();
+						
+						$response = array("success"=>true, "results" => $data);
+					}
+				break;
+
+				default:
+					$response = Catalogo::all();
+				break;
+
+			}
+
+			return Response::json($response);
+		}
 		
 		public function postRegistrarElemento(){
 
