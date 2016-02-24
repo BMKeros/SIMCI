@@ -191,14 +191,35 @@ simci.controller('InventarioController', [
       .withOption('serverSide', true)
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
-        
-        // 4 Celda de acciones en la tabla
-        //angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
+
+        angular.element($('td',row).eq(0).get(0)).css({'width':'20%'});
+        angular.element($('td',row).eq(4).get(0)).css({'width':'15%'});
+
+        $timeout(function(){
+            $('.ui.spopup').popup();
+        },false,0);
       });
     
       $scope.columnas_tabla_elementos = [
-          DTColumnBuilder.newColumn('id').withTitle('ID').notSortable()
-      ];
+          DTColumnBuilder.newColumn(null).withTitle('Codigo de elemento').renderWith(
+            function(data, type, full){
+              return ToolsService.generar_codigo_elemento(data,'label');
+            }
+          ),
+          DTColumnBuilder.newColumn('nombre_objeto').withTitle('Objeto').notSortable(),
+          DTColumnBuilder.newColumn('cantidad_disponible').withTitle('Disponibilidad').notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+            function(data, type, full) {
+              return data.nombre_unidad + ' ('+ data.abreviatura + ')';
+            }
+          ),
+          DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+            function(data, type, full) {
+              return '<a class="ui icon button blue spopup" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>
+                      <a class="ui icon button green spopup"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>  
+                      <a class="ui icon button red spopup"  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
+          })
+      ];      
     }// inventario/ver/todos"  
   }]
 );
