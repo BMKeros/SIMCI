@@ -24,11 +24,11 @@ class CrearTablaProveedores extends Migration {
 			$table->string('telefono_movil2', 15)->nullable();
 			$table->string('email',100);
 			$table->string('direccion', 200);
-			$table->integer('pais');
-			$table->integer('estado');
-			$table->integer('ciudad');
-			$table->integer('municipio');
-			$table->integer('parroquia');
+			//$table->integer('pais');
+			$table->integer('cod_estado');
+			$table->integer('cod_ciudad');
+			$table->integer('cod_municipio');
+			$table->integer('cod_parroquia');
 			$table->timestamps();
 		});
 	}
