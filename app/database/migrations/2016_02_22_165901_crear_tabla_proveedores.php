@@ -14,12 +14,21 @@ class CrearTablaProveedores extends Migration {
 	{
 		Schema::create('proveedores', function($table)
 		{
-			$table->increments('id');
+			$table->string('codigo',5);
+			$table->primary('codigo');
 			$table->string('razon_social', 50);
-			$table->string('doc_identificacion', 50);
-			$table->string('numero_fijo', 20)->nullable();
-			$table->string('numero_movil', 20)->nullable();
+			$table->string('doc_identificacion', 11);
+			$table->string('telefono_fijo1', 15);
+			$table->string('telefono_fijo2', 15)->nullable();
+			$table->string('telefono_movil1', 15;
+			$table->string('telefono_movil2', 15)->nullable();
+			$table->string('email',100);
 			$table->string('direccion', 200);
+			$table->integer('pais');
+			$table->integer('estado');
+			$table->integer('ciudad');
+			$table->integer('municipio');
+			$table->integer('parroquia');
 			$table->timestamps();
 		});
 	}
