@@ -14,7 +14,10 @@ class CrearTablaMunicipios extends Migration {
 	{
 		Schema::table('municipios', function(Blueprint $table)
 		{
-			//
+			$table->increments('id_municipio');
+			$table->integer('id_estado');
+			$table->string('municipio', 100);
+			
 		});
 	}
 
@@ -27,7 +30,7 @@ class CrearTablaMunicipios extends Migration {
 	{
 		Schema::table('municipios', function(Blueprint $table)
 		{
-			//
+			Schema::drop('municipios');
 		});
 	}
 

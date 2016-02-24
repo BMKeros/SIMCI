@@ -12,9 +12,13 @@ class CrearTablaCiudades extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('ciudades', function(Blueprint $table)
+		Schema::table('ciudades', function($table)
 		{
-			//
+			$table->increments('id_ciudad');
+			$table->integer('id_estado');
+			$table->string('ciudad', 200);
+			$table->boolean('capital')->default(false);
+
 		});
 	}
 
@@ -25,9 +29,9 @@ class CrearTablaCiudades extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('ciudades', function(Blueprint $table)
+		Schema::table('ciudades', function($table)
 		{
-			//
+			Schema::drop('ciudades');
 		});
 	}
 

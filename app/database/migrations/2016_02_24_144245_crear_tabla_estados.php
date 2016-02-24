@@ -12,9 +12,11 @@ class CrearTablaEstados extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('estados', function(Blueprint $table)
+		Schema::table('estados', function($table)
 		{
-			//
+			$table->increments('id_estado');
+			$table->string('estado', 250);
+			$table->string('iso_3166-2', 4);
 		});
 	}
 
@@ -25,9 +27,9 @@ class CrearTablaEstados extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('estados', function(Blueprint $table)
+		Schema::table('estados', function($table)
 		{
-			//
+			Schema::drop('estados');
 		});
 	}
 

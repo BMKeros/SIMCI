@@ -12,9 +12,12 @@ class CrearTablaParroquias extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('parroquias', function(Blueprint $table)
+		Schema::table('parroquias', function($table)
 		{
-			//
+			$table->increments('id_parroquia');
+			$table->integer('id_municipio');
+			$table->string('parroquia', 250);
+
 		});
 	}
 
@@ -25,9 +28,9 @@ class CrearTablaParroquias extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('parroquias', function(Blueprint $table)
+		Schema::table('parroquias', function($table)
 		{
-			//
+			Schema::drop('parroquias');
 		});
 	}
 
