@@ -85,20 +85,20 @@
   			<i class="archive icon"></i>
   			Inventario
 		</a>	
-	
-	   	<a class="item" ng-href="#/ordenes">
-  			<i class="edit icon"></i>
-  			Ordenes
-		</a>
-	
-		<a class="item" ng-href="#/laboratorio">
-  			<i class="lab icon"></i>
-  			Laboratorio
-		</a>
 
 		<a class="item" ng-href="#/proveedores">
   			<i class="shop icon"></i>
   			Proveedor
+		</a>
+		
+		<a class="item" ng-href="#/laboratorio">
+  			<i class="lab icon"></i>
+  			Laboratorio
+		</a>
+	
+	   	<a class="item" ng-href="#/ordenes">
+  			<i class="edit icon"></i>
+  			Ordenes
 		</a>
 	
     	<a class="item" ng-href="#/reporte">

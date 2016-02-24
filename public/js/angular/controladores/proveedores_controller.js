@@ -28,7 +28,7 @@ simci.controller('ProveedoresController', [
     
     $scope.modulo.opciones = [
       {
-        nombre:"registrar proveedores",
+        nombre:"registrar proveedor",
         descripcion: "Esta opcion le permitira crear nuevos proveedores",
         url: "#/proveedores/registrar-proveedores",
         icono: 'write',

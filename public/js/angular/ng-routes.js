@@ -42,8 +42,13 @@
           controller: 'InventarioController'  
         }).
 
-         when('/inventario/ver/todos', {
+        when('/inventario/ver/todos', {
           templateUrl: '/views/inventario/mostrar_elementos',
+          controller: 'InventarioController'
+        }).
+
+        when('/inventario/ver/todos', {
+          templateUrl: '/views/inventario/mostrar_almacenes',
           controller: 'InventarioController'
         }).
 
