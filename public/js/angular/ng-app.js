@@ -35,23 +35,13 @@
           var value_upper = input.val().toUpperCase();
           input.val(value_upper);
         },
-        // Esto se tiene que acomodar //
-        quitar_caracteres: function(_event,_array_quitar){
-          var input = angular.element(_event.currentTarget);
-          var val = input.val().toString();
-          patron =/[0-9]/;
-          if(patron.test(_event.key)){
-            val[val.length-1]= '';
-          }
-          input.val(val);
-        },
-        cambiar_coma_punto: function(_event){
-          var input = angular.element(_event.currentTarget);
-          var input_val = input.val().toString();
-          var nuevo_val = input_val.replace(/,/,'.');
-          input.val(nuevo_val);
-        }
-        // Esto se tiene que acomodar //
+      },
+      //Funcion para formatear string
+      printf: function(formato){
+        var args = Array.prototype.slice.call(arguments,1);
+        return formato.replace(/{(\d+)}/g, function(match, number) { 
+          return typeof args[number] != 'undefined'? args[number] : match;
+        });
       },
       //Funcion para cortar el string dependiendo del numero de caracteres por parametros
       cut_string: function(string, num_char){
@@ -111,6 +101,21 @@
       //Funcion para obtener la data del usuario guardada en el localstorage
       get_data_user_localstorage: function(){
         return JSON.parse(localStorage.getItem('data_usuario'));
+      },
+      //Funcion para generar el codigo de los elementos del alamacen
+      generar_codigo_elemento: function(obj_codigos, tipo){
+        if(tipo.toLowerCase() === 'label'){
+          var tmp = '';
+            tmp += '<div class="ui small green label spopup" data-content="Dimension">'+obj_codigos.cod_dimension+'</div>';
+            tmp += '<div class="ui small blue label spopup" data-content="SubDimension">'+obj_codigos.cod_subdimension+'</div>';
+            tmp += '<div class="ui small teal  label spopup" data-content="Agrupacion">'+obj_codigos.cod_agrupacion+'</div>';
+            if(obj_codigos.cod_subagrupacion){
+              tmp += '<div class="ui small red label spopup" data-content="SubAgrupacion">'+obj_codigos.cod_subagrupacion+'</div>';
+            }
+            tmp += '<div class="ui small gray label spopup" data-content="Numero de orden">'+obj_codigos.numero_orden+'</div>';
+
+            return tmp;
+        }
       },
       //Funcion para el registro dinamico de todos los controladores
       registrar_dinamico: function($_SCOPE,$_HTTP,$_TIMEOUT,opciones){
