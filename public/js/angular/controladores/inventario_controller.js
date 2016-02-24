@@ -231,9 +231,9 @@ simci.controller('InventarioController', [
           
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<a class="ui icon button blue spopup" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>
-                      <a class="ui icon button green spopup"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>  
-                      <a class="ui icon button red spopup"  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
+              return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento('+data.id+')"><i class="unhide icon"></i></a>
+                      <a class="ui icon button green spopup"  data-content="Modificar Elemento" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>  
+                      <a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
           })
           .notSortable()
           .withOption('width', '15%'),
