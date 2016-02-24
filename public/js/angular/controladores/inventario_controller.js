@@ -205,20 +205,24 @@ simci.controller('InventarioController', [
             function(data, type, full){
               return ToolsService.generar_codigo_elemento(data,'label');
             }
-          ),
+          ).notSortable(),
           DTColumnBuilder.newColumn('nombre_objeto').withTitle('Objeto').notSortable(),
-          DTColumnBuilder.newColumn('cantidad_disponible').withTitle('Disponibilidad').notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Disponibilidad').renderWith(
+            function(data, type, full){
+              return ToolsService.quitar_ceros_decimales(data.cantidad_disponible);
+            }
+          ).notSortable(),
           DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
             function(data, type, full) {
               return data.nombre_unidad + ' ('+ data.abreviatura + ')';
             }
-          ),
+          ).notSortable(),
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
               return '<a class="ui icon button blue spopup" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>
                       <a class="ui icon button green spopup"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>  
                       <a class="ui icon button red spopup"  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
-          })
+          }).notSortable()
       ];      
     }// inventario/ver/todos"  
   }]

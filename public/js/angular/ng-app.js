@@ -48,6 +48,14 @@
         var infin = ((string.length > num_char)?'....':'');
         return string.substring(0,num_char)+infin;
       },
+      //Funcion para quitar decimales si son ceros
+      quitar_ceros_decimales: function(numero){
+        var num_split_punto = numero.split('.');
+        var decimal = Number(num_split_punto[1]);
+        
+        return (decimal !== NaN && decimal === 0)?(num_split_punto[0]):(numero);
+      },
+      //Funcion para mostrar el loading
       loading_button: function(id_button,activado){
         if(activado){
           $('#'+id_button).addClass('loading').prop('disabled',true);
