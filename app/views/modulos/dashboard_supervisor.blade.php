@@ -83,7 +83,12 @@
 		<a class="item" ng-href="#/inventario">
   			<i class="archive icon"></i>
   			Inventario
-		</a>	
+		</a>
+
+		<a class="item" ng-href="#/proveedores">
+  			<i class="shop icon"></i>
+  			Proveedor
+		</a>
 	
 	   	<a class="item" ng-href="#/ordenes">
   			<i class="edit icon"></i>

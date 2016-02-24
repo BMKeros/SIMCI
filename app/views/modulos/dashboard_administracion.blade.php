@@ -95,6 +95,11 @@
   			<i class="lab icon"></i>
   			Laboratorio
 		</a>
+
+		<a class="item" ng-href="#/proveedores">
+  			<i class="shop icon"></i>
+  			Proveedor
+		</a>
 	
     	<a class="item" ng-href="#/reporte">
 	      	<i class="file text outline icon"></i>
@@ -110,7 +115,7 @@
   			<i class="search icon"></i>
   			Consultas
 		</a>
-	
+		
     	<a class="item">
 	      	<i class="settings icon"></i>
 	      	Settings

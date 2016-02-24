@@ -168,6 +168,20 @@
           controller: 'DocumentosController'
         }).
 
+        //Rutas Proveedores
+        when('/proveedores', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'ProveedoresController'
+        }).
+        when('/proveedores/registrar-proveedores', {
+          templateUrl: '/views/proveedor/crear_proveedores',
+          controller: 'ProveedorController'
+        }).
+        when('/proveedores/ver/todos', {
+          templateUrl: '/views/proveedor/mostrar_proveedores',
+          controller: 'ProveedorController'
+        }).
+
 
 
         otherwise({

@@ -85,6 +85,11 @@
   			<i class="book icon"></i>
   			Catalogo
 		</a>
+
+		<a class="item" ng-href="#/proveedores">
+  			<i class="shop icon"></i>
+  			Proveedor
+		</a>
 	
 		<a class="item" ng-href="#/ordenes">
   			<i class="edit icon"></i>
