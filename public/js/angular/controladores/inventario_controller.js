@@ -192,9 +192,11 @@ simci.controller('InventarioController', [
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
 
-        angular.element($('td',row).eq(0).get(0)).css({'width':'20%'});
+        /*angular.element($('td',row).eq(0).get(0)).css({'width':'20%'});
+        angular.element($('td',row).eq(2).get(0)).css({'width':'10%'});
+        angular.element($('td',row).eq(3).get(0)).css({'width':'15%'});
         angular.element($('td',row).eq(4).get(0)).css({'width':'15%'});
-
+*/
         $timeout(function(){
             $('.ui.spopup').popup();
         },false,0);
@@ -205,25 +207,41 @@ simci.controller('InventarioController', [
             function(data, type, full){
               return ToolsService.generar_codigo_elemento(data,'label');
             }
-          ).notSortable(),
+          )
+          .notSortable()
+          .withOption('width', '20%'),
+
           DTColumnBuilder.newColumn('nombre_objeto').withTitle('Objeto').notSortable(),
+          
           DTColumnBuilder.newColumn(null).withTitle('Disponibilidad').renderWith(
             function(data, type, full){
               return ToolsService.quitar_ceros_decimales(data.cantidad_disponible);
             }
-          ).notSortable(),
+          )
+          .notSortable()
+          .withOption('width', '10%'),
+          
           DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
             function(data, type, full) {
               return data.nombre_unidad + ' ('+ data.abreviatura + ')';
             }
-          ).notSortable(),
+          )
+          .notSortable()
+          .withOption('width', '15%'),
+          
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
               return '<a class="ui icon button blue spopup" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>
                       <a class="ui icon button green spopup"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>  
                       <a class="ui icon button red spopup"  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
-          }).notSortable()
+          })
+          .notSortable()
+          .withOption('width', '15%'),
       ];      
     }// inventario/ver/todos"  
+
+
+
+
   }]
 );
