@@ -25,6 +25,10 @@ class DatabaseSeeder extends Seeder {
 		$this->call('EstadosMateriaSeeder');
 		$this->call('ElementosQuimicosTableSeeder');
 		$this->call('SexosTableSeeder');
+		$this->call('EstadosTableSeeder');
+		$this->call('CiudadesTableSeeder');
+		$this->call('MunicipiosTableSeeder');
+		$this->call('ParroquiasTableSeeder');
 	}
 }
 
