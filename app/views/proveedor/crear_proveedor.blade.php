@@ -69,14 +69,6 @@
 				
 				<h3 class="ui centered dividing header">Datos de Ubicacion</h3>				
 				
-				<div class="field">
-					<div class="fields">
-						<div class="fourteen wide field">
-							<label>Direccion</label>
-							<textarea name="descripcion" placeholder="Direccion del proveedor" ng-model="DatosForm.direccion" rows="2"></textarea>
-						</div>
-					</div>
-				</div>		
 				
 				<br>
 
@@ -106,7 +98,17 @@
 							<select></select>
 						</div>
 					</div>	
-				</div>	
+				</div>
+
+				<div class="field">
+					<div class="fields">
+						<div class="fourteen wide field">
+							<label>Direccion</label>
+							<textarea name="descripcion" placeholder="Direccion del proveedor" ng-model="DatosForm.direccion" rows="2"></textarea>
+						</div>
+					</div>
+				</div>		
+				
 				<div class="field">
 					<div class="big positive ui right floated button" ng-click="registrar_proveedor()" id="btn-registrar">Registrar</div>
 				</div>
