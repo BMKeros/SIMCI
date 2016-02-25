@@ -1,5 +1,3 @@
-<button class="ui red button">Red</button>
-<button class="ui yellow button">Yellow</button>
 <!--Bloque 1 -> Tabla Principal-->
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
@@ -157,14 +155,3 @@
    </div>
 </div>
 <!--Fin De Bloques-->
-<script>
-   $(document).ready(function() {
-      $('.ui.red').on('click', function() {
-         $('#modal_ver_proveedores').modal('show');
-      })
-
-      $('.ui.yellow').on('click', function() {
-         $('#modal_modificar_proveedores').modal('show');
-      })
-   })
-</script>
