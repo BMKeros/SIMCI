@@ -120,8 +120,8 @@ class CrearIndexTablas extends Migration {
 
 		//PARROQUIAS
 		Schema::table('parroquias', function($table){
-			$table->foreign('id_estado')->references('id_estado')
-				->on('estados');
+			$table->foreign('id_municipio')->references('id_municipio')
+				->on('municipios');
 		});
 	}	
 

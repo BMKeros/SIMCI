@@ -12,7 +12,7 @@ class CrearTablaParroquias extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('parroquias', function($table)
+		Schema::create('parroquias', function($table)
 		{
 			$table->increments('id_parroquia');
 			$table->integer('id_municipio');
@@ -28,10 +28,7 @@ class CrearTablaParroquias extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('parroquias', function($table)
-		{
-			Schema::drop('parroquias');
-		});
+		Schema::drop('parroquias');
 	}
 
 }

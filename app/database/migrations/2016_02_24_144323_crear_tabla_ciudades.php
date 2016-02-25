@@ -12,7 +12,7 @@ class CrearTablaCiudades extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('ciudades', function($table)
+		Schema::create('ciudades', function($table)
 		{
 			$table->increments('id_ciudad');
 			$table->integer('id_estado');
@@ -29,10 +29,7 @@ class CrearTablaCiudades extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('ciudades', function($table)
-		{
-			Schema::drop('ciudades');
-		});
+		Schema::drop('ciudades');
 	}
 
 }

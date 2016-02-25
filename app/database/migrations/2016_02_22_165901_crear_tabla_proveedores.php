@@ -20,7 +20,7 @@ class CrearTablaProveedores extends Migration {
 			$table->string('doc_identificacion', 11);
 			$table->string('telefono_fijo1', 15);
 			$table->string('telefono_fijo2', 15)->nullable();
-			$table->string('telefono_movil1', 15;
+			$table->string('telefono_movil1', 15);
 			$table->string('telefono_movil2', 15)->nullable();
 			$table->string('email',100);
 			$table->string('direccion', 200);
