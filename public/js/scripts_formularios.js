@@ -722,7 +722,7 @@ var reglas_formulario_registrar_agrupacion = {
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
-            type:'maxLength[50]',
+            type:'maxLength[150]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           }
         ]
@@ -786,7 +786,7 @@ var reglas_formulario_registrar_sub_agrupacion = {
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
-            type:'maxLength[50]',
+            type:'maxLength[150]',
             prompt:'Este campo no debe exceder los {ruleValue} caracteres'
           }
         ]
