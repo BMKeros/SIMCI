@@ -11,8 +11,7 @@
 						->select('id_estado as value', 'estado as name')
 						->get();
 
-					$response = array("success"=>true, "results" => $data);
-					
+					$response = $data;
 				break;
 
 				case 'ciudad':
@@ -25,14 +24,10 @@
 							->where('id_estado', '=', $id_estado)
 							->get();
 						
-						$response = array("success"=>true, "results" => $data);
-
-						if(is_null($data)){
-							$response = array("success" => false, 'results' => array());
-						}
+						$response = $data;
 					}
 					else{
-						$response = array("success" => false, 'results' => array());
+						$response = array();
 					}
 				break;
 
@@ -47,15 +42,10 @@
 							->where('id_estado', '=', $id_estado)
 							->get();
 
-						$response = array("success"=>true, "results" => $data);
-							
-
-						if(is_null($response)){
-							$response = array("success" => false, 'results' => array());
-						}
+						$response = $data;
 					}
 					else{
-						$response = array("success" => false, 'results' => array());
+						$response = array();
 					}
 				break;
 
@@ -70,14 +60,10 @@
 							->where('id_municipio', '=', $id_municipio)
 							->get();
 
-						$response = array("success"=>true, "results" => $data);	
-
-						if(is_null($response)){
-							$response = array("success" => false, 'results' => array());
-						}
+						$response = $data;	
 					}
 					else{
-						$response = array("success" => false, 'results' => array());
+						$response = array();
 					}
 				break;
 			}
