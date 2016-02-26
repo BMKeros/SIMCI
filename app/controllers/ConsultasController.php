@@ -8,9 +8,11 @@
 
 			switch($tipo_busqueda){
 				case 'estado':
-					$response = DB::table('estados')
+					$data = DB::table('estados')
 						->select('id_estado', 'estado')
 						->get();
+
+					$response = array("success"=>true, "results" => $data);
 					
 				break;
 
@@ -19,18 +21,19 @@
 
 					if($id_estado){
 
-						$response = DB::table('ciudades')
+						$data = DB::table('ciudades')
 							->select('id_ciudad', 'ciudad')
 							->where('id_estado', '=', $id_estado)
 							->get();
-							
+						
+						$response = array("success"=>true, "results" => $data);
 
-						if(is_null($response)){
-							$response = array();
+						if(is_null($data)){
+							$response = array("success" => false, 'results' => array());
 						}
 					}
 					else{
-						$response = array();
+						$response = array("success" => false, 'results' => array());
 					}
 				break;
 
@@ -40,18 +43,20 @@
 
 					if($id_estado){
 
-						$response = DB::table('municipios')
+						$data = DB::table('municipios')
 							->select('id_municipio', 'municipio')
 							->where('id_estado', '=', $id_estado)
 							->get();
+
+						$response = array("success"=>true, "results" => $data);
 							
 
 						if(is_null($response)){
-							$response = array();
+							$response = array("success" => false, 'results' => array());
 						}
 					}
 					else{
-						$response = array();
+						$response = array("success" => false, 'results' => array());
 					}
 				break;
 
@@ -61,18 +66,19 @@
 
 					if($id_municipio){
 
-						$response = DB::table('parroquias')
+						$data = DB::table('parroquias')
 							->select('id_parroquia', 'parroquia')
 							->where('id_municipio', '=', $id_municipio)
 							->get();
-							
+
+						$response = array("success"=>true, "results" => $data);	
 
 						if(is_null($response)){
-							$response = array();
+							$response = array("success" => false, 'results' => array());
 						}
 					}
 					else{
-						$response = array();
+						$response = array("success" => false, 'results' => array());
 					}
 				break;
 			}
