@@ -1,6 +1,6 @@
 /// Controlador para Ordenes
 
-simci.controller('ProveedoresController', [
+simci.controller('ProveedorController', [
   '$scope',
   '$http',
   '$log',

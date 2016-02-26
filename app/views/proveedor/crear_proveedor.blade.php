@@ -15,11 +15,11 @@
 			</div>
 			
 			<form class="ui form" id="formulario_crear_proveedor">
-				<h3 class="ui centered dividing header">Datos generales de proveedor</h3>
+				<h3 class="ui centered dividing header">Datos generales</h3>
 				
 				<div class="field">
 					<div class="two fields">
-			     		<div class="field">
+			     		<div class="nine wide field">
 			     			<label>Razon social</label>
 							<input type="text" name="razon_social" placeholder="Razon Social" ng-model="DatosForm.razon_social">
 						</div>
@@ -28,7 +28,7 @@
 
 				<div class="field">
 				    <div class="two fields">
-						<div class="nine wide field">
+						<div class="five wide field">
 							<label>Documento de Identificacion</label>	
 				        	<input type="text" name="doc_identificacion" placeholder="Documento de Identificacion" ng-model="DatosForm.doc_identificacion">
 				        </div>
@@ -45,22 +45,22 @@
 				<div class="field">
 				    <div class="four fields">
 				        <div class="field">
-							<label>Telefono movil 1</label>	
-				        	<input type="text" name="telefono_movil1" placeholder="Telefono Movil 1" ng-model="DatosForm.telefono_movil1">
+							<label>Telefono movil</label>	
+				        	<input type="text" name="telefono_movil1" placeholder="Telefono Movil" ng-model="DatosForm.telefono_movil1">
 				        </div>
 
 				      	<div class="field">
-							<label>Telefono movil 2</label>	
-				        	<input type="text" name="telefono_movil2" placeholder="Telefono Movil 2" ng-model="DatosForm.telefono_movil2">
+							<label>Telefono movil (Opcional)</label>	
+				        	<input type="text" name="telefono_movil2" placeholder="Telefono Movil" ng-model="DatosForm.telefono_movil2">
 				        </div>
 						<div class="field">
-							<label>Telefono fijo 1</label>	
-				        	<input type="text" name="telefono_fijo1" placeholder="Telefono Fijo 1" ng-model="DatosForm.telefono_fijo1">
+							<label>Telefono fijo</label>	
+				        	<input type="text" name="telefono_fijo1" placeholder="Telefono Fijo" ng-model="DatosForm.telefono_fijo1">
 				        </div>
 
 				      	<div class="field">
-							<label>Telefono fijo 2</label>	
-				        	<input type="text" name="telefono_fijo2" placeholder="Telefono Fijo 2" ng-model="DatosForm.telefono_fijo2">
+							<label>Telefono fijo (Opcional)</label>	
+				        	<input type="text" name="telefono_fijo2" placeholder="Telefono Fijo" ng-model="DatosForm.telefono_fijo2">
 				        </div>
 				    </div>
 				</div>
@@ -75,13 +75,13 @@
 				<div class="field">
 				    <div class="two fields">
 						<div class="field">
-							<label>Codigo del Estado</label>
-							<select></select>
+							<label>Estado</label>
+							<select class="ui dropdown"></select>
 						</div>
 
 						<div class="field">
-							<label>Codido de la Ciudad</label>
-							<select></select>
+							<label>Municipio</label>
+							<select class="ui dropdown"></select>
 						</div>
 					</div>	
 				</div>
@@ -89,13 +89,12 @@
 				<div class="field">
 				    <div class="two fields">
 						<div class="field">
-							<label>Codigo del Municipio</label>
-							<select></select>
+							<label>Ciudad</label>
+							<select class="ui dropdown"></select>
 						</div>
-
 						<div class="field">
-							<label>Codido de la Parroquia</label>
-							<select></select>
+							<label>Parroquia</label>
+							<select class="ui dropdown"></select>
 						</div>
 					</div>	
 				</div>
@@ -116,3 +115,8 @@
 		</div>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	$('.ui.dropdown').dropdown();
+</script>
