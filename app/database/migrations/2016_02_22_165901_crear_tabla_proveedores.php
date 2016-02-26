@@ -16,7 +16,7 @@ class CrearTablaProveedores extends Migration {
 		{
 			$table->string('codigo',5);
 			$table->primary('codigo');
-			$table->string('razon_social', 50);
+			$table->string('razon_social', 150);
 			$table->string('doc_identificacion', 11);
 			$table->string('telefono_fijo1', 15);
 			$table->string('telefono_fijo2', 15)->nullable();

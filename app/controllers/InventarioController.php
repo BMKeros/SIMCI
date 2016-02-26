@@ -362,7 +362,7 @@
 
 			$reglas = array(
 				'codigo' => 'required|unique:sub_dimensiones|min:2|max:3',
-				'descripcion' => 'required|min:2|max:50'
+				'descripcion' => 'required|min:2|max:150'
 			);
 
 			$campos = array(
@@ -402,7 +402,7 @@
 			$reglas = array(
 				'codigo' => 'required|unique:agrupaciones|min:1|max:3',
 				'nombre' => 'required|min:5|max:50',
-				'descripcion' => 'min:5|max:50'
+				'descripcion' => 'min:5|max:150'
 			);
 
 			$campos = array(
@@ -444,7 +444,7 @@
 			$reglas = array(
 				'codigo' => 'required|unique:sub_agrupaciones|min:1|max:3',
 				'nombre' => 'required|min:5|max:50',
-				'descripcion' => 'min:5|max:50'
+				'descripcion' => 'min:5|max:150'
 			);
 
 			$campos = array(

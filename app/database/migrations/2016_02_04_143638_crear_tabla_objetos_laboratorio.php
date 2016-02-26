@@ -15,7 +15,7 @@ class CrearTablaObjetosLaboratorio extends Migration {
 		Schema::create('objetos_laboratorio', function($table)
 		{
 			$table->increments('id');
-			$table->string('cod_laboratorio');
+			$table->string('cod_laboratorio', 4);
 			$table->integer('cod_objeto');
 
 			//este campo esta tentativo
