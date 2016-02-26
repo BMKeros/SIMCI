@@ -30,7 +30,7 @@ simci.controller('ProveedoresController', [
       {
         nombre:"registrar proveedor",
         descripcion: "Esta opcion le permitira crear nuevos proveedores",
-        url: "#/proveedores/registrar-proveedores",
+        url: "#/proveedores/registrar-proveedor",
         icono: 'write',
         show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },

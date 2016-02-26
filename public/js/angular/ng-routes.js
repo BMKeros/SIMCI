@@ -178,8 +178,8 @@
           templateUrl: '/views/layouts/layout_main_modulos',
           controller: 'ProveedoresController'
         }).
-        when('/proveedores/registrar-proveedores', {
-          templateUrl: '/views/proveedor/crear_proveedores',
+        when('/proveedores/registrar-proveedor', {
+          templateUrl: '/views/proveedor/crear_proveedor',
           controller: 'ProveedorController'
         }).
         when('/proveedores/ver/todos', {
