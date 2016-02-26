@@ -48,9 +48,9 @@
 							<label>Objeto</label>
 							<div class="ui search selection dropdown capitalize buscar_objeto">
 				             	<input type="hidden" ng-model="DatosForm.cod_objeto" name="cod_objeto" ng-update-hidden>
+				             	<div class="text">Buscar objeto</div>
 				              	<i class="dropdown icon"></i>
 				              	<input tabindex="0" class="search" type="text">
-				              	<div class="text"></div>
 							</div>
 						</div>
 		     		</div>
@@ -105,6 +105,7 @@
 
 <script>
 $('.ui.dropdown').dropdown();
+
 $('.buscar_objeto').dropdown({
 	apiSettings: {
 	  	method: 'GET',
