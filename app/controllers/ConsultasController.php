@@ -1,15 +1,14 @@
 <?php  
 	class ConsultasController extends Controller {
-		//falta colocar aquji las funciones respectivas
-
-		public function getMostrar(){
+	
+		public function getObtener(){
 
 			$tipo_busqueda = Input::get('type', 'estado');
 
 			switch($tipo_busqueda){
 				case 'estado':
 					$data = DB::table('estados')
-						->select('id_estado', 'estado')
+						->select('id_estado as value', 'estado as name')
 						->get();
 
 					$response = array("success"=>true, "results" => $data);
@@ -22,7 +21,7 @@
 					if($id_estado){
 
 						$data = DB::table('ciudades')
-							->select('id_ciudad', 'ciudad')
+							->select('id_ciudad as value', 'ciudad as name')
 							->where('id_estado', '=', $id_estado)
 							->get();
 						
@@ -44,7 +43,7 @@
 					if($id_estado){
 
 						$data = DB::table('municipios')
-							->select('id_municipio', 'municipio')
+							->select('id_municipio as value', 'municipio as name')
 							->where('id_estado', '=', $id_estado)
 							->get();
 
@@ -67,7 +66,7 @@
 					if($id_municipio){
 
 						$data = DB::table('parroquias')
-							->select('id_parroquia', 'parroquia')
+							->select('id_parroquia as value', 'parroquia as name')
 							->where('id_municipio', '=', $id_municipio)
 							->get();
 
