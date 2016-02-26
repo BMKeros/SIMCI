@@ -45,6 +45,26 @@ simci.controller('ProveedorController', [
 
     ];
 
+    $scope.cargar_municipios =  function(cod_estado){
+
+      $('#select_municipios').attr('class','ui loading dropdown disabled');
+      $http({
+        method: 'GET',
+        url: '/api/consultas/obtener?type=municipio&id_estado='+cod_estado,
+      }).then(
+      function(data){
+        var data_tmp = '<option value="">Municipio</option>';
+        data.data.forEach(function(obj){
+          data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+        });
+        $('#select_municipios').html(data_tmp);
+      },
+      function(){
+
+      });
+      
+    };
+
 
   }]
 );
