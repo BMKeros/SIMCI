@@ -176,7 +176,7 @@
         //Rutas Proveedores
         when('/proveedores', {
           templateUrl: '/views/layouts/layout_main_modulos',
-          controller: 'ProveedoresController'
+          controller: 'ProveedorController'
         }).
         when('/proveedores/registrar-proveedor', {
           templateUrl: '/views/proveedor/crear_proveedor',
