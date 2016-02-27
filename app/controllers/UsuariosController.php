@@ -117,6 +117,7 @@ class UsuariosController extends Controller {
             'unique' => ':attribute ya existe',
             'required' => ':attribute no puede estar en blanco',
             'exists' => ':attribute no existe',
+            'email' => 'El :attribute debe ser un email valido',
             'max' => ':attribute debe tener un maximo de :max caracteres',
             'min' => ':attribute debe tener un minimo de :min caracteres',
             'mimes' => ':attribute extensiones validas [JPG, PNG, BMP]',
