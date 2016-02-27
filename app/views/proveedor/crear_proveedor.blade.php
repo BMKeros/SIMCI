@@ -85,7 +85,7 @@
 
 						<div class="field">
 							<label>Municipio</label>
-							<select class="ui dropdown" id="select_municipios" ng-model="DatosForm.cod_municipio">
+							<select class="ui disabled dropdown" id="select_municipios" ng-model="DatosForm.cod_municipio" ng-change="cargar_parroquias(DatosForm.cod_municipio);">
 								<option value="">Municipio</option>
 							</select>
 						</div>
