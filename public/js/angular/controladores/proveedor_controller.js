@@ -45,6 +45,76 @@ simci.controller('ProveedorController', [
 
     ];
 
+    $scope.cargar_municipios =  function(cod_estado){
+
+      setTimeout(function(){
+        //Cargamos las ciudades tambien
+        $scope.cargar_ciudades(cod_estado);
+
+        $('#select_municipios').parent().dropdown('set selected',' ');
+
+        $('#select_municipios').parent().addClass('loading');
+
+        $http({
+          method: 'GET',
+          url: '/api/consultas/obtener?type=municipio&id_estado='+cod_estado,
+        }).then(
+        function(data){
+          var data_tmp = '<option value=" ">Municipio</option>';
+          data.data.forEach(function(obj){
+            data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+          });
+          $('#select_municipios').html(data_tmp);
+          
+          $('#select_municipios').parent().removeClass('loading disabled');
+        });
+      },500);
+
+    };
+
+
+    $scope.cargar_parroquias = function(cod_municipio){
+      
+      $('#select_parroquias').parent().dropdown('set selected',' '); 
+
+      $('#select_parroquias').parent().addClass('loading');
+
+      $http({
+        method: 'GET',
+        url: '/api/consultas/obtener?type=parroquia&id_municipio='+cod_municipio,
+      }).then(
+      function(data){
+        var data_tmp = '<option value=" ">Parroquia</option>';
+        data.data.forEach(function(obj){
+          data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+        });
+        $('#select_parroquias').html(data_tmp);
+        
+        $('#select_parroquias').parent().removeClass('loading disabled');
+      });
+    };
+
+    $scope.cargar_ciudades = function(cod_estado){
+
+      $('#select_ciudades').parent().dropdown('set selected',' '); 
+      
+      $('#select_ciudades').parent().addClass('loading');
+
+      $http({
+        method: 'GET',
+        url: '/api/consultas/obtener?type=ciudad&id_estado='+cod_estado,
+      }).then(
+      function(data){
+        var data_tmp = '<option value=" ">Ciudad</option>';
+        data.data.forEach(function(obj){
+          data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+        });
+        $('#select_ciudades').html(data_tmp);
+        
+        $('#select_ciudades').parent().removeClass('loading disabled');
+      });
+    };
+
 
   }]
 );

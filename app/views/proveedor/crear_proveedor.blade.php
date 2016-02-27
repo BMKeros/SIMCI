@@ -68,20 +68,26 @@
 				<br>
 				
 				<h3 class="ui centered dividing header">Datos de Ubicacion</h3>				
-				
-				
 				<br>
 
 				<div class="field">
 				    <div class="two fields">
 						<div class="field">
 							<label>Estado</label>
-							<select class="ui dropdown"></select>
+							<!--<select id="select_estados" ng-model="DatosForm.cod_estado" ng-change="cargar_municipios(DatosForm.cod_estado);">
+								<option value="a">a</option>
+								<option value="b">b</option>
+								<option value="c">c</option>
+								<option value="d">d</option>
+							</select>-->
+							{{ Form::select_estados(array('id'=>"select_estados",'ng-model'=>"DatosForm.cod_estado",'ng-change' => "cargar_municipios(DatosForm.cod_estado);")) }}
 						</div>
 
 						<div class="field">
 							<label>Municipio</label>
-							<select class="ui dropdown"></select>
+							<select class="ui disabled dropdown" id="select_municipios" ng-model="DatosForm.cod_municipio" ng-change="cargar_parroquias(DatosForm.cod_municipio);">
+								<option value="">Municipio</option>
+							</select>
 						</div>
 					</div>	
 				</div>
@@ -90,11 +96,16 @@
 				    <div class="two fields">
 						<div class="field">
 							<label>Ciudad</label>
-							<select class="ui dropdown"></select>
+							<select class="ui disabled dropdown" id="select_ciudades" ng-model="DatosForm.cod_ciudad">
+								<option value="">Ciudad</option>
+							</select>
 						</div>
+
 						<div class="field">
 							<label>Parroquia</label>
-							<select class="ui dropdown"></select>
+							<select class="ui disabled dropdown" id="select_parroquias" ng-model="DatosForm.cod_parroquia">
+								<option value="">Parroquia</option>
+							</select>
 						</div>
 					</div>	
 				</div>

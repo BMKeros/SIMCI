@@ -224,5 +224,29 @@ Form::macro('select_personas', function($atributos = null, $selected = null){
 	return $html;
 });
 
+Form::macro('select_estados', function($atributos = null){
+	
+	if($atributos){
+		$sexo = DB::table('estados')->lists('estado', 'id_estado');
+
+		$default_values = array('class'=>"ui dropdown capitalize");
+
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos, $default_values));
+		$html .= '<option value="">Estado</option>';
+		
+		foreach ($sexo as $key => $value) {
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+		}
+
+		$html .= '</select>';
+
+		return $html;
+	}
+	else{
+		return Form::select('');	
+	}
+  
+});
+
 ?>
 

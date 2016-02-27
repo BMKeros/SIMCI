@@ -9,10 +9,10 @@
 				case 'estado':
 					$data = DB::table('estados')
 						->select('id_estado as value', 'estado as name')
+						->orderBy('name', 'asc')
 						->get();
 
-					$response = array("success"=>true, "results" => $data);
-					
+					$response = $data;
 				break;
 
 				case 'ciudad':
@@ -23,16 +23,13 @@
 						$data = DB::table('ciudades')
 							->select('id_ciudad as value', 'ciudad as name')
 							->where('id_estado', '=', $id_estado)
+							->orderBy('name', 'asc')
 							->get();
 						
-						$response = array("success"=>true, "results" => $data);
-
-						if(is_null($data)){
-							$response = array("success" => false, 'results' => array());
-						}
+						$response = $data;
 					}
 					else{
-						$response = array("success" => false, 'results' => array());
+						$response = array();
 					}
 				break;
 
@@ -45,17 +42,13 @@
 						$data = DB::table('municipios')
 							->select('id_municipio as value', 'municipio as name')
 							->where('id_estado', '=', $id_estado)
+							->orderBy('name', 'asc')
 							->get();
 
-						$response = array("success"=>true, "results" => $data);
-							
-
-						if(is_null($response)){
-							$response = array("success" => false, 'results' => array());
-						}
+						$response = $data;
 					}
 					else{
-						$response = array("success" => false, 'results' => array());
+						$response = array();
 					}
 				break;
 
@@ -68,16 +61,13 @@
 						$data = DB::table('parroquias')
 							->select('id_parroquia as value', 'parroquia as name')
 							->where('id_municipio', '=', $id_municipio)
+							->orderBy('name', 'asc')
 							->get();
 
-						$response = array("success"=>true, "results" => $data);	
-
-						if(is_null($response)){
-							$response = array("success" => false, 'results' => array());
-						}
+						$response = $data;	
 					}
 					else{
-						$response = array("success" => false, 'results' => array());
+						$response = array();
 					}
 				break;
 			}
