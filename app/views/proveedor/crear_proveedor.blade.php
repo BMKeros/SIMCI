@@ -73,21 +73,24 @@
 				<div class="field">
 				    <div class="two fields">
 						<div class="field">
+
+
+						
+
 							<label>Estado</label>
-							<!--<select id="select_estados" ng-model="DatosForm.cod_estado" ng-change="cargar_municipios(DatosForm.cod_estado);">
-								<option value="a">a</option>
-								<option value="b">b</option>
-								<option value="c">c</option>
-								<option value="d">d</option>
-							</select>-->
 							{{ Form::select_estados(array('id'=>"select_estados",'ng-model'=>"DatosForm.cod_estado",'ng-change' => "cargar_municipios(DatosForm.cod_estado);")) }}
 						</div>
 
 						<div class="field">
 							<label>Municipio</label>
-							<select class="ui disabled dropdown" id="select_municipios" ng-model="DatosForm.cod_municipio" ng-change="cargar_parroquias(DatosForm.cod_municipio);">
-								<option value="">Municipio</option>
-							</select>
+							<div class="ui disabled selection dropdown"  id="select_municipios">
+	  							<input name="cod_municipio" type="hidden" ng-model="DatosForm.cod_municipio" ng-change="cargar_parroquias(DatosForm.cod_municipio);" ng-update-hidden>
+
+	  							<i class="dropdown icon"></i>
+	  							<div class="default text">Municipio</div>
+	  							<div class="menu"></div>
+							</div>
+
 						</div>
 					</div>	
 				</div>
@@ -96,16 +99,22 @@
 				    <div class="two fields">
 						<div class="field">
 							<label>Ciudad</label>
-							<select class="ui disabled dropdown" id="select_ciudades" ng-model="DatosForm.cod_ciudad">
-								<option value="">Ciudad</option>
-							</select>
+							<div class="ui disabled selection dropdown" id="select_ciudades">
+	  							<input name="gender" type="hidden" ng-model="DatosForm.cod_ciudad" ng-update-hidden>
+	  							<i class="dropdown icon"></i>
+	  							<div class="default text">Ciudad</div>
+	  							<div class="menu"></div>
+							</div>
 						</div>
 
 						<div class="field">
 							<label>Parroquia</label>
-							<select class="ui disabled dropdown" id="select_parroquias" ng-model="DatosForm.cod_parroquia">
-								<option value="">Parroquia</option>
-							</select>
+							<div class="ui disabled selection dropdown" id="select_parroquias">
+	  							<input name="gender" type="hidden" ng-model="DatosForm.cod_parroquia" ng-update-hidden>
+	  							<i class="dropdown icon"></i>
+	  							<div class="default text">Parroquia</div>
+	  							<div class="menu"></div>
+							</div>
 						</div>
 					</div>	
 				</div>
