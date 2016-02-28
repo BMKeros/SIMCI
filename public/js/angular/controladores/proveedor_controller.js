@@ -47,26 +47,38 @@ simci.controller('ProveedorController', [
 
     $scope.cargar_municipios =  function(cod_estado){
 
+      var s_municipios = angular.element('#select_municipios');
+      var s_ciudades = angular.element('#select_ciudades');
+      var s_parroquias = angular.element('#select_parroquias');
+
+
+      $timeout(function(){
+        s_municipios.dropdown('clear')
+        s_ciudades.dropdown('clear');
+        s_parroquias.dropdown('clear');
+      });
+
       setTimeout(function(){
         //Cargamos las ciudades tambien
         $scope.cargar_ciudades(cod_estado);
 
-        $('#select_municipios').parent().dropdown('set selected',' ');
-
-        $('#select_municipios').parent().addClass('loading');
+        //Se agrega la clase loading para mostrar el icono de cargando
+        s_municipios.addClass('loading');
 
         $http({
           method: 'GET',
-          url: '/api/consultas/obtener?type=municipio&id_estado='+cod_estado,
+          url: '/api/consultas/obtener/municipio?id_estado='+cod_estado,
         }).then(
         function(data){
-          var data_tmp = '<option value=" ">Municipio</option>';
+          var opciones = '';
           data.data.forEach(function(obj){
-            data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+            opciones += ToolsService.printf('<div class="item" data-value="{0}">{1}</div>',obj.value, obj.name);
           });
-          $('#select_municipios').html(data_tmp);
           
-          $('#select_municipios').parent().removeClass('loading disabled');
+          s_municipios.find('.menu').html(opciones);
+          
+          s_municipios.removeClass('loading disabled');
+
         });
       },500);
 
@@ -74,44 +86,46 @@ simci.controller('ProveedorController', [
 
 
     $scope.cargar_parroquias = function(cod_municipio){
-      
-      $('#select_parroquias').parent().dropdown('set selected',' '); 
 
-      $('#select_parroquias').parent().addClass('loading');
+      var SELECT = $('#select_parroquias');
+      
+      SELECT.addClass('loading');
 
       $http({
         method: 'GET',
-        url: '/api/consultas/obtener?type=parroquia&id_municipio='+cod_municipio,
+        url: '/api/consultas/obtener/parroquia?id_municipio='+cod_municipio,
       }).then(
       function(data){
-        var data_tmp = '<option value=" ">Parroquia</option>';
+        var data_tmp = '';
         data.data.forEach(function(obj){
-          data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+          data_tmp += ToolsService.printf('<div class="item" data-value="{0}">{1}</div>',obj.value, obj.name);
         });
-        $('#select_parroquias').html(data_tmp);
         
-        $('#select_parroquias').parent().removeClass('loading disabled');
+        SELECT.find('.menu').html(data_tmp);
+        
+        SELECT.removeClass('loading disabled');
       });
     };
 
     $scope.cargar_ciudades = function(cod_estado){
 
-      $('#select_ciudades').parent().dropdown('set selected',' '); 
-      
-      $('#select_ciudades').parent().addClass('loading');
+      var SELECT = $('#select_ciudades');
+
+      SELECT.addClass('loading');
 
       $http({
         method: 'GET',
-        url: '/api/consultas/obtener?type=ciudad&id_estado='+cod_estado,
+        url: '/api/consultas/obtener/ciudad?id_estado='+cod_estado,
       }).then(
       function(data){
-        var data_tmp = '<option value=" ">Ciudad</option>';
+        var opciones = '';
         data.data.forEach(function(obj){
-          data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+          opciones += ToolsService.printf('<div class="item" data-value="{0}">{1}</div>',obj.value, obj.name);
         });
-        $('#select_ciudades').html(data_tmp);
+
+        SELECT.find('.menu').html(opciones);
         
-        $('#select_ciudades').parent().removeClass('loading disabled');
+        SELECT.removeClass('loading disabled');
       });
     };
 
