@@ -1,9 +1,7 @@
 <?php  
 	class ConsultasController extends Controller {
 	
-		public function getObtener(){
-
-			$tipo_busqueda = Input::get('type', 'estado');
+		public function getObtener($tipo_busqueda = null){
 
 			switch($tipo_busqueda){
 				case 'estado':
@@ -69,6 +67,10 @@
 					else{
 						$response = array();
 					}
+				break;
+
+				default:
+					$response = array();
 				break;
 			}
 
