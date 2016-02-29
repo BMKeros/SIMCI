@@ -38,14 +38,14 @@ simci.controller('InventarioController', [
       {
         nombre:"entrada / salida",
         descripcion: "Esta opcion le permitira dar entrada o salida al los objetos del inventario",
-        url: "#/",
+        url: "#/inventario/entrada-salida",
         icono: 'compress',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_PROFESOR]
       },
       {
         nombre:"ver inventario",
         descripcion: "Esta opcion le permitira ver los elementos en el inventario, a su vez tambien podra modificar o eliminar dichos objetos",
-        url: "#/inventario/ver/todos",
+        url: "#/inventario/ver/elementos",
         icono: 'eye',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
@@ -56,7 +56,7 @@ simci.controller('InventarioController', [
         ver_dropdown: true,
         opciones_dropdown: [
           { nombre:"registrar almacen",url: "#/inventario/registrar-almacen"},
-          { nombre:"ver almacen", url:"#/inventario/ver/todos"}
+          { nombre:"ver almacen", url:"#/inventario/ver/almacenes"}
         ],
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },

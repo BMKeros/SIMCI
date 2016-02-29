@@ -42,12 +42,12 @@
           controller: 'InventarioController'  
         }).
 
-        when('/inventario/ver/todos', {
+        when('/inventario/ver/elementos', {
           templateUrl: '/views/inventario/mostrar_elementos',
           controller: 'InventarioController'
         }).
 
-        when('/inventario/ver/todos', {
+        when('/inventario/ver/almacenes', {
           templateUrl: '/views/inventario/mostrar_almacenes',
           controller: 'InventarioController'
         }).
@@ -69,6 +69,11 @@
 
         when('/inventario/registrar-sub-agrupacion', {
           templateUrl: '/views/inventario/crear_sub_agrupacion',
+          controller: 'InventarioController'
+        }).
+
+        when('/inventario/entrada-salida', {
+          templateUrl: '/views/inventario/entrada_salida',
           controller: 'InventarioController'
         }).
 
@@ -186,7 +191,6 @@
           templateUrl: '/views/proveedor/mostrar_proveedores',
           controller: 'ProveedorController'
         }).
-
 
 
         otherwise({
