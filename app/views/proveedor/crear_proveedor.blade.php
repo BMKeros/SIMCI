@@ -73,10 +73,6 @@
 				<div class="field">
 				    <div class="two fields">
 						<div class="field">
-
-
-						
-
 							<label>Estado</label>
 							{{ Form::select_estados(array('id'=>"select_estados",'ng-model'=>"DatosForm.cod_estado",'ng-change' => "cargar_municipios(DatosForm.cod_estado);")) }}
 						</div>
@@ -123,7 +119,7 @@
 					<div class="fields">
 						<div class="fourteen wide field">
 							<label>Direccion</label>
-							<textarea name="descripcion" placeholder="Direccion del proveedor" ng-model="DatosForm.direccion" rows="2"></textarea>
+							<textarea name="direccion" placeholder="Direccion del proveedor" ng-model="DatosForm.direccion" rows="2"></textarea>
 						</div>
 					</div>
 				</div>		
