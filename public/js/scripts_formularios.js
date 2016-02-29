@@ -868,3 +868,137 @@ var reglas_formulario_registrar_elemento = {
     },
    inline: true
 };
+
+var reglas_formulario_registrar_proveedor = {
+  on: 'blur',
+   duration: 40,
+   fields: {
+
+      razon_social: {
+        identifier: 'razon_social',
+        rules:[
+          {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[150]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      doc_identificacion: {
+        identifier: 'doc_identificacion',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede estar vacio'
+
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[150]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+
+      email: {
+        identifier: 'email',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede quedar vacio'
+          },
+          {
+            type:'email',
+            prompt:'Introduce una direccion de email valida' 
+          },
+          {
+            type:'minLength[5]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[100]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      telefono_movil1: {
+        identifier: 'telefono_movil1',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede estar vacio'
+
+          },
+          {
+            type:'number',
+            prompt:'Introduce un numero de telefono valido'
+          },
+          {
+            type:'minLength[7]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[15]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      telefono_fijo1: {
+        identifier: 'telefono_fijo1',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede estar vacio'
+
+          },
+          {
+            type:'number',
+            prompt:'Introduce un numero de telefono valido'
+          },
+          {
+            type:'minLength[7]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[15]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      },
+
+      direccion: {
+        identifier: 'direccion',
+        rules:[
+          {
+            type:'empty',
+            prompt:'Este campo no puede estar vacio'
+
+          },
+          {
+            type:'minLength[10]',
+            prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+          },
+          {
+            type:'maxLength[100]',
+            prompt:'Este campo no debe exceder los {ruleValue} caracteres'
+          }
+        ]
+      }
+      
+    },
+    inline: true
+};
