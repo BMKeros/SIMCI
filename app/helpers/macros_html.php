@@ -248,5 +248,25 @@ Form::macro('select_estados', function($atributos = null){
   
 });
 
+Form::macro('select_proveedores', function($atributos = null, $selected = null){
+	if($atributos){
+
+		$proveedores = DB::table('proveedores')->lists('codigo', 'razon_social');
+	
+		$default_values = array('class'=>"ui dropdown search capitalize");
+		
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
+		$html .= '<option value="">Proveedores</option>';
+		
+		foreach ($proveedores as $key => $value) {
+			$html .= sprintf('<option value="%s">%s</option>', $key, ucfirst($value));
+		}
+		
+		$html .= '</select>';
+
+		return $html;
+	}
+});
+
 ?>
 

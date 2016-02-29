@@ -29,7 +29,7 @@ class CrearTablaProveedores extends Migration {
 			$table->integer('cod_ciudad');
 			$table->integer('cod_municipio');
 			$table->integer('cod_parroquia');
-			$table->timestamps();
+			$table->nullableTimestamps();
 		});
 	}
 

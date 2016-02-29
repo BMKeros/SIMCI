@@ -2,7 +2,6 @@
 class ProveedoresController extends Controller{
 
 	public function postRegistrarProveedor(){
-		$codigo = Input::get('codigo');
 		$razon_social = Input::get('razon_social');
 		$doc_identificacion = Input::get('doc_identificacion');
 		$telefono_fijo1 = Input::get('telefono_fijo1');
@@ -17,14 +16,13 @@ class ProveedoresController extends Controller{
 		$cod_parroquia = Input::get('cod_parroquia');
 
 		$reglas = array(
-			'codigo' => 'required|min:2|max:5|unique:proveedores',
 			'razon_social' => 'required|min:3|max:150',
 			'doc_identificacion' => 'required|min:3|max:11|unique:proveedores|alpha_num',
 			//pendiente por evaluar si los numeros de tlf seran unicos
 			'telefono_fijo1' => 'required|min:7|max:15',
-			'telefono_fijo2' => 'required|min:7|max:15',
+			'telefono_fijo2' => 'min:7|max:15',
 			'telefono_movil1' => 'required|min:7|max:15',
-			'telefono_movil2' => 'required|min:7|max:15',
+			'telefono_movil2' => 'min:7|max:15',
 			'email' => 'required|email|max:100|unique:proveedores',
 			'direccion' => 'required|min:5|max:200',
 			'cod_estado' => 'required|numeric|exists:estados,id_estado',
@@ -34,7 +32,6 @@ class ProveedoresController extends Controller{
 		);
 
 		$campos = array(
-			'codigo' => $codigo,
 			'razon_social' => $razon_social,
 			'doc_identificacion' => $doc_identificacion,
 			//pendiente por evaluar si los numeros de tlf seran unicos
@@ -68,10 +65,12 @@ class ProveedoresController extends Controller{
     		return Response::json(array('resultado'=>false, 'mensajes'=>$validacion->messages()->all()));
     	}
 		else{
+
+			$num_proveedores = DB::table('proveedores')->count();
 			
 			$proveedor = new Proveedor;
 
-			$proveedor->codigo = $codigo;
+			$proveedor->codigo = crear_codigo($num_proveedores, "PROVEEDOR");
 			$proveedor->razon_social = $razon_social;
 			$proveedor->doc_identificacion = $doc_identificacion;
 			$proveedor->telefono_fijo1 = $telefono_fijo1;

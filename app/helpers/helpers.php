@@ -112,6 +112,9 @@ function crear_codigo($numero = 1, $tipo_codigo = null){
 		else if($tipo_codigo == "AGRUPACION"){
 			$codigo_tmp = CODIGO_AGRUPACION;
 		}
+		else if($tipo_codigo == "PROVEEDOR"){
+			$codigo_tmp = CODIGO_PROVEEDORES;
+		}
 		else{
 			$codigo_tmp = '';
 		}		

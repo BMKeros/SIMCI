@@ -59,3 +59,4 @@ define('CODIGO_PERMISO','PU');
 define('CODIGO_ALMACEN','AL');
 define('CODIGO_LABORATORIO', 'LA');
 define('CODIGO_AGRUPACION','');
+define('CODIGO_PROVEEDORES', 'PRV');
