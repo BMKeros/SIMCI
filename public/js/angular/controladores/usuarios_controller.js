@@ -126,18 +126,12 @@ simci.controller('UsuariosController', [
       $scope.modal_ver_usuario = function(id){
         $scope.data_usuario = {};
 
-        $http({
-          method: 'GET',
-          url: '/api/usuarios/mostrar?type=usuario_full&id='+id
-        }).then(function(data){
-          $log.info(data);
-          $scope.data_usuario = data.data;
-          
-          //Mostramos la modal
-          angular.element('#modal_ver_usuario').modal('show');
-        },function(data_error){
-          $log.info(data_error);
+        ToolsService.mostrar_modal_dinamico($scope,$http,{
+          url : '/api/usuarios/mostrar?type=usuario_full&id='+id,
+          scope_data_save_success: 'data_usuario',
+          id_modal: 'modal_ver_usuario'
         });
+        
       };
 
       $scope.modal_modificar_usuario = function(id){
