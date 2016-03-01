@@ -947,7 +947,7 @@ var reglas_formulario_registrar_proveedor = {
             prompt:'Introduce un numero de telefono valido'
           },
           {
-            type:'minLength[7]',
+            type:'minLength[11]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
@@ -970,7 +970,7 @@ var reglas_formulario_registrar_proveedor = {
             prompt:'Introduce un numero de telefono valido'
           },
           {
-            type:'minLength[7]',
+            type:'minLength[11]',
             prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
           },
           {
