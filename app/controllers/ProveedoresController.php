@@ -26,7 +26,7 @@ class ProveedoresController extends Controller{
 					//$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->orderBy($orden)->paginate($length);	
 					
 					$data = DB::table('proveedores')
-						->select('codigo', 'razon_social', 'doc_identificacion', 'email')
+						->select('codigo', 'razon_social', 'doc_identificacion', 'email', 'telefono_fijo1', 'telefono_movil1')
 						->orderBy('codigo', $orden)
 						->paginate($length);
 				}

@@ -87,7 +87,6 @@ simci.controller('ProveedorController', [
 
       };
 
-
       $scope.cargar_parroquias = function(cod_municipio){
         
         var SELECT = $('#select_parroquias');
@@ -144,14 +143,68 @@ simci.controller('ProveedorController', [
           mensajes: ['Nuevo proveedor registrado en la base de datos.']
         }
       });
-
-
-
-
     }// If  === "/proveedores/registrar-proveedor"
+
+
+    if($location.$$url == "/proveedores/ver/todos"){
+
+      $scope.tabla_proveedores = {};
+      $scope.id_proveedor_actual = null;
+
+      $scope.opciones_tabla_proveedores = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+         url: '/api/proveedores/mostrar?type=paginacion',
+         type: 'GET'
+      })
+      .withDataProp('data')
+      .withPaginationType('full_numbers')
+      .withOption('processing', true)
+      .withOption('serverSide', true)
+      .withOption('createdRow', function(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+      });
+    
+      $scope.columnas_tabla_proveedores = [
+          DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width','7%').notSortable(),
+          DTColumnBuilder.newColumn('razon_social').withTitle('Razon Social').notSortable(),
+          DTColumnBuilder.newColumn('doc_identificacion').withTitle('Doc. Identificacion')
+          .withOption('width','15%')
+          .notSortable(),
+          DTColumnBuilder.newColumn('email').withTitle('Email')
+          .withOption('width','20%')
+          .notSortable(),
+          
+          DTColumnBuilder.newColumn(null).withTitle('Telefonos').renderWith(
+            function(data, type, full) {
+              return "("+data.telefono_movil1+")("+data.telefono_fijo1+")";
+            }
+          )
+          .withOption('width','13%')
+          .notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+            function(data, type, full) {
+              return '<div class="ui icon button blue pop" data-content="Ver Usuario" ng-click="modal_ver_proveedor('+data.codigo+')"><i class="unhide icon"></i></div>'+
+                      '<div class="ui icon button green pop"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.codigo+')"><i class="edit icon"></i></div>'+ 
+                      '<div class="ui icon button red pop"  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.codigo+')"><i class="remove icon"></i></div>';
+          }).withOption('width','14%')
+      ];
+
+
+      $scope.modal_ver_proveedor = function(id){
+        $scope.data_proveedor = {};
+
+        //hacer el modal dinamico
+        /*ToolsService.mostrar_modal_dinamico($scope,$http,{
+          url : '/api/usuarios/mostrar?type=usuario_full&id='+id,
+          data_success: 'data_usuario',
+          id_modal: 'modal_ver_usuario'
+        });*/
+
+      };
+    }
 
     
 
 
-  }]
+  }]//Controller
 );
