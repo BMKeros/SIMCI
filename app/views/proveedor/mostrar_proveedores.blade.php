@@ -8,28 +8,33 @@
 </div>
 
 <!--Bloque 2. Mostrar elemento-->
-<div class="ui modal" id="modal_ver_proveedores">
+<div class="ui modal" id="modal_ver_proveedor">
     <div class="header">Datos del proveedor</div>
         <div class="content">
             <table class="ui celled table capitalize">
                 <tbody>
                     <tr>
-                        <td>
-                            <b>Responsable:</b>
-                              <p>Nombre de Responsable</p>
-                        </td>
-                        
-                    </tr>
-					
-                    <tr>
                         <td colspam="2">
-                            <b>Primer auxiliar:</b>
-                                <p>Nombre de auxiliar</p>
+                            <b>Razon Social:</b>
+                                <p>La razon social</p>
                         </td>
 
                         <td colspam="2">
-                            <b>Segundo auxiliar:</b>
-                                <p>Nombre de auxiliar.</p>
+                            <b>Estado:</b>
+                                <p>Estados Unidos </p>
+                        </td> 
+                    </tr>
+
+					
+                    <tr>
+                        <td colspam="2">
+                            <b>Documentacion:</b>
+                                <p>Documento de identificacion</p>
+                        </td>
+
+                        <td colspam="2">
+                            <b>Telefono movil:</b>
+                                <p>+1 333298232.</p>
                         </td> 
                     </tr>
                     
