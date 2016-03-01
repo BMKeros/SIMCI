@@ -1,6 +1,66 @@
 <?php 
 class ProveedoresController extends Controller{
 
+	public function getMostrar(){
+		$tipo_busqueda = Input::get('type', 'todos');
+		$id_proveedor = Input::get('id', null);
+		$orden = Input::get('ordenar',' asc');
+
+		switch($tipo_busqueda){
+			case 'todos':
+				if($orden){
+					//le falta aun los campos que traera la consulta
+					$response = DB::table('proveedores')->orderBy($orden)->get();
+				}
+				else{
+					$response = DB::table('proveedores')->get();
+				}
+			break;
+
+			case 'paginacion':
+				$length = Input::get('length', 10);
+				$value_search = Input::get('search');
+				$draw = Input::get('draw',1);
+
+				if(quitar_espacios($value_search['value']) == ''){
+					//$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->orderBy($orden)->paginate($length);	
+					
+					$data = DB::table('proveedores')
+						->select('codigo', 'razon_social', 'doc_identificacion', 'email')
+						->orderBy('codigo', $orden)
+						->paginate($length);
+				}
+				else{
+
+					//$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->paginate($length);	
+					$data = DB::table('proveedores')
+						->select('codigo', 'razon_social', 'doc_identificacion', 'email')
+						->where('nombre', 'ILIKE', '%'.$value_search['value'].'%')
+						->orderBy('codigo', $orden)
+						->paginate($length);
+				}
+				
+
+				$response = array(
+					"draw"=>$draw,
+					"page"=>$data->getCurrentPage(),
+					"recordsTotal"=>$data->getTotal(),
+					"recordsFiltered"=> $data->count(),
+					"data" => $data->all()
+				);
+
+			break;
+
+			default:
+				$response = DB::table('laboratorios')->get();
+			break;
+
+		}
+
+		return Response::json($response);
+	}
+
+
 	public function postRegistrarProveedor(){
 		$razon_social = Input::get('razon_social');
 		$doc_identificacion = Input::get('doc_identificacion');
