@@ -114,9 +114,9 @@ simci.controller('UsuariosController', [
           DTColumnBuilder.newColumn('data_tipo_usuario.descripcion').withTitle('Tipo de Usuario').notSortable(),
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>
-                      <a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>  
-                      <a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
+              return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>'+
+                      '<a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>'+
+                      '<a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
           })
 
       ];

@@ -19,7 +19,6 @@ simci.controller('ProveedorController', [
     $scope.DatosForm = {}; // Objeto para los datos de formulario
     $scope.data_global_user = ToolsService.get_data_user_localstorage();
 
-
     $scope.modulo.nombre = "Proveedores";
     $scope.modulo.icono = {
       tipo: "shop",
@@ -44,6 +43,10 @@ simci.controller('ProveedorController', [
       }
 
     ];
+
+    if($location.$$url == "/proveedores/registrar-proveedor"){
+
+    }
 
     $scope.cargar_municipios =  function(cod_estado){
 
