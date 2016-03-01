@@ -125,6 +125,27 @@
             return tmp;
         }
       },
+      //Funcion para mostrar modal dinamico
+      mostrar_modal_dinamico: function($_SCOPE, $_HTTP,opciones){
+          
+        $_HTTP({
+          method: 'GET',
+          url: opciones.url
+        }).then(function(data){
+
+          $_SCOPE[opciones.scope_data_save_success] = data.data;
+          
+          //Mostramos la modal
+          setTimeout(function(){
+            angular.element('#'+opciones.id_modal).modal('show');
+          },200);
+
+        },function(data_error){
+          //$log.info(data_error);
+          alertify.error("Upss, ha ocurrido un error inesperado");
+        });
+        
+      },
       //Funcion para el registro dinamico de todos los controladores
       registrar_dinamico: function($_SCOPE,$_HTTP,$_TIMEOUT,opciones){
         var global_this = this;
