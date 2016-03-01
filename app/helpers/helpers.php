@@ -107,7 +107,7 @@ function crear_codigo($numero = 1, $tipo_codigo = null){
 			$codigo_tmp = CODIGO_TIPO_INVENTARIO;	
 		}
 		else if($tipo_codigo == "LABORATORIO"){
-			$codigo_tmp = CODIGO_TIPO_LABORATORIO;	
+			$codigo_tmp = CODIGO_LABORATORIO;	
 		}
 		else if($tipo_codigo == "AGRUPACION"){
 			$codigo_tmp = CODIGO_AGRUPACION;
