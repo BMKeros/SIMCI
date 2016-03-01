@@ -138,7 +138,7 @@
           //Mostramos la modal
           setTimeout(function(){
             angular.element('#'+opciones.id_modal).modal('show');
-          },200);
+          },100);
 
         },function(data_error){
           //$log.info(data_error);
