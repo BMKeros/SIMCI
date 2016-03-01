@@ -3,6 +3,12 @@ var _ = console.log;
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var debug = require('gulp-debug');
+var jsValidate = require('gulp-jsvalidate');
+ 
+gulp.task('validar_controladores', function () {
+  return gulp.src('./js/angular/controladores/*.js')
+    .pipe(jsValidate());
+});
 
 gulp.task('crear_controladores',function(){
   gulp.src('./js/angular/controladores/*.js')
