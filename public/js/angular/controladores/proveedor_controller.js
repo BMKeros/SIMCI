@@ -46,77 +46,111 @@ simci.controller('ProveedorController', [
 
     if($location.$$url == "/proveedores/registrar-proveedor"){
 
-    }
+      $scope.mostrar_mensaje = false;
+      $scope.DatosForm = {};
+      
+      $scope.cargar_municipios =  function(cod_estado){
 
-    $scope.cargar_municipios =  function(cod_estado){
+        var s_municipios = angular.element('#select_municipios');
+        var s_ciudades = angular.element('#select_ciudades');
+        var s_parroquias = angular.element('#select_parroquias');
 
-      setTimeout(function(){
-        //Cargamos las ciudades tambien
-        $scope.cargar_ciudades(cod_estado);
+        $timeout(function(){
+          s_municipios.dropdown('clear')
+          s_ciudades.dropdown('clear');
+          s_parroquias.dropdown('clear');
+        });
 
-        $('#select_municipios').parent().dropdown('set selected',' ');
+        setTimeout(function(){
+          
+          //Cargamos las ciudades tambien
+          $scope.cargar_ciudades(cod_estado);
 
-        $('#select_municipios').parent().addClass('loading');
+          //Se agrega la clase loading para mostrar el icono de cargando
+          s_municipios.addClass('loading');
+
+          $http({
+            method: 'GET',
+            url: '/api/consultas/obtener/municipio?id_estado='+cod_estado,
+          }).then(
+          function(data){
+            var opciones = '';
+            data.data.forEach(function(obj){
+              opciones += ToolsService.printf('<div class="item" data-value="{0}">{1}</div>',obj.value, obj.name);
+            });
+            
+            s_municipios.find('.menu').html(opciones);
+            s_municipios.removeClass('loading disabled');
+
+          });
+        },500);
+
+      };
+
+
+      $scope.cargar_parroquias = function(cod_municipio){
+        
+        var SELECT = $('#select_parroquias');
+
+        SELECT.addClass('loading');
 
         $http({
           method: 'GET',
-          url: '/api/consultas/obtener?type=municipio&id_estado='+cod_estado,
+          url: '/api/consultas/obtener/parroquia?id_municipio='+cod_municipio
         }).then(
         function(data){
-          var data_tmp = '<option value=" ">Municipio</option>';
+          var data_tmp = '';
           data.data.forEach(function(obj){
-            data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
+            data_tmp += ToolsService.printf('<div class="item" data-value="{0}">{1}</div>',obj.value, obj.name);
           });
-          $('#select_municipios').html(data_tmp);
+
+          SELECT.find('.menu').html(data_tmp);
+    
+          SELECT.removeClass('loading disabled');
+
+        });
+      };
+
+      $scope.cargar_ciudades = function(cod_estado){
+        
+        var SELECT = $('#select_ciudades');
+        SELECT.addClass('loading');
+
+        $http({
+          method: 'GET',
+          url: '/api/consultas/obtener/ciudad?id_estado='+cod_estado,
+        }).then(
+        function(data){
+          var opciones = '';
+          data.data.forEach(function(obj){
+            opciones += ToolsService.printf('<div class="item" data-value="{0}">{1}</div>',obj.value, obj.name);
+          });
           
-          $('#select_municipios').parent().removeClass('loading disabled');
+          SELECT.find('.menu').html(opciones);
+          SELECT.removeClass('loading disabled');
+
         });
-      },500);
+      };
 
-    };
+      $scope.registrar_proveedor = ToolsService.registrar_dinamico($scope,$http,$timeout,{
+        url: '/api/proveedores/registrar-proveedor',
 
-
-    $scope.cargar_parroquias = function(cod_municipio){
-      
-      $('#select_parroquias').parent().dropdown('set selected',' '); 
-
-      $('#select_parroquias').parent().addClass('loading');
-
-      $http({
-        method: 'GET',
-        url: '/api/consultas/obtener?type=parroquia&id_municipio='+cod_municipio,
-      }).then(
-      function(data){
-        var data_tmp = '<option value=" ">Parroquia</option>';
-        data.data.forEach(function(obj){
-          data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
-        });
-        $('#select_parroquias').html(data_tmp);
-        
-        $('#select_parroquias').parent().removeClass('loading disabled');
+        formulario:{
+          id:'formulario_crear_proveedor',
+          reglas: reglas_formulario_registrar_proveedor
+        },
+        exito:{
+          titulo: 'Proveedor registrado con exito',
+          mensajes: ['Nuevo proveedor registrado en la base de datos.']
+        }
       });
-    };
 
-    $scope.cargar_ciudades = function(cod_estado){
 
-      $('#select_ciudades').parent().dropdown('set selected',' '); 
-      
-      $('#select_ciudades').parent().addClass('loading');
 
-      $http({
-        method: 'GET',
-        url: '/api/consultas/obtener?type=ciudad&id_estado='+cod_estado,
-      }).then(
-      function(data){
-        var data_tmp = '<option value=" ">Ciudad</option>';
-        data.data.forEach(function(obj){
-          data_tmp += ToolsService.printf('<option value="{0}">{1}</option>',obj.value, obj.name);
-        });
-        $('#select_ciudades').html(data_tmp);
-        
-        $('#select_ciudades').parent().removeClass('loading disabled');
-      });
-    };
+
+    }// If  === "/proveedores/registrar-proveedor"
+
+    
 
 
   }]
