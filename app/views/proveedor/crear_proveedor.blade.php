@@ -35,7 +35,7 @@
 
 				      	<div class="seven wide field">
 				      		<label>Email</label>	
-				        	<input type="email" name="email" placeholder="Direccion Electronica">
+				        	<input type="email" name="email" placeholder="Direccion Electronica" ng-model="DatosForm.email">
 				      	</div>
 				    </div>
 				</div>
