@@ -52,7 +52,7 @@ class ProveedoresController extends Controller{
 			break;
 
 			default:
-				$response = DB::table('laboratorios')->get();
+				$response = DB::table('proveedores')->get();
 			break;
 
 		}
