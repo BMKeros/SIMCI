@@ -87,9 +87,7 @@
     </div>
  
 <!--Bloque 3 -> Modal Modificar proveedor-->
-<button class="ui button">
-  Ver
-</button>
+
 
 <div class="ui modal" id='modal_modificar_proveedores'>
 <div class="header">Datos generales del proveedor</div>
