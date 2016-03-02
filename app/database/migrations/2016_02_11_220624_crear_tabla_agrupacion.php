@@ -15,9 +15,14 @@ class CrearTablaAgrupacion extends Migration {
 		Schema::create('agrupaciones', function($table)
 		{
 			$table->string('codigo', 3);
-			$table->primary('codigo');
 			$table->string('nombre', 50);
 			$table->string('descripcion', 150);
+
+			$table->increments('secuencia');
+			$table->dropPrimary('secuencia');
+
+			$table->primary('codigo');
+
 			$table->nullableTimestamps();
 		});
 	}

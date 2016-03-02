@@ -3,7 +3,7 @@ class ProveedoresController extends Controller{
 
 	public function getMostrar(){
 		$tipo_busqueda = Input::get('type', 'todos');
-		$id_proveedor = Input::get('id', null);
+		$id_proveedor = Input::get('codigo', null);
 		$orden = Input::get('ordenar','desc');
 
 		switch($tipo_busqueda){
@@ -17,8 +17,8 @@ class ProveedoresController extends Controller{
 				}
 			break;
 
-			case 'proveedores_full':
-				if($id_proveedor){
+			case 'full':
+				if(!empty($id_proveedor)){
 					$response = DB::table('proveedores')
 						->select('codigo', 'razon_social', 'doc_identificacion', 'telefono_fijo1', 'telefono_fijo2',
 								'telefono_movil1', 'telefono_movil2', 'email', 'direccion', 'cod_estado', 'estado','cod_ciudad',
@@ -28,7 +28,7 @@ class ProveedoresController extends Controller{
 						->join('municipios', 'municipios.id_municipio', '=', 'cod_municipio')
 						->join('parroquias', 'parroquias.id_parroquia', '=', 'cod_parroquia')
 						->where('codigo', '=', $id_proveedor)
-						->get();
+						->first();
 				}
 				else{
 					$response = array();
@@ -142,7 +142,7 @@ class ProveedoresController extends Controller{
     	}
 		else{
 
-			$num_proveedores = DB::table('proveedores')->count();
+			$num_proveedores = DB::table('proveedores')->max('secuencia');
 			
 			$proveedor = new Proveedor;
 

@@ -15,7 +15,6 @@ class CrearTablaProveedores extends Migration {
 		Schema::create('proveedores', function($table)
 		{
 			$table->string('codigo',5);
-			$table->primary('codigo');
 			$table->string('razon_social', 150);
 			$table->string('doc_identificacion', 11);
 			$table->string('telefono_fijo1', 15);
@@ -29,6 +28,12 @@ class CrearTablaProveedores extends Migration {
 			$table->integer('cod_ciudad');
 			$table->integer('cod_municipio');
 			$table->integer('cod_parroquia');
+
+			$table->increments('secuencia');
+			$table->dropPrimary('secuencia');
+
+			$table->primary('codigo');
+
 			$table->nullableTimestamps();
 		});
 	}
