@@ -110,7 +110,7 @@
           controller: 'LaboratorioController' 
         }).
         when('/laboratorio/ver/laboratorios', {
-          templateUrl: '/views/laboratorio/mostrar_laboratorio',
+          templateUrl: '/views/laboratorio/mostrar_laboratorios',
           controller: 'LaboratorioController' 
         }).
          when('/laboratorio/registrar-stock', {
