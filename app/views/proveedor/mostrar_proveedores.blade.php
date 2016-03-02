@@ -33,7 +33,7 @@
 
                       <td colspan="2">
                         <b>Telefono Movil (Opcional): </b>
-                          <p><% data_proveedor.telefono_movil2 %></p>
+                          <p><% data_proveedor.telefono_movil2 | default_value%></p>
                       </td>
 
                       <td colspan="2">
@@ -43,7 +43,7 @@
 
                       <td colspan="2">
                         <b>Telefono Fijo (Opcional): </b>
-                          <p><% data_proveedor.telefono_fijo2 %></p>
+                          <p><% data_proveedor.telefono_fijo2 | default_value %></p>
                       </td>
                     </tr>
 
