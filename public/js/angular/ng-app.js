@@ -109,7 +109,7 @@
       //Funcion para generar un alertify un mensaje dependiendo del status
       generar_alerta_status: function(data){
         var mensaje = "";
-        mensaje = this.printf('Ha ocurrido un error al realizar la accion. Estado[{0}]',data.status);
+        mensaje = this.printf('Ha ocurrido un error al realizar la operacion. Estado[{0}]',data.status);
         alertify.error(mensaje);
       },
       //Funcion para obtener la data del usuario guardada en el localstorage
