@@ -15,11 +15,15 @@ class CrearTablaAlmacenes extends Migration {
 		Schema::create('almacenes', function($table)
 		{
 			$table->string('codigo',4);
-			$table->primary('codigo');
 			$table->integer('responsable');
 			$table->integer('primer_auxiliar')->nullable();
 			$table->integer('segundo_auxiliar')->nullable();
 			$table->string('descripcion', 150);
+
+			$table->increments('secuencia');
+			$table->dropPrimary('secuencia');
+
+			$table->primary('codigo');
 			
 			$table->nullableTimestamps();
 		});

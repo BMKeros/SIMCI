@@ -15,9 +15,14 @@ class CrearTablaLaboratorios extends Migration {
 		Schema::create('laboratorios', function($table)
 		{
 			$table->string('codigo', 4);
-			$table->primary('codigo');
 			$table->string('nombre', 40);
 			$table->string('descripcion', 150)->nullable();
+
+			$table->increments('secuencia');
+			$table->dropPrimary('secuencia');
+
+			$table->primary('codigo');
+
 			$table->nullableTimestamps();
 		});
 	}

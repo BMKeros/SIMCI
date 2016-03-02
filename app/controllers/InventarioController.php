@@ -341,7 +341,7 @@
 			else{
 				$nuevo_almacen = new Almacen;
 
-				$num_almacen = DB::table('almacenes')->count();
+				$num_almacen = DB::table('almacenes')->max('secuencia');
 
 				$nuevo_almacen->codigo = crear_codigo($num_almacen,"ALMACEN");
 				$nuevo_almacen->responsable = $responsable;

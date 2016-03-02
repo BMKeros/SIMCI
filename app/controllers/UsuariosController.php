@@ -579,7 +579,7 @@ class UsuariosController extends Controller {
         else{
         	$nuevo_TipoUsuario = new TiposUsuario;
 
-        	$num_tipo_usuario = DB::table('tipos_usuario')->count();
+        	$num_tipo_usuario = DB::table('tipos_usuario')->max('secuencia');
 
         	//comentado porque al codigo se le igualara a una funcion ya esta probada y funciona (y)
         	$nuevo_TipoUsuario->codigo = crear_codigo($num_tipo_usuario,"TIPO_USUARIO");

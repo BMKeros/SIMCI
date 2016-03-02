@@ -142,7 +142,7 @@ class ProveedoresController extends Controller{
     	}
 		else{
 
-			$num_proveedores = DB::table('proveedores')->count();
+			$num_proveedores = DB::table('proveedores')->max('secuencia');
 			
 			$proveedor = new Proveedor;
 

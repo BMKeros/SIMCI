@@ -105,7 +105,7 @@
 			}
 			else{
 
-				$num_lab = DB::table('laboratorios')->count();
+				$num_lab = DB::table('laboratorios')->max('secuencia');
 
 				$laboratorio = new Laboratorio;
 				$laboratorio->codigo = crear_codigo($num_lab, 'LABORATORIO');

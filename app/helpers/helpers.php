@@ -103,9 +103,6 @@ function crear_codigo($numero = 1, $tipo_codigo = null){
 		else if($tipo_codigo == "TIPO_USUARIO"){
 			$codigo_tmp = CODIGO_TIPO_USUARIO;
 		}
-		else if($tipo_codigo == "INVENTARIO"){
-			$codigo_tmp = CODIGO_TIPO_INVENTARIO;	
-		}
 		else if($tipo_codigo == "LABORATORIO"){
 			$codigo_tmp = CODIGO_LABORATORIO;	
 		}
