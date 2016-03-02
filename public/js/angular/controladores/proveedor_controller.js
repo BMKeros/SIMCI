@@ -183,9 +183,9 @@ simci.controller('ProveedorController', [
           .notSortable(),
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<div class="ui icon button blue pop" data-content="Ver Usuario" ng-click="modal_ver_proveedor('+data.codigo+')"><i class="unhide icon"></i></div>'+
-                      '<div class="ui icon button green pop"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.codigo+')"><i class="edit icon"></i></div>'+ 
-                      '<div class="ui icon button red pop"  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.codigo+')"><i class="remove icon"></i></div>';
+              return '<div class="ui icon button blue pop" data-content="Ver Proveedor" ng-click="modal_ver_proveedor(\''+data.codigo+'\')"><i class="unhide icon"></i></div>'+
+                      '<div class="ui icon button green pop"  data-content="Modificar Proveedor" ng-click="modal_modificar_objeto(\''+data.codigo+'\')"><i class="edit icon"></i></div>'+ 
+                      '<div class="ui icon button red pop"  data-content="Eliminar Proveedor" ng-click="modal_eliminar_proveedor(\''+data.codigo+'\')"><i class="remove icon"></i></div>';
           }).withOption('width','14%')
       ];
 
@@ -194,11 +194,58 @@ simci.controller('ProveedorController', [
         $scope.data_proveedor = {};
 
         ToolsService.mostrar_modal_dinamico($scope,$http,{
-          url : '/api/provedores/mostrar?type=full&codigo='+id,
-          data_success: 'data_proveedor',
+          url : '/api/proveedores/mostrar?type=full&codigo='+id,
+          scope_data_save_success: 'data_proveedor',
           id_modal: 'modal_ver_proveedor'
         });
+      };
 
+      $scope.modal_eliminar_proveedor = function(id){
+
+        alertify.confirm('Seguro que desea eliminar este proveedor?',
+          function(){
+            $http({
+              method: 'POST',
+              url: '/api/provedores/verificar?codigo='+id,
+            }).then(function(data){
+
+              if(data.data.resultado){
+                alertify.alert('No puede eliminar este proveedor debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.');
+              }
+              else{
+                //sino tiene relaciones, que confirme para que elimine
+                alertify.confirm("Confirme si desea eliminar", 
+                  //onok para eliminar el usuairo
+                  function(){
+                    $http({
+                      method: 'POST',
+                      url: '/api/proveedor/eliminar?codigo='+id,
+                    }).then(function(data){
+                      
+                      if(data.data.resultado){
+                        //Recargamos la tabla
+                        setTimeout(function(){
+                          ToolsService.reload_tabla($scope,'tabla_proveedores',function(data){});
+                        }, 500);                         
+                      }
+                      else{
+                        //$log.info(data.data);
+                        alertify.error("Ha ocurrido un error al realizar la operacion");
+                      }
+                    },function(data_error){
+                      //$log.info(data_error);
+                      ToolsService.generar_alerta_status(data_error);
+                    });
+                  }
+                ).set('title', '¡Alerta!');
+              }
+            },
+            function(data_error){
+              //$log.info(data_error);
+              ToolsService.generar_alerta_status(data_error);
+            });
+          }
+        ).set('title', '¡Alerta!');
       };
     }
 
