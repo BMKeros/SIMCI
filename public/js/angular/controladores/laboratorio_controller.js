@@ -38,7 +38,7 @@ simci.controller('LaboratorioController', [
       {
         nombre:"mostrar laboratorio",
         descripcion: "Esta opcion le permitira ver los nuevos laboratorios",
-        url: "#/laboratorio/ver/todos",
+        url: "#/laboratorio/ver/laboratorios",
         icono: 'unhide',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
@@ -93,7 +93,108 @@ simci.controller('LaboratorioController', [
 
       }// If == '/laboratorio/crear-laboratorio'
 
-  }]
+      if($location.$$url == '/laboratorio/ver/laboratorios'){
+
+        $scope.tabla_laboratorios = {};
+        $scope.id_laboratorio_actual = null;
+
+        $scope.opciones_tabla_laboratorios = DTOptionsBuilder.newOptions()
+          .withOption('ajax', {
+           url: '/api/laboratorio/mostrar?type=paginacion',
+           type: 'GET'
+        })
+        .withDataProp('data')
+        .withPaginationType('full_numbers')
+        .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withOption('createdRow', function(row, data, dataIndex) {
+          $compile(angular.element(row).contents())($scope);
+        });
+      
+        $scope.columnas_tabla_laboratorios = [
+            DTColumnBuilder.newColumn('codigo').withTitle('Codigo').notSortable().withOption('width', '80px'),
+            DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
+            DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable(),
+            
+            DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+              function(data, type, full) {
+                return '<a class="ui icon button blue" data-content="Ver Laboratorio" ng-click="modal_ver_laboratorio(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
+                        '<a class="ui icon button green"  data-content="Modificar Laboratorio" ng-click="modal_modificar_laboratorio(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+
+                        '<a class="ui icon button red "  data-content="Eliminar Laboratorio" ng-click="modal_eliminar_laboratorio(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
+              })
+              .withOption('width', '135px')
+        ];
+        
+        ///Funciones 
+        $scope.modal_ver_laboratorio = function(id){
+          $scope.data_laboratorio = {};
+
+          ToolsService.mostrar_modal_dinamico($scope,$http,{
+            url: '/api/laboratorio/mostrar?type=laboratorio_full&id='+id,
+            scope_data_save_success: 'data_laboratorio',
+            id_modal: 'modal_ver_laboratorio'
+          });
+        };
+
+        
+        $scope.modal_eliminar_laboratorio = function(id){
+          alertify.confirm('Seguro que desea eliminar este laboratorio!',
+            //onok consulta para verificar si tiene relaciones con otras tablas
+            function(){
+              $http({
+                method: 'POST',
+                url: '/api/laboratorio/verificar?id='+id,
+              }).then(function(data){
+                //verificamos si el laboratorio tiene relacion en otras tablas
+                if(data.data.resultado){
+                  alertify.alert(data.data.mensajes);
+                }
+                else{
+                  //sino tiene relaciones, que confirme para que elimine el laboratorio
+                  alertify.confirm(data.data.mensajes, 
+                    //onok para eliminar el usuairo
+                    function(){
+                      $http({
+                        method: 'POST',
+                        url: '/api/laboratorio/eliminar?id='+id,
+                      }).then(function(data){
+                        
+                        if(data.data.resultado){
+
+                          //Recargamos la tabla
+                          setTimeout(function(){
+                            ToolsService.reload_tabla($scope,'tabla_laboratorios',function(data){});
+                          }, 500);                         
+                        }
+                        else{
+                          $log.info(data);
+                        }
+                      },function(data_error){
+                        $log.info(data_error);
+                      });
+                    }
+                  ).set('title', '¡Alerta!');
+                }
+              },
+              function(data_error){
+                $log.info(data_error);
+              });
+            }
+          ).set('title', '¡Alerta!');
+        };//fin de la funcion eliminar de laboratorios
+
+
+      }//fin del if de ver-laboratorios
+
+
+
+
+
+
+
+
+
+    }]
 );
     
  

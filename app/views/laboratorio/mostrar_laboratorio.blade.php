@@ -2,7 +2,7 @@
 <div class="ui two column doubling stackable grid container">
    <div class="ui container centered grid">
       <div class="column">
-         {{--  <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_elemento" dt-columns="columnas_tabla_elemento" dt-instance='tabla_elemento' width="100%"></table>--}}
+         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_laboratorios" dt-columns="columnas_tabla_laboratorios" dt-instance='tabla_laboratorios' width="100%"></table>
       </div>
    </div>
 </div>
@@ -15,13 +15,12 @@
                 <tbody>
                     <tr>
                         <td>
-                            <b>Nombre del Laboratorio:</b> Newlaboratorio.
+                            <b>Nombre del Laboratorio: </b> <%data_laboratorio.nombre%>
                         </td>
                     </tr>
 					
                     <tr>
-                        <td colspan="2"><b>Descripcion</b>
-							<p>Describir El laboratorio</p>
+                        <td colspan="2"><b>Descripcion: </b> <%data_laboratorio.descripcion%>
                         </td> 
                     </tr>
                     
@@ -76,35 +75,3 @@
       <div class="ui chackmark icon"></div>
    </div>
 </div>
-
-
-
-<!--Bloque 4 -> Eliminar Laboratorio-->
-<div class="ui basic modal eliminado">
-   <i class="close icon"></i>
-   <div class="header">
-      Eliminar Laboratorio!
-   </div>
-   <div class="image content">
-      <div class="image">
-        <i class="archive icon"></i>
-      </div>
-      <div class="description">
-        <p>Esta seguro que desea eliminar este Laboratorio?</p>
-      </div>
-   </div>
-   <div class="actions">
-      <div class="two fluid ui inverted buttons">
-         <div class="ui red basic inverted button">
-            <i class="remove icon"></i>
-            No
-         </div>
-         <div class="ui green basic inverted button">
-            <i class="checkmark icon"></i>
-            Yes
-         </div>
-      </div>
-   </div>
-</div>
-<!--Fin De Bloques-->
-
