@@ -16,63 +16,63 @@
                     <tr>
                         <td colspan="5">
                             <b>Razon Social:</b>
-                                <p>La razon social</p>
+                                <p><% data_proveedor.razon_social %></p>
                         </td>
 
                         <td colspan="3">
-                            <b>Identificacion:</b>
-                                <p>23674783</p>
+                            <b>Doc. Identificacion:</b>
+                                <p><% data_proveedor.doc_identificacion %></p>
                         </td>
                     </tr>
 
                     <tr>
                       <td colspan="2">
-                        <b>Movil 1: </b>
-                          <p>042674747873</p>
+                        <b>Telfono Movil: </b>
+                          <p><% data_proveedor.telefono_movil1 %></p>
                       </td>
 
                       <td colspan="2">
-                        <b>Movil 2: </b>
-                          <p>042674747873</p>
+                        <b>Telefono Movil (Opcional): </b>
+                          <p><% data_proveedor.telefono_movil2 %></p>
                       </td>
 
                       <td colspan="2">
-                        <b>Casa 1: </b>
-                          <p>042674747873</p>
+                        <b>Telefono Fijo: </b>
+                          <p><% data_proveedor.telefono_fijo1 %></p>
                       </td>
 
                       <td colspan="2">
-                        <b>Casa 2: </b>
-                          <p>042674747873</p>
+                        <b>Telefono Fijo (Opcional): </b>
+                          <p><% data_proveedor.telefono_fijo2 %></p>
                       </td>
                     </tr>
 
                     <tr>
                       <td colspan="2">
                         <b>Estado: </b>
-                          <p>Falcon</p>
+                          <p><% data_proveedor.estado %></p>
                       </td>
 
                       <td colspan="2">
-                        <b>Capital: </b>
-                          <p>Coro</p>
+                        <b>Ciudad: </b>
+                          <p><% data_proveedor.ciudad %></p>
                       </td>
 
                       <td colspan="2">
                         <b>Municipio: </b>
-                          <p>Miranda</p>
+                          <p><% data_proveedor.municipio %></p>
                       </td>
 
                       <td colspan="2">
                         <b>Parroquia: </b>
-                          <p>San antonio</p>
+                          <p><% data_proveedor.parroquia %></p>
                       </td>
                     </tr>
 
                     <tr>
                       <td colspan="8">
-                        <b>Direccion</b>
-                           <p></p>
+                        <b>Direccion:</b>
+                           <p><% data_proveedor.direccion %></p>
                       </td>
                     </tr>
                     

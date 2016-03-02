@@ -106,6 +106,12 @@
 
         return objeto;
       },
+      //Funcion para generar un alertify un mensaje dependiendo del status
+      generar_alerta_status: function(data){
+        var mensaje = "";
+        mensaje = this.printf('Ha ocurrido un error al realizar la operacion. Estado[{0}]',data.status);
+        alertify.error(mensaje);
+      },
       //Funcion para obtener la data del usuario guardada en el localstorage
       get_data_user_localstorage: function(){
         return JSON.parse(localStorage.getItem('data_usuario'));

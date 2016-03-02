@@ -514,14 +514,14 @@ class UsuariosController extends Controller {
         if($exists_relacion){
         	return Response::json(array(
 				'resultado'=>true, 
-				'mensajes'=> "No puede eliminar este usuario debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion."
+				'mensajes'=> array("No puede eliminar este usuario debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.")
 				)
 			);
         }
         else{
         	return Response::json(array(
 				'resultado'=>false, 
-				'mensajes'=> "Confirme si desea eliminar"
+				'mensajes'=> array()
 				)
 			);
         }
