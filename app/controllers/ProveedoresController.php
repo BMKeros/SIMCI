@@ -23,7 +23,6 @@ class ProveedoresController extends Controller{
 				$draw = Input::get('draw',1);
 
 				if(quitar_espacios($value_search['value']) == ''){
-					//$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->orderBy($orden)->paginate($length);	
 					
 					$data = DB::table('proveedores')
 						->select('codigo', 'razon_social', 'doc_identificacion', 'email', 'telefono_fijo1', 'telefono_movil1')
@@ -31,8 +30,6 @@ class ProveedoresController extends Controller{
 						->paginate($length);
 				}
 				else{
-
-					//$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->paginate($length);	
 					$data = DB::table('proveedores')
 						->select('codigo', 'razon_social', 'doc_identificacion', 'email')
 						->where('razon_social', 'ILIKE', '%'.$value_search['value'].'%')
