@@ -176,7 +176,7 @@ simci.controller('InventarioController', [
       });
     }
 
-    if($location.$$url == "/inventario/ver/todos"){
+    if($location.$$url == "/inventario/ver/elementos"){
       $scope.tabla_elementos = {};
       $scope.id_elemento_actual = null;
 
@@ -191,12 +191,7 @@ simci.controller('InventarioController', [
       .withOption('serverSide', true)
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
-
-        /*angular.element($('td',row).eq(0).get(0)).css({'width':'20%'});
-        angular.element($('td',row).eq(2).get(0)).css({'width':'10%'});
-        angular.element($('td',row).eq(3).get(0)).css({'width':'15%'});
-        angular.element($('td',row).eq(4).get(0)).css({'width':'15%'});
-*/
+        
         $timeout(function(){
             $('.ui.spopup').popup();
         },false,0);

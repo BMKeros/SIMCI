@@ -193,12 +193,11 @@ simci.controller('ProveedorController', [
       $scope.modal_ver_proveedor = function(id){
         $scope.data_proveedor = {};
 
-        //hacer el modal dinamico
-        /*ToolsService.mostrar_modal_dinamico($scope,$http,{
-          url : '/api/usuarios/mostrar?type=usuario_full&id='+id,
-          data_success: 'data_usuario',
-          id_modal: 'modal_ver_usuario'
-        });*/
+        ToolsService.mostrar_modal_dinamico($scope,$http,{
+          url : '/api/provedores/mostrar?type=full&codigo='+id,
+          data_success: 'data_proveedor',
+          id_modal: 'modal_ver_proveedor'
+        });
 
       };
     }
