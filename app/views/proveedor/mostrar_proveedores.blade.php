@@ -14,28 +14,66 @@
             <table class="ui celled table capitalize">
                 <tbody>
                     <tr>
-                        <td colspam="2">
+                        <td colspan="5">
                             <b>Razon Social:</b>
                                 <p>La razon social</p>
                         </td>
 
-                        <td colspam="2">
-                            <b>Estado:</b>
-                                <p>Estados Unidos </p>
-                        </td> 
+                        <td colspan="3">
+                            <b>Identificacion:</b>
+                                <p>23674783</p>
+                        </td>
                     </tr>
 
-					
                     <tr>
-                        <td colspam="2">
-                            <b>Documentacion:</b>
-                                <p>Documento de identificacion</p>
-                        </td>
+                      <td colspan="2">
+                        <b>Movil 1: </b>
+                          <p>042674747873</p>
+                      </td>
 
-                        <td colspam="2">
-                            <b>Telefono movil:</b>
-                                <p>+1 333298232.</p>
-                        </td> 
+                      <td colspan="2">
+                        <b>Movil 2: </b>
+                          <p>042674747873</p>
+                      </td>
+
+                      <td colspan="2">
+                        <b>Casa 1: </b>
+                          <p>042674747873</p>
+                      </td>
+
+                      <td colspan="2">
+                        <b>Casa 2: </b>
+                          <p>042674747873</p>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="2">
+                        <b>Estado: </b>
+                          <p>Falcon</p>
+                      </td>
+
+                      <td colspan="2">
+                        <b>Capital: </b>
+                          <p>Coro</p>
+                      </td>
+
+                      <td colspan="2">
+                        <b>Municipio: </b>
+                          <p>Miranda</p>
+                      </td>
+
+                      <td colspan="2">
+                        <b>Parroquia: </b>
+                          <p>San antonio</p>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td colspan="8">
+                        <b>Direccion</b>
+                           <p></p>
+                      </td>
                     </tr>
                     
                 </tbody>    
@@ -49,6 +87,9 @@
     </div>
  
 <!--Bloque 3 -> Modal Modificar proveedor-->
+<button class="ui button">
+  Ver
+</button>
 
 <div class="ui modal" id='modal_modificar_proveedores'>
 <div class="header">Datos generales del proveedor</div>
