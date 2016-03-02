@@ -243,11 +243,11 @@ simci.controller('UsuariosController', [
             }).then(function(data){
               //verificamos si el usuario tiene relacion en otras tablas
               if(data.data.resultado){
-                alertify.alert(data.data.mensajes);
+                alertify.alert('No puede eliminar este usuario debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.');
               }
               else{
                 //sino tiene relaciones, que confirme para que elimine el usuario
-                alertify.confirm(data.data.mensajes, 
+                alertify.confirm("Confirme si desea eliminar", 
                   //onok para eliminar el usuairo
                   function(){
                     $http({
@@ -256,17 +256,18 @@ simci.controller('UsuariosController', [
                     }).then(function(data){
                       
                       if(data.data.resultado){
-
                         //Recargamos la tabla
                         setTimeout(function(){
                           ToolsService.reload_tabla($scope,'tabla_usuarios',function(data){});
                         }, 500);                         
                       }
                       else{
-                        $log.info(data);
+                        //$log.info(data.data);
+                        alertify.error("Ha ocurrido un error al realizar la operacion");
                       }
                     },function(data_error){
-                      $log.info(data_error);
+                      //$log.info(data_error);
+                      alertify.error("Ha ocurrido un error al realizar la operacion");
                     });
                   }
                 ).set('title', '¡Alerta!');
