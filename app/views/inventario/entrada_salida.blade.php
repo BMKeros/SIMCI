@@ -1,3 +1,11 @@
+<div class="ui two column doubling stackable grid container">
+   <div class="ui container centered grid">
+      <div class="column">
+         <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_elementos" dt-columns="columnas_tabla_elementos" dt-instance='tabla_elementos' width="100%"></table>
+      </div>
+   </div>
+</div>
+
 <div class="ui modal" id='modal_entrada'>
 <div class="header">El Nuevo Elemento a registrar es: </div>
    <div class="content">

@@ -44,7 +44,7 @@
 						
 						$data = DB::table('laboratorios')
 							->select('codigo', 'nombre', 'descripcion')
-							->orderBy('codigo', $orden)
+							->orderBy('codigo')
 							->paginate($length);
 					}
 					else{
@@ -53,7 +53,7 @@
 						$data = DB::table('laboratorios')
 							->select('codigo', 'nombre', 'descripcion')
 							->where('nombre', 'ILIKE', '%'.$value_search['value'].'%')
-							->orderBy('codigo', $orden)
+							->orderBy('codigo')
 							->paginate($length);
 					}
 					
@@ -116,6 +116,62 @@
 
 				return Response::json(array('resultado' => true, 'mensajes' => 'Laboratorio creado con exito'));
 			}
+		}
+
+		public function postActualizarLaboratorio(){
+			
+			$id_laboratorio = Input::get('id');
+
+			$lab_actual = Laboratorio::find($id_laboratorio);
+
+			
+			if(!is_null($lab_actual)){
+				$nombre = input_default(Input::get('nombre'), $lab_actual->nombre);
+				$descripcion = input_default(Input::get('descripcion'), $lab_actual->descripcion);	
+
+				$reglas = array(
+				'nombre' => 'required|min:5|max:40',
+				'descripcion' => 'min:5|max:150'
+				);
+
+				$campos = array(
+					'nombre' => $nombre,
+					'descripcion' => $descripcion
+				);
+
+				$mensajes = array(
+		            'required' => ':attribute no puede estar en blanco',
+		            'max' => ':attribute debe tener un maximo de :max caracteres',
+		            'min' => ':attribute debe tener un minimo de :min caracteres'
+				);
+
+				$validacion = Validator::make($campos, $reglas, $mensajes);
+				
+				if($validacion->fails()){
+					return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+				}
+				else{
+
+					$lab_actual->nombre = $nombre;
+					$lab_actual->descripcion = $descripcion;
+					
+					$lab_actual->save();
+
+					return Response::json(array('resultado' => true, 'mensajes' => 'Laboratorio actualizado con exito'));
+				}
+
+
+
+			}
+
+
+			
+
+
+
+			
+
+			
 		}
 
 		public function postVerificar(){

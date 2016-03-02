@@ -136,6 +136,80 @@ simci.controller('LaboratorioController', [
           });
         };
 
+        $scope.modal_modificar_laboratorio = function(id){
+          //capturamos el id del laboratorio actual
+          $scope.id_lab_actual = id;
+
+          //Desactivamos los mensajes
+          $scope.mostrar_mensaje = false;
+          
+          $http({
+            method: 'GET',
+            url: '/api/laboratorio/mostrar?type=laboratorio_full&id='+id,
+          }).then(function(data){
+
+            $scope.DatosForm = data.data;
+
+            setTimeout(function(){
+              //Mostramos la modal
+              angular.element('#modal_modificar_laboratorio').modal('show');
+
+            },300);
+            
+          },function(data_error){
+            $log.info(data_error);
+          });
+        };
+
+        $scope.procesar_modificar = function(){
+          var id_usuario = $scope.id_lab_actual;
+
+          ToolsService.loading_button('btn-modificar',true);
+
+          $http({
+            method: 'POST',
+            url: '/api/laboratorio/actualizar-laboratorio?id='+id_usuario,
+            data: $scope.DatosForm
+          }).then(function(data){
+            if(data.data.resultado){
+
+                $scope.mostrar_mensaje = true;
+                
+                $scope.mensaje_validacion = {
+                  titulo: 'Laboratorio modificado con exito',
+                  icono: 'checkmark',
+                  color: 'green',
+                  mensajes: []
+                };
+
+                //Desactivamos el loading
+                ToolsService.loading_button('btn-modificar',false);
+
+                setTimeout(function(){
+                  ToolsService.reload_tabla($scope,'tabla_laboratorios',function(){});
+                },500);
+
+            }else{
+              $scope.mostrar_mensaje = true;
+                
+              $scope.mensaje_validacion = {
+                titulo: 'Error al modificar el laboratorio',
+                icono: 'remove',
+                color: 'red',
+                mensajes: data.data.mensajes
+              };
+
+              //Desactivamos el loading
+              ToolsService.loading_button('btn-modificar',false);
+            }            
+          },function(data_error){
+            //$log.info(data_error);
+            //Desactivamos el loading
+            ToolsService.loading_button('btn-modificar',false);
+          });
+
+        };
+
         
         $scope.modal_eliminar_laboratorio = function(id){
           alertify.confirm('Seguro que desea eliminar este laboratorio!',

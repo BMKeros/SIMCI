@@ -235,6 +235,106 @@ simci.controller('InventarioController', [
       ];      
     }// inventario/ver/todos"  
 
+    if($location.$$url == "/inventario/entrada-salida"){
+      $scope.tabla_elementos = {};
+      $scope.id_elemento_actual = null;
+
+      $scope.opciones_tabla_elementos = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+         url: '/api/inventario/mostrar?type=paginacion',
+         type: 'GET'
+      })
+      .withDataProp('data')
+      .withPaginationType('full_numbers')
+      .withOption('processing', true)
+      .withOption('serverSide', true)
+      .withOption('createdRow', function(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+        
+        $timeout(function(){
+            $('.ui.spopup').popup();
+        },false,0);
+      });
+    
+      $scope.columnas_tabla_elementos = [
+          DTColumnBuilder.newColumn(null).withTitle('Codigo de elemento').renderWith(
+            function(data, type, full){
+              return ToolsService.generar_codigo_elemento(data,'label');
+            }
+          )
+          .notSortable()
+          .withOption('width', '20%'),
+
+          DTColumnBuilder.newColumn('nombre_objeto').withTitle('Objeto').notSortable(),
+          
+          DTColumnBuilder.newColumn(null).withTitle('Disponibilidad').renderWith(
+            function(data, type, full){
+              return ToolsService.quitar_ceros_decimales(data.cantidad_disponible);
+            }
+          )
+          .notSortable()
+          .withOption('width', '10%'),
+          
+          DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+            function(data, type, full) {
+              return data.nombre_unidad + ' ('+ data.abreviatura + ')';
+            }
+          )
+          .notSortable()
+          .withOption('width', '15%'),
+          
+          DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+            function(data, type, full) {
+              return '<a class="ui icon button green spopup" data-content="Entrada Elemento" ng-click=""><i class="sign in icon"></i></a>'+
+                      '<a class="ui icon button red spopup"  data-content="Salida Elemento" ng-click=""><i class="sign out icon"></i></a>';
+          })
+          .notSortable()
+          .withOption('width', '15%'),
+      ];      
+    }// inventario/ver/almacenes" 
+
+    if($location.$$url == "/inventario/ver/almacenes"){
+      $scope.tabla_almacenes = {};
+      $scope.id_almacen_actual = null;
+
+      $scope.opciones_tabla_almacenes = DTOptionsBuilder.newOptions()
+        .withOption('ajax', {
+         url: '/api/inventario/mostrar?type=paginacion_almacenes',
+         type: 'GET'
+      })
+      .withDataProp('data')
+      .withPaginationType('full_numbers')
+      .withOption('processing', true)
+      .withOption('serverSide', true)
+      .withOption('createdRow', function(row, data, dataIndex) {
+        $compile(angular.element(row).contents())($scope);
+        
+        $timeout(function(){
+            $('.ui.spopup').popup();
+        },false,0);
+      });
+    
+      $scope.columnas_tabla_almacenes = [
+          DTColumnBuilder.newColumn('codigo').withTitle('Codigo')
+          .notSortable()
+          .withOption('width', '7%'),
+          DTColumnBuilder.newColumn('responsable').withTitle('Responsable').notSortable(),
+          DTColumnBuilder.newColumn('primer_auxiliar').withTitle('Primer auxiliar').notSortable(),
+          DTColumnBuilder.newColumn('segundo_auxiliar').withTitle('Segundo auxiliar').notSortable(),
+
+          DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion')
+          .notSortable(),
+         DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+            function(data, type, full) {
+              return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
+                      '<a class="ui icon button green spopup"  data-content="Modificar Elemento" ng-click="modal_modificar_usuario(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+  
+                      '<a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_usuario(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
+          })
+          .notSortable()
+          .withOption('width', '15%'),
+      ];      
+    }// inventario/ver/almacenes"  
+
 
 
 
