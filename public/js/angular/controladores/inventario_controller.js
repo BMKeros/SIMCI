@@ -191,7 +191,7 @@ simci.controller('InventarioController', [
       .withOption('serverSide', true)
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
-        
+
         $timeout(function(){
             $('.ui.spopup').popup();
         },false,0);
@@ -204,7 +204,7 @@ simci.controller('InventarioController', [
             }
           )
           .notSortable()
-          .withOption('width', '20%'),
+          .withOption('width', '22%'),
 
           DTColumnBuilder.newColumn('nombre_objeto').withTitle('Objeto').notSortable(),
           
