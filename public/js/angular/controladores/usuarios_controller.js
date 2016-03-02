@@ -274,7 +274,8 @@ simci.controller('UsuariosController', [
               }
             },
             function(data_error){
-              $log.info(data_error);
+              //$log.info(data_error);
+              ToolsService.generar_alerta_status(data_error);
             });
           }
         ).set('title', '¡Alerta!');
