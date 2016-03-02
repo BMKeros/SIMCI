@@ -4,7 +4,7 @@ class ProveedoresController extends Controller{
 	public function getMostrar(){
 		$tipo_busqueda = Input::get('type', 'todos');
 		$id_proveedor = Input::get('id', null);
-		$orden = Input::get('ordenar',' asc');
+		$orden = Input::get('ordenar','desc');
 
 		switch($tipo_busqueda){
 			case 'todos':
@@ -23,20 +23,17 @@ class ProveedoresController extends Controller{
 				$draw = Input::get('draw',1);
 
 				if(quitar_espacios($value_search['value']) == ''){
-					//$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->orderBy($orden)->paginate($length);	
 					
 					$data = DB::table('proveedores')
 						->select('codigo', 'razon_social', 'doc_identificacion', 'email', 'telefono_fijo1', 'telefono_movil1')
-						->orderBy('codigo', $orden)
+						->orderBy('codigo')
 						->paginate($length);
 				}
 				else{
-
-					//$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->paginate($length);	
 					$data = DB::table('proveedores')
 						->select('codigo', 'razon_social', 'doc_identificacion', 'email')
-						->where('nombre', 'ILIKE', '%'.$value_search['value'].'%')
-						->orderBy('codigo', $orden)
+						->where('razon_social', 'ILIKE', '%'.$value_search['value'].'%')
+						->orderBy('codigo')
 						->paginate($length);
 				}
 				
