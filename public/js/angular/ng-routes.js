@@ -109,7 +109,7 @@
           templateUrl: '/views/laboratorio/crear_laboratorio',
           controller: 'LaboratorioController' 
         }).
-        when('/laboratorio/ver/todos', {
+        when('/laboratorio/ver/laboratorios', {
           templateUrl: '/views/laboratorio/mostrar_laboratorio',
           controller: 'LaboratorioController' 
         }).
