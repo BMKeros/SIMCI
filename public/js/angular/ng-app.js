@@ -26,6 +26,12 @@
     };
   });
 
+  simci.filter('default_value', function(){
+    return function(input, mensaje){
+      return (!!input) ? (input) : ((!!mensaje) ? ( mensaje ) : ('No especificado'));
+    }
+  });
+
   simci.factory('ToolsService', [function () {
     return {
       tools_input:{
