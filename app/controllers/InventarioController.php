@@ -58,6 +58,7 @@
 								'INV.cod_subagrupacion',
 								'INV.numero_orden',
 								'INV.cantidad_disponible',
+								'INV.cod_objeto',
 								'OBJ.nombre as nombre_objeto',
 								'UNI.nombre as nombre_unidad',
 								'UNI.abreviatura')
@@ -74,6 +75,7 @@
 								'INV.cod_subagrupacion',
 								'INV.numero_orden',
 								'INV.cantidad_disponible',
+								'INV.cod_objeto',
 								'OBJ.nombre as nombre_objeto',
 								'UNI.nombre as nombre_unidad',
 								'UNI.abreviatura')
