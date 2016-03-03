@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('CiudadesTableSeeder');
 		$this->call('MunicipiosTableSeeder');
 		$this->call('ParroquiasTableSeeder');
+		$this->call('FuncionesDBSeeder');
 	}
 }
 
