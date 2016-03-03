@@ -17,8 +17,14 @@
                         <td colspam="2">
                             <b>Almacen:</b> NewAlmacen.
                         </td>
+
                         <td colspam="2">
-                            <b>Cantidad disponible:</b> 200.
+                            <b>Sub Dimension:</b> SubDimencion.
+                        </td>
+
+                        <td colspan="2">
+                          <b>Numero de Organizacion:</b>
+                            <p>33</p>
                         </td>
                     </tr>
 					
@@ -28,10 +34,15 @@
                                 <p>Su agrupacion</p>
                         </td>
 
-                        <td colspam="2">
-                            <b>Objeto:</b>
-                                <p>Objeto es.</p>
-                        </td> 
+                        <td colspam="3">
+                            <b>Sub Agrupacion:</b>
+                                <p>Esto es Sub Agrupacion.</p>
+                        </td>
+
+                        <td colspan="1">
+                          <b>Elemento Movible:</b>
+                            <p>Si</p>
+                        </td>
                     </tr>
                     
                 </tbody>    
