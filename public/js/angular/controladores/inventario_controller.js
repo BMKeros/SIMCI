@@ -230,12 +230,24 @@ simci.controller('InventarioController', [
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
               return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="unhide icon"></i></a>'+
-                      '<a class="ui icon button green spopup"  data-content="Modificar Elemento" ng-click="modal_modificar_usuario('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="edit icon"></i></a>'+  
-                      '<a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_usuario('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="remove icon"></i></a>';
+                      '<a class="ui icon button green spopup"  data-content="Modificar Elemento" ng-click="modal_modificar_elemento('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="edit icon"></i></a>'+  
+                      '<a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_elemento('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="remove icon"></i></a>';
           })
           .notSortable()
           .withOption('width', '15%'),
-      ];      
+      ];  
+
+
+      $scope.modal_ver_elemento = function(cod_dimension,cod_subdimension,cod_agrupacion,cod_objeto,numero_orden){
+        $scope.data_elemento = {};
+
+        ToolsService.mostrar_modal_dinamico($scope,$http,{
+          url : '/api/inventario/mostrar?type=elemento_full&'+ToolsService.printf('cod_dimension={0}&cod_subdimension={1}&cod_agrupacion={2}&cod_objeto={3}&numero_orden={4}',cod_dimension,cod_subdimension,cod_agrupacion,cod_objeto,numero_orden),
+          scope_data_save_success: 'data_elemento',
+          id_modal: 'modal_ver_elemento'
+        });
+      };
+
     }// inventario/ver/todos"  
 
     if($location.$$url == "/inventario/entrada-salida"){
