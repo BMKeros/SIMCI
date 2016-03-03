@@ -285,10 +285,18 @@ class ProveedoresController extends Controller{
 		
 		
         if($exists_relacion){
-        	return Response::json(array('resultado'=>true));
+        	return Response::json(array(
+        		'resultado'=>true,
+        		'mensajes'=> array()
+        		)
+        	);
         }
         else{
-        	return Response::json(array('resultado'=>false));
+        	return Response::json(array(
+        		'resultado'=>false,
+        		'mensajes'=> array()
+        		)
+        	);
         }
     }
 
