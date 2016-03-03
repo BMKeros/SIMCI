@@ -79,6 +79,12 @@
       reload_tabla: function($SCOPE,NOMBRE_TABLA,CALLBACK){
           $SCOPE[NOMBRE_TABLA].reloadData(CALLBACK, false); 
       },
+      //Funcion para añadir a los parametros las comillas para que asi la funcion los reciba como string
+      anadir_comillas_params: function(){
+        var params = Array.prototype.slice.call(arguments, 0);
+        var string = params.join("\',\'");
+        return this.printf('\'{0}\'',string);
+      },
       //Funcion para devolver el mensaje con respecto al codigo http
       get_mensaje_fail_http: function(data_ajax){
         var objeto = {};
