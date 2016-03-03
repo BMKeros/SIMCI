@@ -111,7 +111,7 @@
     	</a>
 
     	<a class="item" ng-href="#/consulta">
-  			<i class="call icon"></i>
+  			<i class="search icon"></i>
   			Consultas
 		</a>
 	
