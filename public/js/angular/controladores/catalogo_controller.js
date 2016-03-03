@@ -100,18 +100,23 @@ simci.controller('CatalogoController', [
         .withOption('serverSide', true)
         .withOption('createdRow', function(row, data, dataIndex) {
           $compile(angular.element(row).contents())($scope);
-          
-          // 4 Celda de acciones en la tabla
-          angular.element($('td',row).eq(4).get(0)).css({'width':'135px'});
         });
       
         $scope.columnas_tabla_objetos = [
-            DTColumnBuilder.newColumn('id').withTitle('ID').notSortable(),
+            DTColumnBuilder.newColumn(null).withTitle('#').renderWith(
+              function(data, type, full){
+                return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.id);
+              }
+            )
+            .withOption('width','5%')
+            .notSortable(),
             DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
             DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
               function(data, type, full) {
                 return data.nombre_unidad+' ('+data.abreviatura_unidad+')';
-            }).notSortable(),
+            })
+            .withOption('width','12%')
+            .notSortable(),
 
             DTColumnBuilder.newColumn(null).withTitle('Especificaciones').renderWith(
             function(data, type, full) {
@@ -123,7 +128,7 @@ simci.controller('CatalogoController', [
                 return '<div class="ui icon button blue pop" data-content="Ver Usuario" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></div>'+
                         '<div class="ui icon button green pop"  data-content="Modificar Usuario" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></div>'+ 
                         '<div class="ui icon button red pop"  data-content="Eliminar Usuario" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></div>';
-            })
+            }).withOption('width','17%')
         ];
 
         ///Funciones 
