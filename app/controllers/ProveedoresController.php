@@ -270,6 +270,28 @@ class ProveedoresController extends Controller{
 		}
 	}
 
+	public function postVerificar(){
+		$codigo = Input::get('codigo');
+
+		if(!is_null($codigo)){
+			
+			$exists_relacion = DB::table('entradas_inventario')
+	            ->where('id_proveedir', '=', $codigo)
+	        	->count();
+		}
+		else{
+			$exists_relacion = 0;
+		}
+		
+		
+        if($exists_relacion){
+        	return Response::json(array('resultado'=>true));
+        }
+        else{
+        	return Response::json(array('resultado'=>false));
+        }
+    }
+
 	public function postEliminar(){
 		$id_proveedor = Input::get('codigo');
 
