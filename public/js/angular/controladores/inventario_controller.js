@@ -180,6 +180,9 @@ simci.controller('InventarioController', [
       $scope.tabla_elementos = {};
       $scope.id_elemento_actual = null;
 
+      //Esto es para no escribir tanto
+      var TS = ToolsService;
+
       $scope.opciones_tabla_elementos = DTOptionsBuilder.newOptions()
         .withOption('ajax', {
          url: '/api/inventario/mostrar?type=paginacion',
@@ -226,9 +229,9 @@ simci.controller('InventarioController', [
           
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento('+data.id+')"><i class="unhide icon"></i></a>'+
-                      '<a class="ui icon button green spopup"  data-content="Modificar Elemento" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>'+  
-                      '<a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
+              return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="unhide icon"></i></a>'+
+                      '<a class="ui icon button green spopup"  data-content="Modificar Elemento" ng-click="modal_modificar_usuario('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="edit icon"></i></a>'+  
+                      '<a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_usuario('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="remove icon"></i></a>';
           })
           .notSortable()
           .withOption('width', '15%'),

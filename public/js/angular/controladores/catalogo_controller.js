@@ -110,6 +110,7 @@ simci.controller('CatalogoController', [
             )
             .withOption('width','5%')
             .notSortable(),
+            
             DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
             DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
               function(data, type, full) {
