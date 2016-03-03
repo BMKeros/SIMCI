@@ -206,7 +206,7 @@ simci.controller('ProveedorController', [
           function(){
             $http({
               method: 'POST',
-              url: '/api/provedores/verificar?codigo='+id,
+              url: '/api/proveedores/verificar?codigo='+id,
             }).then(function(data){
 
               if(data.data.resultado){
