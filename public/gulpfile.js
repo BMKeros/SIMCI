@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var debug = require('gulp-debug');
 var jsValidate = require('gulp-jsvalidate');
+//var livereload = require('gulp-livereload');
  
 gulp.task('validar_controladores', function () {
   return gulp.src('./js/angular/controladores/*.js')
@@ -29,5 +30,14 @@ gulp.task('listen_modificaciones',['crear_controladores'],function(){
     .pipe(uglify())
     .pipe(gulp.dest('./js/angular/'))
   })
-
 });
+
+/*gulp.task('listen_autoreload', function() {
+  livereload.listen();
+
+  gulp.watch('./js/angular/*.js', function(){
+    gulp.src('./js/angular/*.js')
+    .pipe(livereload());
+  });
+
+});*/
