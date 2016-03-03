@@ -30,7 +30,17 @@
 				          	<a class="item">Pants</a>
 				          	<a class="item">Jeans</a>
 				        </div>
-      				</div>
+      				</div>-
+      				<!--<div class="ui pointing dropdown link item" tabindex="0"> 
+  	<span class="text">Shopping</span> 
+  	<i class="dropdown icon"></i>
+    <div class="menu transition hidden" tabindex="-1" style="width: 400px;">
+        <div class="header">Events</div>
+        <div class="right" style=" float: right; margin-top: -25px; margin-right: 10px; ">Create / Edit</div>
+        <div class="divider"></div>
+        <div class="item"> <img class="ui avatar tiny image" src="/images/wireframe/square-image.png" style=" width: 60px; max-height: 140px; "> <span style="display: inline-block;">User<br>Hola</span> </div>
+    </div>
+</div>-->
 
       				<div class="ui dropdown item">
       					<img class="ui right spaced avatar image" src="{{ Auth::user()->get_avatar() }}">
