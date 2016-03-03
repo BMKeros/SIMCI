@@ -170,7 +170,7 @@ class ProveedoresController extends Controller{
 	}
 
 	public function postActualizarProveedor(){
-		$id = Input::get('id');
+		$id = Input::get('codigo');
 
 		$proveedor = Proveedor::find($id);
 
@@ -271,7 +271,7 @@ class ProveedoresController extends Controller{
 	}
 
 	public function postEliminar(){
-		$id_proveedor = Input::get('id');
+		$id_proveedor = Input::get('codigo');
 
 		$proveedor = Proveedor::find($id_proveedor);
 
