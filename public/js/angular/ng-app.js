@@ -145,7 +145,7 @@
       },
       //Funcion para mostrar modal dinamico
       mostrar_modal_dinamico: function($_SCOPE, $_HTTP,opciones){
-          
+        var this_root = this;
         $_HTTP({
           method: 'GET',
           url: opciones.url
@@ -160,7 +160,7 @@
 
         },function(data_error){
           //$log.info(data_error);
-          alertify.error("Upss, ha ocurrido un error inesperado");
+          this_root.generar_alerta_status(data_error);
         });
         
       },
