@@ -132,9 +132,6 @@ class CrearIndexTablas extends Migration {
 			$table->foreign('id_usuario')->references('id')
 				->on('usuarios');
 
-			//$table->foreign('cod_objeto')->references('cod_objeto')
-			//	->on('inventario');
-
 			$table->foreign('cod_objeto')->references('id')
 				->on('catalogo_objetos');
 
