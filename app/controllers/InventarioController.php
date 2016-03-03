@@ -313,7 +313,7 @@
 				'responsable' => 'required|integer|exists:personas,id',
 				//pendientes por modificar si seran o no unicos
 				'primer_auxiliar' => 'required|integer|exists:personas,id',
-				'segundo_auxiliar' => 'required|integer|exists:personas,id',
+				'segundo_auxiliar' => 'integer|exists:personas,id',
 				'descripcion' => 'required|min:3|max:150'
 			);
 
