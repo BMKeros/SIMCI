@@ -203,6 +203,7 @@ simci.controller('ProveedorController', [
       $scope.modal_eliminar_proveedor = function(id){
 
         alertify.confirm('Seguro que desea eliminar este proveedor?',
+          
           function(){
             $http({
               method: 'POST',
@@ -219,7 +220,7 @@ simci.controller('ProveedorController', [
                   function(){
                     $http({
                       method: 'POST',
-                      url: '/api/proveedor/eliminar?codigo='+id,
+                      url: '/api/proveedores/eliminar?codigo='+id,
                     }).then(function(data){
                       
                       if(data.data.resultado){
