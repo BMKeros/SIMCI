@@ -109,14 +109,32 @@
 					if(quitar_espacios($value_search['value']) == ''){	
 						$data = DB::table('almacenes as ALM')
 							->select('ALM.codigo',
-								'ALM.descripcion')
+								'ALM.descripcion', 
+								'RESP.primer_nombre as nombre_responsable', 
+								'RESP.primer_apellido as apellido_responsable',
+								'PA.primer_nombre as nombre_primer_auxiliar', 
+								'PA.primer_apellido as apellido_primer_auxiliar',
+								'SA.primer_nombre as nombre_segundo_auxiliar', 
+								'SA.primer_apellido as apellido_segundo_auxiliar')
+							->join('personas as RESP', 'RESP.id', '=', 'ALM.responsable')
+							->join('personas as PA', 'PA.id', '=', 'ALM.primer_auxiliar')
+							->leftJoin('personas as SA', 'SA.id', '=', 'ALM.segundo_auxiliar')
 							->orderBy('ALM.codigo','asc')
 							->paginate($length);
 					}
 					else{	
 						$data = DB::table('almacenes as ALM')
 							->select('ALM.codigo',
-								'ALM.descripcion')
+								'ALM.descripcion', 
+								'RESP.primer_nombre as nombre_responsable', 
+								'RESP.primer_apellido as apellido_repsonsable',
+								'PA.primer_nombre as nombre_primer_auxiliar', 
+								'PA.primer_apellido as apellido_primer_auxiliar',
+								'SA.primer_nombre as nombre_segundo_auxiliar', 
+								'SA.primer_apellido as apellido_segund_auxiliar')
+							->join('personas as RESP', 'RESP.id', '=', 'ALM.responsable')
+							->join('personas as PA', 'PA.id', '=', 'ALM.primer_auxiliar')
+							->leftJoin('personas as SA', 'SA.id', '=', 'ALM.segundo_auxiliar')
 							->where('ALM.descripcion', 'ILIKE', '%'.$value_search['value'].'%')
 							->orderBy('ALM.codigo','asc')
 							->paginate($length);

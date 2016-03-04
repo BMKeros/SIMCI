@@ -30,7 +30,7 @@
 				          	<a class="item">Pants</a>
 				          	<a class="item">Jeans</a>
 				        </div>
-      				</div>-
+      				</div>
       				<!--<div class="ui pointing dropdown link item" tabindex="0"> 
   	<span class="text">Shopping</span> 
   	<i class="dropdown icon"></i>

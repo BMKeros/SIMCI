@@ -17,7 +17,7 @@ class CrearTablaEntradasInventario extends Migration {
 			$table->increments('id');
 			$table->string('id_proveedor', 5);
 			$table->integer('id_usuario');
-			$table->integer('id_objeto');
+			$table->integer('cod_objeto');
 			$table->decimal('cantidad');
 			$table->time('hora');
 			$table->date('fecha');

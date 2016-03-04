@@ -123,7 +123,22 @@ class CrearIndexTablas extends Migration {
 			$table->foreign('id_municipio')->references('id_municipio')
 				->on('municipios');
 		});
+
+		//ENTRADAS-INVENTARIO
+		Schema::table('entradas_inventario', function($table){
+			$table->foreign('id_proveedor')->references('codigo')
+				->on('proveedores');
+
+			$table->foreign('id_usuario')->references('id')
+				->on('usuarios');
+
+			$table->foreign('cod_objeto')->references('id')
+				->on('catalogo_objetos');
+
+
+		});
 	}	
+
 
 	/**
 	 * Reverse the migrations.
