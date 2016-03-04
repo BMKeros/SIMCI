@@ -92,15 +92,24 @@ simci.controller('UsuariosController', [
       .withOption('serverSide', true)
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
-
-        // 5 Celda de acciones en la tabla
-        angular.element($('td',row).eq(5).get(0)).css({'width':'135px'});
       });
     
       $scope.columnas_tabla_usuarios = [
-          DTColumnBuilder.newColumn('id').withTitle('ID').notSortable(),
-          DTColumnBuilder.newColumn('usuario').withTitle('Usuario').notSortable(),
-          DTColumnBuilder.newColumn('email').withTitle('Email').notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('ID').renderWith(
+            function(data, type, full){
+              return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.id);
+            }
+          )
+          .withOption('width','5%')
+          .notSortable(),
+          
+          DTColumnBuilder.newColumn('usuario').withTitle('Usuario')
+          .withOption('width','15%')
+          .notSortable(),
+          
+          DTColumnBuilder.newColumn('email').withTitle('Email')
+          .withOption('width','40%')
+          .notSortable(),
           
           DTColumnBuilder.newColumn('data_permisos').withTitle('Permisos').renderWith(
             function(data, type, full) {
@@ -111,13 +120,18 @@ simci.controller('UsuariosController', [
               return x;
           }).notSortable(),
           
-          DTColumnBuilder.newColumn('data_tipo_usuario.descripcion').withTitle('Tipo de Usuario').notSortable(),
+          DTColumnBuilder.newColumn('data_tipo_usuario.descripcion').withTitle('Tipo de Usuario')
+          .withOption('width','15%')
+          .notSortable(),
+
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
               return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>'+
                       '<a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>'+
                       '<a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
           })
+          .withOption('width','15%')
+          .notSortable()
 
       ];
 
