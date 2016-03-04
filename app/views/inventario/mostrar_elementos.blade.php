@@ -13,45 +13,42 @@
         <div class="content">
             <table class="ui celled table capitalize">
                 <tbody>
-                    <tr>
-                <td colspan="4">
-                  <b>Nombre Del Elemento:</b><br>
-                    <p>Nombre es.</p>
-                </td>
-                <td colspan="2">
-                  <b>Nombre del Almacen:</b><br>
-                </td>
-               </tr>
+                  <tr>
+                    <td colspan="4">
+                      <b>Nombre Del Elemento:</b><br>
+                        <p>Nombre es.</p>
+                    </td>
+                    <td colspan="2">
+                      <b>Nombre del Almacen:</b><br>
+                    </td>
+                  </tr>
 
-               <tr>
-                  <td colspan="2">
-                    <b>Nro Organizacion:</b><br>
-                      <p>33</p>
-                  </td>
-                  <td colspan="2">
-                    <b>Elemento Movible:</b><br> 
-                    <p>Si</p>
-                  </td>
-                  <td colspan="3">
-                    <b>Cantidad Disponible:</b><br>
-                      <p>33</p>
-                    
-                  </td>
-               </tr>
+                  <tr>
+                    <td colspan="2">
+                      <b>Nro Organizacion:</b><br>
+                        <p>33</p>
+                    </td>
+                    <td colspan="2">
+                      <b>Elemento Movible:</b><br> 
+                        <p>Si</p>
+                    </td>
+                    <td colspan="3">
+                      <b>Cantidad Disponible:</b><br>
+                        <p>33</p> 
+                    </td>
+                   </tr>
 
-               <tr>
-                  <td colspan="4">
-                    <b>Nombre de Agrupacion: </b><br>
-                      <p>Nombre de la agrupacion</p>
-                  </td>
+                  <tr>
+                    <td colspan="4">
+                      <b>Nombre de Agrupacion: </b><br>
+                        <p>Nombre de la agrupacion</p>
+                    </td>
                   
-                  <td colspan="4">
-                    <b>Nombre de Sub Agrupacion:</b><br>
-                      <p>Nombre de sub-agrupacion</p>
-                  </td>
-               </tr>
-
-                    
+                    <td colspan="4">
+                      <b>Nombre de Sub Agrupacion:</b><br>
+                        <p>Nombre de sub-agrupacion</p>
+                    </td>
+                  </tr>       
                 </tbody>    
             </table>
         </div>
