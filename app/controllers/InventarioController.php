@@ -111,7 +111,7 @@
 							->select('ALM.codigo',
 								'ALM.descripcion', 
 								'RESP.primer_nombre as nombre_responsable', 
-								'RESP.primer_apellido as apellido_repsonsable',
+								'RESP.primer_apellido as apellido_responsable',
 								'PA.primer_nombre as nombre_primer_auxiliar', 
 								'PA.primer_apellido as apellido_primer_auxiliar',
 								'SA.primer_nombre as nombre_segundo_auxiliar', 

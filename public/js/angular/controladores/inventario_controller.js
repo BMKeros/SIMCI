@@ -337,9 +337,24 @@ simci.controller('InventarioController', [
           )
           .notSortable()
           .withOption('width', '7%'),
-          DTColumnBuilder.newColumn('responsable').withTitle('Responsable').notSortable(),
-          DTColumnBuilder.newColumn('primer_auxiliar').withTitle('Primer auxiliar').notSortable(),
-          DTColumnBuilder.newColumn('segundo_auxiliar').withTitle('Segundo auxiliar').notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Responsable')
+          .renderWith(
+            function(data, type, full){
+              return data.nombre_responsable +' '+data.apellido_responsable;
+            })
+          .notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Primer auxiliar')
+          .renderWith(
+            function(data, type, full){
+              return data.nombre_primer_auxiliar +' '+data.apellido_primer_auxiliar;
+            })
+          .notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Segundo auxiliar')
+          .renderWith(
+            function(data, type, full){
+              return data.nombre_segundo_auxiliar +' '+data.apellido_segundo_auxiliar;
+            })
+          .notSortable(),
 
           DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion')
           .notSortable(),
