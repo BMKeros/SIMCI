@@ -31,7 +31,7 @@ simci.controller('ProveedorController', [
         descripcion: "Esta opcion le permitira crear nuevos proveedores",
         url: "#/proveedores/registrar-proveedor",
         icono: 'write',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       
       {
@@ -39,7 +39,7 @@ simci.controller('ProveedorController', [
         descripcion: "Esta opcion le permitira ver proveedores registrados",
         url: "#/proveedores/ver/todos",
         icono: 'unhide',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR]
       }
 
     ];
