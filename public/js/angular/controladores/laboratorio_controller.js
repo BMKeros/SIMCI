@@ -112,7 +112,11 @@ simci.controller('LaboratorioController', [
         });
       
         $scope.columnas_tabla_laboratorios = [
-            DTColumnBuilder.newColumn('codigo').withTitle('Codigo').notSortable().withOption('width', '80px'),
+            DTColumnBuilder.newColumn(null).withTitle('Codigo').renderWith(
+              function(data,type, full){
+                return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.codigo);
+              }
+            ).notSortable().withOption('width', '80px'),
             DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
             DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable(),
             
