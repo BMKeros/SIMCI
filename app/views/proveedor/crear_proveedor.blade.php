@@ -78,27 +78,27 @@
 						</div>
 
 						<div class="field">
-							<label>Municipio</label>
-							<div class="ui disabled selection dropdown"  id="select_municipios">
-	  							<input name="cod_municipio" type="hidden" ng-model="DatosForm.cod_municipio" ng-change="cargar_parroquias(DatosForm.cod_municipio);" ng-update-hidden>
-
+							<label>Ciudad</label>
+							<div class="ui disabled selection dropdown" id="select_ciudades">
+	  							<input name="gender" type="hidden" ng-model="DatosForm.cod_ciudad" ng-update-hidden>
 	  							<i class="dropdown icon"></i>
-	  							<div class="default text">Municipio</div>
+	  							<div class="default text">Ciudad</div>
 	  							<div class="menu"></div>
 							</div>
-
 						</div>
+						
 					</div>	
 				</div>
 
 				<div class="field">
 				    <div class="two fields">
 						<div class="field">
-							<label>Ciudad</label>
-							<div class="ui disabled selection dropdown" id="select_ciudades">
-	  							<input name="gender" type="hidden" ng-model="DatosForm.cod_ciudad" ng-update-hidden>
+							<label>Municipio</label>
+							<div class="ui disabled selection dropdown"  id="select_municipios">
+	  							<input name="cod_municipio" type="hidden" ng-model="DatosForm.cod_municipio" ng-change="cargar_parroquias(DatosForm.cod_municipio);" ng-update-hidden>
+
 	  							<i class="dropdown icon"></i>
-	  							<div class="default text">Ciudad</div>
+	  							<div class="default text">Municipio</div>
 	  							<div class="menu"></div>
 							</div>
 						</div>

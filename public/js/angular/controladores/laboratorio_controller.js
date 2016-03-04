@@ -38,7 +38,7 @@ simci.controller('LaboratorioController', [
       {
         nombre:"mostrar laboratorio",
         descripcion: "Esta opcion le permitira ver los nuevos laboratorios",
-        url: "#/laboratorio/ver/laboratorios",
+        url: "#/laboratorio/ver/todos",
         icono: 'unhide',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
@@ -93,7 +93,7 @@ simci.controller('LaboratorioController', [
 
       }// If == '/laboratorio/crear-laboratorio'
 
-      if($location.$$url == '/laboratorio/ver/laboratorios'){
+      if($location.$$url == '/laboratorio/ver/todos'){
 
         $scope.tabla_laboratorios = {};
         $scope.id_laboratorio_actual = null;
@@ -112,7 +112,11 @@ simci.controller('LaboratorioController', [
         });
       
         $scope.columnas_tabla_laboratorios = [
-            DTColumnBuilder.newColumn('codigo').withTitle('Codigo').notSortable().withOption('width', '80px'),
+            DTColumnBuilder.newColumn(null).withTitle('Codigo').renderWith(
+              function(data,type, full){
+                return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.codigo);
+              }
+            ).notSortable().withOption('width', '7%'),
             DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
             DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable(),
             
@@ -122,7 +126,7 @@ simci.controller('LaboratorioController', [
                         '<a class="ui icon button green"  data-content="Modificar Laboratorio" ng-click="modal_modificar_laboratorio(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+
                         '<a class="ui icon button red "  data-content="Eliminar Laboratorio" ng-click="modal_eliminar_laboratorio(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
               })
-              .withOption('width', '135px')
+              .withOption('width', '15%')
         ];
         
         ///Funciones 

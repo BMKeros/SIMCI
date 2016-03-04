@@ -109,7 +109,7 @@
           templateUrl: '/views/laboratorio/crear_laboratorio',
           controller: 'LaboratorioController' 
         }).
-        when('/laboratorio/ver/laboratorios', {
+        when('/laboratorio/ver/todos', {
           templateUrl: '/views/laboratorio/mostrar_laboratorios',
           controller: 'LaboratorioController' 
         }).
@@ -125,15 +125,15 @@
         //Rutas Reportes
         when('/reporte', {
           templateUrl: '/views/layouts/layout_main_modulos',
-          controller: 'ReporteController'
+          controller: 'ReportesController'
         }).
         when('/reporte/crear-reporte', {
           templateUrl: '/views/reportes/crear_reportes',
-          controller: 'ReporteController'
+          controller: 'ReportesController'
         }).
         when('/reporte/ver/todos', {
           templateUrl: '/views/reportes/mostrar_reportes',
-          controller: 'ReporteController'
+          controller: 'ReportesController'
         }).
 
  		//Rutas Consulta

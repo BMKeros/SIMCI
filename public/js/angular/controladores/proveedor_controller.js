@@ -31,7 +31,7 @@ simci.controller('ProveedorController', [
         descripcion: "Esta opcion le permitira crear nuevos proveedores",
         url: "#/proveedores/registrar-proveedor",
         icono: 'write',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
       
       {
@@ -39,7 +39,7 @@ simci.controller('ProveedorController', [
         descripcion: "Esta opcion le permitira ver proveedores registrados",
         url: "#/proveedores/ver/todos",
         icono: 'unhide',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR]
       }
 
     ];
@@ -165,7 +165,12 @@ simci.controller('ProveedorController', [
       });
     
       $scope.columnas_tabla_proveedores = [
-          DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width','7%').notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Codigo').renderWith(
+            function(data, type, full){
+              return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.codigo);
+            }
+          ).withOption('width','7%').notSortable(),
+          
           DTColumnBuilder.newColumn('razon_social').withTitle('Razon Social').notSortable(),
           DTColumnBuilder.newColumn('doc_identificacion').withTitle('Doc. Identificacion')
           .withOption('width','15%')
@@ -203,10 +208,11 @@ simci.controller('ProveedorController', [
       $scope.modal_eliminar_proveedor = function(id){
 
         alertify.confirm('Seguro que desea eliminar este proveedor?',
+          
           function(){
             $http({
               method: 'POST',
-              url: '/api/provedores/verificar?codigo='+id,
+              url: '/api/proveedores/verificar?codigo='+id,
             }).then(function(data){
 
               if(data.data.resultado){
@@ -219,7 +225,7 @@ simci.controller('ProveedorController', [
                   function(){
                     $http({
                       method: 'POST',
-                      url: '/api/proveedor/eliminar?codigo='+id,
+                      url: '/api/proveedores/eliminar?codigo='+id,
                     }).then(function(data){
                       
                       if(data.data.resultado){

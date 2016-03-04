@@ -8,42 +8,46 @@
 		public function getMostrar(){
 
 			$tipo_busqueda = Input::get('type', 'todos');
-			//$id_elemento = Input::get('id', null);
 			$orden = Input::get('ordenar','asc');
 
 			switch($tipo_busqueda){
-				/*case 'todos':
-					if($orden){
-						//esta aun falta porque no se que campos necesita
-						$response = Catalogo::orderBy('id', $orden)->get();
-					}
-					else{
-						//esta aun le falta porque no se que campos necesita
-						//$response = Catalogo::all();
-						$response = DB::table('catalogo_objetos')->get();
-					}
-				break;
+				
+				case 'elemento_full':
+					$cod_dimension = Input::get('cod_dimension', null);
+					$cod_subdimension = Input::get('cod_subdimension', null);
+					$cod_agrupacion = Input::get('cod_agrupacion', null);
+					$cod_objeto = Input::get('cod_objeto', null);
+					$numero_orden = Input::get('numero_orden', null);
 
-				case 'objeto':
-					if($id_objeto){
-						//$response = Catalogo::find($id_objeto);
+					if(!is_null($cod_dimension) && !is_null($cod_subdimension) && !is_null($cod_agrupacion) && !is_null($cod_objeto) && !is_null($numero_orden)){
 
-						$response = DB::table('catalogo_objetos as CO')
-							->select('CO.nombre', 'CO.descripcion', 'CO.especificaciones', 'CO.cod_clase_objeto', 'clase_objetos.nombre as nombre_clase', 'CO.cod_unidad', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
-							->join('clase_objetos', 'clase_objetos.id', '=', 'CO.cod_clase_objeto')
-							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
-							->where('CO.id', '=', $id_objeto)
+						$data = DB::table('inventario as INV')
+							->select('INV.cod_dimension', 
+								'INV.cod_subdimension', 
+								'INV.cod_agrupacion', 
+								'INV.cod_subagrupacion',
+								'INV.numero_orden',
+								'INV.cantidad_disponible',
+								'INV.cod_objeto',
+								'OBJ.nombre as nombre_objeto',
+								'UNI.nombre as nombre_unidad',
+								'UNI.abreviatura')
+							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
+							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
+							->where('INV.cod_dimension','=',$cod_dimension)
+							->where('INV.cod_subdimension', '=', $cod_subdimension)
+							->where('INV.cod_agrupacion', '=', $cod_agrupacion)
+							->where('INV.cod_objeto', '=', $cod_objeto)
+							->where('INV.numero_orden', '=', $numero_orden)
+							->orderBy('INV.id','asc')
 							->first();
-							
 
-						if(is_null($response)){
-							$response = array();
-						}
+						$response = $data;
 					}
 					else{
 						$response = array();
 					}
-				break;*/
+				break;
 
 				case 'paginacion':
 					$length = Input::get('length', 10);
@@ -97,6 +101,38 @@
 
 				break;
 
+				case 'paginacion_almacenes':
+					$length = Input::get('length', 10);
+					$value_search = Input::get('search');
+					$draw = Input::get('draw',1);
+
+					if(quitar_espacios($value_search['value']) == ''){	
+						$data = DB::table('almacenes as ALM')
+							->select('ALM.codigo',
+								'ALM.descripcion')
+							->orderBy('ALM.codigo','asc')
+							->paginate($length);
+					}
+					else{	
+						$data = DB::table('almacenes as ALM')
+							->select('ALM.codigo',
+								'ALM.descripcion')
+							->where('ALM.descripcion', 'ILIKE', '%'.$value_search['value'].'%')
+							->orderBy('ALM.codigo','asc')
+							->paginate($length);
+
+					}
+					
+					$response = array(
+						"draw"=>$draw,
+						"page"=>$data->getCurrentPage(),
+						"recordsTotal"=>$data->getTotal(),
+						"recordsFiltered"=> $data->count(),
+						"data" => $data->all()
+					);
+
+				break;
+
 				case 'query':
 
 					$value_search = Input::get('query');
@@ -123,7 +159,7 @@
 				break;
 
 				default:
-					$response = Catalogo::all();
+					$response = array();
 				break;
 
 			}
