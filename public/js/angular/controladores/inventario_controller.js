@@ -352,7 +352,13 @@ simci.controller('InventarioController', [
           DTColumnBuilder.newColumn(null).withTitle('Segundo auxiliar')
           .renderWith(
             function(data, type, full){
-              return data.nombre_segundo_auxiliar +' '+data.apellido_segundo_auxiliar;
+
+              if(!(data.nombre_segundo_auxiliar && data.apellido_segundo_auxiliar)){
+                return "No Especificado";
+              }
+              else{
+                return data.nombre_segundo_auxiliar +' '+data.apellido_segundo_auxiliar;
+              }
             })
           .notSortable(),
 
