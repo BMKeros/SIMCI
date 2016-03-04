@@ -123,15 +123,15 @@
         }).
 
         //Rutas Reportes
-        when('/reporte', {
+        when('/reportes', {
           templateUrl: '/views/layouts/layout_main_modulos',
           controller: 'ReportesController'
         }).
-        when('/reporte/crear-reporte', {
+        when('/reportes/generar-reporte', {
           templateUrl: '/views/reportes/crear_reportes',
           controller: 'ReportesController'
         }).
-        when('/reporte/ver/todos', {
+        when('/reportes/ver/todos', {
           templateUrl: '/views/reportes/mostrar_reportes',
           controller: 'ReportesController'
         }).

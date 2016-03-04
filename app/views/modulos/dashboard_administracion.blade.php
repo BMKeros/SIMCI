@@ -111,7 +111,7 @@
   			Ordenes
 		</a>
 	
-    	<a class="item" ng-href="#/reporte">
+    	<a class="item" ng-href="#/reportes">
 	      	<i class="file text outline icon"></i>
 	      	Reportes
     	</a>
