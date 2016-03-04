@@ -101,6 +101,38 @@
 
 				break;
 
+				case 'paginacion_almacenes':
+					$length = Input::get('length', 10);
+					$value_search = Input::get('search');
+					$draw = Input::get('draw',1);
+
+					if(quitar_espacios($value_search['value']) == ''){	
+						$data = DB::table('almacenes as ALM')
+							->select('ALM.codigo',
+								'ALM.descripcion')
+							->orderBy('ALM.codigo','asc')
+							->paginate($length);
+					}
+					else{	
+						$data = DB::table('almacenes as ALM')
+							->select('ALM.codigo',
+								'ALM.descripcion')
+							->where('ALM.descripcion', 'ILIKE', '%'.$value_search['value'].'%')
+							->orderBy('ALM.codigo','asc')
+							->paginate($length);
+
+					}
+					
+					$response = array(
+						"draw"=>$draw,
+						"page"=>$data->getCurrentPage(),
+						"recordsTotal"=>$data->getTotal(),
+						"recordsFiltered"=> $data->count(),
+						"data" => $data->all()
+					);
+
+				break;
+
 				case 'query':
 
 					$value_search = Input::get('query');
