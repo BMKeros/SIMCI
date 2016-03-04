@@ -304,7 +304,7 @@ simci.controller('InventarioController', [
                       '<a class="ui icon button red spopup"  data-content="Salida Elemento" ng-click=""><i class="sign out icon"></i></a>';
           })
           .notSortable()
-          .withOption('width', '15%'),
+          .withOption('width', '10%'),
       ];      
     }// inventario/ver/almacenes" 
 
@@ -330,7 +330,11 @@ simci.controller('InventarioController', [
       });
     
       $scope.columnas_tabla_almacenes = [
-          DTColumnBuilder.newColumn('codigo').withTitle('Codigo')
+          DTColumnBuilder.newColumn(null).withTitle('Codigo').renderWith(
+            function(data,type,full){
+              return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.codigo);
+            }
+          )
           .notSortable()
           .withOption('width', '7%'),
           DTColumnBuilder.newColumn('responsable').withTitle('Responsable').notSortable(),
