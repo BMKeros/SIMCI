@@ -165,7 +165,12 @@ simci.controller('ProveedorController', [
       });
     
       $scope.columnas_tabla_proveedores = [
-          DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width','7%').notSortable(),
+          DTColumnBuilder.newColumn(null).withTitle('Codigo').renderWith(
+            function(data, type, full){
+              return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.codigo);
+            }
+          ).withOption('width','7%').notSortable(),
+          
           DTColumnBuilder.newColumn('razon_social').withTitle('Razon Social').notSortable(),
           DTColumnBuilder.newColumn('doc_identificacion').withTitle('Doc. Identificacion')
           .withOption('width','15%')
