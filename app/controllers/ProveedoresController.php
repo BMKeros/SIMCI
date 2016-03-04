@@ -276,7 +276,7 @@ class ProveedoresController extends Controller{
 		if(!is_null($codigo)){
 			
 			$exists_relacion = DB::table('entradas_inventario')
-	            ->where('id_proveedir', '=', $codigo)
+	            ->where('id_proveedor', '=', $codigo)
 	        	->count();
 		}
 		else{
