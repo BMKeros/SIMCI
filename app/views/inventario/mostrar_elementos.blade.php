@@ -14,36 +14,43 @@
             <table class="ui celled table capitalize">
                 <tbody>
                     <tr>
-                        <td colspam="2">
-                            <b>Almacen:</b> NewAlmacen.
-                        </td>
+                <td colspan="4">
+                  <b>Nombre Del Elemento:</b><br>
+                    <p>Nombre es.</p>
+                </td>
+                <td colspan="2">
+                  <b>Nombre del Almacen:</b><br>
+                </td>
+               </tr>
 
-                        <td colspam="2">
-                            <b>Sub Dimension:</b> SubDimencion.
-                        </td>
+               <tr>
+                  <td colspan="2">
+                    <b>Nro Organizacion:</b><br>
+                      <p>33</p>
+                  </td>
+                  <td colspan="2">
+                    <b>Elemento Movible:</b><br> 
+                    <p>Si</p>
+                  </td>
+                  <td colspan="3">
+                    <b>Cantidad Disponible:</b><br>
+                      <p>33</p>
+                    
+                  </td>
+               </tr>
 
-                        <td colspan="2">
-                          <b>Numero de Organizacion:</b>
-                            <p>33</p>
-                        </td>
-                    </tr>
-					
-                    <tr>
-                        <td colspam="2">
-                            <b>Agrupacion:</b>
-                                <p>Su agrupacion</p>
-                        </td>
+               <tr>
+                  <td colspan="4">
+                    <b>Nombre de Agrupacion: </b><br>
+                      <p>Nombre de la agrupacion</p>
+                  </td>
+                  
+                  <td colspan="4">
+                    <b>Nombre de Sub Agrupacion:</b><br>
+                      <p>Nombre de sub-agrupacion</p>
+                  </td>
+               </tr>
 
-                        <td colspam="3">
-                            <b>Sub Agrupacion:</b>
-                                <p>Esto es Sub Agrupacion.</p>
-                        </td>
-
-                        <td colspan="1">
-                          <b>Elemento Movible:</b>
-                            <p>Si</p>
-                        </td>
-                    </tr>
                     
                 </tbody>    
             </table>
