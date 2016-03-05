@@ -1,16 +1,22 @@
 (function(){
-  var simci = angular.module('SIMCI', ['ngRoute','datatables'], function($interpolateProvider) {
+  var simci = angular.module('SIMCI', ['ngRoute','datatables','ngProgress'], function($interpolateProvider) {
           $interpolateProvider.startSymbol('<%');
           $interpolateProvider.endSymbol('%>');
   });
 
-  simci.run(function($rootScope,DTDefaultOptions,ToolsService){
+  simci.run(function($rootScope,DTDefaultOptions,ToolsService,ngProgressFactory){
       alertify.success('Ready!');
       //Lenguaje español para datatable
       DTDefaultOptions.setLanguageSource('/spanish.json');
 
       //Asignar funciones en el scope global
-      $rootScope.tools_input = ToolsService.tools_input; 
+      $rootScope.tools_input = ToolsService.tools_input;
+
+      //Configuracion para el NgProgressBar
+      $rootScope.progressbar = ngProgressFactory.createInstance();
+      $rootScope.progressbar.setHeight('5px');
+      $rootScope.progressbar.setColor('orange');
+
   });
 
   simci.filter('capitalize', function() {
@@ -22,7 +28,7 @@
 
   simci.filter('inArray', function() {
     return function(array, value) {
-        return Array.isArray(array) && array.indexOf(value) !== -1;
+        return angular.isArray(array) && array.indexOf(value) !== -1;
     };
   });
 
@@ -265,6 +271,26 @@
       }
     };
   }]);
+
+simci.directive('ngShowProgressLoading',['$rootScope',function($rootScope) {
+  return {
+    restrict: 'AE',
+    link: function($scope, $element) {
+      
+      function ocultarProgress() {
+        $rootScope.progressbar.complete();
+      }
+            
+      $scope.$on('$routeChangeStart', function() {
+        $rootScope.progressbar.start();
+      });
+      $scope.$on('$routeChangeSuccess',ocultarProgress);
+      $scope.$on('$routeChangeError', ocultarProgress);
+      // Initially element is hidden
+      ocultarProgress();
+    }
+  }
+}]);
 
   //Seteamos de manera global la app simci
   window.simci = simci;
