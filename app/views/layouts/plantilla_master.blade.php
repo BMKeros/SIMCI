@@ -59,11 +59,13 @@
 
 		<script src="/js/scripts_app.js"></script>
 		<script src="/js/scripts_formularios.js"></script>
+
+		<!-- Script APP SIMCI ANGULAR JS -->
 		<script src="/js/angular/ng-app.js"></script>
 		<script src="/js/angular/ng-controladores.js"></script>
+		<script src="/js/angular/ng-directivas.js"></script>
 		<script src="/js/angular/ng-routes.js"></script>
-		
-		
+
 		
 		<script>
 			localStorage.setItem('data_usuario','{{ (empty($data_usuario))?(null):($data_usuario) }}');
