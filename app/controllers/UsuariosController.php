@@ -53,8 +53,14 @@ class UsuariosController extends Controller {
 			case 'paginacion':
 				$length = Input::get('length', 10);
 				$value_search = Input::get('search');
+				$pagina = Input::get('page', 1);
 				$draw = Input::get('draw',1);
+				$start = Input::get('start', 0);
 
+				$current_page = ceil($start/$length)+1;
+				
+				Paginator::setCurrentPage($current_page);
+				
 				if(quitar_espacios($value_search['value']) == ''){
 					$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->orderBy($orden)->paginate($length);	
 				}
@@ -63,12 +69,11 @@ class UsuariosController extends Controller {
 					$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->paginate($length);	
 				}
 				
-
 				$response = array(
 					"draw"=>$draw,
 					"page"=>$data->getCurrentPage(),
 					"recordsTotal"=>$data->getTotal(),
-					"recordsFiltered"=> $data->count(),
+					"recordsFiltered"=> $data->getTotal(),
 					"data" => $data->all()
 				);
 
