@@ -108,7 +108,7 @@ simci.controller('UsuariosController', [
           .notSortable(),
           
           DTColumnBuilder.newColumn('email').withTitle('Email')
-          .withOption('width','40%')
+          .withOption('width','25%')
           .notSortable(),
           
           DTColumnBuilder.newColumn('data_permisos').withTitle('Permisos').renderWith(
@@ -134,7 +134,6 @@ simci.controller('UsuariosController', [
           .notSortable()
 
       ];
-
 
       ///Funciones 
       $scope.modal_ver_usuario = function(id){
