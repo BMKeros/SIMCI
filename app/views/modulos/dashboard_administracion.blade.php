@@ -133,13 +133,7 @@
 	</div>
 	
 	<div class="ui container espacio_buttom espacio_top">
-		<div ng-view>
-			<!--<div class="ui container">
-			  <div class="ui active inverted dimmer">
-			    <div class="ui large text loader">Cargando</div>
-			  </div>
-			</div>-->
-		</div>
+		<div ng-view></div>
 	</div>
 	
 	<div class="ui bottom fixed menu barra_inferior">

@@ -16,6 +16,8 @@
 	  	<!-- AlertifyJs Css -->
 	  	<link rel="stylesheet" href="/bower_components/alertifyjs/css/alertify.min.css">
 	  	<link rel="stylesheet" href="/bower_components/alertifyjs/css/themes/semantic.min.css">
+	  	<!-- Ng Progress -->
+	  	<link rel="stylesheet" href="/bower_components/ngprogress/ngProgress.css">
 
 	  	<script>
 	  		if(typeof(Storage) === "undefined") {
@@ -29,7 +31,7 @@
 		<link rel="icon" href="/img/logo.png" type="image/x-icon" />
 	</head>
 
-	<body>
+	<body ng-show-progress-loading>
 		
 		<div id="contenedorPadre">
 			@yield('contenido-body-master')
@@ -47,6 +49,9 @@
 		
 		<!-- alertifyJs -->
 		<script src="/bower_components/alertifyjs/alertify.min.js"></script>
+		
+		<!-- Ng progress -->
+		<script src="/bower_components/ngprogress/build/ngprogress.min.js"></script>
 		
 		<script src="/js/moment-with-locales.min.js"></script>
 		<script src="/bower_components/pikaday/pikaday.js"></script>
