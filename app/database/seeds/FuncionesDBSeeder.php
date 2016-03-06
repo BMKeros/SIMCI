@@ -8,11 +8,11 @@ class FuncionesDBSeeder extends Seeder {
     	$path_file = PATH_ARCHIVOS_SQL."/funciones.sql";
     	
     	if(file_exists($path_file)){
-    		$sql_funcion = file_get_contents($path_file);
-    	}else{
-    		$sql_funcion = "";
+    		$comando = sprintf("export PGPASSWORD=%s && psql -U %s -d %s < '%s'",$_ENV["DB_PASS"],$_ENV["DB_USER"],$_ENV["DB_NAME"],$path_file);
+    		
+    		$res = exec($comando);
+
+    		$this->command->info($res);
     	}
-    	
-       	DB::statement($sql_funcion);
     }
 }
