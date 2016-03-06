@@ -36,13 +36,35 @@ class UsuariosController extends BaseController {
 
 			case 'usuario_full':
 				if($id_usuario){
-					$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->find($id_usuario);
+					$data = DB::table('usuarios')
+					->select('usuarios.id as id',
+						'usuarios.usuario as usuario',
+						'usuarios.email as email', 
+						'usuarios.activo',
+						DB::raw('permisos_usuario(usuarios.id) as permisos'),
+						'TP.codigo as cod_tipo_usuario',
+						'TP.nombre as nombre_tipo_usuario',
+						'PER.primer_nombre',
+						'PER.segundo_nombre',
+						'PER.primer_apellido',
+						'PER.segundo_apellido',
+						'PER.cedula',
+						'PER.fecha_nacimiento',
+						'SEX.descripcion as sexo',
+						'SEX.id as sexo_id'
+					)
+					->join('tipos_usuario as TP','TP.codigo','=','usuarios.cod_tipo_usuario')
+					->join('personas as PER','PER.usuario_id','=','usuarios.id')
+					->join('sexos as SEX','SEX.id','=','PER.sexo_id')
+					->where('usuarios.cod_tipo_usuario', '<>', TIPO_USER_ROOT)
+					->where('usuarios.id', '=', $id_usuario)
+					->first();
 
 					if(is_null($data)){
 						$response = array();
 					}
 					else{
-						$response = array('usuario'=>$data, 'persona'=>$data->persona);
+						$response = $data;
 					}
 				}
 				else{
@@ -52,7 +74,16 @@ class UsuariosController extends BaseController {
 
 			case 'paginacion':
 
-				$consulta = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT);
+				$consulta = DB::table('usuarios')
+				->select('usuarios.id as id',
+					'usuarios.usuario as usuario',
+					'usuarios.email as email', 
+					DB::raw('permisos_usuario(id) as permisos'),
+					'TP.codigo as cod_tipo_usuario',
+					'TP.nombre as nombre_tipo_usuario'
+					)
+				->join('tipos_usuario as TP','TP.codigo','=','usuarios.cod_tipo_usuario')
+				->where('cod_tipo_usuario', '<>', TIPO_USER_ROOT);
 
 				$response = $this->generar_paginacion_dinamica($consulta,
 					array('campo_where'=>'usuario', 'campo_orden'=>'id'));

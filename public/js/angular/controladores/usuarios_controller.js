@@ -111,16 +111,19 @@ simci.controller('UsuariosController', [
           .withOption('width','25%')
           .notSortable(),
           
-          DTColumnBuilder.newColumn('data_permisos').withTitle('Permisos').renderWith(
+          DTColumnBuilder.newColumn('permisos').withTitle('Permisos').renderWith(
             function(data, type, full) {
               var x = '';
-              data.map(function(obj){
-                x += '['+obj.nombre.toUpperCase()+']';
-              });
+              data = JSON.parse(data);
+              if(data){
+                data.map(function(obj){
+                  x += '['+obj.nombre.toUpperCase()+']';
+                });
+              }
               return x;
           }).notSortable(),
           
-          DTColumnBuilder.newColumn('data_tipo_usuario.descripcion').withTitle('Tipo de Usuario')
+          DTColumnBuilder.newColumn('nombre_tipo_usuario').withTitle('Tipo de Usuario')
           .withOption('width','15%')
           .notSortable(),
 
