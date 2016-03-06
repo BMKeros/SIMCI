@@ -1,6 +1,6 @@
 <?php
 
-class UsuariosController extends Controller {
+class UsuariosController extends BaseController {
 	
 	public function __construct(){
         //$this->beforeFilter('APICheckPermisos', array('except' => ''));
@@ -9,7 +9,7 @@ class UsuariosController extends Controller {
 	public function getMostrar(){
 		$tipo_busqueda = Input::get('type', 'todos');
 		$id_usuario = Input::get('id', null);
-		$orden = Input::get('ordenar','id');
+		$orden = Input::get('ordenar','asc');
 
 		switch($tipo_busqueda){
 			case 'todos':
@@ -51,31 +51,11 @@ class UsuariosController extends Controller {
 			break;
 
 			case 'paginacion':
-				$length = Input::get('length', 10);
-				$value_search = Input::get('search');
-				$pagina = Input::get('page', 1);
-				$draw = Input::get('draw',1);
-				$start = Input::get('start', 0);
 
-				$current_page = ceil($start/$length)+1;
-				
-				Paginator::setCurrentPage($current_page);
-				
-				if(quitar_espacios($value_search['value']) == ''){
-					$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->orderBy($orden)->paginate($length);	
-				}
-				else{
+				$consulta = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT);
 
-					$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->paginate($length);	
-				}
-				
-				$response = array(
-					"draw"=>$draw,
-					"page"=>$data->getCurrentPage(),
-					"recordsTotal"=>$data->getTotal(),
-					"recordsFiltered"=> $data->getTotal(),
-					"data" => $data->all()
-				);
+				$response = $this->generar_paginacion_dinamica($consulta,
+					array('campo_where'=>'usuario', 'campo_orden'=>'id'));
 
 			break;
 

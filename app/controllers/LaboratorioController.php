@@ -1,5 +1,5 @@
 <?php  
-	class LaboratorioController extends Controller{
+	class LaboratorioController extends BaseController{
 		
 		//pendiente para mostrar lo necesaio
 		public function getMostrar(){
@@ -35,36 +35,12 @@
 				break;
 
 				case 'paginacion':
-					$length = Input::get('length', 10);
-					$value_search = Input::get('search');
-					$draw = Input::get('draw',1);
-
-					if(quitar_espacios($value_search['value']) == ''){
-						//$data = Usuario::where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->orderBy($orden)->paginate($length);	
-						
-						$data = DB::table('laboratorios')
-							->select('codigo', 'nombre', 'descripcion')
-							->orderBy('codigo')
-							->paginate($length);
-					}
-					else{
-
-						//$data = Usuario::where('usuario','ILIKE','%'.$value_search['value'].'%')->where('cod_tipo_usuario', '<>', TIPO_USER_ROOT)->paginate($length);	
-						$data = DB::table('laboratorios')
-							->select('codigo', 'nombre', 'descripcion')
-							->where('nombre', 'ILIKE', '%'.$value_search['value'].'%')
-							->orderBy('codigo')
-							->paginate($length);
-					}
 					
+					$consulta = $data = DB::table('laboratorios')
+							->select('codigo', 'nombre', 'descripcion');
 
-					$response = array(
-						"draw"=>$draw,
-						"page"=>$data->getCurrentPage(),
-						"recordsTotal"=>$data->getTotal(),
-						"recordsFiltered"=> $data->count(),
-						"data" => $data->all()
-					);
+					$response = $this->generar_paginacion_dinamica($consulta,
+						array('campo_where'=>'nombre', 'campo_orden'=>'codigo'));
 
 				break;
 
