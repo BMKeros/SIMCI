@@ -54,8 +54,8 @@ class UsuariosController extends BaseController {
 						'SEX.id as sexo_id'
 					)
 					->join('tipos_usuario as TP','TP.codigo','=','usuarios.cod_tipo_usuario')
-					->join('personas as PER','PER.usuario_id','=','usuarios.id')
-					->join('sexos as SEX','SEX.id','=','PER.sexo_id')
+					->leftJoin('personas as PER','PER.usuario_id','=','usuarios.id')
+					->leftJoin('sexos as SEX','SEX.id','=','PER.sexo_id')
 					->where('usuarios.cod_tipo_usuario', '<>', TIPO_USER_ROOT)
 					->where('usuarios.id', '=', $id_usuario)
 					->first();
