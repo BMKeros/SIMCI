@@ -16,58 +16,58 @@
                <tr>
             		<td colspan="2">
                		<b>Primer Nombre:</b><br>
-               		<p><% data_usuario.persona.primer_nombre | capitalize %></p>
+               		<p><% data_usuario.primer_nombre | capitalize %></p>
                	</td>
                	<td colspan="2">
                		<b>Segundo Nombre:</b><br>
-               		<p><% data_usuario.persona.segundo_nombre | capitalize %></p>
+               		<p><% data_usuario.segundo_nombre | capitalize | default_value%></p>
                	</td>
                	<td colspan="2">
                		<b>Primer Apellido:</b><br>
-               		<p><% data_usuario.persona.primer_apellido | capitalize %></p>
+               		<p><% data_usuario.primer_apellido | capitalize %></p>
                	</td>
                	<td colspan="2">
                		<b>Segundo Apellido: </b><br>
-               		<p><% data_usuario.persona.segundo_apellido | capitalize %></p>
+               		<p><% data_usuario.segundo_apellido | capitalize | default_value%></p>
                	</td>
                </tr>
 
                <tr>
                   <td colspan="1">
                   	<b>Cedula:</b><br>
-                  	<p><%data_usuario.persona.cedula%></p>
+                  	<p><% data_usuario.cedula%></p>
                   </td>
                   <td colspan="2">
                   	<b>Sexo:</b><br> 
-                  	<p><% data_usuario.persona.data_sexo.descripcion%></p>
+                  	<p><% data_usuario.sexo %></p>
                   </td>
                   <td colspan="4">
                   	<b>Fecha de Nacimiento:</b><br>
-                  	<p><% data_usuario.persona.fecha_nacimiento%></p>
+                  	<p><% data_usuario.fecha_nacimiento%></p>
                   </td>
                </tr>
 
                <tr>
                   <td colspan="4">
                   	<b>Usuario: </b><br>
-                  	<p><% data_usuario.usuario.usuario | capitalize %></p>
+                  	<p><% data_usuario.usuario | capitalize %></p>
                 	</td>
                   
                   <td colspan="4">
                   	<b>Email:</b><br>
-                  	<p><% data_usuario.usuario.email %> </p>
+                  	<p><% data_usuario.email %> </p>
                   </td>
                </tr>
 
                <tr>
                   <td colspan="3"><b>Tipo Usuario:</b><br>
-                  	<p><% data_usuario.usuario.data_tipo_usuario.descripcion %></p>
+                  	<p><% data_usuario.nombre_tipo_usuario %></p>
                   </td>
                   
                   <td colspan="5"><b>Permisos: </b> 
-							<div class="ui label" ng-repeat="permiso in data_usuario.usuario.data_permisos">
-								<% permiso.nombre %>
-							</div>
+						<div class="ui label" ng-repeat="permiso in data_usuario.permisos">
+							<% permiso.nombre %>
+						</div>
                   </td>
                </tr>
             </tbody>
