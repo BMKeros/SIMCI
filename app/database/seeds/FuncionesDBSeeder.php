@@ -5,22 +5,14 @@ class FuncionesDBSeeder extends Seeder {
 
     public function run()
     {
-    	$sql_funcion = 
-		"CREATE OR REPLACE FUNCTION capitalize(text)".
-		  "RETURNS text AS".
-		"$BODY$".
-		"declare".
-			"total text;".
-		"BEGIN".
-		   "SELECT concat(UPPER(LEFT($1,1))::text , LOWER(SUBSTRING($1,2,length($1)))::text) into total;".
-		   "RETURN total;".
-		"END;".
-		"$BODY$".
-		  "LANGUAGE plpgsql VOLATILE".
-		  "COST 100;".
-		"ALTER FUNCTION capitalize(text)".
-		  "OWNER TO postgres;";
-
+    	$path_file = PATH_ARCHIVOS_SQL."/funciones.sql";
+    	
+    	if(file_exists($path_file)){
+    		$sql_funcion = file_get_contents($path_file);
+    	}else{
+    		$sql_funcion = "";
+    	}
+    	
        	DB::statement($sql_funcion);
     }
 }
