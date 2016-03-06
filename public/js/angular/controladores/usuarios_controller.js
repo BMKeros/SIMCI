@@ -147,7 +147,7 @@ simci.controller('UsuariosController', [
           scope_data_save_success: 'data_usuario',
           id_modal: 'modal_ver_usuario',
           callbackSuccess: function(){
-            $scope['data_usuario']['permisos'] = JSON.parse($scope['data_usuario']['permisos']);  
+            $scope['data_usuario']['permisos'] = (!!$scope['data_usuario']['permisos'])?(JSON.parse($scope['data_usuario']['permisos'])):([]);  
           }
         });
       };
@@ -164,7 +164,7 @@ simci.controller('UsuariosController', [
           $scope.data_usuario = data.data;
 
           //Parseamos los permisos que vienen en JSON
-          data.data.permisos = JSON.parse(data.data.permisos);
+          data.data.permisos = (!!data.data.permisos)?(JSON.parse(data.data.permisos)):([]);
 
           $scope.DatosForm = {
             usuario: data.data.usuario,
@@ -181,7 +181,7 @@ simci.controller('UsuariosController', [
           $scope.DatosForm.primer_apellido = data.data.primer_apellido || null;
           $scope.DatosForm.segundo_apellido = data.data.segundo_apellido || null;
           $scope.DatosForm.cedula = data.data.cedula || null;
-          $scope.DatosForm.sexo = data.data.sexo_id.toString() || null;
+          $scope.DatosForm.sexo = (!!data.data.sexo_id)?(data.data.sexo_id.toString()):(null);
           $scope.DatosForm.fecha_nacimiento = data.data.fecha_nacimiento || null;
           
 
