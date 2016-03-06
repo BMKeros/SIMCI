@@ -145,9 +145,11 @@ simci.controller('UsuariosController', [
         ToolsService.mostrar_modal_dinamico($scope,$http,{
           url : '/api/usuarios/mostrar?type=usuario_full&id='+id,
           scope_data_save_success: 'data_usuario',
-          id_modal: 'modal_ver_usuario'
+          id_modal: 'modal_ver_usuario',
+          callbackSuccess: function(){
+            $scope['data_usuario']['permisos'] = JSON.parse($scope['data_usuario']['permisos']);  
+          }
         });
-        
       };
 
       $scope.modal_modificar_usuario = function(id){
@@ -161,32 +163,33 @@ simci.controller('UsuariosController', [
         }).then(function(data){
           $scope.data_usuario = data.data;
 
+          //Parseamos los permisos que vienen en JSON
+          data.data.permisos = JSON.parse(data.data.permisos);
+
           $scope.DatosForm = {
-            usuario: data.data.usuario.usuario,
-            email: data.data.usuario.email,
-            tipo_usuario: data.data.usuario.cod_tipo_usuario,
-            permisos: data.data.usuario.data_permisos.map(function(objeto){
-              return objeto.codigo;
+            usuario: data.data.usuario,
+            email: data.data.email,
+            tipo_usuario: data.data.cod_tipo_usuario,
+            permisos: data.data.permisos.map(function(objeto){
+              return objeto.cod_permiso;
             }),
-            activo: data.data.usuario.activo,
+            activo: data.data.activo,
           };
 
-          //Si posee datos personale se le agregan
-          if(data.data.persona){
-            $scope.DatosForm.primer_nombre =  data.data.persona.primer_nombre || null;
-            $scope.DatosForm.segundo_nombre = data.data.persona.segundo_nombre || null;
-            $scope.DatosForm.primer_apellido = data.data.persona.primer_apellido || null;
-            $scope.DatosForm.segundo_apellido = data.data.persona.segundo_apellido || null;
-            $scope.DatosForm.cedula = data.data.persona.cedula || null;
-            $scope.DatosForm.sexo = data.data.persona.sexo_id.toString() || null;
-            $scope.DatosForm.fecha_nacimiento = data.data.persona.fecha_nacimiento || null;
-          }
+          $scope.DatosForm.primer_nombre =  data.data.primer_nombre || null;
+          $scope.DatosForm.segundo_nombre = data.data.segundo_nombre || null;
+          $scope.DatosForm.primer_apellido = data.data.primer_apellido || null;
+          $scope.DatosForm.segundo_apellido = data.data.segundo_apellido || null;
+          $scope.DatosForm.cedula = data.data.cedula || null;
+          $scope.DatosForm.sexo = data.data.sexo_id.toString() || null;
+          $scope.DatosForm.fecha_nacimiento = data.data.fecha_nacimiento || null;
+          
 
           $timeout(function(){
             //Setteamos los dropdown con sus respectivos valores
             angular.element('#permisos').dropdown('set selected',$scope.DatosForm.permisos);
             angular.element('#tipo_usuario').dropdown('set selected',$scope.DatosForm.tipo_usuario);
-            angular.element('#sexo').dropdown('set selected',$scope.DatosForm.sexos);
+            angular.element('#sexo').dropdown('set selected',$scope.DatosForm.sexo);
           },0,false);
           
           //Mostramos la modal
