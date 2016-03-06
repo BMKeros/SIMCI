@@ -43,7 +43,7 @@
                   </td>
                   <td colspan="4">
                   	<b>Fecha de Nacimiento:</b><br>
-                  	<p><% data_usuario.fecha_nacimiento%></p>
+                  	<p><% data_usuario.fecha_nacimiento | formato_fecha:"DD/MM/YY" %></p>
                   </td>
                </tr>
 
