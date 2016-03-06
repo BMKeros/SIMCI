@@ -159,6 +159,10 @@
 
           $_SCOPE[opciones.scope_data_save_success] = data.data;
           
+          if(opciones.callbackSuccess){
+            opciones.callbackSuccess();
+          }
+          
           //Mostramos la modal
           setTimeout(function(){
             angular.element('#'+opciones.id_modal).modal('show');
