@@ -83,9 +83,9 @@ simci.controller('InventarioController', [
       },
       
     ];
-    
     $log.info($routeParams);
     $log.info($location);
+    
 
     
     if($location.$$url == "/inventario/registrar-elemento"){
@@ -175,7 +175,6 @@ simci.controller('InventarioController', [
         }///inventario/registrar-sub-agrupacion
       });
     }
-
     if($location.$$url == "/inventario/ver/elementos"){
       $scope.tabla_elementos = {};
       $scope.id_elemento_actual = null;
@@ -249,6 +248,7 @@ simci.controller('InventarioController', [
       };
 
     }// inventario/ver/todos"  
+
 
     if($location.$$url == "/inventario/entrada-salida"){
       $scope.tabla_elementos = {};

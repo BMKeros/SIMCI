@@ -141,8 +141,8 @@
           templateUrl: '/views/layouts/layout_main_modulos',
           controller: 'ConsultaController'
         }).
-        when('/consulta/realizar-consultas', {
-          templateUrl: '/views/consultas/crear_consultas',
+        when('/consulta/ver/todos', {
+          templateUrl: '/views/consultas/ver_consultas',
           controller: 'ConsultaController'
         }).
 
