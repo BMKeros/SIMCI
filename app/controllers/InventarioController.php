@@ -227,7 +227,7 @@
 			$mensajes = array(
 				'required' => 'El campo :attribute es necesario',
 				'alpha_num' => 'El campo :attribute debe contener caracteres alfanumericos',
-				'unique' => 'El campo :attribute ya existe',
+				'unique' => 'El campo :attribute ya existe en el inventario',
 				'integer' => 'El campo :attribute debe ser numerico',
 				'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
 				':attribute no existe',
