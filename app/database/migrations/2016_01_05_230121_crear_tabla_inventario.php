@@ -26,6 +26,9 @@ class CrearTablaInventario extends Migration {
 			$table->boolean('elemento_movible')->default(false);
 			$table->integer('recipientes_disponibles')->nullable();
 			$table->nullableTimestamps();
+
+			//Constrains
+			$table->unique(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'));
 		});
 	}
 
