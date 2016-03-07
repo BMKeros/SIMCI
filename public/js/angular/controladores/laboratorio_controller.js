@@ -109,6 +109,10 @@ simci.controller('LaboratorioController', [
         .withOption('serverSide', true)
         .withOption('createdRow', function(row, data, dataIndex) {
           $compile(angular.element(row).contents())($scope);
+
+          $timeout(function(){
+            $('.ui.spopup').popup();
+        },false,0);
         });
       
         $scope.columnas_tabla_laboratorios = [
@@ -122,9 +126,9 @@ simci.controller('LaboratorioController', [
             
             DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
               function(data, type, full) {
-                return '<a class="ui icon button blue" data-content="Ver Laboratorio" ng-click="modal_ver_laboratorio(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
-                        '<a class="ui icon button green"  data-content="Modificar Laboratorio" ng-click="modal_modificar_laboratorio(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+
-                        '<a class="ui icon button red "  data-content="Eliminar Laboratorio" ng-click="modal_eliminar_laboratorio(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
+                return '<a class="ui icon button blue spopup" data-content="Ver Laboratorio" ng-click="modal_ver_laboratorio(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
+                        '<a class="ui icon button green spopup"  data-content="Modificar Laboratorio" ng-click="modal_modificar_laboratorio(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+
+                        '<a class="ui icon button red spopup"  data-content="Eliminar Laboratorio" ng-click="modal_eliminar_laboratorio(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
               })
               .withOption('width', '15%')
         ];
