@@ -39,7 +39,7 @@
 							->where('INV.cod_agrupacion', '=', $cod_agrupacion)
 							->where('INV.cod_objeto', '=', $cod_objeto)
 							->where('INV.numero_orden', '=', $numero_orden)
-							->orderBy('INV.id','asc')
+							->orderBy('OBJ.nombre','asc')
 							->first();
 
 						$response = $data;
@@ -68,7 +68,7 @@
 								'UNI.abreviatura')
 							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
 							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
-							->orderBy('INV.id','asc')
+							->orderBy('OBJ.nombre','asc')
 							->paginate($length);
 					}
 					else{	
@@ -86,7 +86,7 @@
 							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
 							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
 							->where('OBJ.nombre', 'ILIKE', '%'.$value_search['value'].'%')
-							->orderBy('INV.id','asc')
+							->orderBy('OBJ.nombre','asc')
 							->paginate($length);
 
 					}
