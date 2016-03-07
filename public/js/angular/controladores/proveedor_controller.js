@@ -162,6 +162,9 @@ simci.controller('ProveedorController', [
       .withOption('serverSide', true)
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
+        $timeout(function(){
+            $('.ui.spopup').popup();
+        },false,0);
       });
     
       $scope.columnas_tabla_proveedores = [
@@ -188,9 +191,9 @@ simci.controller('ProveedorController', [
           .notSortable(),
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<div class="ui icon button blue pop" data-content="Ver Proveedor" ng-click="modal_ver_proveedor(\''+data.codigo+'\')"><i class="unhide icon"></i></div>'+
-                      '<div class="ui icon button green pop"  data-content="Modificar Proveedor" ng-click="modal_modificar_objeto(\''+data.codigo+'\')"><i class="edit icon"></i></div>'+ 
-                      '<div class="ui icon button red pop"  data-content="Eliminar Proveedor" ng-click="modal_eliminar_proveedor(\''+data.codigo+'\')"><i class="remove icon"></i></div>';
+              return '<div class="ui icon button blue spopup" data-content="Ver Proveedor" ng-click="modal_ver_proveedor(\''+data.codigo+'\')"><i class="unhide icon"></i></div>'+
+                      '<div class="ui icon button green spopup"  data-content="Modificar Proveedor" ng-click="modal_modificar_objeto(\''+data.codigo+'\')"><i class="edit icon"></i></div>'+ 
+                      '<div class="ui icon button red spopup"  data-content="Eliminar Proveedor" ng-click="modal_eliminar_proveedor(\''+data.codigo+'\')"><i class="remove icon"></i></div>';
           }).withOption('width','14%')
       ];
 
