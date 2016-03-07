@@ -119,37 +119,6 @@
    </div>
 </div>
 
-
-
-<!--Bloque 4 -> Eliminar -->
-<div class="ui basic modal" id="modal_eliminar_objeto">
-   <i class="close icon"></i>
-   <div class="header">
-      Eliminar Objeto!
-   </div>
-   <div class="image content">
-      <div class="image">
-        <i class="trash outline icon"></i>
-      </div>
-      <div class="description">
-        <p>Esta seguro que desea eliminar este Objeto?</p>
-      </div>
-   </div>
-   <div class="actions">
-      <div class="two fluid ui inverted buttons">
-         <div class="ui red basic inverted button" ng-click="cerrar_modal_eliminar()">
-            <i class="remove icon"></i>
-            No
-         </div>
-         <div class="ui green basic inverted button" ng-click="procesar_eliminar()">
-            <i class="checkmark icon"></i>
-            Yes
-         </div>
-      </div>
-   </div>
-</div>
-<!--Fin De Bloques-->
-
 <script>
 	$('.ui.dropdown').dropdown();
 </script>

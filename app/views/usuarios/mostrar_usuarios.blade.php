@@ -210,34 +210,6 @@
    </div>
 </div>
 
-
-<!--Bloque 4 -> Eliminar Usuario-->
-<div class="ui basic modal" id="modal_eliminar_usuario">
-   <i class="close icon"></i>
-   <div class="header">
-      Eliminar Usuario!
-   </div>
-   <div class="image content">
-      <div class="image">
-        <i class="trash outline icon"></i>
-      </div>
-      <div class="description">
-        <p>Esta seguro que desea eliminar este usuario?</p>
-      </div>
-   </div>
-   <div class="actions">
-      <div class="two fluid ui inverted buttons">
-         <button class="ui red basic inverted button" ng-click="cerrar_modal_eliminar()">
-            <i class="remove icon"></i>
-            No
-         </button>
-         <button class="ui green basic inverted button" ng-click="procesar_eliminar()">
-            <i class="checkmark icon"></i>
-            Yes
-         </button>
-      </div>
-   </div>
-</div>
 <!--Fin De Bloques-->
 
 <script>

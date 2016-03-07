@@ -160,34 +160,4 @@
       <div class="ui chackmark icon"></div>
    </div>
 </div>
-
-
-
-<!--Bloque 4 -> Eliminar elemento-->
-<div class="ui basic modal eliminado">
-   <i class="close icon"></i>
-   <div class="header">
-      Eliminar elemento!
-   </div>
-   <div class="image content">
-      <div class="image">
-        <i class="archive icon"></i>
-      </div>
-      <div class="description">
-        <p>Esta seguro que desea eliminar este elemento?</p>
-      </div>
-   </div>
-   <div class="actions">
-      <div class="two fluid ui inverted buttons">
-         <div class="ui red basic inverted button">
-            <i class="remove icon"></i>
-            No
-         </div>
-         <div class="ui green basic inverted button">
-            <i class="checkmark icon"></i>
-            Yes
-         </div>
-      </div>
-   </div>
-</div>
 <!--Fin De Bloques-->
