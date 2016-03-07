@@ -56,7 +56,7 @@ simci.controller('InventarioController', [
         ver_dropdown: true,
         opciones_dropdown: [
           { nombre:"registrar Almacen",url: "#/inventario/registrar-almacen"},
-          { nombre:"ver Almacen", url:"#/inventario/ver/almacenes"}
+          { nombre:"ver Almacenes", url:"#/inventario/ver/almacenes"}
         ],
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },
