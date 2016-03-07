@@ -14,7 +14,7 @@ class CrearTablaInventario extends Migration {
 	{
 		Schema::create('inventario', function($table)
 		{
-			$table->increments('id');
+			//$table->increments('id');
 			$table->string('cod_dimension', 4);
 			$table->string('cod_subdimension', 3);
 			$table->string('cod_agrupacion', 3);
@@ -28,7 +28,9 @@ class CrearTablaInventario extends Migration {
 			$table->nullableTimestamps();
 
 			//Constrains
+			$table->primary(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'));
 			$table->unique(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'));
+
 		});
 	}
 
