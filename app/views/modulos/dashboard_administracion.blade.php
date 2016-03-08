@@ -19,7 +19,7 @@
       			</a>
       			
       			<div class="right menu">
-      				
+      				<!--
       				<div class="ui pointing dropdown link item">
     					Notificaciones
     					<div class="ui red label" id="label_num_notificaciones">0</div>
@@ -30,17 +30,23 @@
 				          	<a class="item">Pants</a>
 				          	<a class="item">Jeans</a>
 				        </div>
-      				</div>
-      				<!--<div class="ui pointing dropdown link item" tabindex="0"> 
-  	<span class="text">Shopping</span> 
-  	<i class="dropdown icon"></i>
-    <div class="menu transition hidden" tabindex="-1" style="width: 400px;">
-        <div class="header">Events</div>
-        <div class="right" style=" float: right; margin-top: -25px; margin-right: 10px; ">Create / Edit</div>
-        <div class="divider"></div>
-        <div class="item"> <img class="ui avatar tiny image" src="/images/wireframe/square-image.png" style=" width: 60px; max-height: 140px; "> <span style="display: inline-block;">User<br>Hola</span> </div>
-    </div>
-</div>-->
+      				</div>-->
+
+      				<!-- Asi funciona, pero como no es buena practica (blablabla) tener los estilos aui los podes mandar a la hoja de estilos xD L tai jodiendo xDlkslaklskl-->
+      				
+      				<div class="ui pointing dropdown link item" tabindex="0"> 
+					  	<span class="text">Shopping</span> 
+					  	<i class="dropdown icon"></i>
+					    <div class="menu transition hidden" tabindex="-1" style="width: 400px; margin-left: -150px;">
+					        <div class="header">Events</div>
+					        <div class="right" style=" float: right; margin-top: -25px; margin-right: 10px; ">Create / Edit</div>
+					        <div class="divider"></div>
+					        
+					<div class="item"> <img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> <span style="display: inline-block;">User<br>Hola</span> <div style="float: right; top: 20px; position: relative">05/04/2016</div></div><div class="item" style="
+					    /* padding-bottom: 10px !important; */
+					"> <img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> <span style="display: inline-block;padding-bottom: 25px;">User<br>Hola</span> <div style="float: right; top: 20px; position: relative">05/04/2016</div></div>
+					    </div>
+					</div>
 
       				<div class="ui dropdown item">
       					<img class="ui right spaced avatar image" src="{{ Auth::user()->get_avatar() }}">
