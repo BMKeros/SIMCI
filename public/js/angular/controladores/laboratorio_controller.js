@@ -47,7 +47,7 @@ simci.controller('LaboratorioController', [
       {
         nombre:"agregar stock",
         descripcion: "Esta opcion le permitira agregar nuevos stock al laboratorios",
-        url: "#/laboratorio/registrar-stock",
+        url: "#/laboratorio/agregar-stock",
         icono: 'plus',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA]
       },

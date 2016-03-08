@@ -113,7 +113,7 @@
           templateUrl: '/views/laboratorio/mostrar_laboratorios',
           controller: 'LaboratorioController' 
         }).
-         when('/laboratorio/registrar-stock', {
+         when('/laboratorio/agregar-stock', {
           templateUrl: '/views/laboratorio/registrar_stock',
           controller: 'LaboratorioController' 
         }).
