@@ -15,7 +15,7 @@
 				<br>
 			</div>
 
-			<h3 class="ui centered dividing header">Agregar Objetos al Stock</h3>
+			<h3 class="ui centered dividing header">Agregar stock al laboratorio</h3>
 
 			<br>
 
