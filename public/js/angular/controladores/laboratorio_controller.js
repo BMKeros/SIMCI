@@ -321,7 +321,7 @@ simci.controller('LaboratorioController', [
               cod_objeto:$scope.select_objeto
             });
           }
-      }
+      }//Fin de agregar stock
 
 
     }]

@@ -24,11 +24,11 @@
 					<div class="seven wide field">
 						<label>Seleccina un laboratorio</label>
 						<select ng-model="select_laboratorio">
-							<option value="LDA">Laboratorio de Agua</option>
-							<option value="LDR">Laboratorio de Reactivos</option>
-							<option value="LDS">Laboratorio de Sales</option>
-							<option value="LDSS">Laboratorio de Sodio</option>
-							<option value="LDG">Laboratorio de Gases</option>
+							<option value="Laboratorio de Agua">Laboratorio de Agua</option>
+							<option value="Laboratorio de Reactivos">Laboratorio de Reactivos</option>
+							<option value="Laboratorio de Sales">Laboratorio de Sales</option>
+							<option value="Laboratorio de Sodio">Laboratorio de Sodio</option>
+							<option value="Laboratorio de Gases">Laboratorio de Gases</option>
 						</select>
 					</div>
 				</div>
@@ -38,11 +38,11 @@
 						<div class="seven wide field">
 							<label>Selecciona un objeto</label>
 							<select ng-model="select_objeto">
-								<option value="ENCDR">Encubadora</option>
-								<option value="PPT">Pipeta</option>
-								<option value="CDE">Campana de Estraccion</option>
-								<option value="PNZ">Pinzas</option>
-								<option value="TDE">Tubo de ensayo</option>
+								<option value="Encubadora">Encubadora</option>
+								<option value="Pipeta">Pipeta</option>
+								<option value="Campana de Estraccion">Campana de Estraccion</option>
+								<option value="Pinzas">Pinzas</option>
+								<option value="Tubo de ensayo">Tubo de ensayo</option>
 							</select>
 						</div>
 
