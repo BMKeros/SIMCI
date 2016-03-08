@@ -117,6 +117,10 @@
           templateUrl: '/views/laboratorio/registrar_stock',
           controller: 'LaboratorioController' 
         }).
+          when('/laboratorio/ver/stock', {
+          templateUrl: '/views/laboratorio/mostrar_stock',
+          controller: 'LaboratorioController' 
+        }).
           when('/laboratorio/mover-stock', {
           templateUrl: '/views/laboratorio/mover_stock',
           controller: 'LaboratorioController' 

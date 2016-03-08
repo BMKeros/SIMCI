@@ -56,7 +56,7 @@ simci.controller('LaboratorioController', [
       {
         nombre:"mostrar stock",
         descripcion: "Esta opcion le permitira ver los nuevos stock y moverlos a nuevos laboratorios",
-        url: "#/laboratorio/mostrar-stock",
+        url: "#/laboratorio/ver/stock",
         icono: 'eye',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
@@ -268,10 +268,46 @@ simci.controller('LaboratorioController', [
 
       }//fin del if de ver-laboratorios
 
+    
+      if($location.$$url == '/laboratorio/ver/stock'){
 
+        $scope.tabla_stock = {};
+        $scope.id_objeto_stock = null;
 
+        $scope.opciones_tabla_stock = DTOptionsBuilder.newOptions()
+          .withOption('ajax', {
+           url: '/api/stock/mostrar?type=paginacion',
+           type: 'GET'
+        })
+        .withDataProp('data')
+        .withPaginationType('full_numbers')
+        .withOption('processing', true)
+        .withOption('serverSide', true)
+        .withOption('createdRow', function(row, data, dataIndex) {
+          $compile(angular.element(row).contents())($scope);
 
+          $timeout(function(){
+            $('.ui.spopup').popup();
+        },false,0);
+        });
+      
+        $scope.columnas_tabla_stock = [
+            DTColumnBuilder.newColumn(null).withTitle('Objeto')
+            .notSortable(),
+            
+            DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
 
+            DTColumnBuilder.newColumn('laboratorio').withTitle('Laboratorio').notSortable(),
+            
+            DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+              function(data, type, full) {
+                return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock('+data.id+')"><i class="unhide icon"></i></div>'+
+                        '<div class="ui icon button green spopup"  data-content="Modificar Stock" ng-click="modal_modificar_stock('+data.id+')"><i class="edit icon"></i></div>'+ 
+                        '<div class="ui icon button red spopup"  data-content="Eliminar Stock" ng-click="modal_eliminar_stock('+data.id+')"><i class="remove icon"></i></div>';
+            }).withOption('width','17%')
+        ];
+
+      }// If == '/laboratorio/ver/stock
 
 
 
