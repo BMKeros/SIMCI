@@ -35,17 +35,24 @@
       				<!-- Asi funciona, pero como no es buena practica (blablabla) tener los estilos aui los podes mandar a la hoja de estilos xD L tai jodiendo xDlkslaklskl-->
       				
       				<div class="ui pointing dropdown link item" tabindex="0"> 
-					  	<span class="text">Shopping</span> 
+					  	<i class=" alarm icon"></i>
+					  	<div class="ui red circular label">0</div>
 					  	<i class="dropdown icon"></i>
 					    <div class="menu transition hidden" tabindex="-1" style="width: 400px; margin-left: -150px;">
-					        <div class="header">Events</div>
-					        <div class="right" style=" float: right; margin-top: -25px; margin-right: 10px; ">Create / Edit</div>
+					        <div class="header">Notificaciones</div>
+					        <div class="right" style=" float: right; margin-top: -25px; margin-right: 10px; ">Ver todas</div>
 					        <div class="divider"></div>
 					        
-					<div class="item"> <img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> <span style="display: inline-block;">User<br>Hola</span> <div style="float: right; top: 20px; position: relative">05/04/2016</div></div><div class="item" style="
-					    /* padding-bottom: 10px !important; */
-					"> <img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> <span style="display: inline-block;padding-bottom: 25px;">User<br>Hola</span> <div style="float: right; top: 20px; position: relative">05/04/2016</div></div>
-					    </div>
+							<div class="item">
+								<img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> 
+								<span style="display: inline-block;">User<br>Hola</span> <div style="float: right; top: 20px; position: relative">05/04/2016</div>
+							</div>
+							<div class="item"> 
+								<img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> 
+								<span style="display: inline-block;padding-bottom: 25px;">User<br>Hola</span> 
+								<div style="float: right; top: 20px; position: relative">05/04/2016</div>
+							</div>
+						</div>
 					</div>
 
       				<div class="ui dropdown item">
