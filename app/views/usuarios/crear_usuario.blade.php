@@ -16,7 +16,7 @@
 			</div>
 			
 			<form class="ui form" id="formulario_crear_usuario">
-				<h4 class="ui horizontal divider header">Datos de Usuario</h4>
+				<h3 class="ui horizontal divider header">Datos de Usuario</h3>
 				
 				<div class="field">
 					<div class="two fields">
@@ -72,7 +72,7 @@
 
 				<br>
 				
-				<h4 class="ui horizontal divider header">Datos Personales</h4>
+				<h3 class="ui horizontal divider header">Datos Personales</h3>
 				
 				<h4 class="ui dividing header">Nombre completo</h4>
 				
