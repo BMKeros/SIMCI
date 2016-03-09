@@ -330,7 +330,7 @@ simci.controller('LaboratorioController', [
                   ToolsService.generar_alerta_status(data_error);
                 });
           }
-      }//Fin de agregar stock
+      }//Fin de agregar-stock
 
 
     }]
