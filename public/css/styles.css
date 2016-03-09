@@ -26,6 +26,12 @@
 .cuerpo_notificacion {
   display: inline-block;
 }
+.cuerpo_notificacion .texto {
+  font-size: 12px;
+  font-style: inherit;
+  margin-top: -20px;
+  padding-top: -20px;
+}
 
 .fecha_notificacion {
   float: right; 
