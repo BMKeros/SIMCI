@@ -309,7 +309,19 @@ simci.controller('LaboratorioController', [
 
       }// If == '/laboratorio/ver/stock
 
-
+      if($location.$$url == '/laboratorio/agregar-stock'){
+          $scope.tabla_stock=[];
+          $scope.select_laboratorio="";
+          $scope.select_objeto="";
+        
+          
+          $scope.agregar_stock_laboratorio=function () {
+            $scope.tabla_stock.push({
+              cod_lab:$scope.select_laboratorio,
+              cod_objeto:$scope.select_objeto
+            });
+          }
+      }//Fin de agregar stock
 
 
     }]

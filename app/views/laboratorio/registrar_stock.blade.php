@@ -23,7 +23,13 @@
 				<div class="two fields">
 					<div class="seven wide field">
 						<label>Seleccina un laboratorio</label>
-						<select></select>
+						<select ng-model="select_laboratorio">
+							<option value="Laboratorio de Agua">Laboratorio de Agua</option>
+							<option value="Laboratorio de Reactivos">Laboratorio de Reactivos</option>
+							<option value="Laboratorio de Sales">Laboratorio de Sales</option>
+							<option value="Laboratorio de Sodio">Laboratorio de Sodio</option>
+							<option value="Laboratorio de Gases">Laboratorio de Gases</option>
+						</select>
 					</div>
 				</div>
 
@@ -31,11 +37,18 @@
 					<div class="two fields">
 						<div class="seven wide field">
 							<label>Selecciona un objeto</label>
-							<select></select>
+							<select ng-model="select_objeto">
+								<option value="Encubadora">Encubadora</option>
+								<option value="Pipeta">Pipeta</option>
+								<option value="Campana de Estraccion">Campana de Estraccion</option>
+								<option value="Pinzas">Pinzas</option>
+								<option value="Tubo de ensayo">Tubo de ensayo</option>
+							</select>
 						</div>
 
 						<div class="field">
-						    <button class="ui icon large inverted green button" id="agregar_stock"> <i class="plus icon"> </i></button>
+						    <button class="ui icon large inverted green button" id="btn_agregar_items" ng-click="agregar_stock_laboratorio()"><i class="plus icon" ></i></button>
+
 					    </div>
 					</div>
 				</div>
@@ -63,12 +76,11 @@
                 </tr>
             </thead>
             <tbody>
-            <tr>
-               <td class="collapsing">
-                    NFG32G
-                </td>
-                <td>Encubadora</td>
-                <td>Laboratorio de agua</td>
+
+            <tr ng-repeat="x in tabla_stock track by $index">
+    		<td></td>
+    		<td><%x.cod_objeto%></td>
+    		<td><%x.cod_lab%></td>
             </tr>
             </tbody>
         </table>
@@ -76,7 +88,7 @@
         <br>
 
         <div class="action">
-        	<div class="ui right floated positive button" ng-click="">
+        	<div class="ui right floated positive button">
                 Agregar
             </div>
         </div>
