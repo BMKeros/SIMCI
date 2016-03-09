@@ -92,7 +92,7 @@ simci.controller('DocumentosController', [
             }).withOption('width','17%')
         ];
 
-      }//Fin de mostrar/documentos
+      }//Fin de /mostrar/documentos
 
   }]
 );
