@@ -20,27 +20,26 @@
       			
       			<div class="right menu">
 
-      				<div class="ui pointing dropdown link item" tabindex="0"> 
+      				<div class="ui pointing dropdown link item" tabindex="0" ng-click="cargar_notificaciones()" id="item_menu_notificaciones"> 
 					  	<i class="circular empty teal alarm icon" id="icono_barra_notificaciones"></i>
 					  	<a class="ui blue empty circular label" id="label_numero_notificaciones">0</a>
 					  	<i class="dropdown icon"></i>
-					    <div class="menu transition hidden menu_notificaciones" tabindex="-1">
+					    <div class="menu transition hidden menu_notificaciones" tabindex="-1" >
 					        <div class="header">Notificaciones</div>
 					        <div class="right label_ver_notificaciones"><a >Ver todas</a></div>
 					        
 					        <div class="divider"></div>
 					        
-
-					        <div ng-show="true" class="item loading_notificaciones">
+					        <div ng-show="bandera_loading_notificaciones" class="item loading_notificaciones">
   								<div class="ui active loader"></div>
  							</div>
 
-							<div ng-show="false" class="item" ng-repeat="x in []">
+							<div ng-show="bandera_mostrar_notificaciones" class="item" ng-repeat="noti in notificaciones track by $index">
 								<img class="ui avatar img_item_notificacion" src="/img/perfil-default.jpg">
 								<div class="cuerpo_notificacion">
-									<span class="texto">User<br>Hola</span> 
+									<span class="texto capitalize"><% noti.mensaje %></span> 
 								</div>
-								<div class="fecha_notificacion" ><% x%>/04/2016</div>
+								<div class="fecha_notificacion" ><% noti.fecha | formato_fecha:'DD/MM/YY' %></div>
 							</div>
 
 						</div>
