@@ -22,7 +22,7 @@ simci.controller('ReportesController', [
     $scope.modulo.nombre = "Reportes";
     $scope.modulo.icono = {
       tipo: "file text outline",
-      color: "purple"
+      color: "violet"
     };
 
     $scope.modulo.opciones = [
@@ -32,7 +32,7 @@ simci.controller('ReportesController', [
         descripcion: "Esta opcion le permitira crear nuevos reportes",
         url: "#/reportes/generar-reporte",
         icono: 'write',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
       
       {
@@ -40,7 +40,7 @@ simci.controller('ReportesController', [
         descripcion: "Esta opcion le permitira ver los reportes generados",
         url: "#/reportes/ver/todos",
         icono: 'unhide',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       }
 
     ];

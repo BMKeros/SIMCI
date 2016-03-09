@@ -31,7 +31,7 @@ simci.controller('DocumentosController', [
         descripcion: "Esta opcion le permitira enviar documentos",
         url: "#/documentos/enviar-documentos",
         icono: 'write',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
 
       {
@@ -39,7 +39,7 @@ simci.controller('DocumentosController', [
         descripcion: "Esta opcion le permitira mostrar los documentos enviados y recibidos",
         url: "#/documentos/subir-documentos",
         icono: 'unhide',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in:[TIPO_USER_ROOT,TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
 
       {
@@ -47,7 +47,7 @@ simci.controller('DocumentosController', [
         descripcion: "Esta opcion le permitira mostrar los documentos enviados y recibidos",
         url: "#/documentos/ver/todos",
         icono: 'unhide',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       }
       
 

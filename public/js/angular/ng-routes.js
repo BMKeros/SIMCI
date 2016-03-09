@@ -195,6 +195,15 @@
           templateUrl: '/views/proveedor/mostrar_proveedores',
           controller: 'ProveedorController'
         }).
+        //Rutas Instituciones
+        when('/instituciones', {
+          templateUrl: '/views/layouts/layout_main_modulos',
+          controller: 'InstitucionesController'
+        }).
+        when('/instituciones/ver/todos', {
+          templateUrl: '/views/instituciones/instituciones',
+          controller: 'InstitucionesController'
+        }).
 
 
         otherwise({
