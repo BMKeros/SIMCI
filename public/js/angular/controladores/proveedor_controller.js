@@ -143,7 +143,7 @@ simci.controller('ProveedorController', [
           mensajes: ['Nuevo proveedor registrado en la base de datos.']
         }
       });
-    }// If  === "/proveedores/registrar-proveedor"
+    }// If  === "/proveedores/registrar-proveedor" 
 
 
     if($location.$$url == "/proveedores/ver/todos"){
