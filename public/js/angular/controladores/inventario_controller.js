@@ -40,7 +40,7 @@ simci.controller('InventarioController', [
         descripcion: "Esta opcion le permitira dar entrada o salida al los objetos del inventario",
         url: "#/inventario/entrada-salida",
         icono: 'compress',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_PROFESOR]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR]
       },
       {
         nombre:"ver inventario",
@@ -306,7 +306,7 @@ simci.controller('InventarioController', [
           .notSortable()
           .withOption('width', '10%'),
       ];      
-    }// inventario/ver/almacenes" 
+    }// inventario/ver/entrada-salida" 
 
     if($location.$$url == "/inventario/ver/almacenes"){
       $scope.tabla_almacenes = {};

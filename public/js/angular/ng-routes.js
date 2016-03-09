@@ -173,11 +173,11 @@
           templateUrl: '/views/documentos/enviar_documentos',
           controller: 'DocumentosController'
         }).
-        when('/ordenes/recibir/subir-documentos', {
+        when('/documentos/subir-documentos', {
           templateUrl: '/views/documentos/subir_documentos',
           controller: 'DocumentosController'
         }).       
-        when('/ordenes/recibir/mostrar/todos', {
+        when('/documentos/ver/todos', {
           templateUrl: '/views/documentos/mostrar_documentos',
           controller: 'DocumentosController'
         }).

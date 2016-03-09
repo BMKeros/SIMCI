@@ -312,14 +312,23 @@ simci.controller('LaboratorioController', [
       if($location.$$url == '/laboratorio/agregar-stock'){
           $scope.tabla_stock=[];
           $scope.select_laboratorio="";
-          $scope.select_objeto="";
-        
-          
+          $scope.select_objeto="";          
           $scope.agregar_stock_laboratorio=function () {
-            $scope.tabla_stock.push({
-              cod_lab:$scope.select_laboratorio,
-              cod_objeto:$scope.select_objeto
-            });
+            var data_laboratorio={};
+            $http({
+                method: 'GET',
+                url: '/api/laboratorio/mostrar?type=laboratorio_full&id='+$scope.select_laboratorio,
+            }).then(
+                function(data){
+                  data_laboratorio=data.data;
+                  $scope.tabla_stock.push({
+                    nombre_lab:data_laboratorio.nombre,
+                    cod_objeto:$scope.select_objeto
+                  });
+                },
+                function(data_error) {
+                  ToolsService.generar_alerta_status(data_error);
+                });
           }
       }//Fin de agregar stock
 
