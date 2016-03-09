@@ -4,7 +4,7 @@
           $interpolateProvider.endSymbol('%>');
   });
 
-  simci.run(function($rootScope,DTDefaultOptions,ToolsService,ngProgressFactory){
+  simci.run(function($rootScope,DTDefaultOptions,ToolsService,ngProgressFactory,$http){
       alertify.success('Ready!');
       //Lenguaje español para datatable
       DTDefaultOptions.setLanguageSource('/spanish.json');
@@ -16,6 +16,31 @@
       $rootScope.progressbar = ngProgressFactory.createInstance();
       $rootScope.progressbar.setHeight('5px');
       $rootScope.progressbar.setColor('orange');
+
+
+      //Acciones de las notificaciones
+      //variable para mostrar el loading del popup de notificaciones
+      $rootScope.bandera_loading_notificaciones = true; // Valor por defecto true para que muestre el loading
+      //Variable para mostrar las notificaciones en el popup 
+      $rootScope.bandera_mostrar_notificaciones = false; // Valor por defecto false porque primero se muestra el loading
+
+      $rootScope.cargar_notificaciones = function(){
+        if(!angular.element('#item_menu_notificaciones').hasClass('active')){
+          
+          $http({
+            method: 'GET',
+            url:'/api/notificaciones/mostrar?type=todas&id_usuario=1',
+          }).then(function(data){
+            $rootScope.notificaciones = data.data.datos;
+            
+            $rootScope.bandera_loading_notificaciones = false;
+            $rootScope.bandera_mostrar_notificaciones = true;
+            
+          }, function(data_error){
+              ToolsService.generar_alerta_status(data_error);
+          });
+        }
+      }
 
   });
 
