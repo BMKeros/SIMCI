@@ -3,7 +3,7 @@
 		
 		//falta por desarrollar
 		public function getMostrar(){
-			$tipo_busqueda = Input::get('type', 'todos');
+			$tipo_busqueda = Input::get('type', 'todas');
 			$id_usuario = Input::get('id_usuario', null);
 			$contar = (bool)Input::get('contar', false);
 
@@ -18,7 +18,7 @@
 			}
 
 			switch($tipo_busqueda){
-				case 'todos':
+				case 'todas':
 					if($contar){
 						
 						//consulta para saber numero de notificaciones del usuario
@@ -41,7 +41,7 @@
 							->join('mensajes', 'mensajes.id', '=', 'NO.mensaje_id')
 							->where('NO.receptor', '=', $id_usuario)
 							->where('NO.visto', '=', $visto)
-							->orderBy('NO.fecha')
+							->orderBy('NO.fecha','asc')
 							->get();
 
 						$response = array(
@@ -85,7 +85,7 @@
 				break;
 
 				default:
-					$response = Usuario::all();
+					$response = array();
 				break;
 
 			}
