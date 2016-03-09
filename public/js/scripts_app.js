@@ -33,6 +33,8 @@
             .addClass('empty')
             .addClass('blue')
           }
+          //Seteamos el numero de notificaciones que viene del backend
+          $("#label_numero_notificaciones").text(data.datos);
         });
       },this.intervalo_notificaciones);
     },
