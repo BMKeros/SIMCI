@@ -15,7 +15,7 @@
 				<br>
 			</div>
 
-			<h3 class="ui centered dividing header">Agregar Objetos al Stock</h3>
+			<h3 class="ui centered dividing header">Agregar stock al laboratorio</h3>
 
 			<br>
 
@@ -35,8 +35,7 @@
 						</div>
 
 						<div class="field">
-						    <label>Agregar</label>
-						        <button class="ui inverted green button"> <i class="plus icon"> </i></button>
+						    <button class="ui icon large inverted green button" id="agregar_stock"> <i class="plus icon"> </i></button>
 					    </div>
 					</div>
 				</div>
