@@ -1,7 +1,7 @@
 (function(){
   
   var TOOLS = {
-    intervalo_notificaciones: 600000,
+    intervalo_notificaciones: 6000,
     sonido_notificacion: function(){
       return new Howl({ urls: ['/sonidos/sound-noti1.wav'] });
     },
@@ -12,9 +12,27 @@
         $.ajax({ url:'/api/notificaciones/mostrar?id_usuario='+data.id_usuario+'&contar=true' })
         .done(function(data){
           if(data.datos != 0){
+            
+            //cambiamos el estilo del icono
+            $('#icono_barra_notificaciones')
+              .removeClass('empty')
+              .addClass('inverted');          
+            
+            //cambiamos el color de las notificaciones
+            $("#label_numero_notificaciones")
+              .removeClass('empty')
+              .removeClass('blue')
+              .addClass('red');
+
+            //Ejecutamos el sonido
             sound.play();
+          }else{
+            $('#icono_barra_notificaciones').removeClass('inverted').addClass('empty');          
+            $("#label_numero_notificaciones")
+            .removeClass('red')
+            .addClass('empty')
+            .addClass('blue')
           }
-          $("#label_num_notificaciones").html(data.datos);
         });
       },this.intervalo_notificaciones);
     },
