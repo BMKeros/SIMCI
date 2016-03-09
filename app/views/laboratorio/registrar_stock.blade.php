@@ -23,7 +23,7 @@
 				<div class="two fields">
 					<div class="seven wide field">
 						<label>Seleccina un laboratorio</label>
-						<select ng-model="select_laboratorio">
+						<select ng-model="select_laboratorio" class="ui dropdown">
 							<option value="Laboratorio de Agua">Laboratorio de Agua</option>
 							<option value="Laboratorio de Reactivos">Laboratorio de Reactivos</option>
 							<option value="Laboratorio de Sales">Laboratorio de Sales</option>
@@ -37,7 +37,7 @@
 					<div class="two fields">
 						<div class="seven wide field">
 							<label>Selecciona un objeto</label>
-							<select ng-model="select_objeto">
+							<select ng-model="select_objeto" class="ui dropdown">
 								<option value="Encubadora">Encubadora</option>
 								<option value="Pipeta">Pipeta</option>
 								<option value="Campana de Estraccion">Campana de Estraccion</option>
@@ -94,3 +94,7 @@
         </div>
     </div>
 </div>
+
+<script>
+	$('.ui.dropdown').dropdown();
+</script>
