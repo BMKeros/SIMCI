@@ -19,39 +19,30 @@
       			</a>
       			
       			<div class="right menu">
-      				<!--
-      				<div class="ui pointing dropdown link item">
-    					Notificaciones
-    					<div class="ui red label" id="label_num_notificaciones">0</div>
-    					<i class="dropdown icon"></i>
-    					<div class="menu">
-      						<div class="header">Novedades</div>
-				          	<a class="item">Shirts</a>
-				          	<a class="item">Pants</a>
-				          	<a class="item">Jeans</a>
-				        </div>
-      				</div>-->
 
-      				<!-- Asi funciona, pero como no es buena practica (blablabla) tener los estilos aui los podes mandar a la hoja de estilos xD L tai jodiendo xDlkslaklskl-->
-      				
       				<div class="ui pointing dropdown link item" tabindex="0"> 
-					  	<i class=" alarm icon"></i>
-					  	<div class="ui red circular label">0</div>
+					  	<i class="circular empty teal alarm icon" id="icono_barra_notificaciones"></i>
+					  	<a class="ui blue empty circular label" id="label_numero_notificaciones">0</a>
 					  	<i class="dropdown icon"></i>
-					    <div class="menu transition hidden" tabindex="-1" style="width: 400px; margin-left: -150px;">
+					    <div class="menu transition hidden menu_notificaciones" tabindex="-1">
 					        <div class="header">Notificaciones</div>
-					        <div class="right" style=" float: right; margin-top: -25px; margin-right: 10px; ">Ver todas</div>
+					        <div class="right label_ver_notificaciones"><a >Ver todas</a></div>
+					        
 					        <div class="divider"></div>
 					        
-							<div class="item">
-								<img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> 
-								<span style="display: inline-block;">User<br>Hola</span> <div style="float: right; top: 20px; position: relative">05/04/2016</div>
+
+					        <div ng-show="true" class="item loading_notificaciones">
+  								<div class="ui active loader"></div>
+ 							</div>
+
+							<div ng-show="false" class="item" ng-repeat="x in []">
+								<img class="ui avatar img_item_notificacion" src="/img/perfil-default.jpg">
+								<div class="cuerpo_notificacion">
+									<span class="texto">User<br>Hola</span> 
+								</div>
+								<div class="fecha_notificacion" ><% x%>/04/2016</div>
 							</div>
-							<div class="item"> 
-								<img class="ui avatar" src="http://simci.tl/img/perfil-default.jpg" style=" width: 60px; max-height: 140px; "> 
-								<span style="display: inline-block;padding-bottom: 25px;">User<br>Hola</span> 
-								<div style="float: right; top: 20px; position: relative">05/04/2016</div>
-							</div>
+
 						</div>
 					</div>
 
