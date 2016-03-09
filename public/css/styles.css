@@ -1,8 +1,44 @@
-/*#btn-abrir-menu {
-  margin-top:60px; 
-  padding:10px 30px 10px 50px;
-  margin-bottom: 10px;
-}*/
+/**** Icono barra notificaciones ***/
+
+
+#icono_barra_notificaciones {
+  font-size: 18x; 
+  margin-right: -5px;
+}
+
+.menu_notificaciones {
+  width: 400px; 
+  margin-left: -150px !important; 
+  display: block ! important;
+}
+
+.label_ver_notificaciones {
+  float: right; 
+  margin-top: -25px;
+  margin-right: 10px; 
+  cursor: pointer;
+}
+.img_item_notificacion{
+  width: 60px !important; 
+  max-height: 140px !important;
+  border-radius: 15px;
+}
+.cuerpo_notificacion {
+  display: inline-block;
+}
+
+.fecha_notificacion {
+  float: right; 
+  top: -10px; 
+  position: relative;
+  font-size: 12px !important;
+  font-style: italic;
+  color: #6C7777;
+}
+.loading_notificaciones {
+   height: 50px !important;
+}
+/**** Fin notificaciones ***/
 
 #reloj {
   font-size: 17px;
