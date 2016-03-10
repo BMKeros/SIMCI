@@ -14,7 +14,7 @@ function reset_secuencia($table = null){
 }
 
 function redirect_por_tipo($tipo_usuario = null){
-	if($tipo_usuario == TIPO_USER_ROOT ){
+	if($tipo_usuario == TIPO_USER_ROOT || $tipo_usuario==TIPO_USER_ADMIN){
 		return Redirect::action('ModulosController@getAdministracion');	
 	}
 	else if($tipo_usuario == TIPO_USER_ESTUDIANTE){

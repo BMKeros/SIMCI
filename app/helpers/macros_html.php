@@ -268,5 +268,27 @@ Form::macro('select_proveedores', function($atributos = null, $selected = null){
 	}
 });
 
+Form::macro('select_laboratorios', function($atributos = null){
+	if($atributos){
+
+		$laboratorios = DB::table('laboratorios')->lists('nombre', 'codigo');
+
+		$default_values = array('class'=>"ui dropdown capitalize");
+		
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
+		$html .= '<option value="">Laboratorio</option>';
+		
+		foreach ($laboratorios as $key => $value) {
+			$html .= sprintf('<option value="%s">%s - %s</option>', $key, strtoupper($key),ucfirst($value));
+		}
+		
+		$html .= '</select>';
+
+		return $html;
+	}
+	else{
+		return Form::select('');
+	}
+});
 ?>
 

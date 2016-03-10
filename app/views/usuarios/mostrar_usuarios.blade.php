@@ -141,6 +141,9 @@
                      {{Form::select_tipo_usuario(array('id' => 'tipo_usuario', 'name' => 'tipo_usuario','ng-model'=>'DatosForm.tipo_usuario'))}}
                   </div>
                </div>
+               <div class="field">
+                  <input type="file" name="imagen" placeholder="" ng-model-file="DatosForm.imagen">
+               </div>
             </div>
          </form>
         

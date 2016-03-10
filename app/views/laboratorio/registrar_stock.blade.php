@@ -23,13 +23,7 @@
 				<div class="two fields">
 					<div class="seven wide field">
 						<label>Seleccina un laboratorio</label>
-						<select ng-model="select_laboratorio" class="ui dropdown">
-							<option value="Laboratorio de Agua">Laboratorio de Agua</option>
-							<option value="Laboratorio de Reactivos">Laboratorio de Reactivos</option>
-							<option value="Laboratorio de Sales">Laboratorio de Sales</option>
-							<option value="Laboratorio de Sodio">Laboratorio de Sodio</option>
-							<option value="Laboratorio de Gases">Laboratorio de Gases</option>
-						</select>
+						{{ Form::select_laboratorios(array('name'=>'laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
 					</div>
 				</div>
 
@@ -80,7 +74,7 @@
             <tr ng-repeat="x in tabla_stock track by $index">
     		<td></td>
     		<td><%x.cod_objeto%></td>
-    		<td><%x.cod_lab%></td>
+    		<td><%x.nombre_lab%></td>
             </tr>
             </tbody>
         </table>

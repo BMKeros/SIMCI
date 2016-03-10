@@ -33,14 +33,14 @@ simci.controller('UsuariosController', [
         descripcion: "Opcion para crear nuevos usuarios en el sistema",
         url: "#/usuarios/crear",
         icono: 'user',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN]
       },
       {
         nombre:"ver usuarios",
         descripcion: "Opcion para Ver, Actualizar, Eliminar los usuarios registrados en el sistema",
         url: "#/usuarios/ver/todos",
         icono: 'eye',
-        show_in:[TIPO_USER_ROOT, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
       
       {
@@ -48,7 +48,7 @@ simci.controller('UsuariosController', [
         descripcion: "Opcion para crear nuevos tipos de usuarios",
         url: "#/usuarios/crear/tipo-usuario",
         icono: 'user',
-        show_in:[TIPO_USER_ROOT]
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN]
       },
     ];
     

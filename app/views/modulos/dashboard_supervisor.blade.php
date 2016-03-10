@@ -12,24 +12,39 @@
     			<a class="item"  id="btn-abrir-menu">
 					<i class="sidebar icon"></i>
     			</a>
+
     			<a href="#" class="header item">
         			<img class="logo" src="/img/logo.png">
         			&nbsp;&nbsp;&nbsp;SIMCI
       			</a>
       			
       			<div class="right menu">
-      				
-      				<div class="ui pointing dropdown link item">
-    					Notificaciones
-    					<div class="ui red label">22</div>
-    					<i class="dropdown icon"></i>
-    					<div class="menu">
-      						<div class="header">Novedades</div>
-				          	<a class="item">Shirts</a>
-				          	<a class="item">Pants</a>
-				          	<a class="item">Jeans</a>
-				        </div>
-      				</div>
+
+      				<div class="ui pointing dropdown link item" tabindex="0"> 
+					  	<i class="circular empty teal alarm icon" id="icono_barra_notificaciones"></i>
+					  	<a class="ui blue empty circular label" id="label_numero_notificaciones">0</a>
+					  	<i class="dropdown icon"></i>
+					    <div class="menu transition hidden menu_notificaciones" tabindex="-1">
+					        <div class="header">Notificaciones</div>
+					        <div class="right label_ver_notificaciones"><a >Ver todas</a></div>
+					        
+					        <div class="divider"></div>
+					        
+
+					        <div ng-show="true" class="item loading_notificaciones">
+  								<div class="ui active loader"></div>
+ 							</div>
+
+							<div ng-show="false" class="item" ng-repeat="x in []">
+								<img class="ui avatar img_item_notificacion" src="/img/perfil-default.jpg">
+								<div class="cuerpo_notificacion">
+									<span class="texto">User<br>Hola</span> 
+								</div>
+								<div class="fecha_notificacion" ><% x%>/04/2016</div>
+							</div>
+
+						</div>
+					</div>
 
       				<div class="ui dropdown item">
       					<img class="ui right spaced avatar image" src="{{ Auth::user()->get_avatar() }}">
@@ -89,16 +104,17 @@
   			<i class="shop icon"></i>
   			Proveedor
 		</a>
+		
+		<a class="item" ng-href="#/laboratorio">
+  			<i class="lab icon"></i>
+  			Laboratorio
+		</a>
 	
 	   	<a class="item" ng-href="#/ordenes">
   			<i class="edit icon"></i>
   			Ordenes
 		</a>
 	
-		<a class="item" ng-href="#/laboratorio">
-  			<i class="lab icon"></i>
-  			Laboratorio
-		</a>
 	
     	<a class="item" ng-href="#/reportes">
 	      	<i class="file text outline icon"></i>

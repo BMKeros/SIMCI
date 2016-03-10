@@ -128,6 +128,11 @@
   			<i class="search icon"></i>
   			Consultas
 		</a>
+
+		<a class="item" ng-href="#/instituciones">
+  			<i class="building icon"></i>
+  			Instituciones
+		</a>
 		
     	<a class="item">
 	      	<i class="settings icon"></i>
