@@ -33,6 +33,10 @@
 					        <div ng-show="bandera_loading_notificaciones" class="item loading_notificaciones">
   								<div class="ui active loader"></div>
  							</div>
+							
+							<div class="item" ng-show="notificaciones.length == 0">
+								<p align="center">No hay notificaciones</p>
+							</div>
 
 							<div ng-show="bandera_mostrar_notificaciones" class="item" ng-repeat="noti in notificaciones track by $index">
 								<img class="ui avatar img_item_notificacion" src="/img/perfil-default.jpg">
