@@ -9,6 +9,7 @@ CREATE OR REPLACE VIEW vista_usuarios_full AS
 		usuarios.cod_tipo_usuario as cod_tipo_usuario,
 		tipos_usuario.nombre as tipo_usuario_nombre,
 		tipos_usuario.descripcion as tipo_usuario_descripcion,
+		permisos_usuario(usuarios.id) as permisos,
 		personas.id as id_persona,
 		personas.primer_nombre as primer_nombre,
 		personas.segundo_nombre  as segundo_nombre,
@@ -16,8 +17,9 @@ CREATE OR REPLACE VIEW vista_usuarios_full AS
 		personas.segundo_apellido as segundo_apellido,
 		personas.cedula as cedula,
 		personas.fecha_nacimiento as fecha_nacimiento,
+		personas.sexo_id as sexo_id,
 		sexos.descripcion as sexo
 	FROM usuarios
 	INNER JOIN tipos_usuario ON tipos_usuario.codigo = usuarios.cod_tipo_usuario
-	INNER JOIN personas ON personas.usuario_id = usuarios.id
-	INNER JOIN sexos ON personas.sexo_id = sexos.id;
+	LEFT JOIN personas ON personas.usuario_id = usuarios.id
+	LEFT JOIN sexos ON personas.sexo_id = sexos.id;
