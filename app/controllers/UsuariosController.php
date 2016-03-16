@@ -547,14 +547,25 @@ class UsuariosController extends BaseController {
 		$id = Input::get('id');
 		
 		$usuario = Usuario::find($id);
+ 
+		if(!is_null($usuario)){
 
-		if($usuario){
-			$usuario->delete();	
-			return Response::json(array(
-				'resultado'=>true, 
-				'mensajes'=>array('Usuario eliminado con exito')
-				)
-			);
+			if(!Auth::check()){
+				$usuario->delete();	
+				return Response::json(array(
+					'resultado'=>true, 
+					'mensajes'=>array('Usuario eliminado con exito')
+					)
+				);
+			}
+			else{
+				return Response::json(array(
+					'resultado'=>true,
+					'mensajes'=>array('¡Alerta!, usuario no puede ser eliminado')	
+					)
+				);
+			}
+			
 		}
 		else{
 			return Response::json(array(

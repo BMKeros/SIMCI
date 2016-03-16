@@ -162,7 +162,6 @@
 							->where('nombre','ILIKE','%'.$value_search.'%')
 							->get();
 
-
 						$response = array("success"=>true, "results" => $data);
 					}
 					else{
@@ -267,95 +266,136 @@
 
 		public function postActualizarElemento($id){
 
-			$elemento = ElementoInventario::find($id);
+			$cod_dimension = Input::get('cod_dimension', null);
+			$cod_subdimension = Input::get('cod_subdimension', null);
+			$cod_agrupacion = Input::get('cod_agrupacion', null);
+			$cod_objeto = Input::get('cod_objeto', null);
+			$numero_orden = Input::get('numero_orden', null);
 
-			if($elemento){
-				$cod_dimension = input_default(Input::get('cod_dimension'), $elemento->cod_dimension);
-				$cod_sub_dimension = input_default(Input::get('cod_sub_dimension'), $elemento->cod_subdimension);
-				$cod_agrupacion = input_default(Input::get('cod_agrupacion'), $elemento->cod_agrupacion);
-				//$cod_sub_agrupacion = input_default(Input::get('cod_sub_agrupacion'), $elemento->cod_subagrupacion);
-				$numero_orden = input_default(Input::get('numero_orden'), $elemento->numero_orden);
-				$cod_objeto = input_default(Input::get('cod_objeto'), $elemento->cod_objeto);
-				$cantidad_disponible = input_default(Input::get('cantidad_disponible'), $elemento->cantidad_disponible);
-				$usa_recipientes = input_default(Input::get('usa_recipientes'), $elemento->usa_recipientes);
-				$recipientes_disponibles = input_default(Input::get('recipientes_disponibles'), $elemento->recipientes_disponibles);
+			if(!is_null($cod_dimension) && !is_null($cod_subdimension) && !is_null($cod_agrupacion) && !is_null($cod_objeto) && !is_null($numero_orden)){
 
-				$reglas = array(
-					'cod_dimension' => 'required|exists:almacenes,cod_almacen',
-					'cod_sub_dimension' =>'required|exists:estantes,cod_estante',
-					'cod_agrupacion' => 'required|exists:tipo_objetos,id',
-					//'cod_sub_agrupacion' => 'exists:inventario,cod_subagrupacion',
-					'numero_orden' => 'required',
-					//pendiente evaluar si cod_objeto sera unique
-					'cod_objeto' => 'required|exists:catalogo_objetos,id',
-					'cantidad_disponible' => 'required',
-					//campos aun no se sabe si se dejaran o se quitaran
-					'usa_recipientes' => 'required|boolean',
-					'recipientes_disponibles' => 'numeric'
-				);
+				$elemento = DB::table('inventario')
+					->where('cod_dimension', '=', $cod_dimension)
+					->where('cod_subdimension', '=', $cod_subdimension)
+					->where('cod_agrupacion', '=', $cod_agrupacion)
+					->where('cod_objeto', '=', $cod_objeto)
+					->where('numero_orden', '=', $numero_orden)
+					->first();
 
-				$campos = array(
-					'cod_dimension' => $cod_dimension,
-					'cod_sub_dimension' => $cod_sub_dimension,
-					'cod_agrupacion' => $cod_agrupacion,
-					//'cod_sub_agrupacion' => $cod_sub_agrupacion,
-					'numero_orden' => $numero_orden,
-					'cod_objeto' => $cod_objeto,
-					'cantidad_disponible' => $cantidad_disponible,
-					'usa_recipientes' => $usa_recipientes,
-					'recipientes_disponibles' => $recipientes_disponibles
-				);
+				if(!is_null($elemento)){
+					$cod_dimension = input_default(Input::get('cod_dimension'), $elemento->cod_dimension);
+					$cod_sub_dimension = input_default(Input::get('cod_sub_dimension'), $elemento->cod_subdimension);
+					$cod_agrupacion = input_default(Input::get('cod_agrupacion'), $elemento->cod_agrupacion);
+					$cod_sub_agrupacion = input_default(Input::get('cod_sub_agrupacion'), $elemento->cod_subagrupacion);
+					$numero_orden = input_default(Input::get('numero_orden'), $elemento->numero_orden);
+					$cod_objeto = input_default(Input::get('cod_objeto'), $elemento->cod_objeto);
+					//comenmtada para evaluar si debe actualizarse PD:motivo corrupcion
+					//$cantidad_disponible = input_default(Input::get('cantidad_disponible'), $elemento->cantidad_disponible);
+					$usa_recipientes = input_default(Input::get('usa_recipientes'), $elemento->usa_recipientes);
+					$recipientes_disponibles = input_default(Input::get('recipientes_disponibles'), $elemento->recipientes_disponibles);
+					$elemento_movible = input_default(Input::get('elemento_movible'), $elemento->recipientes_disponibles);
 
-				$mensajes = array(
-					'required' => 'El campo :attribute es necesario',
-					'integer' => 'El campo :attribute debe ser numerico',
-					'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
-					':attribute no existe',
-					'numeric' => 'El :attribute debe ser solo numeros',
-					'exists' => ':attribute no existe!'
-				);
+					$reglas = array(
+						'cod_dimension' => 'required|alpha_num|exists:almacenes,codigo',
+						'cod_sub_dimension' =>'required|alpha_num|exists:sub_dimensiones,codigo',
+						'cod_agrupacion' => 'required|alpha_num|exists:agrupaciones,codigo',
+						'cod_sub_agrupacion' => 'alpha_num|exists:sub_agrupaciones,codigo',
+						'numero_orden' => 'required|numeric',
+						'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id|unique:inventario',
+						//'cantidad_disponible' => 'required|numeric',
+						'usa_recipientes' => 'required|boolean',
+						'recipientes_disponibles' => 'numeric',
+						'elemento_movible' => 'required|boolean'
+					);
 
-				$validacion = Validator::make($campos, $reglas, $mensajes);
+					$campos = array(
+						'cod_dimension' => $cod_dimension,
+						'cod_sub_dimension' => $cod_sub_dimension,
+						'cod_agrupacion' => $cod_agrupacion,
+						'cod_sub_agrupacion' => $cod_sub_agrupacion,
+						'numero_orden' => $numero_orden,
+						'cod_objeto' => $cod_objeto,
+						//'cantidad_disponible' => $cantidad_disponible,
+						'usa_recipientes' => $usa_recipientes,
+						'recipientes_disponibles' => $recipientes_disponibles,
+						'elemento_movible' => $elemento_movible
+					);
 
-				if($validacion->fails()){
-					return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+					$mensajes = array(
+						'required' => 'El campo :attribute es necesario',
+						'alpha_num' => 'El campo :attribute debe contener caracteres alfanumericos',
+						'unique' => 'El campo :attribute ya existe',
+						'integer' => 'El campo :attribute debe ser numerico',
+						'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
+						':attribute no existe',
+						'numeric' => 'El :attribute debe ser solo numeros',
+						'exists' => ':attribute no existe!'
+					);
+
+					$validacion = Validator::make($campos, $reglas, $mensajes);
+
+					if($validacion->fails()){
+						return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+					}
+					else{
+						
+						$elemento->cod_dimension = $cod_dimension;
+						$elemento->cod_subdimension = $cod_sub_dimension;
+						$elemento->cod_agrupacion = $cod_agrupacion;
+						$elemento->cod_subagrupacion = $cod_sub_agrupacion;
+						$elemento->numero_orden = $numero_orden;
+						$elemento->cod_objeto = $cod_objeto;
+						//$elemento->cantidad_disponible = $cantidad_disponible;
+						$elemento->usa_recipientes = $usa_recipientes;
+						$elemento->recipientes_disponibles = $recipientes_disponibles;
+						$elemento->elemento_movible = $elemento_movible;
+
+						$elemento->save();
+
+						return Response::json(array(
+							'resultado' => true,
+							'mensajes' => 'Elemento Actualizado con exito.'
+							)
+						);
+					}
 				}
 				else{
-					
-					$elemento->cod_dimension = $cod_dimension;
-					$elemento->cod_subdimension = $cod_sub_dimension;
-					$elemento->cod_agrupacion = $cod_agrupacion;
-					//elemento->cod_subagrupacion = $cod_sub_agrupacion;
-					$elemento->numero_orden = $numero_orden;
-					$elemento->cod_objeto = $cod_objeto;
-					$elemento->cantidad_disponible = $cantidad_disponible;
-					$elemento->usa_recipientes = $usa_recipientes;
-					$elemento->recipientes_disponibles = $recipientes_disponibles;
-
-					$elemento->save();
-
-					return Response::json(array(
-						'resultado' => true,
-						'mensajes' => 'Elemento Actualizado con exito.'
-						)
-					);
+					return Response::json(array('resultado' => false, 'mensajes' => 'ID no existe'));
 				}
 			}
 			else{
-				return Response::json(array('resultado' => false, 'mensajes' => 'ID no existe'));
+				return Response::json(array('resultado' => false, 'mensajes' => 'Error codigos no existentes'), 404);
 			}
 		}
 
 		public function postEliminarElemento($id){
 		
-			$elemento = ElementoInventario::find($id);
+			$cod_dimension = Input::get('cod_dimension', null);
+			$cod_subdimension = Input::get('cod_subdimension', null);
+			$cod_agrupacion = Input::get('cod_agrupacion', null);
+			$cod_objeto = Input::get('cod_objeto', null);
+			$numero_orden = Input::get('numero_orden', null);
 
-			if($elemento){
-				$elemento->delete();
-				return Response::json(array('resultado' => true, 'mensajes' => 'Elemento eliminado con exito'));
+			if(!is_null($cod_dimension) && !is_null($cod_subdimension) && !is_null($cod_agrupacion) && !is_null($cod_objeto) && !is_null($numero_orden)){			
+
+				$elemento = DB::table('inventario')
+					->where('cod_dimension', '=', $cod_dimension)
+					->where('cod_subdimension', '=', $cod_subdimension)
+					->where('cod_agrupacion', '=', $cod_agrupacion)
+					->where('cod_objeto', '=', $cod_objeto)
+					->where('numero_orden', '=', $numero_orden)
+					->first();
+
+				if(!is_null($elemento)){
+					$elemento->delete();
+					return Response::json(array('resultado' => true, 'mensajes' => 'Elemento eliminado con exito'));
+				}
+				else{
+					return Response::json(array('resultado' => false, 'mensajes' => 'Elemento no existe'));	
+				}
 			}
 			else{
-				return Response::json(array('resultado' => false, 'mensajes' => 'ID no existe'));	
+				return Response::json(array('resultado' => false, 'mensajes' => 'Error codigos no existentes'), 404);
 			}
 		}
 

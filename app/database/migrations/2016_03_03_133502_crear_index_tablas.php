@@ -132,11 +132,37 @@ class CrearIndexTablas extends Migration {
 			$table->foreign('id_usuario')->references('id')
 				->on('usuarios');
 
-			$table->foreign('cod_objeto')->references('id')
-				->on('catalogo_objetos');
+			$table->foreign('cod_objeto')->references('cod_objeto')
+				->on('inventario');
 
+			$table->foreign('cod_dimension')->references('cod_dimension')
+				->on('inventario');
 
+			$table->foreign('cod_subdimension')->references('cod_subdimension')
+				->on('inventario');
+
+			$table->foreign('cod_agrupacion')->references('cod_agrupacion')
+				->on('inventario');
 		});
+
+		//SALIDAS-INVENTARIOS
+		Schema::table('salidas_inventario', function($table){
+			$table->foreign('id_usuario')->references('id')
+				->on('usuarios');
+
+			$table->foreign('cod_objeto')->references('cod_objeto')
+				->on('inventario');
+
+			$table->foreign('cod_dimension')->references('cod_dimension')
+				->on('inventario');
+
+			$table->foreign('cod_subdimension')->references('cod_subdimension')
+				->on('inventario');
+
+			$table->foreign('cod_agrupacion')->references('cod_agrupacion')
+				->on('inventario');
+		});
+
 	}	
 
 
