@@ -1,6 +1,6 @@
 <?php
 
-class ModulosController extends BaseController {
+class ModulosController extends BaseController {			
 
 	public function __construct(){
        $this->beforeFilter('CheckGuest', array('except' => ''));

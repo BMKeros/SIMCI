@@ -290,5 +290,29 @@ Form::macro('select_laboratorios', function($atributos = null){
 		return Form::select('');
 	}
 });
+
+Form::macro('select_tipo_unidad', function($atributos = null){
+	if($atributos){
+
+		$tipo_unidades = DB::table('tipos_unidades')->lists('nombre', 'id');
+
+		$default_values = array('class'=>"ui dropdown capitalize");
+		
+		$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
+		$html .= '<option value="">Tipo Unidad</option>';
+		
+		foreach ($tipo_unidades as $key => $value){
+			$html .= sprintf('<option value="%s">%s - %s</option>', $key, strtoupper($key),ucfirst($value));
+		}
+		
+		$html .= '</select>';
+
+		return $html;
+	}
+	else{
+		return Form::select('');
+	}
+});
+
 ?>
 

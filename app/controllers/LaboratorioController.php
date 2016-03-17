@@ -139,15 +139,6 @@
 
 
 			}
-
-
-			
-
-
-
-			
-
-			
 		}
 
 		public function postVerificar(){
@@ -201,6 +192,43 @@
 					)
 				);
 			}
+	    }
+
+	    public function postAgregarStock(){
+	    	$cod_laboratorio = Input::get('cod_laboratorio');
+	    	$cod_objeto = Input::get('cod_objeto');
+
+	    	$reglas = array(
+	    		'cod_laboratorio' => 'required',
+	    		'cod_objeto' => 'required'
+	    	);
+
+	    	$campos = array(
+	    		'cod_laboratorio' => $cod_laboratorio,
+	    		'cod_objeto' => $cod_laboratorio
+	    	);
+
+	    	$validacion = Validator::make($campos, $reglas, $mensajes);
+
+	    	if($validacion->fails()){
+	    		return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
+	    	}
+	    	else{
+	    		$objeto_laboratorio = new ObjetoLaboratorio;
+
+	    		$objeto_laboratorio->cod_laboratorio = $cod_laboratorio;
+	    		$objeto_laboratorio->cod_objeto = $cod_objeto;
+
+	    		$objeto_laboratorio->save();
+
+	    		return Response::json(array(
+	    				'resultazdo' => true,
+	    				'mensajes' => array('Objeto asignado con exito.!')
+	    			)
+	    		);
+
+	    	}
+
 	    }
 
 	}

@@ -235,22 +235,25 @@
 		public function postRegistrarUnidad(){
 			$nombre = Input::get('nombre');
 			$abreviatura = Input::get('abreviatura');
+			$tipo_unidad = Input::get('tipo_unidad');
 			
 			$reglas = array(
 				'nombre' => 'required|min:5|max:50', 
 				'abreviatura' => 'required|min:2|max:10',
+				'tipo_unidad' => 'required'
 			);
 
 			$campos = array(
 				'nombre' => $nombre,
-				'abreviatura' => $abreviatura
+				'abreviatura' => $abreviatura,
+				'tipo_unidad' => $tipo_unidad
 			);
 
 			$mensajes = array(
 				'required' => 'El campo :attribute es necesario',
 				'min' => 'El campo :attribute no debe contener menos de :min caracteres',
 				'max' => 'El campo :attribute no debe exceder los :max caracteres',
-				'unique' => 'El campo :attribute ya existe.'
+				'unique' => 'El campo :attribute ya existe.',
 			);
 
 			$validacion = Validator::make($campos, $reglas, $mensajes);
@@ -263,6 +266,7 @@
 
 				$unidad->nombre = $nombre;
 				$unidad->abreviatura = $abreviatura;
+				$undiad->tipo_unidad = $tipo_unidad;
 				
 				$unidad->save();
 

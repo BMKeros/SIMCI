@@ -31,6 +31,11 @@
 							<label>Abreviatura</label>
 							<input type="text" name="abreviatura" placeholder="Abreviatura de la Unidad" ng-model="DatosForm.abreviatura">
 						</div>
+
+						<div class="field">
+							<label>Tipo Unidad</label>
+							{{  Form::select_tipo_unidad(array('name'=>'tipo_unidad','id'=>'tipo_unidad', 'ng-model'=>'DatosForm.tipo_unidad')) }}
+						</div>
 					</div>
 				</div>
 				

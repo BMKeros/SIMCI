@@ -17,9 +17,6 @@ class CrearTablaObjetosLaboratorio extends Migration {
 			$table->increments('id');
 			$table->string('cod_laboratorio', 4);
 			$table->integer('cod_objeto');
-
-			//este campo esta tentativo
-			$table->integer('cod_clase_objeto');
 			$table->timestamps();
 		});
 	}
