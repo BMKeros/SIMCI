@@ -50,3 +50,5 @@ CREATE OR REPLACE VIEW vista_obejos_laboratorio AS
 	INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
 	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
 	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
+
+	/**/
