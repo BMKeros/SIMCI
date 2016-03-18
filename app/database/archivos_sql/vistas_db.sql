@@ -23,3 +23,30 @@ CREATE OR REPLACE VIEW vista_usuarios_full AS
 	INNER JOIN tipos_usuario ON tipos_usuario.codigo = usuarios.cod_tipo_usuario
 	LEFT JOIN personas ON personas.usuario_id = usuarios.id
 	LEFT JOIN sexos ON personas.sexo_id = sexos.id;
+
+
+CREATE OR REPLACE VIEW vista_obejos_laboratorio AS
+	SELECT
+		laboratorios.codigo as cod_laboratorio,
+		laboratorios.nombre as nombre_laboratorio,
+		laboratorios.descripcion as descripcion_laboratorio,
+		catalogo_objetos.id as cod_objeto,
+		catalogo_objetos.nombre as nombre_objeto,
+		catalogo_objetos.descripcion as descripcion_objeto,
+		catalogo_objetos.especificaciones as especificaciones_objeto,
+		unidades.cod_unidad as cod_unidad,
+		unidades.nombre as nombre_unidad,
+		unidades.abreviatura as abreviatura_unidad,
+		tipos_unidades.id as cod_tipo_unidad,
+		tipos_unidades.nombre as nombre_tipo_unidad,
+		clase_objetos.id as cod_clase_objeto,
+		clase_objetos.nombre as nombre_clase_objeto,
+		clase_objetos.descripcion as descripcion_clase_objeto
+
+
+	FROM objetos_laboratorio
+	INNER JOIN laboratorios ON laboratorios.codigo = objetos_laboratorio.cod_laboratorio
+	INNER JOIN catalogo_objetos ON catalogo_objetos.id = objetos_laboratorio.cod_objeto
+	INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
+	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
+	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
