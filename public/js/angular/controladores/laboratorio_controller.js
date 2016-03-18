@@ -13,7 +13,8 @@ simci.controller('LaboratorioController', [
   '$compile',
   'ToolsService',
   '$templateCache',
-  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile,ToolsService,$templateCache){
+  '$filter',
+  function ($scope, $http, $log ,$timeout,$route, $routeParams, $location,DTOptionsBuilder,DTColumnBuilder,$compile,ToolsService,$templateCache,$filter){
     
     $scope.modulo = {};
     $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -310,26 +311,39 @@ simci.controller('LaboratorioController', [
       }// If == '/laboratorio/ver/stock
 
       if($location.$$url == '/laboratorio/agregar-stock'){
-          $scope.tabla_stock=[];
+          $scope.items_tabla_stock = [];
           $scope.select_laboratorio="";
-          $scope.select_objeto="";          
-          $scope.agregar_stock_laboratorio=function () {
-            var data_laboratorio={};
+          $scope.select_objeto="";
+
+          $scope.agregar_stock_tabla=function () {
+            var data_laboratorio = {};
             $http({
                 method: 'GET',
                 url: '/api/laboratorio/mostrar?type=laboratorio_full&id='+$scope.select_laboratorio,
             }).then(
-                function(data){
-                  data_laboratorio=data.data;
-                  $scope.tabla_stock.push({
-                    nombre_lab:data_laboratorio.nombre,
-                    cod_objeto:$scope.select_objeto
-                  });
-                },
-                function(data_error) {
-                  ToolsService.generar_alerta_status(data_error);
+              function(data){
+                var data_laboratorio = data.data;
+                $scope.items_tabla_stock.push({
+                  id_item_stock: ToolsService.generar_id_unico(),
+                  nombre_lab: data_laboratorio.nombre,
+                  cod_objeto: $scope.select_objeto
                 });
-          }
+              },
+              function(data_error) {
+                ToolsService.generar_alerta_status(data_error);
+              }
+            );
+          };
+
+          $scope.eliminar_stock_tabla = function (id_elemento) {
+            
+            $scope.items_tabla_stock = $scope.items_tabla_stock.filter(function(obj) {
+              return obj.id_item_stock !== id_elemento;
+            });
+
+            //$scope.items_tabla_stock = $filter('filter')($scope.items_tabla_stock, {id_item_stock: id_elemento});
+          };
+
       }//Fin de agregar-stock
 
 
