@@ -126,22 +126,16 @@ class CrearIndexTablas extends Migration {
 
 		//ENTRADAS-INVENTARIO
 		Schema::table('entradas_inventario', function($table){
+			
 			$table->foreign('id_proveedor')->references('codigo')
 				->on('proveedores');
 
 			$table->foreign('id_usuario')->references('id')
 				->on('usuarios');
 
-			$table->foreign('cod_objeto')->references('cod_objeto')
-				->on('inventario');
-
-			$table->foreign('cod_dimension')->references('cod_dimension')
-				->on('inventario');
-
-			$table->foreign('cod_subdimension')->references('cod_subdimension')
-				->on('inventario');
-
-			$table->foreign('cod_agrupacion')->references('cod_agrupacion')
+			$table
+				->foreign(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
+				->references(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
 				->on('inventario');
 		});
 
@@ -149,17 +143,10 @@ class CrearIndexTablas extends Migration {
 		Schema::table('salidas_inventario', function($table){
 			$table->foreign('id_usuario')->references('id')
 				->on('usuarios');
-
-			$table->foreign('cod_objeto')->references('cod_objeto')
-				->on('inventario');
-
-			$table->foreign('cod_dimension')->references('cod_dimension')
-				->on('inventario');
-
-			$table->foreign('cod_subdimension')->references('cod_subdimension')
-				->on('inventario');
-
-			$table->foreign('cod_agrupacion')->references('cod_agrupacion')
+				
+			$table
+				->foreign(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
+				->references(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
 				->on('inventario');
 		});
 
