@@ -1,5 +1,5 @@
 (function(){
-  var simci = angular.module('SIMCI', ['ngRoute','datatables','ngProgress'], function($interpolateProvider) {
+  var simci = angular.module('SIMCI', ['ngRoute','datatables','ngProgress','ngAnimate'], function($interpolateProvider) {
           $interpolateProvider.startSymbol('<%');
           $interpolateProvider.endSymbol('%>');
   });
@@ -194,6 +194,17 @@
 
             return tmp;
         }
+      },
+      //Funcion para generar id unicos
+      generar_id_unico: function(){
+        var text = "";
+        var posible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+        var fecha = new Date();
+          for( var i=0; i < 5; i++ ){
+            text += posible.charAt(Math.floor(Math.random() * posible.length));
+          }
+
+        return text+fecha.getHours()+fecha.getMinutes()+fecha.getSeconds()+fecha.getMilliseconds();
       },
       //Funcion para mostrar modal dinamico
       mostrar_modal_dinamico: function($_SCOPE, $_HTTP,opciones){
