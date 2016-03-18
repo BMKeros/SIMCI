@@ -315,24 +315,29 @@ simci.controller('LaboratorioController', [
           $scope.select_laboratorio="";
           $scope.select_objeto="";
 
-          $scope.agregar_stock_tabla=function () {
-            var data_laboratorio = {};
-            $http({
-                method: 'GET',
-                url: '/api/laboratorio/mostrar?type=laboratorio_full&id='+$scope.select_laboratorio,
-            }).then(
-              function(data){
-                var data_laboratorio = data.data;
-                $scope.items_tabla_stock.push({
-                  id_item_stock: ToolsService.generar_id_unico(),
-                  nombre_lab: data_laboratorio.nombre,
-                  cod_objeto: $scope.select_objeto
-                });
-              },
-              function(data_error) {
-                ToolsService.generar_alerta_status(data_error);
-              }
-            );
+          $scope.agregar_stock_tabla = function () {
+            if(!!($scope.select_laboratorio) && !!($scope.select_objeto)){
+              var data_laboratorio = {};
+              $http({
+                  method: 'GET',
+                  url: '/api/laboratorio/mostrar?type=laboratorio_full&id='+$scope.select_laboratorio,
+              }).then(
+                function(data){
+                  var data_laboratorio = data.data;
+                  $scope.items_tabla_stock.push({
+                    id_item_stock: ToolsService.generar_id_unico(),
+                    nombre_lab: data_laboratorio.nombre,
+                    cod_objeto: $scope.select_objeto
+                  });
+                },
+                function(data_error) {
+                  ToolsService.generar_alerta_status(data_error);
+                }
+              );
+            }
+            else{
+              alertify.error("Debes seleccionar un Laboratorio y un Elemento");
+            }
           };
 
           $scope.eliminar_stock_tabla = function (id_elemento) {
