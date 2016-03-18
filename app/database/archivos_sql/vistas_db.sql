@@ -25,7 +25,7 @@ CREATE OR REPLACE VIEW vista_usuarios_full AS
 	LEFT JOIN sexos ON personas.sexo_id = sexos.id;
 
 
-CREATE OR REPLACE VIEW vista_obejos_laboratorio AS
+CREATE OR REPLACE VIEW vista_objetos_laboratorio AS
 	SELECT
 		laboratorios.codigo as cod_laboratorio,
 		laboratorios.nombre as nombre_laboratorio,
@@ -42,7 +42,6 @@ CREATE OR REPLACE VIEW vista_obejos_laboratorio AS
 		clase_objetos.id as cod_clase_objeto,
 		clase_objetos.nombre as nombre_clase_objeto,
 		clase_objetos.descripcion as descripcion_clase_objeto
-
 
 	FROM objetos_laboratorio
 	INNER JOIN laboratorios ON laboratorios.codigo = objetos_laboratorio.cod_laboratorio
