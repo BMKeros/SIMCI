@@ -62,8 +62,7 @@
 							'UNI.nombre as nombre_unidad',
 							'UNI.abreviatura')
 						->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
-						->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
-						->orderBy('OBJ.nombre','asc');
+						->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 					array('campo_where'=>'OBJ.nombre', 'campo_orden'=>'OBJ.nombre'));
