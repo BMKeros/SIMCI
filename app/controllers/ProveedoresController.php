@@ -1,5 +1,5 @@
 <?php 
-class ProveedoresController extends Controller{
+class ProveedoresController extends BaseController{
 
 	public function getMostrar(){
 		$tipo_busqueda = Input::get('type', 'todos');
@@ -37,33 +37,12 @@ class ProveedoresController extends Controller{
 			break;
 
 			case 'paginacion':
-				$length = Input::get('length', 10);
-				$value_search = Input::get('search');
-				$draw = Input::get('draw',1);
-
-				if(quitar_espacios($value_search['value']) == ''){
-					
-					$data = DB::table('proveedores')
-						->select('codigo', 'razon_social', 'doc_identificacion', 'email', 'telefono_fijo1', 'telefono_movil1')
-						->orderBy('codigo')
-						->paginate($length);
-				}
-				else{
-					$data = DB::table('proveedores')
-						->select('codigo', 'razon_social', 'doc_identificacion', 'email')
-						->where('razon_social', 'ILIKE', '%'.$value_search['value'].'%')
-						->orderBy('codigo')
-						->paginate($length);
-				}
+			
+				$consulta = DB::table('proveedores')
+					->select('codigo', 'razon_social', 'doc_identificacion', 'email', 'telefono_fijo1', 'telefono_movil1');
 				
-
-				$response = array(
-					"draw"=>$draw,
-					"page"=>$data->getCurrentPage(),
-					"recordsTotal"=>$data->getTotal(),
-					"recordsFiltered"=> $data->count(),
-					"data" => $data->all()
-				);
+				$response = $this->generar_paginacion_dinamica($consulta,
+				array('campo_where'=>'razon_social', 'campo_orden'=>'codigo'));
 
 			break;
 
