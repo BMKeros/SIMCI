@@ -1,5 +1,5 @@
 <?php 	 
-	class InventarioController extends controller{
+	class InventarioController extends BaseController{
 		
 		public function __construct(){
         	//$this->beforeFilter('APICheckPermisos');
@@ -50,55 +50,24 @@
 				break;
 
 				case 'paginacion':
-					$length = Input::get('length', 10);
-					$value_search = Input::get('search');
-					$draw = Input::get('draw',1);
+					$consulta = DB::table('inventario as INV')
+						->select('INV.cod_dimension', 
+							'INV.cod_subdimension', 
+							'INV.cod_agrupacion', 
+							'INV.cod_subagrupacion',
+							'INV.numero_orden',
+							'INV.cantidad_disponible',
+							'INV.cod_objeto',
+							'OBJ.nombre as nombre_objeto',
+							'UNI.nombre as nombre_unidad',
+							'UNI.abreviatura')
+						->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
+						->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
+						->orderBy('OBJ.nombre','asc');
 
-					if(quitar_espacios($value_search['value']) == ''){	
-						$data = DB::table('inventario as INV')
-							->select('INV.cod_dimension', 
-								'INV.cod_subdimension', 
-								'INV.cod_agrupacion', 
-								'INV.cod_subagrupacion',
-								'INV.numero_orden',
-								'INV.cantidad_disponible',
-								'INV.cod_objeto',
-								'OBJ.nombre as nombre_objeto',
-								'UNI.nombre as nombre_unidad',
-								'UNI.abreviatura')
-							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
-							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
-							->orderBy('OBJ.nombre','asc')
-							->paginate($length);
-					}
-					else{	
-						$data = DB::table('inventario as INV')
-							->select('INV.cod_dimension', 
-								'INV.cod_subdimension', 
-								'INV.cod_agrupacion', 
-								'INV.cod_subagrupacion',
-								'INV.numero_orden',
-								'INV.cantidad_disponible',
-								'INV.cod_objeto',
-								'OBJ.nombre as nombre_objeto',
-								'UNI.nombre as nombre_unidad',
-								'UNI.abreviatura')
-							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
-							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
-							->where('OBJ.nombre', 'ILIKE', '%'.$value_search['value'].'%')
-							->orderBy('OBJ.nombre','asc')
-							->paginate($length);
-
-					}
+					$response = $this->generar_paginacion_dinamica($consulta,
+					array('campo_where'=>'OBJ.nombre', 'campo_orden'=>'OBJ.nombre'));
 					
-					$response = array(
-						"draw"=>$draw,
-						"page"=>$data->getCurrentPage(),
-						"recordsTotal"=>$data->getTotal(),
-						"recordsFiltered"=> $data->count(),
-						"data" => $data->all()
-					);
-
 				break;
 
 				case 'paginacion_almacenes':
