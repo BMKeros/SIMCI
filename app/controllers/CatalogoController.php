@@ -1,6 +1,6 @@
 
 <?php  
-	class CatalogoController extends Controller{
+	class CatalogoController extends BaseController{
 
 		public function getMostrar(){
 
@@ -43,35 +43,13 @@
 				break;
 
 				case 'paginacion':
-					$length = Input::get('length', 10);
-					$value_search = Input::get('search');
-					$draw = Input::get('draw',1);
 
-					if(quitar_espacios($value_search['value']) == ''){
-						//$data = Catalogo::paginate($length);	
-						$data = DB::table('catalogo_objetos as CO')
-							->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
-							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
-							->orderBy('id','asc')
-							->paginate($length);
-					}
-					else{
-						//$data = Catalogo::where('nombre','ILIKE','%'.$value_search['value'].'%')->paginate($length);	
-						$data = DB::table('catalogo_objetos as CO')
-							->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
-							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
-							->where('CO.nombre', 'ILIKE', '%'.$value_search['value'].'%')
-							->orderBy('id','asc')
-							->paginate($length);
-					}
-					
-					$response = array(
-						"draw"=>$draw,
-						"page"=>$data->getCurrentPage(),
-						"recordsTotal"=>$data->getTotal(),
-						"recordsFiltered"=> $data->count(),
-						"data" => $data->all()
-					);
+					$consulta = DB::table('catalogo_objetos as CO')
+						->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
+						->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad');
+				
+					$response = $this->generar_paginacion_dinamica($consulta,
+					array('campo_where'=>'CO.nombre', 'campo_orden'=>'id'));
 
 				break;
 
