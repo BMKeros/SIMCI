@@ -50,4 +50,47 @@ CREATE OR REPLACE VIEW vista_objetos_laboratorio AS
 	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
 	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
 
-	/**/
+
+CREATE OR REPLACE VIEW vista_inventario AS
+	SELECT
+		inventario.numero_orden as numero_orden,
+		inventario.cantidad_disponible as cantidad_disponible,
+		inventario.usa_recipientes as usa_recipientes,
+		inventario.elemento_movible as elemento_movible,
+		inventario.recipientes_disponibles as recipientes_disponibles,
+		almacenes.codigo as cod_dimension,
+		almacenes.descripcion as descripcion_dimension,
+		sub_dimensiones.codigo as cod_subdimension,
+		sub_dimensiones.descripcion as descripcion_subdimension,
+		agrupaciones.codigo as cod_agrupacion,
+		agrupaciones.nombre as nombre_agrupacion,
+		agrupaciones.descripcion as descripcion_agrupacion,
+		sub_agrupaciones.codigo as cod_subagrupacion,
+		sub_agrupaciones.nombre as nombre_subagrupaciones,
+		sub_agrupaciones.descripcion as descripcion_subagrupacion,
+
+		/*pendiente por evaluar a ver si se queda o se elimina ya que estosw campo se traen en la vista de objetos-laboratorio*/
+		catalogo_objetos.id as cod_objeto,
+		catalogo_objetos.nombre as nombre_objeto,
+		catalogo_objetos.descripcion as descripcion_objeto,
+		catalogo_objetos.especificaciones as especificaciones_objeto,
+		unidades.cod_unidad as cod_unidad,
+		unidades.nombre as nombre_unidad,
+		unidades.abreviatura as abreviatura_unidad,
+		tipos_unidades.id as cod_tipo_unidad,
+		tipos_unidades.nombre as nombre_tipo_unidad,
+		clase_objetos.id as cod_clase_objeto,
+		clase_objetos.nombre as nombre_clase_objeto,
+		clase_objetos.descripcion as descripcion_clase_objeto
+
+
+	FROM inventario 
+	INNER JOIN almacenes ON almacenes.codigo = inventario.cod_dimension
+	INNER JOIN sub_dimensiones ON sub_dimensiones.codigo = inventario.cod_subdimension
+	INNER JOIN agrupaciones ON agrupaciones.codigo = inventario.cod_agrupacion
+	INNER JOIN sub_agrupaciones ON sub_agrupaciones.codigo = inventario.cod_subagrupacion
+	INNER JOIN catalogo_objetos ON catalogo_objetos.id = inventario.cod_objeto
+	INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
+	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
+	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
+
