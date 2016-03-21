@@ -9,6 +9,7 @@ composer.lock
 .phpintel
 Thumbs.db
 /public/node_modules
+/public/bower_components
 /public/uploads/imagenes/*.jpg
 /public/uploads/imagenes/*.bmp
 /public/uploads/imagenes/*.png
