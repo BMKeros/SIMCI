@@ -92,6 +92,10 @@ simci.controller('UsuariosController', [
       .withOption('serverSide', true)
       .withOption('createdRow', function(row, data, dataIndex) {
         $compile(angular.element(row).contents())($scope);
+
+        $timeout(function(){
+            $('.ui.spopup').popup();
+        },false,0);
       });
     
       $scope.columnas_tabla_usuarios = [
@@ -129,13 +133,12 @@ simci.controller('UsuariosController', [
 
           DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<a class="ui icon button blue" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>'+
-                      '<a class="ui icon button green"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>'+
-                      '<a class="ui icon button red "  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
+              return '<a class="ui icon button blue spopup" data-content="Ver Usuario" ng-click="modal_ver_usuario('+data.id+')"><i class="unhide icon"></i></a>'+
+                      '<a class="ui icon button green spopup"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario('+data.id+')"><i class="edit icon"></i></a>'+
+                      '<a class="ui icon button red spopup"  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario('+data.id+')"><i class="remove icon"></i></a>';
           })
           .withOption('width','15%')
           .notSortable()
-
       ];
 
       ///Funciones 
