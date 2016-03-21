@@ -94,3 +94,13 @@ CREATE OR REPLACE VIEW vista_inventario AS
 	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
 	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
 
+CREATE OR REPLACE VIEW objetos_full AS
+	select 
+		laboratorios.codigo as cod_laboratorio,
+		laboratorios.nombre as nombre_laboratorio,
+		catalogo_objetos.id as cod_objeto,
+		catalogo_objetos.nombre as nombre_objeto
+
+	FROM inventario
+	INNER JOIN laboratorios ON laboratorios.codigo = inventario.cod_dimension
+	INNER JOIN catalogo_objetos ON catalogo_objetos.id = inventario.cod_objeto
