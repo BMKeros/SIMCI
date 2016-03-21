@@ -14,8 +14,8 @@
 	  	<link rel="stylesheet" href="/bower_components/datatables/media/css/jquery.dataTables.min.css">
 	  	<link rel="stylesheet" href="/bower_components/pikaday/css/pikaday.css">
 	  	<!-- AlertifyJs Css -->
-	  	<link rel="stylesheet" href="/bower_components/alertifyjs/css/alertify.min.css">
-	  	<link rel="stylesheet" href="/bower_components/alertifyjs/css/themes/semantic.min.css">
+	  	<link rel="stylesheet" href="/bower_components/alertify-js/build/css/alertify.min.css">
+	  	<link rel="stylesheet" href="/bower_components/alertify-js/build/css/themes/semantic.min.css">
 	  	<!-- Ng Progress -->
 	  	<link rel="stylesheet" href="/bower_components/ngprogress/ngProgress.css">
 
@@ -38,7 +38,7 @@
 		</div>
 
 
-		<script src="/bower_components/jquery/jquery.min.js"></script>
+		<script src="/bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>
 		<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
@@ -49,7 +49,7 @@
 		<!-- plugins datatables -->
 		
 		<!-- alertifyJs -->
-		<script src="/bower_components/alertifyjs/alertify.min.js"></script>
+		<script src="/bower_components/alertify-js/build/alertify.min.js"></script>
 		
 		<!-- Ng progress -->
 		<script src="/bower_components/ngprogress/build/ngprogress.min.js"></script>
