@@ -5,7 +5,11 @@
   });
 
   simci.run(function($rootScope,DTDefaultOptions,ToolsService,ngProgressFactory,$http){
-      alertify.success('Ready!');
+      //Config para alertify
+      alertify.defaults.transition = "zoom";
+      alertify.defaults.theme.ok = "ui positive button";
+      alertify.defaults.theme.cancel = "ui gray button";
+
       //Lenguaje español para datatable
       DTDefaultOptions.setLanguageSource('/spanish.json');
 
