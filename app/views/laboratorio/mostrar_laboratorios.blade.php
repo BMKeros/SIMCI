@@ -15,12 +15,15 @@
                 <tbody>
                     <tr>
                         <td>
-                            <b>Nombre del Laboratorio: </b> <%data_laboratorio.nombre%>
+                            <b>Nombre del Laboratorio: </b> <br>
+                            <p><%data_laboratorio.nombre%></p>
                         </td>
                     </tr>
 					
                     <tr>
-                        <td colspan="2"><b>Descripcion: </b> <%data_laboratorio.descripcion%>
+                        <td colspan="2">
+                          <b>Descripcion: </b> <br>
+                          <p><%data_laboratorio.descripcion%></p>
                         </td> 
                     </tr>
                     
