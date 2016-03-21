@@ -30,6 +30,7 @@
     "ngprogress": "~1.1.2",
     "alertify-js": "^1.6.1",
     "datatables": "^1.10.11",
-    "angular": "1.4.8"
+    "angular": "1.4.8",
+    "moment": "momentjs#^2.12.0"
   }
 }
