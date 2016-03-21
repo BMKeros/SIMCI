@@ -54,7 +54,7 @@
 		<!-- Ng progress -->
 		<script src="/bower_components/ngprogress/build/ngprogress.min.js"></script>
 		
-		<script src="/js/moment-with-locales.min.js"></script>
+		<script src="/bower_components/moment/min/moment-with-locales.min.js"></script>
 		<script src="/bower_components/pikaday/pikaday.js"></script>
 		<script src="/bower_components/howler.js/howler.min.js"></script>
 
