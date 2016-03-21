@@ -1,0 +1,35 @@
+{
+  "name": "simci_frontend_bower",
+  "description": "Para cargar todas las librerias del front para SIMCI",
+  "main": "gulpfile.js",
+  "authors": [
+    "Israel Lugo"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "SIMCI"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-animate": "1.4.8",
+    "angular-datatables": "~0.5.2",
+    "angular-route": "~1.4.8",
+    "pikaday": "~1.4.0",
+    "howler.js": "howler#~1.1.29",
+    "jquery": "~2.1.4",
+    "ngprogress": "~1.1.2",
+    "alertify-js": "^1.6.1",
+    "datatables": "^1.10.11",
+    "angular": "1.4.8"
+  }
+}
