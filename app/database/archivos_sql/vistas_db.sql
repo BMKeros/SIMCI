@@ -83,7 +83,7 @@ CREATE OR REPLACE VIEW vista_inventario AS
 	INNER JOIN almacenes ON almacenes.codigo = inventario.cod_dimension
 	INNER JOIN sub_dimensiones ON sub_dimensiones.codigo = inventario.cod_subdimension
 	INNER JOIN agrupaciones ON agrupaciones.codigo = inventario.cod_agrupacion
-	INNER JOIN sub_agrupaciones ON sub_agrupaciones.codigo = inventario.cod_subagrupacion
+	LEFT JOIN sub_agrupaciones ON sub_agrupaciones.codigo = inventario.cod_subagrupacion
 	INNER JOIN catalogo_objetos ON catalogo_objetos.id = inventario.cod_objeto
 	INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
 	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
