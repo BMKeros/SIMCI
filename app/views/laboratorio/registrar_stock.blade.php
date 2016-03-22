@@ -30,16 +30,13 @@
 							</select>
 						</div>
 
-						<div class="field">
-						    <button class="ui icon large inverted green button" id="btn_agregar_items" ng-click="agregar_stock_tabla()"><i class="plus icon" ></i></button>
-
-					    </div>
-
-					    <div class="six wide field">
+					    <div class="four wide field">
 						    <label>Cantidad</label>
 						    <input type="number" name="cantidad" placeholder="Cantidad"ng-model="DatosForm.cantidad">
-					    </div>   
+					    </div>
+					    
 					</div>
+
 				</div>
 			<br>
 			
@@ -48,6 +45,9 @@
 					<div class="seven wide field">
 						<label>Seleccione un laboratorio</label>
 						{{ Form::select_laboratorios(array('name'=>'laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
+					</div>
+					<div class="field">
+						<button class="ui icon large inverted green button" id="btn_agregar_items" ng-click="agregar_stock_tabla()"><i class="plus icon" ></i></button>
 					</div>
 				</div>
 			</div>
