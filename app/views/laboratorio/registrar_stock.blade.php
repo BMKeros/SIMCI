@@ -44,7 +44,7 @@
 						           	<i class="dropdown icon"></i>
 						           	<input tabindex="0" class="search" type="text">
 								</div>
-						</div>
+	
 							</div>
 						</div>
 						<div class="field">
