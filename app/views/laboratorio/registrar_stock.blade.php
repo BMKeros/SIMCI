@@ -17,6 +17,30 @@
 
 			<h3 class="ui centered dividing header">Agregar stock a laboratorio</h3>
 
+				<div class="field">
+					<div class="three fields">
+						<div class="seven wide field">
+							<label>Seleccione un elemento</label>
+							<select ng-model="select_objeto" class="ui dropdown">
+								<option value="Encubadora">Encubadora</option>
+								<option value="Pipeta">Pipeta</option>
+								<option value="Campana de Estraccion">Campana de Estraccion</option>
+								<option value="Pinzas">Pinzas</option>
+								<option value="Tubo de ensayo">Tubo de ensayo</option>
+							</select>
+						</div>
+
+						<div class="field">
+						    <button class="ui icon large inverted green button" id="btn_agregar_items" ng-click="agregar_stock_tabla()"><i class="plus icon" ></i></button>
+
+					    </div>
+
+					    <div class="six wide field">
+						    <label>Cantidad</label>
+						    <input type="number" name="cantidad" placeholder="Cantidad"ng-model="DatosForm.cantidad">
+					    </div>   
+					</div>
+				</div>
 			<br>
 			
 			<div class="field">
@@ -25,37 +49,10 @@
 						<label>Seleccione un laboratorio</label>
 						{{ Form::select_laboratorios(array('name'=>'laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
 					</div>
-
-					<div class="four wide field">
-						<label>Cantidad</label>
-						<input type="number" name="cantidad" placeholder="Cantidad"ng-model="DatosForm.cantidad">
-					</div>
-				</div>
-
-				<div class="field">
-					<div class="two fields">
-						<div class="seven wide field">
-							<div class="field">
-								<label>Seleccione un elemento</label>
-
-								<div class="ui search selection dropdown capitalize buscar_elemento">
-						           	<input type="hidden" ng-model="DatosForm.cod_objeto" name="cod_objeto" ng-update-hidden>
-						           	<div class="text">Buscar elemento</div>
-						           	<i class="dropdown icon"></i>
-						           	<input tabindex="0" class="search" type="text">
-								</div>
-	
-							</div>
-						</div>
-						<div class="field">
-						    <button class="ui icon large inverted green button" id="btn_agregar_items" ng-click="agregar_stock_tabla()"><i class="plus icon" ></i></button>
-
-					    </div>
-					</div>
 				</div>
 			</div>
-        </div>
-
+	    </div>
+			
         <br>
 
         <br>
@@ -101,13 +98,4 @@
 
 <script>
 	$('.ui.dropdown').dropdown();
-
-	$('.buscar_elemento').dropdown({
-	apiSettings: {
-	  	method: 'GET',
-	  	dataType: 'JSON',
-	  	url: '/api/inventario/mostrar?type=query&query={query}',
-  	},
-  	saveRemote:false
-});
 </script>
