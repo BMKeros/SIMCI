@@ -14,7 +14,6 @@ class CrearTablaInventario extends Migration {
 	{
 		Schema::create('inventario', function($table)
 		{
-			//$table->increments('id');
 			$table->string('cod_dimension', 4);
 			$table->string('cod_subdimension', 3);
 			$table->string('cod_agrupacion', 3);

@@ -21,25 +21,23 @@
 
 					if(!is_null($cod_dimension) && !is_null($cod_subdimension) && !is_null($cod_agrupacion) && !is_null($cod_objeto) && !is_null($numero_orden)){
 
-						$data = DB::table('inventario as INV')
-							->select('INV.cod_dimension', 
-								'INV.cod_subdimension', 
-								'INV.cod_agrupacion', 
-								'INV.cod_subagrupacion',
-								'INV.numero_orden',
-								'INV.cantidad_disponible',
-								'INV.cod_objeto',
-								'OBJ.nombre as nombre_objeto',
-								'UNI.nombre as nombre_unidad',
-								'UNI.abreviatura')
-							->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
-							->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad')
-							->where('INV.cod_dimension','=',$cod_dimension)
-							->where('INV.cod_subdimension', '=', $cod_subdimension)
-							->where('INV.cod_agrupacion', '=', $cod_agrupacion)
-							->where('INV.cod_objeto', '=', $cod_objeto)
-							->where('INV.numero_orden', '=', $numero_orden)
-							->orderBy('OBJ.nombre','asc')
+						$data = DB::table('vista_inventario')
+							->select('cod_dimension', 
+								'cod_subdimension', 
+								'cod_agrupacion', 
+								'cod_subagrupacion',
+								'numero_orden',
+								'cantidad_disponible',
+								'cod_objeto',
+								'nombre_objeto',
+								'nombre_unidad',
+								'abreviatura_unidad as abreviatura')
+							->where('cod_dimension','=',$cod_dimension)
+							->where('cod_subdimension', '=', $cod_subdimension)
+							->where('cod_agrupacion', '=', $cod_agrupacion)
+							->where('cod_objeto', '=', $cod_objeto)
+							->where('numero_orden', '=', $numero_orden)
+							->orderBy('nombre_objeto','asc')
 							->first();
 
 						$response = $data;
@@ -50,72 +48,36 @@
 				break;
 
 				case 'paginacion':
-					$consulta = DB::table('inventario as INV')
-						->select('INV.cod_dimension', 
-							'INV.cod_subdimension', 
-							'INV.cod_agrupacion', 
-							'INV.cod_subagrupacion',
-							'INV.numero_orden',
-							'INV.cantidad_disponible',
-							'INV.cod_objeto',
-							'OBJ.nombre as nombre_objeto',
-							'UNI.nombre as nombre_unidad',
-							'UNI.abreviatura')
-						->join('catalogo_objetos as OBJ', 'INV.cod_objeto', '=', 'OBJ.id')
-						->join('unidades as UNI', 'OBJ.cod_unidad','=','UNI.cod_unidad');
+					$consulta = DB::table('vista_inventario')
+						->select('cod_dimension', 
+								'cod_subdimension', 
+								'cod_agrupacion', 
+								'cod_subagrupacion',
+								'numero_orden',
+								'cantidad_disponible',
+								'cod_objeto',
+								'nombre_objeto',
+								'nombre_unidad',
+								'abreviatura_unidad as abreviatura');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
-					array('campo_where'=>'OBJ.nombre', 'campo_orden'=>'OBJ.nombre'));
+					array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
 					
 				break;
 
 				case 'paginacion_almacenes':
-					$length = Input::get('length', 10);
-					$value_search = Input::get('search');
-					$draw = Input::get('draw',1);
+					$consulta = DB::table('vista_almacen_full')
+							->select('cod_dimension as codigo',
+								'descripcion', 
+								'primer_nombre_responsable as nombre_responsable', 
+								'primer_apellido_responsable as apellido_responsable',
+								'primer_nombre_primer_auxiliar as nombre_primer_auxiliar',
+								'primer_apellido_primer_auxiliar as apellido_primer_auxiliar',
+								'primer_nombre_segundo_auxiliar as nombre_segundo_auxiliar', 
+								'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar');
 
-					if(quitar_espacios($value_search['value']) == ''){	
-						$data = DB::table('almacenes as ALM')
-							->select('ALM.codigo',
-								'ALM.descripcion', 
-								'RESP.primer_nombre as nombre_responsable', 
-								'RESP.primer_apellido as apellido_responsable',
-								'PA.primer_nombre as nombre_primer_auxiliar', 
-								'PA.primer_apellido as apellido_primer_auxiliar',
-								'SA.primer_nombre as nombre_segundo_auxiliar', 
-								'SA.primer_apellido as apellido_segundo_auxiliar')
-							->join('personas as RESP', 'RESP.id', '=', 'ALM.responsable')
-							->join('personas as PA', 'PA.id', '=', 'ALM.primer_auxiliar')
-							->leftJoin('personas as SA', 'SA.id', '=', 'ALM.segundo_auxiliar')
-							->orderBy('ALM.codigo','asc')
-							->paginate($length);
-					}
-					else{	
-						$data = DB::table('almacenes as ALM')
-							->select('ALM.codigo',
-								'ALM.descripcion', 
-								'RESP.primer_nombre as nombre_responsable', 
-								'RESP.primer_apellido as apellido_repsonsable',
-								'PA.primer_nombre as nombre_primer_auxiliar', 
-								'PA.primer_apellido as apellido_primer_auxiliar',
-								'SA.primer_nombre as nombre_segundo_auxiliar', 
-								'SA.primer_apellido as apellido_segund_auxiliar')
-							->join('personas as RESP', 'RESP.id', '=', 'ALM.responsable')
-							->join('personas as PA', 'PA.id', '=', 'ALM.primer_auxiliar')
-							->leftJoin('personas as SA', 'SA.id', '=', 'ALM.segundo_auxiliar')
-							->where('ALM.descripcion', 'ILIKE', '%'.$value_search['value'].'%')
-							->orderBy('ALM.codigo','asc')
-							->paginate($length);
-
-					}
-					
-					$response = array(
-						"draw"=>$draw,
-						"page"=>$data->getCurrentPage(),
-						"recordsTotal"=>$data->getTotal(),
-						"recordsFiltered"=> $data->count(),
-						"data" => $data->all()
-					);
+					$response = $this->generar_paginacion_dinamica($consulta,
+					array('campo_where'=>'descripcion', 'campo_orden'=>'cod_dimension'));
 
 				break;
 
@@ -125,16 +87,16 @@
 					
 					if(quitar_espacios($value_search) != ''){
 						
-						$data = DB::table('catalogo_objetos')
-							->select(DB::raw('capitalize(nombre) as name'), 'id as value')
-							->where('nombre','ILIKE','%'.$value_search.'%')
+						$data = DB::table('vista_inventario')
+							->select(DB::raw('capitalize(nombre_objeto) as name'), 'cod_objeto as value')
+							->where('nombre_objeto','ILIKE','%'.$value_search.'%')
 							->get();
 
 						$response = array("success"=>true, "results" => $data);
 					}
 					else{
-						$data = DB::table('catalogo_objetos')
-							->select(DB::raw('capitalize(nombre) as name'), 'id as value')
+						$data = DB::table('vista_inventario')
+							->select(DB::raw('capitalize(nombre_objeto) as name'), 'cod_objeto as value')
 							->orderBy('name', 'desc')
 							->take(15)
 							->get();
@@ -148,7 +110,7 @@
 				break;
 
 			}
-
+			
 			return Response::json($response);
 		}
 		
