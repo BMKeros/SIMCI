@@ -18,12 +18,17 @@
 			<h3 class="ui centered dividing header">Agregar stock a laboratorio</h3>
 
 			<br>
-
+			
 			<div class="field">
 				<div class="two fields">
 					<div class="seven wide field">
 						<label>Seleccione un laboratorio</label>
 						{{ Form::select_laboratorios(array('name'=>'laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
+					</div>
+
+					<div class="four wide field">
+						<label>Cantidad</label>
+						<input type="number" name="cantidad" placeholder="Cantidad"ng-model="DatosForm.cantidad">
 					</div>
 				</div>
 
