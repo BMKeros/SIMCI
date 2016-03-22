@@ -11,25 +11,18 @@
 			switch($tipo_busqueda){
 				case 'todos':
 					if($orden){
-						//esta aun falta porque no se que campos necesita
-						$response = Catalogo::orderBy('id', $orden)->get();
+						$response = DB::table('vista_objetos_full')->orderBy('id', $orden)->get();
 					}
 					else{
-						//esta aun le falta porque no se que campos necesita
-						//$response = Catalogo::all();
-						$response = DB::table('catalogo_objetos')->get();
+						$response = DB::table('vista_objetos_full')->get();
 					}
 				break;
 
 				case 'objeto':
 					if($id_objeto){
-						//$response = Catalogo::find($id_objeto);
-
-						$response = DB::table('catalogo_objetos as CO')
-							->select('CO.nombre', 'CO.descripcion', 'CO.especificaciones', 'CO.cod_clase_objeto', 'clase_objetos.nombre as nombre_clase', 'CO.cod_unidad', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
-							->join('clase_objetos', 'clase_objetos.id', '=', 'CO.cod_clase_objeto')
-							->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad')
-							->where('CO.id', '=', $id_objeto)
+						$response = DB::table('vista_objetos_full')
+							->select('nombre_objeto as nombre', 'descripcion_objeto as descripcion', 'especificaciones_objeto as especificaciones', 'cod_clase_objeto', 'nombre_clase_objeto as nombre_clase', 'cod_unidad', 'nombre_unidad', 'abreviatura_unidad')
+							->where('cod_objeto', '=', $id_objeto)
 							->first();
 							
 
@@ -44,13 +37,12 @@
 
 				case 'paginacion':
 
-					$consulta = DB::table('catalogo_objetos as CO')
-						->select('CO.id', 'CO.nombre', 'CO.especificaciones', 'unidades.nombre as nombre_unidad', 'unidades.abreviatura as abreviatura_unidad')
-						->join('unidades', 'unidades.cod_unidad', '=', 'CO.cod_unidad');
+
+				$consulta = DB::table('vista_objetos_full')
+					->select('cod_objeto as id', 'nombre_objeto as nombre', 'especificaciones_objeto as especificaciones', 'nombre_unidad', 'abreviatura_unidad');
 				
 					$response = $this->generar_paginacion_dinamica($consulta,
-					array('campo_where'=>'CO.nombre', 'campo_orden'=>'id'));
-
+					array('campo_where'=>'nombre_objeto', 'campo_orden'=>'cod_objeto'));
 				break;
 
 				case 'query':
@@ -59,17 +51,17 @@
 					
 					if(quitar_espacios($value_search) != ''){
 						
-						$data = DB::table('catalogo_objetos')
-							->select(DB::raw('capitalize(nombre) as name'), 'id as value')
-							->where('nombre','ILIKE','%'.$value_search.'%')
+						$data = DB::table('vista_objetos_full')
+							->select(DB::raw('capitalize(nombre_objeto) as name'), 'cod_objeto as value')
+							->where('nombre_objeto','ILIKE','%'.$value_search.'%')
 							->get();
 
 
 						$response = array("success"=>true, "results" => $data);
 					}
 					else{
-						$data = DB::table('catalogo_objetos')
-							->select(DB::raw('capitalize(nombre) as name'), 'id as value')
+						$data = DB::table('vista_objetos_full')
+							->select(DB::raw('capitalize(nombre_objeto) as name'), 'cod_objeto as value')
 							->orderBy('name', 'desc')
 							->take(15)
 							->get();
