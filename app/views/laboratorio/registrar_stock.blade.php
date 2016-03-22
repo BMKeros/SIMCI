@@ -70,9 +70,9 @@
             </thead>
             <tbody>
             	<tr ng-repeat="elemento in items_tabla_stock track by $index" id="<% elemento.id_item_stock %>" ng-animate="'animate'" class="animate-repeat">
-    				<td><% elemento.cod_objeto%></td>
+    				<td><% elemento.nombre_objeto | lowercase | capitalize%></td>
     				<td><% elemento.cantidad %></td>
-    				<td><% elemento.nombre_lab %></td>
+    				<td><% elemento.nombre_laboratorio | lowercase | capitalize %></td>
     				<td>
 						<button class="ui icon small button" ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
   							<i class="trash outline icon"></i>

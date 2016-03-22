@@ -50,17 +50,20 @@
 
 					$data_lab = DB::table('laboratorios')
 					->select('codigo as cod_laboratorio', 'nombre')
-					->where('codigo','=',$cod_laboratorio);
-					->get();
+					->where('codigo','=',$cod_laboratorio)
+					->first();
 
 					$data_obj = DB::table('catalogo_objetos')
 					->select('id as cod_objeto','nombre')
 					->where('id','=',$cod_objeto)
-					->get();
+					->first();
 
+					
 					$response = array(
-						//'l' => $data_lab,
-						//'o'=> $data_obj
+						'cod_objeto' => $data_obj->cod_objeto,
+						'nombre_objeto' => $data_obj->nombre,
+						'cod_laboratorio' => $data_lab->cod_laboratorio,
+						'nombre_laboratorio' => $data_lab->nombre
 					);
 
 				break;
