@@ -206,7 +206,7 @@
 			$nombre = Input::get('nombre');
 			$abreviatura = Input::get('abreviatura');
 			$tipo_unidad = Input::get('tipo_unidad');
-			
+
 			$reglas = array(
 				'nombre' => 'required|min:5|max:50', 
 				'abreviatura' => 'required|min:2|max:10',
@@ -236,7 +236,7 @@
 
 				$unidad->nombre = $nombre;
 				$unidad->abreviatura = $abreviatura;
-				$undiad->tipo_unidad = $tipo_unidad;
+				$unidad->tipo_unidad = $tipo_unidad;
 				
 				$unidad->save();
 
