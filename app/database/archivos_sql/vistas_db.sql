@@ -27,9 +27,6 @@ CREATE OR REPLACE VIEW vista_usuarios_full AS
 
 CREATE OR REPLACE VIEW vista_objetos_full AS
 	SELECT
-		laboratorios.codigo as cod_laboratorio,
-		laboratorios.nombre as nombre_laboratorio,
-		laboratorios.descripcion as descripcion_laboratorio,
 		catalogo_objetos.id as cod_objeto,
 		catalogo_objetos.nombre as nombre_objeto,
 		catalogo_objetos.descripcion as descripcion_objeto,
@@ -43,13 +40,11 @@ CREATE OR REPLACE VIEW vista_objetos_full AS
 		clase_objetos.nombre as nombre_clase_objeto,
 		clase_objetos.descripcion as descripcion_clase_objeto
 
-	FROM objetos_laboratorio
-	INNER JOIN laboratorios ON laboratorios.codigo = objetos_laboratorio.cod_laboratorio
-	INNER JOIN catalogo_objetos ON catalogo_objetos.id = objetos_laboratorio.cod_objeto
+	FROM catalogo_objetos
 	INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
 	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
-	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
-
+	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto;
+	
 
 CREATE OR REPLACE VIEW vista_inventario AS
 	SELECT
@@ -92,4 +87,20 @@ CREATE OR REPLACE VIEW vista_inventario AS
 	INNER JOIN catalogo_objetos ON catalogo_objetos.id = inventario.cod_objeto
 	INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
 	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
-	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
+	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto;
+
+CREATE OR REPLACE VIEW vista_almacen_full AS
+	SELECT 
+		almacenes.codigo as cod_dimension,
+		almacenes.descripcion as descripcion,
+		responsable.primer_nombre as primer_nombre_responsable,
+		responsable.primer_apellido as primer_apellido_responsable,
+		primer_auxiliar.primer_nombre as primer_nombre_primer_auxiliar,
+		primer_auxiliar.primer_apellido as primer_apellido_primer_auxiliar,
+		segundo_auxiliar.primer_nombre as primer_nombre_segundo_auxiliar,
+		segundo_auxiliar.primer_apellido as primer_apellido_segundo_auxiliar
+	
+	FROM almacenes
+	INNER JOIN personas as responsable ON responsable.id = almacenes.responsable
+	INNER JOIN personas as primer_auxiliar ON primer_auxiliar.id = almacenes.primer_auxiliar
+	LEFT JOIN personas as segundo_auxiliar ON segundo_auxiliar.id = almacenes.segundo_auxiliar;
