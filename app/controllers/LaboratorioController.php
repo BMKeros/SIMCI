@@ -36,11 +36,32 @@
 
 				case 'paginacion':
 					
-					$consulta = $data = DB::table('laboratorios')
+					$consulta = DB::table('laboratorios')
 							->select('codigo', 'nombre', 'descripcion');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 						array('campo_where'=>'nombre', 'campo_orden'=>'codigo'));
+
+				break;
+
+				case 'agregar_stock':
+					$cod_laboratorio = Input::get('cod_laboratorio', null);
+					$cod_objeto = Input::get('cod_objeto', null);
+
+					$data_lab = DB::table('laboratorios')
+					->select('codigo as cod_laboratorio', 'nombre')
+					->where('codigo','=',$cod_laboratorio);
+					->get();
+
+					$data_obj = DB::table('catalogo_objetos')
+					->select('id as cod_objeto','nombre')
+					->where('id','=',$cod_objeto)
+					->get();
+
+					$response = array(
+						//'l' => $data_lab,
+						//'o'=> $data_obj
+					);
 
 				break;
 

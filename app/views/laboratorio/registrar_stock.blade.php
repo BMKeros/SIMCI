@@ -24,7 +24,7 @@
 								<label>Seleccione un elemento</label>
  
 								<div class="ui search selection dropdown capitalize buscar_elemento">
-						           	<input type="hidden" ng-model="DatosForm.cod_objeto" name="cod_objeto" ng-update-hidden>
+						           	<input type="hidden" ng-model="select_objeto" name="cod_objeto" ng-update-hidden>
 						           	<div class="text">Buscar elemento</div>
 						           	<i class="dropdown icon"></i>
 						           	<input tabindex="0" class="search" type="text">
@@ -34,7 +34,7 @@
 
 					    <div class="four wide field">
 						    <label>Cantidad</label>
-						    <input type="number" name="cantidad" placeholder="Cantidad"ng-model="DatosForm.cantidad">
+						    <input type="number" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
 					    </div>
 					    
 					</div>
@@ -62,17 +62,17 @@
         <table class="ui celled striped table" width="100%">
             <thead>
                 <tr>
-                    <th width="20%">Cantida</th>
                     <th width="40%">Nombre</th>
+                    <th width="20%">Cantidad</th>
                     <th width="35%">Laboratorio</th>
 					<th width="5%" align="center">Accion</th>
                 </tr>
             </thead>
             <tbody>
             	<tr ng-repeat="elemento in items_tabla_stock track by $index" id="<% elemento.id_item_stock %>" ng-animate="'animate'" class="animate-repeat">
-    				<td></td>
     				<td><% elemento.cod_objeto%></td>
-    				<td><% elemento.nombre_lab | capitalize%></td>
+    				<td><% elemento.cantidad %></td>
+    				<td><% elemento.nombre_lab %></td>
     				<td>
 						<button class="ui icon small button" ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
   							<i class="trash outline icon"></i>
