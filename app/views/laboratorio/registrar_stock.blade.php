@@ -62,7 +62,7 @@
         <table class="ui celled striped table" width="100%">
             <thead>
                 <tr>
-                    <th width="20%">Codigo</th>
+                    <th width="20%">Cantida</th>
                     <th width="40%">Nombre</th>
                     <th width="35%">Laboratorio</th>
 					<th width="5%" align="center">Accion</th>
