@@ -98,7 +98,7 @@
 						$data = DB::table('vista_inventario')
 							->select(DB::raw('capitalize(nombre_objeto) as name'), 'cod_objeto as value')
 							->orderBy('name', 'desc')
-							->take(15)
+							->take(7)
 							->get();
 						
 						$response = array("success"=>true, "results" => $data);
