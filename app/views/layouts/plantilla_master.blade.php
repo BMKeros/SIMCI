@@ -60,6 +60,7 @@
 
 		<script src="/js/scripts_app.js"></script>
 		<script src="/js/scripts_formularios.js"></script>
+		<script src="/js/dialogos_app.js"></script>
 
 		<!-- Script APP SIMCI ANGULAR JS -->
 		<script src="/js/angular/ng-app.js"></script>
