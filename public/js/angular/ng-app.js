@@ -5,6 +5,11 @@
   });
 
   simci.run(function($rootScope,DTDefaultOptions,ToolsService,ngProgressFactory,$http){
+      //Configuracion de semantic
+      $.fn.search.settings.error = {
+        noResults : 'No se encontraron resultados',
+      }
+
       //Config para alertify
       alertify.defaults.transition = "zoom";
       alertify.defaults.theme.ok = "ui positive button";
