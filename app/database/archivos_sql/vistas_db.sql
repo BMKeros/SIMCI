@@ -39,14 +39,15 @@ CREATE OR REPLACE VIEW vista_objetos_full AS
 		clase_objetos.id as cod_clase_objeto,
 		clase_objetos.nombre as nombre_clase_objeto,
 		clase_objetos.descripcion as descripcion_clase_objeto
-
 	FROM catalogo_objetos
 	INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
 	INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
 	INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto;
 	
 
-CREATE OR REPLACE VIEW vista_inventario AS
+
+/*OJO PENDIENTE POR EVALUAR PORQUE NO TRAE TODOS LOS REGISTROS*/
+CREATE OR REPLACE VIEW vista_inventarios_full AS
 	SELECT
 		inventario.numero_orden as numero_orden,
 		inventario.cantidad_disponible as cantidad_disponible,
@@ -78,7 +79,6 @@ CREATE OR REPLACE VIEW vista_inventario AS
 		clase_objetos.nombre as nombre_clase_objeto,
 		clase_objetos.descripcion as descripcion_clase_objeto
 
-
 	FROM inventario 
 	INNER JOIN almacenes ON almacenes.codigo = inventario.cod_dimension
 	INNER JOIN sub_dimensiones ON sub_dimensiones.codigo = inventario.cod_subdimension
@@ -99,8 +99,15 @@ CREATE OR REPLACE VIEW vista_almacen_full AS
 		primer_auxiliar.primer_apellido as primer_apellido_primer_auxiliar,
 		segundo_auxiliar.primer_nombre as primer_nombre_segundo_auxiliar,
 		segundo_auxiliar.primer_apellido as primer_apellido_segundo_auxiliar
-	
 	FROM almacenes
 	INNER JOIN personas as responsable ON responsable.id = almacenes.responsable
 	INNER JOIN personas as primer_auxiliar ON primer_auxiliar.id = almacenes.primer_auxiliar
 	LEFT JOIN personas as segundo_auxiliar ON segundo_auxiliar.id = almacenes.segundo_auxiliar;
+
+CREATE OR REPLACE VIEW vista_laboratorio_full AS
+	SELECT
+		laboratorios.codigo as cod_laboratorio,
+		laboratorios.nombre as nombre_laboratorio,
+		laboratorios.descripcion as descripcion_laboratorio,
+		laboratorios.secuencia as secuencia_laboratorio
+	FROM laboratorios;

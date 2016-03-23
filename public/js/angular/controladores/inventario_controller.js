@@ -89,6 +89,9 @@ simci.controller('InventarioController', [
 
     
     if($location.$$url == "/inventario/registrar-elemento"){
+      
+      ToolsService.reload_template_cache($route,$templateCache);
+
       $scope.mostrar_mensaje = false;
 
       $scope.registrar_elemento = ToolsService.registrar_dinamico($scope,$http,$timeout,{

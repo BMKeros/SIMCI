@@ -11,18 +11,18 @@
 				case 'todos':
 					if($orden){
 						//le falta aun los campos que traera la consulta
-						$response = DB::table('laboratorios')->orderBy($orden)->get();
+						$response = DB::table('vista_laboratorio_full')->orderBy($orden)->get();
 					}
 					else{
-						$response = DB::table('laboratorios')->get();
+						$response = DB::table('vista_laboratorio_full')->get();
 					}
 				break;
 
 				case 'laboratorio_full':
 					if($id_laboratorio){
-						$response = DB::table('laboratorios')
-							->select('codigo', 'nombre', 'descripcion')
-							->where('codigo', '=', $id_laboratorio)
+						$response = DB::table('vista_laboratorio_full')
+							->select('cod_laboratorio as codigo', 'nombre_laboratorio as nombre', 'descripcion_laboratorio as descripcion')
+							->where('cod_laboratorio', '=', $id_laboratorio)
 							->first();
 
 						if(is_null($response)){
@@ -36,11 +36,11 @@
 
 				case 'paginacion':
 					
-					$consulta = DB::table('laboratorios')
-							->select('codigo', 'nombre', 'descripcion');
+					$consulta = DB::table('vista_laboratorio_full')
+							->select('cod_laboratorio as codigo', 'nombre_laboratorio as nombre', 'descripcion_laboratorio as descripcion');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
-						array('campo_where'=>'nombre', 'campo_orden'=>'codigo'));
+						array('campo_where'=>'nombre_laboratorio', 'campo_orden'=>'cod_laboratorio'));
 
 				break;
 
@@ -48,14 +48,14 @@
 					$cod_laboratorio = Input::get('cod_laboratorio', null);
 					$cod_objeto = Input::get('cod_objeto', null);
 
-					$data_lab = DB::table('laboratorios')
-					->select('codigo as cod_laboratorio', 'nombre')
-					->where('codigo','=',$cod_laboratorio)
+					$data_lab = DB::table('vista_laboratorio_full')
+					->select('cod_laboratorio', 'nombre_laboratorio as nombre')
+					->where('cod_laboratorio','=',$cod_laboratorio)
 					->first();
 
-					$data_obj = DB::table('catalogo_objetos')
-					->select('id as cod_objeto','nombre')
-					->where('id','=',$cod_objeto)
+					$data_obj = DB::table('vista_objetos_full')
+					->select('cod_objeto','nombre_objeto as nombre')
+					->where('cod_objeto','=',$cod_objeto)
 					->first();
 
 					
@@ -69,7 +69,7 @@
 				break;
 
 				default:
-					$response = DB::table('laboratorios')->get();
+					$response = DB::table('vista_laboratorio_full')->get();
 				break;
 
 			}
