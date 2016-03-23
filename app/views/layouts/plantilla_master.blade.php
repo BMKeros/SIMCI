@@ -11,7 +11,7 @@
 		
 	  	<link rel="stylesheet" href="/semantic/semantic.min.css" />
 	  	<link rel="stylesheet" href="/css/styles.css" />
-	  	<link rel="stylesheet" href="/bower_components/datatables/media/css/jquery.dataTables.min.css">
+	  	<link rel="stylesheet" href="/bower_components/datatables/media/css/dataTables.semanticui.min.css">
 	  	<link rel="stylesheet" href="/bower_components/pikaday/css/pikaday.css">
 	  	<!-- AlertifyJs Css -->
 	  	<link rel="stylesheet" href="/bower_components/alertify-js/build/css/alertify.min.css">
@@ -41,6 +41,7 @@
 		<script src="/bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="/semantic/semantic.min.js"></script>
 		<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+		<script src="/bower_components/datatables/media/js/dataTables.semanticui.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
