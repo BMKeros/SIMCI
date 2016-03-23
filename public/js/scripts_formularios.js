@@ -1002,3 +1002,48 @@ var reglas_formulario_registrar_proveedor = {
     },
     inline: true
 };
+
+var reglas_formulario_agregar_stock = {
+   on: 'blur',
+   duration: 40,
+   fields: {
+      select_laboratorio: {
+        identifier: 'select_laboratorio',
+        rules:[
+            {
+              type:'empty',
+              prompt:'Este campo no puede quedar vacio'
+           }
+        ]
+      },
+      select_objeto:{
+        identifier: 'select_objeto',
+        rules:[
+          {
+            type:'empty',
+              prompt:'Este campo no debe quedar vacio'
+          }
+        ]
+      },
+
+      cantidad:{
+        identifier: 'cantidad',
+        rules:[
+          {
+            type:'empty',
+              prompt:'Este campo no debe quedar vacio'
+          },
+          {
+            type:'number',
+            prompt:'Este campo debe contener solo numeros'
+          },
+          {
+            type   : 'not[0]',
+            prompt : 'La cantidad debe ser mayor a cero'
+          }
+        ]
+      }
+    },
+   inline: true
+};
+
