@@ -319,8 +319,10 @@ simci.controller('LaboratorioController', [
 
           $scope.agregar_stock_tabla = function () {
 
-            if(!!($scope.select_laboratorio) && !!($scope.select_objeto)){
-              var data_laboratorio = {};
+            var formulario = $('#formulario_registrar_stock');
+            var is_valid_form = formulario.form(reglas_formulario_agregar_stock).form('is valid');
+          
+            if(is_valid_form){
               $http({
                   method: 'GET',
                   url: '/api/laboratorio/mostrar?type=agregar_stock&cod_laboratorio='+$scope.select_laboratorio+'&cod_objeto='+$scope.select_objeto,
@@ -353,9 +355,6 @@ simci.controller('LaboratorioController', [
                   ToolsService.generar_alerta_status(data_error);
                 }
               );
-            }
-            else{
-              alertify.error("Debes seleccionar un Laboratorio y un Elemento");
             }
           };
 
