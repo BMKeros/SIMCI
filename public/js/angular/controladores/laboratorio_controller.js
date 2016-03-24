@@ -410,7 +410,6 @@ simci.controller('LaboratorioController', [
             elemento_hijo.removeClass('remove');
             elemento_hijo.addClass('checkmark');
             elemento_fila.removeClass('negative');
-            elemento_fila.add
 
           }
 
