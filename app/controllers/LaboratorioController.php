@@ -157,7 +157,7 @@
 					
 					$lab_actual->save();
 
-					return Response::json(array('resultado' => true, 'mensajes' => array('Laboratorio actualizado con exito')));
+					return Response::json(array('resultado' => true, 'mensajes' => 'Laboratorio actualizado con exito'));
 				}
 			}
 		}
@@ -174,7 +174,7 @@
 
 			DB::table('objetos_laboratorio')->insert($campos);
 
-			return Response::json(array('resultado' => true, 'mensajes' => array('Objetos agregados con exito.!')));
+			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos agregados con exito.!'));
 		}
 
 
@@ -229,43 +229,6 @@
 					)
 				);
 			}
-	    }
-
-	    public function postAgregarStock(){
-	    	$cod_laboratorio = Input::get('cod_laboratorio');
-	    	$cod_objeto = Input::get('cod_objeto');
-
-	    	$reglas = array(
-	    		'cod_laboratorio' => 'required',
-	    		'cod_objeto' => 'required'
-	    	);
-
-	    	$campos = array(
-	    		'cod_laboratorio' => $cod_laboratorio,
-	    		'cod_objeto' => $cod_laboratorio
-	    	);
-
-	    	$validacion = Validator::make($campos, $reglas, $mensajes);
-
-	    	if($validacion->fails()){
-	    		return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
-	    	}
-	    	else{
-	    		$objeto_laboratorio = new ObjetoLaboratorio;
-
-	    		$objeto_laboratorio->cod_laboratorio = $cod_laboratorio;
-	    		$objeto_laboratorio->cod_objeto = $cod_objeto;
-
-	    		$objeto_laboratorio->save();
-
-	    		return Response::json(array(
-	    				'resultado' => true,
-	    				'mensajes' => array('Objeto asignado con exito.!')
-	    			)
-	    		);
-
-	    	}
-
 	    }
 
 	}
