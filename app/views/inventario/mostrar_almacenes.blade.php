@@ -8,33 +8,31 @@
 </div>
 
 <!--Bloque 2. Mostrar elemento-->
-<div class="ui modal" id="modal_ver_almacen">
+<div class="ui modal font-tag-p-15px" id="modal_ver_almacen">
     <div class="header">Datos del almacen</div>
         <div class="content">
             <table class="ui celled table capitalize">
                 <tbody>
                     <tr>
-                        <td>
+                        <td colspan="6">
                             <b>Nombre del almacen:</b>
-                              <p>almacen de Reactivo</p>
+                            <p><% data_almacen.descripcion %></p>
                         </td>
-                        
                     </tr>
 					
                     <tr>
-
                         <td colspan="2">
                             <b>Responsable:</b>
-                            <p>Nombre del Responsable</p>
+                            <p><% data_almacen.nombre_responsable +' '+ data_almacen.apellido_responsable%></p>
                         </td>
-                        <td colspam="2">
+                        <td colspan="2">
                             <b>Primer auxiliar:</b>
-                                <p>Nombre de auxiliar</p>
+                            <p><% data_almacen.nombre_primer_auxiliar +' '+ data_almacen.apellido_primer_auxiliar%></p>
                         </td>
 
-                        <td colspam="2">
+                        <td colspan="2">
                             <b>Segundo auxiliar:</b>
-                                <p>Nombre de auxiliar.</p>
+                            <p><% data_almacen.nombre_segundo_auxiliar +' '+ data_almacen.apellido_segundo_auxiliar%></p>
                         </td> 
                     </tr>
                     
