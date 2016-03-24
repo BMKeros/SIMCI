@@ -162,7 +162,7 @@
 			}
 		}
 
-		public function postProcesarAgregadoStock(){
+		public function postAgregarStock(){
 			$codigos_objetos = Input::get('data');
 
 			foreach ($codigos_objetos as $value) {

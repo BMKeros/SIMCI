@@ -363,7 +363,7 @@ simci.controller('LaboratorioController', [
 
             $http({
                 method: 'POST',
-                url: '/api/laboratorio/procesar-agregado-stock',
+                url: '/api/laboratorio/agregar-stock',
                 data: {
                   data: $scope.items_tabla_stock
                 }
