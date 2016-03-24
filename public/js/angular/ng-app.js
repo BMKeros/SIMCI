@@ -93,7 +93,7 @@
     }
   });
 
-  simci.factory('ToolsService', [function () {
+  simci.factory('ToolsService', ['$http', function ($http) {
     return {
       tools_input:{
         //Para convertir el valor de los input en mayuscula
@@ -239,6 +239,82 @@
           this_root.generar_alerta_status(data_error);
         });
         
+      },
+
+      //Funcion para el hacer un modal dinamico con alertify para eliminar 
+      eliminar_elemento_dinamico: function(_SCOPE, opciones_modal){
+
+        var this_root = this;
+        var config = {
+          titulo_confirm : {
+            principal : opciones_modal.titulo_confirm.principal || '¡Alerta!',
+            secundario: opciones_modal.titulo_confirm.secundario  || 'Confirme su respuesta'
+          },
+          mensajes: {
+            principal : {
+              mensaje_confirmacion: opciones_modal.mensajes.principal.mensaje_confirmacion || 'mensaje_confirmacion_defualt',
+              error: opciones_modal.mensajes.principal.error || 'mensaje_error_principal_default'
+            },
+            secundario: {
+              mensaje_confirmacion: opciones_modal.mensajes.secundario.mensaje_confirmacion || 'mensaje_confirmacion_defualt',
+              success: opciones_modal.mensajes.secundario.success || "Eliminacion realizada con exito",
+              error: opciones_modal.mensajes.secundario.error || "Ha ocurrido un error al realizar la operacion"
+            }
+          },
+          urls: {
+            verificacion: opciones_modal.urls.verificacion,
+            eliminacion: opciones_modal.urls.eliminacion
+          },
+          nombre_tabla: opciones_modal.nombre_tabla || undefined
+        };
+
+        alertify.confirm(config.mensajes.principal.mensaje_confirmacion,
+          //onok consulta para verificar si tiene relaciones con otras tablas
+          function(){
+            $http({
+              method: 'POST',
+              url: config.urls.verificacion,
+            }).then(function(data){
+              //verificamos si tiene relacion en otras tablas
+              if(data.data.resultado){
+                alertify.alert(opciones_modal.mensajes.principal.error).set('title', 'Atencion!');
+              }
+              else{
+                //sino tiene relaciones, que confirme para que elimine 
+                alertify.confirm(config.mensajes.secundario.mensaje_confirmacion, 
+                  //onok para eliminar 
+                  function(){
+                    $http({
+                      method: 'POST',
+                      url: config.urls.eliminacion,
+                    }).then(function(data){
+                      
+                      if(data.data.resultado){
+                        //Recargamos la tabla
+                        setTimeout(function(){
+                          this_root.reload_tabla(_SCOPE,config.nombre_tabla,function(data){});
+                        }, 500);
+
+                        alertify.success(config.mensajes.secundario.success);
+                      }
+                      else{
+                        //$log.info(data.data);
+                        alertify.error(config.mensajes.secundario.error);
+                      }
+                    },function(data_error){
+                      //$log.info(data_error);
+                      this_root.generar_alerta_status(data_error);
+                    });
+                  }
+                ).set('title', config.titulo_confirm.secundario);
+              }
+            },
+            function(data_error){
+              //$log.info(data_error);
+              this_root.generar_alerta_status(data_error);
+            });
+          }
+        ).set('title', config.titulo_confirm.principal);
       },
       //Funcion para el registro dinamico de todos los controladores
       registrar_dinamico: function($_SCOPE,$_HTTP,$_TIMEOUT,opciones){
