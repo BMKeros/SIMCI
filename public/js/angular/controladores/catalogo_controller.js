@@ -117,7 +117,7 @@ simci.controller('CatalogoController', [
             
             DTColumnBuilder.newColumn(null).withTitle('Nombre').renderWith(
             function(data, type, full) {
-                return data.nombre + '<img class="ui right floated spopup" style= margin-left:190px; src="/img/data.jpg" width="20" height="20" data-content="Mostrar DataSheet" onclick="alertify.DataSheetDialog(1);">';
+                return data.nombre + '<img class="ui spopup" style="float:right ;" src="/img/data.png" width="25" height="25" data-content="Mostrar DataSheet" onclick="alertify.DataSheetDialog(1);">';
             })
             .withOption('width','30%')
             .notSortable(),
