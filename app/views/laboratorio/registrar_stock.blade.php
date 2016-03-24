@@ -112,8 +112,6 @@
 		onSelect: function(elem_select, response){
 			//Guardamos el objeto seleccionado en el input hidden
 			$('#select_objeto').val(elem_select.value).trigger('change');
-			//Vaciamos el campo de busqueda
-			$('#campo_search_objeto').val('');
 		},
 		apiSettings   : {
 		  onResponse: function(_Response) {

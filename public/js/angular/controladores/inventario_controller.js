@@ -389,51 +389,28 @@ simci.controller('InventarioController', [
 
 
       $scope.modal_eliminar_almacen = function(cod_almacen){
-        alertify.confirm('Seguro que desea eliminar este alamacen!',
-          //onok consulta para verificar si tiene relaciones con otras tablas
-          function(){
-            $http({
-              method: 'POST',
-              url: '/api/usuarios/verificar?id='+id,
-            }).then(function(data){
-              //verificamos si el usuario tiene relacion en otras tablas
-              if(data.data.resultado){
-                alertify.alert('No puede eliminar este usuario debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.');
-              }
-              else{
-                //sino tiene relaciones, que confirme para que elimine el usuario
-                alertify.confirm("Confirme si desea eliminar", 
-                  //onok para eliminar el usuairo
-                  function(){
-                    $http({
-                      method: 'POST',
-                      url: '/api/usuarios/eliminar?id='+id,
-                    }).then(function(data){
-                      
-                      if(data.data.resultado){
-                        //Recargamos la tabla
-                        setTimeout(function(){
-                          ToolsService.reload_tabla($scope,'tabla_usuarios',function(data){});
-                        }, 500);                         
-                      }
-                      else{
-                        //$log.info(data.data);
-                        alertify.error("Ha ocurrido un error al realizar la operacion");
-                      }
-                    },function(data_error){
-                      //$log.info(data_error);
-                      alertify.error("Ha ocurrido un error al realizar la operacion");
-                    });
-                  }
-                ).set('title', '¡Alerta!');
-              }
+        
+        ToolsService.eliminar_elemento_dinamico($scope,{
+          titulo_confirm : {
+            principal : '¡Alerta!',
+            secundario: 'Confirme su respuesta!'
+          },
+          mensajes: {
+            principal : {
+              mensaje_confirmacion: 'Seguro que desea eliminar este almacen?',
+              error: 'No puede eliminar este almacen debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.'
             },
-            function(data_error){
-              //$log.info(data_error);
-              ToolsService.generar_alerta_status(data_error);
-            });
-          }
-        ).set('title', '¡Alerta!');
+            secundario: {
+              mensaje_confirmacion: "Confirme si desea eliminar este almacen",
+            }
+          },
+          urls: {
+            verificacion: '/api/inventario/verificar?id='+cod_almacen,
+            eliminacion: '/api/inventario/eliminar?id='+cod_almacen
+          },
+          nombre_tabla: 'tabla_almacenes'
+        });
+
       };
 
     }// inventario/ver/almacenes"  
