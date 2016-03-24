@@ -8,7 +8,7 @@
 </div>
 
 <!--Bloque 2. Mostrar elemento-->
-<div class="ui modal" id="modal_ver_almacenes">
+<div class="ui modal" id="modal_ver_almacen">
     <div class="header">Datos del almacenes</div>
         <div class="content">
             <table class="ui celled table capitalize">

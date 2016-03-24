@@ -81,6 +81,22 @@
 
 				break;
 
+				case 'almacen_full':
+					$data = DB::table('vista_almacen_full')
+							->select('cod_dimension as codigo',
+								'descripcion', 
+								'primer_nombre_responsable as nombre_responsable', 
+								'primer_apellido_responsable as apellido_responsable',
+								'primer_nombre_primer_auxiliar as nombre_primer_auxiliar',
+								'primer_apellido_primer_auxiliar as apellido_primer_auxiliar',
+								'primer_nombre_segundo_auxiliar as nombre_segundo_auxiliar', 
+								'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar')
+							->get();
+
+					$response = $data;
+
+				break;
+
 				case 'query':
 
 					$value_search = Input::get('query');

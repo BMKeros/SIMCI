@@ -369,17 +369,73 @@ simci.controller('InventarioController', [
           .notSortable(),
          DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<a class="ui icon button blue spopup" data-content="Ver Almacen" ng-click="modal_ver_elemento(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
-                      '<a class="ui icon button green spopup"  data-content="Modificar Almacen" ng-click="modal_modificar_usuario(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+  
-                      '<a class="ui icon button red spopup"  data-content="Eliminar Almacen" ng-click="modal_eliminar_usuario(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
+              return '<a class="ui icon button blue spopup" data-content="Ver Almacen" ng-click="modal_ver_almacen(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
+                      '<a class="ui icon button green spopup"  data-content="Modificar Almacen" ng-click="modal_modificar_almacen(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+  
+                      '<a class="ui icon button red spopup"  data-content="Eliminar Almacen" ng-click="modal_eliminar_almacen(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
           })
           .notSortable()
           .withOption('width', '15%'),
       ];      
+
+      $scope.modal_ver_almacen = function(cod_almacen){
+        $scope.data_almacen = {};
+
+        ToolsService.mostrar_modal_dinamico($scope,$http,{
+          url : '/api/inventario/mostrar?type=almacen_full&'+ToolsService.printf('cod_almacen={0}',cod_almacen),
+          scope_data_save_success: 'data_almacen',
+          id_modal: 'modal_ver_almacen'
+        });
+      };
+
+
+      $scope.modal_eliminar_almacen = function(cod_almacen){
+        alertify.confirm('Seguro que desea eliminar este alamacen!',
+          //onok consulta para verificar si tiene relaciones con otras tablas
+          function(){
+            $http({
+              method: 'POST',
+              url: '/api/usuarios/verificar?id='+id,
+            }).then(function(data){
+              //verificamos si el usuario tiene relacion en otras tablas
+              if(data.data.resultado){
+                alertify.alert('No puede eliminar este usuario debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.');
+              }
+              else{
+                //sino tiene relaciones, que confirme para que elimine el usuario
+                alertify.confirm("Confirme si desea eliminar", 
+                  //onok para eliminar el usuairo
+                  function(){
+                    $http({
+                      method: 'POST',
+                      url: '/api/usuarios/eliminar?id='+id,
+                    }).then(function(data){
+                      
+                      if(data.data.resultado){
+                        //Recargamos la tabla
+                        setTimeout(function(){
+                          ToolsService.reload_tabla($scope,'tabla_usuarios',function(data){});
+                        }, 500);                         
+                      }
+                      else{
+                        //$log.info(data.data);
+                        alertify.error("Ha ocurrido un error al realizar la operacion");
+                      }
+                    },function(data_error){
+                      //$log.info(data_error);
+                      alertify.error("Ha ocurrido un error al realizar la operacion");
+                    });
+                  }
+                ).set('title', '¡Alerta!');
+              }
+            },
+            function(data_error){
+              //$log.info(data_error);
+              ToolsService.generar_alerta_status(data_error);
+            });
+          }
+        ).set('title', '¡Alerta!');
+      };
+
     }// inventario/ver/almacenes"  
-
-
-
-
   }]
 );
