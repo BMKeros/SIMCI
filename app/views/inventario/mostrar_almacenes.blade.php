@@ -9,19 +9,24 @@
 
 <!--Bloque 2. Mostrar elemento-->
 <div class="ui modal" id="modal_ver_almacen">
-    <div class="header">Datos del almacenes</div>
+    <div class="header">Datos del almacen</div>
         <div class="content">
             <table class="ui celled table capitalize">
                 <tbody>
                     <tr>
                         <td>
-                            <b>Responsable:</b>
-                              <p>Nombre de Responsable</p>
+                            <b>Nombre del almacen:</b>
+                              <p>almacen de Reactivo</p>
                         </td>
                         
                     </tr>
 					
                     <tr>
+
+                        <td colspan="2">
+                            <b>Responsable:</b>
+                            <p>Nombre del Responsable</p>
+                        </td>
                         <td colspam="2">
                             <b>Primer auxiliar:</b>
                                 <p>Nombre de auxiliar</p>

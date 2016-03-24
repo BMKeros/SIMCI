@@ -37,7 +37,7 @@ simci.controller('LaboratorioController', [
       },
       
       {
-        nombre:"mostrar laboratorio",
+        nombre:"mostrar laboratorios",
         descripcion: "Esta opcion le permitira ver los nuevos laboratorios",
         url: "#/laboratorio/ver/todos",
         icono: 'unhide',
