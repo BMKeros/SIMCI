@@ -368,6 +368,37 @@ simci.controller('LaboratorioController', [
 
       }//Fin de agregar-stock
 
+      if($location.$$url == '/laboratorio/mover-stock'){
+        
+        $scope.seleccionar_item_tabla=function (_event) {
+          elemento=angular.element(_event.target);
+          elemento_hijo=angular.element(elemento.find('i.icon').get(0));
+          elemento_fila=angular.element('#'+elemento.attr('data-id-fila'));
+
+          if (elemento.hasClass('blue')) {
+            elemento.removeClass('blue');
+            elemento.addClass('red');
+            elemento_hijo.removeClass('checkmark');
+            elemento_hijo.addClass('remove');
+            elemento_fila.addClass('negative');
+            elemento_fila.removeClass('positive');
+          }
+
+          else {
+            elemento.removeClass('red');
+            elemento.addClass('blue');
+            elemento_hijo.removeClass('remove');
+            elemento_hijo.addClass('checkmark');
+            elemento_fila.removeClass('negative');
+
+          }
+
+        }
+          
+          
+
+      }//Fin de agregar-stock
+
 
     }]
 );
