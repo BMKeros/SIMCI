@@ -550,7 +550,7 @@ class UsuariosController extends BaseController {
  
 		if(!is_null($usuario)){
 
-			if(!Auth::check()){
+			if(Auth::user()->id != $usuario->id) {
 				$usuario->delete();	
 				return Response::json(array(
 					'resultado'=>true, 

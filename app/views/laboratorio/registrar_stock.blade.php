@@ -78,7 +78,7 @@
     				<td><% elemento.cantidad %></td>
     				<td><% elemento.nombre_laboratorio | lowercase | capitalize %></td>
     				<td>
-						<button class="ui icon small button" ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
+						<button class="ui  icon small button" id="btn_action_item" ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
   							<i class="trash outline icon"></i>
 						</button>
 					</td>
@@ -95,7 +95,7 @@
         <br>
 
         <div class="action">
-        	<div class="ui right floated positive button">
+        	<div class="ui right floated positive button" ng-click="procesar_agregar_stock()">
                 Agregar
             </div>
         </div>
@@ -145,8 +145,6 @@
 		  },
 		  url: '/api/inventario/mostrar?type=search&query={query}'
 		}
-	});
-
-	
+	});	
 
 </script>

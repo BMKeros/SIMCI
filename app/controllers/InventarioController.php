@@ -82,6 +82,8 @@
 				break;
 
 				case 'almacen_full':
+					$cod_almacen = Input::get('cod_almacen', null);
+
 					$data = DB::table('vista_almacen_full')
 							->select('cod_dimension as codigo',
 								'descripcion', 
@@ -91,7 +93,8 @@
 								'primer_apellido_primer_auxiliar as apellido_primer_auxiliar',
 								'primer_nombre_segundo_auxiliar as nombre_segundo_auxiliar', 
 								'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar')
-							->get();
+							->where('cod_dimension','=',$cod_almacen)
+							->first();
 
 					$response = $data;
 
