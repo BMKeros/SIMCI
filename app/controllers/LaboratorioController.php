@@ -157,7 +157,7 @@
 					
 					$lab_actual->save();
 
-					return Response::json(array('resultado' => true, 'mensajes' => 'Laboratorio actualizado con exito'));
+					return Response::json(array('resultado' => true, 'mensajes' => array('Laboratorio actualizado con exito')));
 				}
 			}
 		}
@@ -174,7 +174,7 @@
 
 			DB::table('objetos_laboratorio')->insert($campos);
 
-			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos agregados con exito.!'));
+			return Response::json(array('resultado' => true, 'mensajes' => array('Objetos agregados con exito.!')));
 		}
 
 
