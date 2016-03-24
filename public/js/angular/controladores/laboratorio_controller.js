@@ -346,6 +346,7 @@ simci.controller('LaboratorioController', [
                       nombre_objeto: data_item.nombre_objeto,
                       cantidad: $scope.cantidad
                     });  
+                    console.log($scope.items_tabla_stock);
                   }
                   else{
                     alertify.error("Ya agregaste un stock igual a este en la lista");
@@ -357,6 +358,25 @@ simci.controller('LaboratorioController', [
               );
             }
           };
+
+          $scope.procesar_agregar_stock = function(){
+
+            $http({
+                method: 'POST',
+                url: '/api/laboratorio/procesar-agregado-stock',
+                data: {
+                  data: $scope.items_tabla_stock
+                }
+              }).then(
+                function(data){
+                  var data_item = data.data;
+                },
+                function(data_error) {
+                  ToolsService.generar_alerta_status(data_error);
+                }
+              );
+
+          }
 
           $scope.eliminar_stock_tabla = function (id_elemento) {
             

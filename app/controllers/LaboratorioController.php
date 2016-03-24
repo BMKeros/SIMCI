@@ -159,11 +159,25 @@
 
 					return Response::json(array('resultado' => true, 'mensajes' => 'Laboratorio actualizado con exito'));
 				}
-
-
-
 			}
 		}
+
+		public function postProcesarAgregadoStock(){
+			$codigos_objetos = Input::get('data');
+
+			foreach ($codigos_objetos as $value) {
+				$campos = array(
+					'cod_laboratorio' => $value['cod_laboratorio'],
+					'cod_objeto' => $value['cod_objeto']
+				);
+				DB::table('objetos_laboratorio')->insert($campos);
+			}
+
+			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos agregados con exito.!'));
+
+			
+		}
+
 
 		public function postVerificar(){
 			$id = Input::get('id');
@@ -246,7 +260,7 @@
 	    		$objeto_laboratorio->save();
 
 	    		return Response::json(array(
-	    				'resultazdo' => true,
+	    				'resultado' => true,
 	    				'mensajes' => array('Objeto asignado con exito.!')
 	    			)
 	    		);
