@@ -166,16 +166,15 @@
 			$codigos_objetos = Input::get('data');
 
 			foreach ($codigos_objetos as $value) {
-				$campos = array(
+				$campos[] = array(
 					'cod_laboratorio' => $value['cod_laboratorio'],
 					'cod_objeto' => $value['cod_objeto']
 				);
-				DB::table('objetos_laboratorio')->insert($campos);
 			}
 
-			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos agregados con exito.!'));
+			DB::table('objetos_laboratorio')->insert($campos);
 
-			
+			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos agregados con exito.!'));
 		}
 
 
