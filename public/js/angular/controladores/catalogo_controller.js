@@ -109,7 +109,7 @@ simci.controller('CatalogoController', [
         $scope.columnas_tabla_objetos = [
             DTColumnBuilder.newColumn(null).withTitle('#').renderWith(
               function(data, type, full){
-                return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.id);
+                  return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>',data.id);
               }
             )
             .withOption('width','5%')
@@ -117,7 +117,7 @@ simci.controller('CatalogoController', [
             
             DTColumnBuilder.newColumn(null).withTitle('Nombre').renderWith(
             function(data, type, full) {
-                return data.nombre + '<img class="ui spopup" style="float:right ;" src="/img/data.png" width="25" height="25" data-content="Mostrar DataSheet" onclick="alertify.DataSheetDialog(1);">';
+                return data.nombre + '<img class="ui spopup datasheet icono" src="/img/data.png" data-content="Mostrar DataSheet" onclick="alertify.DataSheetDialog(1);">';
             })
             .withOption('width','30%')
             .notSortable(),

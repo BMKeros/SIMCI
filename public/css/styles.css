@@ -1,6 +1,5 @@
 /**** Icono barra notificaciones ***/
 
-
 #icono_barra_notificaciones {
   font-size: 18x; 
   margin-right: -5px;
@@ -163,3 +162,14 @@
     top: 0;
     height: 40px;
   }
+
+/*****  clases para icono de datasheet *****/
+
+.datasheet.icono{
+  float:right ;
+  width: 25px; 
+  height: 25px;
+  cursor: pointer;
+  background-color: #CDCDCD;
+  border-radius: 12px;
+}
