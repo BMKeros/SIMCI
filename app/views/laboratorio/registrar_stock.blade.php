@@ -16,18 +16,22 @@
 			</div>
 
 			<h3 class="ui centered dividing header">Agregar stock a laboratorio</h3>
-
+			
+			<form id="formulario_registrar_stock">
+			
 				<div class="field">
 					<div class="three fields">
 						<div class="seven wide field">
 							<div class="field">
 								<label>Seleccione un elemento</label>
- 
-								<div class="ui search selection dropdown capitalize buscar_elemento">
-						           	<input type="hidden" ng-model="select_objeto" name="cod_objeto" ng-update-hidden>
-						           	<div class="text">Buscar elemento</div>
-						           	<i class="dropdown icon"></i>
-						           	<input tabindex="0" class="search" type="text">
+
+								<div class="ui fluid category search">
+  									<div class="ui left icon input">
+    									<input class="prompt" placeholder="Buscar elementos" type="text" id="campo_search_objeto">
+
+    									<input type="hidden" ng-model="select_objeto" id="select_objeto" name="select_objeto" ng-update-hidden>
+    								<i class="search icon"></i>
+  									</div>
 								</div>
 							</div>
 						</div>
@@ -36,25 +40,25 @@
 						    <label>Cantidad</label>
 						    <input type="number" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
 					    </div>
-					    
 					</div>
+				</div>
 
-				</div>
-			<br>
+				<br>
 			
-			<div class="field">
-				<div class="two fields">
-					<div class="seven wide field">
-						<label>Seleccione un laboratorio</label>
-						{{ Form::select_laboratorios(array('name'=>'laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
-					</div>
-					<div class="field">
-						<button class="ui icon large inverted green button" id="btn_agregar_items" ng-click="agregar_stock_tabla()"><i class="plus icon" ></i></button>
+				<div class="field">
+					<div class="two fields">
+						<div class="seven wide field">
+							<label>Seleccione un laboratorio</label>
+							{{ Form::select_laboratorios(array('name'=>'select_laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
+						</div>
+						<div class="field">
+							<button class="ui icon large inverted green button" id="btn_agregar_items" ng-click="agregar_stock_tabla()"><i class="plus icon" ></i></button>
+						</div>
 					</div>
 				</div>
-			</div>
+			</form>
 	    </div>
-			
+	
         <br>
 
         <br>
@@ -101,12 +105,48 @@
 <script>
 	$('.ui.dropdown').dropdown();
 
-	$('.buscar_elemento').dropdown({
-		apiSettings: {
-		  	method: 'GET',
-		  	dataType: 'JSON',
-		  	url: '/api/inventario/mostrar?type=query&query={query}',
-	  	},
-  		saveRemote:false
-  	});
+	$('.ui.search').search({
+		type          : 'category',
+		minCharacters : 3,
+		searchDelay: 300,
+		onSelect: function(elem_select, response){
+			//Guardamos el objeto seleccionado en el input hidden
+			$('#select_objeto').val(elem_select.value).trigger('change');
+		},
+		apiSettings   : {
+		  onResponse: function(_Response) {
+		    var response = {
+		        results : {}
+		      };
+
+		    $.each(_Response.results, function(index, item) {
+		      var
+		        clase_objeto   = item.nombre_clase_objeto || 'Desconocida',
+		        maxResults = 8
+		      ;
+		      if(index >= maxResults) {
+		        return false;
+		      }
+
+		      if(response.results[clase_objeto] === undefined) {
+		        response.results[clase_objeto] = {
+		          name    : clase_objeto,
+		          results : []
+		        };
+		      }
+		      
+		      response.results[clase_objeto].results.push({
+		        title       : item.nombre_objeto.toLowerCase(),
+		        description : item.especificaciones_objeto,
+		        value: item.cod_objeto
+		      });
+		    });
+		    return response;
+		  },
+		  url: '/api/inventario/mostrar?type=search&query={query}'
+		}
+	});
+
+	
+
 </script>

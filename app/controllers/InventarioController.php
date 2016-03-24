@@ -81,6 +81,22 @@
 
 				break;
 
+				case 'almacen_full':
+					$data = DB::table('vista_almacen_full')
+							->select('cod_dimension as codigo',
+								'descripcion', 
+								'primer_nombre_responsable as nombre_responsable', 
+								'primer_apellido_responsable as apellido_responsable',
+								'primer_nombre_primer_auxiliar as nombre_primer_auxiliar',
+								'primer_apellido_primer_auxiliar as apellido_primer_auxiliar',
+								'primer_nombre_segundo_auxiliar as nombre_segundo_auxiliar', 
+								'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar')
+							->get();
+
+					$response = $data;
+
+				break;
+
 				case 'query':
 
 					$value_search = Input::get('query');
@@ -103,6 +119,18 @@
 						
 						$response = array("success"=>true, "results" => $data);
 					}
+				break;
+
+				case 'search':
+					$value_search = Input::get('query');
+
+					$data = DB::table('vista_inventario')
+					->select('cod_objeto', 'nombre_objeto', 'especificaciones_objeto', 'descripcion_objeto','nombre_clase_objeto')
+					->where('nombre_objeto','ILIKE','%'.$value_search.'%')
+					->get();
+
+					$response = array("success"=>true, "results" => $data);
+
 				break;
 
 				default:

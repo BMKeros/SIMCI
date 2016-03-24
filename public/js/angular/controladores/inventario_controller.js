@@ -369,17 +369,50 @@ simci.controller('InventarioController', [
           .notSortable(),
          DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
             function(data, type, full) {
-              return '<a class="ui icon button blue spopup" data-content="Ver Almacen" ng-click="modal_ver_elemento(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
-                      '<a class="ui icon button green spopup"  data-content="Modificar Almacen" ng-click="modal_modificar_usuario(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+  
-                      '<a class="ui icon button red spopup"  data-content="Eliminar Almacen" ng-click="modal_eliminar_usuario(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
+              return '<a class="ui icon button blue spopup" data-content="Ver Almacen" ng-click="modal_ver_almacen(\''+data.codigo+'\')"><i class="unhide icon"></i></a>'+
+                      '<a class="ui icon button green spopup"  data-content="Modificar Almacen" ng-click="modal_modificar_almacen(\''+data.codigo+'\')"><i class="edit icon"></i></a>'+  
+                      '<a class="ui icon button red spopup"  data-content="Eliminar Almacen" ng-click="modal_eliminar_almacen(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
           })
           .notSortable()
           .withOption('width', '15%'),
       ];      
+
+      $scope.modal_ver_almacen = function(cod_almacen){
+        $scope.data_almacen = {};
+
+        ToolsService.mostrar_modal_dinamico($scope,$http,{
+          url : '/api/inventario/mostrar?type=almacen_full&'+ToolsService.printf('cod_almacen={0}',cod_almacen),
+          scope_data_save_success: 'data_almacen',
+          id_modal: 'modal_ver_almacen'
+        });
+      };
+
+
+      $scope.modal_eliminar_almacen = function(cod_almacen){
+        
+        ToolsService.eliminar_elemento_dinamico($scope,{
+          titulo_confirm : {
+            principal : '¡Alerta!',
+            secundario: 'Confirme su respuesta!'
+          },
+          mensajes: {
+            principal : {
+              mensaje_confirmacion: 'Seguro que desea eliminar este almacen?',
+              error: 'No puede eliminar este almacen debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.'
+            },
+            secundario: {
+              mensaje_confirmacion: "Confirme si desea eliminar este almacen",
+            }
+          },
+          urls: {
+            verificacion: '/api/inventario/verificar?id='+cod_almacen,
+            eliminacion: '/api/inventario/eliminar?id='+cod_almacen
+          },
+          nombre_tabla: 'tabla_almacenes'
+        });
+
+      };
+
     }// inventario/ver/almacenes"  
-
-
-
-
   }]
 );
