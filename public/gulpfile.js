@@ -20,15 +20,8 @@ gulp.task('crear_controladores',function(){
 });
 
 gulp.task('listen_modificaciones',['crear_controladores'],function(){
-  gulp.watch('./js/angular/controladores/*.js', function(e){
-    
+  gulp.watch('./js/angular/controladores/*.js', ['crear_controladores'], function(e){
     _("archivo %s [%s]",e.type,e.path);
-    
-    gulp.src('./js/angular/controladores/*.js')
-    .pipe(debug())
-    .pipe(concat('ng-controladores.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./js/angular/'))
   })
 });
 
