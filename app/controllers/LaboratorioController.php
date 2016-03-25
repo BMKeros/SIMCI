@@ -68,6 +68,12 @@
 
 				break;
 
+				case 'paginacion_stock':
+					$response = DB::table('vista_stock_full')
+						->select('cod_laboratorio', 'nombre_laboratorio as laboratorio', 'cod_objeto', 'nombre_objeto as nombre')
+						->get();
+				break;
+
 				default:
 					$response = DB::table('vista_laboratorio_full')->get();
 				break;
@@ -175,6 +181,33 @@
 			DB::table('objetos_laboratorio')->insert($campos);
 
 			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos agregados con exito.!'));
+		}
+
+		public function postMoverStock(){
+			//data porque nose como vendra del frontend, este sera el que traiga todos los datos
+			$data = Input::get('data');
+			$lab_destino = Input::get('select_laboratorio_destino');
+
+			foreach($data as $value){
+				$codigos_objetos[] = array('cod_objeto' => $value['cod_objeto']);
+				$codigos_laboratorios[] = array('cod_laboratorio' => $value['cod_laboratorio']);
+			}
+
+			$objetos_stock = DB::table('vista_stock_full')
+									->where('cod_objeto', $codigos_objetos)
+									->where('cod_laboratorio', $codigos_laboratorios)
+									->get();
+
+			foreach ($objetos_stock as $value) {
+				$asignar_stock[] = array(
+					'cod_objeto' => $objetos_stock->cod_objeto,
+					'cod_laboratorio' => $lab_destino
+				); 
+			}
+
+			DB::table('objetos_laboratorio')->insert($asignar_stock);
+
+			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos reasignados con exito.!'));
 		}
 
 

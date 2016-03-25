@@ -30,7 +30,7 @@
 
 						<div class="nine wide field">
 							<label>Seleccione el laboratorio al que se movera el stock</label>
-							{{ Form::select_laboratorios(array('name'=>'select_laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
+							{{ Form::select_laboratorios(array('name'=>'select_laboratorio_destino', 'id'=>'laboratorio','ng-model'=>'select_laboratorio_destino'))}}
 						</div>
 					</div>
 				</div>

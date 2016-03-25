@@ -277,7 +277,7 @@ simci.controller('LaboratorioController', [
 
         $scope.opciones_tabla_stock = DTOptionsBuilder.newOptions()
           .withOption('ajax', {
-           url: '/api/stock/mostrar?type=paginacion',
+           url: '/api/stock/mostrar?type=paginacion_stock',
            type: 'GET'
         })
         .withDataProp('data')
