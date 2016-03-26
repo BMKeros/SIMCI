@@ -98,7 +98,7 @@
 						->count();
 
 					$response = array(
-						'resultado' => $existe
+						'resultado' => ($existe == 0)?(false):(true)
 					);
 				break;
 
