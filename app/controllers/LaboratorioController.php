@@ -83,6 +83,64 @@
 			return Response::json($response);
 		}
 
+		public function  getVerificar(){
+			$tipo_verificacion = Input::get('type', null);
+
+			switch($tipo_verificacion){
+
+				case 'existe_stock_laboratorio':
+					$cod_laboratorio = Input::get('cod_laboratorio',null);
+					$cod_objeto = Input::get('cod_objeto', null);
+
+					$existe = DB::table('objetos_laboratorio')
+						->where('cod_laboratorio','=',$cod_laboratorio)
+						->where('cod_objeto','=',$cod_objeto)
+						->count();
+
+					$response = array(
+						'resultado' => $existe
+					);
+				break;
+
+				case 'relacion_laboratorio':
+					$id = Input::get('cod_laboratorio');
+
+					if($id){
+						$exists_relacion = DB::table('objetos_laboratorio')
+							->where('cod_laboratorio', '=', $id)
+							->count();
+					}
+					else{
+						$exists_relacion = 0;
+					}
+
+
+					if($exists_relacion){
+						return Response::json(array(
+								'resultado'=>true,
+								'mensajes'=> "No puede eliminar este laboratorio debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion."
+							)
+						);
+					}
+					else{
+						return Response::json(array(
+								'resultado'=>false,
+								'mensajes'=> "Confirme si desea eliminar"
+							)
+						);
+					}
+
+					break;
+
+				default:
+					$response = array();
+				break;
+
+			}
+
+			return Response::json($response);
+		}
+
 		public function postRegistrarLaboratorio(){
 			
 			$nombre = Input::get('nombre');
@@ -169,12 +227,15 @@
 		}
 
 		public function postAgregarStock(){
-			$codigos_objetos = Input::get('items_stock');
+			$items_stock_tabla = Input::get('items_stock');
 
-			foreach ($codigos_objetos as $value) {
+			foreach ($items_stock_tabla as $item) {
 				$campos[] = array(
-					'cod_laboratorio' => $value['cod_laboratorio'],
-					'cod_objeto' => $value['cod_objeto']
+					'cod_laboratorio' => $item['cod_laboratorio'],
+					'cod_objeto' => $item['cod_objeto'],
+					//'cantidad' => $item['cantidad'],
+					'created_at' => get_now(),
+					'updated_at' => get_now()
 				);
 			}
 
@@ -210,35 +271,6 @@
 			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos reasignados con exito.!'));
 		}
 
-
-		public function postVerificar(){
-			$id = Input::get('id');
-
-			if($id){
-				$exists_relacion = DB::table('objetos_laboratorio')
-		            ->where('cod_laboratorio', '=', $id)
-		        	->count();	
-			}
-			else{
-				$exists_relacion = 0;
-			}
-			
-			
-	        if($exists_relacion){
-	        	return Response::json(array(
-					'resultado'=>true, 
-					'mensajes'=> "No puede eliminar este laboratorio debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion."
-					)
-				);
-	        }
-	        else{
-	        	return Response::json(array(
-					'resultado'=>false, 
-					'mensajes'=> "Confirme si desea eliminar"
-					)
-				);
-	        }
-	    }
 
 	    public function postEliminar(){
 	    	$id_laboratorio = Input::get('id');
