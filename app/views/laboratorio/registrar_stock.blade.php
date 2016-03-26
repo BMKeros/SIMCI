@@ -95,8 +95,8 @@
         <br>
 
         <div class="action">
-        	<div class="ui right floated positive button" ng-click="procesar_agregar_stock()">
-                Agregar
+			<div class="ui big right floated submit button green" ng-click="procesar_agregar_stock()" id="btn-registrar">
+				Agregar
             </div>
         </div>
     </div>
