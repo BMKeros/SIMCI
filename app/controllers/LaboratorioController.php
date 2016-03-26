@@ -169,7 +169,7 @@
 		}
 
 		public function postAgregarStock(){
-			$codigos_objetos = Input::get('data');
+			$codigos_objetos = Input::get('items_stock');
 
 			foreach ($codigos_objetos as $value) {
 				$campos[] = array(
@@ -180,7 +180,7 @@
 
 			DB::table('objetos_laboratorio')->insert($campos);
 
-			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos agregados con exito.!'));
+			return Response::json(array('resultado' => true, 'mensajes' => array('Objetos agregados con exito.!')));
 		}
 
 		public function postMoverStock(){
