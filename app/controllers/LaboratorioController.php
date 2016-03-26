@@ -116,18 +116,16 @@
 
 
 					if($exists_relacion){
-						return Response::json(array(
+						$response = array(
 								'resultado'=>true,
 								'mensajes'=> "No puede eliminar este laboratorio debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion."
-							)
-						);
+							);
 					}
 					else{
-						return Response::json(array(
+						$response = array(
 								'resultado'=>false,
 								'mensajes'=> "Confirme si desea eliminar"
-							)
-						);
+							);
 					}
 
 					break;
