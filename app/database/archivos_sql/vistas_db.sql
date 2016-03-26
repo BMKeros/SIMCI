@@ -131,6 +131,7 @@ CREATE OR REPLACE VIEW vista_stock_full AS
 		clase_objetos.id as cod_clase_objeto,
 		clase_objetos.nombre as nombre_clase_objeto,
 		clase_objetos.descripcion as descripcion_clase_objeto
+		objetos_laboratorio.cantidad as cantidad
 
 	FROM objetos_laboratorio
 	INNER JOIN laboratorios ON laboratorios.codigo = objetos_laboratorio.cod_laboratorio
