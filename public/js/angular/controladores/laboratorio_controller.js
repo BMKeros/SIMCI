@@ -278,7 +278,7 @@ simci.controller('LaboratorioController', [
 
                 $scope.opciones_tabla_stock = DTOptionsBuilder.newOptions()
                     .withOption('ajax', {
-                        url: '/api/stock/mostrar?type=paginacion_stock',
+                        url: '/api/laboratorio/mostrar?type=paginacion_stock',
                         type: 'GET'
                     })
                     .withDataProp('data')
@@ -294,19 +294,19 @@ simci.controller('LaboratorioController', [
                     });
 
                 $scope.columnas_tabla_stock = [
-                    DTColumnBuilder.newColumn(null).withTitle('Objeto')
+                    DTColumnBuilder.newColumn('nombre_objeto').withTitle('Nombre').notSortable(),
+                    DTColumnBuilder.newColumn('cantidad')
+                        .withTitle('Cantidad')
+                        .withOption('width','10%')
                         .notSortable(),
-
-                    DTColumnBuilder.newColumn('nombre').withTitle('Nombre').notSortable(),
-
-                    DTColumnBuilder.newColumn('laboratorio').withTitle('Laboratorio').notSortable(),
+                    DTColumnBuilder.newColumn('nombre_laboratorio').withTitle('Laboratorio').notSortable(),
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function(data, type, full) {
                             return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock('+data.id+')"><i class="unhide icon"></i></div>'+
                                 '<div class="ui icon button green spopup"  data-content="Modificar Stock" ng-click="modal_modificar_stock('+data.id+')"><i class="edit icon"></i></div>'+
                                 '<div class="ui icon button red spopup"  data-content="Eliminar Stock" ng-click="modal_eliminar_stock('+data.id+')"><i class="remove icon"></i></div>';
-                        }).withOption('width','17%')
+                        }).withOption('width','14%')
                 ];
 
             }// If == '/laboratorio/ver/stock
@@ -378,10 +378,10 @@ simci.controller('LaboratorioController', [
                     }
                 };
 
-                //Seteamos la data en la variable DatosForm para enviarla con el registro dinamico
-                $scope.DatosForm.items_stock = $scope.items_tabla_stock;
-
                 $scope.procesar_agregar_stock = function(){
+
+                    //Seteamos la data en la variable DatosForm para enviarla con el registro dinamico
+                    $scope.DatosForm.items_stock = $scope.items_tabla_stock;
 
                     if($scope.items_tabla_stock.length != 0) {
                         return ToolsService.registrar_dinamico($scope, $http, $timeout, {
@@ -396,7 +396,6 @@ simci.controller('LaboratorioController', [
                                     _scope.select_laboratorio = "";
                                     _scope.select_objeto = "";
                                     _scope.cantidad = 0;
-                                    console.log("hola");
                                 });
                             }
                         })();
@@ -443,10 +442,7 @@ simci.controller('LaboratorioController', [
 
                 }
 
-
-
-            }//Fin de agregar-stock
-
+            }//Fin de mover-stock
 
         }]
 );
