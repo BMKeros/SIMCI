@@ -1,5 +1,8 @@
 <?php
 
+function get_now(){
+	return date("Y-m-d H:i:s");
+}
 
 function drop_cascade($table = null){
 	if( Schema::hasTable($table) ){
