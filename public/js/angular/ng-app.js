@@ -360,7 +360,7 @@
                     }
 
                     if(opciones.callbackSuccess){
-                        opciones.callbackSuccess();
+                        opciones.callbackSuccess($_SCOPE);
                     }
                 }, 0, false);
 
