@@ -69,9 +69,11 @@
 				break;
 
 				case 'paginacion_stock':
-					$response = DB::table('vista_stock_full')
-						->select('cod_laboratorio', 'nombre_laboratorio as laboratorio', 'cod_objeto', 'nombre_objeto as nombre')
-						->get();
+					$consulta = DB::table('vista_stock_full')
+						->select('cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad');
+
+					$response = $this->generar_paginacion_dinamica($consulta,
+						array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
 				break;
 
 				default:

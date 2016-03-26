@@ -130,7 +130,7 @@ CREATE OR REPLACE VIEW vista_stock_full AS
 		tipos_unidades.nombre as nombre_tipo_unidad,
 		clase_objetos.id as cod_clase_objeto,
 		clase_objetos.nombre as nombre_clase_objeto,
-		clase_objetos.descripcion as descripcion_clase_objeto
+		clase_objetos.descripcion as descripcion_clase_objeto,
 		objetos_laboratorio.cantidad as cantidad
 
 	FROM objetos_laboratorio
