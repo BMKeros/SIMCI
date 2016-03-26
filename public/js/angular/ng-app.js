@@ -321,9 +321,14 @@
         var global_this = this;
             
         return function(){
-        
-          var formulario = $('#'+opciones.formulario.id);
-          var is_valid_form = formulario.form(opciones.formulario.reglas).form('is valid');
+            //Si no existe la opcion de formulario seteamos is_valid_form  = trues
+          if(opciones.formulario) {
+              var formulario = $('#' + opciones.formulario.id);
+              var is_valid_form = formulario.form(opciones.formulario.reglas).form('is valid');
+          }
+          else{
+              var is_valid_form = true;
+          }
 
           if(is_valid_form){
             
@@ -348,8 +353,15 @@
 
                 $_TIMEOUT(function(){
                   //Desactivamos el loading
-                  global_this.loading_button('btn-registrar',false);    
-                  formulario.form('clear');
+                  global_this.loading_button('btn-registrar',false);
+
+                    if(opciones.formulario) {
+                        formulario.form('clear');
+                    }
+
+                    if(opciones.callbackSuccess){
+                        opciones.callbackSuccess();
+                    }
                 }, 0, false);
 
               }
