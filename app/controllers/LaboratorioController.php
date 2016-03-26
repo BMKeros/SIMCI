@@ -231,7 +231,7 @@
 				$campos[] = array(
 					'cod_laboratorio' => $item['cod_laboratorio'],
 					'cod_objeto' => $item['cod_objeto'],
-					//'cantidad' => $item['cantidad'],
+					'cantidad' => $item['cantidad'],
 					'created_at' => get_now(),
 					'updated_at' => get_now()
 				);
