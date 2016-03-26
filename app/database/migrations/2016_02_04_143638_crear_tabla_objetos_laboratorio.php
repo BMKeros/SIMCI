@@ -19,6 +19,8 @@ class CrearTablaObjetosLaboratorio extends Migration {
             $table->integer('cod_objeto');
             $table->integer('cantidad');
             $table->nullableTimestamps();
+
+            $table->unique(array('cod_objeto','cod_laboratorio'));
         });
     }
 
