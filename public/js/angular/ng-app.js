@@ -321,14 +321,13 @@
         var global_this = this;
             
         return function(){
+          var is_valid_form = true;
             //Si no existe la opcion de formulario seteamos is_valid_form  = trues
-          if(opciones.formulario) {
+
+           if(opciones.formulario) {
               var formulario = $('#' + opciones.formulario.id);
-              var is_valid_form = formulario.form(opciones.formulario.reglas).form('is valid');
-          }
-          else{
-              var is_valid_form = true;
-          }
+              is_valid_form = formulario.form(opciones.formulario.reglas).form('is valid');
+            }
 
           if(is_valid_form){
             
