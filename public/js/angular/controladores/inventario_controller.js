@@ -80,7 +80,7 @@ simci.controller('InventarioController', [
         url: "#/inventario/registrar-sub-agrupacion",
         icono: 'write',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA]
-      },
+      }
       
     ];
     $log.info($routeParams);
@@ -236,7 +236,7 @@ simci.controller('InventarioController', [
                       '<a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_elemento('+TS.anadir_comillas_params(data.cod_dimension,data.cod_subdimension,data.cod_agrupacion,data.cod_objeto,data.numero_orden)+')"><i class="remove icon"></i></a>';
           })
           .notSortable()
-          .withOption('width', '15%'),
+          .withOption('width', '15%')
       ];  
 
 
@@ -307,7 +307,7 @@ simci.controller('InventarioController', [
                       '<a class="ui icon button red spopup"  data-content="Salida Elemento" ng-click=""><i class="sign out icon"></i></a>';
           })
           .notSortable()
-          .withOption('width', '10%'),
+          .withOption('width', '10%')
       ];      
     }// inventario/ver/entrada-salida" 
 
@@ -374,7 +374,7 @@ simci.controller('InventarioController', [
                       '<a class="ui icon button red spopup"  data-content="Eliminar Almacen" ng-click="modal_eliminar_almacen(\''+data.codigo+'\')"><i class="remove icon"></i></a>';
           })
           .notSortable()
-          .withOption('width', '15%'),
+          .withOption('width', '15%')
       ];      
 
       $scope.modal_ver_almacen = function(cod_almacen){
