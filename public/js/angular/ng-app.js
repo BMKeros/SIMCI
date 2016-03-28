@@ -66,6 +66,16 @@
     };
   });
 
+  simci.filter('bool_humano', function() {
+    return function(booleano,value) {
+      return (!!booleano)?(
+          (Boolean(booleano))?('Si'):('No')
+      ):(
+          'Undefined'
+      );
+    };
+  });
+
   simci.filter('formato_fecha', function() {
     return function(input, formato) {
         if(input){
