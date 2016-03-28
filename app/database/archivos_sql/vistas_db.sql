@@ -47,7 +47,7 @@ CREATE OR REPLACE VIEW vista_objetos_full AS
 
 
 /*OJO PENDIENTE POR EVALUAR PORQUE NO TRAE TODOS LOS REGISTROS*/
-CREATE OR REPLACE VIEW vista_inventarios_full AS
+CREATE OR REPLACE VIEW vista_inventario_full AS
 	SELECT
 		inventario.numero_orden as numero_orden,
 		inventario.cantidad_disponible as cantidad_disponible,
@@ -62,7 +62,7 @@ CREATE OR REPLACE VIEW vista_inventarios_full AS
 		agrupaciones.nombre as nombre_agrupacion,
 		agrupaciones.descripcion as descripcion_agrupacion,
 		sub_agrupaciones.codigo as cod_subagrupacion,
-		sub_agrupaciones.nombre as nombre_subagrupaciones,
+		sub_agrupaciones.nombre as nombre_subagrupacion,
 		sub_agrupaciones.descripcion as descripcion_subagrupacion,
 
 		/*pendiente por evaluar a ver si se queda o se elimina ya que estosw campo se traen en la vista de objetos-laboratorio*/
