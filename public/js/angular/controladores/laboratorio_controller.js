@@ -318,11 +318,18 @@ simci.controller('LaboratorioController', [
                 $scope.select_objeto=""; //Objeto seleccionado
                 $scope.cantidad = 0; //Cantidad del objeto seleccionado
 
+
+                $scope.cantidad_disponible_inventario = 0;
+
                 $scope.agregar_stock_tabla = function () {
 
                     var formulario = $('#formulario_registrar_stock');
                     var is_valid_form = formulario.form(reglas_formulario_agregar_stock).form('is valid');
 
+                    if($scope.cantidad > $scope.cantidad_disponible_inventario){
+                        alertify.error("La cantidad ingresada es mayor a la disponible en inventario");
+                        return false;
+                    }
                     if(is_valid_form){
                         $http({
                             method: 'GET',

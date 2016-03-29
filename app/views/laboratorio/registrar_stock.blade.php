@@ -40,6 +40,7 @@
 						    <label>Cantidad</label>
 						    <input type="number" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
 					    </div>
+					    <input type="hidden" id="cantidad_disponible_inventario" ng-model="cantidad_disponible_inventario" ng-update-hidden>
 					</div>
 				</div>
 
@@ -112,6 +113,7 @@
 		onSelect: function(elem_select, response){
 			//Guardamos el objeto seleccionado en el input hidden
 			$('#select_objeto').val(elem_select.value).trigger('change');
+			$('#cantidad_disponible_inventario').val(elem_select.cantidad_disponible).trigger('change');
 		},
 		apiSettings   : {
 		  onResponse: function(_Response) {
@@ -138,7 +140,8 @@
 		      response.results[clase_objeto].results.push({
 		        title       : item.nombre_objeto.toLowerCase(),
 		        description : item.especificaciones_objeto,
-		        value: item.cod_objeto
+		        value: item.cod_objeto,
+		        cantidad_disponible: item.cantidad_disponible
 		      });
 		    });
 		    return response;
