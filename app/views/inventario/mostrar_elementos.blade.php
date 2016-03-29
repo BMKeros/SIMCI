@@ -59,7 +59,8 @@
                 </td>
                 <td>
                     <b>Cantidad Disponible:</b><br>
-                    <p><% data_elemento.cantidad_disponible %></p>
+
+                    <p><% data_elemento.cantidad_disponible | quitar_ceros_decimales %></p>
                 </td>
             </tr>
 
