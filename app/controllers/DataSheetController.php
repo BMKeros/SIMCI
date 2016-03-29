@@ -1,6 +1,9 @@
 <?php
 
-	class CatalogoController extends BaseController {
+	class DataSheetController extends BaseController {
 
+        public function getGenerar($id){
+
+        }
 
     }
