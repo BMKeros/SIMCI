@@ -19,7 +19,7 @@
                     <p><% data_elemento.nombre_objeto | uppercase %></p>
                 </td>
                 <td>
-                    <b>Nombre del Almacen:</b><br>
+                    <b>Almacen:</b><br>
                     <p>[<% data_elemento.cod_dimension %>] - <% data_elemento.nombre_dimension | uppercase %></p>
                 </td>
             </tr>
@@ -37,7 +37,13 @@
 
                 <td >
                     <b>Sub Agrupacion:</b><br>
-                    <p>[<% data_elemento.cod_subagrupacion %>] - <% data_elemento.nombre_subagrupacion | uppercase %></p>
+                    <div ng-if="data_elemento.cod_subagrupacion">
+                        <p>[<% data_elemento.cod_subagrupacion %>] - <% data_elemento.nombre_subagrupacion | uppercase %></p>
+                    </div>
+
+                    <div ng-if="!data_elemento.cod_subagrupacion">
+                        <p>No especificado</p>
+                    </div>
                 </td>
 
             </tr>

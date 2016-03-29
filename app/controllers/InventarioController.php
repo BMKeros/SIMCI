@@ -31,6 +31,7 @@
 								'nombre_agrupacion',
 								'cod_agrupacion',
 								'cod_subagrupacion',
+								'descripcion_subagrupacion as nombre_subagrupacion',
 								'numero_orden',
 								'cantidad_disponible',
 								'cod_objeto',
