@@ -60,7 +60,20 @@
                 <td>
                     <b>Cantidad Disponible:</b><br>
 
-                    <p><% data_elemento.cantidad_disponible | quitar_ceros_decimales %></p>
+                    <p><% data_elemento.cantidad_disponible %></p>
+                </td>
+            </tr>
+
+            <tr ng-if="data_elemento.usa_recipientes">
+                <td>
+                    <b>Usa Recipientes: </b><br>
+
+                    <p><% data_elemento.usa_recipientes | bool_humano%></p>
+                </td>
+                <td colspan="2">
+                    <b>Recipientes Disponibles:</b><br>
+
+                    <p><% data_elemento.recipientes_disponibles  %></p>
                 </td>
             </tr>
 
