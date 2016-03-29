@@ -130,7 +130,7 @@
 							);
 					}
 
-					break;
+				break;
 
 				default:
 					$response = array();

@@ -29,6 +29,7 @@
 								'cod_agrupacion',
 								'elemento_movible',
 								'nombre_agrupacion',
+								'cod_agrupacion',
 								'cod_subagrupacion',
 								'numero_orden',
 								'cantidad_disponible',
@@ -52,7 +53,7 @@
 				break;
 
 				case 'paginacion':
-					$consulta = DB::table('vista_inventarios_full')
+					$consulta = DB::table('vista_inventario_full')
 						->select('cod_dimension', 
 								'cod_subdimension', 
 								'cod_agrupacion', 
@@ -110,7 +111,7 @@
 					
 					if(quitar_espacios($value_search) != ''){
 						
-						$data = DB::table('vista_inventarios_full')
+						$data = DB::table('vista_inventario_full')
 							->select(DB::raw('capitalize(nombre_objeto) as name'), 'cod_objeto as value')
 							->where('nombre_objeto','ILIKE','%'.$value_search.'%')
 							->get();
@@ -118,7 +119,7 @@
 						$response = array("success"=>true, "results" => $data);
 					}
 					else{
-						$data = DB::table('vista_inventarios_full')
+						$data = DB::table('vista_inventario_full')
 							->select(DB::raw('capitalize(nombre_objeto) as name'), 'cod_objeto as value')
 							->orderBy('name', 'desc')
 							->take(7)
@@ -131,8 +132,8 @@
 				case 'search':
 					$value_search = Input::get('query');
 
-					$data = DB::table('vista_inventarios_full')
-					->select('cod_objeto', 'nombre_objeto', 'especificaciones_objeto', 'descripcion_objeto','nombre_clase_objeto')
+					$data = DB::table('vista_inventario_full')
+					->select('cod_objeto', 'nombre_objeto', 'especificaciones_objeto', 'descripcion_objeto','nombre_clase_objeto', 'cantidad_disponible')
 					->where('nombre_objeto','ILIKE','%'.$value_search.'%')
 					->get();
 
