@@ -181,6 +181,10 @@
           templateUrl: '/views/documentos/mostrar_documentos',
           controller: 'DocumentosController'
         }).
+        when('/documentos/enviar-correo', {
+          templateUrl: '/views/documentos/enviar_correo',
+          controller: 'DocumentosController'
+        }).
 
         //Rutas Proveedores
         when('/proveedores', {
