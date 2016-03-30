@@ -47,7 +47,7 @@
         switch(key){
           case 'reactivoID':
               this.setHeader('<i class="lab icon"></i>DataSheet '+newValue);
-              iframe.src = '/bower_components/viewerjs/ViewerJS/index.html?zoom=page-width#../../../pdf/'+newValue;
+            iframe.src = '/bower_components/viewerjs/ViewerJS/index.html?zoom=page-width#../../../datasheet/generar-pdf/' + newValue;
           break;   
         }
       },
