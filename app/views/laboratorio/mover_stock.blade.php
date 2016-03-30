@@ -1,7 +1,7 @@
 <div class="ui centered grid">
 	<div class="six wide tablet twelve wide computer column">
 		<div class="ui form">
-			
+
 			<div ng-if="mostrar_mensaje">
 				<div class="ui icon <% mensaje_validacion.color %> message">
 					<i class="<% mensaje_validacion.icono %> icon"></i>
@@ -16,11 +16,11 @@
 			</div>
 
 			<h3 class="ui centered dividing header">Mover el stock de los laboratorios.</h3>
-			
+
 			<form id="formulario_mover_stock">
 
 				<br>
-			
+
 				<div class="field">
 					<div class="two fields">
 						<div class="seven wide field">
@@ -35,61 +35,61 @@
 					</div>
 				</div>
 			</form>
-	    </div>
-	
-        <br>
+		</div>
 
-        <br>
+		<br>
 
-        <table class="ui celled striped table" width="100%">
-            <thead>
-                <tr>
-                    <th width="40%">Nombre</th>
-                    <th width="30%">Cantidad</th> 
-					<th width="3%" align="center">Mover</th>
-                </tr>
-                <tr ng-repeat="x in [1,2,3,4,5,6]" id='<%x%>'>
-                	<td>
-                		<p>Cloruro de Sodio</p>
-                	</td>
-                	<td>10</td>
-                	
-                	<td>
-                		
-						<button class="ui icon small inverted blue button" id="btn_actison_item" ng-click="seleccionar_item_tabla($event)" data-id-fila='<%x%>'><i class="checkmark icon" ></i></button>
-                	</td>
-                </tr>
-            </thead>
-            <tbody>
-            	<tr ng-repeat="elemento in items_tabla_stock track by $index" id="<% elemento.id_item_stock %>" ng-animate="'animate'" class="animate-repeat">
-    				<td><% elemento.nombre_objeto | lowercase | capitalize%></td>
-    				<td><% elemento.cantidad %></td>
-    				<td><% elemento.nombre_laboratorio | lowercase | capitalize %></td>
-    				<td>
-						<button class="ui icon small button" ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
-  							<i class="trash outline icon"></i>
-						</button>
-					</td>
-            	</tr>
+		<br>
 
-            	<tr ng-if="items_tabla_stock.length == 0">
-            		<td colspan="4">
-            			<p align="center">No hay elementos para ser agregados</p>
-            		</td>
-            	</tr>
-            </tbody>
-        </table>
+		<table class="ui celled striped table" width="100%">
+			<thead>
+			<tr>
+				<th width="40%">Nombre</th>
+				<th width="30%">Cantidad</th>
+				<th width="3%" align="center">Mover</th>
+			</tr>
+			<tr ng-repeat="x in [1,2,3,4,5,6]" id='<%x%>'>
+				<td>
+					<p>Cloruro de Sodio</p>
+				</td>
+				<td>10</td>
 
-        <br>
+				<td>
 
-        <br>
+					<button class="ui icon small inverted blue button" id="btn_actison_item" ng-click="seleccionar_item_tabla($event)" data-id-fila='<%x%>'><i class="checkmark icon" ></i></button>
+				</td>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="elemento in items_tabla_stock track by $index" id="<% elemento.id_item_stock %>" ng-animate="'animate'" class="animate-repeat">
+				<td><% elemento.nombre_objeto | lowercase | capitalize%></td>
+				<td><% elemento.cantidad %></td>
+				<td><% elemento.nombre_laboratorio | lowercase | capitalize %></td>
+				<td>
+					<button class="ui icon small button" ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
+						<i class="trash outline icon"></i>
+					</button>
+				</td>
+			</tr>
 
-        <div class="action">
-        	<div class="ui right floated positive button">
-                Mover
-            </div>
-        </div>
-    </div>
+			<tr ng-if="items_tabla_stock.length == 0">
+				<td colspan="4">
+					<p align="center">No hay elementos para ser agregados</p>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+
+		<br>
+
+		<br>
+
+		<div class="action">
+			<div class="ui right floated positive button">
+				Mover
+			</div>
+		</div>
+	</div>
 </div>
 
 <script>
@@ -106,39 +106,40 @@
 			$('#campo_search_objeto').val('');
 		},
 		apiSettings   : {
-		  onResponse: function(_Response) {
-		    var response = {
-		        results : {}
-		      };
+			onResponse: function(_Response) {
+				var response = {
+					results : {}
+				};
 
-		    $.each(_Response.results, function(index, item) {
-		      var
-		        clase_objeto   = item.nombre_clase_objeto || 'Desconocida',
-		        maxResults = 8
-		      ;
-		      if(index >= maxResults) {
-		        return false;
-		      }
+				$.each(_Response.results, function(index, item) {
+					var
+							clase_objeto   = item.nombre_clase_objeto || 'Desconocida',
+							maxResults = 8
+							;
+					if(index >= maxResults) {
+						return false;
+					}
 
-		      if(response.results[clase_objeto] === undefined) {
-		        response.results[clase_objeto] = {
-		          name    : clase_objeto,
-		          results : []
-		        };
-		      }
-		      
-		      response.results[clase_objeto].results.push({
-		        title       : item.nombre_objeto.toLowerCase(),
-		        description : item.especificaciones_objeto,
-		        value: item.cod_objeto
-		      });
-		    });
-		    return response;
-		  },
-		  url: '/api/inventario/mostrar?type=search&query={query}'
+					if(response.results[clase_objeto] === undefined) {
+						response.results[clase_objeto] = {
+							name    : clase_objeto,
+							results : []
+						};
+					}
+
+					response.results[clase_objeto].results.push({
+						title       : item.nombre_objeto.toLowerCase(),
+						description : item.especificaciones_objeto,
+						value: item.cod_objeto
+					});
+				});
+				return response;
+			},
+			url: '/api/inventario/mostrar?type=search&query={query}'
 		}
 	});
 
-	
+
 
 </script>
+

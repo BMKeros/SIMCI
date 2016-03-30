@@ -281,7 +281,7 @@ simci.controller('InventarioController', [
             }
           )
           .notSortable()
-          .withOption('width', '20%'),
+          .withOption('width', '23%'),
 
           DTColumnBuilder.newColumn('nombre_objeto').withTitle('Objeto').notSortable(),
           
