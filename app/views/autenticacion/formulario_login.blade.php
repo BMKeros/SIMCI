@@ -74,45 +74,45 @@
 			<div class="ui grid centered" style="padding-top:25%">
 				<div class="eight column row">
 					<div class="column">
-		      			<a href="#" class="header item">
-				        	<img src="/img/php.png" width="16" height="16">
-				        	&nbsp;&nbsp;PHP
+		      			<a target="_blank" href="https://php.net" class="header item">
+				        	<img src="/img/PHP2.png" width="38" height="38">
 				      	</a>
 					</div>
 
 					<div class="column">
-						<i class="html5 icon"></i>
-						<a href="#">
-							HTML
+						<a target="_blank" href="#" class="header item">
+				        	<img src="/img/HTML5.png" width="38" height="38">
 						</a> 
 					</div>
 					
 					
 					<div class="column">
-		      			<a href="#" class="header item">
-				        	<img src="/img/laravel.png" width="16" height="16">
-				        	&nbsp;&nbsp;Laravel
+		      			<a target="_blank" href="https://laravel.com" class="header item">
+				        	<img src="/img/Laravel3.png" width="38" height="38">
 				      	</a>
 					</div>
 
 					<div class="column">
-						<i class="css3 icon"></i>
-						<a href="#">
-							CSS3
+						<a target="_blank" href="https://angularjs.org" class="header item">
+							<img src="/img/angular2.png" width="38" height="38">
 						</a>
 					</div>
 
 					<div class="column">
-		      			<a href="#" class="header item">
-				        	<img src="/img/open3.png" width="16" height="16">
-				        	&nbsp;&nbsp;Source
+						<a target="_blank" href="https://semantic-ui.com" class="header item">
+				        	<img src="/img/semantic.png" width="38" height="38">
+				      	</a>
+					</div>
+
+					<div class="column">
+		      			<a target="_blank" href="#" class="header item">
+				        	<img src="/img/CSS.png" width="38" height="38">
 				      	</a>
 			      	</div>
 
 			      	<div class="column">
-		      			<a href="#" class="header item">
-				        	<img src="/img/semantic.png" width="16" height="16">
-				        	&nbsp;&nbsp;Semantic
+		      			<a target="_blank" href="#" class="header item">
+				        	<img src="/img/Source2.png" width="38" height="38">
 				      	</a>
 			      	</div>
 				</div>
