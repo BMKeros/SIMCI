@@ -1047,3 +1047,75 @@ var reglas_formulario_agregar_stock = {
    inline: true
 };
 
+var reglas_formulario_generar_ordenes = {
+    on: 'blur',
+    duration: 40,
+    fields: {
+        select_laboratorio: {
+            identifier: 'select_laboratorio',
+            rules:[
+                {
+                    type:'empty',
+                    prompt:'Este campo no puede quedar vacio'
+                }
+            ]
+        },
+        select_objeto:{
+            identifier: 'select_objeto',
+            rules:[
+                {
+                    type:'empty',
+                    prompt:'Este campo no debe quedar vacio'
+                }
+            ]
+        },
+
+        cantidad:{
+            identifier: 'cantidad',
+            rules:[
+                {
+                    type:'empty',
+                    prompt:'Este campo no debe quedar vacio'
+                },
+                {
+                    type:'number',
+                    prompt:'Este campo debe contener solo numeros'
+                },
+                {
+                    type   : 'not[0]',
+                    prompt : 'La cantidad debe ser mayor a cero'
+                }
+            ]
+        }
+
+        fecha_actividad{
+            identifier: 'fecha_actividad'
+            rules:[
+                {
+                    type:'empty',
+                    prompt:'Este campo no debe quedar vacio'
+                }
+            ]
+        }
+
+        observaciones{
+            identifier:'observaciones'
+            rules:[
+                {
+                    type:'empty',
+                    prompt:'Este campo no debe de quedar vacio,'
+
+                },
+                {
+                    type:'minLength[10]',
+                    prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+                },
+                {
+                    type:'maxLength[50]',
+                    prompt:'Este campo debe tener como maximo {ruleValue} caracteres'
+                }
+            ]
+        }
+    },
+    inline: true
+};
