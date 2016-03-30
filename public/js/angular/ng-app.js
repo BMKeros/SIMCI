@@ -99,9 +99,11 @@
         };
     });
 
-    simci.filter('quitar_ceros_decimales', function (ToolsService) {
+    simci.filter('quitar_ceros_decimales', function (ToolsService, $timeout) {
         return function (input, param) {
-            return ToolsService.quitar_ceros_decimales(input);
+            $timeout(function () {
+                return ToolsService.quitar_ceros_decimales(input);
+            });
         };
     });
 
@@ -111,7 +113,7 @@
         }
     });
 
-    simci.factory('ToolsService', ['$http', function ($http) {
+    simci.factory('ToolsService', ['$http', '$timeout', function ($http, $timeout) {
         return {
             tools_input: {
                 //Para convertir el valor de los input en mayuscula
@@ -119,7 +121,7 @@
                     var input = angular.element(_event.currentTarget);
                     var value_upper = input.val().toUpperCase();
                     input.val(value_upper);
-                },
+                }
             },
             //Funcion para formatear string
             printf: function (formato) {

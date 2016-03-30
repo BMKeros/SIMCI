@@ -1,4 +1,4 @@
-	<?php
+<?php
 
 /*
 |--------------------------------------------------------------------------
@@ -14,29 +14,29 @@
 Route::get('/', array('uses' => 'AutenticacionController@getLogin'));
 
 //Metodo para Ng-route
-Route::get('/views/{folder}/{name_template}', function($folder,$name_template) {
-  	
-  	$view_path = $folder.".".$name_template;
+Route::get('/views/{folder}/{name_template}', function ($folder, $name_template) {
 
-  	if (View::exists($view_path)) {
-    	return View::make($view_path);
-  	}
-  	else{
-  		return Response::json("Vista no Encontrada [404]", 404);
-  	}
+    $view_path = $folder . "." . $name_template;
+
+    if (View::exists($view_path)) {
+        return View::make($view_path);
+    } else {
+        return Response::json("Vista no Encontrada [404]", 404);
+    }
 });
 
 //Aqui van todos los controladores que se prestaran como api
-Route::group(array('prefix' => 'api'), function(){
-	Route::controller('/usuarios', 'UsuariosController');
-	Route::controller('/personas', 'PersonasController');
-	Route::controller('/inventario', 'InventarioController');
-	Route::controller('/catalogo', 'CatalogoController');
-	Route::controller('/laboratorio', 'LaboratorioController');
-	Route::controller('/notificaciones', 'NotificacionesController');
-	Route::controller('/consultas', 'ConsultasController');
-	Route::controller('/proveedores', 'ProveedoresController');
+Route::group(array('prefix' => 'api'), function () {
+    Route::controller('/usuarios', 'UsuariosController');
+    Route::controller('/personas', 'PersonasController');
+    Route::controller('/inventario', 'InventarioController');
+    Route::controller('/catalogo', 'CatalogoController');
+    Route::controller('/laboratorio', 'LaboratorioController');
+    Route::controller('/notificaciones', 'NotificacionesController');
+    Route::controller('/consultas', 'ConsultasController');
+    Route::controller('/proveedores', 'ProveedoresController');
 });
 
 Route::controller('/autenticacion', 'AutenticacionController');
 Route::controller('/modulos', 'ModulosController');
+Route::controller('/datasheet', 'DataSheetController');

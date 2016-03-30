@@ -21,7 +21,7 @@
 
 					if(!is_null($cod_dimension) && !is_null($cod_subdimension) && !is_null($cod_agrupacion) && !is_null($cod_objeto) && !is_null($numero_orden)){
 
-						$data = DB::table('vista_inventarios_full')
+						$data = DB::table('vista_inventario_full')
 							->select('cod_dimension',
 								'descripcion_dimension as nombre_dimension',
 								'cod_subdimension',
@@ -37,7 +37,9 @@
 								'cod_objeto',
 								'nombre_objeto',
 								'nombre_unidad',
-								'abreviatura_unidad as abreviatura')
+								'abreviatura_unidad as abreviatura',
+								'usa_recipientes',
+								'recipientes_disponibles')
 							->where('cod_dimension','=',$cod_dimension)
 							->where('cod_subdimension', '=', $cod_subdimension)
 							->where('cod_agrupacion', '=', $cod_agrupacion)
