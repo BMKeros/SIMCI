@@ -435,15 +435,15 @@ simci.controller('LaboratorioController', [
                             function(data){
                                 //asi es como se va a amostrar
                                 $scope.items_tabla_objetos_laboratorio = data.data;
+                                $scope.items_tabla_objetos_laboratorio.forEach( function(element, index) {
+                                    element.id_unico_item = ToolsService.generar_id_unico();
+                                });
                             },
                             function(data_error){
                                 ToolsService.generar_alerta_status(data_error);
                             }
-
-                    );
-                }
-
-
+                    );  
+                };
 
                 $scope.seleccionar_item_tabla=function (_event) {
                     elemento=angular.element(_event.target);
