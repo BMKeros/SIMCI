@@ -424,6 +424,27 @@ simci.controller('LaboratorioController', [
 
             if($location.$$url == '/laboratorio/mover-stock'){
 
+                $scope.items_tabla_objetos_laboratorio = [];
+
+                $scope.cargar_objetos_laboratorio = function(){
+
+                    $http({
+                            method: 'GET',
+                            url: '/api/laboratorio/verificar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio
+                        }).then(
+                            function(data){
+                                //asi es como se va a amostrar
+                                $scope.items_tabla_objetos_laboratorio = data.data;
+                            },
+                            function(data_error){
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+
+                    );
+                }
+
+
+
                 $scope.seleccionar_item_tabla=function (_event) {
                     elemento=angular.element(_event.target);
                     elemento_hijo= angular.element(elemento.find('i.icon').get(0));

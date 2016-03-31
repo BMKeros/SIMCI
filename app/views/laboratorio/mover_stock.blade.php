@@ -25,7 +25,7 @@
 					<div class="two fields">
 						<div class="seven wide field">
 							<label>Seleccione un laboratorio</label>
-							{{ Form::select_laboratorios(array('name'=>'select_laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
+							{{ Form::select_laboratorios(array('name'=>'select_laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio', 'ng-change' => 'cargar_objetos_laboratorio()'))}}
 						</div>
 
 						<div class="nine wide field">
@@ -35,7 +35,6 @@
 					</div>
 				</div>
 			</form>
-<<<<<<< HEAD
 	    </div>
 	
         <br>
@@ -51,28 +50,30 @@
 					<th width="3%" align="center">Mover</th>
                 </tr>
             </thead>
+            
             <tbody>
-				<tr ng-repeat="x in [1,2,3,4,5,6]" id='<%x%>'>
-					<td>
-						<p>Cloruro de Sodio</p>
-					</td>
-					<td class="align centered">10</td>
+				<tr ng-repeat="elemento in items_tabla_objetos_laboratorio track by $index" id="<% elemento.id_item_stock %>" ng-animate="'animate'" class="animate-repeat">
+					<td><% elemento.nombre_objeto | lowercase | capitalize%></td>
+					<td><% elemento.cantidad %></td>
 					<td>
 						<div class="ui input">
 							<input type="text" disabled="disabled" size="5">
 						</div>
 					</td>
+
 					<td>
-						<button class="ui icon small inverted blue button" id="btn_actison_item" ng-click="seleccionar_item_tabla($event)" data-id-fila='<%x%>'><i class="checkmark icon" ></i></button>
+						<button class="ui icon small inverted blue button" id="btn_actison_item" ng-click="seleccionar_item_tabla($event)" data-id-fila='<%x%>'>
+							<i class="checkmark icon"></i>
+						</button>
 					</td>
 				</tr>
 
-            	<tr ng-if="items_tabla_stock.length == 0">
-            		<td colspan="4">
-            			<p align="center">No hay elementos para ser agregados</p>
-            		</td>
-            	</tr>
-            </tbody>
+				<tr ng-if="items_tabla_objetos_laboratorio.length == 0">
+					<td colspan="4">
+						<p align="center">No hay elementos para ser agregados</p>
+					</td>
+				</tr>
+			</tbody>
         </table>
 
         <br>
@@ -85,63 +86,6 @@
             </div>
         </div>
     </div>
-=======
-		</div>
-
-		<br>
-
-		<br>
-
-		<table class="ui celled striped table" width="100%">
-			<thead>
-			<tr>
-				<th width="40%">Nombre</th>
-				<th width="30%">Cantidad</th>
-				<th width="3%" align="center">Mover</th>
-			</tr>
-			<tr ng-repeat="x in [1,2,3,4,5,6]" id='<%x%>'>
-				<td>
-					<p>Cloruro de Sodio</p>
-				</td>
-				<td>10</td>
-
-				<td>
-
-					<button class="ui icon small inverted blue button" id="btn_actison_item" ng-click="seleccionar_item_tabla($event)" data-id-fila='<%x%>'><i class="checkmark icon" ></i></button>
-				</td>
-			</tr>
-			</thead>
-			<tbody>
-			<tr ng-repeat="elemento in items_tabla_stock track by $index" id="<% elemento.id_item_stock %>" ng-animate="'animate'" class="animate-repeat">
-				<td><% elemento.nombre_objeto | lowercase | capitalize%></td>
-				<td><% elemento.cantidad %></td>
-				<td><% elemento.nombre_laboratorio | lowercase | capitalize %></td>
-				<td>
-					<button class="ui icon small button" ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
-						<i class="trash outline icon"></i>
-					</button>
-				</td>
-			</tr>
-
-			<tr ng-if="items_tabla_stock.length == 0">
-				<td colspan="4">
-					<p align="center">No hay elementos para ser agregados</p>
-				</td>
-			</tr>
-			</tbody>
-		</table>
-
-		<br>
-
-		<br>
-
-		<div class="action">
-			<div class="ui right floated positive button">
-				Mover
-			</div>
-		</div>
-	</div>
->>>>>>> 82946ef2fa5d581c3a37fb1e56917485d721aa5b
 </div>
 
 <script>
