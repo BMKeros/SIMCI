@@ -1086,20 +1086,20 @@ var reglas_formulario_generar_ordenes = {
                     prompt : 'La cantidad debe ser mayor a cero'
                 }
             ]
-        }
+        },
 
-        fecha_actividad{
-            identifier: 'fecha_actividad'
+        fecha_actividad:{
+            identifier: 'fecha_actividad',
             rules:[
                 {
                     type:'empty',
                     prompt:'Este campo no debe quedar vacio'
                 }
             ]
-        }
+        },
 
-        observaciones{
-            identifier:'observaciones'
+        observaciones:{
+            identifier:'observaciones',
             rules:[
                 {
                     type:'empty',
