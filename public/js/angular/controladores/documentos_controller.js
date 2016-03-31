@@ -48,8 +48,15 @@ simci.controller('DocumentosController', [
         url: "#/documentos/ver/todos",
         icono: 'unhide',
         show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
-      }
+      },
       
+      {
+        nombre:"enviar correo",
+        descripcion: "Esta opcion le permitira enviar email a contactos del sistema",
+        url: "#/documentos/enviar-correo",
+        icono: 'send',
+        show_in:[TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+      }
 
     ];
 
