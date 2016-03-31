@@ -87,7 +87,7 @@
 			$cod_clase_objeto = Input::get('cod_clase_objeto');
 
 			$reglas = array(
-				'nombre' => 'required|min:5|max:100', 
+				'nombre' => 'required|min:5|max:100|unique:catalogo_objetos', 
 				'descripcion' => 'required|min:5|max:200',
 				'especificaciones' => 'required|min:5|max:200',
 				'cod_unidad' => 'required|numeric|exists:unidades,cod_unidad',
@@ -108,7 +108,8 @@
 				'min' => 'El campo :attribute no debe contener menos de :min caracteres',
 				'max' => 'El campo :attribute no debe exceder los :max caracteres',
 				'exists' => ':attribute no existe',
-				'numeric' => 'El :attribute debe ser solo numeros'
+				'numeric' => 'El :attribute debe ser solo numeros',
+				'unique' => 'Este :attribute ya existe'
 			);
 
 			$validacion = Validator::make($campos, $reglas, $mensajes);
