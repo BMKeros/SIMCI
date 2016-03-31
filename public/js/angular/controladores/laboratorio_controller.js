@@ -452,6 +452,8 @@ simci.controller('LaboratorioController', [
 
                     campo_cantidad_mover = angular.element(elemento_fila.find('input').get(0));
 
+                    campo_cantidad_mover.val('');
+
                     if (elemento.hasClass('blue')) {
                         campo_cantidad_mover.removeAttr('disabled');
                         elemento.removeClass('blue').addClass('red');
