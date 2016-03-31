@@ -442,30 +442,29 @@ simci.controller('LaboratorioController', [
                             function(data_error){
                                 ToolsService.generar_alerta_status(data_error);
                             }
-                    );  
+                    );
                 };
 
                 $scope.seleccionar_item_tabla=function (_event) {
-                    elemento=angular.element(_event.target);
-                    elemento_hijo= angular.element(elemento.find('i.icon').get(0));
-                    elemento_fila= angular.element('#'+elemento.attr('data-id-fila'));
+                    elemento = angular.element(_event.target);
+                    elemento_hijo = angular.element(elemento.find('i.icon').get(0));
+                    elemento_fila = angular.element('#'+elemento.attr('data-id-fila'));
+
+                    campo_cantidad_mover = angular.element(elemento_fila.find('input').get(0));
+
+                    campo_cantidad_mover.val('');
 
                     if (elemento.hasClass('blue')) {
-                        elemento.removeClass('blue');
-                        elemento.addClass('red');
-                        elemento_hijo.removeClass('checkmark');
-                        elemento_hijo.addClass('remove');
-                        elemento_fila.addClass('negative');
-                        elemento_fila.removeClass('positive');
+                        campo_cantidad_mover.removeAttr('disabled');
+                        elemento.removeClass('blue').addClass('red');
+                        elemento_hijo.removeClass('checkmark').addClass('remove');
+                        elemento_fila.addClass('negative').removeClass('positive');
                     }
-
                     else {
-                        elemento.removeClass('red');
-                        elemento.addClass('blue');
-                        elemento_hijo.removeClass('remove');
-                        elemento_hijo.addClass('checkmark');
+                        campo_cantidad_mover.attr('disabled','');
+                        elemento.removeClass('red').addClass('blue');
+                        elemento_hijo.removeClass('remove').addClass('checkmark');
                         elemento_fila.removeClass('negative');
-
                     }
 
                 }
