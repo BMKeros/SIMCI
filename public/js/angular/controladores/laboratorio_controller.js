@@ -432,13 +432,14 @@ simci.controller('LaboratorioController', [
 
                     $http({
                             method: 'GET',
-                            url: '/api/laboratorio/mostrar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio
+                            url: '/api/laboratorio/mostrar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio_origen
                         }).then(
                             function(data){
-                                //asi es como se va a amostrar
+                                //asi es como se va a mostrar
                                 $scope.items_tabla_objetos_laboratorio = data.data;
                                 $scope.items_tabla_objetos_laboratorio.forEach( function(element, index) {
                                     element.id_unico_item = ToolsService.generar_id_unico();
+                                    element.cantidad_mover = 0;
                                 });
                             },
                             function(data_error){
@@ -446,6 +447,9 @@ simci.controller('LaboratorioController', [
                             }
                     );
                 };
+
+             
+
 
                 $scope.validar_seleccion = function(){
                     if($scope.select_laboratorio_origen === $scope.select_laboratorio_destino){
