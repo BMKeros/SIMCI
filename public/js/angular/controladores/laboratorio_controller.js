@@ -435,11 +435,13 @@ simci.controller('LaboratorioController', [
                             function(data){
                                 //asi es como se va a amostrar
                                 $scope.items_tabla_objetos_laboratorio = data.data;
+                                $scope.items_tabla_objetos_laboratorio.forEach( function(element, index) {
+                                    element.id_unico_item = ToolsService.generar_id_unico();
+                                });
                             },
                             function(data_error){
                                 ToolsService.generar_alerta_status(data_error);
                             }
-
                     );
                 };
 
@@ -447,7 +449,6 @@ simci.controller('LaboratorioController', [
                     elemento = angular.element(_event.target);
                     elemento_hijo = angular.element(elemento.find('i.icon').get(0));
                     elemento_fila = angular.element('#'+elemento.attr('data-id-fila'));
-
 
                     campo_cantidad_mover = angular.element(elemento_fila.find('input').get(0));
 
