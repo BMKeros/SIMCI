@@ -85,6 +85,7 @@ simci.controller('CatalogoController', [
       }// If == '/catalogo/registrar-objeto'
 
       if($location.$$url == '/catalogo/ver/todos'){
+        ToolsService.reload_template_cache($route,$templateCache);
 
         $scope.tabla_objetos = {};
         $scope.id_objeto_actual = null;
