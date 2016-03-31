@@ -425,6 +425,8 @@ simci.controller('LaboratorioController', [
             if($location.$$url == '/laboratorio/mover-stock'){
 
                 $scope.items_tabla_objetos_laboratorio = [];
+                $scope.select_laboratorio_origen = null;
+                $scope.select_laboratorio_destino = null;
 
                 $scope.cargar_objetos_laboratorio = function(){
 
@@ -443,6 +445,12 @@ simci.controller('LaboratorioController', [
                                 ToolsService.generar_alerta_status(data_error);
                             }
                     );
+                };
+
+                $scope.validar_seleccion = function(){
+                    if($scope.select_laboratorio_origen === $scope.select_laboratorio_destino){
+                        alertify.error("No puedes mover el stock al mismo laboratorio");
+                    }
                 };
 
                 $scope.seleccionar_item_tabla=function (_event) {
