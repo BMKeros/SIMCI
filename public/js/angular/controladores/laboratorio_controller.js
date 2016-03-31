@@ -430,7 +430,7 @@ simci.controller('LaboratorioController', [
 
                     $http({
                             method: 'GET',
-                            url: '/api/laboratorio/verificar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio
+                            url: '/api/laboratorio/mostrar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio
                         }).then(
                             function(data){
                                 //asi es como se va a amostrar

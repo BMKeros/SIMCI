@@ -69,11 +69,21 @@
 				break;
 
 				case 'paginacion_stock':
-					$consulta = DB::table('vista_stock_full')
+					$consulta = DB::table('vista_stock_laboratorio_full')
 						->select('cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 						array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
+				break;
+
+				case 'stock_laboratorio':
+					$cod_laboratorio_origen = Input::get('cod_laboratorio');
+
+					$response = DB::table('vista_stock_laboratorio_full')
+						->select('cod_objeto', 'nombre_objeto', 'cantidad')
+						->where('cod_laboratorio', '=', $cod_laboratorio_origen)
+						->get();
+
 				break;
 
 				default:
@@ -251,20 +261,16 @@
 
 			foreach($data as $value){
 				$codigos_objetos[] = array('cod_objeto' => $value['cod_objeto']);
+				
 				$codigos_laboratorios[] = array('cod_laboratorio' => $value['cod_laboratorio']);
 			}
 
 			$objetos_stock = DB::table('vista_stock_full')
-									->where('cod_objeto', $codigos_objetos)
+									->whereIn('cod_objeto', $codigos_objetos)
 									->where('cod_laboratorio', $codigos_laboratorios)
 									->get();
 
-			foreach ($objetos_stock as $value) {
-				$asignar_stock[] = array(
-					'cod_objeto' => $objetos_stock->cod_objeto,
-					'cod_laboratorio' => $lab_destino
-				); 
-			}
+
 
 			DB::table('objetos_laboratorio')->insert($asignar_stock);
 
