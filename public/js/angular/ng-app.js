@@ -228,12 +228,19 @@
             generar_id_unico: function () {
                 var text = "";
                 var posible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-                var fecha = new Date();
-                for (var i = 0; i < 5; i++) {
+                for (var i = 0; i < 6; i++) {
                     text += posible.charAt(Math.floor(Math.random() * posible.length));
                 }
 
-                return text + fecha.getHours() + fecha.getMinutes() + fecha.getSeconds() + fecha.getMilliseconds();
+                function get_code() {
+                    return Math.floor((1 + Math.random()) * 0x10000)
+                        .toString(16)
+                        .substring(1);
+                }
+
+                for(i = 0; i < 8; i++) { text += get_code(); }
+
+                return text;
             },
             //Funcion para mostrar modal dinamico
             mostrar_modal_dinamico: function ($_SCOPE, $_HTTP, opciones) {
