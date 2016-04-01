@@ -453,6 +453,8 @@ simci.controller('LaboratorioController', [
                 $scope.validar_seleccion = function(){
                     if($scope.select_laboratorio_origen === $scope.select_laboratorio_destino){
                         alertify.error("No puedes mover el stock al mismo laboratorio");
+
+                        $('#laboratorio_destino').dropdown('restore defaults');
                     }
                 };
 
@@ -463,7 +465,7 @@ simci.controller('LaboratorioController', [
 
                     campo_cantidad_mover = angular.element(elemento_fila.find('input').get(0));
 
-                    campo_cantidad_mover.val('');
+                    campo_cantidad_mover.val(0).trigger('change');
 
                     if (elemento.hasClass('blue')) {
                         campo_cantidad_mover.removeAttr('disabled');
