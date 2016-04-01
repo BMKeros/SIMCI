@@ -59,7 +59,7 @@
                 <td><% elemento.cantidad %></td>
                 <td class="center aligned">
                     <div class="ui input">
-                        <input type="text" disabled="disabled" size="5">
+                        <input type="text" disabled="disabled" size="5" ng-model="elemento.cantidad_mover" ng-only-number allow-decimal="false" allow-negative="false">
                     </div>
                 </td>
 

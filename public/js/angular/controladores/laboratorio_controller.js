@@ -432,6 +432,7 @@ simci.controller('LaboratorioController', [
 
                     $http({
                             method: 'GET',
+
                             url: '/api/laboratorio/mostrar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio_origen
                         }).then(
                             function(data){
@@ -447,8 +448,6 @@ simci.controller('LaboratorioController', [
                             }
                     );
                 };
-
-             
 
 
                 $scope.validar_seleccion = function(){
