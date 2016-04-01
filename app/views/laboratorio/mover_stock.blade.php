@@ -24,12 +24,12 @@
 
                 <div class="field">
                     <div class="two fields">
-                        <div class="seven wide field">
+                        <div class="eight wide field">
                             <label>Seleccione un laboratorio</label>
                             {{ Form::select_laboratorios(array('name'=>'select_laboratorio_origen', 'id'=>'laboratorio_origen','ng-model'=>'select_laboratorio_origen', 'ng-change' => 'cargar_objetos_laboratorio()'))}}
                         </div>
 
-                        <div class="nine wide field">
+                        <div class="eight wide field">
                             <label>Seleccione el laboratorio al que se movera el stock</label>
                             {{ Form::select_laboratorios(array('name'=>'select_laboratorio_destino', 'id'=>'laboratorio_destino','ng-model'=>'select_laboratorio_destino', 'ng-change'=>'validar_seleccion()'))}}
                         </div>
