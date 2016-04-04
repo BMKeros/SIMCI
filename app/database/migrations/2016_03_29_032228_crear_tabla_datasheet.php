@@ -15,6 +15,7 @@ class CrearTablaDatasheet extends Migration {
         Schema::create('datasheets', function ($table)
 		{
 			$table->increments('id');
+            $table->integer('cod_objeto');
             $table->string('nombre', 40);
 			$table->string('codigo', 15);
             $table->string('numero_cas', 15);
