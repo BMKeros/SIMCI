@@ -75,47 +75,55 @@
 				<div class="eight column row">
 					<div class="column">
 		      			<a target="_blank" href="https://php.net" class="header item">
-				        	<img src="/img/PHP2.png" width="38" height="38">
+				        	<img src="/img/PHP2.png" width="30" height="30">
 				      	</a>
 					</div>
 
 					<div class="column">
 						<a target="_blank" href="http://www.w3schools.com/html/html5_intro.asp" class="header item">
-				        	<img src="/img/HTML5.png" width="38" height="38">
+				        	<img src="/img/HTML5.png" width="30" height="30">
 						</a> 
 					</div>
 					
 					
 					<div class="column">
 		      			<a target="_blank" href="https://laravel.com" class="header item">
-				        	<img src="/img/Laravel3.png" width="38" height="38">
+				        	<img src="/img/Laravel3.png" width="30" height="30">
 				      	</a>
 					</div>
 
 					<div class="column">
 						<a target="_blank" href="https://angularjs.org" class="header item">
-							<img src="/img/angular2.png" width="38" height="38">
+							<img src="/img/angular2.png" width="30" height="30">
 						</a>
 					</div>
 
 					<div class="column">
 						<a target="_blank" href="https://semantic-ui.com" class="header item">
-				        	<img src="/img/semantic.png" width="38" height="38">
+				        	<img src="/img/semantic.png" width="30" height="30">
 				      	</a>
 					</div>
 
 					<div class="column">
 		      			<a target="_blank" href="http://www.w3schools.com/css/default.asp" class="header item">
-				        	<img src="/img/CSS.png" width="38" height="38">
+				        	<img src="/img/CSS.png" width="30" height="30">
 				      	</a>
 			      	</div>
 
 			      	<div class="column">
 		      			<a target="_blank" href="https://es.opensuse.org/openSUSE:Licencia" class="header item">
-				        	<img src="/img/Source2.png" width="38" height="38">
+				        	<img src="/img/Source2.png" width="30" height="30">
 				      	</a>
 			      	</div>
 				</div>
+			</div>
+
+			<div class=" ui grid centered">
+				<small>Sistema Integrado para el Manego y Control de Inventario | Bajo la Licencia MIT | Derechos Reservados</small>
+			</div>
+
+			<div class="ui grid centered">
+				<small> <b>SIMCI v1.0 | 2016</small>
 			</div>
 			
 		</div>

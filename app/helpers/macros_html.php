@@ -203,7 +203,7 @@ Form::macro('select_unidades', function($atributos = null, $selected = null){
 	}
 });
 
-Form::macro('select_personas', function($atributos = null, $selected = null){
+Form::macro('select_personas', function($atributos = null, $selected = null, $placeholder=null){
 
 	$personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'personas.id')
 		->join('usuarios', 'usuarios.id', '=', 'personas.usuario_id')
@@ -213,7 +213,7 @@ Form::macro('select_personas', function($atributos = null, $selected = null){
 	$default_values = array('class'=>"ui dropdown search capitalize");
 
 	$html = sprintf('<select %s >', atributos_dinamicos($atributos,$default_values));
-		$html .= '<option value="">Primer Auxiliar</option>';
+		$html .= '<option value="">'.$placeholder.'</option>';
 		
 	foreach ($personas as $persona) {
 		$html .= sprintf('<option value="%s">%s %s</option>', $persona->id, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido));	

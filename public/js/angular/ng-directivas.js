@@ -56,8 +56,8 @@
                             }
                         }
 
-                        if(attrs.allowDecimal == "false") {
-                            newValue = parseInt(newValue);
+                        if (attrs.allowDecimal == "false" && spiltArray.length > 1) {
+                            newValue = newValue.replace(".", "");
                             ngModel.$setViewValue(newValue);
                             ngModel.$render();
                         }
