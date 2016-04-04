@@ -460,25 +460,31 @@ simci.controller('LaboratorioController', [
                             return !(element.cantidad_mover == 0);
                     });
 
-                    $http({
-                        method: 'POST',
-                        url: '/api/laboratorio/mover-stock',
-                        data: {
-                            'data': $scope.items_tabla_objetos_laboratorio
-                        }
-                    }).then(
-                        function(data){
-                            if(data.data.resultado){
-                                $scope.items_tabla_objetos_laboratorio = []  
-                                $('#laboratorio_origen').dropdown('restore defaults');
-                                $('#laboratorio_destino').dropdown('restore defaults');
-                                alertify.notify('Objetos movido con exito!', 'success', 5, function(){  console.log('dismissed'); });
+                    if($scope.items_tabla_objetos_laboratorio == ""){
+                        alertify.error("Aun no hashecho ninguna seleccion");
+                        return false;
+                    }
+                    else{
+                        $http({
+                            method: 'POST',
+                            url: '/api/laboratorio/mover-stock',
+                            data: {
+                                'data': $scope.items_tabla_objetos_laboratorio
                             }
-                        },
-                        function(data_error){
-                            ToolsService.generar_alerta_status(data_error);
-                        }
-                    );
+                        }).then(
+                            function(data){
+                                if(data.data.resultado){
+                                    $scope.items_tabla_objetos_laboratorio = []  
+                                    $('#laboratorio_origen').dropdown('restore defaults');
+                                    $('#laboratorio_destino').dropdown('restore defaults');
+                                    alertify.notify('Objetos movido con exito!', 'success', 5, function(){  console.log('dismissed'); });
+                                }
+                            },
+                            function(data_error){
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
+                    }
                 };
 
                 $scope.validar_seleccion = function(){

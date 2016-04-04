@@ -258,13 +258,19 @@
 			//data porque nose como vendra del frontend, este sera el que traiga todos los datos
 			$data = Input::get('data');
 
-
-
-			foreach($data as $value){
-				DB::select("select mover_stock_laboratorio('".$value['cod_laboratorio_origen']."','".$value['cod_laboratorio_destino']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
+			if(is_null($data)){
+				return Response::json(array('resultado' => false));
 			}
+			else{
+				foreach($data as $value){
+					DB::select("select mover_stock_laboratorio('".$value['cod_laboratorio_origen']."','".$value['cod_laboratorio_destino']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
+				}	
 
-			return Response::json(array('resultado' => true));
+				return Response::json(array('resultado' => true));
+			}
+			
+
+			
 		}
 
 
