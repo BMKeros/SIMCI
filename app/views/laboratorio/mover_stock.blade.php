@@ -73,7 +73,7 @@
 
             <tr ng-if="items_tabla_objetos_laboratorio.length == 0">
                 <td colspan="4">
-                    <p align="center">No hay elementos para ser agregados</p>
+                    <p align="center">No hay elementos para ser movidos</p>
                 </td>
             </tr>
             </tbody>
