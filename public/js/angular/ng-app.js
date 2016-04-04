@@ -51,6 +51,11 @@
             }
         }
 
+        //Funcion global para mostrar el modal de los datasheet
+        $rootScope.cargar_datasheet = function (id_objeto) {
+            return alertify.DataSheetDialog(id_objeto);
+        }
+
     });
 
     simci.filter('capitalize', function () {
