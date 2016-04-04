@@ -118,7 +118,11 @@ simci.controller('CatalogoController', [
             
             DTColumnBuilder.newColumn(null).withTitle('Nombre').renderWith(
             function(data, type, full) {
-                return data.nombre + '<img class="ui spopup datasheet icono" src="/img/data.png" data-content="Mostrar DataSheet" onclick="alertify.DataSheetDialog(1);">';
+                if (data.nombre_clase_objeto.toLowerCase() == 'reactivo') {
+                    return data.nombre + '<img class="ui spopup datasheet icono" src="/img/data.png" data-content="Mostrar DataSheet" ng-click="cargar_datasheet(' + data.id + ')">';
+                } else {
+                    return data.nombre;
+                }
             })
             .withOption('width','30%')
             .notSortable(),
@@ -140,7 +144,7 @@ simci.controller('CatalogoController', [
                 return '<div class="ui icon button blue spopup" data-content="Ver Objeto" ng-click="modal_ver_objeto('+data.id+')"><i class="unhide icon"></i></div>'+
                         '<div class="ui icon button green spopup"  data-content="Modificar Objeto" ng-click="modal_modificar_objeto('+data.id+')"><i class="edit icon"></i></div>'+ 
                         '<div class="ui icon button red spopup"  data-content="Eliminar Objeto" ng-click="modal_eliminar_objeto('+data.id+')"><i class="remove icon"></i></div>';
-            }).withOption('width','17%')
+              }).withOption('width', '15%')
         ];
 
         ///Funciones 
