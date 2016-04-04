@@ -5,6 +5,10 @@
     });
 
     simci.run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http) {
+
+        //Guardamos la informacion del usuario logueado
+        $rootScope.data_global_user = ToolsService.get_data_user_localstorage();
+
         //Configuracion de semantic
         $.fn.search.settings.error = {
             noResults: 'No se encontraron resultados'
@@ -38,7 +42,7 @@
 
                 $http({
                     method: 'GET',
-                    url: '/api/notificaciones/mostrar?type=todas&id_usuario=1'
+                    url: '/api/notificaciones/mostrar?type=todas&id_usuario=' + $rootScope.data_global_user.id_usuario
                 }).then(function (data) {
                     $rootScope.notificaciones = data.data.datos;
 
@@ -49,7 +53,12 @@
                     ToolsService.generar_alerta_status(data_error);
                 });
             }
-        }
+        };
+
+        //Funcion global para mostrar el modal de los datasheet
+        $rootScope.cargar_datasheet = function (id_objeto) {
+            return alertify.DataSheetDialog(id_objeto);
+        };
 
     });
 
@@ -99,7 +108,7 @@
         };
     });
 
-    simci.filter('quitar_ceros_decimales', function (ToolsService, $timeout) {
+    simci.filter('quitar_ceros_decimales', function (ToolsService) {
         return function (input, param) {
             $timeout(function () {
                 return ToolsService.quitar_ceros_decimales(input);
@@ -201,8 +210,7 @@
             },
             //Funcion para generar un alertify un mensaje dependiendo del status
             generar_alerta_status: function (data) {
-                var mensaje = "";
-                mensaje = this.printf('Ha ocurrido un error al realizar la operacion. Estado[{0}]', data.status);
+                var mensaje = this.printf('Ha ocurrido un error al realizar la operacion. Estado[{0}]', data.status);
                 alertify.error(mensaje);
             },
             //Funcion para obtener la data del usuario guardada en el localstorage
@@ -300,7 +308,7 @@
                     function () {
                         $http({
                             method: 'POST',
-                            url: config.urls.verificacion,
+                            url: config.urls.verificacion
                         }).then(function (data) {
                                 //verificamos si tiene relacion en otras tablas
                                 if (data.data.resultado) {
@@ -313,7 +321,7 @@
                                         function () {
                                             $http({
                                                 method: 'POST',
-                                                url: config.urls.eliminacion,
+                                                url: config.urls.eliminacion
                                             }).then(function (data) {
 
                                                 if (data.data.resultado) {

@@ -24,12 +24,12 @@
 
                 <div class="field">
                     <div class="two fields">
-                        <div class="seven wide field">
+                        <div class="eight wide field">
                             <label>Seleccione un laboratorio</label>
                             {{ Form::select_laboratorios(array('name'=>'select_laboratorio_origen', 'id'=>'laboratorio_origen','ng-model'=>'select_laboratorio_origen', 'ng-change' => 'cargar_objetos_laboratorio()'))}}
                         </div>
 
-                        <div class="nine wide field">
+                        <div class="eight wide field">
                             <label>Seleccione el laboratorio al que se movera el stock</label>
                             {{ Form::select_laboratorios(array('name'=>'select_laboratorio_destino', 'id'=>'laboratorio_destino','ng-model'=>'select_laboratorio_destino', 'ng-change'=>'validar_seleccion()'))}}
                         </div>
@@ -59,7 +59,7 @@
                 <td><% elemento.cantidad %></td>
                 <td class="center aligned">
                     <div class="ui input">
-                        <input type="text" disabled="disabled" size="5">
+                        <input type="text" disabled="disabled" size="5" ng-model="elemento.cantidad_mover" ng-only-number allow-decimal="false" allow-negative="false">
                     </div>
                 </td>
 
@@ -84,7 +84,7 @@
         <br>
 
         <div class="action">
-            <div class="ui right floated positive button">
+            <div class="ui right floated positive button" ng-click="procesar_mover_stock();">
                 Mover
             </div>
         </div>

@@ -39,7 +39,7 @@
 
 
 				$consulta = DB::table('vista_objetos_full')
-					->select('cod_objeto as id', 'nombre_objeto as nombre', 'especificaciones_objeto as especificaciones', 'nombre_unidad', 'abreviatura_unidad');
+					->select('cod_objeto as id', 'nombre_objeto as nombre', 'especificaciones_objeto as especificaciones', 'nombre_unidad', 'abreviatura_unidad', 'nombre_clase_objeto');
 				
 					$response = $this->generar_paginacion_dinamica($consulta,
 					array('campo_where'=>'nombre_objeto', 'campo_orden'=>'cod_objeto'));
