@@ -84,7 +84,7 @@
         <br>
 
         <div class="action">
-            <div class="ui right floated positive button">
+            <div class="ui right floated positive button" ng-click="procesar_mover_stock();">
                 Mover
             </div>
         </div>

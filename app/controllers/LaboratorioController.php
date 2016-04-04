@@ -257,29 +257,20 @@
 		public function postMoverStock(){
 			//data porque nose como vendra del frontend, este sera el que traiga todos los datos
 			$data = Input::get('data');
-			$lab_destino = Input::get('select_laboratorio_destino');
+
+
 
 			foreach($data as $value){
-				$codigos_objetos[] = array('cod_objeto' => $value['cod_objeto']);
-				
-				$codigos_laboratorios[] = array('cod_laboratorio' => $value['cod_laboratorio']);
+				DB::select("select mover_stock_laboratorio('".$value['cod_laboratorio_origen']."','".$value['cod_laboratorio_destino']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
 			}
 
-			$objetos_stock = DB::table('vista_stock_full')
-									->whereIn('cod_objeto', $codigos_objetos)
-									->where('cod_laboratorio', $codigos_laboratorios)
-									->get();
-
-
-
-			DB::table('objetos_laboratorio')->insert($asignar_stock);
-
-			return Response::json(array('resultado' => true, 'mensajes' => 'Objetos reasignados con exito.!'));
+			return Response::json(array('resultado' => true));
 		}
 
 
 	    public function postEliminar(){
 	    	$id_laboratorio = Input::get('id');
+
 
 	    	$laboratorio = Laboratorio::find($id_laboratorio);
 

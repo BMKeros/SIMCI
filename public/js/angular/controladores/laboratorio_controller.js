@@ -452,7 +452,7 @@ simci.controller('LaboratorioController', [
                 $scope.procesar_mover_stock = function(){
                     
                     $scope.items_tabla_objetos_laboratorio.forEach( function(element, index){
-                        element.cod_laboratorio = $scope.select_laboratorio_origen;
+                        element.cod_laboratorio_origen = $scope.select_laboratorio_origen;
                         element.cod_laboratorio_destino = $scope.select_laboratorio_destino;
                     });
 
@@ -468,7 +468,12 @@ simci.controller('LaboratorioController', [
                         }
                     }).then(
                         function(data){
-                            alert("exito");
+                            if(data.data.resultado){
+                                $scope.items_tabla_objetos_laboratorio = []  
+                                $('#laboratorio_origen').dropdown('restore defaults');
+                                $('#laboratorio_destino').dropdown('restore defaults');
+                                alertify.notify('Objetos movido con exito!', 'success', 5, function(){  console.log('dismissed'); });
+                            }
                         },
                         function(data_error){
                             ToolsService.generar_alerta_status(data_error);
@@ -479,7 +484,6 @@ simci.controller('LaboratorioController', [
                 $scope.validar_seleccion = function(){
                     if($scope.select_laboratorio_origen === $scope.select_laboratorio_destino){
                         alertify.error("No puedes mover el stock al mismo laboratorio");
-
                         $('#laboratorio_destino').dropdown('restore defaults');
                     }
                 };
