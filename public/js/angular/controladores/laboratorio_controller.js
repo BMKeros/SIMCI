@@ -460,8 +460,17 @@ simci.controller('LaboratorioController', [
                             return !(element.cantidad_mover == 0);
                     });
 
-                    if($scope.items_tabla_objetos_laboratorio == ""){
-                        alertify.error("Aun no has hecho ninguna seleccion");
+
+                    if($scope.select_laboratorio_origen == null){
+                        alertify.error("Aun no has seleccionado laboratorio origen");
+                        return false;
+                    }
+                    else if($scope.select_laboratorio_destino == null){
+                        alertify.error("Aun no has seleccionado laboratorio destino");
+                        return false;
+                    }
+                    else if($scope.items_tabla_objetos_laboratorio == ""){
+                        alertify.error("Aun no has seleccionado ningun objeto");
                         return false;
                     }
                     else{
