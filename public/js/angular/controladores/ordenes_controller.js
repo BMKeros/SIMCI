@@ -68,12 +68,12 @@ simci.controller('OrdenesController', [
         });
       
         $scope.columnas_tabla_ordenes = [
-            DTColumnBuilder.newColumn(null).withTitle('Fecha')
+            DTColumnBuilder.newColumn(null).withTitle('Nombre')
             .notSortable(),
             
-            DTColumnBuilder.newColumn('tipo de orden').withTitle('Tipo de Orden').notSortable(),
+            DTColumnBuilder.newColumn('fecha de actividad').withTitle('Fecha de la actividad').notSortable(),
 
-            DTColumnBuilder.newColumn('ordenes hechas').withTitle('Ordenes Hechas').notSortable(),
+            DTColumnBuilder.newColumn('laboratorio').withTitle('Laboratorio').notSortable(),
             
             DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
               function(data, type, full) {

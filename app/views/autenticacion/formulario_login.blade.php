@@ -80,7 +80,7 @@
 					</div>
 
 					<div class="column">
-						<a target="_blank" href="#" class="header item">
+						<a target="_blank" href="http://www.w3schools.com/html/html5_intro.asp" class="header item">
 				        	<img src="/img/HTML5.png" width="38" height="38">
 						</a> 
 					</div>
@@ -105,13 +105,13 @@
 					</div>
 
 					<div class="column">
-		      			<a target="_blank" href="#" class="header item">
+		      			<a target="_blank" href="http://www.w3schools.com/css/default.asp" class="header item">
 				        	<img src="/img/CSS.png" width="38" height="38">
 				      	</a>
 			      	</div>
 
 			      	<div class="column">
-		      			<a target="_blank" href="#" class="header item">
+		      			<a target="_blank" href="https://es.opensuse.org/openSUSE:Licencia" class="header item">
 				        	<img src="/img/Source2.png" width="38" height="38">
 				      	</a>
 			      	</div>
