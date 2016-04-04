@@ -491,7 +491,7 @@ simci.controller('LaboratorioController', [
                     if($scope.select_laboratorio_origen === $scope.select_laboratorio_destino){
                         $('#laboratorio_destino').dropdown('restore defaults');
                         $scope.select_laboratorio_destino = null;
-                        
+
                         alertify.error("No puedes mover el stock al mismo laboratorio");
                     }
                 };

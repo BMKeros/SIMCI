@@ -46,8 +46,8 @@
             <thead>
             <tr>
                 <th width="40%">Nombre</th>
-                <th width="10%">Cantidad Disponible</th>
-                <th width="10%">Cantidad a Mover</th>
+                <th width="6%" class="center aligned">Cantidad Disponible</th>
+                <th width="6%" class="center aligned">Cantidad a Mover</th>
                 <th width="2%" class="ui center aligned">Accion</th>
             </tr>
             </thead>
@@ -65,6 +65,7 @@
 
                 <td class="center aligned">
                     <button class="ui icon small inverted blue button" id="btn_actison_item"
+                            ng-disabled="elemento.cantidad == 0"
                             ng-click="seleccionar_item_tabla($event)" data-id-fila='<% elemento.id_unico_item %>'>
                         <i class="checkmark icon"></i>
                     </button>
