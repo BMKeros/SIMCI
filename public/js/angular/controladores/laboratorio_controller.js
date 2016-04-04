@@ -461,7 +461,7 @@ simci.controller('LaboratorioController', [
                     });
 
                     if($scope.items_tabla_objetos_laboratorio == ""){
-                        alertify.error("Aun no hashecho ninguna seleccion");
+                        alertify.error("Aun no has hecho ninguna seleccion");
                         return false;
                     }
                     else{
