@@ -449,6 +449,32 @@ simci.controller('LaboratorioController', [
                     );
                 };
 
+                $scope.procesar_mover_stock = function(){
+                    
+                    $scope.items_tabla_objetos_laboratorio.forEach( function(element, index){
+                        element.cod_laboratorio = $scope.select_laboratorio_origen;
+                        element.cod_laboratorio_destino = $scope.select_laboratorio_destino;
+                    });
+
+                    $scope.items_tabla_objetos_laboratorio = $scope.items_tabla_objetos_laboratorio.filter(function(element){
+                            return !(element.cantidad_mover == 0);
+                    });
+
+                    $http({
+                        method: 'POST',
+                        url: '/api/laboratorio/mover-stock',
+                        data: {
+                            'data': $scope.items_tabla_objetos_laboratorio
+                        }
+                    }).then(
+                        function(data){
+                            alert("exito");
+                        },
+                        function(data_error){
+                            ToolsService.generar_alerta_status(data_error);
+                        }
+                    );
+                };
 
                 $scope.validar_seleccion = function(){
                     if($scope.select_laboratorio_origen === $scope.select_laboratorio_destino){
