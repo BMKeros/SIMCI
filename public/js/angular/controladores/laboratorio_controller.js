@@ -469,7 +469,7 @@ simci.controller('LaboratorioController', [
                         alertify.error("Aun no has seleccionado laboratorio destino");
                         return false;
                     }
-                    else if($scope.items_tabla_objetos_laboratorio == ""){
+                    else if($scope.items_tabla_objetos_laboratorio.length == 0){
                         alertify.error("Aun no has seleccionado ningun objeto");
                         return false;
                     }
