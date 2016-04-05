@@ -18,7 +18,8 @@
 			"app/tests/TestCase.php"
 		],
 		"files": [
-            "app/helpers/helpers.php"
+            "app/helpers/helpers.php",
+		  	"app/validators/validators.php"
         ]
 	},
 	"scripts": {
