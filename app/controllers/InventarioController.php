@@ -166,17 +166,21 @@
 			$recipientes_disponibles = Input::get('recipientes_disponibles');
 			$elemento_movible = Input::get('elemento_movible');
 
+			//este codigo es para verificar si existe en el inventario
+			$codigo_elemento = $cod_dimension."-".$cod_subdimension."-".$cod_agrupacion."-".$cod_objeto;
+
 			$reglas = array(
 				'cod_dimension' => 'required|alpha_num|exists:almacenes,codigo',
 				'cod_sub_dimension' =>'required|alpha_num|exists:sub_dimensiones,codigo',
 				'cod_agrupacion' => 'required|alpha_num|exists:agrupaciones,codigo',
 				'cod_sub_agrupacion' => 'alpha_num|exists:sub_agrupaciones,codigo',
 				'numero_orden' => 'required|numeric',
-				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id|unique:inventario',
+				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id',
 				'cantidad_disponible' => 'required|numeric',
 				'usa_recipientes' => 'required|boolean',
 				'recipientes_disponibles' => 'numeric',
-				'elemento_movible' => 'required|boolean'
+				'elemento_movible' => 'required|boolean',
+				'codigo_elemento' => 'exist_in_inventario'
 			);
 
 			$campos = array(
@@ -189,7 +193,8 @@
 				'cantidad_disponible' => $cantidad_disponible,
 				'usa_recipientes' => $usa_recipientes,
 				'recipientes_disponibles' => $recipientes_disponibles,
-				'elemento_movible' => $elemento_movible
+				'elemento_movible' => $elemento_movible,
+				'codigo_elemento' => $codigo_elemento
 			);
 
 			$mensajes = array(
@@ -200,7 +205,9 @@
 				'boolean' => 'El campo :attribute debe ser una eleccion logita Ej:(true o false)',
 				':attribute no existe',
 				'numeric' => 'El :attribute debe ser solo numeros',
-				'exists' => ':attribute no existe!'
+				'exists' => ':attribute no existe!',
+				'exist_in_inventario' => 'Este elemento ya existe en el inventario'
+
 			);
 
 			$validacion = Validator::make($campos, $reglas, $mensajes);
