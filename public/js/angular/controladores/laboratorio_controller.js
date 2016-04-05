@@ -333,52 +333,34 @@ simci.controller('LaboratorioController', [
                     if(is_valid_form){
                         $http({
                             method: 'GET',
-                            url: '/api/laboratorio/verificar?type=existe_stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio+'&cod_objeto='+$scope.select_objeto
+                            url: '/api/laboratorio/mostrar?type=agregar_stock&cod_laboratorio=' + $scope.select_laboratorio + '&cod_objeto=' + $scope.select_objeto
                         }).then(
-                            function(response){
+                            function (data) {
 
-                                var existe = response.data.resultado;
+                                var data_item = data.data;
 
-                                if(!existe){
-                                    $http({
-                                        method: 'GET',
-                                        url: '/api/laboratorio/mostrar?type=agregar_stock&cod_laboratorio='+$scope.select_laboratorio+'&cod_objeto='+$scope.select_objeto
-                                    }).then(
-                                        function(data){
+                                //Verificamos que no se repita el elemento en la lista
+                                var existe = $scope.items_tabla_stock.findIndex(function (obj, index, array) {
+                                    return (obj.cod_objeto == $scope.select_objeto) && (obj.cod_laboratorio == $scope.select_laboratorio);
+                                });
 
-                                            var data_item = data.data;
-
-                                            //Verificamos que no se repita el elemento en la lista
-                                            var existe = $scope.items_tabla_stock.findIndex(function(obj,index,array){
-                                                return (obj.cod_objeto == $scope.select_objeto) && (obj.cod_laboratorio == $scope.select_laboratorio);
-                                            });
-
-                                            //Si no existe el nuevo elemento el la lista lo agregamos
-                                            if(existe === -1){
-                                                $scope.items_tabla_stock.push({
-                                                    id_item_stock: ToolsService.generar_id_unico(),
-                                                    nombre_laboratorio: data_item.nombre_laboratorio,
-                                                    cod_laboratorio: data_item.cod_laboratorio,
-                                                    cod_objeto: data_item.cod_objeto,
-                                                    nombre_objeto: data_item.nombre_objeto,
-                                                    cantidad: $scope.cantidad
-                                                });
-                                                console.log($scope.items_tabla_stock);
-                                            }
-                                            else{
-                                                alertify.error("Ya agregaste un stock igual a este en la lista");
-                                            }
-                                        },
-                                        function(data_error) {
-                                            ToolsService.generar_alerta_status(data_error);
-                                        }
-                                    );
+                                //Si no existe el nuevo elemento el la lista lo agregamos
+                                if (existe === -1) {
+                                    $scope.items_tabla_stock.push({
+                                        id_item_stock: ToolsService.generar_id_unico(),
+                                        nombre_laboratorio: data_item.nombre_laboratorio,
+                                        cod_laboratorio: data_item.cod_laboratorio,
+                                        cod_objeto: data_item.cod_objeto,
+                                        nombre_objeto: data_item.nombre_objeto,
+                                        cantidad: $scope.cantidad
+                                    });
+                                    console.log($scope.items_tabla_stock);
                                 }
                                 else{
-                                    alertify.error("Este elemento ya existe en el laboratorio seleccionado");
+                                    alertify.error("Ya agregaste un stock igual a este en la lista");
                                 }
                             },
-                            function(data_error){
+                            function (data_error) {
                                 ToolsService.generar_alerta_status(data_error);
                             }
                         );
