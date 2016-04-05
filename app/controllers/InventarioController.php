@@ -172,7 +172,7 @@
 				'cod_agrupacion' => 'required|alpha_num|exists:agrupaciones,codigo',
 				'cod_sub_agrupacion' => 'alpha_num|exists:sub_agrupaciones,codigo',
 				'numero_orden' => 'required|numeric',
-				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id|unique:inventario',
+				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id',
 				'cantidad_disponible' => 'required|numeric',
 				'usa_recipientes' => 'required|boolean',
 				'recipientes_disponibles' => 'numeric',
