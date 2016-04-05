@@ -70,6 +70,14 @@ class CrearIndexTablas extends Migration {
 				//->onDelete('cascade');
 		});
 
+		//OBJETOS-LABORATORIO
+		Schema::table('objetos_laboratorio', function($table){
+			$table
+				->foreign(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
+				->references(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
+				->on('inventario');
+		});
+
 		//NOTIFICACIONES
 		Schema::table('notificaciones', function($table){
 			$table->foreign('mensaje_id')->references('id')
