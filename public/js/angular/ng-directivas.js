@@ -65,8 +65,7 @@
                         if(spiltArray.length === 0) return;
                         if(spiltArray.length === 1 && (spiltArray[0] == '-' || spiltArray[0] === '.' )) return;
                         if(spiltArray.length === 2 && newValue === '-.') return;
-
-                        /*Check it is number or not.*/
+                        
                         if (isNaN(newValue)) {
                           ngModel.$setViewValue(oldValue);
                           ngModel.$render();
