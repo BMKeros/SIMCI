@@ -18,6 +18,8 @@
         alertify.defaults.transition = "zoom";
         alertify.defaults.theme.ok = "ui positive button";
         alertify.defaults.theme.cancel = "ui gray button";
+        alertify.defaults.glossary.ok = 'Aceptar';
+        alertify.defaults.glossary.cancel = 'Cancelar';
 
         //Lenguaje español para datatable
         DTDefaultOptions.setLanguageSource('/spanish.json');
