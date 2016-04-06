@@ -70,7 +70,7 @@
 
 				case 'paginacion_stock':
 					$consulta = DB::table('vista_stock_laboratorio_full')
-						->select('cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad');
+						->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 						array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
@@ -240,6 +240,9 @@
 			$items_stock_tabla = Input::get('items_stock');
 
 			foreach ($items_stock_tabla as $item) {
+				
+				//aqui va la consulta a la funcion sql que se encargara de de hacer el agregado
+				//a la db pasando por parametro cod_objeto, cod_laboratorio, cantidad
 				$campos[] = array(
 					'cod_laboratorio' => $item['cod_laboratorio'],
 					'cod_objeto' => $item['cod_objeto'],
@@ -252,6 +255,13 @@
 			DB::table('objetos_laboratorio')->insert($campos);
 
 			return Response::json(array('resultado' => true, 'mensajes' => array('Objetos agregados con exito.!')));
+		}
+
+		public function postRetornarStock(){
+			$id = Input::get('id');
+			$cantidad = Input::get('cantidad');
+
+			dd($id.$cantidad);
 		}
 
 		public function postMoverStock(){
