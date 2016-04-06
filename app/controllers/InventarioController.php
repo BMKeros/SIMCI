@@ -136,7 +136,7 @@
 					$value_search = Input::get('query');
 
 					$data = DB::table('vista_inventario_full')
-					->select('cod_objeto', 'nombre_objeto', 'especificaciones_objeto', 'descripcion_objeto','nombre_clase_objeto', 'cantidad_disponible')
+						->select('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'nombre_objeto', 'especificaciones_objeto', 'descripcion_objeto', 'nombre_clase_objeto', 'cantidad_disponible')
 					->where('nombre_objeto','ILIKE','%'.$value_search.'%')
 					->get();
 
