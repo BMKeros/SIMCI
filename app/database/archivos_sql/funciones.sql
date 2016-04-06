@@ -52,7 +52,8 @@ COST 100;
 
 --Funcion usada para mover los objetos de los laboratorios
 --DROP FUNCTION IF EXISTS mover_stock( TEXT, TEXT, INTEGER, INTEGER);
-CREATE OR REPLACE FUNCTION mover_stock_laboratorio(_cod_laboratorio         TEXT,_cod_laboratorio_destino TEXT, _cod_objeto INT, _cantidad_mover INT)
+CREATE OR REPLACE FUNCTION mover_stock_laboratorio(_cod_laboratorio TEXT, _cod_laboratorio_destino TEXT,
+                                                   _cod_objeto      INT, _cantidad_mover INT)
   RETURNS BOOLEAN AS
   $BODY$
   DECLARE
@@ -84,7 +85,8 @@ CREATE OR REPLACE FUNCTION mover_stock_laboratorio(_cod_laboratorio         TEXT
       )
       THEN
 
-        SELECT cantidad INTO cantidad_objeto_destino
+        SELECT cantidad
+        INTO cantidad_objeto_destino
         FROM objetos_laboratorio
         WHERE cod_laboratorio = _cod_laboratorio_destino :: TEXT AND cod_objeto = _cod_objeto;
 
@@ -110,3 +112,69 @@ CREATE OR REPLACE FUNCTION mover_stock_laboratorio(_cod_laboratorio         TEXT
   END;
   $BODY$
 LANGUAGE plpgsql VOLATILE
+
+
+
+-- DROP FUNCTION public.agregar_stock_laboratorio(text, text, text,integer, text ,integer);
+-- Function: public.agregar_stock_laboratorio(text, text, text,integer, text ,integer);
+
+DROP FUNCTION public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, TEXT, INTEGER );
+
+CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
+  _cod_dimension    TEXT,
+  _cod_subdimension TEXT,
+  _cod_agrupacion   TEXT,
+  _cod_objeto       INTEGER,
+  _cod_laboratorio  TEXT,
+  _cantidad         INTEGER)
+
+  RETURNS BOOLEAN AS
+  $BODY$
+  DECLARE
+    id_stock_laboratorio INTEGER;
+    cantidad_existente   INTEGER;
+  BEGIN
+    IF _cantidad > 0
+    THEN
+      SELECT
+        id,
+        cantidad
+      INTO id_stock_laboratorio, cantidad_existente
+      FROM objetos_laboratorio
+      WHERE
+        cod_dimension = _cod_dimension AND
+        cod_subdimension = _cod_subdimension AND
+        cod_agrupacion = _cod_agrupacion AND
+        cod_objeto = _cod_objeto AND
+        cod_laboratorio = _cod_laboratorio;
+
+      IF id_stock_laboratorio IS NULL
+      THEN
+        INSERT INTO objetos_laboratorio (
+          cod_laboratorio, cod_dimension, cod_subdimension, cod_agrupacion,
+          cod_objeto, cantidad, created_at, updated_at)
+        VALUES (_cod_laboratorio, _cod_dimension,
+                _cod_subdimension, _cod_agrupacion, _cod_objeto,
+                _cantidad, NOW(), NOW());
+
+        RETURN TRUE;
+      ELSE
+        UPDATE objetos_laboratorio
+        SET cantidad = (cantidad_existente + _cantidad), updated_at = NOW()
+        WHERE
+          id = id_stock_laboratorio AND
+          cod_dimension = _cod_dimension AND
+          cod_subdimension = _cod_subdimension AND
+          cod_agrupacion = _cod_agrupacion AND
+          cod_objeto = _cod_objeto AND
+          cod_laboratorio = _cod_laboratorio;
+
+        RETURN TRUE;
+      END IF; -- Condicion id_stock_laboratorio IS NULL
+    END IF;
+    -- Condicion >= 0
+    RETURN FALSE;
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
