@@ -304,10 +304,37 @@ simci.controller('LaboratorioController', [
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function(data, type, full) {
                             return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock('+data.id+')"><i class="unhide icon"></i></div>'+
-                                '<div class="ui icon button green spopup"  data-content="Modificar Stock" ng-click="modal_modificar_stock('+data.id+')"><i class="edit icon"></i></div>'+
-                                '<div class="ui icon button red spopup"  data-content="Eliminar Stock" ng-click="modal_eliminar_stock('+data.id+')"><i class="remove icon"></i></div>';
+                                '<div class="ui icon button orange spopup"  data-content="Retornar Stock" ng-click="retornar_stock('+data.id+')"><i class="sign out icon"></i></div>';
                         }).withOption('width','14%')
                 ];
+
+                ///Funciones
+                $scope.retornar_stock = function(id){
+                    $scope.cantidad_retornar = 0;
+                  
+                    alertify.prompt('','Catidad a retornar', 
+                        function(evt, value){
+                            $http({
+                                method: 'POST',
+                                url: '/api/laboratorio/retornar-stock',
+                                data: {
+                                    'id': id,
+                                    'cantidad': value
+                                }
+                            }).then(function (data) {
+                                if(data.data.resultado){
+                                    alertify.notify('Cantidad anexada alinventario con exito', 'success', 5);
+                                }
+                            },
+                            function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
+                            
+                        }
+                    ).set('title', "Retornar al inventario");
+
+                }
 
             }// If == '/laboratorio/ver/stock
 
@@ -354,7 +381,6 @@ simci.controller('LaboratorioController', [
                                         nombre_objeto: data_item.nombre_objeto,
                                         cantidad: $scope.cantidad
                                     });
-                                    console.log($scope.items_tabla_stock);
                                 }
                                 else{
                                     alertify.error("Ya agregaste un stock igual a este en la lista");
@@ -413,21 +439,20 @@ simci.controller('LaboratorioController', [
                 $scope.cargar_objetos_laboratorio = function(){
 
                     $http({
-                            method: 'GET',
-
-                            url: '/api/laboratorio/mostrar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio_origen
-                        }).then(
-                            function(data){
-                                //asi es como se va a mostrar
-                                $scope.items_tabla_objetos_laboratorio = data.data;
-                                $scope.items_tabla_objetos_laboratorio.forEach( function(element, index) {
-                                    element.id_unico_item = ToolsService.generar_id_unico();
-                                    element.cantidad_mover = 0;
-                                });
-                            },
-                            function(data_error){
-                                ToolsService.generar_alerta_status(data_error);
-                            }
+                        method: 'GET',
+                        url: '/api/laboratorio/mostrar?type=stock_laboratorio&cod_laboratorio='+$scope.select_laboratorio_origen
+                    }).then(
+                        function(data){
+                            //asi es como se va a mostrar
+                            $scope.items_tabla_objetos_laboratorio = data.data;
+                            $scope.items_tabla_objetos_laboratorio.forEach( function(element, index) {
+                                element.id_unico_item = ToolsService.generar_id_unico();
+                                element.cantidad_mover = 0;
+                            });
+                        },
+                        function(data_error){
+                            ToolsService.generar_alerta_status(data_error);
+                        }
                     );
                 };
 

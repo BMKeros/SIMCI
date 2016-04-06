@@ -116,6 +116,7 @@ CREATE OR REPLACE VIEW vista_laboratorio_full AS
 /*FALTA COMPLETAR ESTA VISTA*/
 CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
 	SELECT
+		objetos_laboratorio.id as id,
 		laboratorios.codigo as cod_laboratorio,
 		laboratorios.nombre as nombre_laboratorio,
 		laboratorios.descripcion as descripcion_laboratorio,
