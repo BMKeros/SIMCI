@@ -13,10 +13,11 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path() . '/commands',
+    app_path() . '/controllers',
+    app_path() . '/models',
+    app_path() . '/database/seeds',
+    app_path() . '/validation/'
 
 ));
 
@@ -31,7 +32,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useFiles(storage_path() . '/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +47,8 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
 });
 
 /*
@@ -62,9 +62,8 @@ App::error(function(Exception $exception, $code)
 |
 */
 
-App::down(function()
-{
-	return Response::make("Be right back!", 503);
+App::down(function () {
+    return Response::make("Be right back!", 503);
 });
 
 /*
@@ -78,9 +77,16 @@ App::down(function()
 |
 */
 
-require app_path().'/filters.php';
+require app_path() . '/filters.php';
 
 // Agregamos de manera global las constantes
 
-require app_path().'/constantes/constantes.php';
-require app_path().'/helpers/macros_html.php';
+require app_path() . '/constantes/constantes.php';
+require app_path() . '/helpers/macros_html.php';
+
+
+//Esto es para registrar todos los validators
+
+Validator::resolver(function ($translator, $data, $rules, $messages) {
+    return new ValidatorPersonalizado($translator, $data, $rules, $messages);
+});
