@@ -346,8 +346,8 @@ simci.controller('LaboratorioController', [
                 $scope.select_objeto=""; //Objeto seleccionado
                 $scope.cantidad = 0; //Cantidad del objeto seleccionado
 
-
-                $scope.cantidad_disponible_inventario = 0;
+                $scope.cantidad_disponible_inventario = 0; // cantidad disponible en el inventario
+                $scope.codigos_elemento = ''; // Mantiene un json string de los codigos del elemento que debe ser convertido con JSON.parse
 
                 $scope.agregar_stock_tabla = function () {
 
