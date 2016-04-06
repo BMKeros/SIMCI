@@ -180,7 +180,7 @@
 				'usa_recipientes' => 'required|boolean',
 				'recipientes_disponibles' => 'numeric',
 				'elemento_movible' => 'required|boolean',
-				'codigo_elemento' => 'exist_in_inventario'
+				'codigo_elemento' => 'exists_elemento'
 			);
 
 			$campos = array(
@@ -206,7 +206,7 @@
 				':attribute no existe',
 				'numeric' => 'El :attribute debe ser solo numeros',
 				'exists' => ':attribute no existe!',
-				'exist_in_inventario' => 'Este elemento ya existe en el inventario'
+				'exists_elemento' => 'Este elemento ya existe en el inventario'
 
 			);
 
