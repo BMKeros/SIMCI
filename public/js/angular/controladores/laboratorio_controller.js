@@ -305,7 +305,7 @@ simci.controller('LaboratorioController', [
                         function(data, type, full) {
                             return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock('+data.id+')"><i class="unhide icon"></i></div>'+
                                 '<div class="ui icon button orange spopup"  data-content="Retornar Stock" ng-click="retornar_stock('+data.id+')"><i class="sign out icon"></i></div>';
-                        }).withOption('width','14%')
+                        }).withOption('width','12%')
                 ];
 
                 ///Funciones
