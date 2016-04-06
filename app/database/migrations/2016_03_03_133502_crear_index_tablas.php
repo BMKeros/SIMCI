@@ -70,14 +70,6 @@ class CrearIndexTablas extends Migration {
 				//->onDelete('cascade');
 		});
 
-		//OBJETOS-LABORATORIO
-		Schema::table('objetos_laboratorio', function($table){
-			$table
-				->foreign(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
-				->references(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
-				->on('inventario');
-		});
-
 		//NOTIFICACIONES
 		Schema::table('notificaciones', function($table){
 			$table->foreign('mensaje_id')->references('id')
@@ -158,9 +150,15 @@ class CrearIndexTablas extends Migration {
 				->on('inventario');
 		});
 
+		//OBJETOS-LABORATORIO
+
 		Schema::table('objetos_laboratorio', function($table){
 			$table->foreign('cod_laboratorio')->references('codigo')
 				->on('laboratorios');
+
+			$table->foreign(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
+				->references(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
+				->on('inventario');
 
 			$table->foreign('cod_objeto')->references('id')
 				->on('catalogo_objetos');
