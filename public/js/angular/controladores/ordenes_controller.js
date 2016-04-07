@@ -32,7 +32,7 @@ simci.controller('OrdenesController', [
         descripcion: "Esta opcion le permitira crear ordenes",
         url: "#/ordenes/generar-orden",
         icono: 'write',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_PROFESOR]
       },
       
       {
