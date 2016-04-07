@@ -18,8 +18,8 @@
 
                     <div class="two fields">
                         <div class="five wide field">
-                            <label>asunto</label>
-                            <input type="text" name="asunto" placeholder="asunto" ng-model="DatosForm.asunto" >
+                            <label>Asunto</label>
+                            <input type="text" name="asunto" placeholder="Asunto" ng-model="DatosForm.asunto" >
                         </div>
                         <div class="one wide field" id="btn_adjuntar">
                             <input type="file" name="archivo">
