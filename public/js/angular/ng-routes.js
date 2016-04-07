@@ -155,7 +155,7 @@
           templateUrl: '/views/layouts/layout_main_modulos',
           controller: 'OrdenesController'
         }).
-        when('/ordenes/crear-ordenes', {
+        when('/ordenes/generar-orden', {
           templateUrl: '/views/ordenes/generar_ordenes',
           controller: 'OrdenesController'
         }).

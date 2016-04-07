@@ -30,7 +30,7 @@ simci.controller('OrdenesController', [
       {
         nombre:"generar orden",
         descripcion: "Esta opcion le permitira crear ordenes",
-        url: "#/ordenes/crear-ordenes",
+        url: "#/ordenes/generar-orden",
         icono: 'write',
         show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
       },
@@ -40,7 +40,7 @@ simci.controller('OrdenesController', [
         descripcion: "Esta opcion le permitira ver las ordenes existentes",
         url: "#/ordenes/ver/todos",
         icono: 'unhide',
-        show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
+        show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA]
       }
 
     ];
@@ -84,10 +84,14 @@ simci.controller('OrdenesController', [
         ];
 
       }
-/*
-      if($location.$$url == '/laboratorio/crear-ordenes') {
 
-          $scope.items_tabla_orden = []; //Aqui se guardaran todos los elementos que se agreguen con el btn plus
+      if($location.$$url == '/laboratorio/generar-orden') {
+        $scope.procesar_generar_orden=function () {
+          console.log("asdasd")
+          //alertify.confirm("Esta seguro que desea generar esta Orden?");
+        }
+
+          /*$scope.items_tabla_orden = []; //Aqui se guardaran todos los elementos que se agreguen con el btn plus
           $scope.select_laboratorio = ""; //Laboratorio seleccionado
           $scope.select_objeto = ""; //Objeto seleccionado
           $scope.cantidad = 0; //Cantidad del objeto seleccionado
@@ -157,8 +161,8 @@ simci.controller('OrdenesController', [
                       }
                   );
               }
-          };
-      }*/
+          };*/
+      }
 
   }]
 
