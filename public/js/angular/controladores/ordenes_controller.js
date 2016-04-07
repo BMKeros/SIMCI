@@ -85,10 +85,13 @@ simci.controller('OrdenesController', [
 
       }
 
-      if($location.$$url == '/laboratorio/generar-orden') {
+      if($location.$$url == '/ordenes/generar-orden') {
         $scope.procesar_generar_orden=function () {
-          console.log("asdasd")
-          //alertify.confirm("Esta seguro que desea generar esta Orden?");
+          alertify.confirm("Esta seguro que desea generar esta Orden?", function() {
+            alertify.success("Aceptar");
+          }, function () {
+            alertify.error("Cancelar");
+          }).set("title", "Confirmar Accion!");
         }
 
           /*$scope.items_tabla_orden = []; //Aqui se guardaran todos los elementos que se agreguen con el btn plus
