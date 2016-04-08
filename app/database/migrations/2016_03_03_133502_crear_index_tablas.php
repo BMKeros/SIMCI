@@ -10,6 +10,9 @@ class CrearIndexTablas extends Migration {
 	 *
 	 * @return void
 	 */
+
+	//prueba
+	
 	public function up()
 	{
 		//ELEMENTOS QUIMICOS
