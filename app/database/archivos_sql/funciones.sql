@@ -184,7 +184,7 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
         RETURN TRUE;
       END IF; -- Condicion id_stock_laboratorio IS NULL
     END IF;
-    -- Condicion >= 0
+    -- Condicion _cantidad > 0 AND (_cantidad <= cantidad_disponible_inventario)
     RETURN FALSE;
   END;
   $BODY$
