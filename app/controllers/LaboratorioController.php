@@ -240,19 +240,8 @@
 			$items_stock_tabla = Input::get('items_stock');
 
 			foreach ($items_stock_tabla as $item) {
-				
-				//aqui va la consulta a la funcion sql que se encargara de de hacer el agregado
-				//a la db pasando por parametro cod_objeto, cod_laboratorio, cantidad
-				$campos[] = array(
-					'cod_laboratorio' => $item['cod_laboratorio'],
-					'cod_objeto' => $item['cod_objeto'],
-					'cantidad' => $item['cantidad'],
-					'created_at' => get_now(),
-					'updated_at' => get_now()
-				);
+				DB::select("select public.agregar_stock_laboratorio('".$item['cod_dimension']."','".$item['cod_subdimension']."','".$item['cod_agrupacion']."',".$item['cod_objeto'].",'".$item['cod_laboratorio']."',".$item['cantidad'].")");
 			}
-
-			DB::table('objetos_laboratorio')->insert($campos);
 
 			return Response::json(array('resultado' => true, 'mensajes' => array('Objetos agregados con exito.!')));
 		}
