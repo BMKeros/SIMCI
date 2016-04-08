@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <!--  Input que almacena los codigos del elemento -->
-                        <input type="hidden" value="" ng-model="codigos_elemento" id="codigos_elemento">
+                        <input type="hidden" ng-model="codigos_elemento" id="codigos_elemento" ng-update-hidden>
 
                         <div class="four wide field">
                             <label>Cantidad</label>

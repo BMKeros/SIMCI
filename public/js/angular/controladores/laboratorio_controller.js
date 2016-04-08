@@ -358,6 +358,10 @@ simci.controller('LaboratorioController', [
                         alertify.error("La cantidad ingresada es mayor a la disponible en inventario");
                         return false;
                     }
+                    if ($scope.codigos_elemento.length === 0 || $scope.codigos_elemento.trim() === '') {
+                        alertify.error("Error, No has seleccionado un elemento del inventario");
+                        return false;
+                    }
                     if(is_valid_form){
                         $http({
                             method: 'GET',
@@ -374,14 +378,23 @@ simci.controller('LaboratorioController', [
 
                                 //Si no existe el nuevo elemento el la lista lo agregamos
                                 if (existe === -1) {
-                                    $scope.items_tabla_stock.push({
+
+                                    var nuevo_elemento = {
                                         id_item_stock: ToolsService.generar_id_unico(),
                                         nombre_laboratorio: data_item.nombre_laboratorio,
                                         cod_laboratorio: data_item.cod_laboratorio,
-                                        cod_objeto: data_item.cod_objeto,
                                         nombre_objeto: data_item.nombre_objeto,
                                         cantidad: $scope.cantidad
-                                    });
+                                    };
+                                    // Agregamos los nuevos attributos
+                                    //Se convierte los codigos elemento a objeto porque vienen en formato string
+                                    var temp_codigos = JSON.parse($scope.codigos_elemento);
+
+                                    for (key in temp_codigos) {
+                                        nuevo_elemento[key] = temp_codigos[key];
+                                    }
+
+                                    $scope.items_tabla_stock.push(nuevo_elemento);
                                 }
                                 else{
                                     alertify.error("Ya agregaste un stock igual a este en la lista");
@@ -412,6 +425,7 @@ simci.controller('LaboratorioController', [
                                     _scope.select_laboratorio = "";
                                     _scope.select_objeto = "";
                                     _scope.cantidad = 0;
+                                    _scope.codigos_elemento = "";
                                 });
                             }
                         })();
