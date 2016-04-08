@@ -99,7 +99,7 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
     THEN
       ---Si cambio la cantidad se actualiza el objeto en la tabla
       UPDATE objetos_laboratorio
-      SET cantidad = cantidad_restante
+      SET cantidad = cantidad_restante, updated_at = NOW()
       WHERE
         cod_laboratorio = _cod_laboratorio :: TEXT AND
         cod_dimension = _cod_dimension AND
