@@ -133,8 +133,20 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
   DECLARE
     id_stock_laboratorio INTEGER;
     cantidad_existente   INTEGER;
+    cantidad_disponible_inventario INTEGER;
   BEGIN
-    IF _cantidad > 0
+    --Consultamos al inventario para ver si la cantidad que se esta
+    --agregando no es mayor a la existente
+    SELECT cantidad_disponible::INTEGER INTO cantidad_disponible_inventario
+    FROM inventario
+    WHERE
+      cod_dimension = _cod_dimension AND
+      cod_subdimension = _cod_subdimension AND
+      cod_agrupacion = _cod_agrupacion AND
+      cod_objeto = _cod_objeto
+    LIMIT 1;
+
+    IF _cantidad > 0 AND (_cantidad <= cantidad_disponible_inventario)
     THEN
       SELECT
         id,
