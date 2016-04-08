@@ -210,6 +210,16 @@
 
                 return objeto;
             },
+            //Funcion para extender los atributos de un objeto
+            extender_atributos_objeto: function (_objeto, _objeto_atributos) {
+                if (typeof _objeto === "object" && typeof _objeto_atributos === "object") {
+                    for (key in _objeto_atributos) {
+                        if (typeof _objeto_atributos[key] !== "function") {
+                            _objeto[key] = _objeto_atributos[key];
+                        }
+                    }
+                }
+            },
             //Funcion para generar un alertify un mensaje dependiendo del status
             generar_alerta_status: function (data) {
                 var mensaje = this.printf('Ha ocurrido un error al realizar la operacion. Estado[{0}]', data.status);

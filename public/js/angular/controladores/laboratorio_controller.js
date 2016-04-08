@@ -390,9 +390,8 @@ simci.controller('LaboratorioController', [
                                     //Se convierte los codigos elemento a objeto porque vienen en formato string
                                     var temp_codigos = JSON.parse($scope.codigos_elemento);
 
-                                    for (key in temp_codigos) {
-                                        nuevo_elemento[key] = temp_codigos[key];
-                                    }
+                                    //Agregamos los atributos al nuevo_elemento
+                                    ToolsService.extender_atributos_objeto(nuevo_elemento, temp_codigos);
 
                                     $scope.items_tabla_stock.push(nuevo_elemento);
                                 }
