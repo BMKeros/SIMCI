@@ -80,7 +80,7 @@
 					$cod_laboratorio_origen = Input::get('cod_laboratorio');
 
 					$response = DB::table('vista_stock_laboratorio_full')
-						->select('cod_objeto', 'nombre_objeto', 'cantidad')
+						->select('cod_objeto', 'nombre_objeto', 'cantidad','cod_dimension','cod_subdimension','cod_agrupacion')
 						->where('cod_laboratorio', '=', $cod_laboratorio_origen)
 						->get();
 
