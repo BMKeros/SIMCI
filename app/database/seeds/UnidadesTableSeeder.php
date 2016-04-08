@@ -22,6 +22,7 @@ class UnidadesTableSeeder extends Seeder {
         	array( "nombre"=>'Onza', "abreviatura"=>'oz', "tipo_unidad"=>'2'),
         	array( "nombre"=>'Decigramo', "abreviatura"=>'dg', "tipo_unidad"=>'2'),
         	array( "nombre"=>'Centigrados', "abreviatura"=>'cg', "tipo_unidad"=>'2'),
+        	array( "nombre"=>'gramos', "abreviatura"=>'gr', "tipo_unidad"=>'2'),
         	array( "nombre"=>'Miligramos', "abreviatura"=>'mg', "tipo_unidad"=>'2'),
         	array( "nombre"=>'Microgramos', "abreviatura"=>'µg', "tipo_unidad"=>'2'),
         	array( "nombre"=>'Manogramos', "abreviatura"=>'ng', "tipo_unidad"=>'2'),
