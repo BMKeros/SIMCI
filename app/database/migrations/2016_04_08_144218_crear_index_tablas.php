@@ -152,13 +152,17 @@ class CrearIndexTablas extends Migration {
 
 		//OBJETOS-LABORATORIO
 		Schema::table('objetos_laboratorio', function($table){
+			$table->foreign('cod_laboratorio')->references('codigo')
+				->on('laboratorios');
+		});
+
+		Schema::table('objetos_laboratorio', function($table){
 			$table
 				->foreign(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
 				->references(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'))
 				->on('inventario');
 		});
 	}	
-
 
 	/**
 	 * Reverse the migrations.
