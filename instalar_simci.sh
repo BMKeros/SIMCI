@@ -32,6 +32,4 @@ else
 	echo error instalar 
 fi
 
-
-
-clear
+echo falta por terminar
