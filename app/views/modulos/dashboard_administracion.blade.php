@@ -13,7 +13,7 @@
 					<i class="sidebar icon"></i>
     			</a>
 
-    			<a href="#" class="header item">
+    			<a href="#/" class="header item">
         			<img class="logo" src="/img/logo.png">
         			&nbsp;&nbsp;&nbsp;SIMCI
       			</a>
@@ -39,13 +39,35 @@
 							</div>
 
 							<div ng-show="bandera_mostrar_notificaciones" class="item" ng-repeat="noti in notificaciones track by $index">
-								<img class="ui avatar img_item_notificacion" src="/img/perfil-default.jpg">
+								<!--<img class="ui avatar img_item_notificacion" src="/img/perfil-default.jpg">
 								<div class="cuerpo_notificacion">
 									<span class="texto capitalize"><% noti.mensaje %></span> 
 								</div>
-								<div class="fecha_notificacion" ><% noti.fecha | formato_fecha:'DD/MM/YY' %></div>
+								<div class="fecha_notificacion" ><% noti.fecha | formato_fecha:'DD/MM/YY' %></div>-->
+								<div class="ui feed">
+  									<div class="event">
+    									<div class="label">
+      										<img src="/img/perfil-default.jpg">
+    									</div>
+    									
+    									<div class="content">
+      										<div class="summary">
+        										<a class="user">
+          											<% noti.usuario | capitalize %>
+        										</a> 
+        										<% noti.mensaje %>
+        										<div class="date" style="float:right;">
+          											<% noti.fecha | formato_fecha:'DD/MM/YY' %>
+        										</div>
+      										</div>
+      										<div class="meta">
+        										<a class="like"><i class="clock icon"></i><% noti.hora %>
+        										</a>
+      										</div>
+    									</div>
+  									</div>
+  								</div>
 							</div>
-
 						</div>
 					</div>
 
@@ -147,6 +169,8 @@
 	<div class="ui container espacio_buttom espacio_top">
 		<div ng-view></div>
 	</div>
+
+	
 	
 	<div class="ui bottom fixed menu barra_inferior">
 	  	<div class="item right">
