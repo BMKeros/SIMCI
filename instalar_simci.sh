@@ -33,5 +33,3 @@ else
 fi
 
 
-
-clear
