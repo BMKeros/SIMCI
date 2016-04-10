@@ -31,5 +31,3 @@ if [[ "$instalar_node" == "false" && "$instalar_npm" == "false" ]]; then
 else
 	echo error instalar 
 fi
-
-
