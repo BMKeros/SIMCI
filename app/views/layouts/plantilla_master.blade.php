@@ -18,6 +18,8 @@
 	  	<link rel="stylesheet" href="/bower_components/alertify-js/build/css/themes/semantic.min.css">
 	  	<!-- Ng Progress -->
 	  	<link rel="stylesheet" href="/bower_components/ngprogress/ngProgress.css">
+	  	<!-- Ng chart -->
+	  	<link rel="stylesheet" href="/bower_components/angular-chart.js/dist/angular-chart.css">
 
 	  	<script>
 	  		if(typeof(Storage) === "undefined") {
@@ -42,15 +44,19 @@
 		<script src="/semantic/semantic.min.js"></script>
 		<script src="/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 		<script src="/bower_components/datatables/media/js/dataTables.semanticui.min.js"></script>
+		<script src="/bower_components/Chart.js/Chart.min.js"></script>
 		<script src="/bower_components/angular/angular.min.js"></script>	
 		<script src="/bower_components/angular-route/angular-route.min.js"></script>
 		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
 		<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
+		<script src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 		
 		<!-- plugins datatables -->
 		
 		<!-- alertifyJs -->
 		<script src="/bower_components/alertify-js/build/alertify.min.js"></script>
+
+
 		
 		<!-- Ng progress -->
 		<script src="/bower_components/ngprogress/build/ngprogress.min.js"></script>
