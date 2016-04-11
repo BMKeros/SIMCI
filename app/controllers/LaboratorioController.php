@@ -86,6 +86,30 @@
 
 				break;
 
+				case 'stock_full':
+					$cod_dimension = Input::get('cod_dimension');
+					$cod_subdimension = Input::get('cod_subdimension');
+					$cod_agrupacion = Input::get('cod_agrupacion');
+					$cod_objeto = Input::get('cod_objeto');
+
+					$response = DB::table('vista_stock_laboratorio_full')
+							->select('nombre_objeto', 'cod_dimension',
+									'descripcion_dimension', 
+									'cod_subdimension',
+									'descripcion_subdimension',
+									'cod_agrupacion',
+									'nombre_agrupacion',
+									'cantidad',
+									'cod_laboratorio',
+									'nombre_laboratorio')
+
+							->where('cod_dimension', '=', $cod_dimension)
+							->where('cod_subdimension', '=', $cod_subdimension)
+							->where('cod_agrupacion', '=', $cod_agrupacion)
+							->where('cod_objeto', '=', $cod_objeto)
+							->first();
+				break;
+
 				default:
 					$response = DB::table('vista_laboratorio_full')->get();
 				break;
@@ -254,13 +278,17 @@
 		public function postMoverStock(){
 			//data porque nose como vendra del frontend, este sera el que traiga todos los datos
 			$data = Input::get('data');
+			$lab_origen = Input::get('laboratorio_origen');
+			$lab_destino = Input::get('laboratorio_destino');
+
+			
 
 			if(is_null($data)){
 				return Response::json(array('resultado' => false));
 			}
 			else{
 				foreach($data as $value){
-					DB::select("select mover_stock_laboratorio('".$value['cod_laboratorio_origen']."','".$value['cod_laboratorio_destino']."','".$value['cod_dimension']."','".$value['cod_subdimension']."','".$value['cod_agrupacion']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
+					DB::select("select mover_stock_laboratorio('".$lab_origen."','".$lab_destino."','".$value['cod_dimension']."','".$value['cod_subdimension']."','".$value['cod_agrupacion']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
 				}	
 
 				return Response::json(array('resultado' => true));
