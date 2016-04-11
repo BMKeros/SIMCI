@@ -220,6 +220,20 @@
                     }
                 }
             },
+            //Funcion  para eliminar algun objeto o elemento de un arreglo
+            //@ retorna el elemento eliminado
+            eliminar_elemento_array: function (_array, _callback) {
+                //Buscamos al elemento seleccionado en el arreglo
+                var index_elemento = _array.findIndex(_callback);
+
+                //Verificamos que existe en el arreglo
+                if (index_elemento !== -1) {
+                    var tmp = _array.splice(index_elemento, 1);
+                    return tmp[0];
+                }
+                return null;
+
+            },
             //Funcion para generar un alertify un mensaje dependiendo del status
             generar_alerta_status: function (data) {
                 var mensaje = this.printf('Ha ocurrido un error al realizar la operacion. Estado[{0}]', data.status);
