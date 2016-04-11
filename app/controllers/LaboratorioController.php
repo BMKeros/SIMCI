@@ -260,7 +260,7 @@
 			}
 			else{
 				foreach($data as $value){
-					DB::select("select mover_stock_laboratorio('".$value['cod_laboratorio_origen']."','".$value['cod_laboratorio_destino']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
+					DB::select("select mover_stock_laboratorio('".$value['cod_laboratorio_origen']."','".$value['cod_laboratorio_destino']."','".$value['cod_dimension']."','".$value['cod_subdimension']."','".$value['cod_agrupacion']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
 				}	
 
 				return Response::json(array('resultado' => true));

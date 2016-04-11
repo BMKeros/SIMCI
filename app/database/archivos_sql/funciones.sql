@@ -1,6 +1,6 @@
 ﻿-- Function: capitalize(text)
 
-DROP FUNCTION IF EXISTS capitalize(text);
+--DROP FUNCTION IF EXISTS capitalize(text);
 
 CREATE OR REPLACE FUNCTION capitalize(TEXT)
   RETURNS TEXT AS
@@ -19,7 +19,7 @@ COST 100;
 
 -- Function: permisos_usuario(int)
 
-DROP FUNCTION IF EXISTS permisos_usuario(int);
+--DROP FUNCTION IF EXISTS permisos_usuario(int);
 
 --Funcion para obtener todos los permisos de un usuario en especifico
 CREATE OR REPLACE FUNCTION permisos_usuario(INT)
@@ -52,7 +52,7 @@ COST 100;
 
 -- Function: public.mover_stock_laboratorio(text, text, text, text, text, integer, integer)
 
-DROP FUNCTION IF EXISTS public.mover_stock_laboratorio(text, text, text, text, text, integer, integer);
+--DROP FUNCTION IF EXISTS public.mover_stock_laboratorio(text, text, text, text, text, integer, integer);
 
 CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
   _cod_laboratorio         TEXT,
@@ -161,7 +161,7 @@ COST 100;
 
 -- Function: public.agregar_stock_laboratorio(text, text, text,integer, text ,integer);
 
-DROP FUNCTION IF EXISTS public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, TEXT, INTEGER );
+--DROP FUNCTION IF EXISTS public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, TEXT, INTEGER );
 
 CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
   _cod_dimension    TEXT,
