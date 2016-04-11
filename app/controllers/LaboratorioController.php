@@ -240,7 +240,7 @@
 			$items_stock_tabla = Input::get('items_stock');
 
 			foreach ($items_stock_tabla as $item) {
-				DB::select("select public.agregar_stock_laboratorio('".$item['cod_dimension']."','".$item['cod_subdimension']."','".$item['cod_agrupacion']."',".$item['cod_objeto'].",'".$item['cod_laboratorio']."',".$item['cantidad'].")");
+				DB::select("select agregar_stock_laboratorio('".$item['cod_dimension']."','".$item['cod_subdimension']."','".$item['cod_agrupacion']."',".$item['cod_objeto'].",'".$item['cod_laboratorio']."',".$item['cantidad'].")");
 			}
 
 			return Response::json(array('resultado' => true, 'mensajes' => array('Objetos agregados con exito.!')));
@@ -249,8 +249,6 @@
 		public function postRetornarStock(){
 			$id = Input::get('id');
 			$cantidad = Input::get('cantidad');
-
-			dd($id.$cantidad);
 		}
 
 		public function postMoverStock(){
@@ -266,16 +264,12 @@
 				}	
 
 				return Response::json(array('resultado' => true));
-			}
-			
-
-			
+			}			
 		}
 
 
 	    public function postEliminar(){
 	    	$id_laboratorio = Input::get('id');
-
 
 	    	$laboratorio = Laboratorio::find($id_laboratorio);
 

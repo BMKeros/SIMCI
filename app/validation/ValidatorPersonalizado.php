@@ -5,7 +5,6 @@ class ValidatorPersonalizado extends \Illuminate\Validation\Validator
 
     public function validateExistsElemento($field, $value, $parameters)
     {
-
         $values = explode('-', $value);
 
         $tmp_dimension = $values[0];
@@ -20,6 +19,6 @@ class ValidatorPersonalizado extends \Illuminate\Validation\Validator
             ->where('cod_objeto', '=', $tmp_objeto)
             ->count();
 
-        return ($existe >= 1) ? (true) : (false);
+        return ($existe >= 1) ? (false): (true);
     }
 }
