@@ -4,8 +4,15 @@
  
     GlobalApp.config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider) {
       
-      //Rutas para usuarios
+      
       $routeProvider.
+      
+        when('/', {
+          templateUrl: 'main_dashboard.html',
+          controller: 'DashboardController'
+        }).
+
+        //Rutas para usuarios
         when('/usuarios', {
           templateUrl: '/views/layouts/layout_main_modulos',
           controller: 'UsuariosController'
