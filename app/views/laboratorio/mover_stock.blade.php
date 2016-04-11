@@ -63,10 +63,13 @@
                     </div>
                 </td>
 
+
                 <td class="center aligned">
                     <button class="ui icon small inverted blue button" id="btn_actison_item"
                             ng-disabled="elemento.cantidad == 0"
-                            ng-click="seleccionar_item_tabla($event)" data-id-fila='<% elemento.id_unico_item %>'>
+                            ng-click="seleccionar_item_tabla($event)"
+                            data-id-fila='<% elemento.id_unico_item %>'
+                            data-json-elemento='<% elemento | json%>'>
                         <i class="checkmark icon"></i>
                     </button>
                 </td>

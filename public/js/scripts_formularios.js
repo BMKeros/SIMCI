@@ -1047,6 +1047,36 @@ var reglas_formulario_agregar_stock = {
    inline: true
 };
 
+var reglas_formulario_mover_stock = {
+    on: 'blur',
+    duration: 40,
+    fields: {
+        select_laboratorio_origen: {
+            identifier: 'select_laboratorio_origen',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                }
+            ]
+        },
+        select_laboratorio_destino: {
+            identifier: 'select_laboratorio_destino',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no debe quedar vacio'
+                },
+                {
+                    type: 'different[select_laboratorio_origen]',
+                    prompt: 'Este laboratorio debe ser diferente al laboratorio origen'
+                }
+            ]
+        }
+    },
+    inline: true
+};
+
 var reglas_formulario_generar_ordenes = {
     on: 'blur',
     duration: 40,

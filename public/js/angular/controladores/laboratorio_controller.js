@@ -449,6 +449,7 @@ simci.controller('LaboratorioController', [
                 $scope.items_tabla_objetos_laboratorio = [];
                 $scope.select_laboratorio_origen = null;
                 $scope.select_laboratorio_destino = null;
+                $scope.items_tabla_seleccionados = [];
 
                 $scope.cargar_objetos_laboratorio = function(){
 
@@ -470,51 +471,48 @@ simci.controller('LaboratorioController', [
                     );
                 };
 
+
                 $scope.procesar_mover_stock = function(){
-                    
-                    $scope.items_tabla_objetos_laboratorio.forEach( function(element, index){
-                        element.cod_laboratorio_origen = $scope.select_laboratorio_origen;
-                        element.cod_laboratorio_destino = $scope.select_laboratorio_destino;
-                    });
 
-                    $scope.items_tabla_objetos_laboratorio = $scope.items_tabla_objetos_laboratorio.filter(function(element){
-                            return !(element.cantidad_mover == 0);
-                    });
+                    var formulario = $('#formulario_mover_stock');
+                    var is_valid_form = formulario.form(reglas_formulario_mover_stock).form('is valid');
 
+                    if (is_valid_form) {
 
-                    if($scope.select_laboratorio_origen == null){
-                        alertify.error("Aun no has seleccionado laboratorio origen");
-                        return false;
-                    }
-                    else if($scope.select_laboratorio_destino == null){
-                        alertify.error("Aun no has seleccionado laboratorio destino");
-                        return false;
-                    }
-                    else if($scope.items_tabla_objetos_laboratorio.length == 0){
-                        alertify.error("Aun no has seleccionado ningun objeto");
-                        return false;
-                    }
-                    else{
-                        $http({
-                            method: 'POST',
-                            url: '/api/laboratorio/mover-stock',
-                            data: {
-                                'data': $scope.items_tabla_objetos_laboratorio
-                            }
-                        }).then(
-                            function(data){
-                                if(data.data.resultado){
-                                    $scope.items_tabla_objetos_laboratorio = []  
-                                    $('#laboratorio_origen').dropdown('restore defaults');
-                                    $('#laboratorio_destino').dropdown('restore defaults');
-                                    alertify.notify('Objetos movido con exito!', 'success', 5, function(){  console.log('dismissed'); });
+                        if ($scope.items_tabla_seleccionados.length == 0) {
+                            alertify.error("Aun no has seleccionado ningun objeto");
+                        }
+                        else {
+
+                            $http({
+                                method: 'POST',
+                                url: '/api/laboratorio/mover-stock',
+                                data: {
+                                    'data': $scope.items_tabla_seleccionados,
+                                    'laboratorio_origen': $scope.select_laboratorio_origen,
+                                    'laboratorio_destino': $scope.select_laboratorio_destino
                                 }
-                            },
-                            function(data_error){
-                                ToolsService.generar_alerta_status(data_error);
-                            }
-                        );
+                            }).then(
+                                function (data) {
+                                    if (data.data.resultado) {
+                                        $scope.items_tabla_objetos_laboratorio = [];
+                                        $scope.items_tabla_seleccionados = [];
+
+                                        $('#laboratorio_origen').dropdown('restore defaults');
+                                        $('#laboratorio_destino').dropdown('restore defaults');
+
+                                        alertify.notify('Objetos movido con exito!', 'success', 5, function () {
+                                            console.log('dismissed');
+                                        });
+                                    }
+                                },
+                                function (data_error) {
+                                    ToolsService.generar_alerta_status(data_error);
+                                }
+                            );
+                        }
                     }
+
                 };
 
                 $scope.validar_seleccion = function(){
@@ -523,6 +521,8 @@ simci.controller('LaboratorioController', [
                         $scope.select_laboratorio_destino = null;
 
                         alertify.error("No puedes mover el stock al mismo laboratorio");
+
+                        return false;
                     }
                 };
 
@@ -532,22 +532,31 @@ simci.controller('LaboratorioController', [
                     elemento_fila = angular.element('#'+elemento.attr('data-id-fila'));
 
                     campo_cantidad_mover = angular.element(elemento_fila.find('input').get(0));
-
                     campo_cantidad_mover.val(0).trigger('change');
+
+                    //convertimos la data con angular.fromJson para luego agregarla al arreglo
+                    elemento_seleccionado = angular.fromJson(elemento.attr('data-json-elemento'));
 
                     if (elemento.hasClass('blue')) {
                         campo_cantidad_mover.removeAttr('disabled');
                         elemento.removeClass('blue').addClass('red');
                         elemento_hijo.removeClass('checkmark').addClass('remove');
                         elemento_fila.addClass('negative').removeClass('positive');
+
+                        //Agregamos el item seleccionado al arreglo
+                        $scope.items_tabla_seleccionados.push(elemento_seleccionado);
                     }
                     else {
                         campo_cantidad_mover.attr('disabled','');
                         elemento.removeClass('red').addClass('blue');
                         elemento_hijo.removeClass('remove').addClass('checkmark');
                         elemento_fila.removeClass('negative');
-                    }
 
+                        //Eliminamos el elemento del array seleccionados
+                        ToolsService.eliminar_elemento_array($scope.items_tabla_seleccionados, function (elemento) {
+                            return elemento.id_unico_item === elemento_seleccionado.id_unico_item;
+                        });
+                    }
                 }
 
             }//Fin de mover-stock
