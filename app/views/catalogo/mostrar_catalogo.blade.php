@@ -21,7 +21,7 @@
             <tr>
                 <td colspan="1"><b>Clase de Objeto: </b><br> <% data_objeto.nombre_clase %>
                 </td>
-                <td colspan="2"><b>Unidad:</b> <%data_objeto.nombre_unidad %> (<%data_objeto.abreviatura_unidad %>
+                <td colspan="2"><b>Unidad:</b><br> <%data_objeto.nombre_unidad %> (<%data_objeto.abreviatura_unidad %>
                     )</small></td>
                 <td colspan="2"><b>Especificacion:</b><br>
                     <p><% data_objeto.especificaciones | uppercase %></p>
