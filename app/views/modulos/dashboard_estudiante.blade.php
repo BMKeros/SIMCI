@@ -13,7 +13,7 @@
 					<i class="sidebar icon"></i>
 				</a>
 
-				<a href="#" class="header item">
+				<a href="#/" class="header item">
 					<img class="logo" src="/img/logo.png">
 					&nbsp;&nbsp;&nbsp;SIMCI
 				</a>
@@ -83,7 +83,7 @@
 
 
 	<div class="ui left vertical inverted labeled icon sidebar menu" id="menu-administracion">
-		<a class="item" href="#">
+		<a class="item" href="#/">
   			<i class="home icon"></i>
   			Inicio
 		</a>
