@@ -24,6 +24,7 @@ class CrearTablaSalidasInventario extends Migration {
 			$table->time('hora');
 			$table->date('fecha');
 			$table->string('observaciones', 200);
+			$table->integer('cod_tipo_movimiento');
 			$table->nullableTimestamps();
 		});
 	}
