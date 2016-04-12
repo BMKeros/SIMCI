@@ -15,15 +15,15 @@
         <table class="ui celled table capitalize">
             <tbody>
             <tr>
-                <td colspam="3"><b>Nombre del Objeto: </b> <% data_objeto.nombre %></td>
+                <td colspam="5"><b>Nombre del Objeto: </b><br> <% data_objeto.nombre %></td>
 
-                <td colspan="2"><b>Unidad:</b> <%data_objeto.nombre_unidad %> (<%data_objeto.abreviatura_unidad %>
-                    )</small></td>
             </tr>
             <tr>
-                <td colspan="1"><b>Clase de Objeto: </b> <% data_objeto.nombre_clase %>
+                <td colspan="1"><b>Clase de Objeto: </b><br> <% data_objeto.nombre_clase %>
                 </td>
-                <td colspan="4"><b>Especificacion:</b><br>
+                <td colspan="2"><b>Unidad:</b> <%data_objeto.nombre_unidad %> (<%data_objeto.abreviatura_unidad %>
+                    )</small></td>
+                <td colspan="2"><b>Especificacion:</b><br>
                     <p><% data_objeto.especificaciones | uppercase %></p>
                 </td>
             </tr>

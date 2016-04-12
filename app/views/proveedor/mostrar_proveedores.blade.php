@@ -197,12 +197,12 @@
                     <div class="two fields">
                         <div class="field">
                             <label>Codigo del Estado</label>
-                            <select></select>
+                            <select class="ui dropdown"></select>
                         </div>
 
                         <div class="field">
                             <label>Codido de la Ciudad</label>
-                            <select></select>
+                            <select class="ui dropdown"></select>
                         </div>
                     </div>
                 </div>
@@ -211,12 +211,12 @@
                     <div class="two fields">
                         <div class="field">
                             <label>Codigo del Municipio</label>
-                            <select></select>
+                            <select class="ui dropdown"></select>
                         </div>
 
                         <div class="field">
                             <label>Codido de la Parroquia</label>
-                            <select></select>
+                            <select class="ui dropdown"></select>
                         </div>
                     </div>
                 </div>
@@ -234,3 +234,7 @@
     </div>
 </div>
 <!--Fin De Bloques-->
+
+<script>
+    $('.ui.dropdown').dropdown();
+</script>
