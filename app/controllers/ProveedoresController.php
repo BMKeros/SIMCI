@@ -170,15 +170,14 @@ class ProveedoresController extends BaseController{
 			$cod_parroquia = input_default(Input::get('cod_parroquia'), $proveedor->cod_parroquia);
 
 			$reglas = array(
-				'codigo' => 'required|min:2|max:5|unique:proveedores',
+				'codigo' => 'required|min:2|max:5',
 				'razon_social' => 'required|min:3|max:150',
-				'doc_identificacion' => 'required|min:3|max:11|unique:proveedores|alpha_num',
-				//pendiente por evaluar si los numeros de tlf seran unicos
+				'doc_identificacion' => 'required|min:3|max:11|alpha_num',
 				'telefono_fijo1' => 'required|min:7|max:15',
-				'telefono_fijo2' => 'required|min:7|max:15',
+				'telefono_fijo2' => 'min:7|max:15',
 				'telefono_movil1' => 'required|min:7|max:15',
-				'telefono_movil2' => 'required|min:7|max:15',
-				'email' => 'required|email|max:100|unique:proveedores',
+				'telefono_movil2' => 'min:7|max:15',
+				'email' => 'required|email|max:100',
 				'direccion' => 'required|min:5|max:200',
 				'cod_estado' => 'required|numeric|exists:estados,id_estado',
 				'cod_ciudad' => 'required|numeric|exists:ciudades,id_ciudad',
