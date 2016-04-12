@@ -100,6 +100,21 @@
                 </td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <th colspan="4">
+                    <div class="ui right floated pagination menu">
+                        <a class="icon item">
+                            <i class="left chevron icon"></i>
+                        </a>
+                        <a class="item">1</a>
+                        <a class="icon item">
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </th>
+            </tr>
+            </tfoot>
         </table>
 
         <br>

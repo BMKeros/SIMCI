@@ -149,20 +149,13 @@ simci.controller('CatalogoController', [
 
                 ///Funciones
                 $scope.modal_ver_objeto = function (id) {
+
                     $scope.data_objeto = {};
 
-                    $http({
-                        method: 'GET',
+                    ToolsService.mostrar_modal_dinamico($scope, $http, {
                         url: '/api/catalogo/mostrar?type=objeto&id=' + id,
-                        data: $scope.DatosForm
-                    }).then(function (data) {
-
-                        $scope.data_objeto = data.data;
-
-                        //Mostramos la modal
-                        angular.element('#modal_ver_objeto').modal('show');
-                    }, function (data_error) {
-                        $log.info(data_error);
+                        scope_data_save_success: 'data_objeto',
+                        id_modal: 'modal_ver_objeto'
                     });
                 };
 
