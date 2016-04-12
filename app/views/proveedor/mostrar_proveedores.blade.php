@@ -102,7 +102,7 @@
 
 
 <div class="ui modal" id='modal_modificar_proveedor'>
-    <div class="header">Datos generales del proveedor</div>
+    <div class="ui centered dividing header"> Actualizar Datos del Proveedor</div>
     <div class="content">
 
         <div ng-if="mostrar_mensaje">
@@ -121,7 +121,6 @@
 
         <div class="ui form">
             <form class="ui form" id="formulario_modificar_proveedor">
-                <h3 class="ui centered dividing header">Actualizar datos del proveedor</h3>
 
                 <div class="field">
                     <div class="two fields">
