@@ -70,20 +70,10 @@
 
 				case 'paginacion_stock':
 					$consulta = DB::table('vista_stock_laboratorio_full')
-						->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad');
+						->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad', 'cod_dimension','cod_subdimension','cod_agrupacion');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 						array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
-				break;
-
-				case 'stock_laboratorio':
-					$cod_laboratorio_origen = Input::get('cod_laboratorio');
-
-					$response = DB::table('vista_stock_laboratorio_full')
-						->select('cod_objeto', 'nombre_objeto', 'cantidad','cod_dimension','cod_subdimension','cod_agrupacion')
-						->where('cod_laboratorio', '=', $cod_laboratorio_origen)
-						->get();
-
 				break;
 
 				case 'stock_full':
@@ -91,6 +81,7 @@
 					$cod_subdimension = Input::get('cod_subdimension');
 					$cod_agrupacion = Input::get('cod_agrupacion');
 					$cod_objeto = Input::get('cod_objeto');
+					$cod_laboratorio = Input::get('cod_laboratorio');
 
 					$response = DB::table('vista_stock_laboratorio_full')
 							->select('nombre_objeto', 'cod_dimension',
@@ -107,6 +98,7 @@
 							->where('cod_subdimension', '=', $cod_subdimension)
 							->where('cod_agrupacion', '=', $cod_agrupacion)
 							->where('cod_objeto', '=', $cod_objeto)
+							->where('cod_laboratorio', '=', $cod_laboratorio)
 							->first();
 				break;
 

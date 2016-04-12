@@ -123,8 +123,11 @@ CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
   SELECT
     objetos_laboratorio.id               AS id,
     objetos_laboratorio.cod_dimension    AS cod_dimension,
+    almacenes.descripcion                AS descripcion_dimension,
     objetos_laboratorio.cod_subdimension AS cod_subdimension,
+    sub_dimensiones.descripcion          AS descripcion_subdimension,
     objetos_laboratorio.cod_agrupacion   AS cod_agrupacion,
+    agrupaciones.nombre                  AS nombre_agrupacion,
     laboratorios.codigo                  AS cod_laboratorio,
     laboratorios.nombre                  AS nombre_laboratorio,
     laboratorios.descripcion             AS descripcion_laboratorio,
@@ -147,4 +150,8 @@ CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
     INNER JOIN catalogo_objetos ON catalogo_objetos.id = objetos_laboratorio.cod_objeto
     INNER JOIN unidades ON unidades.cod_unidad = catalogo_objetos.cod_unidad
     INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
-    INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto;
+    INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
+    INNER JOIN almacenes ON almacenes.codigo = objetos_laboratorio.cod_dimension
+    INNER JOIN sub_dimensiones ON sub_dimensiones.codigo = objetos_laboratorio.cod_subdimension
+    INNER JOIN agrupaciones ON agrupaciones.codigo = objetos_laboratorio.cod_agrupacion
+
