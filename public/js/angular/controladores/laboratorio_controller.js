@@ -303,13 +303,23 @@ simci.controller('LaboratorioController', [
 
 					DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
 						function(data, type, full) {
-							return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock('+data.id+')"><i class="unhide icon"></i></div>'+
-								'<div class="ui icon button orange spopup"  data-content="Retornar Stock" ng-click="retornar_stock('+data.id+')"><i class="sign out icon"></i></div>';
+							return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock(\''+data.cod_laboratorio+'\',\''+data.cod_dimension+'\',\''+data.cod_subdimension+'\',\''+data.cod_agrupacion+'\','+data.cod_objeto+')"><i class="unhide icon"></i></div>'+
+                                '<div class="ui icon button orange spopup"  data-content="Retornar Stock" ng-click="retornar_stock('+data.id+')"><i class="sign out icon"></i></div>';
 						}).withOption('width','11%')
 						.withClass('center aligned')
 				];
 
-				///Funciones
+				///Funciones                
+                $scope.modal_ver_stock = function(cod_laboratorio,cod_dimension,cod_subdimension,cod_agrupacion,cod_objeto){
+                    $scope.data_elemento_stock = {};
+
+                    ToolsService.mostrar_modal_dinamico($scope,$http,{
+                        url: '/api/laboratorio/mostrar?type=stock_full&cod_laboratorio='+cod_laboratorio+'&cod_dimension='+cod_dimension+'&cod_subdimension='+cod_subdimension+'&cod_agrupacion='+cod_agrupacion+'&cod_objeto='+cod_objeto,
+                        scope_data_save_success: 'data_elemento_stock',
+                        id_modal: 'modal_ver_elemento_stock'
+                    });
+                }
+
 				$scope.retornar_stock = function(id){
 					$scope.cantidad_retornar = 0;
 				  
