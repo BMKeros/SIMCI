@@ -110,7 +110,7 @@
 
 
     <div class="ui left vertical inverted labeled icon sidebar menu" id="menu-administracion">
-        <a class="item" href="#">
+        <a class="item" href="#/">
             <i class="home icon"></i>
             Inicio
         </a>
