@@ -45,10 +45,11 @@
         <table class="ui celled striped table" width="100%">
             <thead>
             <tr>
-                <th width="40%">Nombre</th>
+                <th width="37%">Nombre del elemento</th>
+                <th width="5%" class="center aligned">Estado</th>
                 <th width="6%" class="center aligned">Cantidad Disponible</th>
                 <th width="6%" class="center aligned">Cantidad a Mover</th>
-                <th width="2%" class="ui center aligned">Accion</th>
+                <th width="10%" class="ui center aligned">Accion</th>
             </tr>
             </thead>
 
@@ -56,21 +57,31 @@
             <tr ng-repeat="elemento in items_tabla_objetos_laboratorio track by $index"
                 id="<% elemento.id_unico_item %>" ng-animate="'animate'" class="animate-repeat">
                 <td><% elemento.nombre_objeto | lowercase | capitalize%></td>
+                <td class="center aligned">
+                    <i class="large green minus icon"></i>
+                </td>
                 <td><% elemento.cantidad %></td>
                 <td class="center aligned">
                     <div class="ui input">
-                        <input type="text" disabled="disabled" size="5" ng-model="elemento.cantidad_mover" ng-only-number allow-decimal="false" allow-negative="false">
+                        <input type="text" name="input_cantidad_mover" disabled="disabled" size="5" ng-model="elemento.cantidad_mover" ng-only-number allow-decimal="false" allow-negative="false">
                     </div>
                 </td>
 
 
                 <td class="center aligned">
-                    <button class="ui icon small inverted blue button" id="btn_actison_item"
+                    <button class="ui icon small inverted blue button" name="btn_action_seleccionar"
                             ng-disabled="elemento.cantidad == 0"
-                            ng-click="seleccionar_item_tabla($event)"
-                            data-id-fila='<% elemento.id_unico_item %>'
-                            data-json-elemento='<% elemento | json%>'>
-                        <i class="checkmark icon"></i>
+                            ng-click="seleccionar_item_tabla(elemento.id_unico_item)">
+                        <i class="plus icon"></i>
+                    </button>
+                    <!-- Guardamos la data json en un input hidden-->
+                    <input type="hidden" value='<% elemento | json%>' name="data_hidden" data-id-fila='<% elemento.id_unico_item %>'>
+
+                    <button class="circular ui icon small inverted green button" 
+                        name="btn_action_confirmar"
+                        disabled="disabled"
+                        ng-click="confirmar_seleccion(elemento.id_unico_item)">
+                        <i class="checkmark box icon"></i>
                     </button>
                 </td>
             </tr>
@@ -81,6 +92,21 @@
                 </td>
             </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="5">
+                        <div class="ui right floated pagination menu">
+                            <a class="icon item">
+                              <i class="left chevron icon"></i>
+                            </a>
+                            <a class="item">1</a>
+                            <a class="icon item">
+                                <i class="right chevron icon"></i>
+                            </a>
+                        </div>
+                    </th>
+                </tr>
+            </tfoot>
         </table>
 
         <br>
@@ -88,7 +114,7 @@
         <br>
 
         <div class="action">
-            <div class="ui right floated positive button" ng-click="procesar_mover_stock();">
+            <div class="ui right floated submit big button green" ng-click="procesar_mover_stock();">
                 Mover
             </div>
         </div>
