@@ -76,6 +76,16 @@
 						array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
 				break;
 
+				case 'stock_laboratorio':
+		          	$cod_laboratorio_origen = Input::get('cod_laboratorio');
+
+		          	$response = DB::table('vista_stock_laboratorio_full')
+		            	->select('cod_objeto', 'nombre_objeto', 'cantidad','cod_dimension','cod_subdimension','cod_agrupacion')
+		            	->where('cod_laboratorio', '=', $cod_laboratorio_origen)
+		            	->get();
+
+		        break;
+
 				case 'stock_full':
 					$cod_dimension = Input::get('cod_dimension');
 					$cod_subdimension = Input::get('cod_subdimension');
