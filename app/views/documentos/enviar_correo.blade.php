@@ -7,24 +7,31 @@
                 <br>
 
                 <div class="field">
-                    <div class="two fields">
-                        <div class="six wide field">
-                            <label>Destinatario.</label>
-                            {{ Form::select_personas(array('name'=>'responsable', 'id'=>'responsable','ng-model'=>'DatosForm.responsable'),null, 'Destinatario')}}
+                    <div class="one fields">
+                        <div class="eleven wide field">
+                            <label>Destinatario</label>
+                            {{ Form::select_destinatarios(array('name'=>'responsable', 'id'=>'responsable','ng-model'=>'DatosForm.responsable'),null, 'Destinatario')}}
+                        </div>
+                    </div>
+
+                    <br>
+
+                    <div class="two field">
+                        <div class="ten wide field">
+                            <label>Asunto</label>
+                            <input type="text" name="asunto" placeholder="Asunto" ng-model="DatosForm.asunto">
                         </div>
                     </div>
 
                     <br>
 
                     <div class="two fields">
-                        <div class="five wide field">
-                            <label>Asunto</label>
-                            <input type="text" name="asunto" placeholder="Asunto" ng-model="DatosForm.asunto" >
-                        </div>
-                        <div class="one wide field" id="btn_adjuntar">
+                        <div class="field">
                             <input type="file" name="archivo">
                         </div>
                     </div>
+
+                    <br>
 
                     <div class="two fields">
                         <div class="eleven wide field">
@@ -45,5 +52,7 @@
 </div>
 
 <script>
-    $('.ui.dropdown').dropdown();
+    $('.ui.dropdown').dropdown({
+        maxSelections: 10
+    });
 </script>
