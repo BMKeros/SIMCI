@@ -34,10 +34,10 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><b>Creado</b><br>
+                <td colspan="2"><b>Creado:</b><br>
                     <p>2016/02/13</p>
                 </td>
-                <td colspan="2"><b>Actualizado</b><br>
+                <td colspan="2"><b>Actualizado:</b><br>
                     <p>2016/04/19</p>
                 </td>
             </tr>

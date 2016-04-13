@@ -74,11 +74,11 @@
 
             <tr>
                 <td colspan="4">
-                    <b>Creado</b><br>
+                    <b>Creado:</b><br>
                     <p>2016/04/28</p>
                 </td>
                 <td colspan="4">
-                    <b>Actualizado</b><br>
+                    <b>Actualizado:</b><br>
                     <p>2016/06/28</p>
                 </td>
             </tr>
