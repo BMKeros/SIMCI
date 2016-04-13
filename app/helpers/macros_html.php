@@ -314,5 +314,26 @@ Form::macro('select_tipo_unidad', function($atributos = null){
 	}
 });
 
+Form::macro('select_destinatarios', function($atributos = null, $selected = null, $placeholder=null) {
+
+	$personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'personas.id')
+		->join('usuarios', 'usuarios.id', '=', 'personas.usuario_id')
+		->get();
+
+	$default_values = array('class' => "ui dropdown search capitalize");
+
+	$html = sprintf('<select multiple="" %s >', atributos_dinamicos($atributos, $default_values));
+	$html .= '<option value="">' . $placeholder . '</option>';
+
+	foreach ($personas as $persona) {
+		$html .= sprintf('<option value="%s">%s %s</option>', $persona->id, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido));
+	}
+
+	$html .= '</select>';
+
+	return $html;
+
+});
+
 ?>
 
