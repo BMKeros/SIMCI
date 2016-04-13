@@ -39,7 +39,7 @@
 								'nombre_unidad',
 								'abreviatura_unidad as abreviatura',
 								'usa_recipientes',
-								'recipientes_disponibles')
+								'recipientes_disponibles', 'created_at', 'updated_at')
 							->where('cod_dimension','=',$cod_dimension)
 							->where('cod_subdimension', '=', $cod_subdimension)
 							->where('cod_agrupacion', '=', $cod_agrupacion)
@@ -100,7 +100,9 @@
 								'primer_nombre_primer_auxiliar as nombre_primer_auxiliar',
 								'primer_apellido_primer_auxiliar as apellido_primer_auxiliar',
 								'primer_nombre_segundo_auxiliar as nombre_segundo_auxiliar', 
-								'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar')
+								'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar', 
+								'created_at', 
+								'updated_at')
 							->where('cod_dimension','=',$cod_almacen)
 							->first();
 

@@ -41,6 +41,8 @@ class UsuariosController extends BaseController {
 						'usuarios.usuario as usuario',
 						'usuarios.email as email', 
 						'usuarios.activo',
+						'usuarios.created_at',
+						'usuarios.updated_at',
 						DB::raw('permisos_usuario(usuarios.id) as permisos'),
 						'TP.codigo as cod_tipo_usuario',
 						'TP.nombre as nombre_tipo_usuario',
@@ -77,7 +79,9 @@ class UsuariosController extends BaseController {
 				$consulta = DB::table('usuarios')
 				->select('usuarios.id as id',
 					'usuarios.usuario as usuario',
-					'usuarios.email as email', 
+					'usuarios.email as email',
+					'usuarios.created_at',
+					'usuarios.updated_at',
 					DB::raw('permisos_usuario(id) as permisos'),
 					'TP.codigo as cod_tipo_usuario',
 					'TP.nombre as nombre_tipo_usuario'

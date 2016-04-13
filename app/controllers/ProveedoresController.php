@@ -22,7 +22,7 @@ class ProveedoresController extends BaseController{
 					$response = DB::table('proveedores')
 						->select('codigo', 'razon_social', 'doc_identificacion', 'telefono_fijo1', 'telefono_fijo2',
 								'telefono_movil1', 'telefono_movil2', 'email', 'direccion', 'cod_estado', 'estado','cod_ciudad',
-								'ciudad', 'cod_municipio', 'municipio', 'cod_parroquia', 'parroquia')
+								'ciudad', 'cod_municipio', 'municipio', 'cod_parroquia', 'parroquia', 'created_at', 'updated_at')
 						->join('estados', 'estados.id_estado', '=', 'cod_estado')
 						->join('ciudades', 'ciudades.id_ciudad', '=', 'cod_ciudad')
 						->join('municipios', 'municipios.id_municipio', '=', 'cod_municipio')

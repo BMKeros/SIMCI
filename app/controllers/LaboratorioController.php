@@ -21,7 +21,7 @@
 				case 'laboratorio_full':
 					if($id_laboratorio){
 						$response = DB::table('vista_laboratorio_full')
-							->select('cod_laboratorio as codigo', 'nombre_laboratorio as nombre', 'descripcion_laboratorio as descripcion')
+							->select('cod_laboratorio as codigo', 'nombre_laboratorio as nombre', 'descripcion_laboratorio as descripcion', 'created_at', 'updated_at')
 							->where('cod_laboratorio', '=', $id_laboratorio)
 							->first();
 
@@ -102,7 +102,9 @@
 									'nombre_agrupacion',
 									'cantidad',
 									'cod_laboratorio',
-									'nombre_laboratorio')
+									'nombre_laboratorio', 
+									'created_at', 
+									'updated_at')
 
 							->where('cod_dimension', '=', $cod_dimension)
 							->where('cod_subdimension', '=', $cod_subdimension)

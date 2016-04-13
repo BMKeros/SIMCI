@@ -21,7 +21,7 @@
 				case 'objeto':
 					if($id_objeto){
 						$response = DB::table('vista_objetos_full')
-							->select('nombre_objeto as nombre', 'descripcion_objeto as descripcion', 'especificaciones_objeto as especificaciones', 'cod_clase_objeto', 'nombre_clase_objeto as nombre_clase', 'cod_unidad', 'nombre_unidad', 'abreviatura_unidad')
+							->select('nombre_objeto as nombre', 'descripcion_objeto as descripcion', 'especificaciones_objeto as especificaciones', 'cod_clase_objeto', 'nombre_clase_objeto as nombre_clase', 'cod_unidad', 'nombre_unidad', 'abreviatura_unidad', 'created_at', 'updated_at')
 							->where('cod_objeto', '=', $id_objeto)
 							->first();
 							
