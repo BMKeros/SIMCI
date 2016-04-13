@@ -7,6 +7,8 @@ CREATE OR REPLACE VIEW vista_usuarios_full AS
     usuarios.email                AS email,
     usuarios.imagen               AS imagen,
     usuarios.activo               AS activo,
+    usuarios.created_at           AS created_at,
+    usuarios.updated_at           AS updated_at,
     usuarios.cod_tipo_usuario     AS cod_tipo_usuario,
     tipos_usuario.nombre          AS tipo_usuario_nombre,
     tipos_usuario.descripcion     AS tipo_usuario_descripcion,
@@ -33,6 +35,8 @@ CREATE OR REPLACE VIEW vista_objetos_full AS
     catalogo_objetos.nombre           AS nombre_objeto,
     catalogo_objetos.descripcion      AS descripcion_objeto,
     catalogo_objetos.especificaciones AS especificaciones_objeto,
+    catalogo_objetos.created_at       AS created_at,
+    catalogo_objetos.updated_at       AS updated_at,
     unidades.cod_unidad               AS cod_unidad,
     unidades.nombre                   AS nombre_unidad,
     unidades.abreviatura              AS abreviatura_unidad,
@@ -56,6 +60,8 @@ CREATE OR REPLACE VIEW vista_inventario_full AS
     inventario.usa_recipientes         AS usa_recipientes,
     inventario.elemento_movible        AS elemento_movible,
     inventario.recipientes_disponibles AS recipientes_disponibles,
+    inventario.created_at              AS created_at,
+    inventario.updated_at              AS updated_at,
     almacenes.codigo                   AS cod_dimension,
     almacenes.descripcion              AS descripcion_dimension,
     sub_dimensiones.codigo             AS cod_subdimension,
@@ -96,6 +102,8 @@ CREATE OR REPLACE VIEW vista_almacen_full AS
   SELECT
     almacenes.codigo                 AS cod_dimension,
     almacenes.descripcion            AS descripcion,
+    almacenes.created_at             AS created_at,
+    almacenes.updated_at             AS updated_at,
     responsable.primer_nombre        AS primer_nombre_responsable,
     responsable.primer_apellido      AS primer_apellido_responsable,
     primer_auxiliar.primer_nombre    AS primer_nombre_primer_auxiliar,
@@ -113,7 +121,9 @@ CREATE OR REPLACE VIEW vista_laboratorio_full AS
     laboratorios.codigo      AS cod_laboratorio,
     laboratorios.nombre      AS nombre_laboratorio,
     laboratorios.descripcion AS descripcion_laboratorio,
-    laboratorios.secuencia   AS secuencia_laboratorio
+    laboratorios.secuencia   AS secuencia_laboratorio,
+    laboratorios.created_at  AS created_at,
+    laboratorios.updated_at  AS updated_at
   FROM laboratorios;
 
 
@@ -128,6 +138,8 @@ CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
     sub_dimensiones.descripcion          AS descripcion_subdimension,
     objetos_laboratorio.cod_agrupacion   AS cod_agrupacion,
     agrupaciones.nombre                  AS nombre_agrupacion,
+    objetos_laboratorio.created_at       AS created_at,
+    objetos_laboratorio.updated_at       AS updated_at,
     laboratorios.codigo                  AS cod_laboratorio,
     laboratorios.nombre                  AS nombre_laboratorio,
     laboratorios.descripcion             AS descripcion_laboratorio,
