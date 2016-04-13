@@ -192,7 +192,7 @@
                 </div>
 
                 <br>
-
+        <!--
                 <div class="field">
                     <div class="two fields">
                         <div class="field">
@@ -220,6 +220,7 @@
                         </div>
                     </div>
                 </div>
+          -->
             </form>
         </div>
     </div>
