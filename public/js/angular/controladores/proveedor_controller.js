@@ -253,8 +253,7 @@ simci.controller('ProveedorController', [
                             ToolsService.loading_button('btn-modificar', false);
 
                             setTimeout(function () {
-                                ToolsService.reload_tabla($scope, 'tabla_proveedores', function () {
-                                });
+                                ToolsService.reload_tabla($scope, 'tabla_proveedores', function () {});
                             }, 500);
 
                         } else {
@@ -282,52 +281,26 @@ simci.controller('ProveedorController', [
 
                 $scope.modal_eliminar_proveedor = function (id) {
 
-                    alertify.confirm('Seguro que desea eliminar este proveedor?',
-
-                        function () {
-                            $http({
-                                method: 'POST',
-                                url: '/api/proveedores/verificar?codigo=' + id
-                            }).then(function (data) {
-
-                                    if (data.data.resultado) {
-                                        alertify.alert('No puede eliminar este proveedor debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.');
-                                    }
-                                    else {
-                                        //sino tiene relaciones, que confirme para que elimine
-                                        alertify.confirm("Confirme si desea eliminar",
-                                            //onok para eliminar el usuairo
-                                            function () {
-                                                $http({
-                                                    method: 'POST',
-                                                    url: '/api/proveedores/eliminar?codigo=' + id,
-                                                }).then(function (data) {
-
-                                                    if (data.data.resultado) {
-                                                        //Recargamos la tabla
-                                                        setTimeout(function () {
-                                                            ToolsService.reload_tabla($scope, 'tabla_proveedores', function (data) {
-                                                            });
-                                                        }, 500);
-                                                    }
-                                                    else {
-                                                        //$log.info(data.data);
-                                                        alertify.error("Ha ocurrido un error al realizar la operacion");
-                                                    }
-                                                }, function (data_error) {
-                                                    //$log.info(data_error);
-                                                    ToolsService.generar_alerta_status(data_error);
-                                                });
-                                            }
-                                        ).set('title', '¡Alerta!');
-                                    }
-                                },
-                                function (data_error) {
-                                    //$log.info(data_error);
-                                    ToolsService.generar_alerta_status(data_error);
-                                });
-                        }
-                    ).set('title', '¡Alerta!');
+                    ToolsService.eliminar_elemento_dinamico($scope, {
+                        titulo_confirm: {
+                            principal: '¡Alerta!',
+                            secundario: 'Confirme su respuesta'
+                        },
+                        mensajes: {
+                            principal: {
+                                mensaje_confirmacion: 'Seguro que desea eliminar este proveedor?',
+                                error: 'No puede eliminar este proveedor debido que mantiene relaciones con otras entidades. Verifique para proceder con la accion.'
+                            },
+                            secundario: {
+                                mensaje_confirmacion: "Confirme si desea eliminar este proveedor"
+                            }
+                        },
+                        urls: {
+                            verificacion: '/api/proveedores/verificar?codigo=' + id,
+                            eliminacion: '/api/proveedores/eliminar?codigo=' + id
+                        },
+                        nombre_tabla: 'tabla_proveedores'
+                    });
                 };
             }
 
