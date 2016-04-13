@@ -19,18 +19,26 @@
 
             </tr>
             <tr>
-                <td ><b>Clase de Objeto: </b><br> <% data_objeto.nombre_clase %>
+                <td><b>Clase de Objeto: </b><br> <% data_objeto.nombre_clase %>
                 </td>
                 <td colspan="2"><b>Unidad:</b><br><%data_objeto.nombre_unidad %> (<%data_objeto.abreviatura_unidad %>
-                    )</td>
+                    )
+                </td>
                 <td colspan="3"><b>Especificaciones:</b><br>
                     <p><% data_objeto.especificaciones | uppercase %></p>
                 </td>
             </tr>
             <tr>
                 <td colspan="5"><b>Descripcion:</b><br>
-
                     <p><% data_objeto.descripcion | uppercase %></p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2"><b>Creado</b><br>
+                    <p>2016/02/13</p>
+                </td>
+                <td colspan="2"><b>Actualizado</b><br>
+                    <p>2016/04/19</p>
                 </td>
             </tr>
             </tbody>
@@ -57,7 +65,9 @@
                 <div class="content">
                     <div class="header"><% mensaje_validacion.titulo %></div>
                     <ul class="list">
-                        <li ng-repeat=" mensaje in mensaje_validacion.mensajes track by $index"><% mensaje | capitalize %></li>
+                        <li ng-repeat=" mensaje in mensaje_validacion.mensajes track by $index"><% mensaje | capitalize
+                            %>
+                        </li>
                     </ul>
                 </div>
             </div>

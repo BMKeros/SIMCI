@@ -87,6 +87,16 @@
                     <p><% data_proveedor.direccion %></p>
                 </td>
             </tr>
+            <tr>
+                <td colspan="4">
+                    <b>Creado</b><br>
+                    <p>2016/04/28</p>
+                </td>
+                <td colspan="4">
+                    <b>Actualizado</b><br>
+                    <p>2016/06/28</p>
+                </td>
+            </tr>
 
             </tbody>
         </table>
@@ -112,7 +122,9 @@
                 <div class="content">
                     <div class="header"><% mensaje_validacion.titulo %></div>
                     <ul class="list">
-                        <li ng-repeat=" mensaje in mensaje_validacion.mensajes track by $index"><% mensaje | capitalize %></li>
+                        <li ng-repeat=" mensaje in mensaje_validacion.mensajes track by $index"><% mensaje | capitalize
+                            %>
+                        </li>
                     </ul>
                 </div>
             </div>
