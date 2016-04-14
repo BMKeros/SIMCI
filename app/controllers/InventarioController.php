@@ -167,7 +167,7 @@
 			$elemento_movible = Input::get('elemento_movible');
 
 			//este codigo es para verificar si existe en el inventario
-			$codigo_elemento = $cod_dimension."-".$cod_sub_dimension."-".$cod_agrupacion."-".$cod_objeto.'-'.$numero_orden;
+			$codigo_elemento = $cod_dimension."-".$cod_sub_dimension."-".$cod_agrupacion."-".$cod_objeto."-".$numero_orden;
 
 			$reglas = array(
 				'cod_dimension' => 'required|alpha_num|exists:almacenes,codigo',
