@@ -11,7 +11,7 @@ class ValidatorPersonalizado extends \Illuminate\Validation\Validator
         $tmp_subdimension = $values[1];
         $tmp_agrupacion = $values[2];
         $tmp_objeto = $values[3];
-        $tmp_numero_orden = $value[4];
+        $tmp_numero_orden = $values[4];
 
         $existe = DB::table("inventario")
             ->where('cod_dimension', '=', $tmp_dimension)
