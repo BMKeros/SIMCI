@@ -105,10 +105,7 @@ simci.controller('InventarioController', [
                     },
                     callbackSuccess: function (_scope) {
                         _scope.$apply(function(){
-                            _scope.DatosForm.usa_recipientes = false;
                             _scope.DatosForm.elemento_movible = false;
-                            //_scope.DatosForm.recipientes_disponibles = undefined;
-                            _scope.DatosForm.recipientes_disponibles = null;
                         });
                     }
                 });
