@@ -27,8 +27,8 @@ class CrearTablaInventario extends Migration {
 			$table->nullableTimestamps();
 
 			//Constrains
-			$table->primary(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'));
-			$table->unique(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'));
+			$table->primary(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto', 'numero_orden'));
+			$table->unique(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto', 'numero_orden'));
 
 		});
 	}
