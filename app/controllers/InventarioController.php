@@ -38,8 +38,8 @@
 								'nombre_objeto',
 								'nombre_unidad',
 								'abreviatura_unidad as abreviatura',
-								'usa_recipientes',
-								'recipientes_disponibles', 'created_at', 'updated_at')
+								'created_at', 
+								'updated_at')
 							->where('cod_dimension','=',$cod_dimension)
 							->where('cod_subdimension', '=', $cod_subdimension)
 							->where('cod_agrupacion', '=', $cod_agrupacion)
@@ -138,7 +138,7 @@
 					$value_search = Input::get('query');
 
 					$data = DB::table('vista_inventario_full')
-						->select('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'nombre_objeto', 'especificaciones_objeto', 'descripcion_objeto', 'nombre_clase_objeto', 'cantidad_disponible')
+						->select('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'numero_orden', 'nombre_objeto', 'especificaciones_objeto', 'descripcion_objeto', 'nombre_clase_objeto', 'cantidad_disponible')
 					->where('nombre_objeto','ILIKE','%'.$value_search.'%')
 					->get();
 
@@ -164,8 +164,6 @@
 			$cod_objeto = Input::get('cod_objeto');
 			$numero_orden = Input::get('numero_orden');
 			$cantidad_disponible = Input::get('cantidad_disponible');
-			$usa_recipientes = Input::get('usa_recipientes');
-			$recipientes_disponibles = Input::get('recipientes_disponibles');
 			$elemento_movible = Input::get('elemento_movible');
 
 			//este codigo es para verificar si existe en el inventario
@@ -179,8 +177,6 @@
 				'numero_orden' => 'required|numeric',
 				'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id',
 				'cantidad_disponible' => 'required|numeric',
-				'usa_recipientes' => 'required|boolean',
-				'recipientes_disponibles' => 'numeric',
 				'elemento_movible' => 'required|boolean',
 				'codigo_elemento' => 'exists_elemento'
 			);
@@ -193,8 +189,6 @@
 				'numero_orden' => $numero_orden,
 				'cod_objeto' => $cod_objeto,
 				'cantidad_disponible' => $cantidad_disponible,
-				'usa_recipientes' => $usa_recipientes,
-				'recipientes_disponibles' => $recipientes_disponibles,
 				'elemento_movible' => $elemento_movible,
 				'codigo_elemento' => $codigo_elemento
 			);
@@ -227,8 +221,6 @@
 				$nuevo_elemento->numero_orden = $numero_orden;
 				$nuevo_elemento->cod_objeto = $cod_objeto;
 				$nuevo_elemento->cantidad_disponible = $cantidad_disponible;
-				$nuevo_elemento->usa_recipientes = $usa_recipientes;
-				$nuevo_elemento->recipientes_disponibles = $recipientes_disponibles;
 				$nuevo_elemento->elemento_movible = $elemento_movible;
 
 				$nuevo_elemento->save();
@@ -236,7 +228,6 @@
 				return Response::json(array(
 					'resultado' => true,
 					'mensajes' => array('Nuevo Elemento creado con exito.',
-					//pendiente colocar o no del id de los objetos que se crean
 					))
 				);
 			}
@@ -267,10 +258,7 @@
 					$cod_sub_agrupacion = input_default(Input::get('cod_sub_agrupacion'), $elemento->cod_subagrupacion);
 					$numero_orden = input_default(Input::get('numero_orden'), $elemento->numero_orden);
 					$cod_objeto = input_default(Input::get('cod_objeto'), $elemento->cod_objeto);
-					//comenmtada para evaluar si debe actualizarse PD:motivo corrupcion
-					//$cantidad_disponible = input_default(Input::get('cantidad_disponible'), $elemento->cantidad_disponible);
-					$usa_recipientes = input_default(Input::get('usa_recipientes'), $elemento->usa_recipientes);
-					$recipientes_disponibles = input_default(Input::get('recipientes_disponibles'), $elemento->recipientes_disponibles);
+					$cantidad_disponible = input_default(Input::get('cantidad_disponible'), $elemento->cantidad_disponible);
 					$elemento_movible = input_default(Input::get('elemento_movible'), $elemento->recipientes_disponibles);
 
 					$reglas = array(
@@ -280,9 +268,7 @@
 						'cod_sub_agrupacion' => 'alpha_num|exists:sub_agrupaciones,codigo',
 						'numero_orden' => 'required|numeric',
 						'cod_objeto' => 'required|numeric|exists:catalogo_objetos,id|unique:inventario',
-						//'cantidad_disponible' => 'required|numeric',
-						'usa_recipientes' => 'required|boolean',
-						'recipientes_disponibles' => 'numeric',
+						'cantidad_disponible' => 'required|numeric',
 						'elemento_movible' => 'required|boolean'
 					);
 
@@ -293,9 +279,7 @@
 						'cod_sub_agrupacion' => $cod_sub_agrupacion,
 						'numero_orden' => $numero_orden,
 						'cod_objeto' => $cod_objeto,
-						//'cantidad_disponible' => $cantidad_disponible,
-						'usa_recipientes' => $usa_recipientes,
-						'recipientes_disponibles' => $recipientes_disponibles,
+						'cantidad_disponible' => $cantidad_disponible,
 						'elemento_movible' => $elemento_movible
 					);
 
@@ -316,16 +300,13 @@
 						return Response::json(array('resultado' => false, 'mensajes' => $validacion->messages()->all()));
 					}
 					else{
-						
 						$elemento->cod_dimension = $cod_dimension;
 						$elemento->cod_subdimension = $cod_sub_dimension;
 						$elemento->cod_agrupacion = $cod_agrupacion;
 						$elemento->cod_subagrupacion = $cod_sub_agrupacion;
 						$elemento->numero_orden = $numero_orden;
 						$elemento->cod_objeto = $cod_objeto;
-						//$elemento->cantidad_disponible = $cantidad_disponible;
-						$elemento->usa_recipientes = $usa_recipientes;
-						$elemento->recipientes_disponibles = $recipientes_disponibles;
+						$elemento->cantidad_disponible = $cantidad_disponible;
 						$elemento->elemento_movible = $elemento_movible;
 
 						$elemento->save();
@@ -385,7 +366,6 @@
 
 			$reglas = array(
 				'responsable' => 'required|integer|exists:personas,id',
-				//pendientes por modificar si seran o no unicos
 				'primer_auxiliar' => 'required|integer|exists:personas,id',
 				'segundo_auxiliar' => 'integer|exists:personas,id',
 				'descripcion' => 'required|min:3|max:150'
