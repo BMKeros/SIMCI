@@ -69,25 +69,13 @@
 							<label>Cantidad Disponible</label>
 							<input type="number" name="cantidad_disponible" placeholder="0" min="1" ng-model="DatosForm.cantidad_disponible">
 						</div>
-
-						<div class="field" ng-show="DatosForm.usa_recipientes">
-							<label>Recipientes Disponibles</label>
-							<input type="number" name="recipientes_disponibles" placeholder="0" min="1" ng-model="DatosForm.recipientes_disponibles">
-
-						</div>
 					</div>
 					
 					<br>
 					
 					<div class="field">
 						<div class="two fields">
-							<div class="field">
-								<div class="ui toggle checkbox">
-								  	<input name="usa_recipientes" type="checkbox" ng-model="DatosForm.usa_recipientes" ng-init="DatosForm.usa_recipientes = false">
-								  	<label>Usar Recipiente</label>
-								</div>
-							</div>
-
+							
 							<div class="field">
 								<div class="ui toggle checkbox">
 								  	<input name="elemento_movible" type="checkbox" ng-model="DatosForm.elemento_movible" ng-init="DatosForm.elemento_movible = true">
