@@ -165,8 +165,8 @@ class CrearIndexTablas extends Migration
 
         Schema::table('objetos_laboratorio', function ($table) {
             $table
-                ->foreign(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto'))
-                ->references(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto'))
+                ->foreign(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'numero_orden'))
+                ->references(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'numero_orden'))
                 ->on('inventario');
         });
     }

@@ -20,12 +20,13 @@ class CrearTablaObjetosLaboratorio extends Migration {
             $table->string('cod_dimension', 4);
             $table->string('cod_subdimension', 3);
             $table->string('cod_agrupacion', 3);
+            $table->integer('numero_orden');
 
             $table->integer('cod_objeto');
             $table->integer('cantidad');
             $table->nullableTimestamps();
 
-            $table->unique(array('cod_objeto','cod_laboratorio','cod_dimension','cod_subdimension','cod_agrupacion'));
+            $table->unique(array('cod_objeto','cod_laboratorio','cod_dimension','cod_subdimension','cod_agrupacion', 'numero_orden'));
         });
     }
 

@@ -21,14 +21,12 @@ class CrearTablaInventario extends Migration {
 			$table->integer('numero_orden');
 			$table->integer('cod_objeto');
 			$table->decimal('cantidad_disponible');
-			$table->boolean('usa_recipientes');
 			$table->boolean('elemento_movible')->default(false);
-			$table->integer('recipientes_disponibles')->nullable();
 			$table->nullableTimestamps();
 
 			//Constrains
-			$table->primary(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'));
-			$table->unique(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto'));
+			$table->primary(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto', 'numero_orden'));
+			$table->unique(array('cod_dimension','cod_subdimension','cod_agrupacion','cod_objeto', 'numero_orden'));
 
 		});
 	}

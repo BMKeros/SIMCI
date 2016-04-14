@@ -57,9 +57,7 @@ CREATE OR REPLACE VIEW vista_inventario_full AS
   SELECT
     inventario.numero_orden            AS numero_orden,
     inventario.cantidad_disponible     AS cantidad_disponible,
-    inventario.usa_recipientes         AS usa_recipientes,
     inventario.elemento_movible        AS elemento_movible,
-    inventario.recipientes_disponibles AS recipientes_disponibles,
     inventario.created_at              AS created_at,
     inventario.updated_at              AS updated_at,
     almacenes.codigo                   AS cod_dimension,
@@ -140,6 +138,7 @@ CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
     agrupaciones.nombre                  AS nombre_agrupacion,
     objetos_laboratorio.created_at       AS created_at,
     objetos_laboratorio.updated_at       AS updated_at,
+    objetos_laboratorio.numero_orden     AS numero_orden,
     laboratorios.codigo                  AS cod_laboratorio,
     laboratorios.nombre                  AS nombre_laboratorio,
     laboratorios.descripcion             AS descripcion_laboratorio,
