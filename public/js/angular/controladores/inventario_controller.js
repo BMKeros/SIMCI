@@ -234,9 +234,7 @@ simci.controller('InventarioController', [
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
-                            return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto, data.numero_orden) + ')"><i class="unhide icon"></i></a>' +
-                                '<a class="ui icon button green spopup"  data-content="Modificar Elemento" ng-click="modal_modificar_elemento(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto, data.numero_orden) + ')"><i class="edit icon"></i></a>' +
-                                '<a class="ui icon button red spopup"  data-content="Eliminar Elemento" ng-click="modal_eliminar_elemento(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto, data.numero_orden) + ')"><i class="remove icon"></i></a>';
+                            return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto, data.numero_orden) + ')"><i class="unhide icon"></i></a>';
                         })
                         .notSortable()
                         .withOption('width', '15%')
