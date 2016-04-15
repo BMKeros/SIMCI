@@ -1,5 +1,5 @@
 --Vista para obtener todos los campos de usuario con sus relaciones
-DROP VIEW IF EXISTS vista_usuarios_full;
+DROP VIEW IF EXISTS vista_usuarios_full CASCADE;
 CREATE OR REPLACE VIEW vista_usuarios_full AS
   SELECT
     usuarios.id                   AS id_usuario,
@@ -28,7 +28,7 @@ CREATE OR REPLACE VIEW vista_usuarios_full AS
     LEFT JOIN sexos ON personas.sexo_id = sexos.id;
 
 
-DROP VIEW IF EXISTS vista_objetos_full;
+DROP VIEW IF EXISTS vista_objetos_full CASCADE;
 CREATE OR REPLACE VIEW vista_objetos_full AS
   SELECT
     catalogo_objetos.id               AS cod_objeto,
@@ -52,7 +52,7 @@ CREATE OR REPLACE VIEW vista_objetos_full AS
 
 
 /*OJO PENDIENTE POR EVALUAR PORQUE NO TRAE TODOS LOS REGISTROS*/
-DROP VIEW IF EXISTS vista_inventario_full;
+DROP VIEW IF EXISTS vista_inventario_full CASCADE;
 CREATE OR REPLACE VIEW vista_inventario_full AS
   SELECT
     inventario.numero_orden            AS numero_orden,
@@ -95,7 +95,7 @@ CREATE OR REPLACE VIEW vista_inventario_full AS
     INNER JOIN tipos_unidades ON tipos_unidades.id = unidades.tipo_unidad
     INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto;
 
-DROP VIEW IF EXISTS vista_almacen_full;
+DROP VIEW IF EXISTS vista_almacen_full CASCADE;
 CREATE OR REPLACE VIEW vista_almacen_full AS
   SELECT
     almacenes.codigo                 AS cod_dimension,
@@ -126,7 +126,7 @@ CREATE OR REPLACE VIEW vista_laboratorio_full AS
 
 
 /*FALTA COMPLETAR ESTA VISTA*/
-DROP VIEW IF EXISTS vista_stock_laboratorio_full;
+DROP VIEW IF EXISTS vista_stock_laboratorio_full CASCADE;
 CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
   SELECT
     objetos_laboratorio.id               AS id,
@@ -164,10 +164,10 @@ CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
     INNER JOIN clase_objetos ON clase_objetos.id = catalogo_objetos.cod_clase_objeto
     INNER JOIN almacenes ON almacenes.codigo = objetos_laboratorio.cod_dimension
     INNER JOIN sub_dimensiones ON sub_dimensiones.codigo = objetos_laboratorio.cod_subdimension
-    INNER JOIN agrupaciones ON agrupaciones.codigo = objetos_laboratorio.cod_agrupacion
+    INNER JOIN agrupaciones ON agrupaciones.codigo = objetos_laboratorio.cod_agrupacion;
 
 
-DROP VIEW IF EXISTS vista_elementos_inventario;
+DROP VIEW IF EXISTS vista_elementos_inventario CASCADE;
 CREATE OR REPLACE VIEW vista_elementos_inventario AS
        SELECT
         vista_inventario_full.cod_dimension,
@@ -180,7 +180,8 @@ CREATE OR REPLACE VIEW vista_elementos_inventario AS
         vista_inventario_full.nombre_objeto,
         sum(vista_inventario_full.cantidad_disponible) AS cantidad_total_disponible,
         vista_inventario_full.cod_unidad,
-        vista_inventario_full.nombre_unidad
+        vista_inventario_full.nombre_unidad,
+        vista_inventario_full.abreviatura_unidad
 
     FROM vista_inventario_full
 
@@ -194,7 +195,8 @@ CREATE OR REPLACE VIEW vista_elementos_inventario AS
         vista_inventario_full.cod_objeto, 
         vista_inventario_full.nombre_objeto,
         vista_inventario_full.cod_unidad,
-        vista_inventario_full.nombre_unidad
+        vista_inventario_full.nombre_unidad,
+        vista_inventario_full.abreviatura_unidad
 
     ORDER BY 
         nombre_objeto;

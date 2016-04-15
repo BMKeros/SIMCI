@@ -56,17 +56,17 @@
 				break;
 
 				case 'paginacion':
-					$consulta = DB::table('vista_inventario_full')
+				
+					$consulta = DB::table('vista_elementos_inventario')
 						->select('cod_dimension', 
 								'cod_subdimension', 
 								'cod_agrupacion', 
-								'cod_subagrupacion',
-								'numero_orden',
-								'cantidad_disponible',
+								'cantidad_total_disponible',
 								'cod_objeto',
 								'nombre_objeto',
 								'nombre_unidad',
 								'abreviatura_unidad as abreviatura');
+
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 					array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
