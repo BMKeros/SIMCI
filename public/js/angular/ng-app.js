@@ -110,6 +110,20 @@
         };
     });
 
+    simci.filter('formato_timestamps', function(){
+        return function(value){
+            if(!!(value)){
+                var tmp_timestamps = value.split('.')[0].split(" ");
+                var fecha_tmp = tmp_timestamps[0].split('-').reverse().join('/');
+                var hora_tmp = tmp_timestamps[1];
+
+                return fecha_tmp + ' - '+ hora_tmp;
+            }else{
+                return ''
+            }
+        }
+    });
+
     simci.filter('quitar_ceros_decimales', function (ToolsService) {
         return function (input, param) {
             $timeout(function () {
