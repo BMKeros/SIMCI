@@ -56,6 +56,30 @@
 				break;
 
 				case 'paginacion':
+
+					$consulta = DB::table('vista_elementos_inventario')
+						->select('cod_dimension', 
+								'cod_subdimension', 
+								'cod_agrupacion', 
+								'cantidad_total_disponible',
+								'cod_objeto',
+								'nombre_objeto',
+								'nombre_unidad',
+								'abreviatura_unidad as abreviatura');
+
+
+					$response = $this->generar_paginacion_dinamica($consulta,
+					array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
+					
+				break;
+
+				case 'listar_elementos':
+
+					$cod_dimension = Input::get('cod_dimension', null);
+					$cod_subdimension = Input::get('cod_subdimension', null);
+					$cod_agrupacion = Input::get('cod_agrupacion', null);
+					$cod_objeto = Input::get('cod_objeto', null);
+
 					$consulta = DB::table('vista_inventario_full')
 						->select('cod_dimension', 
 								'cod_subdimension', 
@@ -66,12 +90,19 @@
 								'cod_objeto',
 								'nombre_objeto',
 								'nombre_unidad',
-								'abreviatura_unidad as abreviatura');
+								'abreviatura_unidad as abreviatura')
+						->where('cod_dimension','=',$cod_dimension)
+						->where('cod_subdimension', '=', $cod_subdimension)
+						->where('cod_agrupacion', '=', $cod_agrupacion)
+						->where('cod_objeto', '=', $cod_objeto)
+						->orderBy('nombre_objeto','asc')
+						->get();
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 					array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
-					
+
 				break;
+
 
 				case 'paginacion_almacenes':
 					$consulta = DB::table('vista_almacen_full')
