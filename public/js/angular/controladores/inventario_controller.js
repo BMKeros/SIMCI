@@ -234,10 +234,10 @@ simci.controller('InventarioController', [
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
-                            return '<a class="ui icon button blue spopup" data-content="Ver Elemento" ng-click="modal_ver_elemento(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto, data.numero_orden) + ')"><i class="unhide icon"></i></a>';
+                            return '<a class="ui icon button blue spopup" data-content="Detalles" ng-click="modal_ver_elemento(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto, data.numero_orden) + ')"><i class="list icon"></i></a>';
                         })
                         .notSortable()
-                        .withOption('width', '15%')
+                        .withOption('width', '6%')
                 ];
 
 
