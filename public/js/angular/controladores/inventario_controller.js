@@ -212,13 +212,13 @@ simci.controller('InventarioController', [
                         }
                     )
                         .notSortable()
-                        .withOption('width', '22%'),
+                        .withOption('width', '18%'),
 
-                    DTColumnBuilder.newColumn('nombre_objeto').withTitle('Objeto').notSortable(),
+                    DTColumnBuilder.newColumn('nombre_objeto').withTitle('Nombre del objeto').notSortable(),
 
                     DTColumnBuilder.newColumn(null).withTitle('Disponibilidad').renderWith(
                         function (data, type, full) {
-                            return ToolsService.quitar_ceros_decimales(data.cantidad_disponible);
+                            return ToolsService.quitar_ceros_decimales(data.cantidad_total_disponible);
                         }
                     )
                         .notSortable()
