@@ -208,7 +208,7 @@ simci.controller('InventarioController', [
                 $scope.columnas_tabla_elementos = [
                     DTColumnBuilder.newColumn(null).withTitle('Codigo de elemento').renderWith(
                         function (data, type, full) {
-                            return ToolsService.generar_codigo_elemento(data, 'label');
+                            return ToolsService.generar_codigo_elemento(data, 'label',['numero_orden']);
                         }
                     )
                         .notSortable()
