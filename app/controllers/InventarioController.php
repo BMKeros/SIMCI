@@ -95,7 +95,6 @@
 						->where('cod_subdimension', '=', $cod_subdimension)
 						->where('cod_agrupacion', '=', $cod_agrupacion)
 						->where('cod_objeto', '=', $cod_objeto)
-						->orderBy('nombre_objeto','asc')
 						->get();
 
 					$response = $this->generar_paginacion_dinamica($consulta,
