@@ -31,11 +31,11 @@
             <tr>
                 <td colspan="2">
                     <b>Creado:</b><br>
-                    <p>2016/04/28</p>
+                    <p><% data_laboratorio.created_at | formato_timestamps %></p>
                 </td>
                 <td colspan="2">
                     <b>Actualizado:</b><br>
-                    <p>2016/06/28</p>
+                    <p><% data_laboratorio.updated_at | formato_timestamps %></p>
                 </td>
             </tr>
 
