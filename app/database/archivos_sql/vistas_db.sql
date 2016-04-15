@@ -166,3 +166,35 @@ CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
     INNER JOIN sub_dimensiones ON sub_dimensiones.codigo = objetos_laboratorio.cod_subdimension
     INNER JOIN agrupaciones ON agrupaciones.codigo = objetos_laboratorio.cod_agrupacion
 
+
+DROP VIEW IF EXISTS vista_elementos_inventario;
+CREATE OR REPLACE VIEW vista_elementos_inventario AS
+       SELECT
+        vista_inventario_full.cod_dimension,
+        vista_inventario_full.descripcion_dimension,
+        vista_inventario_full.cod_subdimension, 
+        vista_inventario_full.descripcion_subdimension,
+        vista_inventario_full.cod_agrupacion, 
+        vista_inventario_full.nombre_agrupacion,
+        vista_inventario_full.cod_objeto, 
+        vista_inventario_full.nombre_objeto,
+        sum(vista_inventario_full.cantidad_disponible) AS cantidad_total_disponible,
+        vista_inventario_full.cod_unidad,
+        vista_inventario_full.nombre_unidad
+
+    FROM vista_inventario_full
+
+    GROUP BY 
+        vista_inventario_full.cod_dimension,
+        vista_inventario_full.descripcion_dimension,
+        vista_inventario_full.cod_subdimension, 
+        vista_inventario_full.descripcion_subdimension,
+        vista_inventario_full.cod_agrupacion, 
+        vista_inventario_full.nombre_agrupacion,
+        vista_inventario_full.cod_objeto, 
+        vista_inventario_full.nombre_objeto,
+        vista_inventario_full.cod_unidad,
+        vista_inventario_full.nombre_unidad
+
+    ORDER BY 
+        nombre_objeto;
