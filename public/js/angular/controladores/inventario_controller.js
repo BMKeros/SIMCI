@@ -182,6 +182,7 @@ simci.controller('InventarioController', [
                 });
             }
             if ($location.$$url == "/inventario/ver/elementos") {
+                
                 $scope.tabla_elementos = {};
                 $scope.id_elemento_actual = null;
 
@@ -234,11 +235,73 @@ simci.controller('InventarioController', [
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
-                            return '<a class="ui icon button blue spopup" data-content="Detalles" ng-click="modal_ver_elemento(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto, data.numero_orden) + ')"><i class="list icon"></i></a>';
+                            return '<a class="ui icon button blue spopup" data-content="Detalles" ng-click="modal_listar_elementos(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto) + ')"><i class="list icon"></i></a>';
                         })
                         .notSortable()
                         .withOption('width', '6%')
                 ];
+
+
+                $scope.modal_listar_elementos = function(cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto){
+
+
+                    //Esto es para no escribir tanto
+                    var TS = ToolsService;
+
+                    $scope.opciones_tabla_listar_elementos = DTOptionsBuilder.newOptions()
+                        .withOption('ajax', {
+                            url: '/api/inventario/mostrar?type=listar_elementos&'+ToolsService.printf('cod_dimension={0}&cod_subdimension={1}&cod_agrupacion={2}&cod_objeto={3}', cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto),
+                            type: 'GET'
+                        })
+                        .withDataProp('data')
+                        .withPaginationType('full_numbers')
+                        .withOption('processing', true)
+                        .withOption('serverSide', true)
+                        .withOption('createdRow', function (row, data, dataIndex) {
+                            $compile(angular.element(row).contents())($scope);
+
+                            $timeout(function () {
+                                $('.ui.spopup').popup();
+                            }, false, 0);
+                        });
+
+                    $scope.columnas_tabla_listar_elementos = [
+                        DTColumnBuilder.newColumn(null).withTitle('Codigo de elemento').renderWith(
+                            function (data, type, full) {
+                                return ToolsService.generar_codigo_elemento(data, 'label',['numero_orden']);
+                            }
+                        )
+                            .notSortable()
+                            .withOption('width', '18%'),
+
+                        DTColumnBuilder.newColumn('nombre_objeto').withTitle('Nombre del objeto').notSortable(),
+
+                        DTColumnBuilder.newColumn(null).withTitle('Disponibilidad').renderWith(
+                            function (data, type, full) {
+                                return ToolsService.quitar_ceros_decimales(data.cantidad_disponible);
+                            }
+                        )
+                            .notSortable()
+                            .withOption('width', '10%'),
+
+                        DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+                            function (data, type, full) {
+                                return data.nombre_unidad + ' (' + data.abreviatura + ')';
+                            }
+                        )
+                            .notSortable()
+                            .withOption('width', '15%'),
+
+                        DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
+                            function (data, type, full) {
+                                return '<a class="ui icon button blue spopup" data-content="Detalles" ng-click="modal_listar_elementos(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto) + ')"><i class="list icon"></i></a>';
+                            })
+                            .notSortable()
+                            .withOption('width', '6%')
+                    ];
+
+                    angular.element('#modal_listar_elementos').modal('show');
+                };
 
 
                 $scope.modal_ver_elemento = function (cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto, numero_orden) {

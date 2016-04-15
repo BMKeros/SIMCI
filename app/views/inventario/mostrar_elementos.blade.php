@@ -8,6 +8,25 @@
     </div>
 </div>
 
+<!-- Bloque 1. para listar elementos -->
+<div class="ui fullscreen modal" id="modal_listar_elementos">
+    <i class="close icon"></i>
+    <div class="header">
+        Modal Title
+    </div>
+    <div class="content">
+        <!--<div nf-if="tabla_listar_elementos">
+            <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_listar_elementos"
+               dt-columns="columnas_tabla_listar_elementos" dt-instance='tabla_listar_elementos' width="100%"></table>
+        </div>-->
+    </div>
+    <div class="actions">
+        <div class="ui button">Cancel</div>
+        <div class="ui button">OK</div>
+    </div>
+</div>
+<!--- Fin Bloque -->
+
 <!--Bloque 2. Mostrar elemento-->
 <div class="ui modal" id="modal_ver_elemento">
     <div class="header">Datos del Elemento</div>
