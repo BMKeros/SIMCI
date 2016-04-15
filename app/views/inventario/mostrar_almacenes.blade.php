@@ -39,11 +39,11 @@
             <tr>
                 <td colspan="3">
                     <b>Creado:</b><br>
-                    <p>2016/04/28</p>
+                    <p><% data_almacen.created_at | formato_timestamps %></p>
                 </td>
                 <td colspan="3">
                     <b>Actualizado:</b><br>
-                    <p>2016/06/28</p>
+                    <p><% data_almacen.updated_at | formato_timestamps %></p>
                 </td>
             </tr>
 

@@ -35,10 +35,10 @@
             </tr>
             <tr>
                 <td colspan="2"><b>Creado:</b><br>
-                    <p>2016/02/13</p>
+                    <p><% data_objeto.created_at | formato_timestamps %></p>
                 </td>
                 <td colspan="2"><b>Actualizado:</b><br>
-                    <p>2016/04/19</p>
+                    <p><% data_objeto.updated_at | formato_timestamps %></p>
                 </td>
             </tr>
             </tbody>
