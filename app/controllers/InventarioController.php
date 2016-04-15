@@ -94,8 +94,7 @@
 						->where('cod_dimension','=',$cod_dimension)
 						->where('cod_subdimension', '=', $cod_subdimension)
 						->where('cod_agrupacion', '=', $cod_agrupacion)
-						->where('cod_objeto', '=', $cod_objeto)
-						->get();
+						->where('cod_objeto', '=', $cod_objeto);
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 					array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
