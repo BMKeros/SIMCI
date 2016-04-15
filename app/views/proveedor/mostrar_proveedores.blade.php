@@ -90,11 +90,11 @@
             <tr>
                 <td colspan="4">
                     <b>Creado:</b><br>
-                    <p>2016/04/28</p>
+                    <p><% data_proveedor.created_at | formato_timestamps %></p>
                 </td>
                 <td colspan="4">
                     <b>Actualizado:</b><br>
-                    <p>2016/06/28</p>
+                    <p><% data_proveedor.updated_at | formato_timestamps %></p>
                 </td>
             </tr>
 
