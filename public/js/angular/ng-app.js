@@ -258,16 +258,25 @@
                 return JSON.parse(localStorage.getItem('data_usuario'));
             },
             //Funcion para generar el codigo de los elementos del alamacen
-            generar_codigo_elemento: function (obj_codigos, tipo) {
+            generar_codigo_elemento: function (obj_codigos, tipo, exclude) {
+
                 if (tipo.toLowerCase() === 'label') {
                     var tmp = '';
-                    tmp += '<div class="ui small green label spopup" data-content="Dimension">' + obj_codigos.cod_dimension + '</div>';
-                    tmp += '<div class="ui small blue label spopup" data-content="SubDimension">' + obj_codigos.cod_subdimension + '</div>';
-                    tmp += '<div class="ui small teal  label spopup" data-content="Agrupacion">' + obj_codigos.cod_agrupacion + '</div>';
-                    if (obj_codigos.cod_subagrupacion) {
+                    if( exclude.indexOf('cod_dimension') == -1) {
+                        tmp += '<div class="ui small green label spopup" data-content="Dimension">' + obj_codigos.cod_dimension + '</div>';
+                    }
+                    if( exclude.indexOf('cod_subdimension') == -1){
+                        tmp += '<div class="ui small blue label spopup" data-content="SubDimension">' + obj_codigos.cod_subdimension + '</div>';
+                    }
+                    if( exclude.indexOf('cod_agrupacion') == -1){
+                        tmp += '<div class="ui small teal  label spopup" data-content="Agrupacion">' + obj_codigos.cod_agrupacion + '</div>';
+                    }
+                    if (obj_codigos.cod_subagrupacion && exclude.indexOf('cod_subagrupacion') == -1) {
                         tmp += '<div class="ui small red label spopup" data-content="SubAgrupacion">' + obj_codigos.cod_subagrupacion + '</div>';
                     }
-                    tmp += '<div class="ui small gray label spopup" data-content="Numero de orden">' + obj_codigos.numero_orden + '</div>';
+                    if( exclude.indexOf('numero_orden') == -1){
+                        tmp += '<div class="ui small gray label spopup" data-content="Numero de orden">' + obj_codigos.numero_orden + '</div>';
+                    }
 
                     return tmp;
                 }
