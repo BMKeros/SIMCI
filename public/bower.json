@@ -33,6 +33,7 @@
     "angular": "1.4.8",
     "moment": "momentjs#^2.12.0",
     "viewerjs": "^0.5.9",
-    "angular-chart.js": "^0.9.0"
+    "angular-chart.js": "^0.9.0",
+    "angularUtils-pagination": "angular-utils-pagination#^0.11.1"
   }
 }

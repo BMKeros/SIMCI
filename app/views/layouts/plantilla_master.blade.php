@@ -50,14 +50,13 @@
 		<script src="/bower_components/angular-datatables/dist/angular-datatables.min.js"></script>
 		<script src="/bower_components/angular-animate/angular-animate.min.js"></script>
 		<script src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+		<script src="/bower_components/angularUtils-pagination/dirPagination.js"></script>
 		
 		<!-- plugins datatables -->
 		
 		<!-- alertifyJs -->
 		<script src="/bower_components/alertify-js/build/alertify.min.js"></script>
 
-
-		
 		<!-- Ng progress -->
 		<script src="/bower_components/ngprogress/build/ngprogress.min.js"></script>
 		
