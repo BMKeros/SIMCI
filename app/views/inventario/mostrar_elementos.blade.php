@@ -15,14 +15,37 @@
         Modal Title
     </div>
     <div class="content">
-        <!--<div nf-if="tabla_listar_elementos">
-            <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_listar_elementos"
-               dt-columns="columnas_tabla_listar_elementos" dt-instance='tabla_listar_elementos' width="100%"></table>
-        </div>-->
+
+        <table class="ui celled striped table" width="100%">
+            <thead>
+            <tr>
+                <th width="18%">Codigo del elemento</th>
+                <th width="">Nombre del objeto</th>
+                <th width="10%">Disponibilidad</th>
+                <th width="15%">Unidad</th>
+                <th width="6%" class="center aligned">Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr dir-paginate="elemento in lista_elementos | itemsPerPage: ElementosPerPage" total-items="totalElementos"
+                current-page="pagination.current">
+                <td><% elemento.cod_dimension +' '+ elemento.cod_subdimension+' '+ elemento.cod_agrupacion +' '+ elemento.cod_subagrupacion +' '+ elemento.numero_orden %></td>
+                <td><% elemento.nombre_objeto %></td>
+                <td><% elemento.cantidad_disponible %></td>
+                <td><% elemento.nombre_unidad +"("+ elemento.abreviatura +")" %></td>
+                <td></td>
+            </tr>
+            </tbody>
+
+            <dir-pagination-controls boundary-links="true" on-page-change="cambiar_pagina(newPageNumber)"
+                                     template-url="/plantillas/paginacion/paginacion_semantic.tpl.html"></dir-pagination-controls>
+
+        </table>
+
     </div>
     <div class="actions">
-        <div class="ui button">Cancel</div>
-        <div class="ui button">OK</div>
+        <div class="ui button">Cerrar</div>
     </div>
 </div>
 <!--- Fin Bloque -->

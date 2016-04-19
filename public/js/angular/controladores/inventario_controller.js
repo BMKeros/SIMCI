@@ -182,7 +182,7 @@ simci.controller('InventarioController', [
                 });
             }
             if ($location.$$url == "/inventario/ver/elementos") {
-                
+
                 $scope.tabla_elementos = {};
                 $scope.id_elemento_actual = null;
 
@@ -238,67 +238,52 @@ simci.controller('InventarioController', [
                             return '<a class="ui icon button blue spopup" data-content="Detalles" ng-click="modal_listar_elementos(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto) + ')"><i class="list icon"></i></a>';
                         })
                         .notSortable()
+                        .withClass('center aligned')
                         .withOption('width', '6%')
                 ];
 
 
                 $scope.modal_listar_elementos = function(cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto){
 
+                    $scope.lista_elementos = [];
 
-                    //Esto es para no escribir tanto
-                    var TS = ToolsService;
+                    $scope.totalElementos = 0;
+                    $scope.ElementosPerPage = 10; // this should match however many results your API puts on one page
 
-                    $scope.opciones_tabla_listar_elementos = DTOptionsBuilder.newOptions()
-                        .withOption('ajax', {
-                            url: '/api/inventario/mostrar?type=listar_elementos&'+ToolsService.printf('cod_dimension={0}&cod_subdimension={1}&cod_agrupacion={2}&cod_objeto={3}', cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto),
-                            type: 'GET'
-                        })
-                        .withDataProp('data')
-                        .withPaginationType('full_numbers')
-                        .withOption('processing', true)
-                        .withOption('serverSide', true)
-                        .withOption('createdRow', function (row, data, dataIndex) {
-                            $compile(angular.element(row).contents())($scope);
+                    getResultsPage(1);
 
-                            $timeout(function () {
-                                $('.ui.spopup').popup();
-                            }, false, 0);
+                    $scope.pagination = {
+                        current: 1
+                    };
+
+                    $scope.cambiar_pagina = function (newPage) {
+                        getResultsPage(newPage);
+                    };
+
+                    function getResultsPage(pageNumber) {
+                        var parametros = {
+                            start: ($scope.ElementosPerPage * (pageNumber - 1)),
+                            length: $scope.ElementosPerPage,
+                            cod_dimension: cod_dimension,
+                            cod_subdimension: cod_subdimension,
+                            cod_agrupacion: cod_agrupacion,
+                            cod_objeto: cod_objeto
+                        };
+
+                        var params = encodeURI(angular.element.param(parametros));
+
+                        $http({
+                            method: 'GET',
+                            url: '/api/inventario/mostrar?type=listar_elementos&' + params
+                        }).then(function (data) {
+
+                            $scope.lista_elementos = data.data.data;
+
+                            $scope.totalElementos = data.data.recordsTotal;
+
+                        }, function (data_error) {
                         });
-
-                    $scope.columnas_tabla_listar_elementos = [
-                        DTColumnBuilder.newColumn(null).withTitle('Codigo de elemento').renderWith(
-                            function (data, type, full) {
-                                return ToolsService.generar_codigo_elemento(data, 'label',['numero_orden']);
-                            }
-                        )
-                            .notSortable()
-                            .withOption('width', '18%'),
-
-                        DTColumnBuilder.newColumn('nombre_objeto').withTitle('Nombre del objeto').notSortable(),
-
-                        DTColumnBuilder.newColumn(null).withTitle('Disponibilidad').renderWith(
-                            function (data, type, full) {
-                                return ToolsService.quitar_ceros_decimales(data.cantidad_disponible);
-                            }
-                        )
-                            .notSortable()
-                            .withOption('width', '10%'),
-
-                        DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
-                            function (data, type, full) {
-                                return data.nombre_unidad + ' (' + data.abreviatura + ')';
-                            }
-                        )
-                            .notSortable()
-                            .withOption('width', '15%'),
-
-                        DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
-                            function (data, type, full) {
-                                return '<a class="ui icon button blue spopup" data-content="Detalles" ng-click="modal_listar_elementos(' + TS.anadir_comillas_params(data.cod_dimension, data.cod_subdimension, data.cod_agrupacion, data.cod_objeto) + ')"><i class="list icon"></i></a>';
-                            })
-                            .notSortable()
-                            .withOption('width', '6%')
-                    ];
+                    }
 
                     angular.element('#modal_listar_elementos').modal('show');
                 };
