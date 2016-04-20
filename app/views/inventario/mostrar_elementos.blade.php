@@ -11,8 +11,8 @@
 <!-- Bloque 1. para listar elementos -->
 <div class="ui fullscreen modal" id="modal_listar_elementos">
     <i class="close icon"></i>
-    <div class="header">
-        Modal Title
+    <div class="header ui centered">
+        Elementos.
     </div>
     <div class="content">
 
@@ -38,14 +38,14 @@
             </tr>
             </tbody>
 
-            <dir-pagination-controls boundary-links="true" on-page-change="cambiar_pagina(newPageNumber)"
-                                     template-url="/plantillas/paginacion/paginacion_semantic.tpl.html"></dir-pagination-controls>
 
         </table>
 
     </div>
     <div class="actions">
-        <div class="ui button">Cerrar</div>
+        <div class="ui negative button">
+            Cerrar
+        </div>
     </div>
 </div>
 <!--- Fin Bloque -->
