@@ -61,6 +61,7 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
   _cod_subdimension        TEXT,
   _cod_agrupacion          TEXT,
   _cod_objeto              INTEGER,
+  _numero_orden INTEGER,
   _cantidad_mover          INTEGER)
 
   RETURNS BOOLEAN AS
@@ -80,7 +81,8 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
       cod_dimension = _cod_dimension AND
       cod_subdimension = _cod_subdimension AND
       cod_agrupacion = _cod_agrupacion AND
-      cod_objeto = _cod_objeto;
+      cod_objeto = _cod_objeto AND
+      numero_orden = _numero_orden;
 
     SELECT cantidad_actual - _cantidad_mover
     INTO cantidad_restante;
@@ -92,7 +94,8 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
     --    cod_dimension = _cod_dimension AND
     --    cod_subdimension = _cod_subdimension AND
     --    cod_agrupacion = _cod_agrupacion AND
-    --    cod_objeto = _cod_objeto;
+    --    cod_objeto = _cod_objeto AND
+    --    numero_orden = _numero_orden;
     --END IF
 
     IF cantidad_actual <> cantidad_restante AND cantidad_restante >= 0
@@ -105,7 +108,8 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
         cod_dimension = _cod_dimension AND
         cod_subdimension = _cod_subdimension AND
         cod_agrupacion = _cod_agrupacion AND
-        cod_objeto = _cod_objeto;
+        cod_objeto = _cod_objeto AND
+        numero_orden = _numero_orden;
 
       --Verificamos si el objeto que se movera existe en el laboratorio destino
       SELECT
@@ -117,7 +121,8 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
             cod_dimension = _cod_dimension AND
             cod_subdimension = _cod_subdimension AND
             cod_agrupacion = _cod_agrupacion AND
-            cod_objeto = _cod_objeto;
+            cod_objeto = _cod_objeto AND
+            numero_orden = _numero_orden;
 
       -- Si el objeto existe en el laboratorio destino se actualiza
       IF id_objeto IS NOT NULL
@@ -131,7 +136,8 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
           cod_dimension = _cod_dimension AND
           cod_subdimension = _cod_subdimension AND
           cod_agrupacion = _cod_agrupacion AND
-          cod_objeto = _cod_objeto;
+          cod_objeto = _cod_objeto AND
+          numero_orden = _numero_orden;
 
         RETURN TRUE; --Retornamos true para hacer saber que se hizo el procedimiento
 
@@ -139,12 +145,12 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
         --Si no existe el objeto en el laboratorio destino se crear con la cantidad
         INSERT INTO objetos_laboratorio (
           cod_laboratorio, cod_dimension, cod_subdimension, cod_agrupacion,
-          cod_objeto, cantidad, created_at, updated_at)
+          cod_objeto, numero_orden, cantidad, created_at, updated_at)
         VALUES (_cod_laboratorio_destino,
                 _cod_dimension,
                 _cod_subdimension,
                 _cod_agrupacion,
-                _cod_objeto, _cantidad_mover, NOW(), NOW());
+                _cod_objeto, _numero_orden, _cantidad_mover, NOW(), NOW());
 
         RETURN TRUE; --Retornamos true para hacer saber que se hizo el procedimiento
 
