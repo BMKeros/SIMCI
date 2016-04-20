@@ -100,6 +100,7 @@
 									'descripcion_subdimension',
 									'cod_agrupacion',
 									'nombre_agrupacion',
+									'numero_orden',
 									'cantidad',
 									'cod_laboratorio',
 									'nombre_laboratorio', 
@@ -268,7 +269,7 @@
 			$items_stock_tabla = Input::get('items_stock');
 
 			foreach ($items_stock_tabla as $item) {
-				DB::select("select agregar_stock_laboratorio('".$item['cod_dimension']."','".$item['cod_subdimension']."','".$item['cod_agrupacion']."',".$item['cod_objeto'].",'".$item['cod_laboratorio']."',".$item['cantidad'].")");
+				DB::select("select agregar_stock_laboratorio('".$item['cod_dimension']."','".$item['cod_subdimension']."','".$item['cod_agrupacion']."',".$item['cod_objeto'].",".$item['numero_orden'].",'".$item['cod_laboratorio']."',".$item['cantidad'].")");
 			}
 
 			return Response::json(array('resultado' => true, 'mensajes' => array('Objetos agregados con exito.!')));
