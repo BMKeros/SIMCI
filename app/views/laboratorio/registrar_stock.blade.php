@@ -172,7 +172,8 @@
                             cod_dimension: item.cod_dimension,
                             cod_subdimension: item.cod_subdimension,
                             cod_agrupacion: item.cod_agrupacion,
-                            cod_objeto: item.cod_objeto
+                            cod_objeto: item.cod_objeto,
+                            numero_orden: item.numero_orden
                         })
                     });
                 });

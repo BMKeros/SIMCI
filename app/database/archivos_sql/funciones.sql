@@ -161,7 +161,7 @@ COST 100;
 
 -- Function: public.agregar_stock_laboratorio(text, text, text,integer, text ,integer);
 
---DROP FUNCTION IF EXISTS public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, TEXT, INTEGER );
+DROP FUNCTION IF EXISTS public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, TEXT, INTEGER );
 
 CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
   _cod_dimension    TEXT,
