@@ -35,9 +35,9 @@
                 <td><% elemento.cantidad_disponible %></td>
                 <td><% elemento.nombre_unidad +"("+ elemento.abreviatura +")" %></td>
                 <td>
-                    <button class="ui red button"
-                            ng-click="modal_ver_elemento(elemento.cod_dimension, elemento.cod_subdimension,elemento.cod_agrupacion,elemento.cod_objeto,elemento.numero_orden)">
-                        aaa
+                    <button class="ui blue small button"
+                            ng-click="modal_ver_elemento(elemento.cod_dimension, elemento.cod_subdimension,elemento.cod_agrupacion,elemento.cod_objeto,elemento.numero_orden)"><i class="unhide icon"></i>
+
                     </button>
                 </td>
             </tr>
