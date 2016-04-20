@@ -34,7 +34,12 @@
                 <td><% elemento.nombre_objeto %></td>
                 <td><% elemento.cantidad_disponible %></td>
                 <td><% elemento.nombre_unidad +"("+ elemento.abreviatura +")" %></td>
-                <td></td>
+                <td>
+                    <button class="ui red button"
+                            ng-click="modal_ver_elemento(elemento.cod_dimension, elemento.cod_subdimension,elemento.cod_agrupacion,elemento.cod_objeto,elemento.numero_orden)">
+                        aaa
+                    </button>
+                </td>
             </tr>
             </tbody>
 
@@ -136,7 +141,8 @@
         </table>
     </div>
     <div class="actions">
-        <div class="ui negative button">
+        <div class="ui negative button"
+             ng-click="cerrar_modal_ver_elemento(data_elemento.cod_dimension, data_elemento.cod_subdimension, data_elemento.cod_agrupacion, data_elemento.cod_objeto)">
             Cerrar
         </div>
     </div>

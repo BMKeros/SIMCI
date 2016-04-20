@@ -299,6 +299,12 @@ simci.controller('InventarioController', [
                     });
                 };
 
+                //Recibe los cuatro codigos para cargar el modal de listar elemento luego que se cierre el modal de ver
+                $scope.cerrar_modal_ver_elemento = function (cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto) {
+
+                    $scope.modal_listar_elementos(cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto);
+                };
+
             }// inventario/ver/todos"
 
 
