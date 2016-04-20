@@ -12,7 +12,7 @@
 <div class="ui fullscreen modal" id="modal_listar_elementos">
     <i class="close icon"></i>
     <div class="header ui centered">
-        Elementos.
+        Elementos
     </div>
     <div class="content">
 
