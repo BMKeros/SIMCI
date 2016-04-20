@@ -9,7 +9,7 @@
 </div>
 
 <!-- Bloque 1. para listar elementos -->
-<div class="ui fullscreen modal" id="modal_listar_elementos">
+<div class="ui long fullscreen modal" id="modal_listar_elementos">
     <i class="close icon"></i>
     <div class="header ui centered">
         Elementos
@@ -34,11 +34,11 @@
                 <td><% elemento.nombre_objeto %></td>
                 <td><% elemento.cantidad_disponible %></td>
                 <td><% elemento.nombre_unidad +"("+ elemento.abreviatura +")" %></td>
-                <td>
-                    <button class="ui blue small button"
+                <td class="center aligned">
+                    <a class="ui icon blue button"
                             ng-click="modal_ver_elemento(elemento.cod_dimension, elemento.cod_subdimension,elemento.cod_agrupacion,elemento.cod_objeto,elemento.numero_orden)"><i class="unhide icon"></i>
 
-                    </button>
+                    </a>
                 </td>
             </tr>
             </tbody>

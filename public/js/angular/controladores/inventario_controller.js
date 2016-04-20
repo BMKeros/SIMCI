@@ -281,11 +281,19 @@ simci.controller('InventarioController', [
 
                             $scope.totalElementos = data.data.recordsTotal;
 
-                        }, function (data_error) {
-                        });
+                                //luego de cargar todos los datos mostramos el modal
+                                $timeout(function () {
+                                    angular.element('#modal_listar_elementos').modal('show');
+                                });
+
+
+                            }, function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
                     }
 
-                    angular.element('#modal_listar_elementos').modal('show');
+
                 };
 
 
