@@ -616,12 +616,17 @@ simci.controller('LaboratorioController', [
                         //convertimos la data con angular.fromJson para luego agregarla al arreglo
                         elemento_seleccionado = angular.fromJson(data_item);
 
-                        //Agregamos el item seleccionado al arreglo
-                        $scope.items_tabla_seleccionados.push(elemento_seleccionado);
+                        if (elemento_seleccionado.cantidad_mover <= 0) {
+                            alertify.warning('Debes especificar la cantidad que va a mover');
+                        }
+                        else {
+                            //Agregamos el item seleccionado al arreglo
+                            $scope.items_tabla_seleccionados.push(elemento_seleccionado);
 
-                        //Desactivamos toda la fila para que no pueda ser modificada
-                        fila.addClass('active').find('button').addClass('disabled');
-                        fila.find('input').attr('disabled', '');
+                            //Desactivamos toda la fila para que no pueda ser modificada
+                            fila.addClass('active').find('button').addClass('disabled');
+                            fila.find('input').attr('disabled', '');
+                        }
 
                     }, function () {
                         alertify.warning('Accion cancelada');
