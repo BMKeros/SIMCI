@@ -80,7 +80,7 @@
 		          	$cod_laboratorio_origen = Input::get('cod_laboratorio');
 
 		          	$response = DB::table('vista_stock_laboratorio_full')
-		            	->select('cod_objeto', 'nombre_objeto', 'cantidad','cod_dimension','cod_subdimension','cod_agrupacion')
+		            	->select('cod_objeto', 'nombre_objeto', 'cantidad','cod_dimension','cod_subdimension','cod_agrupacion', 'numero_orden')
 		            	->where('cod_laboratorio', '=', $cod_laboratorio_origen)
 		            	->get();
 
@@ -286,14 +286,13 @@
 			$lab_origen = Input::get('laboratorio_origen');
 			$lab_destino = Input::get('laboratorio_destino');
 
-			
 
 			if(is_null($data)){
 				return Response::json(array('resultado' => false));
 			}
 			else{
 				foreach($data as $value){
-					DB::select("select mover_stock_laboratorio('".$lab_origen."','".$lab_destino."','".$value['cod_dimension']."','".$value['cod_subdimension']."','".$value['cod_agrupacion']."',".$value['cod_objeto'].",".$value['cantidad_mover'].")");
+					DB::select("select mover_stock_laboratorio('".$lab_origen."','".$lab_destino."','".$value['cod_dimension']."','".$value['cod_subdimension']."','".$value['cod_agrupacion']."',".$value['cod_objeto'].",".$value['numero_orden'].",".$value['cantidad_mover'].")");
 				}	
 
 				return Response::json(array('resultado' => true));

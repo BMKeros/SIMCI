@@ -495,7 +495,7 @@ simci.controller('LaboratorioController', [
                     var formulario = $('#formulario_mover_stock');
                     var is_valid_form = formulario.form(reglas_formulario_mover_stock).form('is valid');
 
-                    if (is_valid_form) {
+                    if (is_valid_form){
 
                         if ($scope.items_tabla_seleccionados.length == 0) {
                             alertify.error("Aun no has seleccionado ningun objeto");
