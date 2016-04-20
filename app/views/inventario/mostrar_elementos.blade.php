@@ -42,10 +42,7 @@
                 </td>
             </tr>
             </tbody>
-
-
         </table>
-
     </div>
     <div class="actions">
         <div class="ui negative button">

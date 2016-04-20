@@ -168,6 +168,7 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
   _cod_subdimension TEXT,
   _cod_agrupacion   TEXT,
   _cod_objeto       INTEGER,
+  _numero_orden INTEGER,
   _cod_laboratorio  TEXT,
   _cantidad         INTEGER)
 
@@ -187,7 +188,8 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
       cod_dimension = _cod_dimension AND
       cod_subdimension = _cod_subdimension AND
       cod_agrupacion = _cod_agrupacion AND
-      cod_objeto = _cod_objeto
+      cod_objeto = _cod_objeto AND
+      numero_orden = _numero_orden
     LIMIT 1;
 
     IF _cantidad > 0 AND (_cantidad <= cantidad_disponible_inventario)
@@ -202,15 +204,16 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
         cod_subdimension = _cod_subdimension AND
         cod_agrupacion = _cod_agrupacion AND
         cod_objeto = _cod_objeto AND
+        numero_orden = _numero_orden AND
         cod_laboratorio = _cod_laboratorio;
 
       IF id_stock_laboratorio IS NULL
       THEN
         INSERT INTO objetos_laboratorio (
           cod_laboratorio, cod_dimension, cod_subdimension, cod_agrupacion,
-          cod_objeto, cantidad, created_at, updated_at)
+          cod_objeto, numero_orden, cantidad, created_at, updated_at)
         VALUES (_cod_laboratorio, _cod_dimension,
-                _cod_subdimension, _cod_agrupacion, _cod_objeto,
+                _cod_subdimension, _cod_agrupacion, _cod_objeto, _numero_orden,
                 _cantidad, NOW(), NOW());
 
         RETURN TRUE;
@@ -223,6 +226,7 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
           cod_subdimension = _cod_subdimension AND
           cod_agrupacion = _cod_agrupacion AND
           cod_objeto = _cod_objeto AND
+          numero_orden = _numero_orden AND
           cod_laboratorio = _cod_laboratorio;
 
         RETURN TRUE;
