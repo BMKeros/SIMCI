@@ -27,6 +27,7 @@ class CrearTablaPedidos extends Migration {
 			$table->string('cod_dimension', 4);
 			$table->string('cod_subdimension', 3);
 			$table->string('cod_agrupacion', 3);
+			$table->integer('cod_objeto');
 
 			$table->nullableTimestamps();
 		});
