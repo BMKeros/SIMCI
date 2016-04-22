@@ -15,7 +15,8 @@ class CrearTablaTiposMovimientos extends Migration {
 		Schema::create('tipos_movimientos', function($table)
 		{
 			$table->increments('id');
-			$table->string('descripcion', 50);
+			$table->string('nombre', 30);
+			$table->string('descripcion', 150);
 			$table->nullableTimestamps();
 		});
 	}
