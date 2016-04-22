@@ -17,7 +17,6 @@ class CrearTablaTiposMovimientos extends Migration {
 			$table->increments('id');
 			$table->string('nombre', 30);
 			$table->string('descripcion', 150);
-			//
 			$table->nullableTimestamps();
 		});
 	}
