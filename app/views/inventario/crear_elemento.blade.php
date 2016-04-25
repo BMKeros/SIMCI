@@ -62,7 +62,7 @@
 					<div class="three fields">
 						<div class="field">
 							<label>Numero de Organizacion</label>
-							<input type="number" name="numero_orden" placeholder="0" min="1" ng-model="DatosForm.numero_orden" >
+							<input type="number" name="numero_orden" placeholder="0" min="1" ng-model="DatosForm.numero_orden" ng-disabled="true">
 						</div>
 
 						<div class="field">
