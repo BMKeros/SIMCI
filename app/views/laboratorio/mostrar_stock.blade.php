@@ -15,13 +15,17 @@
         <table class="ui celled table capitalize">
             <tbody>
             <tr>
-                <td colspan="2">
+                <td colspan="1">
                     <b>Nombre Del Elemento:</b><br>
                     <p><% data_elemento_stock.nombre_objeto | uppercase %></p>
                 </td>
                 <td>
                     <b>Almacen:</b><br>
                     <p>[<% data_elemento_stock.cod_dimension %>] - <% data_elemento_stock.descripcion_dimension | uppercase %></p>
+                </td>
+                <td colspan="1">
+                    <b>Numero de Ordenes</b><br>
+                    <p>43</p>
                 </td>
             </tr>
 
