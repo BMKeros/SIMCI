@@ -164,7 +164,6 @@ LANGUAGE plpgsql VOLATILE
 COST 100;
 
 
-
 -- Function: public.agregar_stock_laboratorio(text, text, text,integer, text ,integer);
 
 DROP FUNCTION IF EXISTS public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, TEXT, INTEGER );
@@ -244,3 +243,27 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
   $BODY$
 LANGUAGE plpgsql VOLATILE
 COST 100;
+
+/*
+
+Funcion para sirve para traer las combinaciones entre los recipientes
+
+SELECT
+  T1.cod_dimension,
+  T1.cod_subdimension,
+  T1.cod_agrupacion,
+  T1.cod_objeto,
+  T1.numero_orden                                   AS numero_orden_recipiente_1,
+  T1.cantidad_disponible                            AS cantidad_recipiente_1,
+  T2.cod_objeto,
+  T2.numero_orden                                   AS numero_orden_recipiente_2,
+  T2.cantidad_disponible                            AS cantidad_recipiente_2,
+  (T1.cantidad_disponible + T2.cantidad_disponible) AS cantidad_total
+FROM vista_elementos_disponibles T1
+  CROSS JOIN vista_elementos_disponibles T2
+WHERE
+  T1.numero_orden < T2.numero_orden
+ORDER BY
+  cantidad_total
+LIMIT 1;
+*/
