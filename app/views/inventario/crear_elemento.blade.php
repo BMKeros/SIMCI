@@ -46,8 +46,8 @@
 
 						<div class="field">
 							<label>Objeto</label>
-							<div class="ui search selection dropdown capitalize buscar_objeto">
-				             	<input type="hidden" ng-model="DatosForm.cod_objeto" name="cod_objeto" ng-update-hidden>
+							<div class="ui search selection dropdown capitalize buscar_objeto" id="select_objetos">
+				             	<input type="hidden" ng-model="DatosForm.cod_objeto" name="cod_objeto" ng-update-hidden  ng-change="generar_secuencia_numero_orden();">
 				             	<div class="text">Buscar objeto</div>
 				              	<i class="dropdown icon"></i>
 				              	<input tabindex="0" class="search" type="text">
@@ -62,7 +62,7 @@
 					<div class="three fields">
 						<div class="field">
 							<label>Numero de Organizacion</label>
-							<input type="number" name="numero_orden" placeholder="0" min="1" ng-model="DatosForm.numero_orden">
+							<input type="number" name="numero_orden" placeholder="0" min="1" ng-model="DatosForm.numero_orden" >
 						</div>
 
 						<div class="field">

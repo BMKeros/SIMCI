@@ -93,6 +93,28 @@ simci.controller('InventarioController', [
 
                 $scope.mostrar_mensaje = false;
 
+                $scope.generar_secuencia_numero_orden = function(){
+                    
+                    if(!($scope.DatosForm.cod_dimension == null || $scope.DatosForm.cod_sub_dimension == null || $scope.DatosForm.cod_agrupacion == null || $scope.DatosForm.cod_objeto == null)){
+                        $http({
+                            method: 'GET',
+                            url: '/api/inventario/mostrar?type=generar_numero_orden&cod_dimension='+$scope.DatosForm.cod_dimension+'&cod_subdimension='+$scope.DatosForm.cod_sub_dimension+'&cod_agrupacion='+$scope.DatosForm.cod_agrupacion+'&cod_objeto='+$scope.DatosForm.cod_objeto,
+                        }).then(function (data) {
+
+                           $timeout(function(){
+                                $scope.DatosForm.numero_orden = data.data.datos;
+                           });
+                            
+
+                        }, function (data_error) {
+                            $log.info(data_error);
+                        });
+                    }
+                    else{
+                        $('#select_objetos').dropdown('restore defaults');
+                    }
+                }
+
                 $scope.registrar_elemento = ToolsService.registrar_dinamico($scope, $http, $timeout, {
                     url: '/api/inventario/registrar-elemento',
                     formulario: {
