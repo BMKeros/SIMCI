@@ -101,7 +101,6 @@
 
 				break;
 
-
 				case 'paginacion_almacenes':
 					$consulta = DB::table('vista_almacen_full')
 							->select('cod_dimension as codigo',
@@ -173,6 +172,22 @@
 
 					$response = array("success"=>true, "results" => $data);
 
+				break;
+
+				case 'generar_numero_orden':
+					$cod_dimension = Input::get('cod_dimension', null);
+					$cod_subdimension = Input::get('cod_subdimension', null);
+					$cod_agrupacion = Input::get('cod_agrupacion', null);
+					$cod_objeto = Input::get('cod_objeto', null);
+
+					$data = DB::table('inventario')
+									->where('cod_dimension', '=', $cod_dimension)
+									->where('cod_subdimension', '=', $cod_subdimension)
+									->where('cod_agrupacion', '=', $cod_agrupacion)
+									->where('cod_objeto', '=', $cod_objeto)
+									->count();
+
+					$response = array('resultado' => true, 'datos' => ($data+1));
 				break;
 
 				default:
