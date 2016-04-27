@@ -200,3 +200,27 @@ CREATE OR REPLACE VIEW vista_elementos_inventario AS
 
     ORDER BY 
         nombre_objeto;
+
+
+DROP VIEW IF EXISTS vista_elementos_disponibles CASCADE;
+CREATE OR REPLACE VIEW vista_elementos_disponibles AS
+    SELECT 
+        inventario.cod_dimension                    AS cod_dimension,
+        inventario.cod_subdimension                 AS cod_subdimension,
+        inventario.cod_agrupacion                   AS cod_agrupacion,
+        inventario.cod_objeto                       AS cod_objeto,
+        inventario.numero_orden                     AS numero_orden,
+        inventario.cantidad_disponible              AS cantidad_disponible,
+        inventario.elemento_movible                 AS elemento_movible,
+    
+        elementos_retenidos.cantidad_existente      AS cantidad_existente,
+        elementos_retenidos.cantidad_solicitada     AS cantidad_solicitada,
+        elementos_retenidos.cod_referencia          AS cod_referencia,
+        elementos_retenidos.cod_tipo_movimiento     AS cod_tipo_movimiento        
+
+    FROM inventario 
+    INNER JOIN elementos_retenidos ON (inventario.cod_dimension = elementos_retenidos.cod_dimension)        AND
+                                      (inventario.cod_subdimension = elementos_retenidos.cod_subdimension)  AND
+                                      (inventario.cod_agrupacion = elementos_retenidos.cod_agrupacion)      AND
+                                      (inventario.cod_objeto = elementos_retenidos.cod_objeto)              AND
+                                      (inventario.numero_orden <> elementos_retenidos.numero_orden);
