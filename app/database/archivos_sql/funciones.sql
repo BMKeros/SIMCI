@@ -61,7 +61,7 @@ CREATE OR REPLACE FUNCTION public.mover_stock_laboratorio(
   _cod_subdimension        TEXT,
   _cod_agrupacion          TEXT,
   _cod_objeto              INTEGER,
-  _numero_orden INTEGER,
+  _numero_orden            INTEGER,
   _cantidad_mover          INTEGER)
 
   RETURNS BOOLEAN AS
@@ -173,7 +173,7 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
   _cod_subdimension TEXT,
   _cod_agrupacion   TEXT,
   _cod_objeto       INTEGER,
-  _numero_orden INTEGER,
+  _numero_orden     INTEGER,
   _cod_laboratorio  TEXT,
   _cantidad         INTEGER)
 
@@ -244,26 +244,199 @@ CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
 LANGUAGE plpgsql VOLATILE
 COST 100;
 
+
+-- Function: public.obtener_cantidad_disponible_elemento(text, text, text, integer)
+
+-- DROP FUNCTION public.obtener_cantidad_disponible_elemento(text, text, text, integer);
+
+CREATE OR REPLACE FUNCTION public.obtener_cantidad_disponible_elemento(
+  _cod_dimension    TEXT,
+  _cod_subdimension TEXT,
+  _cod_agrupacion   TEXT,
+  _cod_objeto       INTEGER)
+  RETURNS NUMERIC AS
+  $BODY$
+  DECLARE
+    total_inventario NUMERIC;
+    total_retenido   NUMERIC;
+    total            NUMERIC;
+  BEGIN
+    --Consultamos la cantidad disponible en el inventario
+    SELECT SUM(cantidad_disponible)
+    INTO total_inventario
+    FROM inventario
+    WHERE
+      cod_dimension = _cod_dimension AND
+      cod_subdimension = _cod_subdimension AND
+      cod_agrupacion = _cod_agrupacion AND
+      cod_objeto = _cod_objeto;
+
+    --Consultamos la cantidad disponible en la tabla retenidos
+    SELECT SUM(cantidad_solicitada)
+    INTO total_retenido
+    FROM elementos_retenidos
+    WHERE
+      cod_dimension = _cod_dimension AND
+      cod_subdimension = _cod_subdimension AND
+      cod_agrupacion = _cod_agrupacion AND
+      cod_objeto = _cod_objeto;
+
+    IF total_inventario IS NULL
+    THEN
+      total_inventario := 0;
+    ELSIF total_retenido IS NULL
+      THEN
+        total_retenido := 0;
+    END IF;
+
+    total := total_inventario - total_retenido;
+
+    RETURN total;
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
+
+
 /*
 
-Funcion para sirve para traer las combinaciones entre los recipientes
+CREATE TYPE tipo_elemento AS (
+  cod_dimension    TEXT,
+  cod_subdimension TEXT,
+  cod_agrupacion   TEXT,
+  cod_objeto       INTEGER,
+  numero_orden     INTEGER,
+  cantidad NUMERIC
+);
 
-SELECT
-  T1.cod_dimension,
-  T1.cod_subdimension,
-  T1.cod_agrupacion,
-  T1.cod_objeto,
-  T1.numero_orden                                   AS numero_orden_recipiente_1,
-  T1.cantidad_disponible                            AS cantidad_recipiente_1,
-  T2.cod_objeto,
-  T2.numero_orden                                   AS numero_orden_recipiente_2,
-  T2.cantidad_disponible                            AS cantidad_recipiente_2,
-  (T1.cantidad_disponible + T2.cantidad_disponible) AS cantidad_total
-FROM vista_elementos_disponibles T1
-  CROSS JOIN vista_elementos_disponibles T2
-WHERE
-  T1.numero_orden < T2.numero_orden
-ORDER BY
-  cantidad_total
-LIMIT 1;
 */
+
+
+CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
+  _cod_dimension      TEXT,
+  _cod_subdimension   TEXT,
+  _cod_agrupacion     TEXT,
+  _cod_objeto         INTEGER,
+  _cantidad_solicitada NUMERIC)
+
+  RETURNS JSON AS
+  $BODY$
+  DECLARE
+    num_elementos_disponibles INTEGER;--Esta variable se usa en el procedimiento de seleccionar varios potes
+    clase_objeto_solicitado   TEXT;-- Esta variable almacenara la clase del elemento que se esta solicitando
+    cantidad_disponible       NUMERIC;--Esta variable se usara para guardar la cantidad disponible del elemento
+  BEGIN
+
+    --Buscamos la clase del objeto que se esta pidiendo
+    SELECT UPPER(clase_objetos.nombre)
+    INTO clase_objeto_solicitado
+    FROM catalogo_objetos
+      INNER JOIN clase_objetos ON catalogo_objetos.cod_clase_objeto = clase_objetos.id
+    WHERE catalogo_objetos.id = _cod_objeto;
+
+    --Condicion para verificar si el elemento que se esta solicitando es un reactivo
+
+    IF clase_objeto_solicitado = 'REACTIVO'
+    THEN
+      --Comienzo del procedimiento especial se asignacion de potes
+
+        -- Obtenemos el numero de elementos disponibles
+      SELECT COUNT(*)
+      INTO num_elementos_disponibles
+      FROM vista_elementos_disponibles
+      WHERE
+        cod_dimension = _cod_dimension AND
+        cod_subdimension = _cod_subdimension AND
+        cod_agrupacion = _cod_agrupacion AND
+        cod_objeto = _cod_objeto;
+
+      IF num_elementos_disponibles = 0
+      THEN
+        RETURN FALSE; -- No hay disponibilidad
+      ELSIF num_elementos_disponibles = 1
+        THEN
+          -- Buscamos el unico elemento disponible
+          IF EXISTS(
+              SELECT
+                cod_dimension,
+                cod_subdimension,
+                cod_agrupacion,
+                cod_objeto,
+                cantidad_disponible
+              FROM vista_elementos_disponibles
+              WHERE
+                cod_dimension = _cod_dimension AND
+                cod_subdimension = _cod_subdimension AND
+                cod_agrupacion = _cod_agrupacion AND
+                cod_objeto = _cod_objeto AND
+                cantidad_disponible >= _cantidad_solicitada
+              ORDER BY cantidad_disponible
+              LIMIT 1
+          )
+          THEN
+
+
+          END IF;
+
+      ELSE
+
+
+      END IF;
+    --Si no es un reactivo
+    ELSE
+      --Comienzo del prcedimiento normal de asignacion
+
+      --Buscamos la cantidad disponible del elemento
+      SELECT obtener_cantidad_disponible_elemento(_cod_dimension,_cod_subdimension,_cod_agrupacion,_cod_objeto) INTO cantidad_disponible;
+
+      IF cantidad_disponible >= _cantidad_solicitada THEN
+
+        INSERT INTO public.elementos_retenidos(
+          cantidad_existente, cantidad_solicitada, cod_referencia,
+          cod_tipo_movimiento, numero_orden, cod_dimension, cod_subdimension,
+          cod_agrupacion, cod_objeto, created_at, updated_at)
+
+        VALUES (cantidad_disponible , _cantidad_solicitada, ?,
+                ?, ?, ?, ?,
+                ?, ?, ?, ?);
+
+      ELSE
+
+      END IF;
+    END IF;
+  END;
+
+  /*SELECT array_to_json(
+      array_agg(
+          row_to_json(campos)
+      )
+  )
+  FROM (
+         SELECT
+           T1.cod_dimension,
+           T1.cod_subdimension,
+           T1.cod_agrupacion,
+           T1.cod_objeto,
+           T1.numero_orden                                   AS numero_orden_recipiente_1,
+           T1.cantidad_disponible                            AS cantidad_recipiente_1,
+           T2.cod_objeto,
+           T2.numero_orden                                   AS numero_orden_recipiente_2,
+           T2.cantidad_disponible                            AS cantidad_recipiente_2,
+           (T1.cantidad_disponible + T2.cantidad_disponible) AS cantidad_total
+         FROM inventario T1
+           CROSS JOIN inventario T2
+         WHERE
+           T1.numero_orden < T2.numero_orden AND
+           T1.cod_dimension = 'AL05' AND T2.cod_dimension = 'AL05' AND
+           T1.cod_subdimension = 'F56' AND T2.cod_subdimension = 'F56' AND
+           T1.cod_agrupacion = 'CP1' AND T2.cod_agrupacion = 'CP1' AND
+           T1.cod_objeto = '41' AND T2.cod_objeto = '41'
+         ORDER BY
+           cantidad_total
+         LIMIT 1
+       ) AS campos;*/
+  RETURN FALSE;
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
