@@ -271,7 +271,7 @@ CREATE OR REPLACE FUNCTION public.obtener_cantidad_disponible_elemento(
       cod_agrupacion = _cod_agrupacion AND
       cod_objeto = _cod_objeto;
 
-    --Consultamos la cantidad disponible en la tabla retenidos
+    --Consultamos la cantidad retenida en la tabla retenidos
     SELECT SUM(cantidad_solicitada)
     INTO total_retenido
     FROM elementos_retenidos
@@ -298,33 +298,32 @@ LANGUAGE plpgsql VOLATILE
 COST 100;
 
 
-/*
-
-CREATE TYPE tipo_elemento AS (
-  cod_dimension    TEXT,
-  cod_subdimension TEXT,
-  cod_agrupacion   TEXT,
-  cod_objeto       INTEGER,
-  numero_orden     INTEGER,
-  cantidad NUMERIC
-);
-
-*/
-
 
 CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
-  _cod_dimension      TEXT,
-  _cod_subdimension   TEXT,
-  _cod_agrupacion     TEXT,
-  _cod_objeto         INTEGER,
+  _cod_dimension       TEXT,
+  _cod_subdimension    TEXT,
+  _cod_agrupacion      TEXT,
+  _cod_objeto          INTEGER,
   _cantidad_solicitada NUMERIC)
 
-  RETURNS JSON AS
+  RETURNS TABLE(
+  COD_DIMENSION TEXT,
+  COD_SUBDIMENSION TEXT,
+  COD_AGRUPACION TEXT,
+  COD_OBJETO INTEGER,
+  NUMERO_ORDEN INTEGER,
+  CANTIDAD_DISPONIBLE NUMERIC
+  ) AS
+
   $BODY$
   DECLARE
-    num_elementos_disponibles INTEGER;--Esta variable se usa en el procedimiento de seleccionar varios potes
-    clase_objeto_solicitado   TEXT;-- Esta variable almacenara la clase del elemento que se esta solicitando
-    cantidad_disponible       NUMERIC;--Esta variable se usara para guardar la cantidad disponible del elemento
+    num_elementos_disponibles INTEGER;
+    --Esta variable se usa en el procedimiento de seleccionar varios potes
+    clase_objeto_solicitado   TEXT;
+    -- Esta variable almacenara la clase del elemento que se esta solicitando
+    cantidad_disponible       NUMERIC;
+    --Esta variable se usara para guardar la cantidad disponible del elemento
+
   BEGIN
 
     --Buscamos la clase del objeto que se esta pidiendo
@@ -352,55 +351,86 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
 
       IF num_elementos_disponibles = 0
       THEN
-        RETURN FALSE; -- No hay disponibilidad
+        RETURN NEXT; -- No hay disponibilidad
       ELSIF num_elementos_disponibles = 1
         THEN
           -- Buscamos el unico elemento disponible
-          IF EXISTS(
-              SELECT
-                cod_dimension,
-                cod_subdimension,
-                cod_agrupacion,
-                cod_objeto,
-                cantidad_disponible
-              FROM vista_elementos_disponibles
-              WHERE
-                cod_dimension = _cod_dimension AND
-                cod_subdimension = _cod_subdimension AND
-                cod_agrupacion = _cod_agrupacion AND
-                cod_objeto = _cod_objeto AND
-                cantidad_disponible >= _cantidad_solicitada
-              ORDER BY cantidad_disponible
-              LIMIT 1
-          )
-          THEN
+          RETURN QUERY
+          SELECT
+            cod_dimension,
+            cod_subdimension,
+            cod_agrupacion,
+            cod_objeto,
+            numero_orden,
+            cantidad_disponible
+          FROM vista_elementos_disponibles
+          WHERE
+            cod_dimension = _cod_dimension AND
+            cod_subdimension = _cod_subdimension AND
+            cod_agrupacion = _cod_agrupacion AND
+            cod_objeto = _cod_objeto AND
+            cantidad_disponible >= _cantidad_solicitada
+          ORDER BY cantidad_disponible
+          LIMIT 1;
 
-
-          END IF;
-
-      ELSE
-
+      ELSIF num_elementos_disponibles >= 2
+        THEN
+          RETURN QUERY
+          SELECT
+            T1.cod_dimension,
+            T1.cod_subdimension,
+            T1.cod_agrupacion,
+            T1.cod_objeto,
+            T1.numero_orden,
+            T1.cantidad_disponible
+          FROM vista_reactivos_disponibles T1
+            INNER JOIN vista_reactivos_disponibles T2 ON
+                                       T1.cod_dimension = T2.cod_dimension AND
+                                       T1.cod_subdimension = T2.cod_subdimension AND
+                                       T1.cod_agrupacion = T2.cod_agrupacion AND
+                                       T1.cod_objeto = T2.cod_objeto
+          WHERE
+            T1.numero_orden <> T2.numero_orden AND
+            (T1.cantidad_disponible + T2.cantidad_disponible) >= _cantidad_solicitada
+          GROUP BY
+            T1.cod_dimension,
+            T1.cod_subdimension,
+            T1.cod_agrupacion,
+            T1.cod_objeto,
+            T1.numero_orden,
+            T1.cantidad_disponible
+          ORDER BY (T1.cantidad_disponible + T2.cantidad_disponible)
+          LIMIT 2;
 
       END IF;
-    --Si no es un reactivo
+
     ELSE
       --Comienzo del prcedimiento normal de asignacion
 
-      --Buscamos la cantidad disponible del elemento
-      SELECT obtener_cantidad_disponible_elemento(_cod_dimension,_cod_subdimension,_cod_agrupacion,_cod_objeto) INTO cantidad_disponible;
+        --Buscamos la cantidad disponible del elemento
+      SELECT obtener_cantidad_disponible_elemento(_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto)
+      INTO cantidad_disponible;
 
-      IF cantidad_disponible >= _cantidad_solicitada THEN
-
-        INSERT INTO public.elementos_retenidos(
-          cantidad_existente, cantidad_solicitada, cod_referencia,
-          cod_tipo_movimiento, numero_orden, cod_dimension, cod_subdimension,
-          cod_agrupacion, cod_objeto, created_at, updated_at)
-
-        VALUES (cantidad_disponible , _cantidad_solicitada, ?,
-                ?, ?, ?, ?,
-                ?, ?, ?, ?);
-
-      ELSE
+      IF cantidad_disponible >= _cantidad_solicitada
+      THEN
+        RETURN QUERY
+        SELECT
+          cod_dimension,
+          cod_subdimension,
+          cod_agrupacion,
+          cod_objeto,
+          numero_orden,
+          cantidad_disponible
+        FROM
+          inventario
+        WHERE
+          cod_dimension = _cod_dimension AND
+          cod_subdimension = _cod_subdimension AND
+          cod_agrupacion = _cod_agrupacion AND
+          cod_objeto = _cod_objeto
+        ORDER BY
+          cantidad_disponible
+        LIMIT 1;
 
       END IF;
     END IF;
@@ -435,8 +465,6 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
            cantidad_total
          LIMIT 1
        ) AS campos;*/
-  RETURN FALSE;
-  END;
   $BODY$
 LANGUAGE plpgsql VOLATILE
 COST 100;
