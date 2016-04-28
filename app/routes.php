@@ -35,6 +35,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::controller('/notificaciones', 'NotificacionesController');
     Route::controller('/consultas', 'ConsultasController');
     Route::controller('/proveedores', 'ProveedoresController');
+    Route::controller('/pedidos', 'PedidosController');
 });
 
 Route::controller('/autenticacion', 'AutenticacionController');

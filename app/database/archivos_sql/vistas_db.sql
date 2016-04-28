@@ -202,21 +202,14 @@ CREATE OR REPLACE VIEW vista_elementos_inventario AS
         nombre_objeto;
 
 
-DROP VIEW IF EXISTS vista_elementos_disponibles CASCADE;
+DROP VIEW IF EXISTS vista_reactivos_disponibles CASCADE;
 CREATE OR REPLACE VIEW vista_elementos_disponibles AS
     SELECT 
         inventario.cod_dimension                    AS cod_dimension,
         inventario.cod_subdimension                 AS cod_subdimension,
         inventario.cod_agrupacion                   AS cod_agrupacion,
         inventario.cod_objeto                       AS cod_objeto,
-        inventario.numero_orden                     AS numero_orden,
-        inventario.cantidad_disponible              AS cantidad_disponible,
-        inventario.elemento_movible                 AS elemento_movible,
-    
-        elementos_retenidos.cantidad_existente      AS cantidad_existente,
-        elementos_retenidos.cantidad_solicitada     AS cantidad_solicitada,
-        elementos_retenidos.cod_referencia          AS cod_referencia,
-        elementos_retenidos.cod_tipo_movimiento     AS cod_tipo_movimiento        
+        inventario.numero_orden                     AS numero_orden
 
     FROM inventario 
     INNER JOIN elementos_retenidos ON (inventario.cod_dimension = elementos_retenidos.cod_dimension)        AND
@@ -224,3 +217,29 @@ CREATE OR REPLACE VIEW vista_elementos_disponibles AS
                                       (inventario.cod_agrupacion = elementos_retenidos.cod_agrupacion)      AND
                                       (inventario.cod_objeto = elementos_retenidos.cod_objeto)              AND
                                       (inventario.numero_orden <> elementos_retenidos.numero_orden);
+
+
+DROP VIEW IF EXISTS vista_pedidos_full;
+CREATE OR REPLACE VIEW vista_pedidos_full AS
+    SELECT
+        pedidos.codigo_pedido       AS codigo_pedido,
+        pedidos.fecha               AS fecha,
+        pedidos.hora                AS hora,
+        pedidos.numero_orden        AS numero_orden,
+        pedidos.cantidad_solicitada AS cantidad_solicitada,
+
+        
+        pedidos.usuario_id          AS usuario_id,
+        personas.primer_nombre      AS primer_nombre,
+        personas.primer_apellido    AS primer_apellido,
+
+        pedidos.cod_laboratorio     AS cod_laboratorio,
+        laboratorios.nombre         AS nombre_laboratorio,
+
+        pedidos.cod_objeto          AS cod_objeto,
+        catalogo_objetos.nombre     AS nombre_objeto
+
+    FROM pedidos
+    INNER JOIN personas ON personas.usuario_id = pedidos.usuario_id
+    INNER JOIN laboratorios ON laboratorios.codigo = pedidos.cod_laboratorio
+    INNER JOIN catalogo_objetos ON catalogo_objetos.id = pedidos.cod_objeto;

@@ -1,6 +1,29 @@
 <?php  
 
 	class PedidosController extends BaseController{
+
+		public function getMostrar(){
+			$type = Input::get('type', 'todos');
+			$tipo_movimiento = Input::get('cod_tipo_movimiento', null);
+			
+			switch($type){
+				case 'todos':
+					$data = DB::table('vista_pedidos_full')->get();
+
+					$response = array('resultado' => true, 'data' => $data);
+									
+				break;
+
+				default:
+					$response = array();
+				break;
+			}
+
+			return Response::json(array('resultado' => true, 'data' => $response));
+
+		}
+
+
 		public function postRegistrarElemento(){
 			$cod_dimension = Input::get('cod_dimension');
 			$cod_subdimension = Input::get('cod_subdimension');
