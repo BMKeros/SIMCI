@@ -299,22 +299,17 @@ COST 100;
 
 
 
+-- Function: public.seleccionar_elemento_disponible(text, text, text, integer, numeric)
+
+DROP FUNCTION IF EXISTS public.seleccionar_elemento_disponible(text, text, text, integer, numeric);
+
 CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
-  _cod_dimension       TEXT,
-  _cod_subdimension    TEXT,
-  _cod_agrupacion      TEXT,
-  _cod_objeto          INTEGER,
-  _cantidad_solicitada NUMERIC)
-
-  RETURNS TABLE(
-  COD_DIMENSION TEXT,
-  COD_SUBDIMENSION TEXT,
-  COD_AGRUPACION TEXT,
-  COD_OBJETO INTEGER,
-  NUMERO_ORDEN INTEGER,
-  CANTIDAD_DISPONIBLE NUMERIC
-  ) AS
-
+  IN _cod_dimension text,
+  IN _cod_subdimension text,
+  IN _cod_agrupacion text,
+  IN _cod_objeto integer,
+  IN _cantidad_solicitada numeric)
+  RETURNS TABLE(cod_dimension text, cod_subdimension text, cod_agrupacion text, cod_objeto integer, numero_orden integer, cantidad_disponible numeric) AS
   $BODY$
   DECLARE
     num_elementos_disponibles INTEGER;
@@ -467,4 +462,5 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
        ) AS campos;*/
   $BODY$
 LANGUAGE plpgsql VOLATILE
-COST 100;
+COST 100
+ROWS 1000;
