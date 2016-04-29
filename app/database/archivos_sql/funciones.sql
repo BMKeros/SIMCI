@@ -298,18 +298,17 @@ LANGUAGE plpgsql VOLATILE
 COST 100;
 
 
-
 -- Function: public.seleccionar_elemento_disponible(text, text, text, integer, numeric)
 
-DROP FUNCTION IF EXISTS public.seleccionar_elemento_disponible(text, text, text, integer, numeric);
+DROP FUNCTION IF EXISTS public.seleccionar_elemento_disponible( TEXT, TEXT, TEXT, INTEGER, NUMERIC );
 
 CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
-  IN _cod_dimension text,
-  IN _cod_subdimension text,
-  IN _cod_agrupacion text,
-  IN _cod_objeto integer,
-  IN _cantidad_solicitada numeric)
-  RETURNS TABLE(cod_dimension text, cod_subdimension text, cod_agrupacion text, cod_objeto integer, numero_orden integer, cantidad_disponible numeric) AS
+  IN _cod_dimension       TEXT,
+  IN _cod_subdimension    TEXT,
+  IN _cod_agrupacion      TEXT,
+  IN _cod_objeto          INTEGER,
+  IN _cantidad_solicitada NUMERIC)
+  RETURNS TABLE(cod_dimension TEXT, cod_subdimension TEXT, cod_agrupacion TEXT, cod_objeto INTEGER, numero_orden INTEGER, cantidad_disponible NUMERIC) AS
   $BODY$
   DECLARE
     num_elementos_disponibles INTEGER;
@@ -318,6 +317,8 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
     -- Esta variable almacenara la clase del elemento que se esta solicitando
     cantidad_disponible       NUMERIC;
     --Esta variable se usara para guardar la cantidad disponible del elemento
+    variable_record           RECORD;
+    --Usada para guardar el resultado de una consulta
 
   BEGIN
 
@@ -348,24 +349,22 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
       THEN
         RETURN NEXT; -- No hay disponibilidad
       ELSIF
-        EXISTS(
-            SELECT
-              cod_dimension,
-              cod_subdimension,
-              cod_agrupacion,
-              cod_objeto,
-              numero_orden,
-              cantidad_disponible
-            FROM vista_reactivos_disponibles
-            WHERE
-              cod_dimension = _cod_dimension AND
-              cod_subdimension = _cod_subdimension AND
-              cod_agrupacion = _cod_agrupacion AND
-              cod_objeto = _cod_objeto AND
-              cantidad_disponible >= _cantidad_solicitada
-            ORDER BY cantidad_disponible
-            LIMIT 1
-        )
+        EXISTS(SELECT
+                 cod_dimension,
+                 cod_subdimension,
+                 cod_agrupacion,
+                 cod_objeto,
+                 numero_orden,
+                 cantidad_disponible
+               FROM vista_reactivos_disponibles as vista
+               WHERE
+                 vista.cod_dimension = _cod_dimension AND
+                 vista.cod_subdimension = _cod_subdimension AND
+                 vista.cod_agrupacion = _cod_agrupacion AND
+                 vista.cod_objeto = _cod_objeto AND
+                 vista.cantidad_disponible >= _cantidad_solicitada
+               ORDER BY cantidad_disponible
+               LIMIT 1)
         THEN
           -- Buscamos el unico elemento disponible
           RETURN QUERY
@@ -376,49 +375,49 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
             cod_objeto,
             numero_orden,
             cantidad_disponible
-          FROM vista_reactivos_disponibles
+          FROM vista_reactivos_disponibles as vista
           WHERE
-            cod_dimension = _cod_dimension AND
-            cod_subdimension = _cod_subdimension AND
-            cod_agrupacion = _cod_agrupacion AND
-            cod_objeto = _cod_objeto AND
-            cantidad_disponible >= _cantidad_solicitada
+            vista.cod_dimension = _cod_dimension AND
+            vista.cod_subdimension = _cod_subdimension AND
+            vista.cod_agrupacion = _cod_agrupacion AND
+            vista.cod_objeto = _cod_objeto AND
+            vista.cantidad_disponible >= _cantidad_solicitada
           ORDER BY cantidad_disponible
           LIMIT 1;
 
-        ELSE
-          IF num_elementos_disponibles >= 2
-          THEN
-            RETURN QUERY
-            SELECT
-              T1.cod_dimension,
-              T1.cod_subdimension,
-              T1.cod_agrupacion,
-              T1.cod_objeto,
-              T1.numero_orden,
-              T1.cantidad_disponible
-            FROM vista_reactivos_disponibles T1
-              INNER JOIN vista_reactivos_disponibles T2 ON
-                                                          T1.cod_dimension = T2.cod_dimension AND
-                                                          T1.cod_subdimension = T2.cod_subdimension AND
-                                                          T1.cod_agrupacion = T2.cod_agrupacion AND
-                                                          T1.cod_objeto = T2.cod_objeto
-            WHERE
-              T1.numero_orden <> T2.numero_orden AND
-              (T1.cantidad_disponible + T2.cantidad_disponible) >= _cantidad_solicitada
-            GROUP BY
-              T1.cod_dimension,
-              T1.cod_subdimension,
-              T1.cod_agrupacion,
-              T1.cod_objeto,
-              T1.numero_orden,
-              T1.cantidad_disponible,
-              T2.cantidad_disponible
-            ORDER BY (T1.cantidad_disponible + T2.cantidad_disponible)
-            LIMIT 2;
+      ELSE
+        IF num_elementos_disponibles >= 2
+        THEN
+          RETURN QUERY
+          SELECT
+            T1.cod_dimension,
+            T1.cod_subdimension,
+            T1.cod_agrupacion,
+            T1.cod_objeto,
+            T1.numero_orden,
+            T1.cantidad_disponible
+          FROM vista_reactivos_disponibles T1
+            INNER JOIN vista_reactivos_disponibles T2 ON
+                                                        T1.cod_dimension = T2.cod_dimension AND
+                                                        T1.cod_subdimension = T2.cod_subdimension AND
+                                                        T1.cod_agrupacion = T2.cod_agrupacion AND
+                                                        T1.cod_objeto = T2.cod_objeto
+          WHERE
+            T1.numero_orden <> T2.numero_orden AND
+            (T1.cantidad_disponible + T2.cantidad_disponible) >= _cantidad_solicitada
+          GROUP BY
+            T1.cod_dimension,
+            T1.cod_subdimension,
+            T1.cod_agrupacion,
+            T1.cod_objeto,
+            T1.numero_orden,
+            T1.cantidad_disponible,
+            T2.cantidad_disponible
+          ORDER BY (T1.cantidad_disponible + T2.cantidad_disponible)
+          LIMIT 2;
 
-          END IF;
         END IF;
+      END IF;
     ELSE
       --Comienzo del prcedimiento normal de asignacion
 
