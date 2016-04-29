@@ -210,7 +210,8 @@ CREATE OR REPLACE VIEW vista_reactivos_disponibles AS
         inventario.cod_subdimension                 AS cod_subdimension,
         inventario.cod_agrupacion                   AS cod_agrupacion,
         inventario.cod_objeto                       AS cod_objeto,
-        inventario.numero_orden                     AS numero_orden
+        inventario.numero_orden                     AS numero_orden,
+        inventario.cantidad_disponible              AS cantidad_disponible
 
     FROM inventario 
     LEFT JOIN elementos_retenidos ON    (inventario.cod_dimension = elementos_retenidos.cod_dimension)        AND
