@@ -393,7 +393,8 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
             T1.cod_agrupacion,
             T1.cod_objeto,
             T1.numero_orden,
-            T1.cantidad_disponible
+            T1.cantidad_disponible,
+            T2.cantidad_disponible
           ORDER BY (T1.cantidad_disponible + T2.cantidad_disponible)
           LIMIT 2;
 
