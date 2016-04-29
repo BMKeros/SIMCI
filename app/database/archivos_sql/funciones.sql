@@ -308,7 +308,7 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
   IN _cod_agrupacion      TEXT,
   IN _cod_objeto          INTEGER,
   IN _cantidad_solicitada NUMERIC)
-  RETURNS TABLE(cod_dimension TEXT, cod_subdimension TEXT, cod_agrupacion TEXT, cod_objeto INTEGER, numero_orden INTEGER, cantidad_disponible NUMERIC) AS
+  RETURNS TABLE(cod_dimension CHARACTER VARYING(4), cod_subdimension CHARACTER VARYING(3), cod_agrupacion CHARACTER VARYING(3), cod_objeto INTEGER, numero_orden INTEGER, cantidad_disponible NUMERIC) AS
   $BODY$
   DECLARE
     num_elementos_disponibles INTEGER;
