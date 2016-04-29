@@ -107,11 +107,14 @@ simci.controller('InventarioController', [
                             
 
                         }, function (data_error) {
-                            $log.info(data_error);
+                            ToolsService.generar_alerta_status(data_error);
                         });
                     }
                     else{
-                        $('#select_objetos').dropdown('restore defaults');
+                        $timeout(function(){
+                            $('#select_objetos').dropdown('restore defaults');    
+                        });
+                        
                     }
                 }
 
