@@ -337,7 +337,7 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
         -- Obtenemos el numero de elementos disponibles
       SELECT COUNT(*)
       INTO num_elementos_disponibles
-      FROM vista_elementos_disponibles
+      FROM vista_reactivos_disponibles
       WHERE
         cod_dimension = _cod_dimension AND
         cod_subdimension = _cod_subdimension AND
@@ -358,7 +358,7 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
             cod_objeto,
             numero_orden,
             cantidad_disponible
-          FROM vista_elementos_disponibles
+          FROM vista_reactivos_disponibles
           WHERE
             cod_dimension = _cod_dimension AND
             cod_subdimension = _cod_subdimension AND
