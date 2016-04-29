@@ -203,7 +203,7 @@ CREATE OR REPLACE VIEW vista_elementos_inventario AS
 
 
 DROP VIEW IF EXISTS vista_reactivos_disponibles CASCADE;
-CREATE OR REPLACE VIEW vista_elementos_disponibles AS
+CREATE OR REPLACE VIEW vista_reactivos_disponibles AS
     SELECT 
         inventario.cod_dimension                    AS cod_dimension,
         inventario.cod_subdimension                 AS cod_subdimension,
