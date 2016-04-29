@@ -61,3 +61,13 @@ define('CODIGO_ALMACEN','AL');
 define('CODIGO_LABORATORIO', 'LA');
 //define('CODIGO_AGRUPACION','');
 define('CODIGO_PROVEEDORES', 'PRV');
+
+
+//Tipos de moviemientos
+define('MOV01', 'ENTRADA POR PROVEEDOR');
+define('MOV02', 'ENTRADA POR DONACION');
+define('MOV03', 'SALIDA POR PEDIDO');
+define('MOV04', 'RETENIDO STOCK');
+define('MOV05', 'RETENIDO POR PEDIDO');
+
+
