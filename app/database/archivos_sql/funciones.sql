@@ -337,12 +337,12 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
         -- Obtenemos el numero de elementos disponibles
       SELECT COUNT(*)
       INTO num_elementos_disponibles
-      FROM vista_reactivos_disponibles
+      FROM vista_reactivos_disponibles AS vista
       WHERE
-        cod_dimension = _cod_dimension AND
-        cod_subdimension = _cod_subdimension AND
-        cod_agrupacion = _cod_agrupacion AND
-        cod_objeto = _cod_objeto;
+        vista.cod_dimension = _cod_dimension AND
+        vista.cod_subdimension = _cod_subdimension AND
+        vista.cod_agrupacion = _cod_agrupacion AND
+        vista.cod_objeto = _cod_objeto;
 
       IF num_elementos_disponibles = 0
       THEN
