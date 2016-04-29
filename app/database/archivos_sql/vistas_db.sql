@@ -205,6 +205,7 @@ CREATE OR REPLACE VIEW vista_elementos_inventario AS
 DROP VIEW IF EXISTS vista_reactivos_disponibles CASCADE;
 CREATE OR REPLACE VIEW vista_reactivos_disponibles AS
     SELECT 
+        DISTINCT
         inventario.cod_dimension                    AS cod_dimension,
         inventario.cod_subdimension                 AS cod_subdimension,
         inventario.cod_agrupacion                   AS cod_agrupacion,
@@ -212,11 +213,17 @@ CREATE OR REPLACE VIEW vista_reactivos_disponibles AS
         inventario.numero_orden                     AS numero_orden
 
     FROM inventario 
-    INNER JOIN elementos_retenidos ON (inventario.cod_dimension = elementos_retenidos.cod_dimension)        AND
-                                      (inventario.cod_subdimension = elementos_retenidos.cod_subdimension)  AND
-                                      (inventario.cod_agrupacion = elementos_retenidos.cod_agrupacion)      AND
-                                      (inventario.cod_objeto = elementos_retenidos.cod_objeto)              AND
-                                      (inventario.numero_orden <> elementos_retenidos.numero_orden);
+    LEFT JOIN elementos_retenidos ON    (inventario.cod_dimension = elementos_retenidos.cod_dimension)        AND
+                                        (inventario.cod_subdimension = elementos_retenidos.cod_subdimension)  AND
+                                        (inventario.cod_agrupacion = elementos_retenidos.cod_agrupacion)      AND
+                                        (inventario.cod_objeto = elementos_retenidos.cod_objeto)              AND
+                                        (inventario.numero_orden = elementos_retenidos.numero_orden)
+                                
+                                WHERE   elementos_retenidos.cod_dimension IS NUll AND 
+                                        elementos_retenidos.cod_subdimension IS NUll AND
+                                        elementos_retenidos.cod_agrupacion IS NUll AND 
+                                        elementos_retenidos.cod_objeto IS NUll AND 
+                                        elementos_retenidos.numero_orden IS NUll;
 
 
 DROP VIEW IF EXISTS vista_pedidos_full;
