@@ -349,40 +349,42 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
       THEN
         RETURN NEXT; -- No hay disponibilidad
       ELSIF
-        EXISTS(SELECT
-                 cod_dimension,
-                 cod_subdimension,
-                 cod_agrupacion,
-                 cod_objeto,
-                 numero_orden,
-                 cantidad_disponible
-               FROM vista_reactivos_disponibles as vista
-               WHERE
-                 vista.cod_dimension = _cod_dimension AND
-                 vista.cod_subdimension = _cod_subdimension AND
-                 vista.cod_agrupacion = _cod_agrupacion AND
-                 vista.cod_objeto = _cod_objeto AND
-                 vista.cantidad_disponible >= _cantidad_solicitada
-               ORDER BY cantidad_disponible
-               LIMIT 1)
+        EXISTS(
+            SELECT
+              vista_reactivos_disponibles.cod_dimension,
+              vista_reactivos_disponibles.cod_subdimension,
+              vista_reactivos_disponibles.cod_agrupacion,
+              vista_reactivos_disponibles.cod_objeto,
+              vista_reactivos_disponibles.numero_orden,
+              vista_reactivos_disponibles.cantidad_disponible
+            FROM vista_reactivos_disponibles
+            WHERE
+              vista_reactivos_disponibles.cod_dimension = _cod_dimension AND
+              vista_reactivos_disponibles.cod_subdimension = _cod_subdimension AND
+              vista_reactivos_disponibles.cod_agrupacion = _cod_agrupacion AND
+              vista_reactivos_disponibles.cod_objeto = _cod_objeto AND
+              vista_reactivos_disponibles.cantidad_disponible >= _cantidad_solicitada
+            ORDER BY vista_reactivos_disponibles.cantidad_disponible
+            LIMIT 1
+        )
         THEN
           -- Buscamos el unico elemento disponible
           RETURN QUERY
           SELECT
-            cod_dimension,
-            cod_subdimension,
-            cod_agrupacion,
-            cod_objeto,
-            numero_orden,
-            cantidad_disponible
-          FROM vista_reactivos_disponibles as vista
+            vista_reactivos_disponibles.cod_dimension,
+            vista_reactivos_disponibles.cod_subdimension,
+            vista_reactivos_disponibles.cod_agrupacion,
+            vista_reactivos_disponibles.cod_objeto,
+            vista_reactivos_disponibles.numero_orden,
+            vista_reactivos_disponibles.cantidad_disponible
+          FROM vista_reactivos_disponibles
           WHERE
-            vista.cod_dimension = _cod_dimension AND
-            vista.cod_subdimension = _cod_subdimension AND
-            vista.cod_agrupacion = _cod_agrupacion AND
-            vista.cod_objeto = _cod_objeto AND
-            vista.cantidad_disponible >= _cantidad_solicitada
-          ORDER BY cantidad_disponible
+            vista_reactivos_disponibles.cod_dimension = _cod_dimension AND
+            vista_reactivos_disponibles.cod_subdimension = _cod_subdimension AND
+            vista_reactivos_disponibles.cod_agrupacion = _cod_agrupacion AND
+            vista_reactivos_disponibles.cod_objeto = _cod_objeto AND
+            vista_reactivos_disponibles.cantidad_disponible >= _cantidad_solicitada
+          ORDER BY vista_reactivos_disponibles.cantidad_disponible
           LIMIT 1;
 
       ELSE
