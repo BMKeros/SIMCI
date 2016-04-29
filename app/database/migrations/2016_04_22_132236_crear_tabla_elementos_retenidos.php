@@ -22,9 +22,7 @@ class CrearTablaElementosRetenidos extends Migration
             $table->integer('numero_orden');
             $table->decimal('cantidad_existente');
             $table->decimal('cantidad_solicitada');
-            $table->integer('cod_referencia');//codigo que referenciara a Elem-Ret;Pedido
-            $table->integer('cod_tipo_movimiento');
-
+            
             $table->nullableTimestamps();
         });
     }
