@@ -485,3 +485,34 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
 LANGUAGE plpgsql VOLATILE
 COST 100
 ROWS 1000;
+
+
+-- Function: public.retener_elemento_inventario(text, text, text, integer, integer, numeric)
+DROP FUNCTION IF EXISTS public.retener_elemento_inventario( TEXT, TEXT, TEXT, INTEGER, INTEGER, NUMERIC );
+
+CREATE OR REPLACE FUNCTION public.retener_elemento_inventario(
+  _cod_dimension       TEXT,
+  _cod_subdimension    TEXT,
+  _cod_agrupacion      TEXT,
+  _cod_objeto          INTEGER,
+  _numero_orden        INTEGER,
+  _cantidad_solicitada NUMERIC)
+  RETURNS VOID AS
+  $BODY$
+  DECLARE
+    cantidad_total NUMERIC;
+  BEGIN
+    SELECT obtener_cantidad_disponible_elemento(_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto)
+    INTO cantidad_total;
+
+    INSERT INTO public.elementos_retenidos (
+      cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto,
+      numero_orden, cantidad_existente, cantidad_solicitada, created_at,
+      updated_at)
+    VALUES (_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto,
+            _numero_orden, cantidad_total, _cantidad_solicitada, NOW(),
+            NOW());
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
