@@ -364,7 +364,6 @@ simci.controller('LaboratorioController', [
                 $scope.select_objeto = ""; //Objeto seleccionado
                 $scope.cantidad = 0; //Cantidad del objeto seleccionado
 
-                $scope.cantidad_disponible_inventario = 0; // cantidad disponible en el inventario
                 $scope.codigos_elemento = ''; // Mantiene un json string de los codigos del elemento que debe ser convertido con JSON.parse
 
                 $scope.agregar_stock_tabla = function () {
@@ -372,50 +371,70 @@ simci.controller('LaboratorioController', [
                     var formulario = $('#formulario_registrar_stock');
                     var is_valid_form = formulario.form(reglas_formulario_agregar_stock).form('is valid');
 
-                    if ($scope.cantidad > $scope.cantidad_disponible_inventario) {
-                        alertify.error("La cantidad ingresada es mayor a la disponible en inventario");
-                        return false;
-                    }
                     if ($scope.codigos_elemento.length === 0 || $scope.codigos_elemento.trim() === '') {
                         alertify.error("Error, No has seleccionado un elemento del inventario");
                         return false;
                     }
                     if (is_valid_form) {
+
+                        var parametros = {
+                            type: 'agregar_stock',
+                            cod_laboratorio: $scope.select_laboratorio,
+                            cantidad_solicitada: $scope.cantidad
+                        };
+
+                        // Agregamos los nuevos attributos
+                        //Se convierte los codigos elemento a objeto porque vienen en formato string
+                        var temp_codigos = JSON.parse($scope.codigos_elemento);
+
+                        //Agregamos los atributos al nuevo_elemento
+                        ToolsService.extender_atributos_objeto(parametros, temp_codigos);
+
                         $http({
                             method: 'GET',
-                            url: '/api/laboratorio/mostrar?type=agregar_stock&cod_laboratorio=' + $scope.select_laboratorio + '&cod_objeto=' + $scope.select_objeto
+                            url: '/api/laboratorio/mostrar',
+                            params: parametros
                         }).then(
                             function (data) {
 
-                                var data_item = data.data;
+                                if (data.data.resultado) {
 
-                                //Verificamos que no se repita el elemento en la lista
-                                var existe = $scope.items_tabla_stock.findIndex(function (obj, index, array) {
-                                    return (obj.cod_objeto == $scope.select_objeto) && (obj.cod_laboratorio == $scope.select_laboratorio);
-                                });
+                                    var data_item = data.data.datos;
 
-                                //Si no existe el nuevo elemento el la lista lo agregamos
-                                if (existe === -1) {
+                                    //Verificamos que no se repita el elemento en la lista
+                                    var existe = $scope.items_tabla_stock.findIndex(function (obj, index, array) {
+                                        return (obj.cod_objeto == data_item.cod_objeto) && (obj.cod_laboratorio == $scope.select_laboratorio);
+                                    });
 
-                                    var nuevo_elemento = {
-                                        id_item_stock: ToolsService.generar_id_unico(),
-                                        nombre_laboratorio: data_item.nombre_laboratorio,
-                                        cod_laboratorio: data_item.cod_laboratorio,
-                                        nombre_objeto: data_item.nombre_objeto,
-                                        cantidad: $scope.cantidad
-                                    };
-                                    // Agregamos los nuevos attributos
-                                    //Se convierte los codigos elemento a objeto porque vienen en formato string
-                                    var temp_codigos = JSON.parse($scope.codigos_elemento);
+                                    //Si no existe el nuevo elemento el la lista lo agregamos
+                                    if (existe === -1) {
 
-                                    //Agregamos los atributos al nuevo_elemento
-                                    ToolsService.extender_atributos_objeto(nuevo_elemento, temp_codigos);
+                                        var nuevo_elemento = {
+                                            id_item_stock: ToolsService.generar_id_unico(),
+                                            nombre_laboratorio: data_item.nombre_laboratorio,
+                                            cod_laboratorio: data_item.cod_laboratorio,
+                                            nombre_objeto: data_item.nombre_objeto,
+                                            cantidad: $scope.cantidad,
+                                            cod_dimension: data_item.cod_dimension,
+                                            cod_subdimension: data_item.cod_subdimension,
+                                            cod_agrupacion: data_item.cod_agrupacion,
+                                            cod_objeto: data_item.cod_objeto,
+                                            numero_orden: data_item.numero_orden
+                                        };
 
-                                    $scope.items_tabla_stock.push(nuevo_elemento);
+
+                                        $scope.items_tabla_stock.push(nuevo_elemento);
+                                    }
+                                    else {
+                                        alertify.error("Ya agregaste un stock igual a este en la lista");
+                                    }
+
                                 }
                                 else {
-                                    alertify.error("Ya agregaste un stock igual a este en la lista");
+                                    alertify.error("No hay disponibilidad de este elemento, Intenta con una cantidad menor");
                                 }
+
+
                             },
                             function (data_error) {
                                 ToolsService.generar_alerta_status(data_error);
@@ -443,6 +462,8 @@ simci.controller('LaboratorioController', [
                                     _scope.select_objeto = "";
                                     _scope.cantidad = 0;
                                     _scope.codigos_elemento = "";
+
+                                    $('.ui.dropdown.selection').removeClass('disabled');
                                 });
                             }
                         })();

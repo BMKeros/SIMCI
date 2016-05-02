@@ -19,6 +19,17 @@
             <h3 class="ui centered dividing header">Agregar stock a laboratorio</h3>
 
             <form id="formulario_registrar_stock">
+                <div class="field">
+                    <div class="two fields">
+                        <div class="seven wide field">
+                            <label>Seleccione un laboratorio</label>
+                            {{ Form::select_laboratorios(array('name'=>'select_laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
+                        </div>
+                    </div>
+
+                </div>
+
+                <br>
 
                 <div class="field">
                     <div class="three fields">
@@ -45,25 +56,14 @@
                             <label>Cantidad</label>
                             <input type="number" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
                         </div>
-                        <input type="hidden" id="cantidad_disponible_inventario"
-                               ng-model="cantidad_disponible_inventario" ng-update-hidden>
-                    </div>
-                </div>
 
-                <br>
-
-                <div class="field">
-                    <div class="two fields">
-                        <div class="seven wide field">
-                            <label>Seleccione un laboratorio</label>
-                            {{ Form::select_laboratorios(array('name'=>'select_laboratorio', 'id'=>'laboratorio','ng-model'=>'select_laboratorio'))}}
-                        </div>
                         <div class="field">
                             <button class="ui icon large inverted green button" id="btn_agregar_items"
                                     ng-click="agregar_stock_tabla()"><i class="plus icon"></i></button>
                         </div>
                     </div>
                 </div>
+
             </form>
         </div>
 
@@ -74,7 +74,7 @@
         <table class="ui celled striped table" width="100%">
             <thead>
             <tr>
-                <th width="40%">Nombre</th>
+                <th width="40%">Nombre del elemento</th>
                 <th width="20%">Cantidad</th>
                 <th width="35%">Laboratorio</th>
                 <th width="5%" align="center">Accion</th>
@@ -129,7 +129,11 @@
 </div>
 
 <script>
-    $('.ui.dropdown').dropdown();
+    $('.ui.dropdown').dropdown({
+        onChange: function (value, text, $selectedItem) {
+            $('.ui.dropdown.selection').addClass('disabled');
+        }
+    });
 
     $('.ui.search').search({
         type: 'category',
@@ -138,7 +142,6 @@
         onSelect: function (elem_select, response) {
             //Guardamos el objeto seleccionado en el input hidden
             $('#select_objeto').val(elem_select.value).trigger('change');
-            $('#cantidad_disponible_inventario').val(elem_select.cantidad_disponible).trigger('change');
             $('#codigos_elemento').val(elem_select.codigos_elemento).trigger('change');
         },
         apiSettings: {
@@ -167,13 +170,11 @@
                         title: item.nombre_objeto.toLowerCase(),
                         description: item.especificaciones_objeto,
                         value: item.cod_objeto,
-                        cantidad_disponible: item.cantidad_disponible,
                         codigos_elemento: JSON.stringify({
                             cod_dimension: item.cod_dimension,
                             cod_subdimension: item.cod_subdimension,
                             cod_agrupacion: item.cod_agrupacion,
-                            cod_objeto: item.cod_objeto,
-                            numero_orden: item.numero_orden
+                            cod_objeto: item.cod_objeto
                         })
                     });
                 });

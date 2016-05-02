@@ -347,7 +347,18 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
 
       IF num_elementos_disponibles = 0
       THEN
-        RETURN NEXT; -- No hay disponibilidad
+        RETURN QUERY
+        SELECT
+            vista_reactivos_disponibles.cod_dimension,
+            vista_reactivos_disponibles.cod_subdimension,
+            vista_reactivos_disponibles.cod_agrupacion,
+            vista_reactivos_disponibles.cod_objeto,
+            vista_reactivos_disponibles.numero_orden,
+            vista_reactivos_disponibles.cantidad_disponible
+          FROM vista_reactivos_disponibles
+          WHERE
+            num_elementos_disponibles <> 0
+          LIMIT 1; -- No hay disponibilidad
       ELSIF
         EXISTS(
             SELECT
