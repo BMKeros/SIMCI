@@ -512,12 +512,13 @@ CREATE OR REPLACE FUNCTION public.retener_elemento_inventario(
   $BODY$
   DECLARE
     cantidad_total NUMERIC;
+    tmp_cantidad_solicitada NUMERIC;
   BEGIN
     SELECT obtener_cantidad_disponible_elemento(_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto)
     INTO cantidad_total;
 
     IF EXISTS(
-        SELECT 1
+        SELECT elementos_retenidos.cantidad_solicitada INTO tmp_cantidad_solicitada
         FROM elementos_retenidos
         WHERE
           elementos_retenidos.cod_dimension = _cod_dimension AND
@@ -530,7 +531,7 @@ CREATE OR REPLACE FUNCTION public.retener_elemento_inventario(
       UPDATE elementos_retenidos
       SET
         elementos_retenidos.cantidad_total      = cantidad_total,
-        elementos_retenidos.cantidad_solicitada = (elementos_retenidos.cantidad_solicitada + _cantidad_solicitada),
+        elementos_retenidos.cantidad_solicitada = (tmp_cantidad_solicitada + _cantidad_solicitada),
         elementos_retenidos.updated_at          = NOW()
       WHERE elementos_retenidos.cod_dimension = _cod_dimension AND
             elementos_retenidos.cod_subdimension = _cod_subdimension AND
