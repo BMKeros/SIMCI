@@ -442,21 +442,21 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
       THEN
         RETURN QUERY
         SELECT
-          cod_dimension,
-          cod_subdimension,
-          cod_agrupacion,
-          cod_objeto,
-          numero_orden,
-          cantidad_disponible
+          inventario.cod_dimension,
+          inventario.cod_subdimension,
+          inventario.cod_agrupacion,
+          inventario.cod_objeto,
+          inventario.numero_orden,
+          inventario.cantidad_disponible
         FROM
           inventario
         WHERE
-          cod_dimension = _cod_dimension AND
-          cod_subdimension = _cod_subdimension AND
-          cod_agrupacion = _cod_agrupacion AND
-          cod_objeto = _cod_objeto
+          inventario.cod_dimension = _cod_dimension AND
+          inventario.cod_subdimension = _cod_subdimension AND
+          inventario.cod_agrupacion = _cod_agrupacion AND
+          inventario.cod_objeto = _cod_objeto
         ORDER BY
-          cantidad_disponible
+          inventario.cantidad_disponible
         LIMIT 1;
 
       END IF;
