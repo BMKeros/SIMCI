@@ -312,7 +312,7 @@ simci.controller('LaboratorioController', [
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
                             return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock(\'' + data.cod_laboratorio + '\',\'' + data.cod_dimension + '\',\'' + data.cod_subdimension + '\',\'' + data.cod_agrupacion + '\',' + data.cod_objeto + ')"><i class="unhide icon"></i></div>' +
-                                '<div class="ui icon button orange spopup"  data-content="Retornar Stock" ng-click="retornar_stock(' + data.id + ')"><i class="sign out icon"></i></div>';
+                                '<div class="ui icon button orange spopup" data-content="Retornar Stock" ng-click="retornar_stock(' + data.id + ')"><i class="sign out icon"></i></div>';
                         }).withOption('width', '11%')
                         .withClass('center aligned')
                 ];
@@ -326,12 +326,12 @@ simci.controller('LaboratorioController', [
                         scope_data_save_success: 'data_elemento_stock',
                         id_modal: 'modal_ver_elemento_stock'
                     });
-                }
+                };
 
                 $scope.retornar_stock = function (id) {
                     $scope.cantidad_retornar = 0;
 
-                    alertify.prompt('', 'Catidad a retornar',
+                    alertify.prompt('Escriba la cantidad que desea retornar', '',
                         function (evt, value) {
                             $http({
                                 method: 'POST',
@@ -340,7 +340,8 @@ simci.controller('LaboratorioController', [
                                     'id': id,
                                     'cantidad': value
                                 }
-                            }).then(function (data) {
+                            }).then(
+                                function (data) {
                                     if (data.data.resultado) {
                                         alertify.notify('Cantidad anexada alinventario con exito', 'success', 5);
                                     }
@@ -516,7 +517,7 @@ simci.controller('LaboratorioController', [
                     var formulario = $('#formulario_mover_stock');
                     var is_valid_form = formulario.form(reglas_formulario_mover_stock).form('is valid');
 
-                    if (is_valid_form){
+                    if (is_valid_form) {
 
                         if ($scope.items_tabla_seleccionados.length == 0) {
                             alertify.error("Aun no has seleccionado ningun objeto");
