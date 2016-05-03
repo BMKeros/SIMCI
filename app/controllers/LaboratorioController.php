@@ -97,7 +97,7 @@ class LaboratorioController extends BaseController
 
             case 'paginacion_stock':
                 $consulta = DB::table('vista_stock_laboratorio_full')
-                    ->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto', 'cantidad', 'cod_dimension', 'cod_subdimension', 'cod_agrupacion','numero_orden');
+                    ->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto', 'cantidad', 'cod_dimension', 'cod_subdimension', 'cod_agrupacion');
 
                 $response = $this->generar_paginacion_dinamica($consulta,
                     array('campo_where' => 'nombre_objeto', 'campo_orden' => 'nombre_objeto'));
@@ -306,8 +306,82 @@ class LaboratorioController extends BaseController
     public function postRetornarStock()
     {
         $id = Input::get('id');
-        $cantidad = Input::get('cantidad');
-    }
+        $cantidad_retornar = Input::get('cantidad_retornar');
+
+        DB::beginTransaction();
+        
+        try{
+        	$data = DB::table('objetos_laboratorio')
+        				->select('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'numero_orden', 'cantidad')
+        				->where('id', '=', $id)
+        				->first();
+
+        	if(is_null($data)){
+                return Response::json(array('resultado' => false, 'mensajes' => array('objeto no encontrad')));
+            }
+            
+            if($cantidad_retornar > $data->cantidad){
+        		return Response::json(array('resultado' => false, 'mensajes' => array('no puede exceder la cantidad exitente')));
+        	}
+
+        	else{
+                $cantidad_retornar_total = ($data->cantidad - $cantidad_retornar);
+
+                DB::table('objetos_laboratorio')
+                    ->where('id', $id)
+                    ->update(array('cantidad' => $cantidad_retornar_total));
+
+                $data_retenido = DB::table('elementos_retenidos')
+                    ->select('cantidad_solicitada')
+                    ->where('cod_dimension', '=', $data->cod_dimension)
+                    ->where('cod_subdimension', '=', $data->cod_subdimension)
+                    ->where('cod_agrupacion', '=', $data->cod_agrupacion)
+                    ->where('cod_objeto', '=', $data->cod_objeto)
+                    ->where('numero_orden', '=', $data->numero_orden)
+                    ->first();
+
+                DB::table('elementos_retenidos')
+                        ->where('cod_dimension', '=', $data->cod_dimension)
+                        ->where('cod_subdimension', '=', $data->cod_subdimension)
+                        ->where('cod_agrupacion', '=', $data->cod_agrupacion)
+                        ->where('cod_objeto', '=', $data->cod_objeto)
+                        ->where('numero_orden', '=', $data->numero_orden)
+                        ->update(array('cantidad_solicitada' => ($data_retenido->cantidad_solicitada - $cantidad_retornar)));    
+
+                if(($cantidad_retornar_total == 0)){
+                    DB::table('objetos_laboratorio')->where('id', '=', $id)->delete();
+
+                    if(($data_retenido->cantidad_solicitada - $cantidad_retornar) == 0){
+                
+                        DB::table('elementos_retenidos')
+                            ->where('cod_dimension', '=', $data->cod_dimension)
+                            ->where('cod_subdimension', '=', $data->cod_subdimension)
+                            ->where('cod_agrupacion', '=', $data->cod_agrupacion)
+                            ->where('cod_objeto', '=', $data->cod_objeto)
+                            ->where('numero_orden', '=', $data->numero_orden)
+                            ->delete();
+                    }  
+                }     		
+        	}
+		}
+
+		catch(\Exception $e){
+			DB::rollBack();
+
+			return Response::json(array(
+				'resultado'=>false, 
+				'mensajes'=> array($e->getMessage())
+			),500);
+		}
+		
+		DB::commit();
+
+		return Response::json(array(
+			'resultado'=>true, 
+			'mensajes'=>array('Cantidad retornada con exito')
+			)
+		);
+	}
 
     public function postMoverStock()
     {
@@ -323,6 +397,8 @@ class LaboratorioController extends BaseController
             foreach ($data as $value) {
                 DB::select("select mover_stock_laboratorio('" . $lab_origen . "','" . $lab_destino . "','" . $value['cod_dimension'] . "','" . $value['cod_subdimension'] . "','" . $value['cod_agrupacion'] . "'," . $value['cod_objeto'] . "," . $value['numero_orden'] . "," . $value['cantidad_mover'] . ")");
             }
+
+
 
             return Response::json(array('resultado' => true));
         }
