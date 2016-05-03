@@ -22,8 +22,8 @@ class CrearTableOrdenes extends Migration {
 			$table->time('hora');
 			$table->string('cod_laboratorio', 4);
 			$table->string('observaciones', 200);
-
-
+			$table->integer('status');
+            
 
 			$table->nullableTimestamps();
 		});
