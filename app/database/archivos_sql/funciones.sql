@@ -529,9 +529,9 @@ CREATE OR REPLACE FUNCTION public.retener_elemento_inventario(
     THEN
       UPDATE elementos_retenidos
       SET
-        elementos_retenidos.cantidad_existente  = cantidad_total,
-        elementos_retenidos.cantidad_solicitada = (elementos_retenidos.cantidad_solicitada + _cantidad_solicitada),
-        elementos_retenidos.updated_at          = NOW()
+        cantidad_existente  = cantidad_total,
+        cantidad_solicitada = (cantidad_solicitada + _cantidad_solicitada),
+        updated_at          = NOW()
       WHERE elementos_retenidos.cod_dimension = _cod_dimension AND
             elementos_retenidos.cod_subdimension = _cod_subdimension AND
             elementos_retenidos.cod_agrupacion = _cod_agrupacion AND
