@@ -347,6 +347,11 @@ simci.controller('LaboratorioController', [
                                     function (data) {
                                         if (data.data.resultado) {
                                             alertify.notify('Cantidad retornada al inventario con exito', 'success', 5);
+
+                                            ToolsService.reload_tabla($scope,'tabla_stock',function(){});
+                                        }
+                                        else{
+                                            alertify.notify('Ha ocurrido un error al realizar la operacion', 'error', 5);
                                         }
                                     },
                                     function (data_error) {
