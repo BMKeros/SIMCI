@@ -347,7 +347,18 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
 
       IF num_elementos_disponibles = 0
       THEN
-        RETURN NEXT; -- No hay disponibilidad
+        RETURN QUERY
+        SELECT
+            vista_reactivos_disponibles.cod_dimension,
+            vista_reactivos_disponibles.cod_subdimension,
+            vista_reactivos_disponibles.cod_agrupacion,
+            vista_reactivos_disponibles.cod_objeto,
+            vista_reactivos_disponibles.numero_orden,
+            vista_reactivos_disponibles.cantidad_disponible
+          FROM vista_reactivos_disponibles
+          WHERE
+            num_elementos_disponibles <> 0
+          LIMIT 1; -- No hay disponibilidad
       ELSIF
         EXISTS(
             SELECT
@@ -431,21 +442,21 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
       THEN
         RETURN QUERY
         SELECT
-          cod_dimension,
-          cod_subdimension,
-          cod_agrupacion,
-          cod_objeto,
-          numero_orden,
-          cantidad_disponible
+          inventario.cod_dimension,
+          inventario.cod_subdimension,
+          inventario.cod_agrupacion,
+          inventario.cod_objeto,
+          inventario.numero_orden,
+          inventario.cantidad_disponible
         FROM
           inventario
         WHERE
-          cod_dimension = _cod_dimension AND
-          cod_subdimension = _cod_subdimension AND
-          cod_agrupacion = _cod_agrupacion AND
-          cod_objeto = _cod_objeto
+          inventario.cod_dimension = _cod_dimension AND
+          inventario.cod_subdimension = _cod_subdimension AND
+          inventario.cod_agrupacion = _cod_agrupacion AND
+          inventario.cod_objeto = _cod_objeto
         ORDER BY
-          cantidad_disponible
+          inventario.cantidad_disponible
         LIMIT 1;
 
       END IF;
@@ -485,3 +496,34 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
 LANGUAGE plpgsql VOLATILE
 COST 100
 ROWS 1000;
+
+
+-- Function: public.retener_elemento_inventario(text, text, text, integer, integer, numeric)
+DROP FUNCTION IF EXISTS public.retener_elemento_inventario( TEXT, TEXT, TEXT, INTEGER, INTEGER, NUMERIC );
+
+CREATE OR REPLACE FUNCTION public.retener_elemento_inventario(
+  _cod_dimension       TEXT,
+  _cod_subdimension    TEXT,
+  _cod_agrupacion      TEXT,
+  _cod_objeto          INTEGER,
+  _numero_orden        INTEGER,
+  _cantidad_solicitada NUMERIC)
+  RETURNS VOID AS
+  $BODY$
+  DECLARE
+    cantidad_total NUMERIC;
+  BEGIN
+    SELECT obtener_cantidad_disponible_elemento(_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto)
+    INTO cantidad_total;
+
+    INSERT INTO public.elementos_retenidos (
+      cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto,
+      numero_orden, cantidad_existente, cantidad_solicitada, created_at,
+      updated_at)
+    VALUES (_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto,
+            _numero_orden, cantidad_total, _cantidad_solicitada, NOW(),
+            NOW());
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
