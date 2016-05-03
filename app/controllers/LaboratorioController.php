@@ -70,7 +70,7 @@
 
 				case 'paginacion_stock':
 					$consulta = DB::table('vista_stock_laboratorio_full')
-						->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad', 'cod_dimension','cod_subdimension','cod_agrupacion');
+						->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto','cantidad', 'cod_dimension','cod_subdimension','cod_agrupacion', 'numero_orden');
 
 					$response = $this->generar_paginacion_dinamica($consulta,
 						array('campo_where'=>'nombre_objeto', 'campo_orden'=>'nombre_objeto'));
