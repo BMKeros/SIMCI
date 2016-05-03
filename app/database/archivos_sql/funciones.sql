@@ -349,16 +349,16 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
       THEN
         RETURN QUERY
         SELECT
-            vista_reactivos_disponibles.cod_dimension,
-            vista_reactivos_disponibles.cod_subdimension,
-            vista_reactivos_disponibles.cod_agrupacion,
-            vista_reactivos_disponibles.cod_objeto,
-            vista_reactivos_disponibles.numero_orden,
-            vista_reactivos_disponibles.cantidad_disponible
-          FROM vista_reactivos_disponibles
-          WHERE
-            num_elementos_disponibles <> 0
-          LIMIT 1; -- No hay disponibilidad
+          vista_reactivos_disponibles.cod_dimension,
+          vista_reactivos_disponibles.cod_subdimension,
+          vista_reactivos_disponibles.cod_agrupacion,
+          vista_reactivos_disponibles.cod_objeto,
+          vista_reactivos_disponibles.numero_orden,
+          vista_reactivos_disponibles.cantidad_disponible
+        FROM vista_reactivos_disponibles
+        WHERE
+          num_elementos_disponibles <> 0
+        LIMIT 1; -- No hay disponibilidad
       ELSIF
         EXISTS(
             SELECT
@@ -516,13 +516,37 @@ CREATE OR REPLACE FUNCTION public.retener_elemento_inventario(
     SELECT obtener_cantidad_disponible_elemento(_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto)
     INTO cantidad_total;
 
-    INSERT INTO public.elementos_retenidos (
-      cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto,
-      numero_orden, cantidad_existente, cantidad_solicitada, created_at,
-      updated_at)
-    VALUES (_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto,
-            _numero_orden, cantidad_total, _cantidad_solicitada, NOW(),
-            NOW());
+    IF EXISTS(
+        SELECT 1
+        FROM elementos_retenidos
+        WHERE
+          elementos_retenidos.cod_dimension = _cod_dimension AND
+          elementos_retenidos.cod_subdimension = _cod_subdimension AND
+          elementos_retenidos.cod_agrupacion = _cod_agrupacion AND
+          elementos_retenidos.cod_objeto = _cod_objeto AND
+          elementos_retenidos.numero_orden = _numero_orden
+    )
+    THEN
+      UPDATE elementos_retenidos
+      SET
+        elementos_retenidos.cantidad_total      = cantidad_total,
+        elementos_retenidos.cantidad_solicitada = (elementos_retenidos.cantidad_solicitada + _cantidad_solicitada),
+        elementos_retenidos.updated_at          = NOW()
+      WHERE elementos_retenidos.cod_dimension = _cod_dimension AND
+            elementos_retenidos.cod_subdimension = _cod_subdimension AND
+            elementos_retenidos.cod_agrupacion = _cod_agrupacion AND
+            elementos_retenidos.cod_objeto = _cod_objeto AND
+            elementos_retenidos.numero_orden = _numero_orden;
+    ELSE
+      INSERT INTO public.elementos_retenidos (
+        cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto,
+        numero_orden, cantidad_existente, cantidad_solicitada, created_at,
+        updated_at)
+      VALUES (_cod_dimension, _cod_subdimension, _cod_agrupacion, _cod_objeto,
+              _numero_orden, cantidad_total, _cantidad_solicitada, NOW(),
+              NOW());
+    END IF;
+
   END;
   $BODY$
 LANGUAGE plpgsql VOLATILE
