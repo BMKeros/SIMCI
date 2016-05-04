@@ -308,7 +308,7 @@ class LaboratorioController extends BaseController
         $id = Input::get('id');
         $cantidad_retornar = Input::get('cantidad_retornar');
 
-        DB::beginTransaction();
+        /*DB::beginTransaction();
         
         try{
         	$data = DB::table('objetos_laboratorio')
@@ -349,7 +349,7 @@ class LaboratorioController extends BaseController
                         ->update(array('cantidad_solicitada' => ($data_retenido->cantidad_solicitada - $cantidad_retornar)));    
 
                 if(($cantidad_retornar_total == 0)){
-                    DB::table('objetos_laboratorio')->where('id', '=', $id)->delete();
+                    //DB::table('objetos_laboratorio')->where('id', '=', $id)->delete();
 
                     if(($data_retenido->cantidad_solicitada - $cantidad_retornar) == 0){
                 
@@ -362,8 +362,13 @@ class LaboratorioController extends BaseController
                             ->delete();
                     }  
                 }     		
-        	}
-		}
+        	}*/
+
+            $resultado = DB::select("select retornar_stock_laboratorio(".$id.",".$cantidad_retornar.") as resultado;");
+
+
+            return Response::json(json_decode($resultado[0]->resultado));
+		/*}
 
 		catch(\Exception $e){
 			DB::rollBack();
@@ -380,7 +385,7 @@ class LaboratorioController extends BaseController
 			'resultado'=>true, 
 			'mensajes'=>array('Cantidad retornada con exito')
 			)
-		);
+		);*/
 	}
 
     public function postMoverStock()
