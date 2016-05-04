@@ -166,7 +166,7 @@ COST 100;
 
 -- Function: public.agregar_stock_laboratorio(text, text, text,integer, text ,integer);
 
-DROP FUNCTION IF EXISTS public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, TEXT, INTEGER );
+DROP FUNCTION IF EXISTS public.agregar_stock_laboratorio( TEXT, TEXT, TEXT, INTEGER, INTEGER, TEXT, INTEGER );
 
 CREATE OR REPLACE FUNCTION public.agregar_stock_laboratorio(
   _cod_dimension    TEXT,
@@ -546,6 +546,87 @@ CREATE OR REPLACE FUNCTION public.retener_elemento_inventario(
               _numero_orden, cantidad_total, _cantidad_solicitada, NOW(),
               NOW());
     END IF;
+
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
+
+
+CREATE OR REPLACE FUNCTION public.retornar_stock_laboratorio(
+  _id_objetos_laboratorio INTEGER,
+  _cantidad_retornar      NUMERIC)
+  RETURNS JSON AS
+  $BODY$
+  DECLARE
+    resultado               RECORD;
+    cantidad_retornar_total NUMERIC;
+    consulta                TEXT;
+  BEGIN
+    consulta = 'SELECT
+      cod_dimension,
+      cod_subdimension,
+      cod_agrupacion,
+      cod_objeto,
+      numero_orden,
+      cantidad
+    FROM objetos_laboratorio
+    WHERE id = ' || _id_objetos_laboratorio || ' LIMIT 1;';
+
+    FOR resultado IN EXECUTE consulta LOOP
+
+      IF _cantidad_retornar > resultado.cantidad
+      THEN
+        RETURN '{"resultado":false, "mensajes": ["No puede exceder de la cantidad exitente"]}' :: JSON;
+      ELSE
+        --Almacenamos la cantidad total a retornar
+        cantidad_retornar_total = (resultado.cantidad - _cantidad_retornar);
+
+        --Actualizamos la cantidad total en la tabla objetos laboratorio
+        UPDATE objetos_laboratorio
+        SET
+          cantidad   = cantidad_retornar_total,
+          updated_at = NOW()
+        WHERE id = _id_objetos_laboratorio;
+
+        --Actualizamos la cantidad total en la tabla de retenidos
+        UPDATE elementos_retenidos
+        SET
+          cantidad_solicitada = (cantidad_solicitada - _cantidad_retornar),
+          updated_at          = NOW()
+        WHERE
+          elementos_retenidos.cod_dimension = resultado.cod_dimension AND
+          elementos_retenidos.cod_subdimension = resultado.cod_subdimension AND
+          elementos_retenidos.cod_agrupacion = resultado.cod_agrupacion AND
+          elementos_retenidos.cod_objeto = resultado.cod_objeto AND
+          elementos_retenidos.numero_orden = resultado.numero_orden;
+
+        --Verificamos si la cantidad que quedo en objetos laboratorio en = 0
+        IF cantidad_retornar_total = 0
+        THEN
+
+          --Eliminamos el registro que tiene 0 cantidad de objetos_laboratorio
+          DELETE FROM objetos_laboratorio
+          WHERE id = _id_objetos_laboratorio;
+
+          --Eliminamos el registro que tiene 0 cantidad de la tabla retenidos
+          DELETE FROM elementos_retenidos
+          WHERE
+            (elementos_retenidos.cantidad_solicitada - _cantidad_retornar) = 0 AND
+            elementos_retenidos.cod_dimension = resultado.cod_dimension AND
+            elementos_retenidos.cod_subdimension = resultado.cod_subdimension AND
+            elementos_retenidos.cod_agrupacion = resultado.cod_agrupacion AND
+            elementos_retenidos.cod_objeto = resultado.cod_objeto AND
+            elementos_retenidos.numero_orden = resultado.numero_orden;
+
+        END IF;
+
+        RETURN '{"resultado": true, "mensajes": ["Cantidad retornada con exito"]}' :: JSON;
+
+      END IF;
+    END LOOP;
+
+    RETURN '{"resultado":false, "mensajes": ["objeto no encontrado"]}' :: JSON;
 
   END;
   $BODY$
