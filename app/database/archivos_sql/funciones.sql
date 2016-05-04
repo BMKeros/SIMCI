@@ -615,7 +615,7 @@ CREATE OR REPLACE FUNCTION public.retornar_stock_laboratorio(
           --Eliminamos el registro que tiene 0 cantidad de la tabla retenidos
           DELETE FROM elementos_retenidos
           WHERE
-            (elementos_retenidos.cantidad_solicitada - _cantidad_retornar) = 0 AND
+            elementos_retenidos.cantidad_solicitada = 0 AND
             elementos_retenidos.cod_dimension = resultado.cod_dimension AND
             elementos_retenidos.cod_subdimension = resultado.cod_subdimension AND
             elementos_retenidos.cod_agrupacion = resultado.cod_agrupacion AND
