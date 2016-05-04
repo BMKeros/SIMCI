@@ -553,10 +553,13 @@ LANGUAGE plpgsql VOLATILE
 COST 100;
 
 
+
+DROP FUNCTION IF EXISTS public.retornar_stock_laboratorio(integer, numeric);
+
 CREATE OR REPLACE FUNCTION public.retornar_stock_laboratorio(
-  _id_objetos_laboratorio INTEGER,
-  _cantidad_retornar      NUMERIC)
-  RETURNS JSON AS
+  _id_objetos_laboratorio integer,
+  _cantidad_retornar numeric)
+  RETURNS json AS
   $BODY$
   DECLARE
     resultado               RECORD;
