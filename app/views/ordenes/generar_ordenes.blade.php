@@ -97,6 +97,9 @@
                             </div>
                         </div>
 
+                        <!--  Input que almacena los codigos del elemento -->
+                        <input type="hidden" ng-model="codigos_elemento" id="codigos_elemento" ng-update-hidden>
+
                         <div class="four wide field">
                             <label>Cantidad</label>
                             <input type="number" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
@@ -104,7 +107,7 @@
 
                         <div class="field">
                             <button class="ui icon inverted blue button" id="btn_items_ordenes"
-                                    ng-click=""><i class="plus icon"></i></button>
+                                    ng-click="agregar_elemento_tabla()"><i class="plus icon"></i></button>
                         </div>
 
                     </div>
@@ -177,7 +180,7 @@
         onSelect: function (elem_select, response) {
             //Guardamos el objeto seleccionado en el input hidden
             $('#select_objeto').val(elem_select.value).trigger('change');
-            $('#cantidad_disponible_inventario').val(elem_select.cantidad_disponible).trigger('change');
+            $('#codigos_elemento').val(elem_select.codigos_elemento).trigger('change');
         },
         apiSettings: {
             onResponse: function (_Response) {
@@ -205,7 +208,12 @@
                         title: item.nombre_objeto.toLowerCase(),
                         description: item.especificaciones_objeto,
                         value: item.cod_objeto,
-                        cantidad_disponible: item.cantidad_disponible
+                        codigos_elemento: JSON.stringify({
+                            cod_dimension: item.cod_dimension,
+                            cod_subdimension: item.cod_subdimension,
+                            cod_agrupacion: item.cod_agrupacion,
+                            cod_objeto: item.cod_objeto
+                        })
                     });
                 });
                 return response;
