@@ -1149,3 +1149,52 @@ var reglas_formulario_generar_ordenes = {
     },
     inline: true
 };
+
+
+var reglas_formulario_datos_orden = {
+    on: 'blur',
+    fields: {
+        responsable: {
+            identifier: 'responsable',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                }
+            ]
+        },
+        fecha_actividad: {
+            identifier: 'fecha_actividad',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                }
+            ]
+        },
+        select_laboratorio: {
+            identifier: 'select_laboratorio',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                }
+            ]
+        },
+        observaciones: {
+            identifier: 'observaciones',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                }
+            ]
+        }
+    },
+    inline: true,
+    //Esta Funcion es para que no se envie el formulario automaticamente
+    onSuccess: function (_event) {
+        _event.preventDefault();
+        _event.stopPropagation();
+    }
+}
