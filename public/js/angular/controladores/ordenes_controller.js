@@ -145,7 +145,7 @@ simci.controller('OrdenesController', [
                         //Se convierte los codigos elemento a objeto porque vienen en formato string
                         var temp_codigos = angular.fromJson($scope.codigos_elemento);
 
-                        //Agregamos los atributos al nuevo_elemento
+                        //Agregamos los codigos a la variable parametros
                         ToolsService.extender_atributos_objeto(parametros, temp_codigos);
 
                         $http({
