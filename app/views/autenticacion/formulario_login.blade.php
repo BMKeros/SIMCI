@@ -119,7 +119,8 @@
 			</div>
 
 			<div class=" ui grid centered">
-				<small>Sistema Integrado para el Manego y Control de Inventario | Bajo la Licencia MIT | Derechos Reservados</small>
+				<small>Sistema Integrado para el Manego y Control de Inventario | Bajo la 
+Licencia XXX | Derechos Reservados</small>
 			</div>
 
 			<div class="ui grid centered">
