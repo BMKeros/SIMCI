@@ -205,7 +205,7 @@ Form::macro('select_unidades', function($atributos = null, $selected = null){
 
 Form::macro('select_personas', function($atributos = null, $selected = null, $placeholder=null){
 
-	$personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'personas.id')
+	$personas = DB::table('personas')->select('personas.primer_nombre', 'personas.primer_apellido', 'usuarios.id as id_usuario')
 		->join('usuarios', 'usuarios.id', '=', 'personas.usuario_id')
 		->whereIn('usuarios.cod_tipo_usuario', array(TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA))
 		->get();
@@ -216,7 +216,7 @@ Form::macro('select_personas', function($atributos = null, $selected = null, $pl
 		$html .= '<option value="">'.$placeholder.'</option>';
 		
 	foreach ($personas as $persona) {
-		$html .= sprintf('<option value="%s">%s %s</option>', $persona->id, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido));	
+		$html .= sprintf('<option value="%s">%s %s</option>', $persona->id_usuario, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido));
 	}
 		
 	$html .= '</select>';
