@@ -49,15 +49,15 @@ class CrearIndexTablas extends Migration
         //ALMACENES
         Schema::table('almacenes', function ($table) {
             $table->foreign('responsable')->references('id')
-                ->on('personas');
+                ->on('usuarios');
             //->onDelete('cascade');
 
             $table->foreign('primer_auxiliar')->references('id')
-                ->on('personas');
+                ->on('usuarios');
             //->onDelete('cascade');
 
             $table->foreign('segundo_auxiliar')->references('id')
-                ->on('personas');
+                ->on('usuarios');
             //->onDelete('cascade');
         });
 
