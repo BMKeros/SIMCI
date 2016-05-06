@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CrearTableOrdenes extends Migration {
+class CrearTablaOrdenes extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -18,12 +18,12 @@ class CrearTableOrdenes extends Migration {
 			$table->string('codigo', 10);			
 			$table->integer('responsable');
 			$table->integer('solicitante');
-			$table->date('fecha_actividad')
+			$table->date('fecha_actividad');
 			$table->date('fecha');
 			$table->time('hora');
 			$table->string('cod_laboratorio', 4);
 			$table->string('observaciones', 200);
-			$table->integer('status');
+			$table->string('status', 3);
             
 
 			$table->nullableTimestamps();

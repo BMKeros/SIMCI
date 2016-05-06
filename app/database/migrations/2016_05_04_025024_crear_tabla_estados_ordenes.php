@@ -13,7 +13,7 @@ class CrearTablaEstadosOrdenes extends Migration
      */
     public function up()
     {
-        Schema::table('estados_ordenes', function (Blueprint $table) {
+        Schema::create('estados_ordenes', function (Blueprint $table) {
             $table->string('codigo', 3);
             $table->primary('codigo');
             $table->string('nombre', 80);

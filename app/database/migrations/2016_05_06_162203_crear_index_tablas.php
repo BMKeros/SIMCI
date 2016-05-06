@@ -134,12 +134,12 @@ class CrearIndexTablas extends Migration
                 ->on('usuarios');
 
             $table->foreign('cod_tipo_movimiento')->references('id')
-                ->on('tipos_movimiento');
+                ->on('tipos_movimientos');
 
-            $table
+            /*$table
                 ->foreign(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto'))
                 ->references(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto'))
-                ->on('inventario');
+                ->on('inventario');*/
         });
 
         //SALIDAS-INVENTARIOS
@@ -148,12 +148,12 @@ class CrearIndexTablas extends Migration
                 ->on('usuarios');
 
             $table->foreign('cod_tipo_movimiento')->references('id')
-                ->on('tipos_movimiento');
+                ->on('tipos_movimientos');
 
-            $table
+            /*$table
                 ->foreign(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto'))
                 ->references(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto'))
-                ->on('inventario');
+                ->on('inventario');*/
         });
 
         //OBJETOS-LABORATORIO
@@ -168,6 +168,13 @@ class CrearIndexTablas extends Migration
                 ->references(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'numero_orden'))
                 ->on('inventario');
         }); 
+
+
+        //ORDENES-ESTADO_ORDENES
+       /* Schema::table('ordenes', function($table){
+            $table->foreign('status')->references('codigo')
+                ->on('estados_ordenes');
+        });*/
     }
 
     /**
