@@ -198,6 +198,12 @@ simci.controller('OrdenesController', [
                     }
                 };
 
+                $scope.eliminar_item_tabla_pedidos = function (id_elemento) {
+                    $scope.items_tabla_pedidos = $scope.items_tabla_pedidos.filter(function (obj) {
+                        return obj.id_item !== id_elemento;
+                    });
+                };
+
 
                 $scope.procesar_generar_orden = function () {
                     alertify.confirm("Esta seguro que desea generar esta Orden?", function () {

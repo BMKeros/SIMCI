@@ -137,7 +137,7 @@
                             <td><% elemento.unidad %></td>
                             <td>
                                 <button class="ui  icon small button" id="btn_action_item_orden"
-                                        ng-click="eliminar_item_tabla_orden(elemento.id_item )">
+                                        ng-click="eliminar_item_tabla_pedidos(elemento.id_item )">
                                     <i class="trash outline icon"></i>
                                 </button>
                             </td>
