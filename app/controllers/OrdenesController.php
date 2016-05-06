@@ -115,41 +115,49 @@ class OrdenesController extends BaseController{
 
 	public function postProcesarOrden(){
 		$codigo_orden = Input::get('codigo_orden');
-		$nuevo_estado = Input::get('nuevo_estado');
+		$cod_nuevo_estado = Input::get('cod_nuevo_estado');
 
 		if(!is_null($codigo_orden)){
-			if(!is_null($nuevo_estado)){
+			if(!is_null($cod_nuevo_estado)){
 				
 				//actualizar el estado de la orden
-				DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => $nuevo_estado]);
+				DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => $cod_nuevo_estado]);
 
-				//obtenemos todos lo elementos de la orden procesada
-				$elementos = DB::table('pedidos')->select('cod_dimension', 
-														  'cod_subdimension', 
-														  'cod_agrupacion', 
-														  'cod_objeto', 
-														  'numero_orden', 
-														  'cantidad_solicitada')
-												->where('cod_orden', '=', $cod_orden)
-												->get();
+				if($cod_nuevo_estado == COMPLETADA){
 
-				foreach($elementos as $elemento){
 
-					$data_elementos_pedidos[] = array(
-							'cod_dimension' => $elemento->cod_dimension,
-							'cod_subdimension' => $elemento->cod_subdimension,
-							'cod_agrupacion' => $elemento->cod_agrupacion,
-							'cod_objeto' => $elemento->cod_objeto,
-							'numero_orden' => $elemento->numero_orden,
-							'cantidad_existente' => null,//null por ahora hasta que se decida si se va a quitar el campo o no
-							'cantidad_solicitada' => $elemento->cantidad_disponible
-						);
-					
+					//obtenemos todos lo elementos de la orden procesada
+					$elementos = DB::table('pedidos')->select('cod_dimension', 
+															  'cod_subdimension', 
+															  'cod_agrupacion', 
+															  'cod_objeto', 
+															  'numero_orden', 
+															  'cantidad_solicitada')
+													->where('cod_orden', '=', $cod_orden)
+													->get();
+
+					foreach($elementos as $elemento){
+
+						$data_elementos_pedidos[] = array(
+								'cod_dimension' => $elemento->cod_dimension,
+								'cod_subdimension' => $elemento->cod_subdimension,
+								'cod_agrupacion' => $elemento->cod_agrupacion,
+								'cod_objeto' => $elemento->cod_objeto,
+								'numero_orden' => $elemento->numero_orden,
+								'cantidad_existente' => null,//null por ahora hasta que se decida si se va a quitar el campo o no
+								'cantidad_solicitada' => $elemento->cantidad_disponible
+							);
+						
+					}
+
+					DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
+
+					return Response::json(array('resultado' => true, 'mensajes' => array('Orden procesada con exito.!')));
 				}
+				else if($cod_nuevo_estado == CANCELADA){
+					return Response::json(array('resultado' => true, 'mensajes' => array('Orden cancelada con exito.!')));
 
-				DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
-
-				return Response::json(array('resultado' => true, 'mensajes' => array('Orden procesada con exito.!')));
+				}
 			}
 			else{
 				return Response::json(array('resultado' => false, 'mensajes' => array('El cod_estado de orden no debe quedar vacio')));
