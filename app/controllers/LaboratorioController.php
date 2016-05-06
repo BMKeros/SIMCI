@@ -95,6 +95,49 @@ class LaboratorioController extends BaseController
 
                 break;
 
+            case 'agregar_elemento':
+                
+                $cod_laboratorio = Input::get('cod_laboratorio', null);
+                $cod_dimension = Input::get('cod_dimension');
+                $cod_subdimension = Input::get('cod_subdimension');
+                $cod_agrupacion = Input::get('cod_agrupacion');
+                $cod_objeto = Input::get('cod_objeto');
+                $cantidad = Input::get('cantidad_solicitada');
+
+                $consulta = "seleccionar_elemento_disponible('" . $cod_dimension . "','" . $cod_subdimension . "','" . $cod_agrupacion . "','" . $cod_objeto . "'," . $cantidad . ")";
+
+                $consulta = DB::table(DB::raw($consulta));
+
+
+                $data_elemento_seleccionado = $consulta->first();
+
+                if ($consulta->count() === 0) {
+                    $response = array('resultado' => false);
+                } else {
+
+                    $data_obj = DB::table('vista_objetos_full')
+                        ->select('cod_objeto', 'nombre_objeto as nombre')
+                        ->where('cod_objeto', '=', $cod_objeto)
+                        ->first();
+
+                    $response = array(
+                        'resultado' => true,
+                        'datos' => array(
+                            'cod_dimension' => $data_elemento_seleccionado->cod_dimension,
+                            'cod_subdimension' => $data_elemento_seleccionado->cod_subdimension,
+                            'cod_agrupacion' => $data_elemento_seleccionado->cod_agrupacion,
+                            'cod_objeto' => $data_elemento_seleccionado->cod_objeto,
+                            'numero_orden' => $data_elemento_seleccionado->numero_orden,
+                            'cantidad_disponible' => $data_elemento_seleccionado->cantidad_disponible,
+                            'nombre_objeto' => $data_obj->nombre
+                        )
+                    );
+                }
+
+                return $response;
+
+                break;
+
             case 'paginacion_stock':
                 $consulta = DB::table('vista_stock_laboratorio_full')
                     ->select('id', 'cod_laboratorio', 'nombre_laboratorio', 'cod_objeto', 'nombre_objeto', 'cantidad', 'cod_dimension', 'cod_subdimension', 'cod_agrupacion');
