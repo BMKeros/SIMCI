@@ -16,7 +16,7 @@
                 <br>
             </div>
 
-            <h3 class="ui centered dividing header">Generar Ordenes</h3>
+            <h3 class="ui centered dividing header">Generar Orden</h3>
 
             <br>
 
