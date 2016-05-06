@@ -19,9 +19,9 @@ COST 100;
 
 -- Function: generar_unidad(text, text)
 
-DROP FUNCTION IF EXISTS generar_unidad(text, text);
+DROP FUNCTION IF EXISTS formato_unidad_objeto(text, text);
 
-CREATE OR REPLACE FUNCTION generar_unidad(nombre TEXT, abrev TEXT)
+CREATE OR REPLACE FUNCTION formato_unidad_objeto(nombre TEXT, abrev TEXT)
   RETURNS TEXT AS
   $BODY$
   DECLARE
