@@ -14,10 +14,10 @@ class CrearTableOrdenes extends Migration {
 	{
 		Schema::create('ordenes', function(Blueprint $table)
 		{
-			$table->string('codigo', 5);
-			$table->primary('codigo');
-			
-			$table->integer('usuario_id');
+			$table->increments('id');
+			$table->string('codigo', 10);			
+			$table->integer('responsable');
+			$table->integer('solicitante');
 			$table->date('fecha');
 			$table->time('hora');
 			$table->string('cod_laboratorio', 4);

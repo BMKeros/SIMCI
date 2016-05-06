@@ -15,13 +15,13 @@ class CrearTablaPedidos extends Migration {
 		Schema::create('pedidos', function($table)
 		{
 			$table->increments('id');
-			$table->string('cod_orden', 5);
+			$table->string('cod_orden', 10);
 			$table->string('cod_dimension', 4);
 			$table->string('cod_subdimension', 3);
 			$table->string('cod_agrupacion', 3);
 			$table->integer('cod_objeto');
 			$table->integer('numero_orden');
-			$table->decimal('cantidad_solicitada');			
+			$table->decimal('cantidad_solicitada');	
 
 			$table->nullableTimestamps();
 		});
