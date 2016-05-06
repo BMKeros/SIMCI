@@ -142,3 +142,12 @@ function get_array_permisos_usuario($id_usuario = null){
 	}
 }
 
+function generar_codigo_orden(){
+	
+	$timestamp = DB::select('select NOW() as timestamp');
+
+	$hash = hash('crc32b', $timestamp[0]->timestamp);
+
+	return 'O-'.$hash;
+}
+
