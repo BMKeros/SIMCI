@@ -13,7 +13,8 @@ simci.controller('OrdenesController', [
         '$compile',
         'ToolsService',
         '$templateCache',
-        function ($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache) {
+        '$window',
+        function ($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache, $window) {
 
             $scope.modulo = {};
             $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -93,10 +94,8 @@ simci.controller('OrdenesController', [
                 $scope.cantidad = 0; //Cantidad del objeto seleccionado
                 $scope.codigos_elemento = ''; // Mantiene un json string de los codigos del elemento que debe ser convertido con JSON.parse
 
-
                 $scope.ver_contenedor_datos_orden = true;
                 $scope.ver_contenedor_pedidos = false;
-
 
                 $scope.procesar_accion = function (accion) {
                     if (accion == undefined || accion == null) {
@@ -206,8 +205,30 @@ simci.controller('OrdenesController', [
 
 
                 $scope.procesar_generar_orden = function () {
+
                     alertify.confirm("Esta seguro que desea generar esta Orden?", function () {
-                        alertify.success("Aceptar");
+
+                        $scope.DatosForm.data_elementos_pedidos = $scope.items_tabla_pedidos;
+                        $scope.DatosForm.laboratorio = $scope.select_laboratorio;
+
+                        if ($scope.items_tabla_pedidos.length != 0) {
+
+                            return ToolsService.registrar_dinamico($scope, $http, $timeout, {
+                                url: '/api/ordenes/generar-orden',
+                                exito: {
+                                    titulo: 'Orden generada con exito',
+                                    mensajes: ['La orden ha sido agregada a la cola de ordenes']
+                                },
+                                CallbackSuccess: function(){
+                                    setTimeout(function(){
+                                        $window.location.reload();
+                                    },1000);
+                                }
+                            })();
+                        }
+                        else {
+                            alertify.error("Debes agregar al menos 1 elemento a la lista");
+                        }
                     }, function () {
                         alertify.error("Cancelar");
                     }).set("title", "Confirmar Accion!");
