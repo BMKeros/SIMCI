@@ -113,9 +113,7 @@ class OrdenesController extends BaseController{
 
 	}
 
-	//comentado porque aun no esta funcional para que no vaya a presentar problemas
-
-	/*public function postProcesarOrden(){
+	public function postProcesarOrden(){
 		$codigo_orden = Input::get('codigo_orden');
 		$nuevo_estado = Input::get('nuevo_estado');
 
@@ -126,7 +124,7 @@ class OrdenesController extends BaseController{
 				DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => $nuevo_estado]);
 
 				//obtenemos todos lo elementos de la orden procesada
-				$elementos = DB::table('pedidos')->select('cod_dimensio', 
+				$elementos = DB::table('pedidos')->select('cod_dimension', 
 														  'cod_subdimension', 
 														  'cod_agrupacion', 
 														  'cod_objeto', 
@@ -136,13 +134,31 @@ class OrdenesController extends BaseController{
 												->get();
 
 				foreach($elementos as $elemento){
+
+					$data_elementos_pedidos[] = array(
+							'cod_dimension' => $elemento->cod_dimension,
+							'cod_subdimension' => $elemento->cod_subdimension,
+							'cod_agrupacion' => $elemento->cod_agrupacion,
+							'cod_objeto' => $elemento->cod_objeto,
+							'numero_orden' => $elemento->numero_orden,
+							'cantidad_existente' => null,//null por ahora hasta que se decida si se va a quitar el campo o no
+							'cantidad_solicitada' => $elemento->cantidad_disponible
+						);
 					
 				}
 
+				DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
 
+				return Response::json(array('resultado' => true, 'mensajes' => array('Orden procesada con exito.!')));
 			}
+			else{
+				return Response::json(array('resultado' => false, 'mensajes' => array('El cod_estado de orden no debe quedar vacio')));
+			}
+		}	
+		else{
+			return Response::json(array('resultado' => false, 'mensajes' => array('El cod_orden no debe quedar vacio')));
 		}
-	}*/
+	}
 }
 
 ?>
