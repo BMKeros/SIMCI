@@ -17,6 +17,25 @@ LANGUAGE plpgsql VOLATILE
 COST 100;
 
 
+-- Function: generar_unidad(text, text)
+
+DROP FUNCTION IF EXISTS generar_unidad(text, text);
+
+CREATE OR REPLACE FUNCTION generar_unidad(nombre TEXT, abrev TEXT)
+  RETURNS TEXT AS
+  $BODY$
+  DECLARE
+    retorno TEXT;
+  BEGIN
+    SELECT capitalize(lower(nombre)) || ' (' || abrev || ')'
+    INTO retorno;
+    RETURN retorno;
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
+
+
 -- Function: permisos_usuario(int)
 
 --DROP FUNCTION IF EXISTS permisos_usuario(int);
@@ -553,13 +572,12 @@ LANGUAGE plpgsql VOLATILE
 COST 100;
 
 
-
-DROP FUNCTION IF EXISTS public.retornar_stock_laboratorio(integer, numeric);
+DROP FUNCTION IF EXISTS public.retornar_stock_laboratorio( INTEGER, NUMERIC );
 
 CREATE OR REPLACE FUNCTION public.retornar_stock_laboratorio(
-  _id_objetos_laboratorio integer,
-  _cantidad_retornar numeric)
-  RETURNS json AS
+  _id_objetos_laboratorio INTEGER,
+  _cantidad_retornar      NUMERIC)
+  RETURNS JSON AS
   $BODY$
   DECLARE
     resultado               RECORD;
