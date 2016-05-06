@@ -16,6 +16,10 @@ function reset_secuencia($table = null){
 	}
 }
 
+function remplaza_coma_punto($string = null){
+	return (empty($string) || strlen($string) == 0)?(''):(str_replace([','],'.',$string));
+}
+
 function redirect_por_tipo($tipo_usuario = null){
 	if($tipo_usuario == TIPO_USER_ROOT || $tipo_usuario==TIPO_USER_ADMIN){
 		return Redirect::action('ModulosController@getAdministracion');	

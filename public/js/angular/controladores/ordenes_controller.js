@@ -87,16 +87,16 @@ simci.controller('OrdenesController', [
 
             if ($location.$$url == '/ordenes/generar-orden') {
 
+                $scope.items_tabla_pedidos = [];
+                $scope.select_laboratorio = ""; //Laboratorio seleccionado
+                $scope.select_objeto = ""; //Objeto seleccionado
+                $scope.cantidad = 0; //Cantidad del objeto seleccionado
+                $scope.codigos_elemento = ''; // Mantiene un json string de los codigos del elemento que debe ser convertido con JSON.parse
+
+
                 $scope.ver_contenedor_datos_orden = true;
                 $scope.ver_contenedor_pedidos = false;
 
-                $scope.procesar_generar_orden = function () {
-                    alertify.confirm("Esta seguro que desea generar esta Orden?", function () {
-                        alertify.success("Aceptar");
-                    }, function () {
-                        alertify.error("Cancelar");
-                    }).set("title", "Confirmar Accion!");
-                };
 
                 $scope.procesar_accion = function (accion) {
                     if (accion == undefined || accion == null) {
@@ -108,7 +108,7 @@ simci.controller('OrdenesController', [
 
                             var form_is_valid = $('#formulario_generar_orden').form(reglas_formulario_datos_orden).form('is valid');
 
-                            if(form_is_valid){
+                            if (form_is_valid) {
 
                                 $scope.ver_contenedor_datos_orden = false;
                                 $scope.ver_contenedor_pedidos = true;
@@ -125,81 +125,92 @@ simci.controller('OrdenesController', [
 
                 };
 
-                $scope.items_tabla_pedidos = [];
-                /*$scope.items_tabla_orden = []; //Aqui se guardaran todos los elementos que se agreguen con el btn plus
-                 $scope.select_laboratorio = ""; //Laboratorio seleccionado
-                 $scope.select_objeto = ""; //Objeto seleccionado
-                 $scope.cantidad = 0; //Cantidad del objeto seleccionado
+                $scope.agregar_elemento_tabla = function () {
+
+                    //var formulario = $('#formulario_registrar_stock');
+                    var is_valid_form = true;//formulario.form(reglas_formulario_agregar_stock).form('is valid');
+
+                    if ($scope.codigos_elemento.length === 0 || $scope.codigos_elemento.trim() === '') {
+                        alertify.error("Error, No has seleccionado un elemento del inventario");
+                        return false;
+                    }
+                    if (is_valid_form) {
+
+                        var parametros = {
+                            type: 'agregar_elemento',
+                            cantidad_solicitada: $scope.cantidad
+                        };
+
+                        // Agregamos los nuevos attributos
+                        //Se convierte los codigos elemento a objeto porque vienen en formato string
+                        var temp_codigos = angular.fromJson($scope.codigos_elemento);
+
+                        //Agregamos los codigos a la variable parametros
+                        ToolsService.extender_atributos_objeto(parametros, temp_codigos);
+
+                        $http({
+                            method: 'GET',
+                            url: '/api/ordenes/mostrar',
+                            params: parametros
+                        }).then(
+                            function (data) {
+
+                                if (data.data.resultado) {
+
+                                    var data_item = data.data.datos;
+
+                                    //Verificamos que no se repita el elemento en la lista
+                                    var existe = $scope.items_tabla_pedidos.findIndex(function (obj, index, array) {
+                                        return (obj.cod_dimension == data_item.cod_dimension) && (obj.cod_subdimension == data_item.cod_subdimension) && (obj.cod_agrupacion == data_item.cod_agrupacion) && (obj.cod_objeto == data_item.cod_objeto);
+                                    });
+
+                                    //Si no existe el nuevo elemento el la lista lo agregamos
+                                    if (existe === -1) {
+
+                                        var nuevo_elemento = {
+                                            id_item: ToolsService.generar_id_unico(),
+                                            nombre_objeto: data_item.nombre_objeto,
+                                            cantidad: $scope.cantidad,
+                                            cod_dimension: data_item.cod_dimension,
+                                            cod_subdimension: data_item.cod_subdimension,
+                                            cod_agrupacion: data_item.cod_agrupacion,
+                                            cod_objeto: data_item.cod_objeto,
+                                            numero_orden: data_item.numero_orden,
+                                            unidad: data_item.unidad,
+                                            clase_objeto: data_item.clase_objeto
+                                        };
+
+                                        $scope.items_tabla_pedidos.push(nuevo_elemento);
+                                    }
+                                    else {
+                                        alertify.error("Ya agregaste un elemento igual a este en la lista");
+                                    }
+
+                                }
+                                else {
+                                    alertify.error("No hay disponibilidad de este elemento, Intenta con una cantidad menor");
+                                }
+                            },
+                            function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
+                    }
+                };
 
 
-                 $scope.cantidad_disponible_inventario = 0;
-
-                 $scope.agregar_orden_tabla = function () {
-
-                 var formulario = $('#formulario_generar_ordenes');
-                 var is_valid_form = formulario.form(reglas_formulario_generar_ordenes).form('is valid');
-
-                 if ($scope.cantidad > $scope.cantidad_disponible_inventario) {
-                 alertify.error("La cantidad ingresada es mayor a la disponible en inventario");
-                 return false;
-                 }
-                 if (is_valid_form) {
-                 $http({
-                 method: 'GET',
-                 url: '/api/laboratorio/verificar?type=existe_stock_laboratorio&cod_laboratorio=' + $scope.select_laboratorio + '&cod_objeto=' + $scope.select_objeto
-                 }).then(
-                 function (response) {
-
-                 var existe = response.data.resultado;
-
-                 if (!existe) {
-                 $http({
-                 method: 'GET',
-                 url: '/api/laboratorio/mostrar?type=agregar_stock&cod_laboratorio=' + $scope.select_laboratorio + '&cod_objeto=' + $scope.select_objeto
-                 }).then(
-                 function (data) {
-
-                 var data_item = data.data;
-
-                 //Verificamos que no se repita el elemento en la lista
-                 var existe = $scope.items_tabla_orden.findIndex(function (obj, index, array) {
-                 return (obj.cod_objeto == $scope.select_objeto) && (obj.cod_laboratorio == $scope.select_laboratorio);
-                 });
-
-                 //Si no existe el nuevo elemento el la lista lo agregamos
-                 if (existe === -1) {
-                 $scope.items_tabla_orden.push({
-                 id_item_stock: ToolsService.generar_id_unico(),
-                 nombre_laboratorio: data_item.nombre_laboratorio,
-                 cod_laboratorio: data_item.cod_laboratorio,
-                 cod_objeto: data_item.cod_objeto,
-                 nombre_objeto: data_item.nombre_objeto,
-                 cantidad: $scope.cantidad
-                 });
-                 console.log($scope.items_tabla_orden);
-                 }
-                 else {
-                 alertify.error("Ya agregaste un elemento igual a este en la lista");
-                 }
-                 },
-                 function (data_error) {
-                 ToolsService.generar_alerta_status(data_error);
-                 }
-                 );
-                 }
-                 else {
-                 alertify.error("Este elemento ya existe en la lista de Ordenes");
-                 }
-                 },
-                 function (data_error) {
-                 ToolsService.generar_alerta_status(data_error);
-                 }
-                 );
-                 }
-                 };*/
+                $scope.procesar_generar_orden = function () {
+                    alertify.confirm("Esta seguro que desea generar esta Orden?", function () {
+                        alertify.success("Aceptar");
+                    }, function () {
+                        alertify.error("Cancelar");
+                    }).set("title", "Confirmar Accion!");
+                };
 
 
             }
 
-        }]
-);
+        }
+    ]
+)
+;

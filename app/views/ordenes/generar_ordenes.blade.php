@@ -16,7 +16,7 @@
                 <br>
             </div>
 
-            <h3 class="ui centered dividing header">Generar Ordenes</h3>
+            <h3 class="ui centered dividing header">Generar Orden</h3>
 
             <br>
 
@@ -40,8 +40,11 @@
                             <div class="four two field"></div>
                             <div class="four wide field">
                                 <label>Fecha de la actividad</label>
-                                <input type="text" name="fecha_actividad" id="fecha_actividad"
+                                <div class="ui left icon input">
+                                    <input type="text" name="fecha_actividad" id="fecha_actividad"
                                        placeholder="Fecha de actividad" ng-model="DatosForm.fecha_actividad">
+                                    <i class="calendar icon"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,7 @@
                         <div class="two fields">
                             <div class="eleven wide field">
                                 <label>Observaciones</label>
-                                <textarea name="observaciones" ng-model="DatosForm.observacones"
+                                <textarea name="observaciones" ng-model="DatosForm.observaciones"
                                           placeholder="Observaciones" rows="2"></textarea>
                             </div>
                         </div>
@@ -97,14 +100,20 @@
                             </div>
                         </div>
 
+                        <!--  Input que almacena los codigos del elemento -->
+                        <input type="hidden" ng-model="codigos_elemento" id="codigos_elemento" ng-update-hidden>
+
                         <div class="four wide field">
                             <label>Cantidad</label>
-                            <input type="number" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
+                            <div class="ui right icon input">
+                                <input type="text" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
+                                <i class="edit icon"></i>
+                            </div>
                         </div>
 
                         <div class="field">
                             <button class="ui icon inverted blue button" id="btn_items_ordenes"
-                                    ng-click=""><i class="plus icon"></i></button>
+                                    ng-click="agregar_elemento_tabla()"><i class="plus icon"></i></button>
                         </div>
 
                     </div>
@@ -112,19 +121,23 @@
                     <table class="ui celled striped table" width="100%">
                         <thead>
                         <tr>
-                            <th width="40%">Nombre</th>
-                            <th width="20%">Cantidad</th>
+                            <th width="60%">Nombre del elemento</th>
+                            <th width="10" class="ui center aligned">Tipo</th>
+                            <th width="10%" class="ui center aligned">Cantidad</th>
+                            <th width="15%" class="ui center aligned">Unidad</th>
                             <th width="5%" align="center">Accion</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="elemento in items_tabla_orden track by $index" id="<% elemento.id_item_orden %>"
+                        <tr ng-repeat="elemento in items_tabla_pedidos track by $index" id="<% elemento.id_item %>"
                             ng-animate="'animate'" class="animate-repeat">
                             <td><% elemento.nombre_objeto | lowercase | capitalize%></td>
-                            <td><% elemento.cantidad %></td>
+                            <td class="ui center aligned"><div class="ui teal horizontal label"><% elemento.clase_objeto %></div></td>
+                            <td class="ui center aligned"><% elemento.cantidad %></td>
+                            <td><% elemento.unidad %></td>
                             <td>
                                 <button class="ui  icon small button" id="btn_action_item_orden"
-                                        ng-click="eliminar_item_tabla_orden(elemento.id_item_orden )">
+                                        ng-click="eliminar_item_tabla_orden(elemento.id_item )">
                                     <i class="trash outline icon"></i>
                                 </button>
                             </td>
@@ -177,7 +190,7 @@
         onSelect: function (elem_select, response) {
             //Guardamos el objeto seleccionado en el input hidden
             $('#select_objeto').val(elem_select.value).trigger('change');
-            $('#cantidad_disponible_inventario').val(elem_select.cantidad_disponible).trigger('change');
+            $('#codigos_elemento').val(elem_select.codigos_elemento).trigger('change');
         },
         apiSettings: {
             onResponse: function (_Response) {
@@ -205,7 +218,12 @@
                         title: item.nombre_objeto.toLowerCase(),
                         description: item.especificaciones_objeto,
                         value: item.cod_objeto,
-                        cantidad_disponible: item.cantidad_disponible
+                        codigos_elemento: JSON.stringify({
+                            cod_dimension: item.cod_dimension,
+                            cod_subdimension: item.cod_subdimension,
+                            cod_agrupacion: item.cod_agrupacion,
+                            cod_objeto: item.cod_objeto
+                        })
                     });
                 });
                 return response;
