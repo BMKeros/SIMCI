@@ -63,7 +63,7 @@ class OrdenesController extends BaseController
 
         $responsable = Input::get('responsable');
         $solicitante = Auth::user()->id;
-        $cod_laboratorio = Input::get('cod_laboratorio');
+        $cod_laboratorio = Input::get('laboratorio');
         $observaciones = Input::get('observaciones');
         $fecha_actividad = Input::get('fecha_actividad');
 
