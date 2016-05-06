@@ -40,8 +40,11 @@
                             <div class="four two field"></div>
                             <div class="four wide field">
                                 <label>Fecha de la actividad</label>
-                                <input type="text" name="fecha_actividad" id="fecha_actividad"
+                                <div class="ui left icon input">
+                                    <input type="text" name="fecha_actividad" id="fecha_actividad"
                                        placeholder="Fecha de actividad" ng-model="DatosForm.fecha_actividad">
+                                    <i class="calendar icon"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,7 @@
                         <div class="two fields">
                             <div class="eleven wide field">
                                 <label>Observaciones</label>
-                                <textarea name="observaciones" ng-model="DatosForm.observacones"
+                                <textarea name="observaciones" ng-model="DatosForm.observaciones"
                                           placeholder="Observaciones" rows="2"></textarea>
                             </div>
                         </div>
@@ -102,7 +105,10 @@
 
                         <div class="four wide field">
                             <label>Cantidad</label>
-                            <input type="number" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
+                            <div class="ui right icon input">
+                                <input type="text" name="cantidad" placeholder="Cantidad" ng-model="cantidad">
+                                <i class="edit icon"></i>
+                            </div>
                         </div>
 
                         <div class="field">
@@ -115,19 +121,23 @@
                     <table class="ui celled striped table" width="100%">
                         <thead>
                         <tr>
-                            <th width="40%">Nombre</th>
-                            <th width="20%">Cantidad</th>
+                            <th width="60%">Nombre del elemento</th>
+                            <th width="10" class="ui center aligned">Tipo</th>
+                            <th width="10%" class="ui center aligned">Cantidad</th>
+                            <th width="15%" class="ui center aligned">Unidad</th>
                             <th width="5%" align="center">Accion</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="elemento in items_tabla_orden track by $index" id="<% elemento.id_item_orden %>"
+                        <tr ng-repeat="elemento in items_tabla_pedidos track by $index" id="<% elemento.id_item %>"
                             ng-animate="'animate'" class="animate-repeat">
                             <td><% elemento.nombre_objeto | lowercase | capitalize%></td>
-                            <td><% elemento.cantidad %></td>
+                            <td class="ui center aligned"><div class="ui teal horizontal label"><% elemento.clase_objeto %></div></td>
+                            <td class="ui center aligned"><% elemento.cantidad %></td>
+                            <td><% elemento.unidad %></td>
                             <td>
                                 <button class="ui  icon small button" id="btn_action_item_orden"
-                                        ng-click="eliminar_item_tabla_orden(elemento.id_item_orden )">
+                                        ng-click="eliminar_item_tabla_orden(elemento.id_item )">
                                     <i class="trash outline icon"></i>
                                 </button>
                             </td>

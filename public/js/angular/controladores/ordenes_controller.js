@@ -160,25 +160,27 @@ simci.controller('OrdenesController', [
                                     var data_item = data.data.datos;
 
                                     //Verificamos que no se repita el elemento en la lista
-                                    var existe = $scope.items_tabla_stock.findIndex(function (obj, index, array) {
-                                        return (obj.cod_objeto == data_item.cod_objeto);
+                                    var existe = $scope.items_tabla_pedidos.findIndex(function (obj, index, array) {
+                                        return (obj.cod_dimension == data_item.cod_dimension) && (obj.cod_subdimension == data_item.cod_subdimension) && (obj.cod_agrupacion == data_item.cod_agrupacion) && (obj.cod_objeto == data_item.cod_objeto);
                                     });
 
                                     //Si no existe el nuevo elemento el la lista lo agregamos
                                     if (existe === -1) {
 
                                         var nuevo_elemento = {
-                                            id_item_stock: ToolsService.generar_id_unico(),
+                                            id_item: ToolsService.generar_id_unico(),
                                             nombre_objeto: data_item.nombre_objeto,
                                             cantidad: $scope.cantidad,
                                             cod_dimension: data_item.cod_dimension,
                                             cod_subdimension: data_item.cod_subdimension,
                                             cod_agrupacion: data_item.cod_agrupacion,
                                             cod_objeto: data_item.cod_objeto,
-                                            numero_orden: data_item.numero_orden
+                                            numero_orden: data_item.numero_orden,
+                                            unidad: data_item.unidad,
+                                            clase_objeto: data_item.clase_objeto
                                         };
 
-                                        $scope.items_tabla_stock.push(nuevo_elemento);
+                                        $scope.items_tabla_pedidos.push(nuevo_elemento);
                                     }
                                     else {
                                         alertify.error("Ya agregaste un elemento igual a este en la lista");
