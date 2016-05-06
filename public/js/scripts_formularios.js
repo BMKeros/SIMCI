@@ -1187,6 +1187,14 @@ var reglas_formulario_datos_orden = {
                 {
                     type: 'empty',
                     prompt: 'Este campo no puede quedar vacio'
+                },
+                {
+                    type:'minLength[10]',
+                    prompt:'Este campo debe tener como minimo {ruleValue} caracteres'
+                },
+                {
+                    type:'maxLength[200]',
+                    prompt:'Este campo debe tener como maximo {ruleValue} caracteres'
                 }
             ]
         }
