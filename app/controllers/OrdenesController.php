@@ -62,9 +62,10 @@ class OrdenesController extends BaseController
     public function postGenerarOrden(){
 
         $responsable = Input::get('responsable');
-        $solicitante = Input::get('solicitante');
+        $solicitante = Auth::user()->id;
         $cod_laboratorio = Input::get('cod_laboratorio');
         $observaciones = Input::get('observaciones');
+        $fecha_actividad = Input::get('fecha_actividad');
 
         $data_elementos_pedidos = Input::get('data_elementos_pedidos');
 
@@ -91,6 +92,7 @@ class OrdenesController extends BaseController
         $nueva_orden->codigo = generar_codigo_orden();
         $nueva_orden->responsable = $responsable;
         $nueva_orden->solicitante = $solicitante;
+        $nueva_orden->fecha_actividad = $fecha_actividad;
         $nueva_orden->fecha = date("Y-m-d");
         $nueva_orden->hora = date("H:i:s");
         $nueva_orden->cod_laboratorio = $cod_laboratorio;

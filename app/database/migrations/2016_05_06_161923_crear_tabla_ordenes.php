@@ -18,6 +18,7 @@ class CrearTableOrdenes extends Migration {
 			$table->string('codigo', 10);			
 			$table->integer('responsable');
 			$table->integer('solicitante');
+			$table->date('fecha_actividad')
 			$table->date('fecha');
 			$table->time('hora');
 			$table->string('cod_laboratorio', 4);
