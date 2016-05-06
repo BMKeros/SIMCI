@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CrearIndexTablas extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -169,6 +168,8 @@ class CrearIndexTablas extends Migration
                 ->references(array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'numero_orden'))
                 ->on('inventario');
         });
+
+        //comentario de prueba 
     }
 
     /**
