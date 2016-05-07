@@ -45,8 +45,8 @@ LANGUAGE 'plpgsql' VOLATILE;
 
 --Tabla de laboratorios
 DROP TRIGGER IF EXISTS trigger_generar_campo_personalizado ON laboratorios;
-CREATE TRIGGER trigger_generar_campo_personalizado BEFORE INSERT ON laboratorios FOR EACH ROW EXECUTE PROCEDURE generar_codigo_tabla();
+--CREATE TRIGGER trigger_generar_campo_personalizado BEFORE INSERT ON laboratorios FOR EACH ROW EXECUTE PROCEDURE generar_codigo_tabla();
 
 --Tabla proveedores
 DROP TRIGGER IF EXISTS trigger_generar_campo_personalizado ON proveedores;
-CREATE TRIGGER trigger_generar_campo_personalizado BEFORE INSERT ON proveedores FOR EACH ROW EXECUTE PROCEDURE generar_codigo_tabla();
+--CREATE TRIGGER trigger_generar_campo_personalizado BEFORE INSERT ON proveedores FOR EACH ROW EXECUTE PROCEDURE generar_codigo_tabla();
