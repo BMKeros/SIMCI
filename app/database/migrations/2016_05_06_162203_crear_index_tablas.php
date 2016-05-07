@@ -171,10 +171,10 @@ class CrearIndexTablas extends Migration
 
 
         //ORDENES-ESTADO_ORDENES
-       /* Schema::table('ordenes', function($table){
+        Schema::table('ordenes', function($table){
             $table->foreign('status')->references('codigo')
                 ->on('estados_ordenes');
-        });*/
+        });
     }
 
     /**
