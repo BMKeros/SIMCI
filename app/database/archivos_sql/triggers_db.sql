@@ -8,10 +8,12 @@ END;
 $$ language 'plpgsql';
 
 -- TABLA CATALOGO OBJETOS
-CREATE OR REPLACE TRIGGER trigger_campo_updated_at BEFORE UPDATE ON catalogo_objetos FOR EACH ROW EXECUTE PROCEDURE actualizar_campo_updated();
+DROP TRIGGER IF EXISTS trigger_campo_updated_at ON catalogo_objetos;
+CREATE TRIGGER trigger_campo_updated_at BEFORE UPDATE ON catalogo_objetos FOR EACH ROW EXECUTE PROCEDURE actualizar_campo_updated();
 
 -- TABLA PROVEEDORES
-CREATE OR REPLACE TRIGGER trigger_campo_updated_at BEFORE UPDATE ON proveedores FOR EACH ROW EXECUTE PROCEDURE actualizar_campo_updated();
+DROP TRIGGER IF EXISTS trigger_campo_updated_at ON proveedores;
+CREATE TRIGGER trigger_campo_updated_at BEFORE UPDATE ON proveedores FOR EACH ROW EXECUTE PROCEDURE actualizar_campo_updated();
 
 
 --Funcion para generar el campo codigo de las tablas
