@@ -135,12 +135,7 @@ function get_array_permisos_usuario($id_usuario = null){
 		return array();
 	}
 	else{
-		$resultado = DB::table('permisos_usuarios')->select('cod_permiso')->where('usuario_id','=',$id_usuario)->get();
-
-		$permisos = array();
-		foreach ($resultado as $value) {
-			$permisos[] = $value->cod_permiso;
-		}
+		$permisos = DB::table('permisos_usuarios')->select('cod_permiso')->where('usuario_id','=',$id_usuario)->lists('cod_permiso');
 
 		return $permisos;
 	}
