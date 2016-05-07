@@ -195,13 +195,20 @@
             get_mensaje_fail_http: function (data_ajax) {
                 var objeto = {};
 
+                if(data_ajax.data.hasOwnProperty('error')){
+                    data_mensajes = [data_ajax.data.error.message];
+                }
+                else{
+                  data_mensajes = data_ajax.data;
+                }
+
                 switch (data_ajax.status) {
                     case 401:
                         objeto = {
                             titulo: "Upss, Acceso no autorizado, inicie sesion porfavor. Estado[" + data_ajax.status + "]",
                             icono: 'ban',
                             color: 'red',
-                            mensajes: data_ajax.data
+                            mensajes: data_mensajes
                         };
                         break;
                     case 403:
@@ -209,7 +216,7 @@
                             titulo: "Upss, Hubo un problema con sus permisos. Estado[" + data_ajax.status + "]",
                             icono: 'ban',
                             color: 'red',
-                            mensajes: data_ajax.data
+                            mensajes: data_mensajes
                         };
                         break;
                     case 500:
@@ -217,7 +224,7 @@
                             titulo: "Upss, Ocurrio un error en el servidor. Estado[" + data_ajax.status + "]",
                             icono: 'remove',
                             color: 'red',
-                            mensajes: data_ajax.data
+                            mensajes: data_mensajes
                         };
                         break;
                 }
