@@ -34,7 +34,7 @@
                             <div class="ten wide field">
                                 <div class="field">
                                     <label>Responsable:</label>
-                                    {{ Form::select_personas(array('name'=>'responsable', 'id'=>'responsable','ng-model'=>'DatosForm.responsable'),null, 'Responsable')}}
+                                    {{ Form::select_personas(array('name'=>'responsable', 'id'=>'responsable','ng-model'=>'DatosForm.responsable'),null, 'Responsable','persona-usuario')}}
                                 </div>
                             </div>
                             <div class="four two field"></div>
