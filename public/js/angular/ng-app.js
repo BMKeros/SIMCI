@@ -1,5 +1,12 @@
 (function () {
-    var simci = angular.module('SIMCI', ['ngRoute', 'datatables', 'ngProgress', 'ngAnimate', 'chart.js', 'angularUtils.directives.dirPagination'], function ($interpolateProvider) {
+    var simci = angular.module('SIMCI', ['ngRoute',
+        'datatables',
+        'ngProgress',
+        'ngAnimate',
+        'chart.js',
+        'angularUtils.directives.dirPagination',
+        'qrScanner'], function ($interpolateProvider) {
+
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');
     });
@@ -110,15 +117,15 @@
         };
     });
 
-    simci.filter('formato_timestamps', function(){
-        return function(value){
-            if(!!(value)){
+    simci.filter('formato_timestamps', function () {
+        return function (value) {
+            if (!!(value)) {
                 var tmp_timestamps = value.split('.')[0].split(" ");
                 var fecha_tmp = tmp_timestamps[0].split('-').reverse().join('/');
                 var hora_tmp = tmp_timestamps[1];
 
-                return fecha_tmp + ' - '+ hora_tmp;
-            }else{
+                return fecha_tmp + ' - ' + hora_tmp;
+            } else {
                 return ''
             }
         }
@@ -195,11 +202,11 @@
             get_mensaje_fail_http: function (data_ajax) {
                 var objeto = {};
 
-                if(data_ajax.data.hasOwnProperty('error')){
+                if (data_ajax.data.hasOwnProperty('error')) {
                     data_mensajes = [data_ajax.data.error.message];
                 }
-                else{
-                  data_mensajes = data_ajax.data;
+                else {
+                    data_mensajes = data_ajax.data;
                 }
 
                 switch (data_ajax.status) {
@@ -269,19 +276,19 @@
 
                 if (tipo.toLowerCase() === 'label') {
                     var tmp = '';
-                    if( exclude.indexOf('cod_dimension') == -1) {
+                    if (exclude.indexOf('cod_dimension') == -1) {
                         tmp += '<div class="ui small green label spopup" data-content="Dimension">' + obj_codigos.cod_dimension + '</div>';
                     }
-                    if( exclude.indexOf('cod_subdimension') == -1){
+                    if (exclude.indexOf('cod_subdimension') == -1) {
                         tmp += '<div class="ui small blue label spopup" data-content="SubDimension">' + obj_codigos.cod_subdimension + '</div>';
                     }
-                    if( exclude.indexOf('cod_agrupacion') == -1){
+                    if (exclude.indexOf('cod_agrupacion') == -1) {
                         tmp += '<div class="ui small teal  label spopup" data-content="Agrupacion">' + obj_codigos.cod_agrupacion + '</div>';
                     }
                     if (obj_codigos.cod_subagrupacion && exclude.indexOf('cod_subagrupacion') == -1) {
                         tmp += '<div class="ui small red label spopup" data-content="SubAgrupacion">' + obj_codigos.cod_subagrupacion + '</div>';
                     }
-                    if( exclude.indexOf('numero_orden') == -1){
+                    if (exclude.indexOf('numero_orden') == -1) {
                         tmp += '<div class="ui small gray label spopup" data-content="Numero de orden">' + obj_codigos.numero_orden + '</div>';
                     }
 
@@ -302,7 +309,9 @@
                         .substring(1);
                 }
 
-                for(i = 0; i < 8; i++) { text += get_code(); }
+                for (i = 0; i < 8; i++) {
+                    text += get_code();
+                }
 
                 return text;
             },
