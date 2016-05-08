@@ -42,6 +42,13 @@ simci.controller('OrdenesController', [
                     url: "#/ordenes/ver/todos",
                     icono: 'unhide',
                     show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA]
+                },
+                {
+                    nombre: "buscar orden",
+                    descripcion: "Esta opcion le permitira buscar una orden por el codigo",
+                    url: "#/ordenes/buscar-orden",
+                    icono: 'search',
+                    show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA]
                 }
 
             ];
@@ -234,6 +241,10 @@ simci.controller('OrdenesController', [
                     }).set("title", "Confirmar Accion!");
                 };
 
+
+            }// If generar-orden
+
+            if ($location.$$url == '/ordenes/buscar-orden') {
 
             }
 
