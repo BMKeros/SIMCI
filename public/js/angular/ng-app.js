@@ -5,7 +5,8 @@
         'ngAnimate',
         'chart.js',
         'angularUtils.directives.dirPagination',
-        'qrScanner'], function ($interpolateProvider) {
+        'qrScanner',
+        'ngAudio'], function ($interpolateProvider) {
 
         $interpolateProvider.startSymbol('<%');
         $interpolateProvider.endSymbol('%>');

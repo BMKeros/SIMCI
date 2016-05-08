@@ -35,6 +35,7 @@
     "viewerjs": "^0.5.9",
     "angular-chart.js": "^0.9.0",
     "angularUtils-pagination": "angular-utils-pagination#^0.11.1",
-    "angular-qr-scanner": "^0.1.0"
+    "angular-qr-scanner": "^0.1.0",
+    "angular-audio": "^1.7.2"
   }
 }

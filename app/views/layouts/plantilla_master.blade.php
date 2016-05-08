@@ -53,6 +53,7 @@
 <script src="/bower_components/angularUtils-pagination/dirPagination.js"></script>
 <script src="/bower_components/angular-qr-scanner/qr-scanner.js"></script>
 <script src="/bower_components/angular-qr-scanner/src/jsqrcode-combined.min.js"></script>
+<script src="/bower_components/angular-audio/app/angular.audio.js"></script>
 
 <!-- plugins datatables -->
 
