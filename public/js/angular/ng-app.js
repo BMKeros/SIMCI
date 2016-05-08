@@ -14,9 +14,58 @@
 
     simci.run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http, $interval) {
 
-        setInterval(function () {
+        $rootScope.notificaciones = {
+            num_notificaciones: 0,
+            data_notificaciones: [],
+            bandera_loading: true,
+            bandera_mostrar: false,
+            intervalo: 600000,
+            //Para obtener todas data de las notificaciones
+            getAllData: function () {
+                return this.data_notificaciones
+            },
+            //Para asignar las notificacinoes al objeto
+            setData: function (_data) {
+                this.data_notificaciones = _data;
+            },
+            //Obtiene el numero de notificaciones, Es usada para solo el numero que se muestra
+            getCount: function () {
+                return this.num_notificaciones;
+            },
+            //Asigna el numero de notificaciones
+            setCount: function (_total) {
+                this.num_notificaciones = _total;
+            },
+            //Retorna el estado del loading si se muestra o no
+            showLoading: function () {
+                return this.bandera_loading;
+            },
+            //Retorna el estado para poder mostrar la lista de notificaciones o no
+            showNotificaciones: function () {
+                return this.bandera_mostrar;
+            },
+            //Asignar el estado para poder mostrar el loading
+            setStatusLoading: function (_estado) {
+                this.bandera_loading = _estado;
+            },
+            //Asignar el estado para poder mostrar la lista de notificaciones
+            setStatusMostrar: function (_estado) {
+                this.bandera_mostrar = _estado;
+            },
+            //Obtiene el numero total de notificaciones
+            getTotal: function () {
+                return this.data_notificaciones.length;
+            },
+            //Obtener el intervalo de verificacion de notificaciones
+            getIntervaloVerificacion: function () {
+                return this.intervalo;
+            }
+        };
+
+        //Intervalo de verificacion
+        $interval(function () {
             $rootScope.$broadcast('evento_verificar_notificaciones', {estado: true});
-        }, 10000);
+        }, $rootScope.notificaciones.getIntervaloVerificacion());
 
         //Guardamos la informacion del usuario logueado
         $rootScope.data_global_user = ToolsService.get_data_user_localstorage();
@@ -45,23 +94,22 @@
         $rootScope.progressbar.setColor('orange');
 
 
-        //Acciones de las notificaciones
-        //variable para mostrar el loading del popup de notificaciones
-        $rootScope.bandera_loading_notificaciones = true; // Valor por defecto true para que muestre el loading
-        //Variable para mostrar las notificaciones en el popup
-        $rootScope.bandera_mostrar_notificaciones = false; // Valor por defecto false porque primero se muestra el loading
-
         $rootScope.cargar_notificaciones = function () {
             if (!angular.element('#item_menu_notificaciones').hasClass('active')) {
 
                 $http({
                     method: 'GET',
-                    url: '/api/notificaciones/mostrar?type=todas&id_usuario=' + $rootScope.data_global_user.id_usuario
+                    url: '/api/notificaciones/mostrar',
+                    params: {
+                        type: 'todas',
+                        id_usuario: $rootScope.data_global_user.id_usuario
+                    }
                 }).then(function (data) {
-                    $rootScope.notificaciones = data.data.datos;
-
-                    $rootScope.bandera_loading_notificaciones = false;
-                    $rootScope.bandera_mostrar_notificaciones = true;
+                    $rootScope.notificaciones.setData(data.data.datos);
+                    //Para mostrar el loading de notificaciones
+                    $rootScope.notificaciones.setStatusLoading(false);
+                    //Para mostrar la lista de notificaciones
+                    $rootScope.notificaciones.setStatusMostrar(true);
 
                 }, function (data_error) {
                     ToolsService.generar_alerta_status(data_error);
@@ -498,8 +546,9 @@
     }]);
 
 
-    //Seteamos de manera global la app simci
+//Seteamos de manera global la app simci
     window.simci = simci;
 
     return simci;
-})();
+})
+();
