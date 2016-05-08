@@ -33,7 +33,7 @@
     <link rel="icon" href="/img/logo.png" type="image/x-icon"/>
 </head>
 
-<body ng-show-progress-loading>
+<body ng-show-progress-loading ng-listen-notificaciones>
 
 <div id="contenedorPadre">
     @yield('contenido-body-master')
