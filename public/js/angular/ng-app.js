@@ -12,7 +12,11 @@
         $interpolateProvider.endSymbol('%>');
     });
 
-    simci.run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http) {
+    simci.run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http, $interval) {
+
+        setInterval(function () {
+            $rootScope.$broadcast('evento_verificar_notificaciones', {estado: true});
+        }, 10000);
 
         //Guardamos la informacion del usuario logueado
         $rootScope.data_global_user = ToolsService.get_data_user_localstorage();

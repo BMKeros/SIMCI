@@ -95,6 +95,22 @@
             }
         }]);
 
+        GlobalApp.directive('ngListenNotificaciones', ['$rootScope', 'ngAudio', function ($rootScope, ngAudio) {
+            return {
+                restrict: 'AE',
+                link: function ($scope, $element) {
+
+                    $rootScope.$on('evento_verificar_notificaciones', function (event, data) {
+                        if (data.estado) {
+
+                            //sound = ngAudio.load("/sonidos/sound-noti2.wav");
+                            //sound.play();
+                        }
+                    });
+                }
+            }
+        }]);
+
     }
     else {
 
