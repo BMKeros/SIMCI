@@ -12,12 +12,12 @@ class OrdenesController extends BaseController
         switch ($tipo_busqueda) {
             case 'paginacion':
                 $consulta = DB::table('ordenes')
-                    ->select('id',
-                        'codigo',
+                    ->select('ordenes.id',
+                        'ordenes.codigo',
                         'formato_nombre_completo(P_R.primer_nombre, P_R.primer_apellido) as nombre_completo_responsable',
                         'formato_nombre_completo(P_S.primer_nombre, P_S.primer_apellido) as nombre_completo_solicitante',
-                        'fecha_actividad',
-                        'status',
+                        'ordenes.fecha_actividad',
+                        'ordenes.status',
                         'nombre as nombre_status')
                     ->join('personas as P_R', 'P_R.id', '=', 'responsable')
                     ->join('personas as P_S', 'P_S.id', '=','solicitante')
