@@ -190,20 +190,26 @@ class InventarioController extends BaseController
                 $cod_agrupacion = Input::get('cod_agrupacion', null);
                 $cod_objeto = Input::get('cod_objeto', null);
 
-                $data = DB::table('inventario')
-                    ->where('cod_dimension', '=', $cod_dimension)
-                    ->where('cod_subdimension', '=', $cod_subdimension)
-                    ->where('cod_agrupacion', '=', $cod_agrupacion)
-                    ->where('cod_objeto', '=', $cod_objeto)
-                    ->count();
+                if(empty($cod_dimension) && empty($cod_subdimension) && empty($cod_agrupacion) && empty($cod_objeto)){
+                    $response = array('resultado' => false, 'datos' => 0);
+                }
+                else{
+                    $data = DB::table('inventario')
+                        ->where('cod_dimension', '=', $cod_dimension)
+                        ->where('cod_subdimension', '=', $cod_subdimension)
+                        ->where('cod_agrupacion', '=', $cod_agrupacion)
+                        ->where('cod_objeto', '=', $cod_objeto)
+                        ->count();
 
-                $response = array('resultado' => true, 'datos' => ($data + 1));
+                    $response = array('resultado' => true, 'datos' => ($data + 1));    
+                }
+
+                
                 break;
 
             default:
                 $response = array();
                 break;
-
         }
 
         return Response::json($response);
