@@ -37,7 +37,7 @@ class CrearTablaOrdenes extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('ordenes');
+		Schema::drop_cascade('ordenes');
 	}
 
 }

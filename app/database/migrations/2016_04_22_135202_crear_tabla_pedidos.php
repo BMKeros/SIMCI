@@ -34,7 +34,7 @@ class CrearTablaPedidos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('pedidos');
+		Schema::drop_cascade('pedidos');
 	}
 
 }

@@ -28,7 +28,7 @@ class CrearTablaTiposMovimientos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('tipos_movimientos');
+		Schema::drop_cascade('tipos_movimientos');
 	}
 
 }

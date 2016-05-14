@@ -31,7 +31,7 @@ class CrearTablaElementosRestringidos extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('elementos_restringidos');
+		Schema::drop_cascade('elementos_restringidos');
 	}
 
 }
