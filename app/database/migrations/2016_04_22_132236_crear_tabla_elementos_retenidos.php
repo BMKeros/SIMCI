@@ -34,7 +34,7 @@ class CrearTablaElementosRetenidos extends Migration
      */
     public function down()
     {
-        Schema::drop('elementos_retenidos');
+        drop_cascade('elementos_retenidos');
     }
 
 }
