@@ -10,6 +10,25 @@ class OrdenesController extends BaseController
         $orden = Input::get('ordenar', ' asc');
 
         switch ($tipo_busqueda) {
+            case 'paginacion':
+                $consulta = DB::table('ordenes')
+                    ->select('id',
+                        'codigo',
+                        'formato_nombre_completo(P_R.primer_nombre, P_R.primer_apellido) as nombre_completo_responsable',
+                        'formato_nombre_completo(P_S.primer_nombre, P_S.primer_apellido) as nombre_completo_solicitante',
+                        'fecha_actividad',
+                        'status',
+                        'nombre as nombre_status')
+                    ->join('personas as P_R', 'P_R.id', '=', 'responsable')
+                    ->join('personas as P_S', 'P_S.id', '=','solicitante')
+                    ->join('estados_ordenes', 'estados_ordenes.codigo', '=', 'status');
+
+
+                $response = $this->generar_paginacion_dinamica($consulta,
+                    array('campo_where' => 'codigo', 'campo_orden' => 'id'));
+
+                
+                break;
 
             case 'agregar_elemento':
 
@@ -114,7 +133,9 @@ class OrdenesController extends BaseController
                     'cod_agrupacion' => $value['cod_agrupacion'],
                     'cod_objeto' => $value['cod_objeto'],
                     'numero_orden' => $value['numero_orden'],
-                    'cantidad_solicitada' => $value['cantidad_solicitada']
+                    'cantidad_solicitada' => $value['cantidad_solicitada'],
+                    'created_at' => get_now(),
+                    'updated_at' => get_now()
                 );
             }
 
@@ -130,17 +151,12 @@ class OrdenesController extends BaseController
                 'mensajes'=> array($e->getMessage())
             ),500);
         }
-
         
         DB::commit();
 
         return Response::json(array(
                 'resultado'=>true, 
                 'mensajes'=> array('Orden generada con exito!')));
-
-
-        
-
     }
 
     public function postProcesarOrden(){
