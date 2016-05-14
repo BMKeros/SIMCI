@@ -61,62 +61,85 @@ class OrdenesController extends BaseController
     }
     public function postGenerarOrden(){
 
-        $responsable = Input::get('responsable');
-        $solicitante = Auth::user()->id;
-        $cod_laboratorio = Input::get('laboratorio');
-        $observaciones = Input::get('observaciones');
-        $fecha_actividad = Input::get('fecha_actividad');
+        DB::beginTransaction();
 
-        $data_elementos_pedidos = Input::get('data_elementos_pedidos');
+        try{
+            $responsable = Input::get('responsable');
+            $solicitante = Auth::user()->id;
+            $cod_laboratorio = Input::get('laboratorio');
+            $observaciones = Input::get('observaciones');
+            $fecha_actividad = Input::get('fecha_actividad');
 
-        if(is_null($responsable) || is_null($cod_laboratorio) || is_null($observaciones) || is_null($data_elementos_pedidos)){
-            if(is_null($responsable)){
-                $mensajes[] = "El id del usuario no puede quedar vacio";
-            }
-            if(is_null($cod_laboratorio)){
-                $mensajes[] = "El codigo de laboratorio no puede quedar vacio";
-            }
-            if(is_null($observaciones)){
-                $mensajes[] = "El campo observaciones no puede quedar vacio";
-            }
-            if(is_null($data_elementos_pedidos)){
-                $mensajes[] = "No has seleccionado ningun elemento.";
+            $data_elementos_pedidos = Input::get('data_elementos_pedidos');
+
+            if(is_null($responsable) || is_null($cod_laboratorio) || is_null($observaciones) || is_null($data_elementos_pedidos)){
+                if(is_null($responsable)){
+                    $mensajes[] = "El id del usuario no puede quedar vacio";
+                }
+                if(is_null($cod_laboratorio)){
+                    $mensajes[] = "El codigo de laboratorio no puede quedar vacio";
+                }
+                if(is_null($observaciones)){
+                    $mensajes[] = "El campo observaciones no puede quedar vacio";
+                }
+                if(is_null($data_elementos_pedidos)){
+                    $mensajes[] = "No has seleccionado ningun elemento.";
+                }
+
+                return Response::json(array('resultado' => false, 'mensajes' => $mensajes));
             }
 
-            return Response::json(array('resultado' => false, 'mensajes' => $mensajes));
+            //primero se crea la orden
+            $nueva_orden = new Orden;
+
+            $nueva_orden->codigo = generar_codigo_orden();
+            $nueva_orden->responsable = $responsable;
+            $nueva_orden->solicitante = $solicitante;
+            $nueva_orden->fecha_actividad = $fecha_actividad;
+            $nueva_orden->fecha = date("Y-m-d");
+            $nueva_orden->hora = date("H:i:s");
+            $nueva_orden->cod_laboratorio = $cod_laboratorio;
+            $nueva_orden->observaciones = $observaciones;
+            $nueva_orden->status = PENDIENTE;
+
+            $nueva_orden->save();
+
+            //armado de la data de los elementos pedidos
+            foreach ($data_elementos_pedidos as $value){
+
+                $data[] = array(
+                    'cod_orden' => generar_codigo_orden(),
+                    'cod_dimension' => $value['cod_dimension'],
+                    'cod_subdimension' => $value['cod_subdimension'],
+                    'cod_agrupacion' => $value['cod_agrupacion'],
+                    'cod_objeto' => $value['cod_objeto'],
+                    'numero_orden' => $value['numero_orden'],
+                    'cantidad_solicitada' => $value['cantidad_solicitada']
+                );
+            }
+
+            //se crean los elementos pedidos en la orden
+            DB::table('pedidos')->insert($data);
         }
 
-        //primero se crea la orden
-        $nueva_orden = new Orden;
+        catch(\Exception $e){
+            DB::rollBack();
 
-        $nueva_orden->codigo = generar_codigo_orden();
-        $nueva_orden->responsable = $responsable;
-        $nueva_orden->solicitante = $solicitante;
-        $nueva_orden->fecha_actividad = $fecha_actividad;
-        $nueva_orden->fecha = date("Y-m-d");
-        $nueva_orden->hora = date("H:i:s");
-        $nueva_orden->cod_laboratorio = $cod_laboratorio;
-        $nueva_orden->observaciones = $observaciones;
-        $nueva_orden->status = PENDIENTE;
-
-        $nueva_orden->save();
-
-        //armado de la data de los elementos pedidos
-        foreach ($data_elementos_pedidos as $value){
-
-            $data[] = array(
-                'cod_orden' => generar_codigo_orden(),
-                'cod_dimension' => $value['cod_dimension'],
-                'cod_subdimension' => $value['cod_subdimension'],
-                'cod_agrupacion' => $value['cod_agrupacion'],
-                'cod_objeto' => $value['cod_objeto'],
-                'numero_orden' => $value['numero_orden'],
-                'cantidad_solicitada' => $value['cantidad_solicitada']
-            );
+            return Response::json(array(
+                'resultado'=>false, 
+                'mensajes'=> array($e->getMessage())
+            ),500);
         }
 
-        //se crean los elementos pedidos en la orden
-        DB::table('pedidos')->insert($data);
+        
+        DB::commit();
+
+        return Response::json(array(
+                'resultado'=>true, 
+                'mensajes'=> array('Orden generada con exito!')));
+
+
+        
 
     }
 
