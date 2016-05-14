@@ -39,17 +39,17 @@
                 }
             };
         }]);
-       
+
         GlobalApp.directive('ngOnlyNumber', function () {
             return {
                 restrict: 'EA',
                 require: 'ngModel',
-                link: function (scope, element, attrs, ngModel) {   
-                    scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+                link: function (scope, element, attrs, ngModel) {
+                    scope.$watch(attrs.ngModel, function (newValue, oldValue) {
                         var spiltArray = String(newValue).split("");
 
-                        if(attrs.allowNegative == "false") {
-                            if(spiltArray[0] == '-') {
+                        if (attrs.allowNegative == "false") {
+                            if (spiltArray[0] == '-') {
                                 newValue = newValue.replace("-", "");
                                 ngModel.$setViewValue(newValue);
                                 ngModel.$render();
@@ -62,13 +62,13 @@
                             ngModel.$render();
                         }
 
-                        if(spiltArray.length === 0) return;
-                        if(spiltArray.length === 1 && (spiltArray[0] == '-' || spiltArray[0] === '.' )) return;
-                        if(spiltArray.length === 2 && newValue === '-.') return;
-                        
+                        if (spiltArray.length === 0) return;
+                        if (spiltArray.length === 1 && (spiltArray[0] == '-' || spiltArray[0] === '.' )) return;
+                        if (spiltArray.length === 2 && newValue === '-.') return;
+
                         if (isNaN(newValue)) {
-                          ngModel.$setViewValue(oldValue);
-                          ngModel.$render();
+                            ngModel.$setViewValue(oldValue);
+                            ngModel.$render();
                         }
                     });
                 }
@@ -91,6 +91,61 @@
                     $scope.$on('$routeChangeError', ocultarProgress);
                     // Initially element is hidden
                     ocultarProgress();
+                }
+            }
+        }]);
+
+        GlobalApp.directive('ngListenNotificaciones', ['$rootScope', 'ngAudio', '$http', function ($rootScope, ngAudio, $http) {
+            return {
+                restrict: 'AE',
+                link: function ($scope, $element) {
+
+                    $rootScope.$on('evento_verificar_notificaciones', function (event, data) {
+
+                        if (data.estado) {
+                            var data = $rootScope.data_global_user;
+                            var sound = ngAudio.load('/sonidos/sound-noti1.wav');
+
+                            $http({
+                                method: 'GET',
+                                url: '/api/notificaciones/mostrar',
+                                params: {
+                                    id_usuario: data.id_usuario,
+                                    contar: true
+                                }
+                            }).then(
+                                function (data_ajax) {
+                                    var response = data_ajax.data;
+
+                                    if (response.datos != 0) {
+
+                                        //cambiamos el estilo del icono
+                                        $('#icono_barra_notificaciones')
+                                            .removeClass('empty')
+                                            .addClass('inverted');
+
+                                        //cambiamos el color de las notificaciones
+                                        $("#label_numero_notificaciones")
+                                            .removeClass('empty')
+                                            .removeClass('blue')
+                                            .addClass('red');
+
+                                        //Ejecutamos el sonido
+                                        sound.play();
+                                    } else {
+                                        $('#icono_barra_notificaciones').removeClass('inverted').addClass('empty');
+                                        $("#label_numero_notificaciones")
+                                            .removeClass('red')
+                                            .addClass('empty')
+                                            .addClass('blue')
+                                    }
+                                    //Seteamos el numero de notificaciones que viene del backend
+                                    $rootScope.notificaciones.setCount(response.datos);
+                                }
+                            );
+                        }
+
+                    });
                 }
             }
         }]);

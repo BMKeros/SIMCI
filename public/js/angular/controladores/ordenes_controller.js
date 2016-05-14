@@ -14,7 +14,8 @@ simci.controller('OrdenesController', [
         'ToolsService',
         '$templateCache',
         '$window',
-        function ($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache, $window) {
+        'ngAudio',
+        function ($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache, $window, ngAudio) {
 
             $scope.modulo = {};
             $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -41,6 +42,13 @@ simci.controller('OrdenesController', [
                     descripcion: "Esta opcion le permitira ver las ordenes existentes",
                     url: "#/ordenes/ver/todos",
                     icono: 'unhide',
+                    show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA]
+                },
+                {
+                    nombre: "buscar orden",
+                    descripcion: "Esta opcion le permitira buscar una orden por el codigo",
+                    url: "#/ordenes/buscar-orden",
+                    icono: 'search',
                     show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA]
                 }
 
@@ -219,10 +227,10 @@ simci.controller('OrdenesController', [
                                     titulo: 'Orden generada con exito',
                                     mensajes: ['La orden ha sido agregada a la cola de ordenes']
                                 },
-                                CallbackSuccess: function(){
-                                    setTimeout(function(){
+                                CallbackSuccess: function () {
+                                    setTimeout(function () {
                                         $window.location.reload();
-                                    },1000);
+                                    }, 1000);
                                 }
                             })();
                         }
@@ -234,6 +242,25 @@ simci.controller('OrdenesController', [
                     }).set("title", "Confirmar Accion!");
                 };
 
+
+            }// If generar-orden
+
+            if ($location.$$url == '/ordenes/buscar-orden') {
+                $scope.opcion_busqueda = 'busqueda_orden_normal';
+
+                $scope.verificar_opcion = function () {
+                    alert($scope.opcion_busqueda);
+                };
+
+                $scope.onSuccess = function (data) {
+                    //console.log(error);
+                };
+                $scope.onError = function (error) {
+                    //console.log(error);
+                };
+                $scope.onVideoError = function (error) {
+                    console.log(error);
+                };
 
             }
 

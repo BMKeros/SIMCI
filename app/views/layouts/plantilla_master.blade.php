@@ -33,7 +33,7 @@
     <link rel="icon" href="/img/logo.png" type="image/x-icon"/>
 </head>
 
-<body ng-show-progress-loading>
+<body ng-show-progress-loading ng-listen-notificaciones>
 
 <div id="contenedorPadre">
     @yield('contenido-body-master')
@@ -51,6 +51,9 @@
 <script src="/bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="/bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 <script src="/bower_components/angularUtils-pagination/dirPagination.js"></script>
+<script src="/bower_components/angular-qr-scanner/qr-scanner.js"></script>
+<script src="/bower_components/angular-qr-scanner/src/jsqrcode-combined.min.js"></script>
+<script src="/bower_components/angular-audio/app/angular.audio.js"></script>
 
 <!-- plugins datatables -->
 
@@ -63,6 +66,7 @@
 <script src="/bower_components/moment/min/moment-with-locales.min.js"></script>
 <script src="/bower_components/pikaday/pikaday.js"></script>
 <script src="/bower_components/howler.js/howler.min.js"></script>
+
 
 <script src="/js/scripts_app.js"></script>
 <script src="/js/scripts_formularios.js"></script>

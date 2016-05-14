@@ -23,7 +23,8 @@
                     <div class="ui pointing dropdown link item" tabindex="0" ng-click="cargar_notificaciones()"
                          id="item_menu_notificaciones">
                         <i class="circular empty teal alarm icon" id="icono_barra_notificaciones"></i>
-                        <a class="ui blue empty circular label" id="label_numero_notificaciones">0</a>
+                        <a class="ui blue empty circular label"
+                           id="label_numero_notificaciones"><% notificaciones.getCount() %></a>
                         <i class="dropdown icon"></i>
 
                         <div class="menu transition hidden menu_notificaciones" tabindex="-1">
@@ -32,16 +33,16 @@
 
                             <div class="divider"></div>
 
-                            <div ng-show="bandera_loading_notificaciones" class="item loading_notificaciones">
+                            <div ng-show="notificaciones.showLoading()" class="item loading_notificaciones">
                                 <div class="ui active loader"></div>
                             </div>
 
-                            <div class="item" ng-show="notificaciones.length == 0">
+                            <div class="item" ng-show="notificaciones.getTotal() == 0">
                                 <p align="center">No hay notificaciones</p>
                             </div>
 
-                            <div ng-show="bandera_mostrar_notificaciones" class="item"
-                                 ng-repeat="noti in notificaciones track by $index">
+                            <div ng-show="notificaciones.showNotificaciones()" class="item"
+                                 ng-repeat="noti in notificaciones.getAllData() track by $index">
                                 <!--<img class="ui avatar img_item_notificacion" src="/img/perfil-default.jpg">
 								<div class="cuerpo_notificacion">
 									<span class="texto capitalize"><% noti.mensaje %></span> 
