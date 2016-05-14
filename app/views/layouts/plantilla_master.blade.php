@@ -84,7 +84,7 @@
 
     $(document).ready(function () {
         TOOLS_APP.ver_reloj();
-        TOOLS_APP.listen_notificaciones();
+        //TOOLS_APP.listen_notificaciones();
     });
 </script>
 

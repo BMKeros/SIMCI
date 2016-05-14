@@ -55,35 +55,35 @@ CREATE OR REPLACE VIEW vista_objetos_full AS
 DROP VIEW IF EXISTS vista_inventario_full CASCADE;
 CREATE OR REPLACE VIEW vista_inventario_full AS
   SELECT
-    inventario.numero_orden            AS numero_orden,
-    inventario.cantidad_disponible     AS cantidad_disponible,
-    inventario.elemento_movible        AS elemento_movible,
-    inventario.created_at              AS created_at,
-    inventario.updated_at              AS updated_at,
-    almacenes.codigo                   AS cod_dimension,
-    almacenes.descripcion              AS descripcion_dimension,
-    sub_dimensiones.codigo             AS cod_subdimension,
-    sub_dimensiones.descripcion        AS descripcion_subdimension,
-    agrupaciones.codigo                AS cod_agrupacion,
-    agrupaciones.nombre                AS nombre_agrupacion,
-    agrupaciones.descripcion           AS descripcion_agrupacion,
-    sub_agrupaciones.codigo            AS cod_subagrupacion,
-    sub_agrupaciones.nombre            AS nombre_subagrupacion,
-    sub_agrupaciones.descripcion       AS descripcion_subagrupacion,
+    inventario.numero_orden           AS numero_orden,
+    inventario.cantidad_disponible    AS cantidad_disponible,
+    inventario.elemento_movible       AS elemento_movible,
+    inventario.created_at             AS created_at,
+    inventario.updated_at             AS updated_at,
+    almacenes.codigo                  AS cod_dimension,
+    almacenes.descripcion             AS descripcion_dimension,
+    sub_dimensiones.codigo            AS cod_subdimension,
+    sub_dimensiones.descripcion       AS descripcion_subdimension,
+    agrupaciones.codigo               AS cod_agrupacion,
+    agrupaciones.nombre               AS nombre_agrupacion,
+    agrupaciones.descripcion          AS descripcion_agrupacion,
+    sub_agrupaciones.codigo           AS cod_subagrupacion,
+    sub_agrupaciones.nombre           AS nombre_subagrupacion,
+    sub_agrupaciones.descripcion      AS descripcion_subagrupacion,
 
     /*pendiente por evaluar a ver si se queda o se elimina ya que estosw campo se traen en la vista de objetos-laboratorio*/
-    catalogo_objetos.id                AS cod_objeto,
-    catalogo_objetos.nombre            AS nombre_objeto,
-    catalogo_objetos.descripcion       AS descripcion_objeto,
-    catalogo_objetos.especificaciones  AS especificaciones_objeto,
-    unidades.cod_unidad                AS cod_unidad,
-    unidades.nombre                    AS nombre_unidad,
-    unidades.abreviatura               AS abreviatura_unidad,
-    tipos_unidades.id                  AS cod_tipo_unidad,
-    tipos_unidades.nombre              AS nombre_tipo_unidad,
-    clase_objetos.id                   AS cod_clase_objeto,
-    clase_objetos.nombre               AS nombre_clase_objeto,
-    clase_objetos.descripcion          AS descripcion_clase_objeto
+    catalogo_objetos.id               AS cod_objeto,
+    catalogo_objetos.nombre           AS nombre_objeto,
+    catalogo_objetos.descripcion      AS descripcion_objeto,
+    catalogo_objetos.especificaciones AS especificaciones_objeto,
+    unidades.cod_unidad               AS cod_unidad,
+    unidades.nombre                   AS nombre_unidad,
+    unidades.abreviatura              AS abreviatura_unidad,
+    tipos_unidades.id                 AS cod_tipo_unidad,
+    tipos_unidades.nombre             AS nombre_tipo_unidad,
+    clase_objetos.id                  AS cod_clase_objeto,
+    clase_objetos.nombre              AS nombre_clase_objeto,
+    clase_objetos.descripcion         AS descripcion_clase_objeto
 
   FROM inventario
     INNER JOIN almacenes ON almacenes.codigo = inventario.cod_dimension
@@ -169,85 +169,83 @@ CREATE OR REPLACE VIEW vista_stock_laboratorio_full AS
 
 DROP VIEW IF EXISTS vista_elementos_inventario CASCADE;
 CREATE OR REPLACE VIEW vista_elementos_inventario AS
-       SELECT
-        vista_inventario_full.cod_dimension,
-        vista_inventario_full.descripcion_dimension,
-        vista_inventario_full.cod_subdimension, 
-        vista_inventario_full.descripcion_subdimension,
-        vista_inventario_full.cod_agrupacion, 
-        vista_inventario_full.nombre_agrupacion,
-        vista_inventario_full.cod_objeto, 
-        vista_inventario_full.nombre_objeto,
-        sum(vista_inventario_full.cantidad_disponible) AS cantidad_total_disponible,
-        vista_inventario_full.cod_unidad,
-        vista_inventario_full.nombre_unidad,
-        vista_inventario_full.abreviatura_unidad
+  SELECT
+    vista_inventario_full.cod_dimension,
+    vista_inventario_full.descripcion_dimension,
+    vista_inventario_full.cod_subdimension,
+    vista_inventario_full.descripcion_subdimension,
+    vista_inventario_full.cod_agrupacion,
+    vista_inventario_full.nombre_agrupacion,
+    vista_inventario_full.cod_objeto,
+    vista_inventario_full.nombre_objeto,
+    sum(vista_inventario_full.cantidad_disponible) AS cantidad_total_disponible,
+    vista_inventario_full.cod_unidad,
+    vista_inventario_full.nombre_unidad,
+    vista_inventario_full.abreviatura_unidad
 
-    FROM vista_inventario_full
+  FROM vista_inventario_full
 
-    GROUP BY 
-        vista_inventario_full.cod_dimension,
-        vista_inventario_full.descripcion_dimension,
-        vista_inventario_full.cod_subdimension, 
-        vista_inventario_full.descripcion_subdimension,
-        vista_inventario_full.cod_agrupacion, 
-        vista_inventario_full.nombre_agrupacion,
-        vista_inventario_full.cod_objeto, 
-        vista_inventario_full.nombre_objeto,
-        vista_inventario_full.cod_unidad,
-        vista_inventario_full.nombre_unidad,
-        vista_inventario_full.abreviatura_unidad
+  GROUP BY
+    vista_inventario_full.cod_dimension,
+    vista_inventario_full.descripcion_dimension,
+    vista_inventario_full.cod_subdimension,
+    vista_inventario_full.descripcion_subdimension,
+    vista_inventario_full.cod_agrupacion,
+    vista_inventario_full.nombre_agrupacion,
+    vista_inventario_full.cod_objeto,
+    vista_inventario_full.nombre_objeto,
+    vista_inventario_full.cod_unidad,
+    vista_inventario_full.nombre_unidad,
+    vista_inventario_full.abreviatura_unidad
 
-    ORDER BY 
-        nombre_objeto;
+  ORDER BY
+    nombre_objeto;
 
 
 DROP VIEW IF EXISTS vista_reactivos_disponibles CASCADE;
 CREATE OR REPLACE VIEW vista_reactivos_disponibles AS
-    SELECT 
-        DISTINCT
-        inventario.cod_dimension                    AS cod_dimension,
-        inventario.cod_subdimension                 AS cod_subdimension,
-        inventario.cod_agrupacion                   AS cod_agrupacion,
-        inventario.cod_objeto                       AS cod_objeto,
-        inventario.numero_orden                     AS numero_orden,
-        inventario.cantidad_disponible              AS cantidad_disponible
+  SELECT
+    DISTINCT
+    inventario.cod_dimension       AS cod_dimension,
+    inventario.cod_subdimension    AS cod_subdimension,
+    inventario.cod_agrupacion      AS cod_agrupacion,
+    inventario.cod_objeto          AS cod_objeto,
+    inventario.numero_orden        AS numero_orden,
+    inventario.cantidad_disponible AS cantidad_disponible
 
-    FROM inventario 
-    LEFT JOIN elementos_retenidos ON    (inventario.cod_dimension = elementos_retenidos.cod_dimension)        AND
-                                        (inventario.cod_subdimension = elementos_retenidos.cod_subdimension)  AND
-                                        (inventario.cod_agrupacion = elementos_retenidos.cod_agrupacion)      AND
-                                        (inventario.cod_objeto = elementos_retenidos.cod_objeto)              AND
-                                        (inventario.numero_orden = elementos_retenidos.numero_orden)
-                                
-                                WHERE   elementos_retenidos.cod_dimension IS NUll AND 
-                                        elementos_retenidos.cod_subdimension IS NUll AND
-                                        elementos_retenidos.cod_agrupacion IS NUll AND 
-                                        elementos_retenidos.cod_objeto IS NUll AND 
-                                        elementos_retenidos.numero_orden IS NUll;
+  FROM inventario
+    LEFT JOIN elementos_retenidos ON (inventario.cod_dimension = elementos_retenidos.cod_dimension) AND
+                                     (inventario.cod_subdimension = elementos_retenidos.cod_subdimension) AND
+                                     (inventario.cod_agrupacion = elementos_retenidos.cod_agrupacion) AND
+                                     (inventario.cod_objeto = elementos_retenidos.cod_objeto) AND
+                                     (inventario.numero_orden = elementos_retenidos.numero_orden)
+
+  WHERE elementos_retenidos.cod_dimension IS NULL AND
+        elementos_retenidos.cod_subdimension IS NULL AND
+        elementos_retenidos.cod_agrupacion IS NULL AND
+        elementos_retenidos.cod_objeto IS NULL AND
+        elementos_retenidos.numero_orden IS NULL;
 
 
 DROP VIEW IF EXISTS vista_pedidos_full;
 CREATE OR REPLACE VIEW vista_pedidos_full AS
-    SELECT
-        pedidos.codigo_pedido       AS codigo_pedido,
-        pedidos.fecha               AS fecha,
-        pedidos.hora                AS hora,
-        pedidos.numero_orden        AS numero_orden,
-        pedidos.cantidad_solicitada AS cantidad_solicitada,
+  SELECT
+    pedidos.cod_orden                           AS cod_orden,
+    pedidos.cod_dimension                       AS cod_dimension,
+    pedidos.cod_subdimension                    AS cod_subdimension,
+    pedidos.cod_agrupacion                      AS cod_agrupacion,
+    pedidos.cod_objeto                          AS cod_objeto,
+    pedidos.numero_orden                        AS numero_orden,-- Este campo no tiene nada que ver con la orden
+    pedidos.cantidad_solicitada                 AS cantidad_solicitada,
+    vista_objetos_full.nombre_objeto            AS nombre_objeto,
+    vista_objetos_full.descripcion_objeto       AS descripcion_objeto,
+    vista_objetos_full.especificaciones_objeto  AS especificaciones_objeto,
+    vista_objetos_full.cod_unidad               AS cod_unidad,
+    vista_objetos_full.nombre_unidad            AS nombre_unidad,
+    vista_objetos_full.abreviatura_unidad       AS abreviatura_unidad,
+    vista_objetos_full.nombre_tipo_unidad       AS nombre_tipo_unidad,
+    vista_objetos_full.nombre_clase_objeto      AS nombre_clase_objeto,
+    vista_objetos_full.descripcion_clase_objeto AS descripcion_clase_objeto
 
-        
-        pedidos.usuario_id          AS usuario_id,
-        personas.primer_nombre      AS primer_nombre,
-        personas.primer_apellido    AS primer_apellido,
-
-        pedidos.cod_laboratorio     AS cod_laboratorio,
-        laboratorios.nombre         AS nombre_laboratorio,
-
-        pedidos.cod_objeto          AS cod_objeto,
-        catalogo_objetos.nombre     AS nombre_objeto
-
-    FROM pedidos
-    INNER JOIN personas ON personas.usuario_id = pedidos.usuario_id
-    INNER JOIN laboratorios ON laboratorios.codigo = pedidos.cod_laboratorio
-    INNER JOIN catalogo_objetos ON catalogo_objetos.id = pedidos.cod_objeto;
+  FROM pedidos
+    INNER JOIN vista_objetos_full ON vista_objetos_full.cod_objeto = pedidos.cod_objeto;
