@@ -177,7 +177,7 @@ simci.controller('OrdenesController', [
                                         var nuevo_elemento = {
                                             id_item: ToolsService.generar_id_unico(),
                                             nombre_objeto: data_item.nombre_objeto,
-                                            cantidad: $scope.cantidad,
+                                            cantidad_solicitada: $scope.cantidad,
                                             cod_dimension: data_item.cod_dimension,
                                             cod_subdimension: data_item.cod_subdimension,
                                             cod_agrupacion: data_item.cod_agrupacion,
