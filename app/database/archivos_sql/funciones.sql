@@ -46,7 +46,7 @@ CREATE OR REPLACE FUNCTION formato_nombre_completo(nombre TEXT, apellido TEXT)
   DECLARE
     retorno TEXT;
   BEGIN
-    SELECT capitalize(lower(nombre)) || ' (' || capitalize(lower(apellido)) || ')'
+    SELECT capitalize(lower(nombre)) || ' ' || capitalize(lower(apellido))
     INTO retorno;
     RETURN retorno;
   END;
