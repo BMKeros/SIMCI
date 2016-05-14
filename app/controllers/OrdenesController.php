@@ -108,7 +108,7 @@ class OrdenesController extends BaseController
             foreach ($data_elementos_pedidos as $value){
 
                 $data[] = array(
-                    'cod_orden' => generar_codigo_orden(),
+                    'cod_orden' => $nueva_orden->codigo,
                     'cod_dimension' => $value['cod_dimension'],
                     'cod_subdimension' => $value['cod_subdimension'],
                     'cod_agrupacion' => $value['cod_agrupacion'],
