@@ -417,9 +417,9 @@ class InventarioController extends BaseController
         $descripcion = Input::get('descripcion');
 
         $reglas = array(
-            'responsable' => 'required|integer|exists:personas,id',
-            'primer_auxiliar' => 'required|integer|exists:personas,id',
-            'segundo_auxiliar' => 'integer|exists:personas,id',
+            'responsable' => 'required|integer|exists:usuarios,id',
+            'primer_auxiliar' => 'required|integer|exists:usuarios,id',
+            'segundo_auxiliar' => 'integer|exists:usuarios,id',
             'descripcion' => 'required|min:3|max:150'
         );
 
