@@ -116,7 +116,7 @@ simci.controller('InventarioController', [
                         });
                         
                     }
-                }
+                };
 
                 $scope.registrar_elemento = ToolsService.registrar_dinamico($scope, $http, $timeout, {
                     url: '/api/inventario/registrar-elemento',
@@ -130,7 +130,7 @@ simci.controller('InventarioController', [
                     },
                     callbackSuccess: function (_scope) {
                         _scope.$apply(function(){
-                            _scope.DatosForm.elemento_movible = false;
+                            _scope.DatosForm.elemento_movible = true;
                         });
                     }
                 });
