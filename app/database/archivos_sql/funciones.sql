@@ -17,7 +17,7 @@ LANGUAGE plpgsql VOLATILE
 COST 100;
 
 
--- Function: generar_unidad(text, text)
+-- Function: formato_unidad_objeto(text, text)
 
 DROP FUNCTION IF EXISTS formato_unidad_objeto(text, text);
 
@@ -34,6 +34,26 @@ CREATE OR REPLACE FUNCTION formato_unidad_objeto(nombre TEXT, abrev TEXT)
   $BODY$
 LANGUAGE plpgsql VOLATILE
 COST 100;
+
+
+-- Function: formato_nombre_completo(text, text)
+
+DROP FUNCTION IF EXISTS formato_nombre_completo(text, text);
+
+CREATE OR REPLACE FUNCTION formato_nombre_completo(nombre TEXT, apellido TEXT)
+  RETURNS TEXT AS
+  $BODY$
+  DECLARE
+    retorno TEXT;
+  BEGIN
+    SELECT capitalize(lower(nombre)) || ' (' || capitalize(lower(apellido)) || ')'
+    INTO retorno;
+    RETURN retorno;
+  END;
+  $BODY$
+LANGUAGE plpgsql VOLATILE
+COST 100;
+
 
 
 -- Function: permisos_usuario(int)
