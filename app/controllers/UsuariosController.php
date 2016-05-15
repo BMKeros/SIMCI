@@ -82,7 +82,7 @@ class UsuariosController extends BaseController {
 					'usuarios.email as email',
 					'usuarios.created_at',
 					'usuarios.updated_at',
-					DB::raw('permisos_usuario(id) as permisos'),
+					RAW('permisos_usuario(id) as permisos'),
 					'TP.codigo as cod_tipo_usuario',
 					'TP.nombre as nombre_tipo_usuario'
 					)
