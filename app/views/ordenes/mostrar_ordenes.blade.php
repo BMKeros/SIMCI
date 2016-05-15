@@ -6,3 +6,21 @@
       </div>
    </div>
 </div>
+
+
+
+
+<div class="ui long fullscreen basic modal" id="modal_mostrar_orden">
+    <i class="close icon"></i>
+    <div class="header ui centered">
+        Detalles de la orden
+    </div>
+    <div class="content" id="contenedor_modal_orden">
+    </div>
+    <div class="actions">
+        <div class="ui negative button">
+            Cerrar
+        </div>
+    </div>
+</div>
+<!--- Fin Bloque -->

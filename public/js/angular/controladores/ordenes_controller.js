@@ -80,20 +80,20 @@ simci.controller('OrdenesController', [
 
                     DTColumnBuilder.newColumn('id').withTitle('#').notSortable(),
 
-                    DTColumnBuilder.newColumn('codigo').withTitle('Codigo').notSortable(),
+                    DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width','11%').notSortable(),
 
                     DTColumnBuilder.newColumn('nombre_completo_responsable').withTitle('Responsable').notSortable(),
 
                     DTColumnBuilder.newColumn('nombre_completo_solicitante').withTitle('Solicitante').notSortable(),
 
-                    DTColumnBuilder.newColumn('fecha_actividad').withTitle('Fecha Actividad').notSortable(),
+                    DTColumnBuilder.newColumn('fecha_actividad').withTitle('Fecha Actividad').withOption('width','10%').notSortable(),
 
                     DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').notSortable().withClass("warning"),
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
                             return '<div class="ui icon buttons">\
-                                        <button class="ui button"><i class="eye icon"></i></button>\
+                                        <button class="ui button" ng-click="mostrar_orden(\'' + data.codigo + '\')"><i class="eye icon"></i></button>\
                                         <button class="ui button"><i class="align center icon"></i></button>\
                                         <button class="ui button" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i></button>\
                                         <button class="ui button" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i></button>\
@@ -101,15 +101,45 @@ simci.controller('OrdenesController', [
                         }).withOption('width', '17%')
                 ];
 
-                //FUNCIONES
+                $scope.mostrar_orden = function(codigo_orden){
+
+                    var altura_modal = screen.height * .6 + 'px';
+                    var ancho = '100%';
+
+                    var contenedor_modal = document.getElementById('contenedor_modal_orden');
+
+                    //Vaciamos el contenido del modal
+                    contenedor_modal.innerHTML = '';
+                    contenedor_modal.style.padding = '0'; //Quitamos el padding del modal
+                    contenedor_modal.style.minHeight = altura_modal;
+
+                    //Creamos el iframe
+                    var iframe = document.createElement('iframe');
+                    //iframe.frameBorder = "no";
+                    iframe.width = ancho;
+                    //Le colocamos al iframe el heigth del modal
+                    iframe.height = altura_modal;
+                    iframe.setAttribute('allowfullscreen',true);
+                    iframe.setAttribute('webkitallowfullscreen',true);
+
+                    //Asignamos el src para cargar el pdf
+                    iframe.src = '/bower_components/viewerjs/ViewerJS/index.html?zoom=page-width#../../../datasheet/generar-pdf/' + codigo_orden;
+
+                    //Asignamos el nuevo iframe al modal
+                    contenedor_modal.appendChild(iframe);
+
+                    angular.element('#modal_mostrar_orden').modal('show');
+
+                };
+
                 $scope.aceptar_orden = function(codigo){
                     alertify.confirm("Seguro que desea aceptar la orden.", function(){
                         alertify.success('Orden procesada con exito.');
                     },
                     function(){
                         alertify.error('Cancel');
-                    }).set('title', '¡Alerta!');;
-                }
+                    }).set('title', '¡Alerta!');
+                };
 
                 $scope.cancelar_orden = function(codigo){
                     alertify.confirm("Seguro que desea cancelar la orden.", function(){
@@ -117,8 +147,8 @@ simci.controller('OrdenesController', [
                     },
                     function(){
                         alertify.error('Cancel');
-                    }).set('title', '¡Alerta!');;
-                }
+                    }).set('title', '¡Alerta!');
+                };
 
             }
 
