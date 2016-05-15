@@ -11,23 +11,22 @@ class OrdenesController extends BaseController
 
         switch ($tipo_busqueda) {
             case 'paginacion':
+
                 $consulta = DB::table('ordenes')
                     ->select('ordenes.id',
                         'ordenes.codigo',
-                        'formato_nombre_completo(P_R.primer_nombre, P_R.primer_apellido) as nombre_completo_responsable',
-                        'formato_nombre_completo(P_S.primer_nombre, P_S.primer_apellido) as nombre_completo_solicitante',
+                        RAW('formato_nombre_completo(PER1.primer_nombre, PER1.primer_apellido) as nombre_completo_responsable'),
+                        RAW('formato_nombre_completo(PER2.primer_nombre, PER2.primer_apellido) as nombre_completo_solicitante'),
                         'ordenes.fecha_actividad',
                         'ordenes.status',
                         'nombre as nombre_status')
-                    ->join('personas as P_R', 'P_R.id', '=', 'responsable')
-                    ->join('personas as P_S', 'P_S.id', '=','solicitante')
+                    ->leftJoin(RAW('personas AS PER1'), RAW('PER1.usuario_id'), '=', 'ordenes.responsable')
+                    ->leftJoin(RAW('personas AS PER2'), RAW('PER2.usuario_id'), '=','ordenes.solicitante')
                     ->join('estados_ordenes', 'estados_ordenes.codigo', '=', 'status');
 
-
                 $response = $this->generar_paginacion_dinamica($consulta,
-                    array('campo_where' => 'codigo', 'campo_orden' => 'id'));
+                    array('campo_where' => 'ordenes.codigo', 'campo_orden' => 'ordenes.id'));
 
-                
                 break;
 
             case 'agregar_elemento':
@@ -72,11 +71,15 @@ class OrdenesController extends BaseController
                         )
                     );
                 }
-
-                return $response;
-
                 break;
+
+            default:
+                $response = array();
+                break;
+
         }
+
+        return Response::json($response);
     }
     public function postGenerarOrden(){
 
