@@ -95,11 +95,30 @@ simci.controller('OrdenesController', [
                             return '<div class="ui icon buttons">\
                                         <button class="ui button"><i class="eye icon"></i></button>\
                                         <button class="ui button"><i class="align center icon"></i></button>\
-                                        <button class="ui button" ng-click="aceptar_orden("'+data.codigo+'")"><i class="check icon"></i></button>\
-                                        <button class="ui button" ng-click="cancelar_orden("'+data.codigo+'")"><i class="remove icon"></i></button>\
+                                        <button class="ui button" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i></button>\
+                                        <button class="ui button" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i></button>\
                                     </div>';
                         }).withOption('width', '17%')
                 ];
+
+                //FUNCIONES
+                $scope.aceptar_orden = function(codigo){
+                    alertify.confirm("Seguro que desea aceptar la orden.", function(){
+                        alertify.success('Orden procesada con exito.');
+                    },
+                    function(){
+                        alertify.error('Cancel');
+                    }).set('title', '¡Alerta!');;
+                }
+
+                $scope.cancelar_orden = function(codigo){
+                    alertify.confirm("Seguro que desea cancelar la orden.", function(){
+                        alertify.success('Orden cancelada con exito.');
+                    },
+                    function(){
+                        alertify.error('Cancel');
+                    }).set('title', '¡Alerta!');;
+                }
 
             }
 
