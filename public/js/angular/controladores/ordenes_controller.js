@@ -93,10 +93,10 @@ simci.controller('OrdenesController', [
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
                             return '<div class="ui icon buttons">\
-                                        <button class="ui button"><i class="align left icon"></i></button>\
+                                        <button class="ui button"><i class="eye icon"></i></button>\
                                         <button class="ui button"><i class="align center icon"></i></button>\
-                                        <button class="ui button"><i class="align right icon"></i></button>\
-                                        <button class="ui button"><i class="align justify icon"></i></button>\
+                                        <button class="ui button" ng-click="aceptar_orden("'+data.codigo+'")"><i class="check icon"></i></button>\
+                                        <button class="ui button" ng-click="cancelar_orden("'+data.codigo+'")"><i class="remove icon"></i></button>\
                                     </div>';
                         }).withOption('width', '17%')
                 ];
