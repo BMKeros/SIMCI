@@ -77,18 +77,27 @@ simci.controller('OrdenesController', [
                     });
 
                 $scope.columnas_tabla_ordenes = [
-                    DTColumnBuilder.newColumn(null).withTitle('Nombre')
-                        .notSortable(),
 
-                    DTColumnBuilder.newColumn('fecha de actividad').withTitle('Fecha de la actividad').notSortable(),
+                    DTColumnBuilder.newColumn('id').withTitle('#').notSortable(),
 
-                    DTColumnBuilder.newColumn('laboratorio').withTitle('Laboratorio').notSortable(),
+                    DTColumnBuilder.newColumn('codigo').withTitle('Codigo').notSortable(),
+
+                    DTColumnBuilder.newColumn('nombre_completo_responsable').withTitle('Responsable').notSortable(),
+
+                    DTColumnBuilder.newColumn('nombre_completo_solicitante').withTitle('Solicitante').notSortable(),
+
+                    DTColumnBuilder.newColumn('fecha_actividad').withTitle('Fecha Actividad').notSortable(),
+
+                    DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').notSortable().withClass("warning"),
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
-                            return '<div class="ui icon button blue spopup" data-content="Ver Ordenes" ng-click="modal_ver_ordenes(' + data.id + ')"><i class="unhide icon"></i></div>' +
-                                '<div class="ui icon button green spopup"  data-content="Modificar Ordenes" ng-click="modal_modificar_ordenes(' + data.id + ')"><i class="edit icon"></i></div>' +
-                                '<div class="ui icon button red spopup"  data-content="Eliminar Ordenes" ng-click="modal_eliminar_ordenes(' + data.id + ')"><i class="remove icon"></i></div>';
+                            return '<div class="ui icon buttons">\
+                                        <button class="ui button"><i class="align left icon"></i></button>\
+                                        <button class="ui button"><i class="align center icon"></i></button>\
+                                        <button class="ui button"><i class="align right icon"></i></button>\
+                                        <button class="ui button"><i class="align justify icon"></i></button>\
+                                    </div>';
                         }).withOption('width', '17%')
                 ];
 
