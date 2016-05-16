@@ -215,6 +215,44 @@ class OrdenesController extends BaseController
             return Response::json(array('resultado' => false, 'mensajes' => array('El cod_orden no debe quedar vacio')));
         }
     }
+
+    public function postMostrarPedido(){
+        $cod_orden = Input::get('codigo', null);
+
+        //evaluamos que el codigo de la orden no venga ni vacion ni sea null
+        if(is_null($cod_orden) || empty($cod_orden)){
+            return Response::json(array('resultado' => false, 'mensajes' => array('Error codigo de orden no puede estar vacio')));
+        }
+        else{
+            //obtenemos todos los elementos de la tabla pedidos que coincidan con el cod_orden dado
+            $elementos_pedidos = DB::table('pedidos')->select('id', 'cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'cantidad_solicitada', 'numero_orden')
+                                        ->where('cod_orden', '=', $cod_orden)
+                                        ->get();
+
+            foreach ($elementos_pedidos as $value) {
+                //iteramos y verificamos si hay disponibilidad de cada elemento del pedido
+                $elemento_disponible = DB::table('vista_reactivos_disponibles')
+                                ->where('cod_dimension', '=', $value->cod_dimension)
+                                ->where('cod_subdimension', '=', $value->cod_subdimension)
+                                ->where('cod_agrupacion', '=', $value->cod_agrupacion)
+                                ->where('cod_objeto', '=', $value->cod_objeto)
+                                ->where('numero_orden', '=', $value->numero_orden)
+                                ->first();
+            
+                //evaluamos si es distinto de vacio o de null si es asi resultado sera true de lo contrario si no hay
+                //disponibilidad resultado sera false
+                if(!is_null($elemento_disponible) || !empty($elemento_disponible)){
+                    
+                    $disponibilidad[] = array('id_pedido' => $value->id, 'resultado' =>true); 
+                }
+                else{
+                    $disponibilidad[] = array('id_pedido' => $value->id, 'resultado' =>false);
+                }
+            }    
+        }
+
+        return Response::json(array('resultado'=>true, 'data' => $disponibilidad));
+    }
 }
 
 ?>
