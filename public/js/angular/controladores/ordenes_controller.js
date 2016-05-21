@@ -3,7 +3,7 @@
 simci.controller('OrdenesController', [
         '$scope',
         '$http',
-        '$log',
+        '$filter',
         '$timeout',
         '$route',
         '$routeParams',
@@ -15,7 +15,7 @@ simci.controller('OrdenesController', [
         '$templateCache',
         '$window',
         'ngAudio',
-        function ($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache, $window, ngAudio) {
+        function ($scope, $http, $filter, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache, $window, ngAudio) {
 
             $scope.modulo = {};
             $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -69,6 +69,11 @@ simci.controller('OrdenesController', [
                     .withOption('processing', true)
                     .withOption('serverSide', true)
                     .withOption('createdRow', function (row, data, dataIndex) {
+
+                        clase_celda = ToolsService.get_class_status_orden(data.status);
+
+                        row.cells[5].className = clase_celda;
+
                         $compile(angular.element(row).contents())($scope);
 
                         $timeout(function () {
@@ -86,19 +91,24 @@ simci.controller('OrdenesController', [
 
                     DTColumnBuilder.newColumn('nombre_completo_solicitante').withTitle('Solicitante').notSortable(),
 
-                    DTColumnBuilder.newColumn('fecha_actividad').withTitle('Fecha Actividad').withOption('width','10%').notSortable(),
+                    DTColumnBuilder.newColumn(null).renderWith(
+                        function (data, type, full, config) {
 
-                    DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').notSortable().withClass("warning"),
+                            return $filter('formato_fecha')(data.fecha_actividad, 'DD/MM/YY');
+                        }
+                    ).withTitle('Fecha Actividad').withOption('width','10%').notSortable(),
+
+                    DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').notSortable(),
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
                             return '<div class="ui icon buttons">\
                                         <button class="ui button" ng-click="mostrar_orden(\'' + data.codigo + '\')"><i class="eye icon"></i></button>\
-                                        <button class="ui button"><i class="align center icon"></i></button>\
+                                        /<button class="ui button"><i class="align center icon"></i></button>\
                                         <button class="ui button" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i></button>\
                                         <button class="ui button" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i></button>\
                                     </div>';
-                        }).withOption('width', '17%')
+                        }).withOption('width', '17%').notSortable()
                 ];
 
                 $scope.mostrar_orden = function(codigo_orden){
@@ -138,7 +148,7 @@ simci.controller('OrdenesController', [
                     },
                     function(){
                         alertify.error('Cancel');
-                    }).set('title', '¡Alerta!');
+                    }).set('title', '¡Atencion!');
                 };
 
                 $scope.cancelar_orden = function(codigo){
@@ -147,7 +157,7 @@ simci.controller('OrdenesController', [
                     },
                     function(){
                         alertify.error('Cancel');
-                    }).set('title', '¡Alerta!');
+                    }).set('title', '¡Atencion!');
                 };
 
             }
@@ -285,10 +295,21 @@ simci.controller('OrdenesController', [
                                     titulo: 'Orden generada con exito',
                                     mensajes: ['La orden ha sido agregada a la cola de ordenes']
                                 },
-                                CallbackSuccess: function () {
-                                    setTimeout(function () {
-                                        $window.location.reload();
-                                    }, 1000);
+                                callbackSuccess: function (_scope) {
+                                    $timeout(function(){
+                                        _scope.items_tabla_pedidos = [];
+                                        _scope.select_laboratorio = null;
+                                        _scope.select_objeto = "";
+                                        _scope.cantidad = 0;
+                                        _scope.codigos_elemento = '';
+
+                                        _scope.procesar_accion('ver_datos_orden');
+
+
+                                        $('#formulario_generar_orden').form('clear');
+
+                                    });
+
                                 }
                             })();
                         }
