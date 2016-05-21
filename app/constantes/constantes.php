@@ -72,9 +72,9 @@ define('MOV05', 'RETENIDO POR PEDIDO');
 
 
 //Estados ordenes
-define('ACTIVO', 'E01');
-define('PENDIENTE', 'E02');
-define('CANCELADA', 'E03');
-define('COMPLETADA', 'E04');
+define('ORDEN_ACTIVA', 'E01');
+define('ORDEN_PENDIENTE', 'E02');
+define('ORDEN_CANCELADA', 'E03');
+define('ORDEN_COMPLETADA', 'E04');
 
 
