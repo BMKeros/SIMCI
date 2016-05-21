@@ -98,15 +98,15 @@ simci.controller('OrdenesController', [
                         }
                     ).withTitle('Fecha Actividad').withOption('width','10%').notSortable(),
 
-                    DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').notSortable(),
+                    DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').withOption('width','10%').notSortable(),
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
                             return '<div class="ui icon buttons">\
-                                        <button class="ui button" ng-click="mostrar_orden(\'' + data.codigo + '\')"><i class="eye icon"></i></button>\
+                                        <button class="ui blue button" ng-click="mostrar_orden(\'' + data.codigo + '\')"><i class="eye icon"></i></button>\
                                         /<button class="ui button"><i class="align center icon"></i></button>\
-                                        <button class="ui button" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i></button>\
-                                        <button class="ui button" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i></button>\
+                                        <button class="ui green button" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i></button>\
+                                        <button class="ui red button" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i></button>\
                                     </div>';
                         }).withOption('width', '17%').notSortable()
                 ];
