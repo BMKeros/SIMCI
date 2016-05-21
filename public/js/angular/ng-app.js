@@ -249,6 +249,25 @@
                 var string = params.join("\',\'");
                 return this.printf('\'{0}\'', string);
             },
+            //Funcion para obtener la clase css para el estatus de una orden
+            get_class_status_orden: function (status_code) {
+                var clase = "";
+                switch (status_code) {
+                    case 'E01':
+                        clase = 'color-info'; //activo
+                        break;
+                    case 'E02':
+                        clase = 'color-warning'; //pendiente
+                        break;
+                    case 'E03':
+                        clase = 'color-error'; //cancelada
+                        break;
+                    case 'E04':
+                        clase = 'color-success'; // completada
+                        break;
+                }
+                return clase;
+            },
             //Funcion para devolver el mensaje con respecto al codigo http
             get_mensaje_fail_http: function (data_ajax) {
                 var objeto = {};
