@@ -152,11 +152,9 @@
     simci.filter('formato_fecha', function () {
         return function (input, formato) {
             if (input) {
-                var fecha_tmp = input.split('-');
-
                 switch (formato) {
                     case "DD/MM/YY":
-                        return fecha_tmp[2] + "/" + fecha_tmp[1] + "/" + fecha_tmp[0];
+                        return input.split('-').reverse().join('/');
                         break;
 
                     default:
