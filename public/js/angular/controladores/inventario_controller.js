@@ -287,6 +287,7 @@ simci.controller('InventarioController', [
 
                     function getResultsPage(pageNumber) {
                         var parametros = {
+                            type: 'listar_elementos',
                             start: ($scope.ElementosPerPage * (pageNumber - 1)),
                             length: $scope.ElementosPerPage,
                             cod_dimension: cod_dimension,
@@ -295,11 +296,10 @@ simci.controller('InventarioController', [
                             cod_objeto: cod_objeto
                         };
 
-                        var params = encodeURI(angular.element.param(parametros));
-
                         $http({
                             method: 'GET',
-                            url: '/api/inventario/mostrar?type=listar_elementos&' + params
+                            url: '/api/inventario/mostrar',
+                            params: parametros
                         }).then(function (data) {
 
                             $scope.lista_elementos = data.data.data;
