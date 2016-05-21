@@ -241,13 +241,8 @@ class OrdenesController extends BaseController
             
                 //evaluamos si es distinto de vacio o de null si es asi resultado sera true de lo contrario si no hay
                 //disponibilidad resultado sera false
-                if(!is_null($elemento_disponible) || !empty($elemento_disponible)){
-                    
-                    $disponibilidad[] = array('id_pedido' => $value->id, 'resultado' =>true); 
-                }
-                else{
-                    $disponibilidad[] = array('id_pedido' => $value->id, 'resultado' =>false);
-                }
+                $disponibilidad[] = array('id_pedido' => $value->id, 'resultado' => (!is_null($elemento_disponible) || !empty($elemento_disponible)) ? (true) : (false)); 
+                
             }    
         }
 
