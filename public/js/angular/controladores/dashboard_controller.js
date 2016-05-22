@@ -37,17 +37,17 @@ simci.controller('DashboardController', [
                     value: 100
                 },
                 {
-                    color: "green",
+                    color: "grey",
                     label_primario: "objetos en inventario",
                     label_secundario: "",
                     icono: "bullseye icon",
                     value: 1000
                 },
                 {
-                    color: "red",
-                    label_primario: "objetos en laboratorios",
+                    color: "green",
+                    label_primario: "ordenes activas",
                     label_secundario: "",
-                    icono: "lab icon",
+                    icono: "check icon",
                     value: 67
                 },
                 {
