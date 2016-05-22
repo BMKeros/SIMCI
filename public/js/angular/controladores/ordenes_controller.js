@@ -71,8 +71,9 @@ simci.controller('OrdenesController', [
                     .withOption('serverSide', true)
                     .withOption('createdRow', function (row, data, dataIndex) {
 
+                        //Buscamos la clase correspondiente al codigo de la orden
                         clase_celda = ToolsService.get_class_status_orden(data.status);
-
+                        //Asignamos la clase
                         row.cells[5].className = clase_celda;
 
                         $compile(angular.element(row).contents())($scope);
@@ -85,7 +86,11 @@ simci.controller('OrdenesController', [
 
                 $scope.columnas_tabla_ordenes = [
 
-                    DTColumnBuilder.newColumn('id').withTitle('#').notSortable(),
+                    DTColumnBuilder.newColumn(null).renderWith(
+                        function (data, type, full) {
+                            return ToolsService.printf('<a class="ui tiny blue tag label">{0}</a>', data.id);
+                        }
+                    ).withTitle('#').withOption('width', '2%').notSortable(),
 
                     DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width','11%').notSortable(),
 
@@ -111,10 +116,16 @@ simci.controller('OrdenesController', [
                             html += '<i class="dropdown icon"></i>';
                             html += '<div class="menu">';
 
-                            if (data.status == CONSTANTES.ORDEN_CANCELADA) {
-                            } else {
-                                html += '<div class="item" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i>Aceptar orden</div>';
-                                html += '<div class="item" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i>Cancelar orden</div>';
+                            switch (data.status) {
+                                case CONSTANTES.ORDEN_ACTIVA:
+                                    html += '<div class="item" ng-click="completar_orden(\'' + data.codigo + '\')"><i class="edit icon"></i>Completar orden</div>';
+                                    break;
+                                case CONSTANTES.ORDEN_PENDIENTE:
+                                    html += '<div class="item" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i>Aceptar orden</div>';
+                                    html += '<div class="item" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i>Cancelar orden</div>';
+                                    break;
+                                default:
+                                    break;
                             }
 
                             html += '</div></div></div>';
