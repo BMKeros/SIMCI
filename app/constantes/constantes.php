@@ -77,7 +77,7 @@ define('ORDEN_PENDIENTE', 'C02');
 define('ORDEN_CANCELADA', 'C03');
 define('ORDEN_COMPLETADA', 'C04');
 define('DISPONIBLE', 'C05');
-define('NO DISPONIBLE', 'C06');
+define('NO_DISPONIBLE', 'C06');
 define('RETENIDO', 'C07');
 
 
