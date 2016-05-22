@@ -45,7 +45,8 @@ class OrdenesController extends BaseController
 
                 $consulta = DB::table(DB::raw($consulta));
 
-                $data_elemento_seleccionado = $consulta->first();
+
+                $data_elementos_seleccionado = $consulta->get();
 
                 if ($consulta->count() === 0) {
                     $response = array('resultado' => false);
@@ -56,19 +57,25 @@ class OrdenesController extends BaseController
                         ->where('cod_objeto', '=', $cod_objeto)
                         ->first();
 
-                    $response = array(
-                        'resultado' => true,
-                        'datos' => array(
-                            'cod_dimension' => $data_elemento_seleccionado->cod_dimension,
-                            'cod_subdimension' => $data_elemento_seleccionado->cod_subdimension,
-                            'cod_agrupacion' => $data_elemento_seleccionado->cod_agrupacion,
-                            'cod_objeto' => $data_elemento_seleccionado->cod_objeto,
-                            'numero_orden' => $data_elemento_seleccionado->numero_orden,
-                            'cantidad_disponible' => $data_elemento_seleccionado->cantidad_disponible,
+                    $array_elementos_seleccionados = array();
+
+                    foreach ($data_elementos_seleccionado as $elemento_seleccionado) {
+                		$array_elementos_seleccionados[] = array(
+                            'cod_dimension' => $elemento_seleccionado->cod_dimension,
+                            'cod_subdimension' => $elemento_seleccionado->cod_subdimension,
+                            'cod_agrupacion' => $elemento_seleccionado->cod_agrupacion,
+                            'cod_objeto' => $elemento_seleccionado->cod_objeto,
+                            'numero_orden' => $elemento_seleccionado->numero_orden,
+                            'cantidad_disponible' => $elemento_seleccionado->cantidad_disponible,
                             'nombre_objeto' => $data_obj->nombre,
                             'unidad' => $data_obj->unidad,
                             'clase_objeto' => $data_obj->clase_objeto
-                        )
+                        );
+                	}
+
+                    $response = array(
+                        'resultado' => true,
+                        'datos' => $array_elementos_seleccionados
                     );
                 }
                 break;
@@ -195,8 +202,8 @@ class OrdenesController extends BaseController
                                 'cod_agrupacion' => $elemento->cod_agrupacion,
                                 'cod_objeto' => $elemento->cod_objeto,
                                 'numero_orden' => $elemento->numero_orden,
-                                'cantidad_existente' => null,//null por ahora hasta que se decida si se va a quitar el campo o no
-                                'cantidad_solicitada' => $elemento->cantidad_disponible
+                                'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
+                                'cantidad_solicitada' => $elemento->cantidad_solicitada
                             );
 
                         }
