@@ -180,10 +180,10 @@ simci.controller('OrdenesController', [
 
                                 if (data.data.resultado) {
                                     ToolsService.reload_tabla($scope, 'tabla_ordenes', function () {
-                                        alertify.success('Orden '+_codigo+' procesada con exito.');
+                                        alertify.success('Orden ' + _codigo + ' procesada con exito.');
                                     });
                                 }
-                                else{
+                                else {
                                     alertify.error(data.data.mensajes[0]);
                                 }
                             },
@@ -209,10 +209,10 @@ simci.controller('OrdenesController', [
 
                                 if (data.data.resultado) {
                                     ToolsService.reload_tabla($scope, 'tabla_ordenes', function () {
-                                        alertify.success('Orden '+_codigo+' cancelada con exito.');
+                                        alertify.success('Orden ' + _codigo + ' cancelada con exito.');
                                     });
                                 }
-                                else{
+                                else {
                                     alertify.error(data.data.mensajes[0]);
                                 }
                             },
@@ -301,11 +301,11 @@ simci.controller('OrdenesController', [
                                     var existe = 0;
 
                                     $scope.items_tabla_pedidos.forEach(function (obj, index, array) {
-                                        data_items.forEach(function(item){
-                                          if((obj.cod_dimension == item.cod_dimension) && (obj.cod_subdimension == item.cod_subdimension) && (obj.cod_agrupacion == item.cod_agrupacion) && (obj.cod_objeto == item.cod_objeto)){
-                                            existe++;
-                                            return;
-                                          }
+                                        data_items.forEach(function (item) {
+                                            if ((obj.cod_dimension == item.cod_dimension) && (obj.cod_subdimension == item.cod_subdimension) && (obj.cod_agrupacion == item.cod_agrupacion) && (obj.cod_objeto == item.cod_objeto)) {
+                                                existe++;
+                                                return;
+                                            }
                                         });
                                     });
 
@@ -313,30 +313,42 @@ simci.controller('OrdenesController', [
                                     if (existe === 0) {
 
                                         var nuevo_elemento = {};
+                                        var cantidad_solicitada = $scope.cantidad;
                                         var cantidad_real_solicitada = 0;
+                                        var cantidad_restante = 0;
+
 
 //******************* FALTA ARREGLAR AQUI LA PARTE DE LA CANTIDAD CUANDO SON DOS RACTIVO */////////////////////////
 //*****************************************************************************************************
-                                        data_items.forEach(function(item){
+                                        data_items.forEach(function (item) {
 
-                                          cantidad_real_solicitada = ($scope.cantidad + cantidad_real_solicitada) - Number(item.cantidad_disponible) ;
-                                            
-                                          nuevo_elemento = {
-                                            id_item: ToolsService.generar_id_unico(),
-                                            nombre_objeto: item.nombre_objeto,
-                                            cantidad_solicitada: cantidad_real_solicitada,
-                                            cod_dimension: item.cod_dimension,
-                                            cod_subdimension: item.cod_subdimension,
-                                            cod_agrupacion: item.cod_agrupacion,
-                                            cod_objeto: item.cod_objeto,
-                                            numero_orden: item.numero_orden,
-                                            unidad: item.unidad,
-                                            clase_objeto: item.clase_objeto
-                                          };
+                                            if (data_items.length > 1) {
+                                                cantidad_restante = Number(cantidad_solicitada) - Number(item.cantidad_disponible);
+                                                if(cantidad_restante > 0){
+                                                    cantidad_real_solicitada = Number(item.cantidad_disponible);
+                                                    cantidad_solicitada = cantidad_restante;
+                                                }else{
+                                                    cantidad_real_solicitada = cantidad_solicitada;
+                                                }
 
-                                          console.log(cantidad_real_solicitada);
+                                            } else {
+                                                cantidad_real_solicitada = cantidad_solicitada;
+                                            }
 
-                                          $scope.items_tabla_pedidos.push(nuevo_elemento);
+                                            nuevo_elemento = {
+                                                id_item: ToolsService.generar_id_unico(),
+                                                nombre_objeto: item.nombre_objeto,
+                                                cantidad_solicitada: cantidad_real_solicitada,
+                                                cod_dimension: item.cod_dimension,
+                                                cod_subdimension: item.cod_subdimension,
+                                                cod_agrupacion: item.cod_agrupacion,
+                                                cod_objeto: item.cod_objeto,
+                                                numero_orden: item.numero_orden,
+                                                unidad: item.unidad,
+                                                clase_objeto: item.clase_objeto
+                                            };
+
+                                            $scope.items_tabla_pedidos.push(nuevo_elemento);
 
                                         });
 
