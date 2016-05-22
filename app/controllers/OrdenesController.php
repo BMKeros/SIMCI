@@ -122,7 +122,7 @@ class OrdenesController extends BaseController
             $nueva_orden->hora = date("H:i:s");
             $nueva_orden->cod_laboratorio = $cod_laboratorio;
             $nueva_orden->observaciones = $observaciones;
-            $nueva_orden->status = PENDIENTE;
+            $nueva_orden->status = ORDEN_PENDIENTE;
 
             $nueva_orden->save();
 
