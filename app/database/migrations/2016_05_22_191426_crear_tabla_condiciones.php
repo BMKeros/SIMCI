@@ -17,7 +17,6 @@ class CrearTablaCondiciones extends Migration {
 			$table->string('codigo', 3);
 			$table->primary('codigo');
 			$table->string('nombre', 50);
-			$table->timestamps();
 		});
 	}
 
