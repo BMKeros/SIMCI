@@ -13,10 +13,10 @@
     });
 
     simci.constant('CONSTANTES', {
-        'ORDEN_ACTIVA': 'E01',
-        'ORDEN_PENDIENTE': 'E02',
-        'ORDEN_CANCELADA': 'E03',
-        'ORDEN_COMPLETADA': 'E04'
+        'ORDEN_ACTIVA': 'C01',
+        'ORDEN_PENDIENTE': 'C02',
+        'ORDEN_CANCELADA': 'C03',
+        'ORDEN_COMPLETADA': '04'
     });
 
     simci.run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http, $interval) {
