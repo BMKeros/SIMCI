@@ -164,51 +164,65 @@ class OrdenesController extends BaseController
 
     public function postProcesarOrden(){
         $codigo_orden = Input::get('codigo_orden');
-        $cod_nuevo_estado = Input::get('cod_nuevo_estado');
+        $accion_orden = Input::get('accion_orden');
 
         if(!is_null($codigo_orden)){
-            if(!is_null($cod_nuevo_estado)){
+            if (!is_null($accion_orden)) {
 
-                //actualizar el estado de la orden
-                DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => $cod_nuevo_estado]);
+                $response = []; //Mensajes que se enviaran en el response
 
-                if($cod_nuevo_estado == COMPLETADA){
+                switch (strtoupper($accion_orden)) {
+                    case 'ACEPTAR':
 
+                        //actualizar el estado de la orden
+                        DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_ACTIVA]);
 
-                    //obtenemos todos lo elementos de la orden procesada
-                    $elementos = DB::table('pedidos')->select('cod_dimension',
-                        'cod_subdimension',
-                        'cod_agrupacion',
-                        'cod_objeto',
-                        'numero_orden',
-                        'cantidad_solicitada')
-                        ->where('cod_orden', '=', $codigo_orden)
-                        ->get();
+                        //obtenemos todos lo elementos de la orden procesada
+                        $elementos = DB::table('pedidos')->select('cod_dimension',
+                            'cod_subdimension',
+                            'cod_agrupacion',
+                            'cod_objeto',
+                            'numero_orden',
+                            'cantidad_solicitada')
+                            ->where('cod_orden', '=', $codigo_orden)
+                            ->get();
 
-                    foreach($elementos as $elemento){
+                        foreach ($elementos as $elemento) {
 
-                        $data_elementos_pedidos[] = array(
-                            'cod_dimension' => $elemento->cod_dimension,
-                            'cod_subdimension' => $elemento->cod_subdimension,
-                            'cod_agrupacion' => $elemento->cod_agrupacion,
-                            'cod_objeto' => $elemento->cod_objeto,
-                            'numero_orden' => $elemento->numero_orden,
-                            'cantidad_existente' => null,//null por ahora hasta que se decida si se va a quitar el campo o no
-                            'cantidad_solicitada' => $elemento->cantidad_disponible
-                        );
+                            $data_elementos_pedidos[] = array(
+                                'cod_dimension' => $elemento->cod_dimension,
+                                'cod_subdimension' => $elemento->cod_subdimension,
+                                'cod_agrupacion' => $elemento->cod_agrupacion,
+                                'cod_objeto' => $elemento->cod_objeto,
+                                'numero_orden' => $elemento->numero_orden,
+                                'cantidad_existente' => null,//null por ahora hasta que se decida si se va a quitar el campo o no
+                                'cantidad_solicitada' => $elemento->cantidad_disponible
+                            );
 
-                    }
+                        }
 
-                    DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
+                        DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
 
-                    return Response::json(array('resultado' => true, 'mensajes' => array('Orden procesada con exito.!')));
+                        $response = ['resultado' => true, 'mensajes' => ['Orden aceptada con exito.!']];
+
+                        break;
+                    case 'CANCELAR':
+                        //actualizar el estado de la orden
+                        DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_CANCELADA]);
+
+                        $response = ['resultado' => true, 'mensajes' => ['Orden cancelada con exito.!']];
+
+                        break;
+
+                    default:
+                        $response = ['resultado' => false, 'mensajes' => ['Error no se ha especificado una accion para esta orden']];
+                        break;
+
                 }
-                else if($cod_nuevo_estado == CANCELADA){
-                    return Response::json(array('resultado' => true, 'mensajes' => array('Orden cancelada con exito.!')));
-                }
+                return Response::json($response);
             }
             else{
-                return Response::json(array('resultado' => false, 'mensajes' => array('El cod_estado de orden no debe quedar vacio')));
+                return Response::json(array('resultado' => false, 'mensajes' => array('La accion que se aplicara a la orden no debe quedar vacio')));
             }
         }
         else{

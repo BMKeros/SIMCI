@@ -15,7 +15,8 @@ simci.controller('OrdenesController', [
         '$templateCache',
         '$window',
         'ngAudio',
-        function ($scope, $http, $filter, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache, $window, ngAudio) {
+        'CONSTANTES',
+        function ($scope, $http, $filter, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache, $window, ngAudio, CONSTANTES) {
 
             $scope.modulo = {};
             $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -78,6 +79,7 @@ simci.controller('OrdenesController', [
 
                         $timeout(function () {
                             $('.ui.spopup').popup();
+                            $('.dropdown').dropdown();
                         }, false, 0);
                     });
 
@@ -102,13 +104,24 @@ simci.controller('OrdenesController', [
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
-                            return '<div class="ui icon buttons">\
-                                        <button class="ui blue button" ng-click="mostrar_orden(\'' + data.codigo + '\')"><i class="eye icon"></i></button>\
-                                        <button class="ui button"><i class="align center icon"></i></button>\
-                                        <button class="ui green button" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i></button>\
-                                        <button class="ui red button" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i></button>\
-                                    </div>';
-                        }).withOption('width', '17%').notSortable()
+
+                            html = '<div class="ui blue buttons">';
+                            html += '<div class="ui button" ng-click="mostrar_orden(\'' + data.codigo + '\')"><i class="eye icon"></i>Ver</div>';
+                            html += '<div class="ui floating dropdown icon button">';
+                            html += '<i class="dropdown icon"></i>';
+                            html += '<div class="menu">';
+
+                            if (data.status == CONSTANTES.ORDEN_CANCELADA) {
+                            } else {
+                                html += '<div class="item" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i>Aceptar orden</div>';
+                                html += '<div class="item" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i>Cancelar orden</div>';
+                            }
+
+                            html += '</div></div></div>';
+
+                            return html;
+
+                        }).withOption('width', '13%').notSortable()
                 ];
 
                 $scope.mostrar_orden = function(codigo_orden){
@@ -151,12 +164,29 @@ simci.controller('OrdenesController', [
                     }).set('title', '¡Atencion!');
                 };
 
-                $scope.cancelar_orden = function(codigo){
+                $scope.cancelar_orden = function (_codigo) {
                     alertify.confirm("Seguro que desea cancelar la orden.", function(){
-                        alertify.success('Orden cancelada con exito.');
-                    },
-                    function(){
-                        alertify.error('Cancel');
+
+                        $http({
+                            method: 'POST',
+                            url: '/api/ordenes/procesar-orden',
+                            data: {
+                                accion_orden: 'cancelar',
+                                codigo_orden: _codigo
+                            }
+                        }).then(
+                            function (data) {
+
+                                if (data.data.resultado) {
+                                    ToolsService.reload_tabla($scope, 'tabla_ordenes', function () {
+                                        alertify.success('Orden cancelada con exito.');
+                                    });
+                                }
+                            },
+                            function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
                     }).set('title', '¡Atencion!');
                 };
 
@@ -303,11 +333,9 @@ simci.controller('OrdenesController', [
                                         _scope.cantidad = 0;
                                         _scope.codigos_elemento = '';
 
-                                        _scope.procesar_accion('ver_datos_orden');
+                                        $('#formulario_generar_orden').form('clear'); // limpiamos el formulario
 
-
-                                        $('#formulario_generar_orden').form('clear');
-
+                                        _scope.procesar_accion('ver_datos_orden'); // Mostramos el formulario de datos orden
                                     });
 
                                 }
