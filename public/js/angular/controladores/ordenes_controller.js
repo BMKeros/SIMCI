@@ -92,7 +92,7 @@ simci.controller('OrdenesController', [
                         }
                     ).withTitle('#').withOption('width', '2%').notSortable(),
 
-                    DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width','11%').notSortable(),
+                    DTColumnBuilder.newColumn('codigo').withTitle('Codigo').withOption('width', '11%').notSortable(),
 
                     DTColumnBuilder.newColumn('nombre_completo_responsable').withTitle('Responsable').notSortable(),
 
@@ -103,9 +103,9 @@ simci.controller('OrdenesController', [
 
                             return $filter('formato_fecha')(data.fecha_actividad, 'DD/MM/YY');
                         }
-                    ).withTitle('Fecha Actividad').withOption('width','10%').notSortable(),
+                    ).withTitle('Fecha Actividad').withOption('width', '10%').notSortable(),
 
-                    DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').withOption('width','10%').notSortable(),
+                    DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').withOption('width', '10%').notSortable(),
 
                     DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                         function (data, type, full) {
@@ -135,7 +135,7 @@ simci.controller('OrdenesController', [
                         }).withOption('width', '13%').notSortable()
                 ];
 
-                $scope.mostrar_orden = function(codigo_orden){
+                $scope.mostrar_orden = function (codigo_orden) {
 
                     var altura_modal = screen.height * .6 + 'px';
                     var ancho = '100%';
@@ -153,8 +153,8 @@ simci.controller('OrdenesController', [
                     iframe.width = ancho;
                     //Le colocamos al iframe el heigth del modal
                     iframe.height = altura_modal;
-                    iframe.setAttribute('allowfullscreen',true);
-                    iframe.setAttribute('webkitallowfullscreen',true);
+                    iframe.setAttribute('allowfullscreen', true);
+                    iframe.setAttribute('webkitallowfullscreen', true);
 
                     //Asignamos el src para cargar el pdf
                     iframe.src = '/bower_components/viewerjs/ViewerJS/index.html?zoom=page-width#../../../datasheet/generar-pdf/' + codigo_orden;
@@ -167,16 +167,35 @@ simci.controller('OrdenesController', [
                 };
 
                 $scope.aceptar_orden = function (_codigo) {
-                    alertify.confirm("Seguro que desea aceptar la orden.", function(){
-                            alertify.success('Orden procesada con exito.' + _codigo);
-                    },
-                    function(){
-                        alertify.error('Cancel');
+                    alertify.confirm("Seguro que desea aceptar la orden.", function () {
+                        $http({
+                            method: 'POST',
+                            url: '/api/ordenes/procesar-orden',
+                            data: {
+                                accion_orden: 'aceptar',
+                                codigo_orden: _codigo
+                            }
+                        }).then(
+                            function (data) {
+
+                                if (data.data.resultado) {
+                                    ToolsService.reload_tabla($scope, 'tabla_ordenes', function () {
+                                        alertify.success('Orden '+_codigo+' procesada con exito.');
+                                    });
+                                }
+                                else{
+                                    alertify.error(data.data.mensajes[0]);
+                                }
+                            },
+                            function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
                     }).set('title', '¡Atencion!');
                 };
 
                 $scope.cancelar_orden = function (_codigo) {
-                    alertify.confirm("Seguro que desea cancelar la orden.", function(){
+                    alertify.confirm("Seguro que desea cancelar la orden.", function () {
 
                         $http({
                             method: 'POST',
@@ -190,8 +209,11 @@ simci.controller('OrdenesController', [
 
                                 if (data.data.resultado) {
                                     ToolsService.reload_tabla($scope, 'tabla_ordenes', function () {
-                                        alertify.success('Orden cancelada con exito.');
+                                        alertify.success('Orden '+_codigo+' cancelada con exito.');
                                     });
+                                }
+                                else{
+                                    alertify.error(data.data.mensajes[0]);
                                 }
                             },
                             function (data_error) {
@@ -273,30 +295,51 @@ simci.controller('OrdenesController', [
 
                                 if (data.data.resultado) {
 
-                                    var data_item = data.data.datos;
+                                    var data_items = data.data.datos;
 
                                     //Verificamos que no se repita el elemento en la lista
-                                    var existe = $scope.items_tabla_pedidos.findIndex(function (obj, index, array) {
-                                        return (obj.cod_dimension == data_item.cod_dimension) && (obj.cod_subdimension == data_item.cod_subdimension) && (obj.cod_agrupacion == data_item.cod_agrupacion) && (obj.cod_objeto == data_item.cod_objeto);
+                                    var existe = 0;
+
+                                    $scope.items_tabla_pedidos.forEach(function (obj, index, array) {
+                                        data_items.forEach(function(item){
+                                          if((obj.cod_dimension == item.cod_dimension) && (obj.cod_subdimension == item.cod_subdimension) && (obj.cod_agrupacion == item.cod_agrupacion) && (obj.cod_objeto == item.cod_objeto)){
+                                            existe++;
+                                            return;
+                                          }
+                                        });
                                     });
 
                                     //Si no existe el nuevo elemento el la lista lo agregamos
-                                    if (existe === -1) {
+                                    if (existe === 0) {
 
-                                        var nuevo_elemento = {
+                                        var nuevo_elemento = {};
+                                        var cantidad_real_solicitada = 0;
+
+//******************* FALTA ARREGLAR AQUI LA PARTE DE LA CANTIDAD CUANDO SON DOS RACTIVO */////////////////////////
+//*****************************************************************************************************
+                                        data_items.forEach(function(item){
+
+                                          cantidad_real_solicitada = ($scope.cantidad + cantidad_real_solicitada) - Number(item.cantidad_disponible) ;
+                                            
+                                          nuevo_elemento = {
                                             id_item: ToolsService.generar_id_unico(),
-                                            nombre_objeto: data_item.nombre_objeto,
-                                            cantidad_solicitada: $scope.cantidad,
-                                            cod_dimension: data_item.cod_dimension,
-                                            cod_subdimension: data_item.cod_subdimension,
-                                            cod_agrupacion: data_item.cod_agrupacion,
-                                            cod_objeto: data_item.cod_objeto,
-                                            numero_orden: data_item.numero_orden,
-                                            unidad: data_item.unidad,
-                                            clase_objeto: data_item.clase_objeto
-                                        };
+                                            nombre_objeto: item.nombre_objeto,
+                                            cantidad_solicitada: cantidad_real_solicitada,
+                                            cod_dimension: item.cod_dimension,
+                                            cod_subdimension: item.cod_subdimension,
+                                            cod_agrupacion: item.cod_agrupacion,
+                                            cod_objeto: item.cod_objeto,
+                                            numero_orden: item.numero_orden,
+                                            unidad: item.unidad,
+                                            clase_objeto: item.clase_objeto
+                                          };
 
-                                        $scope.items_tabla_pedidos.push(nuevo_elemento);
+                                          console.log(cantidad_real_solicitada);
+
+                                          $scope.items_tabla_pedidos.push(nuevo_elemento);
+
+                                        });
+
                                     }
                                     else {
                                         alertify.error("Ya agregaste un elemento igual a este en la lista");
@@ -337,7 +380,7 @@ simci.controller('OrdenesController', [
                                     mensajes: ['La orden ha sido agregada a la cola de ordenes']
                                 },
                                 callbackSuccess: function (_scope) {
-                                    $timeout(function(){
+                                    $timeout(function () {
                                         _scope.items_tabla_pedidos = [];
                                         _scope.select_laboratorio = null;
                                         _scope.select_objeto = "";
