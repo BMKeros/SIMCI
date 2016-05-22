@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', array('uses' => 'AutenticacionController@getLogin'));
 
 //Metodo para Ng-route
@@ -23,6 +24,19 @@ Route::get('/views/{folder}/{name_template}', function ($folder, $name_template)
     } else {
         return Response::json("Vista no Encontrada [404]", 404);
     }
+});
+
+Route::get('/estadisticas', function () {
+    $datos = DB::select(RAW("SELECT
+        (SELECT count(*) FROM usuarios)::INTEGER AS total_usuarios,
+        (SELECT count(*) FROM catalogo_objetos)::INTEGER AS total_objetos,
+        (SELECT count(*) FROM inventario)::INTEGER AS total_elementos,
+        (SELECT count(*) FROM ordenes WHERE status = 'E01')::INTEGER AS total_ordenes_activas,
+        (SELECT count(*) FROM ordenes WHERE status = 'E02')::INTEGER AS total_ordenes_pendientes;
+    "));
+
+
+    return Response::json(['indicadores' => $datos[0]]);
 });
 
 //Aqui van todos los controladores que se prestaran como api
