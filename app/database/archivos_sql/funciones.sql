@@ -455,6 +455,10 @@ CREATE OR REPLACE FUNCTION public.seleccionar_elemento_disponible(
                                                         T1.cod_agrupacion = T2.cod_agrupacion AND
                                                         T1.cod_objeto = T2.cod_objeto
           WHERE
+            T1.cod_dimension = _cod_dimension AND T2.cod_dimension = _cod_dimension AND
+            T1.cod_subdimension = _cod_subdimension AND T2.cod_subdimension = _cod_subdimension AND
+            T1.cod_agrupacion = _cod_agrupacion AND T2.cod_agrupacion = _cod_agrupacion AND
+            T1.cod_objeto = _cod_objeto AND T2.cod_objeto = _cod_objeto AND
             T1.numero_orden <> T2.numero_orden AND
             (T1.cantidad_disponible + T2.cantidad_disponible) >= _cantidad_solicitada
           GROUP BY
