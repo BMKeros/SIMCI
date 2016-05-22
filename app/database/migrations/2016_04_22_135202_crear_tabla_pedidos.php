@@ -21,7 +21,8 @@ class CrearTablaPedidos extends Migration {
 			$table->string('cod_agrupacion', 3);
 			$table->integer('cod_objeto');
 			$table->integer('numero_orden');
-			$table->decimal('cantidad_solicitada');	
+			$table->decimal('cantidad_solicitada');
+			$table->string('status_elemento', 3);	
 
 			$table->nullableTimestamps();
 		});
