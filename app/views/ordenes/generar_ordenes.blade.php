@@ -133,7 +133,7 @@
                             ng-animate="'animate'" class="animate-repeat">
                             <td><% elemento.nombre_objeto | lowercase | capitalize%></td>
                             <td class="ui center aligned"><div class="ui teal horizontal label"><% elemento.clase_objeto %></div></td>
-                            <td class="ui center aligned"><% elemento.cantidad %></td>
+                            <td class="ui center aligned"><% elemento.cantidad_solicitada %></td>
                             <td><% elemento.unidad %></td>
                             <td>
                                 <button class="ui  icon small button" id="btn_action_item_orden"
