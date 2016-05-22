@@ -71,10 +71,13 @@ define('MOV04', 'RETENIDO STOCK');
 define('MOV05', 'RETENIDO POR PEDIDO');
 
 
-//Estados ordenes
-define('ORDEN_ACTIVA', 'E01');
-define('ORDEN_PENDIENTE', 'E02');
-define('ORDEN_CANCELADA', 'E03');
-define('ORDEN_COMPLETADA', 'E04');
+//Condiciones para ordenes
+define('ORDEN_ACTIVA', 'C01');
+define('ORDEN_PENDIENTE', 'C02');
+define('ORDEN_CANCELADA', 'C03');
+define('ORDEN_COMPLETADA', 'C04');
+define('DISPONIBLE', 'C05');
+define('NO DISPONIBLE', 'C06');
+define('RETENIDO', 'C07');
 
 
