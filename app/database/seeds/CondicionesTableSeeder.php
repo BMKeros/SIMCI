@@ -4,7 +4,7 @@ class CondicionesTableSeeder extends Seeder
 {
     public function run()
     {
-        DB::table('estados_ordenes')->delete();
+        DB::table('condiciones')->delete();
 
         $campos = array(
             array('codigo' => ORDEN_ACTIVA, 'nombre' => 'Activa'),
@@ -17,6 +17,6 @@ class CondicionesTableSeeder extends Seeder
 
         );
 
-        DB::table('estados_ordenes')->insert($campos);
+        DB::table('condiciones')->insert($campos);
     }
 }
