@@ -28,7 +28,7 @@ class CrearTablaCondiciones extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('condiciones');
+		drop_cascade('condiciones');
 	}
 
 }

@@ -175,6 +175,12 @@ class CrearIndexTablas extends Migration
             $table->foreign('status')->references('codigo')
                 ->on('condiciones');
         });
+
+        //PEDIDOS-CONDICIONES_ORDENES
+        Schema::table('pedidos', function($table){
+            $table->foreign('status_elemento')->references('codigo')
+                ->on('condiciones');
+        });
     }
 
     /**
