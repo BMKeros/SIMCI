@@ -144,6 +144,7 @@ class OrdenesController extends BaseController
                     'cod_objeto' => $value['cod_objeto'],
                     'numero_orden' => $value['numero_orden'],
                     'cantidad_solicitada' => $value['cantidad_solicitada'],
+                    'status_elemento' => DISPONIBLE,
                     'created_at' => get_now(),
                     'updated_at' => get_now()
                 );
