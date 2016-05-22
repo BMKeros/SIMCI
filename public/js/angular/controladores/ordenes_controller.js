@@ -69,7 +69,7 @@ simci.controller('OrdenesController', [
                     .withPaginationType('full_numbers')
                     .withOption('processing', true)
                     .withOption('serverSide', true)
-                    .withOption('createdRow', function (row, data, dataIndex) {
+                    .withOption('createdRow', function (row, data) {
 
                         //Buscamos la clase correspondiente al codigo de la orden
                         clase_celda = ToolsService.get_class_status_orden(data.status);
@@ -166,9 +166,9 @@ simci.controller('OrdenesController', [
 
                 };
 
-                $scope.aceptar_orden = function(codigo){
+                $scope.aceptar_orden = function (_codigo) {
                     alertify.confirm("Seguro que desea aceptar la orden.", function(){
-                        alertify.success('Orden procesada con exito.');
+                            alertify.success('Orden procesada con exito.' + _codigo);
                     },
                     function(){
                         alertify.error('Cancel');
