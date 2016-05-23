@@ -13,6 +13,16 @@ function get_now()
     return date("Y-m-d H:i:s");
 }
 
+function get_fecha()
+{
+    return date("Y-m-d");
+}
+
+function get_hora()
+{
+    return date("H:i:s");
+}
+
 function drop_cascade($table = null)
 {
     if (Schema::hasTable($table)) {
@@ -148,9 +158,41 @@ function get_array_permisos_usuario($id_usuario = null)
 
 function generar_codigo_orden()
 {
-
     $hash = hash('crc32b', uniqid(rand(), true));
 
     return 'O-' . strtoupper($hash);
 }
 
+function crear_notificacion($mensaje = null, $receptor_id = null)
+{
+    if (!is_null($mensaje) && !is_null($receptor_id)) {
+
+
+        DB::beginTransaction();
+
+        try {
+            $id_mensaje = DB::table('mensajes')->insertGetId(['mensaje' => $mensaje]);
+
+            DB::table('notificaciones')->insert([
+                'mensaje_id' => $id_mensaje,
+                'fecha' => get_fecha(),
+                'hora' => get_hora(),
+                'emisor' => Auth::user()->id,
+                'receptor' => $receptor_id,
+                'created_at' => get_now(),
+                'updated_at' => get_now()
+            ]);
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+            //$e->getMessage()
+            return false;
+        }
+
+        DB::commit();
+
+        return true;
+    } else {
+        return false;
+    }
+}
