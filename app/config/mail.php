@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'smtp',
+	'driver' => 'mailgun',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => null, 'name' => null),
+	'from' => array('address' => Config::get('simci.MAILGUN.EMAIL'), 'name' => Config::get('simci.MAILGUN.NOMBRE')),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => null,
+	'username' => Config::get('simci.MAILGUN.USUARIO'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => null,
+	'password' => Config::get('simci.MAILGUN.PASS'),
 
 	/*
 	|--------------------------------------------------------------------------
