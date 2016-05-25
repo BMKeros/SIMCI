@@ -15,8 +15,8 @@ return array(
 	*/
 
 	'mailgun' => array(
-		'domain' => '',
-		'secret' => '',
+		'domain' => Config::get('simci.MAILGUN.API.URL'),
+		'secret' => Config::get('simci.MAILGUN.API.KEY'),
 	),
 
 	'mandrill' => array(
