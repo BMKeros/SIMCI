@@ -7,7 +7,7 @@ return [
         'EMAIL' => 'bmkeros@gmail.com',
         'NOMBRE' => "BMKero's",
         'API' => [
-            'URL' => 'https://api.mailgun.net/v3/sandbox69403da1cf164af0b057d1c6cfa5ac78.mailgun.org',
+            'URL' => 'sandbox69403da1cf164af0b057d1c6cfa5ac78.mailgun.org',
             'KEY' => 'key-c17e3edcf3e15a522e2517c778b7e590'
         ]
     ]
