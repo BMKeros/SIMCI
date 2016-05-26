@@ -14,6 +14,8 @@ class CondicionesTableSeeder extends Seeder
             array('codigo' => DISPONIBLE, 'nombre' => 'Disponible'),
             array('codigo' => NO_DISPONIBLE, 'nombre' => 'No Disponible'),
             array('codigo' => RETENIDO, 'nombre' => 'Retenido'),
+            array('codigo' => PEDIDO_CANCELADO, 'nombre' => 'Pedido Cancelado'),
+            array('codigo' => PEDIDO_EN_ESPERA, 'nombre' => 'Pedido en Espera'),
 
         );
 
