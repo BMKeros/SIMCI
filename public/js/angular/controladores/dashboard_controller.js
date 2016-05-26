@@ -27,37 +27,54 @@ simci.controller('DashboardController', [
                     label_primario: "Usuarios registrados",
                     label_secundario: "",
                     icono: "users icon",
-                    value: 10
+                    value: 0
                 },
                 {
                     color: "blue",
                     label_primario: "objetos en catalogo",
                     label_secundario: "",
                     icono: "book icon",
-                    value: 100
+                    value: 0
                 },
                 {
                     color: "grey",
                     label_primario: "objetos en inventario",
                     label_secundario: "",
                     icono: "bullseye icon",
-                    value: 1000
+                    value: 0
                 },
                 {
                     color: "green",
                     label_primario: "ordenes activas",
                     label_secundario: "",
                     icono: "check icon",
-                    value: 67
+                    value: 0
                 },
                 {
                     color: "yellow",
                     label_primario: "ordenes en espera",
                     label_secundario: "",
                     icono: "wait icon",
-                    value: 610
+                    value: 0
                 }
             ];
+
+            //Consultamos al servidor las estadisticas
+            $http({
+                method: 'GET',
+                url: '/estadisticas'
+            }).then(function (data) {
+                $timeout(function () {
+                    $scope.indicadores[0].value = data.data.indicadores.total_usuarios;
+                    $scope.indicadores[1].value = data.data.indicadores.total_objetos;
+                    $scope.indicadores[2].value = data.data.indicadores.total_elementos;
+                    $scope.indicadores[3].value = data.data.indicadores.total_ordenes_activas;
+                    $scope.indicadores[4].value = data.data.indicadores.total_ordenes_pendientes;
+                });
+            }, function (data_error) {
+                ToolsService.generar_alerta_status(data_error);
+            });
+
 
             $scope.labels_grafica_1 = ["January", "February", "March", "April", "May", "June", "July"];
             $scope.series_grafica_1 = ['Series A', 'Series B'];
