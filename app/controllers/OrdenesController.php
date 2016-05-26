@@ -21,7 +21,7 @@ class OrdenesController extends BaseController
                         'ordenes.status',
                         'nombre as nombre_status')
                     ->leftJoin(RAW('personas AS PER1'), RAW('PER1.usuario_id'), '=', 'ordenes.responsable')
-                    ->leftJoin(RAW('personas AS PER2'), RAW('PER2.usuario_id'), '=','ordenes.solicitante')
+                    ->leftJoin(RAW('personas AS PER2'), RAW('PER2.usuario_id'), '=', 'ordenes.solicitante')
                     ->join('condiciones', 'condiciones.codigo', '=', 'status');
 
                 $response = $this->generar_paginacion_dinamica($consulta,
@@ -53,14 +53,14 @@ class OrdenesController extends BaseController
                 } else {
 
                     $data_obj = DB::table('vista_objetos_full')
-                        ->select('cod_objeto', 'nombre_objeto as nombre', DB::raw('formato_unidad_objeto(nombre_unidad,abreviatura_unidad) as unidad'),'nombre_clase_objeto as clase_objeto')
+                        ->select('cod_objeto', 'nombre_objeto as nombre', DB::raw('formato_unidad_objeto(nombre_unidad,abreviatura_unidad) as unidad'), 'nombre_clase_objeto as clase_objeto')
                         ->where('cod_objeto', '=', $cod_objeto)
                         ->first();
 
                     $array_elementos_seleccionados = array();
 
                     foreach ($data_elementos_seleccionado as $elemento_seleccionado) {
-                		$array_elementos_seleccionados[] = array(
+                        $array_elementos_seleccionados[] = array(
                             'cod_dimension' => $elemento_seleccionado->cod_dimension,
                             'cod_subdimension' => $elemento_seleccionado->cod_subdimension,
                             'cod_agrupacion' => $elemento_seleccionado->cod_agrupacion,
@@ -71,7 +71,7 @@ class OrdenesController extends BaseController
                             'unidad' => $data_obj->unidad,
                             'clase_objeto' => $data_obj->clase_objeto
                         );
-                	}
+                    }
 
                     $response = array(
                         'resultado' => true,
@@ -88,11 +88,13 @@ class OrdenesController extends BaseController
 
         return Response::json($response);
     }
-    public function postGenerarOrden(){
+
+    public function postGenerarOrden()
+    {
 
         DB::beginTransaction();
 
-        try{
+        try {
             $responsable = Input::get('responsable');
             $solicitante = Auth::user()->id;
             $cod_laboratorio = Input::get('laboratorio');
@@ -101,17 +103,17 @@ class OrdenesController extends BaseController
 
             $data_elementos_pedidos = Input::get('data_elementos_pedidos');
 
-            if(is_null($responsable) || is_null($cod_laboratorio) || is_null($observaciones) || is_null($data_elementos_pedidos)){
-                if(is_null($responsable)){
+            if (is_null($responsable) || is_null($cod_laboratorio) || is_null($observaciones) || is_null($data_elementos_pedidos)) {
+                if (is_null($responsable)) {
                     $mensajes[] = "El id del usuario no puede quedar vacio";
                 }
-                if(is_null($cod_laboratorio)){
+                if (is_null($cod_laboratorio)) {
                     $mensajes[] = "El codigo de laboratorio no puede quedar vacio";
                 }
-                if(is_null($observaciones)){
+                if (is_null($observaciones)) {
                     $mensajes[] = "El campo observaciones no puede quedar vacio";
                 }
-                if(is_null($data_elementos_pedidos)){
+                if (is_null($data_elementos_pedidos)) {
                     $mensajes[] = "No has seleccionado ningun elemento.";
                 }
 
@@ -134,7 +136,7 @@ class OrdenesController extends BaseController
             $nueva_orden->save();
 
             //armado de la data de los elementos pedidos
-            foreach ($data_elementos_pedidos as $value){
+            foreach ($data_elementos_pedidos as $value) {
 
                 $data[] = array(
                     'cod_orden' => $nueva_orden->codigo,
@@ -144,7 +146,7 @@ class OrdenesController extends BaseController
                     'cod_objeto' => $value['cod_objeto'],
                     'numero_orden' => $value['numero_orden'],
                     'cantidad_solicitada' => $value['cantidad_solicitada'],
-                    'status_elemento' => DISPONIBLE,
+                    'status_elemento' => PEDIDO_EN_ESPERA,
                     'created_at' => get_now(),
                     'updated_at' => get_now()
                 );
@@ -152,99 +154,108 @@ class OrdenesController extends BaseController
 
             //se crean los elementos pedidos en la orden
             DB::table('pedidos')->insert($data);
-        }
-
-        catch(\Exception $e){
+        } catch (\Exception $e) {
             DB::rollBack();
 
             return Response::json(array(
-                'resultado'=>false, 
-                'mensajes'=> array($e->getMessage())
-            ),500);
+                'resultado' => false,
+                'mensajes' => array($e->getMessage())
+            ), 500);
         }
-        
+
         DB::commit();
 
         return Response::json(array(
-                'resultado'=>true, 
-                'mensajes'=> array('Orden generada con exito!')));
+            'resultado' => true,
+            'mensajes' => array('Orden generada con exito!')));
     }
 
-    public function postProcesarOrden(){
+    public function postProcesarOrden()
+    {
         $codigo_orden = Input::get('codigo_orden');
         $accion_orden = Input::get('accion_orden');
 
-        if(!is_null($codigo_orden)){
+        if (!is_null($codigo_orden)) {
             if (!is_null($accion_orden)) {
 
                 $response = []; //Mensajes que se enviaran en el response
 
                 DB::beginTransaction();
 
-                try{
-
-                    //obtenemos todos lo elementos de la orden procesada
-                    $elementos = DB::table('pedidos')->select('cod_dimension',
-                        'cod_subdimension',
-                        'cod_agrupacion',
-                        'cod_objeto',
-                        'numero_orden',
-                        'cantidad_solicitada')
+                try {
+                    //obtenemos el id de los elementos pedidos en la orden
+                    $id_elementos_pedidos = DB::table('pedidos')
+                        ->select('id')
                         ->where('cod_orden', '=', $codigo_orden)
-                        ->get();
-
-                    foreach ($elementos as $elemento) {
-                        //obtenemos el id de los elementos pedidos en la orden
-                        $id_elementos_pedidos[] = $elemento->id;
-
-                        //obtenemos los datos de los elmentos pedidos en la orden
-                        $data_elementos_pedidos[] = array(
-                            'cod_dimension' => $elemento->cod_dimension,
-                            'cod_subdimension' => $elemento->cod_subdimension,
-                            'cod_agrupacion' => $elemento->cod_agrupacion,
-                            'cod_objeto' => $elemento->cod_objeto,
-                            'numero_orden' => $elemento->numero_orden,
-                            'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
-                            'cantidad_solicitada' => $elemento->cantidad_solicitada
-                        );
-
-                        //actualizamos el estado a no disponble de los elementos que coincidan con los elementos 
-                        //de la orden actual.
-                        DB::table('pedidos')
-                            ->where('cod_dimension', '=', $elemento->cod_dimension)
-                            ->where('cod_subdimension', '=', $elemento->cod_subdimension)
-                            ->where('cod_agrupacion', '=', $elemento->cod_agrupacion)
-                            ->where('cod_objeto', '=', $elemento->cod_objeto)
-                            ->where('numero_orden', '=', $elemento->numero_orden)
-                            ->where('cod_orden', '<>', $elemento->cod_orden)
-                            ->update(['status_elemento' => NO_DISPONIBLE]);
-                    }
+                        ->lists('id');
 
                     switch (strtoupper($accion_orden)) {
-                        case 'ACEPTAR':
+
+                        case 'ACEPTAR': {
+
                             //actualizar el estado de la orden
                             DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_ACTIVA]);
 
+                            //obtenemos todos lo elementos de la orden procesada
+                            $elementos = DB::table('pedidos')->select('cod_dimension',
+                                'cod_subdimension',
+                                'cod_agrupacion',
+                                'cod_objeto',
+                                'numero_orden',
+                                'cantidad_solicitada',
+                                'cod_orden')
+                                ->where('cod_orden', '=', $codigo_orden)
+                                ->get();
+
+                            foreach ($elementos as $elemento) {
+                                //obtenemos los datos de los elmentos pedidos en la orden
+                                $data_elementos_pedidos[] = array(
+                                    'cod_dimension' => $elemento->cod_dimension,
+                                    'cod_subdimension' => $elemento->cod_subdimension,
+                                    'cod_agrupacion' => $elemento->cod_agrupacion,
+                                    'cod_objeto' => $elemento->cod_objeto,
+                                    'numero_orden' => $elemento->numero_orden,
+                                    'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
+                                    'cantidad_solicitada' => $elemento->cantidad_solicitada
+                                );
+
+                                //Actualizamos a no disponible aquel elemento que coinciada con alguno del pedido actual
+                                DB::table('pedidos')
+                                    ->where('cod_dimension', '=', $elemento->cod_dimension)
+                                    ->where('cod_subdimension', '=', $elemento->cod_subdimension)
+                                    ->where('cod_agrupacion', '=', $elemento->cod_agrupacion)
+                                    ->where('cod_objeto', '=', $elemento->cod_objeto)
+                                    ->where('numero_orden', '=', $elemento->numero_orden)
+                                    ->where('cod_orden', '<>', $elemento->cod_orden)
+                                    ->update(['status_elemento' => NO_DISPONIBLE]);
+                            }
+
                             //actualizamos el status de los elementos de la orden aceptada
-                            DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => NO_DISPONIBLE]);
+                            DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => RETENIDO]);
 
                             //insertamos los lementos del pedido en la tabla retenidos
                             DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
 
+
                             $response = ['resultado' => true, 'mensajes' => ['Orden aceptada con exito.!']];
 
                             break;
+                        }
 
-                        case 'CANCELAR':
+                        case 'CANCELAR': {
                             //actualizar el estado de la orden
                             DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_CANCELADA]);
 
                             //actualizamos el status de los elementos de la orden aceptada
-                            DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => DISPONIBLE]);
+                            DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => PEDIDO_CANCELADO /*, 'cantidad_retornada' => 0*/]);
 
 
                             $response = ['resultado' => true, 'mensajes' => ['Orden cancelada con exito.!']];
 
+                            break;
+                        }
+
+                        case 'COMPLETAR':
                             break;
 
                         default:
@@ -252,64 +263,58 @@ class OrdenesController extends BaseController
                             break;
 
                     }
-                    return Response::json($response);
-                }
 
-                catch(\Exception $e){
+                } catch (\Exception $e) {
                     DB::rollBack();
 
                     return Response::json(array(
-                        'resultado'=>false, 
-                        'mensajes'=> array($e->getMessage())
-                    ),500);
+                        'resultado' => false,
+                        'mensajes' => array($e->getMessage())
+                    ), 500);
                 }
-                
-                DB::commit();
 
-                return Response::json(array(
-                        'resultado'=>true, 
-                        'mensajes'=> array('Orden generada con exito!')));
-            }
-            else{
+                DB::commit();
+                return Response::json($response);
+
+            } else {
                 return Response::json(array('resultado' => false, 'mensajes' => array('La accion que se aplicara a la orden no debe quedar vacio')));
             }
-        }
-        else{
+        } else {
             return Response::json(array('resultado' => false, 'mensajes' => array('El cod_orden no debe quedar vacio')));
         }
     }
 
-    public function postMostrarPedido(){
+    public function postMostrarPedido()
+    {
         $cod_orden = Input::get('codigo', null);
 
         //evaluamos que el codigo de la orden no venga ni vacion ni sea null
-        if(is_null($cod_orden) || empty($cod_orden)){
+        if (is_null($cod_orden) || empty($cod_orden)) {
             return Response::json(array('resultado' => false, 'mensajes' => array('Error codigo de orden no puede estar vacio')));
-        }
-        else{
+        } else {
             //obtenemos todos los elementos de la tabla pedidos que coincidan con el cod_orden dado
             $elementos_pedidos = DB::table('pedidos')->select('id', 'cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_objeto', 'cantidad_solicitada', 'numero_orden')
-                                        ->where('cod_orden', '=', $cod_orden)
-                                        ->get();
+                ->where('cod_orden', '=', $cod_orden)
+                ->get();
 
             foreach ($elementos_pedidos as $value) {
                 //iteramos y verificamos si hay disponibilidad de cada elemento del pedido
                 $elemento_disponible = DB::table('vista_reactivos_disponibles')
-                                ->where('cod_dimension', '=', $value->cod_dimension)
-                                ->where('cod_subdimension', '=', $value->cod_subdimension)
-                                ->where('cod_agrupacion', '=', $value->cod_agrupacion)
-                                ->where('cod_objeto', '=', $value->cod_objeto)
-                                ->where('numero_orden', '=', $value->numero_orden)
-                                ->first();
-            
+                    ->where('cod_dimension', '=', $value->cod_dimension)
+                    ->where('cod_subdimension', '=', $value->cod_subdimension)
+                    ->where('cod_agrupacion', '=', $value->cod_agrupacion)
+                    ->where('cod_objeto', '=', $value->cod_objeto)
+                    ->where('numero_orden', '=', $value->numero_orden)
+                    ->first();
+
                 //evaluamos si es distinto de vacio o de null si es asi resultado sera true de lo contrario si no hay
                 //disponibilidad resultado sera false
-                $disponibilidad[] = array('id_pedido' => $value->id, 'resultado' => (!is_null($elemento_disponible) || !empty($elemento_disponible)) ? (true) : (false)); 
-                
-            }    
+                $disponibilidad[] = array('id_pedido' => $value->id, 'resultado' => (!is_null($elemento_disponible) || !empty($elemento_disponible)) ? (true) : (false));
+
+            }
         }
 
-        return Response::json(array('resultado'=>true, 'data' => $disponibilidad));
+        return Response::json(array('resultado' => true, 'data' => $disponibilidad));
     }
 }
 
