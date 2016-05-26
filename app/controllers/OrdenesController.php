@@ -6,7 +6,6 @@ class OrdenesController extends BaseController
     public function getMostrar()
     {
         $tipo_busqueda = Input::get('type', 'todos');
-        $id_laboratorio = Input::get('id', null);
         $orden = Input::get('ordenar', ' asc');
 
         switch ($tipo_busqueda) {
@@ -53,7 +52,7 @@ class OrdenesController extends BaseController
                 } else {
 
                     $data_obj = DB::table('vista_objetos_full')
-                        ->select('cod_objeto', 'nombre_objeto as nombre', DB::raw('formato_unidad_objeto(nombre_unidad,abreviatura_unidad) as unidad'), 'nombre_clase_objeto as clase_objeto')
+                        ->select('cod_objeto', 'nombre_objeto as nombre', RAW('formato_unidad_objeto(nombre_unidad,abreviatura_unidad) as unidad'), 'nombre_clase_objeto as clase_objeto')
                         ->where('cod_objeto', '=', $cod_objeto)
                         ->first();
 
@@ -134,6 +133,9 @@ class OrdenesController extends BaseController
             $nueva_orden->status = ORDEN_PENDIENTE;
 
             $nueva_orden->save();
+
+            //incializamos la variable
+            $data = [];
 
             //armado de la data de los elementos pedidos
             foreach ($data_elementos_pedidos as $value) {
