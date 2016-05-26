@@ -16,7 +16,7 @@
         'ORDEN_ACTIVA': 'C01',
         'ORDEN_PENDIENTE': 'C02',
         'ORDEN_CANCELADA': 'C03',
-        'ORDEN_COMPLETADA': '04'
+        'ORDEN_COMPLETADA': 'C04'
     });
 
     simci.run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http, $interval) {
@@ -151,7 +151,7 @@
     });
 
     simci.filter('bool_humano', function () {
-        return function (booleano, value) {
+        return function (booleano) {
             return (!!booleano) ? (
                 (Boolean(booleano)) ? ('Si') : ('No')
             ) : (
@@ -194,7 +194,7 @@
     });
 
     simci.filter('quitar_ceros_decimales', function (ToolsService) {
-        return function (input, param) {
+        return function (input) {
             $timeout(function () {
                 return ToolsService.quitar_ceros_decimales(input);
             });
@@ -207,7 +207,7 @@
         }
     });
 
-    simci.factory('ToolsService', ['$http', '$timeout', function ($http, $timeout) {
+    simci.factory('ToolsService', ['$http', '$timeout', 'CONSTANTES', function ($http, $timeout, CONSTANTES) {
         return {
             tools_input: {
                 //Para convertir el valor de los input en mayuscula
@@ -264,16 +264,16 @@
             get_class_status_orden: function (status_code) {
                 var clase = "";
                 switch (status_code) {
-                    case 'E01':
+                    case CONSTANTES.ORDEN_ACTIVA:
                         clase = 'color-info'; //activo
                         break;
-                    case 'E02':
+                    case CONSTANTES.ORDEN_PENDIENTE:
                         clase = 'color-warning'; //pendiente
                         break;
-                    case 'E03':
+                    case CONSTANTES.ORDEN_CANCELADA:
                         clase = 'color-error'; //cancelada
                         break;
-                    case 'E04':
+                    case CONSTANTES.ORDEN_COMPLETADA:
                         clase = 'color-success'; // completada
                         break;
                 }
