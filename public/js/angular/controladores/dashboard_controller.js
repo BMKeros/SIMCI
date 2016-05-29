@@ -63,13 +63,13 @@ simci.controller('DashboardController', [
             $http({
                 method: 'GET',
                 url: '/estadisticas'
-            }).then(function (data) {
+            }).then(function (response) {
                 $timeout(function () {
-                    $scope.indicadores[0].value = data.data.indicadores.total_usuarios;
-                    $scope.indicadores[1].value = data.data.indicadores.total_objetos;
-                    $scope.indicadores[2].value = data.data.indicadores.total_elementos;
-                    $scope.indicadores[3].value = data.data.indicadores.total_ordenes_activas;
-                    $scope.indicadores[4].value = data.data.indicadores.total_ordenes_pendientes;
+                    $scope.indicadores[0].value = response.data.indicadores.total_usuarios;
+                    $scope.indicadores[1].value = response.data.indicadores.total_objetos;
+                    $scope.indicadores[2].value = response.data.indicadores.total_elementos;
+                    $scope.indicadores[3].value = response.data.indicadores.total_ordenes_activas;
+                    $scope.indicadores[4].value = response.data.indicadores.total_ordenes_pendientes;
                 });
             }, function (data_error) {
                 ToolsService.generar_alerta_status(data_error);
