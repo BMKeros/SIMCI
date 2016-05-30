@@ -6,7 +6,7 @@ class ElementoInventario extends Eloquent{
 	public $incrementing = false;
     protected $fillable = array('cod_dimension', 'cod_subdimension', 'cod_agrupacion', 'cod_subagrupacion', 'numero_orden', 'cod_objeto', 'cantidad_disponible');
 
-
+    //Funcion que permite verificar si es la clase del reactivo que se le pasa por parametro
     static public function verificar_is_clase_objeto($cod_clase_objeto, $cod_objeto)
     {
         $string_select = sprintf("clase_objetos.id = '%s'::integer as resultado", (string)$cod_clase_objeto);
