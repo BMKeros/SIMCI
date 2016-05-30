@@ -229,21 +229,33 @@ class OrdenesController extends BaseController
                                     ];
                                 }
 
-                                //Actualizamos a no disponible aquel elemento que coinciada con alguno del pedido actual
-                                DB::table('pedidos')
-                                    ->where('cod_dimension', '=', $pedido->cod_dimension)
-                                    ->where('cod_subdimension', '=', $pedido->cod_subdimension)
-                                    ->where('cod_agrupacion', '=', $pedido->cod_agrupacion)
-                                    ->where('cod_objeto', '=', $pedido->cod_objeto)
-                                    ->where('numero_orden', '=', $pedido->numero_orden)
-                                    ->where('cod_orden', '<>', $pedido->cod_orden)
-                                    ->update(['status_elemento' => NO_DISPONIBLE]);
+                                //Antes de cambiar el estado de no disponible a los otros elemento se
+                                //debe verificar si es un reactivo o un instrumento
+                                //debido a que cada uno de ellos su numero_orden se maneja de manera distinta
+                                if (ElementoInventario::verificar_is_clase_objeto(REACTIVO, $pedido->cod_objeto)) {
+                                    //Actualizamos a no disponible aquel elemento que coinciada con alguno del pedido actual
+                                    DB::table('pedidos')
+                                        ->where('cod_dimension', '=', $pedido->cod_dimension)
+                                        ->where('cod_subdimension', '=', $pedido->cod_subdimension)
+                                        ->where('cod_agrupacion', '=', $pedido->cod_agrupacion)
+                                        ->where('cod_objeto', '=', $pedido->cod_objeto)
+                                        ->where('numero_orden', '=', $pedido->numero_orden)
+                                        ->where('cod_orden', '<>', $pedido->cod_orden)
+                                        ->where('status_elemento', '=', PEDIDO_EN_ESPERA)
+                                        ->update(['status_elemento' => NO_DISPONIBLE]);
+                                } else {
+                                    /********** OJO ************* /
+                                     * aun falta hacer la actualizacion de no disponible a los instrumentos y equipos
+                                     *
+                                     * */
+                                }
+
                             }
 
                             //actualizamos el status de los elementos de la orden aceptada
                             DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => RETENIDO]);
 
-                            //insertamos los lementos del pedido en la tabla retenidos
+                            //insertamos los elementos del pedido en la tabla retenidos
                             DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
 
 
