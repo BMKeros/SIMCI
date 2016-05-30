@@ -298,7 +298,6 @@ CREATE OR REPLACE FUNCTION public.obtener_cantidad_disponible_elemento(
   DECLARE
     total_inventario NUMERIC;
     total_retenido   NUMERIC;
-    total            NUMERIC;
   BEGIN
     --Consultamos la cantidad disponible en el inventario
     SELECT SUM(cantidad_disponible)
@@ -322,15 +321,15 @@ CREATE OR REPLACE FUNCTION public.obtener_cantidad_disponible_elemento(
 
     IF total_inventario IS NULL
     THEN
-      total_inventario := 0;
-    ELSIF total_retenido IS NULL
-      THEN
-        total_retenido := 0;
+      total_inventario = 0;
     END IF;
 
-    total := total_inventario - total_retenido;
+    IF total_retenido IS NULL
+      THEN
+        total_retenido = 0;
+    END IF;
 
-    RETURN total;
+    RETURN (total_inventario - total_retenido);
   END;
   $BODY$
 LANGUAGE plpgsql VOLATILE
