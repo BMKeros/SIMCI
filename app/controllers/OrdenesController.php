@@ -42,8 +42,7 @@ class OrdenesController extends BaseController
 
                 $consulta = "seleccionar_elemento_disponible('" . $cod_dimension . "','" . $cod_subdimension . "','" . $cod_agrupacion . "','" . $cod_objeto . "','" . $cantidad . "')";
 
-                $consulta = DB::table(DB::raw($consulta));
-
+                $consulta = DB::table(RAW($consulta));
 
                 $data_elementos_seleccionado = $consulta->get();
 
@@ -185,10 +184,12 @@ class OrdenesController extends BaseController
                 DB::beginTransaction();
 
                 try {
+
                     //obtenemos el id de los elementos pedidos en la orden
                     $id_elementos_pedidos = DB::table('pedidos')
                         ->select('id')
                         ->where('cod_orden', '=', $codigo_orden)
+                        ->where('status_elemento', '=', PEDIDO_EN_ESPERA)
                         ->lists('id');
 
                     switch (strtoupper($accion_orden)) {
@@ -198,8 +199,8 @@ class OrdenesController extends BaseController
                             //actualizar el estado de la orden
                             DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_ACTIVA]);
 
-                            //obtenemos todos lo elementos de la orden procesada
-                            $elementos = DB::table('pedidos')->select('cod_dimension',
+                            //obtenemos todos los pedidos de la orden procesada
+                            $pedidos = DB::table('pedidos')->select('cod_dimension',
                                 'cod_subdimension',
                                 'cod_agrupacion',
                                 'cod_objeto',
@@ -209,26 +210,33 @@ class OrdenesController extends BaseController
                                 ->where('cod_orden', '=', $codigo_orden)
                                 ->get();
 
-                            foreach ($elementos as $elemento) {
-                                //obtenemos los datos de los elmentos pedidos en la orden
-                                $data_elementos_pedidos[] = array(
-                                    'cod_dimension' => $elemento->cod_dimension,
-                                    'cod_subdimension' => $elemento->cod_subdimension,
-                                    'cod_agrupacion' => $elemento->cod_agrupacion,
-                                    'cod_objeto' => $elemento->cod_objeto,
-                                    'numero_orden' => $elemento->numero_orden,
-                                    'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
-                                    'cantidad_solicitada' => $elemento->cantidad_solicitada
-                                );
+                            $data_elementos_pedidos = [];
+
+                            foreach ($pedidos as $pedido) {
+
+                                //Agregregamos solo al arreglo los pedidos que se encutren en estado espera
+                                if ($pedido->status_elemento == PEDIDO_EN_ESPERA) {
+
+                                    //obtenemos los datos de los elementos pedidos en la orden
+                                    $data_elementos_pedidos[] = [
+                                        'cod_dimension' => $pedido->cod_dimension,
+                                        'cod_subdimension' => $pedido->cod_subdimension,
+                                        'cod_agrupacion' => $pedido->cod_agrupacion,
+                                        'cod_objeto' => $pedido->cod_objeto,
+                                        'numero_orden' => $pedido->numero_orden,
+                                        'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
+                                        'cantidad_solicitada' => $pedido->cantidad_solicitada
+                                    ];
+                                }
 
                                 //Actualizamos a no disponible aquel elemento que coinciada con alguno del pedido actual
                                 DB::table('pedidos')
-                                    ->where('cod_dimension', '=', $elemento->cod_dimension)
-                                    ->where('cod_subdimension', '=', $elemento->cod_subdimension)
-                                    ->where('cod_agrupacion', '=', $elemento->cod_agrupacion)
-                                    ->where('cod_objeto', '=', $elemento->cod_objeto)
-                                    ->where('numero_orden', '=', $elemento->numero_orden)
-                                    ->where('cod_orden', '<>', $elemento->cod_orden)
+                                    ->where('cod_dimension', '=', $pedido->cod_dimension)
+                                    ->where('cod_subdimension', '=', $pedido->cod_subdimension)
+                                    ->where('cod_agrupacion', '=', $pedido->cod_agrupacion)
+                                    ->where('cod_objeto', '=', $pedido->cod_objeto)
+                                    ->where('numero_orden', '=', $pedido->numero_orden)
+                                    ->where('cod_orden', '<>', $pedido->cod_orden)
                                     ->update(['status_elemento' => NO_DISPONIBLE]);
                             }
 
