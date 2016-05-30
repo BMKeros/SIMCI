@@ -83,3 +83,9 @@ define('PEDIDO_CANCELADO', 'C08');
 define('PEDIDO_EN_ESPERA', 'C09');
 
 
+//clase de objetos
+define('REACTIVO', 1);
+define('INSTRUMENTO', 2);
+define('EQUIPO', 3);
+
+

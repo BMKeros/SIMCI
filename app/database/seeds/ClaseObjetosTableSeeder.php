@@ -8,9 +8,9 @@ class ClaseObjetosTableSeeder extends Seeder {
        DB::table('clase_objetos')->delete();
 
         $campos = array(
-        	array('nombre' => 'Reactivo', 'descripcion' => 'reactivos quimicos'),
-            array('nombre' => 'Instrumento', 'descripcion'=> 'intrumentos de laboratorio'),
-            array('nombre' => 'Equipo', 'descripcion'=> 'equipos de laboratorio')
+            array('id' => REACTIVO, 'nombre' => 'Reactivo', 'descripcion' => 'reactivos quimicos'),
+            array('id' => INSTRUMENTO, 'nombre' => 'Instrumento', 'descripcion' => 'intrumentos de laboratorio'),
+            array('id' => EQUIPO, 'nombre' => 'Equipo', 'descripcion' => 'equipos de laboratorio')
         );
 
         DB::table('clase_objetos')->insert($campos);
