@@ -265,11 +265,29 @@ class OrdenesController extends BaseController
                         }
 
                         case 'CANCELAR': {
+                            //Variable que alamcela la razon de cancelar la orden
+                            $razon_cancelar = Input::get('razon_cancelar', 'Razones no especificicadas');
+
                             //actualizar el estado de la orden
                             DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_CANCELADA]);
 
                             //actualizamos el status de los elementos de la orden aceptada
                             DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => PEDIDO_CANCELADO /*, 'cantidad_retornada' => 0*/]);
+
+
+                            //Enviamos un mensaje al responsable de la orden
+                            Session::put('responsable', Orden::get_datos_responsable($codigo_orden));
+
+                            enviar_email('emails.plantilla_cancelar_orden', [
+                                'cod_orden' => $codigo_orden,
+                                'razon_cancelar' => $razon_cancelar
+                            ], function ($mensaje) {
+                                $mensaje
+                                    ->to(Session::get('responsable')->email, Session::get('responsable')->nombre_completo)
+                                    ->subject('SIMCI - Orden Cancelada');
+                            });
+
+                            Session::forget('responsable');
 
 
                             $response = ['resultado' => true, 'mensajes' => ['Orden cancelada con exito.!']];
