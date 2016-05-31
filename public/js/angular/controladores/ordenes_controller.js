@@ -195,14 +195,15 @@ simci.controller('OrdenesController', [
                 };
 
                 $scope.cancelar_orden = function (_codigo) {
-                    alertify.confirm("Seguro que desea cancelar la orden.", function () {
+                    alertify.prompt("Seguro que desea cancelar la orden? <br> Escriba una razon por la cual cancelara la orden", '', function (_event, value_campo) {
 
                         $http({
                             method: 'POST',
                             url: '/api/ordenes/procesar-orden',
                             data: {
                                 accion_orden: 'cancelar',
-                                codigo_orden: _codigo
+                                codigo_orden: _codigo,
+                                razon_cancelar: value_campo
                             }
                         }).then(
                             function (data) {
@@ -313,24 +314,16 @@ simci.controller('OrdenesController', [
                                     if (existe === 0) {
 
                                         var nuevo_elemento = {};
-                                        var cantidad_solicitada = $scope.cantidad; // cantidad solicitada por el usuario
-                                        var cantidad_real_solicitada = 0; // cantidad real que se solicita en caso que sean dos reactivos
-                                        var cantidad_restante = 0; // cantidad restante del procedimiento cuando son dos reactivos
+                                        var cantidad_real_solicitada = 0;
 
+//******************* FALTA ARREGLAR AQUI LA PARTE DE LA CANTIDAD CUANDO SON DOS RACTIVO */////////////////////////
+//*****************************************************************************************************
                                         data_items.forEach(function (item) {
 
                                             if (data_items.length > 1) {
-                                                cantidad_restante = Number(cantidad_solicitada) - Number(item.cantidad_disponible);
-
-                                                if(cantidad_restante > 0){
-                                                    cantidad_real_solicitada = Number(item.cantidad_disponible);
-                                                    cantidad_solicitada = cantidad_restante;
-                                                }else{
-                                                    cantidad_real_solicitada = cantidad_solicitada;
-                                                }
-
+                                                cantidad_real_solicitada = $scope.cantidad - Number(item.cantidad_disponible);
                                             } else {
-                                                cantidad_real_solicitada = cantidad_solicitada;
+                                                cantidad_real_solicitada = $scope.cantidad;
                                             }
 
                                             nuevo_elemento = {
@@ -345,6 +338,8 @@ simci.controller('OrdenesController', [
                                                 unidad: item.unidad,
                                                 clase_objeto: item.clase_objeto
                                             };
+
+                                            console.log(cantidad_real_solicitada);
 
                                             $scope.items_tabla_pedidos.push(nuevo_elemento);
 
