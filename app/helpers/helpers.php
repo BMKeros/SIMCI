@@ -196,3 +196,9 @@ function crear_notificacion($mensaje = null, $receptor_id = null)
         return false;
     }
 }
+
+
+function enviar_email($template, $datos = [], $callback)
+{
+    Mail::send($template, $datos, $callback);
+}
