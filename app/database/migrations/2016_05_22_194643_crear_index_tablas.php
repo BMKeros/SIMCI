@@ -172,7 +172,7 @@ class CrearIndexTablas extends Migration
 
         //ORDENES-CONDICIONES_ORDENES
         Schema::table('ordenes', function($table){
-            $table->foreign('status')->references('codigo')
+            $table->foreign('status_elemento')->references('codigo')
                 ->on('condiciones');
         });
 
@@ -192,5 +192,4 @@ class CrearIndexTablas extends Migration
     {
 
     }
-
 }
