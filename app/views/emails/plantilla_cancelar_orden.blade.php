@@ -21,7 +21,7 @@
     <b>Su orden fue cancelada por el siguiente motivo: </b>
     <br>
     <site id="razon_cancelar">
-        {{ $razon_cancelar }}
+        {{ ucfirst($razon_cancelar) }}
     </site>
 </p>
 
