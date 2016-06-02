@@ -47,11 +47,15 @@ define('SEXO_MASCULINO', 10);
 define('SEXO_FEMENINO', 20);
 
 /// PATH
-define('PATH_IMAGENES', '/uploads/imagenes/');
+define('PATH_UPLOADS', '/uploads/');
+define('PATH_IMAGENES', PATH_UPLOADS . 'imagenes/');
+define('PATH_ARCHIVOS', PATH_UPLOADS . 'archivos/');
+define('PATH_ARCHIVOS_CORREO', PATH_ARCHIVOS . 'correo/');
 define('PATH_AVATAR_MASCULINO', '/img/masculino.jpg');
 define('PATH_AVATAR_FEMENINO', '/img/femenino.jpg');
 define('PATH_NO_AVATAR', '/img/no-avatar.png');
 define('PATH_ARCHIVOS_SQL', app_path() . "/database/archivos_sql");
+
 
 //NOMENCLATURAS
 
