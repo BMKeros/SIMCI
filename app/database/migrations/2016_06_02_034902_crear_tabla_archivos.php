@@ -16,6 +16,7 @@ class CrearTablaArchivos extends Migration
         Schema::create('archivos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('ubicacion', 100);
+            $table->string('ruta_completa', 100);
             $table->string('nombre_original', 80);
             $table->string('nombre_generado', 80);
             $table->string('extension', 10);
