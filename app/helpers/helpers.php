@@ -115,9 +115,9 @@ function crear_directorio($path_directorio = null, $permisos = '0777')
         }
     }
     return false;
+}
 
-
-    function cargar_crear_imagen_usuario($archivo = null, $name_usuario = "")
+function cargar_crear_imagen_usuario($archivo = null, $name_usuario = "")
 {
     if ($archivo) {
         $extension = explode(".", $archivo->getClientOriginalName());
