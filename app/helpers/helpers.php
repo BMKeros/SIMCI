@@ -93,6 +93,17 @@ function input_default($input = '', $default = '')
     return ($num_char == 0) ? ($default) : ($input);
 }
 
+function get_extension_archivo($nombre_archivo = null)
+{
+    if ($nombre_archivo) {
+        $vector = explode(".", $nombre_archivo);
+        //Ubicamos el cursor en la ultima posicion del vector
+        end($vector);
+
+        return $vector[key($vector)];
+    }
+    return '';
+}
 
 function cargar_crear_imagen_usuario($archivo = null, $name_usuario = "")
 {
