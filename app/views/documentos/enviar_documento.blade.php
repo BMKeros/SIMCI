@@ -28,6 +28,9 @@
                     <div class="two fields">
                         <div class="field">
                             <input type="file" name="archivo">
+
+                            <p style="padding-top: 5px;">Si quiere enviar mas de un archivo debe crear un archivo
+                                comprimido .zip o .rar</p>
                         </div>
                     </div>
 
