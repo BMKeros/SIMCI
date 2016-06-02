@@ -105,6 +105,18 @@ function get_extension_archivo($nombre_archivo = null)
     return '';
 }
 
+function crear_directorio($path_directorio = null, $permisos = '0777')
+{
+    if ($path_directorio) {
+        if (!file_exists($path_directorio)) {
+            mkdir($path_directorio, $permisos, true);
+
+            return true;
+        }
+    }
+    return false;
+
+
 function cargar_crear_imagen_usuario($archivo = null, $name_usuario = "")
 {
     if ($archivo) {
