@@ -186,6 +186,11 @@ function generar_codigo_orden()
     return 'O-' . strtoupper($hash);
 }
 
+function generar_nombre_archivo()
+{
+    return strtoupper(uniqid(rand())) . date("YmdHis");
+}
+
 function crear_notificacion($mensaje = null, $receptor_id = null)
 {
     if (!is_null($mensaje) && !is_null($receptor_id)) {
