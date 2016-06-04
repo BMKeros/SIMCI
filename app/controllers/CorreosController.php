@@ -80,6 +80,9 @@ class CorreosController extends Controller
                         'created_at' => get_now(),
                         'updated_at' => get_now()
                     ]);
+
+                    //Enviamos una notificacion al destinatario
+                    crear_notificacion("Ha recibido un nuevo correo", $destinatario);
                 }
 
             } catch (\Exception $e) {
