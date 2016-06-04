@@ -16,7 +16,6 @@ class CrearTablaCorreos extends Migration
         Schema::create('correos', function ($table) {
             $table->increments('id');
             $table->integer('emisor');
-            $table->integer('destinatario');
             $table->string('asunto', 80);
             $table->integer('archivo')->nullable();
             $table->string('descripcion', 250);
