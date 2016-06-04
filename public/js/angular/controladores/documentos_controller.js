@@ -86,6 +86,23 @@ simci.controller('DocumentosController', [
 
         }//Fin de /mostrar/documentos
 
+
+        if ($location.$$url == '/documentos/enviar-documento') {
+
+            $scope.enviar_correo = ToolsService.registrar_dinamico($scope, $http, $timeout, {
+                url: '/api/correos/enviar-correo',
+                formulario: {
+                    id: 'formulario_enviar_correo',
+                    reglas: reglas_formulario_enviar_correo
+                },
+                exito: {
+                    titulo: 'Correo enviado con exito',
+                    mensajes: ['El correo ha sido enviado a los destinatarios.']
+                }
+            });
+
+        }//Fin de enviar-documento
+
     }]
 );
     
