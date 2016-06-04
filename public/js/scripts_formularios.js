@@ -1227,7 +1227,7 @@ var reglas_formulario_enviar_correo = {
                     prompt: 'Este campo no puede quedar vacio'
                 }
             ]
-        }
+        },
         descripcion: {
             identifier: 'descripcion',
             rules: [
