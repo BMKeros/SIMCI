@@ -15,9 +15,9 @@ class CorreosController extends Controller
         //reglas
         $reglas = array(
             'emisor' => 'required|exists:usuarios,id|numeric',
-            'asunto' => 'required|alpha|max:80',
+            'asunto' => 'required|max:80',
             'destinatarios' => 'required',
-            'descripcion' => 'required|alpha|max:250',
+            'descripcion' => 'required|max:250',
             'archivo' => 'mimes:jpeg,bmp,png,zip,pdf,tar.gz,tar',
         );
 
@@ -31,7 +31,7 @@ class CorreosController extends Controller
 
         $mensajes = array(
             'required' => ':attribute no puede estar en blanco',
-            'alpha' => ':attribute debe contener solo caracteres',
+            'alpha_num' => ':attribute debe contener solo caracteres y numeros',
             'max' => ':attribute debe tener un maximo de :max caracteres',
             'exists' => ':attribute no existe',
             'numeric' => ':attribute debe tener solo numeros',
