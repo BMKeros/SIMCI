@@ -3,6 +3,6 @@
 class Correo extends Eloquent
 {
     protected $table = 'correos';
-    protected $fillable = array('emisor', 'destinatario', 'asunto', 'archivo', 'descripcion');
+    protected $fillable = array('emisor', 'asunto', 'archivo', 'descripcion');
 
 }
