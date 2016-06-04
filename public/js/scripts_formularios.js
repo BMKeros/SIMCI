@@ -1205,4 +1205,6 @@ var reglas_formulario_datos_orden = {
         _event.preventDefault();
         _event.stopPropagation();
     }
-}
+};
+
+var reglas_formulario_enviar_correo = {};
