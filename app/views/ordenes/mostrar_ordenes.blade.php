@@ -24,3 +24,20 @@
     </div>
 </div>
 <!--- Fin Bloque -->
+
+
+<div class="ui long modal" id="modal_completar_orden">
+    <i class="close icon"></i>
+
+    <div class="header ui centered">
+        Completar la orden
+    </div>
+    <div class="content">
+    </div>
+    <div class="actions">
+        <div class="ui negative button">
+            Cerrar
+        </div>
+    </div>
+</div>
+<!--- Fin Bloque -->

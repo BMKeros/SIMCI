@@ -224,6 +224,11 @@ simci.controller('OrdenesController', [
                     }).set('title', '¡Atencion!');
                 };
 
+
+                $scope.completar_orden = function () {
+                    angular.module('#modal_completar_orden').modal('show');
+                };
+
             }
 
             if ($location.$$url == '/ordenes/generar-orden') {
