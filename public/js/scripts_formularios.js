@@ -1207,4 +1207,44 @@ var reglas_formulario_datos_orden = {
     }
 };
 
-var reglas_formulario_enviar_correo = {};
+var reglas_formulario_enviar_correo = {
+    on: 'blur',
+    fields: {
+        destinatarios: {
+            identifier: 'destinatarios',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                }
+            ]
+        },
+        asunto: {
+            identifier: 'asunto',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                }
+            ]
+        }
+        descripcion: {
+            identifier: 'descripcion',
+            rules: [
+                {
+                    type: 'empty',
+                    prompt: 'Este campo no puede quedar vacio'
+                },
+                {
+                    type: 'minLength[10]',
+                    prompt: 'Este campo debe tener como minimo {ruleValue} caracteres'
+                },
+                {
+                    type: 'maxLength[250]',
+                    prompt: 'Este campo debe tener como maximo {ruleValue} caracteres'
+                }
+            ]
+        }
+    },
+    inline: true
+};
