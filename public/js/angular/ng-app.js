@@ -287,7 +287,7 @@
                     data_mensajes = [data_ajax.data.error.message];
                 }
                 else {
-                    data_mensajes = data_ajax.data;
+                    data_mensajes = data_ajax.data.mensajes;
                 }
 
                 switch (data_ajax.status) {
