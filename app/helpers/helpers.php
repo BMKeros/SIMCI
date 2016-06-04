@@ -100,7 +100,7 @@ function get_extension_archivo($nombre_archivo = null)
         //Ubicamos el cursor en la ultima posicion del vector
         end($vector);
 
-        return $vector[key($vector)];
+        return str_replace(['.'], '', $vector[key($vector)]);
     }
     return '';
 }
