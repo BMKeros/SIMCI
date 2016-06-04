@@ -40,8 +40,11 @@ class CorreosController extends Controller
         $validacion = Validator::make($campos, $reglas, $mensajes);
 
         if ($validacion->fails()) {
+
             return Response::json(['resultado' => false, 'mensajes' => $validacion->messages()->all()]);
+
         } else {
+
             try {
 
                 $nuevo_correo = new Correo();
