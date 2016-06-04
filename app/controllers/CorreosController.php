@@ -8,7 +8,7 @@ class CorreosController extends Controller
 
         $emisor = Auth::user()->id;
         $asunto = Input::get('asunto');
-        $destinatarios = Input::get(destinatarios');
+        $destinatarios = Input::get('destinatarios');
         $descripcion = Input::get('descripcion');
         $archivo = Input::file('archivo');
 
