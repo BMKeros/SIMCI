@@ -2,6 +2,38 @@
 
 class CorreosController extends Controller
 {
+    
+    public function getMostrar()
+    {
+        $tipo_busqueda = Input::get('type', 'todos');
+        $orden = Input::get('ordenar', ' asc');
+
+        switch ($tipo_busqueda) {
+            case 'todos':
+                if ($orden) {
+                    //le falta aun los campos que traera la consulta
+                    $response = DB::table('correo_destinatarios')
+                            ->join('correos', 'correos.id', '=', 'correo_destinatarios.correos_id')
+                            ->join('archivos', 'archivos.id', '=','correos.archivo_id')
+                            ->where('correo_destinatarios', '=', Auth::user()->id)
+                            ->orderBy('correos.id', $orden)
+                            ->get();
+
+                } else {
+                    $response = DB::table('vista_laboratorio_full')->get();
+                }
+                break;
+
+            default:
+                $response = DB::table('vista_laboratorio_full')->get();
+                break;
+
+        }
+
+        return Response::json($response);
+    }
+
+
     public function postEnviarCorreo()
     {
         DB::beginTransaction();
@@ -49,6 +81,7 @@ class CorreosController extends Controller
 
                 $nuevo_correo = new Correo();
                 $nuevo_correo->emisor = $emisor;
+                $nuevo_correo->asunto = $asunto;
                 $nuevo_correo->descripcion = $descripcion;
 
                 if (Input::hasFile('archivo')) {
