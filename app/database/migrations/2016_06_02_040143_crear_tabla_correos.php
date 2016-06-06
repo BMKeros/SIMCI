@@ -17,7 +17,7 @@ class CrearTablaCorreos extends Migration
             $table->increments('id');
             $table->integer('emisor');
             $table->string('asunto', 80);
-            $table->integer('archivo')->nullable();
+            $table->integer('archivo_id')->nullable();
             $table->string('descripcion', 250);
             $table->timestamps();
         });
