@@ -318,17 +318,23 @@ simci.controller('OrdenesController', [
                                     //Si no existe el nuevo elemento el la lista lo agregamos
                                     if (existe === 0) {
 
-                                        var nuevo_elemento = {};
-                                        var cantidad_real_solicitada = 0;
+                                        var cantidad_solicitada = $scope.cantidad; // cantidad solicitada por el usuario
+                                        var cantidad_real_solicitada = 0; // cantidad real que se solicita en caso que sean dos reactivos
+                                        var cantidad_restante = 0; // cantidad restante del procedimiento cuando son dos reactivos
 
-//******************* FALTA ARREGLAR AQUI LA PARTE DE LA CANTIDAD CUANDO SON DOS RACTIVO */////////////////////////
-//*****************************************************************************************************
                                         data_items.forEach(function (item) {
 
                                             if (data_items.length > 1) {
-                                                cantidad_real_solicitada = $scope.cantidad - Number(item.cantidad_disponible);
+                                                cantidad_restante = Number(cantidad_solicitada) - Number(item.cantidad_disponible);
+                                                if (cantidad_restante > 0) {
+                                                    cantidad_real_solicitada = Number(item.cantidad_disponible);
+                                                    cantidad_solicitada = cantidad_restante;
+                                                } else {
+                                                    cantidad_real_solicitada = cantidad_solicitada;
+                                                }
+
                                             } else {
-                                                cantidad_real_solicitada = $scope.cantidad;
+                                                cantidad_real_solicitada = cantidad_solicitada;
                                             }
 
                                             nuevo_elemento = {
@@ -343,8 +349,6 @@ simci.controller('OrdenesController', [
                                                 unidad: item.unidad,
                                                 clase_objeto: item.clase_objeto
                                             };
-
-                                            console.log(cantidad_real_solicitada);
 
                                             $scope.items_tabla_pedidos.push(nuevo_elemento);
 
