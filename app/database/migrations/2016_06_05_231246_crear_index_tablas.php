@@ -181,6 +181,23 @@ class CrearIndexTablas extends Migration
             $table->foreign('status_elemento')->references('codigo')
                 ->on('condiciones');
         });
+
+        //CORREOS-[USUARIOS Y ARCHIVOS]
+        Schema::table('correos', function($table){
+            $table->foreign('emisor')->references('id')
+                ->on('usuarios');
+
+            $table->foreign('archivo_id')->references('id')
+                ->on('archivos');
+        });
+
+        Schema::table('correo_destinatarios', function($table){
+            $table->foreign('correo_id')->references('id')
+                ->on('correos');
+
+            $table->foreign('destinatario')->references('id')
+                ->on('usuarios');
+        });
     }
 
     /**

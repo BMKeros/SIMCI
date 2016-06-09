@@ -16,7 +16,7 @@ class CrearTablaCorreoDestinatarios extends Migration
         Schema::create('correo_destinatarios', function ($table) {
             $table->increments('id');
             $table->integer('correo_id');
-            $table->integet('destinatario');
+            $table->integer('destinatario');
             $table->timestamps();
         });
     }
