@@ -265,15 +265,18 @@ class OrdenesController extends BaseController
                         }
 
                         case 'CANCELAR': {
-                            //Variable que alamcela la razon de cancelar la orden
-                            $razon_cancelar = Input::get('razon_cancelar', 'Razones no especificicadas');
+                            //Variable que almacena la razon de cancelar la orden
+                            $razon_cancelar = Input::get('razon_cancelar', 'Razon no especificicada');
 
                             //actualizar el estado de la orden
                             DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_CANCELADA]);
 
-                            //actualizamos el status de los elementos de la orden aceptada
-                            DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => PEDIDO_CANCELADO /*, 'cantidad_retornada' => 0*/]);
+                            //actualizamos el status de los elementos de la orden a cancelar
 
+                            DB::table('pedidos')
+                                ->where('cod_orden', '=', $codigo_orden)
+                                ->where('status_elemento', '=', PEDIDO_EN_ESPERA)
+                                ->update(['status_elemento' => PEDIDO_CANCELADO /*, 'cantidad_retornada' => 0*/]);
 
                             //Enviamos un mensaje al responsable de la orden
                             Session::put('responsable', Orden::get_datos_responsable($codigo_orden));
