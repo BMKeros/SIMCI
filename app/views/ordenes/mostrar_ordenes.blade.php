@@ -26,13 +26,39 @@
 <!--- Fin Bloque -->
 
 
-<div class="ui long modal" id="modal_completar_orden">
+<div class="ui long modal" id="modal_preaceptar_orden">
     <i class="close icon"></i>
 
     <div class="header ui centered">
-        Completar la orden
+        Lista de pedidos que sera procesada
     </div>
+
     <div class="content">
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Dimension</th>
+                    <th>Subdimension</th>
+                    <th>Agrupacion</th>
+                    <th>Objeto</th>
+                    <th>Numero Orden</th>
+                    <th>Cantidad Solicitada</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="pedido in datos_pedidos_aceptar">
+                    <td><% pedido.cod_dimension %></td>
+                    <td><% pedido.cod_subdimension %></td>
+                    <td><% pedido.cod_agrupacion %></td>
+                    <td><% pedido.cod_objeto %></td>
+                    <td><% pedido.numero_orden %></td>
+                    <td><% pedido.cantidad_solicitada | quitar_ceros_decimales %></td>
+                    <td ng-if="pedido.disponible" class="positive"><i class="icon checkmark"></i> DISPONIBLE</td>
+                    <td ng-if="!pedido.disponible" class="negative"><i class="icon close"></i> NO DISPONIBLE</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
     <div class="actions">
         <div class="ui negative button">
