@@ -193,11 +193,9 @@
         }
     });
 
-    simci.filter('quitar_ceros_decimales', function (ToolsService) {
+    simci.filter('quitar_ceros_decimales', function (ToolsService, $timeout) {
         return function (input) {
-            $timeout(function () {
-                return ToolsService.quitar_ceros_decimales(input);
-            });
+            return (!isNaN(Number(input))) ? (Number(input)) : (null);
         };
     });
 
@@ -231,10 +229,8 @@
             },
             //Funcion para quitar decimales si son ceros
             quitar_ceros_decimales: function (numero) {
-                var num_split_punto = numero.split('.');
-                var decimal = Number(num_split_punto[1]);
-
-                return ( !isNaN(decimal) && decimal === 0) ? (num_split_punto[0]) : (numero);
+                var decimal = Number(numero);
+                return ( !isNaN(decimal) ) ? (numero) : (null);
             },
             //Funcion para mostrar el loading
             loading_button: function (id_button, activado) {
