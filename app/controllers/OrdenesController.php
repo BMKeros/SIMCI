@@ -193,13 +193,12 @@ class OrdenesController extends BaseController
                         ->lists('id');
 
                     switch (strtoupper($accion_orden)) {
+                        //Accion que se ejecuta antes de aceptar una orden
+                        //Esta accion es para verificar si algun elemento ya no se encuentra disponible
+                        case 'PRE_ACEPTAR':{
 
-                        case 'ACEPTAR': {
+                            //obtenemos todos los pedidos de la orden que se va aceptar
 
-                            //actualizar el estado de la orden
-                            DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_ACTIVA]);
-
-                            //obtenemos todos los pedidos de la orden procesada
                             $pedidos = DB::table('pedidos')->select('cod_dimension',
                                 'cod_subdimension',
                                 'cod_agrupacion',
@@ -214,52 +213,32 @@ class OrdenesController extends BaseController
 
                             foreach ($pedidos as $pedido) {
 
-                                //Agregregamos solo al arreglo los pedidos que se encutren en estado espera
-                                if ($pedido->status_elemento == PEDIDO_EN_ESPERA) {
-
-                                    //obtenemos los datos de los elementos pedidos en la orden
-                                    $data_elementos_pedidos[] = [
-                                        'cod_dimension' => $pedido->cod_dimension,
-                                        'cod_subdimension' => $pedido->cod_subdimension,
-                                        'cod_agrupacion' => $pedido->cod_agrupacion,
-                                        'cod_objeto' => $pedido->cod_objeto,
-                                        'numero_orden' => $pedido->numero_orden,
-                                        'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
-                                        'cantidad_solicitada' => $pedido->cantidad_solicitada
-                                    ];
-                                }
-
-                                //Antes de cambiar el estado de no disponible a los otros elemento se
-                                //debe verificar si es un reactivo o un instrumento
-                                //debido a que cada uno de ellos su numero_orden se maneja de manera distinta
-                                if (ElementoInventario::verificar_is_clase_objeto(REACTIVO, $pedido->cod_objeto)) {
-                                    //Actualizamos a no disponible aquel elemento que coinciada con alguno del pedido actual
-                                    DB::table('pedidos')
-                                        ->where('cod_dimension', '=', $pedido->cod_dimension)
-                                        ->where('cod_subdimension', '=', $pedido->cod_subdimension)
-                                        ->where('cod_agrupacion', '=', $pedido->cod_agrupacion)
-                                        ->where('cod_objeto', '=', $pedido->cod_objeto)
-                                        ->where('numero_orden', '=', $pedido->numero_orden)
-                                        ->where('cod_orden', '<>', $pedido->cod_orden)
-                                        ->where('status_elemento', '=', PEDIDO_EN_ESPERA)
-                                        ->update(['status_elemento' => NO_DISPONIBLE]);
-                                } else {
-                                    /********** OJO ************* /
-                                     * aun falta hacer la actualizacion de no disponible a los instrumentos y equipos
-                                     *
-                                     * */
-                                }
-
+                                $data_elementos_pedidos[] = [
+                                    'cod_dimension' => $pedido->cod_dimension,
+                                    'cod_subdimension' => $pedido->cod_subdimension,
+                                    'cod_agrupacion' => $pedido->cod_agrupacion,
+                                    'cod_objeto' => $pedido->cod_objeto,
+                                    'numero_orden' => $pedido->numero_orden,
+                                    'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
+                                    'cantidad_solicitada' => $pedido->cantidad_solicitada,
+                                    'disponible' =>
+                                        ElementoInventario::disponible($pedido->cod_dimension,
+                                            $pedido->cod_subdimension,$pedido->cod_agrupacion,
+                                            $pedido->cod_objeto,$pedido->numero_orden,
+                                            $pedido->cantidad_solicitada)
+                                ];
                             }
 
-                            //actualizamos el status de los elementos de la orden aceptada
-                            DB::table('pedidos')->whereIn('id', $id_elementos_pedidos)->update(['status_elemento' => RETENIDO]);
+                            $response = ['resultado' => true, 'datos' => $data_elementos_pedidos];
 
-                            //insertamos los elementos del pedido en la tabla retenidos
-                            DB::table('elementos_retenidos')->insert($data_elementos_pedidos);
+                            break;
+                        }
 
+                        case 'ACEPTAR': {
 
-                            $response = ['resultado' => true, 'mensajes' => ['Orden aceptada con exito.!']];
+                            //actualizar el estado de la orden
+                            DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_ACTIVA]);
+
 
                             break;
                         }
