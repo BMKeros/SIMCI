@@ -121,7 +121,7 @@ simci.controller('OrdenesController', [
                                     html += '<div class="item" ng-click="completar_orden(\'' + data.codigo + '\')"><i class="edit icon"></i>Completar orden</div>';
                                     break;
                                 case CONSTANTES.ORDEN_PENDIENTE:
-                                    html += '<div class="item" ng-click="aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i>Aceptar orden</div>';
+                                    html += '<div class="item" ng-click="pre_aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i>Aceptar orden</div>';
                                     html += '<div class="item" ng-click="cancelar_orden(\'' + data.codigo + '\')"><i class="remove icon"></i>Cancelar orden</div>';
                                     break;
                                 default:
@@ -164,6 +164,40 @@ simci.controller('OrdenesController', [
 
                     angular.element('#modal_mostrar_orden').modal('show');
 
+                };
+
+                $scope.pre_aceptar_orden = function (_codigo) {
+                    $http({
+                        method: 'POST',
+                        url: '/api/ordenes/procesar-orden',
+                        data: {
+                            accion_orden: 'pre_aceptar',
+                            codigo_orden: _codigo
+                        }
+                    }).then(
+                        function (data) {
+
+                            var response = data.data;
+
+                            if (response.resultado) {
+
+                                $timeout(function(){
+                                    $scope.datos_pedidos_aceptar = response.datos;
+                                });
+
+                                $timeout(function () {
+                                    angular.element('#modal_preaceptar_orden').modal('show');
+                                });
+
+                            }
+                            else {
+                                alertify.error(data.data.mensajes[0]);
+                            }
+                        },
+                        function (data_error) {
+                            ToolsService.generar_alerta_status(data_error);
+                        }
+                    );
                 };
 
                 $scope.aceptar_orden = function (_codigo) {
