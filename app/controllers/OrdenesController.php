@@ -129,7 +129,7 @@ class OrdenesController extends BaseController
             $nueva_orden->hora = get_hora();
             $nueva_orden->cod_laboratorio = $cod_laboratorio;
             $nueva_orden->observaciones = $observaciones;
-            $nueva_orden->status = ORDEN_PENDIENTE;
+            $nueva_orden->status = PENDIENTE;
 
             $nueva_orden->save();
 
@@ -147,7 +147,7 @@ class OrdenesController extends BaseController
                     'cod_objeto' => $value['cod_objeto'],
                     'numero_orden' => $value['numero_orden'],
                     'cantidad_solicitada' => $value['cantidad_solicitada'],
-                    'status_elemento' => PEDIDO_EN_ESPERA,
+                    'status_elemento' => EN_ESPERA,
                     'created_at' => get_now(),
                     'updated_at' => get_now()
                 );
@@ -189,17 +189,18 @@ class OrdenesController extends BaseController
                     $id_elementos_pedidos = DB::table('pedidos')
                         ->select('id')
                         ->where('cod_orden', '=', $codigo_orden)
-                        ->where('status_elemento', '=', PEDIDO_EN_ESPERA)
+                        ->where('status_elemento', '=', EN_ESPERA)
                         ->lists('id');
 
                     switch (strtoupper($accion_orden)) {
                         //Accion que se ejecuta antes de aceptar una orden
                         //Esta accion es para verificar si algun elemento ya no se encuentra disponible
-                        case 'PRE_ACEPTAR':{
+                        case 'PRE_ACEPTAR': {
 
                             //obtenemos todos los pedidos de la orden que se va aceptar
 
-                            $pedidos = DB::table('pedidos')->select('cod_dimension',
+                            $pedidos = DB::table('pedidos')->select('id',
+                                'cod_dimension',
                                 'cod_subdimension',
                                 'cod_agrupacion',
                                 'cod_objeto',
@@ -214,6 +215,7 @@ class OrdenesController extends BaseController
                             foreach ($pedidos as $pedido) {
 
                                 $data_elementos_pedidos[] = [
+                                    'id' => $pedido->id,
                                     'cod_dimension' => $pedido->cod_dimension,
                                     'cod_subdimension' => $pedido->cod_subdimension,
                                     'cod_agrupacion' => $pedido->cod_agrupacion,
@@ -223,11 +225,17 @@ class OrdenesController extends BaseController
                                     'cantidad_solicitada' => $pedido->cantidad_solicitada,
                                     'disponible' =>
                                         ElementoInventario::disponible($pedido->cod_dimension,
-                                            $pedido->cod_subdimension,$pedido->cod_agrupacion,
-                                            $pedido->cod_objeto,$pedido->numero_orden,
+                                            $pedido->cod_subdimension, $pedido->cod_agrupacion,
+                                            $pedido->cod_objeto, $pedido->numero_orden,
                                             $pedido->cantidad_solicitada)
                                 ];
                             }
+
+                            //Almacenamos la data de los pedidos de la orden que sera aceptada en una session flash
+                            //El key de la session llevara concatenado el codigo de la orden, para no mezclar data
+                            $key_session_orden = "pedidos_orden_" . $codigo_orden;
+
+                            Session::flash($key_session_orden, $data_elementos_pedidos);
 
                             $response = ['resultado' => true, 'datos' => $data_elementos_pedidos];
 
@@ -236,9 +244,66 @@ class OrdenesController extends BaseController
 
                         case 'ACEPTAR': {
 
-                            //actualizar el estado de la orden
-                            DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_ACTIVA]);
+                            //El key de la session llevara concatenado el codigo de la orden, para no mezclar data
+                            $key_session_orden = "pedidos_orden_" . $codigo_orden;
 
+                            //Verificamos si existe la data del pedido en la sesion
+                            if (Session::has($key_session_orden)) {
+
+                                $data_pedidos_orden = Session::get($key_session_orden);
+
+                                foreach ($data_pedidos_orden as $pedido) {
+
+                                    //Verificamos si el pedido actual en el recorrido esta disponible para aceptarlo
+                                    if ($pedido['disponible']) {
+
+                                        //Insertamos el pedido en la tabla de retenidos
+                                        DB::table('elementos_retenidos')->insert([
+                                            'cod_dimension' => $pedido['cod_dimension'],
+                                            'cod_subdimension' => $pedido['cod_subdimension'],
+                                            'cod_agrupacion' => $pedido['cod_agrupacion'],
+                                            'cod_objeto' => $pedido['cod_objeto'],
+                                            'numero_orden' => $pedido['numero_orden'],
+                                            'cantidad_existente' => 0,//null por ahora hasta que se decida si se va a quitar el campo o no
+                                            'cantidad_solicitada' => $pedido['cantidad_solicitada'],
+                                            'created_at' => get_now(),
+                                            'updated_at' => get_now()
+                                        ]);
+
+                                        //El pedido que este disponible lo pasamos a activo
+                                        DB::table('pedidos')
+                                            ->where('id', $pedido['id'])
+                                            ->update([
+                                                'status_elemento' => ACTIVO,
+                                                'updated_at' => get_now()
+                                            ]);
+
+                                    } else {
+                                        //El pedido que no este disponible lo cancelamos
+                                        DB::table('pedidos')
+                                            ->where('id', $pedido['id'])
+                                            ->update([
+                                                'status_elemento' => CANCELADO,
+                                                'updated_at' => get_now()
+                                            ]);
+                                    }
+                                }
+
+                                //actualizar el estado de la orden
+                                DB::table('ordenes')
+                                    ->where('codigo', $codigo_orden)
+                                    ->update([
+                                        'status' => ACTIVA,
+                                        'updated_at' => get_now()
+                                    ]);
+
+                                //Borramos la session
+                                Session::forget($key_session_orden);
+
+                                $response = ['resultado' => true, 'mensajes' => ['Orden aceptada con exito.!']];
+                            } else {
+                                $response = ['resultado' => false, 'mensajes' => ['Error al procesar la orden, no se consiguieron pedidos asociados a la orden']];
+                            }
 
                             break;
                         }
@@ -248,14 +313,14 @@ class OrdenesController extends BaseController
                             $razon_cancelar = Input::get('razon_cancelar', 'Razon no especificicada');
 
                             //actualizar el estado de la orden
-                            DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => ORDEN_CANCELADA]);
+                            DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => CANCELADA]);
 
                             //actualizamos el status de los elementos de la orden a cancelar
 
                             DB::table('pedidos')
                                 ->where('cod_orden', '=', $codigo_orden)
-                                ->where('status_elemento', '=', PEDIDO_EN_ESPERA)
-                                ->update(['status_elemento' => PEDIDO_CANCELADO /*, 'cantidad_retornada' => 0*/]);
+                                ->where('status_elemento', '=', EN_ESPERA)
+                                ->update(['status_elemento' => CANCELADO /*, 'cantidad_retornada' => 0*/]);
 
                             //Enviamos un mensaje al responsable de la orden
                             Session::put('responsable', Orden::get_datos_responsable($codigo_orden));
