@@ -61,6 +61,9 @@
         </table>
     </div>
     <div class="actions">
+        <button class="ui positive button" ng-click="aceptar_orden(cod_orden_actual)">
+            Aceptar Orden
+        </button>
         <div class="ui negative button">
             Cerrar
         </div>

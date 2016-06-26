@@ -183,6 +183,9 @@ simci.controller('OrdenesController', [
 
                                 $timeout(function(){
                                     $scope.datos_pedidos_aceptar = response.datos;
+
+                                    //Variable usada para pasarla a la vista, especificamente al boton de aceptar orden
+                                    $scope.cod_orden_actual = _codigo;
                                 });
 
                                 $timeout(function () {
