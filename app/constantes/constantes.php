@@ -76,15 +76,24 @@ define('MOV05', 'RETENIDO POR PEDIDO');
 
 
 //Condiciones para ordenes
-define('ORDEN_ACTIVA', 'C01');
-define('ORDEN_PENDIENTE', 'C02');
-define('ORDEN_CANCELADA', 'C03');
-define('ORDEN_COMPLETADA', 'C04');
+define('ACTIVA', 'C01');
+define('ACTIVO', 'C01');
+
+define('PENDIENTE', 'C02');
+
+define('CANCELADA', 'C03');
+define('CANCELADO', 'C03');
+
+define('COMPLETADA', 'C04');
+define('COMPLETADO', 'C04');
+
 define('DISPONIBLE', 'C05');
 define('NO_DISPONIBLE', 'C06');
+
+define('RETENIDA', 'C07');
 define('RETENIDO', 'C07');
-define('PEDIDO_CANCELADO', 'C08');
-define('PEDIDO_EN_ESPERA', 'C09');
+
+define('EN_ESPERA', 'C08');
 
 
 //clase de objetos

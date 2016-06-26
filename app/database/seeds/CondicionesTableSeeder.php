@@ -7,15 +7,14 @@ class CondicionesTableSeeder extends Seeder
         DB::table('condiciones')->delete();
 
         $campos = array(
-            array('codigo' => ORDEN_ACTIVA, 'nombre' => 'Activa'),
-            array('codigo' => ORDEN_PENDIENTE, 'nombre' => 'Pendiente'),
-            array('codigo' => ORDEN_CANCELADA, 'nombre' => 'Cancelada'),
-            array('codigo' => ORDEN_COMPLETADA, 'nombre' => 'Completada'),
+            array('codigo' => ACTIVA, 'nombre' => 'Activo(a)'),
+            array('codigo' => PENDIENTE, 'nombre' => 'Pendiente'),
+            array('codigo' => CANCELADA, 'nombre' => 'Cancelado(a)'),
+            array('codigo' => COMPLETADA, 'nombre' => 'Completado(a)'),
             array('codigo' => DISPONIBLE, 'nombre' => 'Disponible'),
             array('codigo' => NO_DISPONIBLE, 'nombre' => 'No Disponible'),
-            array('codigo' => RETENIDO, 'nombre' => 'Retenido'),
-            array('codigo' => PEDIDO_CANCELADO, 'nombre' => 'Pedido Cancelado'),
-            array('codigo' => PEDIDO_EN_ESPERA, 'nombre' => 'Pedido en Espera'),
+            array('codigo' => RETENIDO, 'nombre' => 'Retenido(a)'),
+            array('codigo' => EN_ESPERA, 'nombre' => 'En Espera'),
 
         );
 
