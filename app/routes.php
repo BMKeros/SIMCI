@@ -31,8 +31,8 @@ Route::get('/estadisticas', function () {
         (SELECT count(*) FROM usuarios)::INTEGER AS total_usuarios,
         (SELECT count(*) FROM catalogo_objetos)::INTEGER AS total_objetos,
         (SELECT count(*) FROM inventario)::INTEGER AS total_elementos,
-        (SELECT count(*) FROM ordenes WHERE status = '" . ORDEN_ACTIVA . "' )::INTEGER AS total_ordenes_activas,
-        (SELECT count(*) FROM ordenes WHERE status = '" . ORDEN_PENDIENTE . "' )::INTEGER AS total_ordenes_pendientes;
+        (SELECT count(*) FROM ordenes WHERE status = '" . ACTIVA . "' )::INTEGER AS total_ordenes_activas,
+        (SELECT count(*) FROM ordenes WHERE status = '" . PENDIENTE . "' )::INTEGER AS total_ordenes_pendientes;
     "));
     
 
