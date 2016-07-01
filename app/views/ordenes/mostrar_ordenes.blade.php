@@ -70,3 +70,53 @@
     </div>
 </div>
 <!--- Fin Bloque -->
+
+
+<!-- Modal pre completar orden -->
+<div class="ui long modal" id="modal_pre_completar_orden">
+    <i class="close icon"></i>
+
+    <div class="header ui centered">
+        Orden que sera completada
+    </div>
+
+    <div class="content">
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th>Dimension</th>
+                <th>Subdimension</th>
+                <th>Agrupacion</th>
+                <th>Objeto</th>
+                <th>Numero Orden</th>
+                <th>Cantidad Solicitada</th>
+                <th>Cantidad Retornada</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="pedido in datos_pedidos_aceptar">
+                <td><% pedido.cod_dimension %></td>
+                <td><% pedido.cod_subdimension %></td>
+                <td><% pedido.cod_agrupacion %></td>
+                <td><% pedido.cod_objeto %></td>
+                <td><% pedido.numero_orden %></td>
+                <td><% pedido.cantidad_solicitada | quitar_ceros_decimales %></td>
+                <td>
+                    <div class="ui input">
+                        <input type="text" size="8" ng-model="pedido.cantidad_retornada">
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="actions">
+        <button class="ui positive button" ng-click="completar_orden(cod_orden_actual)">
+            Completar Orden
+        </button>
+        <div class="ui negative button">
+            Cerrar
+        </div>
+    </div>
+</div>
+<!--- Fin Bloque -->

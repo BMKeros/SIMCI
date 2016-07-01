@@ -118,7 +118,7 @@ simci.controller('OrdenesController', [
 
                             switch (data.status) {
                                 case CONSTANTES.ORDEN_ACTIVA:
-                                    html += '<div class="item" ng-click="completar_orden(\'' + data.codigo + '\')"><i class="edit icon"></i>Completar orden</div>';
+                                    html += '<div class="item" ng-click="pre_completar_orden(\'' + data.codigo + '\')"><i class="edit icon"></i>Completar orden</div>';
                                     break;
                                 case CONSTANTES.ORDEN_PENDIENTE:
                                     html += '<div class="item" ng-click="pre_aceptar_orden(\'' + data.codigo + '\')"><i class="check icon"></i>Aceptar orden</div>';
@@ -262,9 +262,43 @@ simci.controller('OrdenesController', [
                 };
 
 
-                $scope.completar_orden = function () {
-                    angular.module('#modal_completar_orden').modal('show');
+                $scope.pre_completar_orden = function (_codigo) {
+                    $http({
+                        method: 'POST',
+                        url: '/api/ordenes/procesar-orden',
+                        data: {
+                            accion_orden: 'pre_completar',
+                            codigo_orden: _codigo
+                        }
+                    }).then(
+                        function (data) {
+
+                            var response = data.data;
+
+                            if (response.resultado) {
+
+                                $timeout(function () {
+                                    $scope.datos_pedidos_aceptar = response.datos;
+
+                                    //Variable usada para pasarla a la vista, especificamente al boton de completar orden
+                                    $scope.cod_orden_actual = _codigo;
+                                });
+
+                                $timeout(function () {
+                                    angular.element('#modal_pre_completar_orden').modal('show');
+                                });
+
+                            }
+                            else {
+                                alertify.error(data.data.mensajes[0]);
+                            }
+                        },
+                        function (data_error) {
+                            ToolsService.generar_alerta_status(data_error);
+                        }
+                    );
                 };
+
 
             }
 

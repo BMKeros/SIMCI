@@ -342,8 +342,41 @@ class OrdenesController extends BaseController
                             break;
                         }
 
-                        case 'COMPLETAR':
+                        case 'PRE_COMPLETAR': {
+
+                            //obtenemos todos los pedidos de la orden que se va completar
+                            $pedidos = DB::table('pedidos')->select('id',
+                                'cod_dimension',
+                                'cod_subdimension',
+                                'cod_agrupacion',
+                                'cod_objeto',
+                                'numero_orden',
+                                'cantidad_solicitada',
+                                'cod_orden')
+                                ->where('cod_orden', '=', $codigo_orden)
+                                ->where('status_elemento', '=', ACTIVA)
+                                ->get();
+
+                            $data_elementos_pedidos = [];
+
+                            foreach ($pedidos as $pedido) {
+
+                                $data_elementos_pedidos[] = [
+                                    'id' => $pedido->id,
+                                    'cod_dimension' => $pedido->cod_dimension,
+                                    'cod_subdimension' => $pedido->cod_subdimension,
+                                    'cod_agrupacion' => $pedido->cod_agrupacion,
+                                    'cod_objeto' => $pedido->cod_objeto,
+                                    'numero_orden' => $pedido->numero_orden,
+                                    'cantidad_solicitada' => $pedido->cantidad_solicitada,
+                                    'cantidad_retornada' => 0
+                                ];
+                            }
+
+                            $response = ['resultado' => true, 'datos' => $data_elementos_pedidos];
+
                             break;
+                        }
 
                         default:
                             $response = ['resultado' => false, 'mensajes' => ['Error no se ha especificado una accion para esta orden']];
