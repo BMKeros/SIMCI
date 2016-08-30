@@ -40,6 +40,39 @@
             };
         }]);
 
+        GlobalApp.directive('inputCheckCantidad', ['$timeout', function ($timeout) {
+            return {
+                restrict: 'E', //attribute or element
+                require: 'ngModel',
+                replace: true,
+                link: function (scope, elemento, attrs, ngModel) {
+                    scope.$watch(attrs.ngModel, function (nuevo_val, viejo_val) {
+
+                        if (!isNaN(nuevo_val)) {
+
+                            var _max = Number(attrs.maxValue);
+
+                            if (nuevo_val > _max) {
+                                ngModel.$setViewValue(0);
+
+                                if (angular.isDefined(attrs.messageErrorMaxValue)) {
+
+                                    $timeout(function () {
+                                        alert(attrs.messageErrorMaxValue);
+                                    });
+                                }
+                            }
+                            else {
+                                ngModel.$setViewValue(Number(nuevo_val));
+                            }
+                            ngModel.$render();
+                        }
+                    });
+                },
+                template: '<input type="text" />'
+            };
+        }]);
+
         GlobalApp.directive('ngOnlyNumber', function () {
             return {
                 restrict: 'EA',
