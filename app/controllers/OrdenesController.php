@@ -377,6 +377,12 @@ class OrdenesController extends BaseController
 
                             break;
                         }
+                        //AUN FALTA TERMINAR ESTA ACCION
+                        case 'COMPLETAR': {
+
+                            $response = ['resultado' => true, 'datos' => $codigo_orden];
+                            break;
+                        }
 
                         default:
                             $response = ['resultado' => false, 'mensajes' => ['Error no se ha especificado una accion para esta orden']];
