@@ -299,7 +299,55 @@ simci.controller('OrdenesController', [
                     );
                 };
 
+                $scope.completar_orden = function (_codigo) {
+                    var retornos_valor_cero = 0;
 
+                    //ESTA ES LA FUNCION PARA EJECUTAR LA ACCION DE COMPLETAR ORDEN
+
+                    function accion_completar_orden(_codigo_orden) {
+                        $http({
+                            method: 'POST',
+                            url: '/api/ordenes/procesar-orden',
+                            data: {
+                                accion_orden: 'completar',
+                                codigo_orden: _codigo_orden
+                            }
+                        }).then(
+                            function (data) {
+
+                                var response = data.data;
+
+                                if (response.resultado) {
+                                    //console.log(response);
+                                    ToolsService.reload_tabla($scope, 'tabla_ordenes');
+                                }
+                                else {
+                                    alertify.error(data.data.mensajes[0]);
+                                }
+                            },
+                            function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
+                    }
+
+                    $scope.datos_pedidos_aceptar.forEach(function (item) {
+                        if (item.cantidad_retornada === 0) {
+                            retornos_valor_cero++;
+                        }
+                    });
+
+                    if (retornos_valor_cero > 0) {
+                        alertify.confirm("Hay ordenes que no tienen cantidad retornada, desea continuar de igual manera?",
+                            function () {
+                                accion_completar_orden(_codigo);
+                            }
+                        ).set("title", "Confirmar Accion!");
+                    }
+                    else {
+                        accion_completar_orden(_codigo);
+                    }
+                };
             }
 
             if ($location.$$url == '/ordenes/generar-orden') {
