@@ -95,11 +95,22 @@
             </thead>
             <tbody>
             <tr ng-repeat="pedido in datos_pedidos_aceptar">
-                <td><% pedido.cod_dimension %></td>
-                <td><% pedido.cod_subdimension %></td>
-                <td><% pedido.cod_agrupacion %></td>
-                <td><% pedido.cod_objeto %></td>
-                <td><% pedido.numero_orden %></td>
+                <td class="ui center aligned">
+                    <div class="ui small green label spopup" data-content="Dimension"><% pedido.cod_dimension %></div>
+                </td>
+                <td class="ui center aligned">
+                    <div class="ui small green label spopup"
+                         data-content="Sub Dimension"><% pedido.cod_subdimension %></div>
+                </td>
+                <td class="ui center aligned">
+                    <div class="ui small green label spopup" data-content="Agrupacion"><% pedido.cod_agrupacion %></div>
+                </td>
+                <td class="ui center aligned">
+                    <div class="ui small green label spopup" data-content="Objeto"><% pedido.cod_objeto %></div>
+                </td>
+                <td class="ui center aligned">
+                    <div class="ui small green label spopup" data-content="Numero orden"><% pedido.numero_orden %></div>
+                </td>
                 <td><% pedido.cantidad_solicitada | quitar_ceros_decimales %></td>
                 <td>
                     <div class="ui input">
@@ -108,6 +119,7 @@
                 </td>
             </tr>
             </tbody>
+
         </table>
     </div>
     <div class="actions">
