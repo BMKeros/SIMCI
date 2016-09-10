@@ -387,6 +387,7 @@ class OrdenesController extends BaseController
                             }
                             else{
                                 $error_en_pedidos = 0;
+                                $error_especial = 0;
 
                                 foreach ($data_pedido_completar as $pedido_aceptar) {
 
@@ -414,9 +415,17 @@ class OrdenesController extends BaseController
                                         $error_en_pedidos++;
                                     }
 
+                                    $cantidad_disponible_elemento  = ElementoInventario::get_cantidad_disponible($pedido_aceptar['cod_dimension'],
+                                        $pedido_aceptar['cod_subdimension'], $pedido_aceptar['cod_agrupacion'], $pedido_aceptar['cod_objeto'],$pedido_aceptar['numero_orden']);
+
+                                    //En este caso se verifica si la cantidad que esta retornando es mayor a la existente en el inventario
+                                    if($pedido_aceptar['cantidad_retornada'] > $cantidad_disponible_elemento){
+                                        $error_especial++;
+                                    }
+
                                 }
 
-                                if($error_en_pedidos === 0){
+                                if($error_en_pedidos === 0 && $error_especial === 0){
 
                                     /***************** OJO ******************/
                                     // SE DEBE VERIFICAR ESTA FUNCION PARA EL CASO DE CUANDO SE SELECCIONAN DOS ELEMENTOS
@@ -441,6 +450,37 @@ class OrdenesController extends BaseController
                                             ->where('numero_orden', '=', $pedido_aceptar['numero_orden'])
                                             ->delete();
 
+                                        $cantidad_disponible_elemento  = ElementoInventario::get_cantidad_disponible($pedido_aceptar['cod_dimension'],
+                                            $pedido_aceptar['cod_subdimension'], $pedido_aceptar['cod_agrupacion'], $pedido_aceptar['cod_objeto'],$pedido_aceptar['numero_orden']);
+
+                                        //Restamos la cantidad disponible con la cantidad retornada para obtener la cantidad restante
+                                        $nueva_cantidad_elemento = $cantidad_disponible_elemento - $pedido_aceptar['cantidad_retornada'];
+
+                                        //Actualizamos la cantidad disponible del elemento
+                                        DB::table('inventario')
+                                            ->where('cod_dimension', '=', $pedido_aceptar['cod_dimension'])
+                                            ->where('cod_subdimension', '=', $pedido_aceptar['cod_subdimension'])
+                                            ->where('cod_agrupacion', '=', $pedido_aceptar['cod_agrupacion'])
+                                            ->where('cod_objeto', '=', $pedido_aceptar['cod_objeto'])
+                                            ->where('numero_orden', '=', $pedido_aceptar['numero_orden'])
+                                            ->update(['cantidad_disponible' => $nueva_cantidad_elemento ]);
+
+
+                                        //Creamos un asiento de salida para este elemento del inventario
+                                        /*DB::table('salidas_inventario')->insert([
+                                            'id_usuario' => Auth::user()->id,
+                                            'cod_dimension' => $pedido_aceptar['cod_dimension'],
+                                            'cod_subdimension' => $pedido_aceptar['cod_subdimension'],
+                                            'cod_agrupacion' => $pedido_aceptar['cod_agrupacion'],
+                                            'cod_objeto' => $pedido_aceptar['cod_objeto'],
+                                            'numero_orden' => $pedido_aceptar['numero_orden'],
+                                            'cantidad' => $pedido_aceptar['cantidad_retornada'],
+                                            'hora' => get_hora(),
+                                            'fecha' => get_fecha(),
+                                            'observaciones' => "SALIDA POR ORDEN ORDINARIA",
+                                            'cod_tipo_movimiento' => ''
+                                        ]);*/
+
                                     }
 
                                     //actualizar el estado de la orden
@@ -453,7 +493,11 @@ class OrdenesController extends BaseController
                                         ->update(['status_elemento' => COMPLETADO /*, 'cantidad_retornada' => $pedido_aceptar['cantidad_retornada']*/]);
 
                                     $response = ['resultado' => true,'mensajes' => ['']];
-                                }else{
+                                }
+                                elseif($error_especial > 0){
+                                    $response = ['resultado' => false,'mensajes' => ['Error, existe algun problema con las cantidades retornadas, sobrepasan las cantidades existenten en el inventario']];
+                                }
+                                else{
                                     $response = ['resultado' => false,'mensajes' => ['Error, verifique las cantidades retornadas de los pedidos']];
                                 }
                             }
