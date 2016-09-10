@@ -310,7 +310,8 @@ simci.controller('OrdenesController', [
                             url: '/api/ordenes/procesar-orden',
                             data: {
                                 accion_orden: 'completar',
-                                codigo_orden: _codigo_orden
+                                codigo_orden: _codigo_orden,
+                                data_pedido: $scope.datos_pedidos_aceptar
                             }
                         }).then(
                             function (data) {
