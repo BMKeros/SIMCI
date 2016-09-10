@@ -22,6 +22,20 @@ class ElementoInventario extends Eloquent
         return $consulta->resultado;
     }
 
+    static public function get_cantidad_disponible($_cod_dimension, $_cod_subdimension, $_cod_agrupacion, $_cod_objeto, $_numero_orden){
+
+        $consulta = DB::table('inventario')
+            ->select('cantidad_disponible')
+            ->where('cod_dimension', '=', $_cod_dimension)
+            ->where('cod_subdimension', '=', $_cod_subdimension)
+            ->where('cod_agrupacion', '=', $_cod_agrupacion)
+            ->where('cod_objeto', '=', $_cod_objeto)
+            ->where('numero_orden', '=', $_numero_orden)
+            ->first();
+
+        return $consulta->cantidad_disponible;
+    }
+
     static public function disponible($_cod_dimension, $_cod_subdimension, $_cod_agrupacion, $_cod_objeto, $_numero_orden, $_cantidad_solicitada)
     {
         //Comprobamos si es un reactivo
