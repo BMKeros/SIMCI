@@ -380,7 +380,84 @@ class OrdenesController extends BaseController
                         //AUN FALTA TERMINAR ESTA ACCION
                         case 'COMPLETAR': {
 
-                            $response = ['resultado' => true, 'datos' => $codigo_orden];
+                            $data_pedido_completar = Input::get('data_pedido', null);
+
+                            if(is_null($data_pedido_completar)){
+                                $response = ['resultado' => false,'mensajes' => ['Error no se ha pasado la data del pedido que se va a completar']];
+                            }
+                            else{
+                                $error_en_pedidos = 0;
+
+                                foreach ($data_pedido_completar as $pedido_aceptar) {
+
+                                    $pedido_original = DB::table('pedidos')->select('id',
+                                        'cod_dimension',
+                                        'cod_subdimension',
+                                        'cod_agrupacion',
+                                        'cod_objeto',
+                                        'numero_orden',
+                                        'cantidad_solicitada',
+                                        'cod_orden')
+                                        ->where('id', '=', $pedido_aceptar['id'])
+                                        ->where('cod_dimension', '=', $pedido_aceptar['cod_dimension'])
+                                        ->where('cod_subdimension', '=', $pedido_aceptar['cod_subdimension'])
+                                        ->where('cod_agrupacion', '=', $pedido_aceptar['cod_agrupacion'])
+                                        ->where('cod_objeto', '=', $pedido_aceptar['cod_objeto'])
+                                        ->where('numero_orden', '=', $pedido_aceptar['numero_orden'])
+                                        ->where('cod_orden', '=', $codigo_orden)
+                                        ->where('status_elemento', '=', ACTIVA)
+                                        ->get();
+
+                                    if($pedido_aceptar['cantidad_retornada'] > $pedido_original[0]->cantidad_solicitada ||
+                                        $pedido_aceptar['cantidad_retornada'] < 0){
+
+                                        $error_en_pedidos++;
+                                    }
+
+                                }
+
+                                if($error_en_pedidos === 0){
+
+                                    /***************** OJO ******************/
+                                    // SE DEBE VERIFICAR ESTA FUNCION PARA EL CASO DE CUANDO SE SELECCIONAN DOS ELEMENTOS
+                                    // DEBIDO A QUE UN SOLO ELEMENTO NO SATISFACE LA CANTIDAD DESEADA POR EL USUARIO
+                                    /***************************************/
+
+                                    //Eliminar el elemento de retenidos
+                                    //cambiar el estado a la orrden
+                                    //cambiar el estado al pedido
+                                    //restar la cantidad retornada con la solicitada
+                                    //registrar la salida del elemento
+
+
+                                    foreach ($data_pedido_completar as $pedido_aceptar) {
+
+                                        //Eliminamos el pedido de la tabla de elementos retenidos
+                                        DB::table('elementos_retenidos')
+                                            ->where('cod_dimension', '=', $pedido_aceptar['cod_dimension'])
+                                            ->where('cod_subdimension', '=', $pedido_aceptar['cod_subdimension'])
+                                            ->where('cod_agrupacion', '=', $pedido_aceptar['cod_agrupacion'])
+                                            ->where('cod_objeto', '=', $pedido_aceptar['cod_objeto'])
+                                            ->where('numero_orden', '=', $pedido_aceptar['numero_orden'])
+                                            ->delete();
+
+                                    }
+
+                                    //actualizar el estado de la orden
+                                    DB::table('ordenes')->where('codigo', $codigo_orden)->update(['status' => COMPLETADA]);
+
+                                    //actualizamos el status de los elementos de la orden a completar
+                                    DB::table('pedidos')
+                                        ->where('cod_orden', '=', $codigo_orden)
+                                        ->where('status_elemento', '=', ACTIVA)
+                                        ->update(['status_elemento' => COMPLETADO /*, 'cantidad_retornada' => $pedido_aceptar['cantidad_retornada']*/]);
+
+                                    $response = ['resultado' => true,'mensajes' => ['']];
+                                }else{
+                                    $response = ['resultado' => false,'mensajes' => ['Error, verifique las cantidades retornadas de los pedidos']];
+                                }
+                            }
+
                             break;
                         }
 
