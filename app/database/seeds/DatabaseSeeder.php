@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call('UnidadesTableSeeder');
         $this->call('ClaseObjetosTableSeeder');
         $this->call('CondicionesTableSeeder');
-        $this->call('TiposMovimientoTableSeeder')
+        $this->call('TiposMovimientoTableSeeder');
         $this->call('UsuariosTableSeeder');
         $this->call('ClasificacionElementosSeeder');
         $this->call('SubClasificacionElementosSeeder');
