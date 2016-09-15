@@ -1,5 +1,15 @@
 <?php
 
+function get_value_to_key($arr, $key)
+{
+    
+    if (is_null($arr) || empty($arr)) {
+        return null;
+    }
+
+    return $arr[$key];
+}
+
 function RAW($text_sql = '')
 {
     if (empty($text_sql)) {
