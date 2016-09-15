@@ -477,8 +477,8 @@ class OrdenesController extends BaseController
                                             'cantidad' => $pedido_aceptar['cantidad_retornada'],
                                             'hora' => get_hora(),
                                             'fecha' => get_fecha(),
-                                            'observaciones' => "SALIDA POR ORDEN ORDINARIA",
-                                            'cod_tipo_movimiento' => ''
+                                            'observaciones' => get_value_to_key(MOV03, 'descripcion'),
+                                            'cod_tipo_movimiento' => get_value_to_key(MOV03, 'id')
                                         ]);*/
 
                                     }
