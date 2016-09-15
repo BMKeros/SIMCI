@@ -15,7 +15,7 @@ class TiposMovimientoTableSeeder extends Seeder
             array('id' => get_value_to_key(MOV04, 'id'), 'nombre' => get_value_to_key(MOV04, 'descripcion'), 'descripcion' => get_value_to_key(MOV04, 'descripcion'), 'created_at' => get_now()),
             array('id' => get_value_to_key(MOV05, 'id'), 'nombre' => get_value_to_key(MOV05, 'descripcion'), 'descripcion' => get_value_to_key(MOV05, 'descripcion'), 'created_at' => get_now()),
             array('id' => get_value_to_key(MOV06, 'id'), 'nombre' => get_value_to_key(MOV06, 'descripcion'), 'descripcion' => get_value_to_key(MOV06, 'descripcion'), 'created_at' => get_now()),
-            array('id' => get_value_to_key(MOV07, 'id'), 'nombre' => get_value_to_key(MOV07, 'descripcion'), 'descripcion' => get_value_to_key(MOV0, 'descripcion'), 'created_at' => get_now()),
+            array('id' => get_value_to_key(MOV07, 'id'), 'nombre' => get_value_to_key(MOV07, 'descripcion'), 'descripcion' => get_value_to_key(MOV07, 'descripcion'), 'created_at' => get_now()),
         );
 
         DB::table('tipos_movimientos')->insert($campos);
