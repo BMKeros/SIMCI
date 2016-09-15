@@ -69,7 +69,7 @@ define('CODIGO_PROVEEDORES', 'PRV');
 
 //Tipos de moviemientos
 const MOV01 = ['id' => 1, 'descripcion' => 'ENTRADA POR PROVEEDOR'];
-const MOV02 = ['id' => 2, 'descripcion' => 'ENTRADA POR DONACI}ON'];
+const MOV02 = ['id' => 2, 'descripcion' => 'ENTRADA POR DONACON'];
 const MOV03 = ['id' => 3, 'descripcion' => 'SALIDA POR PEDIDO'];
 const MOV04 = ['id' => 4, 'descripcion' => 'SALIDA POR PERDIDA'];
 const MOV05 = ['id' => 5, 'descripcion' => 'SALIDA DESCONOCIDA'];
