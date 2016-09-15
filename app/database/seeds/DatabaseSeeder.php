@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call('TiposUsuarioTableSeeder');
         $this->call('UnidadesTableSeeder');
         $this->call('ClaseObjetosTableSeeder');
+        $this->call('CondicionesTableSeeder');
+        $this->call('TiposMovimientoTableSeeder')
         $this->call('UsuariosTableSeeder');
         $this->call('ClasificacionElementosSeeder');
         $this->call('SubClasificacionElementosSeeder');
@@ -32,7 +34,7 @@ class DatabaseSeeder extends Seeder
         $this->call('ParroquiasTableSeeder');
         $this->call('FuncionesDBSeeder');
         $this->call('VistasDBSeeder');
-        $this->call('CondicionesTableSeeder');
+
     }
 }
 
