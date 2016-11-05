@@ -2,7 +2,7 @@
 
 function get_value_to_key($arr, $key)
 {
-    
+
     if (is_null($arr) || empty($arr)) {
         return null;
     }
@@ -247,4 +247,13 @@ function verificar_null($dato = null)
         return 'N/A';
     }
     return $dato;
+}
+
+function tag_img_base64($path_img_file = null)
+{
+    $imgData = base64_encode(file_get_contents($path_img_file));
+
+    $src = sprintf('data:%s;base64,%s', mime_content_type($path_img_file), $imgData);
+
+    echo '<img src="' . $src . '">';
 }
