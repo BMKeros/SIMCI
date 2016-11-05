@@ -240,3 +240,11 @@ function enviar_email($template, $datos = [], $callback)
 {
     Mail::send($template, $datos, $callback);
 }
+
+function verificar_null($dato = null)
+{
+    if (is_null($dato)) {
+        return 'N/A';
+    }
+    return $dato;
+}
