@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver' => 'mailgun',
+	'driver' => 'smtp',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return array(
 	|
 	*/
 
-	'host' => 'smtp.mailgun.org',
+	'host' => 'smtp.zoho.com',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => Config::get('simci.MAILGUN.EMAIL'), 'name' => Config::get('simci.MAILGUN.NOMBRE')),
+	'from' => array('address' => Config::get('simci.EMAIL.EMAIL'), 'name' => Config::get('simci.EMAIL.NOMBRE')),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => Config::get('simci.MAILGUN.USUARIO'),
+	'username' => Config::get('simci.EMAIL.USUARIO'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => Config::get('simci.MAILGUN.PASS'),
+	'password' => Config::get('simci.EMAIL.PASS'),
 
 	/*
 	|--------------------------------------------------------------------------
