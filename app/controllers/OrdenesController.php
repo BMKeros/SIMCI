@@ -155,6 +155,29 @@ class OrdenesController extends BaseController
 
             //se crean los elementos pedidos en la orden
             DB::table('pedidos')->insert($data);
+
+            DB::commit();
+
+            //Enviamos un mensaje al responsable de la orden
+            $datos_email = [
+                'datos_orden' => $nueva_orden,
+                'responsable' => Orden::get_datos_responsable($nueva_orden->codigo),
+                'solicitante' => Orden::get_datos_solicitante($nueva_orden->codigo),
+                'data_pedidos' => $data
+            ];
+
+
+            enviar_email('emails.plantilla_comprobante_solicitud', $datos_email, function ($mensaje) use ($datos_email) {
+                $mensaje
+                    ->to($datos_email['solicitante']->email, $datos_email['solicitante']->nombre_completo)
+                    ->cc($datos_email['responsable']->email, $datos_email['responsable']->nombre_completo)
+                    ->subject('SIMCI - Comprobante de solicitud orden [' . $datos_email['datos_orden']->codigo . ']');
+            });
+
+            return Response::json(array(
+                'resultado' => true,
+                'mensajes' => array('Orden generada con exito!', "El comprobante de su solicitud ha sido enviado a su correo")));
+
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -163,12 +186,6 @@ class OrdenesController extends BaseController
                 'mensajes' => array($e->getMessage())
             ), 500);
         }
-
-        DB::commit();
-
-        return Response::json(array(
-            'resultado' => true,
-            'mensajes' => array('Orden generada con exito!')));
     }
 
     public function postProcesarOrden()
