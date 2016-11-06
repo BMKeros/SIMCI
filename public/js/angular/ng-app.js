@@ -498,6 +498,10 @@
             registrar_dinamico: function ($_SCOPE, $_HTTP, $_TIMEOUT, opciones) {
                 var global_this = this;
 
+                if (angular.isUndefined(opciones.id_btn_accion)) {
+                    opciones.id_btn_accion = 'btn-registrar';
+                }
+
                 return function () {
                     var is_valid_form = true;
                     //Si no existe la opcion de formulario seteamos is_valid_form  = trues
@@ -510,7 +514,7 @@
                     if (is_valid_form) {
 
                         //Activamos el loading
-                        global_this.loading_button('btn-registrar', true);
+                        global_this.loading_button(opciones.id_btn_accion, true);
 
                         $_HTTP({
                             method: 'POST',
@@ -530,7 +534,7 @@
 
                                 $_TIMEOUT(function () {
                                     //Desactivamos el loading
-                                    global_this.loading_button('btn-registrar', false);
+                                    global_this.loading_button(opciones.id_btn_accion, false);
 
                                     if (opciones.formulario) {
                                         formulario.form('clear');
@@ -554,14 +558,14 @@
                             }
 
                             //Desactivamos el loading
-                            global_this.loading_button('btn-registrar', false);
+                            global_this.loading_button(opciones.id_btn_accion, false);
 
                         }, function (data_error) {
                             $_SCOPE.mostrar_mensaje = true;
                             $_SCOPE.mensaje_validacion = global_this.get_mensaje_fail_http(data_error);
 
                             //Desactivamos el loading
-                            global_this.loading_button('btn-registrar', false);
+                            global_this.loading_button(opciones.id_btn_accion, false);
                         });
                     }
                 }
