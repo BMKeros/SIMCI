@@ -22,6 +22,16 @@ class ElementoInventario extends Eloquent
         return $consulta->resultado;
     }
 
+    static public function get_nombre_objeto($cod_objeto)
+    {
+        $consulta = DB::table('catalogo_objetos')
+            ->select(RAW("UPPER(catalogo_objetos.nombre) as resultado"))
+            ->where('catalogo_objetos.id', '=', $cod_objeto)
+            ->first();
+
+        return $consulta->resultado;
+    }
+
     static public function get_cantidad_disponible($_cod_dimension, $_cod_subdimension, $_cod_agrupacion, $_cod_objeto, $_numero_orden){
 
         $consulta = DB::table('inventario')
