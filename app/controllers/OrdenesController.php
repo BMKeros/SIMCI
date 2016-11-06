@@ -340,19 +340,19 @@ class OrdenesController extends BaseController
                                 ->update(['status_elemento' => CANCELADO /*, 'cantidad_retornada' => 0*/]);
 
                             //Enviamos un mensaje al responsable de la orden
-                            Session::put('responsable', Orden::get_datos_responsable($codigo_orden));
-
-                            enviar_email('emails.plantilla_cancelar_orden', [
+                            $data_email = [
                                 'cod_orden' => $codigo_orden,
-                                'razon_cancelar' => $razon_cancelar
-                            ], function ($mensaje) {
+                                'razon_cancelar' => $razon_cancelar,
+                                'responsable' => Orden::get_datos_responsable($codigo_orden),
+                                'solicitante' => Orden::get_datos_solicitante($codigo_orden),
+                            ];
+
+                            enviar_email('emails.plantilla_cancelar_orden', $data_email, function ($mensaje) use ($data_email) {
                                 $mensaje
-                                    ->to(Session::get('responsable')->email, Session::get('responsable')->nombre_completo)
+                                    ->to($data_email['solicitante']->email, $data_email['solicitante']->nombre_completo)
+                                    ->cc($data_email['responsable']->email, $data_email['responsable']->nombre_completo)
                                     ->subject('SIMCI - Orden Cancelada');
                             });
-
-                            Session::forget('responsable');
-
 
                             $response = ['resultado' => true, 'mensajes' => ['Orden cancelada con exito.!']];
 
