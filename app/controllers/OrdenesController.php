@@ -580,6 +580,26 @@ class OrdenesController extends BaseController
 
         return Response::json(array('resultado' => true, 'data' => $disponibilidad));
     }
+
+    public function getGenerarPdf($codigo = null)
+    {
+
+        if (is_null($codigo)) {
+            return App::abort(404, "No se ha encontrado el codigo de la orden");
+        }
+
+        $data_orden = Orden::where('codigo', '=', $codigo)->first();
+
+        $vista = View::make('ordenes.plantilla_orden_pdf', [
+            'codigo_orden' => $codigo,
+            'datos_orden' => $data_orden
+        ])->render();
+
+        $pdf = PDF::loadHTML($vista);
+
+        $nombre_archivo = sprintf('orden[%s]-%s.pdf', $codigo, (string)get_fecha());
+        return $pdf->stream($nombre_archivo);
+    }
 }
 
 ?>
