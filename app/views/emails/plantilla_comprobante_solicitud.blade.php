@@ -101,10 +101,10 @@
         <td bgcolor="orange">Numero de orden</td>
         <td bgcolor="orange">Cantidad Solicitada</td>
     </tr>
-    @foreach($data_pedidos as $pedido)
+    @forelse($data_pedidos as $pedido)
         @if(ElementoInventario::verificar_is_clase_objeto(REACTIVO, $pedido['cod_objeto']))
             <tr>
-                <td bgcolor="orange" width="5%"> 1</td>
+                <td bgcolor="orange" width="5%"> *</td>
                 <td width="">{{ ElementoInventario::get_nombre_objeto($pedido['cod_objeto']) }}</td>
                 <td width="">{{ $pedido['cod_dimension'] }}</td>
                 <td width="">{{ $pedido['cod_subdimension'] }}</td>
@@ -114,7 +114,12 @@
                 <td width="">{{ $pedido['cantidad_solicitada'] }}</td>
             </tr>
         @endif
-    @endforeach
+    @empty
+        <tr>
+            <td colspan="8">No fue seleccionado ningun reactivo</td>
+        </tr>
+        @end
+    @endforelse
 </table>
 
 <br>
@@ -136,10 +141,10 @@
             <td bgcolor="orange">Numero de orden</td>
             <td bgcolor="orange">Cantidad Solicitada</td>
         </tr>
-        @foreach($data_pedidos as $pedido)
+        @forelse($data_pedidos as $pedido)
             @if(!ElementoInventario::verificar_is_clase_objeto(REACTIVO, $pedido['cod_objeto']))
                 <tr>
-                    <td bgcolor="orange" width="5%"> 1</td>
+                    <td bgcolor="orange" width="5%"> *</td>
                     <td width="">{{ ElementoInventario::get_nombre_objeto($pedido['cod_objeto']) }}</td>
                     <td width="">{{ $pedido['cod_dimension'] }}</td>
                     <td width="">{{ $pedido['cod_subdimension'] }}</td>
@@ -149,7 +154,11 @@
                     <td width="">{{ $pedido['cantidad_solicitada'] }}</td>
                 </tr>
             @endif
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="8">No fue seleccionado ningun equipo o instrumento</td>
+            </tr>
+        @endforelse
     </table>
 </div>
 
