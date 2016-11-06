@@ -257,3 +257,17 @@ function tag_img_base64($path_img_file = null)
 
     echo '<img src="' . $src . '">';
 }
+
+function get_decode64_data_img($path_img_file = null)
+{
+    $imgData = base64_decode(file_get_contents($path_img_file));
+
+    return $imgData;
+}
+
+function get_encode64_data_img($path_img_file = null)
+{
+    $imgData = base64_encode(file_get_contents($path_img_file));
+
+    return $imgData;
+}
