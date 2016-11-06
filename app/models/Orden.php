@@ -31,5 +31,18 @@
 
             return $consulta;
         }
+
+        public function get_estado_orden()
+        {
+            $consulta = DB::table('ordenes')
+                ->select(
+                    RAW('UPPER(condiciones.nombre) as nombre'))
+                ->join('condiciones', 'condiciones.codigo', '=', 'ordenes.status')
+                ->where('ordenes.codigo', '=', $this->codigo)
+                ->first();
+
+            return $consulta->nombre;
+        }
+
 	}
 ?>
