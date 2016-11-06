@@ -127,7 +127,7 @@ simci.controller('OrdenesController', [
                                 default:
                                     break;
                             }
-
+                            html += '<a class="item" href="/api/ordenes/generar-pdf/' + data.codigo + '/"><i class="save icon"></i>Guardar orden PDF</a>';
                             html += '</div></div></div>';
 
                             return html;
@@ -181,7 +181,7 @@ simci.controller('OrdenesController', [
 
                             if (response.resultado) {
 
-                                $timeout(function(){
+                                $timeout(function () {
                                     $scope.datos_pedidos_aceptar = response.datos;
 
                                     //Variable usada para pasarla a la vista, especificamente al boton de aceptar orden
