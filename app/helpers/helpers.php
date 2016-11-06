@@ -271,3 +271,8 @@ function get_encode64_data_img($path_img_file = null)
 
     return $imgData;
 }
+
+function convertir_fecha($fecha)
+{
+    return join('/', array_reverse(explode('-', $fecha)));
+}
