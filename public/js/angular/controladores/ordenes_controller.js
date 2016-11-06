@@ -398,6 +398,12 @@ simci.controller('OrdenesController', [
                         alertify.error("Error, No has seleccionado un elemento del inventario");
                         return false;
                     }
+
+                    if (Number($scope.cantidad) === 0) {
+                        alertify.error("Error, Se debe ingresar una cantidad distinta de 0");
+                        return false;
+                    }
+
                     if (is_valid_form) {
 
                         var parametros = {
@@ -509,6 +515,7 @@ simci.controller('OrdenesController', [
 
                             return ToolsService.registrar_dinamico($scope, $http, $timeout, {
                                 url: '/api/ordenes/generar-orden',
+                                id_btn_accion: 'btn_generar',
                                 exito: {
                                     titulo: 'Orden generada con exito',
                                     mensajes: ['La orden ha sido agregada a la cola de ordenes']
