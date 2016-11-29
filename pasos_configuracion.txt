@@ -19,4 +19,4 @@ el cual contendra lo siguinte
 ?>
 
 	
-esto es para poner el servidor en produccion o en configuracion local
+#esto es para poner el servidor en produccion o en configuracion local
