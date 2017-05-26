@@ -75,7 +75,7 @@
     <table border=1 width="100%">
 		<tr>
             <td colspan="2" align="center">Nombre Producto:</td>
-            <td colspan="2"> TARTATO DE ANTIMONIO Y POTASIO SEMIHIDRATADO</td>
+            <td colspan="2">{{ $reactivo->nombre }}</td>
 		</tr>
 		<tr>
             <td colspan="2" align="center">Grupo Producto:</td>

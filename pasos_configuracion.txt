@@ -1,7 +1,5 @@
 CONFIGURAR LAS VARIABLES DE ENTORNO PRIMERAMENTE
-CREAR LAS SIGUIENTES VARIABLES
-EN UN ARCHIVO UBICADO EN LA CARPETA PRINCIPAL
-COLOCARLE AL ARCHIVO EL SIGUIENTE NOMBRE 
+CREAR LAS SIGUIENTES VARIABLES EN UN ARCHIVO UBICADO EN LA CARPETA PRINCIPAL COLOCARLE AL ARCHIVO EL SIGUIENTE NOMBRE 
 .env.local.php
 
 el cual contendra lo siguinte
@@ -17,6 +15,6 @@ el cual contendra lo siguinte
 	);
 
 ?>
+	
+#esto es para poner el servidor en produccion o en configuracion local
 
-
-esto es para poner el servidor en produccion o en configuracion local
