@@ -12,8 +12,11 @@
 
 # Pasos para la configuracion del sistema
 1) Clonar el repositorio
+
 2) Instalacion de nodejs y npm
+
 3) Instalacion de composer
+
 4) Acceder a la carpeta del proyecto 
 `cd SIMCI`
 ejecutar
