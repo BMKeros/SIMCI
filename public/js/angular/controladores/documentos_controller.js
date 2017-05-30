@@ -1,19 +1,28 @@
-/// Controlador para catalogo
+/// Controlador para documentos
 
-simci.controller('DocumentosController', [
-    '$scope',
-    '$http',
-    '$log',
-    '$timeout',
-    '$route',
-    '$routeParams',
-    '$location',
-    'DTOptionsBuilder',
-    'DTColumnBuilder',
-    '$compile',
-    'ToolsService',
-    '$templateCache',
-    function ($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache) {
+(function () {
+    'use strict';
+
+    angular
+        .module('SIMCI')
+        .controller('DocumentosController', DocumentosController);
+
+    DocumentosController.$injector = [
+        '$scope',
+        '$http',
+        '$log',
+        '$timeout',
+        '$route',
+        '$routeParams',
+        '$location',
+        'DTOptionsBuilder',
+        'DTColumnBuilder',
+        '$compile',
+        'ToolsService',
+        '$templateCache'
+    ];
+
+    function DocumentosController($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache) {
 
         $scope.modulo = {};
         $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -103,7 +112,5 @@ simci.controller('DocumentosController', [
 
         }//Fin de enviar-documento
 
-    }]
-);
-    
- 
+    }
+})();
