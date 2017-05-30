@@ -15,7 +15,8 @@ gulp.task('validar_javascript', function () {
 
 gulp.task('compilar_archivos_angular', ['validar_javascript'], function () {
     //'!./js/angular/**/ng-*.js'
-    gulp.src(['./js/angular/**/*.js'])
+    gulp.src(['./js/angular/app.modules.js',
+        './js/angular/**/*.js'])
         .pipe(debug())
         .pipe(sourcemaps.init())
         .pipe(concat('ng-app.min.js'))
