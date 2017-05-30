@@ -147,7 +147,7 @@ class OrdenesController extends BaseController
                     'cod_objeto' => $value['cod_objeto'],
                     'numero_orden' => $value['numero_orden'],
                     'cantidad_solicitada' => $value['cantidad_solicitada'],
-                    'status_elemento' => EN_ESPERA,
+                    'status' => EN_ESPERA,
                     'created_at' => get_now(),
                     'updated_at' => get_now()
                 );
@@ -206,7 +206,7 @@ class OrdenesController extends BaseController
                     $id_elementos_pedidos = DB::table('pedidos')
                         ->select('id')
                         ->where('cod_orden', '=', $codigo_orden)
-                        ->where('status_elemento', '=', EN_ESPERA)
+                        ->where('status', '=', EN_ESPERA)
                         ->lists('id');
 
                     switch (strtoupper($accion_orden)) {
@@ -291,7 +291,7 @@ class OrdenesController extends BaseController
                                         DB::table('pedidos')
                                             ->where('id', $pedido['id'])
                                             ->update([
-                                                'status_elemento' => ACTIVO,
+                                                'status' => ACTIVO,
                                                 'updated_at' => get_now()
                                             ]);
 
@@ -300,7 +300,7 @@ class OrdenesController extends BaseController
                                         DB::table('pedidos')
                                             ->where('id', $pedido['id'])
                                             ->update([
-                                                'status_elemento' => CANCELADO,
+                                                'status' => CANCELADO,
                                                 'updated_at' => get_now()
                                             ]);
                                     }
@@ -336,8 +336,8 @@ class OrdenesController extends BaseController
 
                             DB::table('pedidos')
                                 ->where('cod_orden', '=', $codigo_orden)
-                                ->where('status_elemento', '=', EN_ESPERA)
-                                ->update(['status_elemento' => CANCELADO /*, 'cantidad_retornada' => 0*/]);
+                                ->where('status', '=', EN_ESPERA)
+                                ->update(['status' => CANCELADO /*, 'cantidad_retornada' => 0*/]);
 
                             //Enviamos un mensaje al responsable de la orden
                             $data_email = [
@@ -371,7 +371,7 @@ class OrdenesController extends BaseController
                                 'cantidad_solicitada',
                                 'cod_orden')
                                 ->where('cod_orden', '=', $codigo_orden)
-                                ->where('status_elemento', '=', ACTIVA)
+                                ->where('status', '=', ACTIVA)
                                 ->get();
 
                             $data_elementos_pedidos = [];
@@ -423,7 +423,7 @@ class OrdenesController extends BaseController
                                         ->where('cod_objeto', '=', $pedido_aceptar['cod_objeto'])
                                         ->where('numero_orden', '=', $pedido_aceptar['numero_orden'])
                                         ->where('cod_orden', '=', $codigo_orden)
-                                        ->where('status_elemento', '=', ACTIVA)
+                                        ->where('status', '=', ACTIVA)
                                         ->get();
 
                                     if($pedido_aceptar['cantidad_retornada'] > $pedido_original[0]->cantidad_solicitada ||
@@ -506,8 +506,8 @@ class OrdenesController extends BaseController
                                     //actualizamos el status de los elementos de la orden a completar
                                     DB::table('pedidos')
                                         ->where('cod_orden', '=', $codigo_orden)
-                                        ->where('status_elemento', '=', ACTIVA)
-                                        ->update(['status_elemento' => COMPLETADO /*, 'cantidad_retornada' => $pedido_aceptar['cantidad_retornada']*/]);
+                                        ->where('status', '=', ACTIVA)
+                                        ->update(['status' => COMPLETADO /*, 'cantidad_retornada' => $pedido_aceptar['cantidad_retornada']*/]);
 
                                     $response = ['resultado' => true,'mensajes' => ['']];
                                 }

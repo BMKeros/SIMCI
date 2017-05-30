@@ -23,7 +23,7 @@ class CrearTablaOrdenes extends Migration {
 			$table->time('hora');
 			$table->string('cod_laboratorio', 4);
 			$table->string('observaciones', 200);
-			$table->string('status_elemento', 3);
+			$table->string('status', 3);
             
 			$table->nullableTimestamps();
 		});

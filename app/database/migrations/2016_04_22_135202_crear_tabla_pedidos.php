@@ -23,7 +23,7 @@ class CrearTablaPedidos extends Migration {
 			$table->integer('numero_orden');
 			$table->decimal('cantidad_solicitada');
 			$table->decimal('cantidad_retornada');
-			$table->string('status_elemento', 3);	
+			$table->string('status', 3);
 
 			$table->nullableTimestamps();
 		});
