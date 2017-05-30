@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-	<meta charset="utf-8">
-	<title></title>
-	<style type="text/css">
+    <meta charset="utf-8">
+    <title></title>
+    <style type="text/css">
         body {
             font-family: verdana, geneva, helvetica, sans-serif;
         }
@@ -52,67 +52,67 @@
             height: 70px;
         }
 
-	</style>
+    </style>
 </head>
 <body>
 <div class="titulo">
     <table border=1 width="100%">
-		<tr>
+        <tr>
             <td bgcolor="orange" align="center">DATASHEET</td>
-		</tr>
-	</table>
+        </tr>
+    </table>
 </div>
 <br>
 
 <div class="reactivo">
     <table border=1 width="100%">
-		<tr>
+        <tr>
             <td bgcolor="orange" align="center">Reactivo</td>
-		</tr>
-	</table>
+        </tr>
+    </table>
 </div>
 <div class="data_sheet1">
     <table border=1 width="100%">
-		<tr>
+        <tr>
             <td colspan="2" align="center">Nombre Producto:</td>
-            <td colspan="2">{{ $reactivo->nombre }}</td>
-		</tr>
-		<tr>
+            <td colspan="2">{{ strtoupper($reactivo->nombre) }}</td>
+        </tr>
+        <tr>
             <td colspan="2" align="center">Grupo Producto:</td>
-			<td colspan="2">POTASIO </td>
-		</tr>
-		<tr>
+            <td colspan="2">POTASIO</td>
+        </tr>
+        <tr>
             <td colspan="2" align="center">Formula:</td>
-			<td colspan="2">C4H4KO7Sb . 1/2 H2O </td>
-		</tr>
-		<tr>
+            <td colspan="2">C4H4KO7Sb . 1/2 H2O</td>
+        </tr>
+        <tr>
             <td colspan="2" align="center">Peso Formula:</td>
-			<td colspan="2">333.93</td>
-		</tr>
-		<tr>
+            <td colspan="2">333.93</td>
+        </tr>
+        <tr>
             <td colspan="2" align="center">N# CAS:</td>
             <td colspan="2">28300-74-5</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td colspan="2" align="center">Codigo Producto:</td>
-			<td colspan="2">0000000000</td>
-		</tr>
-	</table>
+            <td colspan="2">0000000000</td>
+        </tr>
+    </table>
 </div>
 <br>
 
 <div class="data_sheet2">
     <table border=1 width="100%">
-		<tr>
+        <tr>
             <td bgcolor="orange" align="center" ;>Nivel de Peligro</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td><br><br><br><br><br><br><br><br><br><br><br><br><br></td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td bgcolor="orange" align="center" ;>Informacion Toxica</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td><p>
                     Vías de absorción por inhalación. Ingestión.
                     Toxicidad en los animales DL50: No disponible. CL50: No disponible.
@@ -146,11 +146,11 @@
                     Ingestión: la ingestión prolongada o repetida puede provocar cálculos renales y daño a los riñones y
                     puede afectar al hígado.
                 </p></td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td bgcolor="orange" align="center" ;>Informacion Radioactiva</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td><p>
                     Estabilidad El producto es estable.
                     Temperatura de inestabilidad No disponible.
@@ -162,11 +162,11 @@
                     Observaciones especiales sobre corrosividad Los oxalatos se corroen lentamente acero
                     No ocurrirá polimerización.
                 </p></td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td bgcolor="orange" align="center" ;>Infromacion Fisica</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td><p>
                     Estado físico y apariencia sólida. (cristales sólidos.)
                     Olor Sin olor.
@@ -193,11 +193,11 @@
                     DO.; 11,8 g / 100 ml de agua
                     @ 50 grados. DO.; 1 g / 2,6 ml de agua hirviendo.
                 </p></td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td bgcolor="orange" align="center" ;>Informacion Proteccion Personal</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td><p>
                     Controles de ingeniería Aísle el proceso, ventilación local, u otros controles de ingeniería para
                     mantener los niveles ambientales por debajo de los límites de exposición recomendados. Si las
@@ -211,11 +211,11 @@
                     especialista antes de utilizar este producto.
                     Límites de exposición No disponible.
                 </p></td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td bgcolor="orange" align="center" ;>Informacion Almacenamiento</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td><p>
                     precauciones
                     No ingerir. No respirar el polvo. Use ropa protectora adecuada. en caso de falta de ventilación,
@@ -226,11 +226,11 @@
                     Mantenga el recipiente herméticamente cerrado. Mantener el contenedor en un área fresca y bien
                     ventilada.
                 </p></td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td bgcolor="orange" align="center" ;>Informacion de Fuego</td>
-		</tr>
-		<tr>
+        </tr>
+        <tr>
             <td><p>
                     Inflamabilidad del producto no inflamable.
                     Temperatura de autoignición No aplicable.
@@ -246,8 +246,8 @@
                     emite vapores tóxicos de óxidos de nitrógeno
                     Observaciones especiales sobre los riesgos de explosión No disponible.
                 </p></td>
-		</tr>
-	</table>
+        </tr>
+    </table>
 </div>
 <div class="logo1"><img src="{{ public_path() }}/img/logo_simciq.png"></div>
 </body>
