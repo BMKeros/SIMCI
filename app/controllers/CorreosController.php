@@ -1,8 +1,8 @@
 <?php
 
-class CorreosController extends Controller
+class CorreosController extends BaseController
 {
-    
+
     public function getMostrar()
     {
         $tipo_busqueda = Input::get('type', 'todos');
@@ -13,21 +13,35 @@ class CorreosController extends Controller
                 if ($orden) {
                     //le falta aun los campos que traera la consulta
                     $response = DB::table('correo_destinatarios')
-                            ->join('correos', 'correos.id', '=', 'correo_destinatarios.correos_id')
-                            ->join('archivos', 'archivos.id', '=','correos.archivo_id')
-                            ->where('correo_destinatarios', '=', Auth::user()->id)
-                            ->orderBy('correos.id', $orden)
-                            ->get();
+                        ->select('correos.emisor', 'correos.asunto', 'correos.descripcion')
+                        ->join('correos', 'correos.id', '=', 'correo_destinatarios.correos_id')
+                        ->where('correo_destinatarios.destinatario', '=', Auth::user()->id)
+                        ->orderBy('correos.id', $orden)
+                        ->get();
 
                 } else {
-                    $response = DB::table('vista_laboratorio_full')->get();
+                    $response = DB::table('correo_destinatarios')
+                        ->select('correos.emisor', 'correos.asunto', 'correos.descripcion')
+                        ->join('correos', 'correos.id', '=', 'correo_destinatarios.correos_id')
+                        ->where('correo_destinatarios.destinatario', '=', Auth::user()->id)
+                        ->get();
                 }
                 break;
 
-            default:
-                $response = DB::table('vista_laboratorio_full')->get();
+            case 'paginacion':
+
+                $consulta = DB::table('vista_correos')
+                    ->select('id', 'emisor', 'asunto', 'descripcion', 'path_archivo', 'nombre_original_archivo',
+                        'nombre_generado_archivo', 'extension_archivo');
+
+                $response = $this->generar_paginacion_dinamica($consulta,
+                    array('campo_where' => 'asunto', 'campo_orden' => 'id'));
+
                 break;
 
+            default:
+                $response = DB::table('vista_correos')->get();
+                break;
         }
 
         return Response::json($response);
@@ -84,7 +98,12 @@ class CorreosController extends Controller
                 $nuevo_correo->asunto = $asunto;
                 $nuevo_correo->descripcion = $descripcion;
 
+                var_dump(Input::hasFile('archivo'));die();
+
                 if (Input::hasFile('archivo')) {
+
+                    //Esta funcion es para crear el directorio donde se suben los archivos del correo
+                    crear_directorio(PATH_ARCHIVOS_CORREO);
 
                     $nuevo_archivo = new Archivo();
                     $nuevo_archivo->nombre_original = $archivo->getClientOriginalName();
