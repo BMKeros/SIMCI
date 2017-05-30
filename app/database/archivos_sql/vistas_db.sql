@@ -249,3 +249,22 @@ CREATE OR REPLACE VIEW vista_pedidos_full AS
 
   FROM pedidos
     INNER JOIN vista_objetos_full ON vista_objetos_full.cod_objeto = pedidos.cod_objeto;
+
+
+DROP VIEW IF EXISTS vista_correos CASCADE;
+CREATE OR REPLACE VIEW vista_correos AS
+  SELECT
+    correos.id                                  AS id,
+    correos.emisor                              AS emisor_id,
+    usuarios.usuario                            AS emisor,
+    correos.asunto                              AS asunto,
+    correos.descripcion                         AS descripcion,
+    archivos.id                                 AS id_archivo,
+    archivos.path                               AS path_archivo,
+    archivos.nombre_original                    AS nombre_original_archivo,
+    archivos.nombre_generado                    AS nombre_generado_archivo,
+    archivos.extension                          AS extension_archivo
+
+  FROM correos
+  LEFT JOIN archivos ON archivos.id = correos.archivo_id
+  INNER JOIN usuarios ON usuarios.id = correos.emisor;
