@@ -62,7 +62,7 @@
 
             $scope.opciones_tabla_documentos = DTOptionsBuilder.newOptions()
                 .withOption('ajax', {
-                    url: '/api/documentos/mostrar?type=paginacion',
+                    url: '/api/correos/mostrar?type=paginacion',
                     type: 'GET'
                 })
                 .withDataProp('data')
