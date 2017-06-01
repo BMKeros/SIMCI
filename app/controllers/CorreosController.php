@@ -64,7 +64,7 @@ class CorreosController extends BaseController
             'asunto' => 'required|max:80',
             'destinatarios' => 'required',
             'descripcion' => 'required|max:250',
-            'archivo' => 'mimes:jpeg,bmp,png,zip,pdf,tar.gz,tar',
+            'archivo' => 'mimes:jpeg,bmp,png,zip,pdf,tar.gz,tar,doc,docx,ppt,pptx,ods,odt|max:5000',
         );
 
         $campos = array(
@@ -81,9 +81,11 @@ class CorreosController extends BaseController
             'max' => ':attribute debe tener un maximo de :max caracteres',
             'exists' => ':attribute no existe',
             'numeric' => ':attribute debe tener solo numeros',
+            'mimes' => 'Solo se admiten los formatos jpeg,bmp,png,zip,pdf,tar.gz,tar,doc,docx,ppt,pptx,ods,odt'
         );
 
         $validacion = Validator::make($campos, $reglas, $mensajes);
+
 
         if ($validacion->fails()) {
 
@@ -98,12 +100,12 @@ class CorreosController extends BaseController
                 $nuevo_correo->asunto = $asunto;
                 $nuevo_correo->descripcion = $descripcion;
 
-                var_dump(Input::hasFile('archivo'));die();
+                //Esta variable es para verificar si se subio el archivo en el sistema
+                //si ocurre un error 500 borrar el archivo subido
+                $subio_archivo = false;
+                $nombre_archivo_subido = "";
 
                 if (Input::hasFile('archivo')) {
-
-                    //Esta funcion es para crear el directorio donde se suben los archivos del correo
-                    crear_directorio(PATH_ARCHIVOS_CORREO);
 
                     $nuevo_archivo = new Archivo();
                     $nuevo_archivo->nombre_original = $archivo->getClientOriginalName();
@@ -117,12 +119,19 @@ class CorreosController extends BaseController
                     //Guardamos el archivo
                     $nuevo_archivo->save();
 
+                    //Esto es por si ocurre un error 500, para poder eliminar el archivo que se subio
+                    $subio_archivo = true;
+                    $nombre_archivo_subido = public_path(PATH_ARCHIVOS_CORREO . $nuevo_archivo->get_full_name());
+
                     //Asignamos el archivo al correo
-                    $nuevo_correo->archivo = $nuevo_archivo->id;
+                    $nuevo_correo->archivo_id = $nuevo_archivo->id;
                 }
 
                 //Guardamos el correo
                 $nuevo_correo->save();
+
+                //Convertimos el string separado por COMAS de los ids de usuario, y lo convertimos en un array
+                $destinatarios = explode(",", $destinatarios);
 
                 //Enviamos el correo a los destinatarios
                 foreach ($destinatarios as $destinatario) {
@@ -139,6 +148,10 @@ class CorreosController extends BaseController
 
             } catch (\Exception $e) {
                 DB::rollBack();
+
+                if ($subio_archivo) {
+                    unlink($nombre_archivo_subido);
+                }
 
                 return Response::json(array(
                     'resultado' => false,
