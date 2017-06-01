@@ -11,7 +11,8 @@
                 'chart.js',
                 'angularUtils.directives.dirPagination',
                 'qrScanner',
-                'ngAudio'
+                'ngAudio',
+                'LocalStorageModule'
             ], function ($interpolateProvider) {
                 $interpolateProvider.startSymbol('<%');
                 $interpolateProvider.endSymbol('%>');

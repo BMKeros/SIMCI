@@ -3,7 +3,7 @@
 
     angular
         .module('SIMCI')
-        .run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http, $interval) {
+        .run(function ($rootScope, DTDefaultOptions, ToolsService, ngProgressFactory, $http, $interval, localStorageService) {
 
             $rootScope.notificaciones = {
 
@@ -72,14 +72,38 @@
             };
 
             //Config para alertify
-            alertify.defaults.transition = "zoom";
-            alertify.defaults.theme.ok = "ui positive button";
-            alertify.defaults.theme.cancel = "ui gray button";
-            alertify.defaults.glossary.ok = 'Aceptar';
-            alertify.defaults.glossary.cancel = 'Cancelar';
+            Object.assign(alertify.defaults, {
+                transition: "zoom",
+                theme: {
+                    ok: "ui positive button",
+                    cancel: "ui gray button"
+                },
+                glossary: {
+                    ok: "Aceptar",
+                    cancel: "Cancelar"
+                }
+            });
 
             //Lenguaje español para datatable
-            DTDefaultOptions.setLanguageSource('/spanish.json');
+            if (localStorageService.keys().indexOf('lenguaje_datatables') == -1) {
+
+                $http({
+                    method: 'GET',
+                    url: '/spanish.json'
+                }).then(function (data) {
+                    var lang = data.data;
+
+                    localStorageService.set("lenguaje_datatables", lang);
+
+                    DTDefaultOptions.setLanguage(localStorageService.get('lenguaje_datatables'));
+
+                }, function (data_error) {
+                    console.log("Error al cargar el idioma de datatables", data_error);
+                });
+
+            } else {
+                DTDefaultOptions.setLanguage(localStorageService.get('lenguaje_datatables'));
+            }
 
             //Asignar funciones en el scope global
             $rootScope.tools_input = ToolsService.tools_input;
