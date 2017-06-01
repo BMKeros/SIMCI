@@ -107,7 +107,8 @@
                 exito: {
                     titulo: 'Correo enviado con exito',
                     mensajes: ['El correo ha sido enviado a los destinatarios.']
-                }
+                },
+                post_archivo: true
             });
 
         }//Fin de enviar-documento
