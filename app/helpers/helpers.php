@@ -209,7 +209,11 @@ function crear_notificacion($mensaje = null, $receptor_id = null)
         DB::beginTransaction();
 
         try {
-            $id_mensaje = DB::table('mensajes')->insertGetId(['mensaje' => $mensaje]);
+            $id_mensaje = DB::table('mensajes')->insertGetId([
+                    'mensaje' => $mensaje,
+                    'created_at' => get_now(),
+                    'updated_at' => get_now()
+                ]);
 
             DB::table('notificaciones')->insert([
                 'mensaje_id' => $id_mensaje,
