@@ -10,6 +10,7 @@ composer.lock
 Thumbs.db
 /public/node_modules
 /public/bower_components
+/public/uploads/*
 /public/uploads/imagenes/*.jpg
 /public/uploads/imagenes/*.bmp
 /public/uploads/imagenes/*.png
