@@ -318,11 +318,36 @@
                         //Activamos el loading
                         global_this.loading_button(opciones.id_btn_accion, true);
 
-                        $_HTTP({
-                            method: 'POST',
-                            url: opciones.url,
-                            data: $_SCOPE.DatosForm
-                        }).then(function (data) {
+                        var config_http = {};
+
+                        if (opciones.post_archivo) {
+
+                            var data_enviar = new FormData();
+
+                            for (var _key in $_SCOPE.DatosForm) {
+                                if($_SCOPE.DatosForm.hasOwnProperty(_key)){
+                                    data_enviar.append(_key, $_SCOPE.DatosForm[_key]);
+                                }
+                            }
+                            
+                            config_http = {
+                                method: 'POST',
+                                url: opciones.url,
+                                data: data_enviar,
+                                transformRequest: angular.identity,
+                                headers: {'Content-Type': undefined}
+                            };
+
+                        } else {
+
+                            config_http = {
+                                method: 'POST',
+                                url: opciones.url,
+                                data: $_SCOPE.DatosForm
+                            };
+                        }
+
+                        $_HTTP(config_http).then(function (data) {
 
                             if (data.data.resultado) {
 
