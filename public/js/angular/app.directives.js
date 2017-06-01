@@ -4,8 +4,22 @@
     angular
         .module('SIMCI')
 
-        .directive("ngModelFile", [function () {
+        .directive("ngModelFile", ['$parse', function ($parse) {
             return {
+                restrict: 'A',
+                link: function(scope, element, attrs) {
+                    var model = $parse(attrs.ngModelFile);
+                    var modelSetter = model.assign;
+
+                    element.bind('change', function(_changeEvent){
+                        scope.$apply(function(){
+                            modelSetter(scope, _changeEvent.target.files[0]);
+                        });
+                    });
+                }
+            };
+
+            /*return {
                 scope: {
                     ngModelFile: "="
                 },
@@ -14,13 +28,22 @@
                         var reader = new FileReader();
                         reader.onload = function (loadEvent) {
                             scope.$apply(function () {
-                                scope.ngModelFile = loadEvent.target.result;
+                                //scope.ngModelFile = loadEvent.target.result;
+                                scope.ngModelFile = {
+                                    lastModified: changeEvent.target.files[0].lastModified,
+                                    lastModifiedDate: changeEvent.target.files[0].lastModifiedDate,
+                                    name: changeEvent.target.files[0].name,
+                                    size: changeEvent.target.files[0].size,
+                                    type: changeEvent.target.files[0].type,
+                                    data: loadEvent.target.result
+                                };
                             });
                         };
                         reader.readAsDataURL(changeEvent.target.files[0]);
+                        //reader.readAsArrayBuffer(changeEvent.target.files[0]);
                     });
                 }
-            }
+            }*/
         }])
 
         .directive('ngUpdateHidden', [function () {
