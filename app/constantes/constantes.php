@@ -47,7 +47,7 @@ define('SEXO_MASCULINO', 10);
 define('SEXO_FEMENINO', 20);
 
 /// PATH
-define('PATH_UPLOADS', '/uploads/');
+define('PATH_UPLOADS', 'uploads/');
 define('PATH_IMAGENES', PATH_UPLOADS . 'imagenes/');
 define('PATH_ARCHIVOS', PATH_UPLOADS . 'archivos/');
 define('PATH_ARCHIVOS_CORREO', PATH_ARCHIVOS . 'correo/');
