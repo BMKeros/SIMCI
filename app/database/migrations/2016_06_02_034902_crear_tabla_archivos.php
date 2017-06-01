@@ -19,6 +19,7 @@ class CrearTablaArchivos extends Migration
             $table->string('nombre_original', 80);
             $table->string('nombre_generado', 80);
             $table->string('extension', 10);
+            $table->timestamps();
         });
     }
 
