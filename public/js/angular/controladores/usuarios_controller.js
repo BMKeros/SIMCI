@@ -241,7 +241,7 @@
                     transformRequest: angular.identity,
                     headers: {'Content-Type': undefined}
                 };
-                
+
                 $http(config_http).then(function (data) {
                     if (data.data.resultado) {
 
