@@ -76,7 +76,8 @@
                 exito: {
                     titulo: 'Usuario creado con exito',
                     mensajes: ['El usuario ha sido almacenado en la base de datos.']
-                }
+                },
+                post_archivo: true
             });
 
         }// If == '/usuarios/crear'
@@ -207,11 +208,9 @@
 
                         angular.element('#permisos').dropdown('set selected', $scope.DatosForm.permisos);
 
-
                         angular.element('#tipo_usuario').dropdown('set selected', $scope.DatosForm.tipo_usuario);
 
                         angular.element('#sexo').dropdown('set selected', $scope.DatosForm.sexo);
-
 
                     }, 0, false);
 
@@ -227,11 +226,23 @@
 
                 ToolsService.loading_button('btn-modificar', true);
 
-                $http({
+                var data_enviar = new FormData();
+
+                for (var _key in $scope.DatosForm) {
+                    if ($scope.DatosForm.hasOwnProperty(_key)) {
+                        data_enviar.append(_key, $scope.DatosForm[_key]);
+                    }
+                }
+
+                var config_http = {
                     method: 'POST',
                     url: '/api/usuarios/actualizar-usuario-completo?id=' + id_usuario,
-                    data: $scope.DatosForm
-                }).then(function (data) {
+                    data: data_enviar,
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                };
+                
+                $http(config_http).then(function (data) {
                     if (data.data.resultado) {
 
                         $scope.mostrar_mensaje = true;
