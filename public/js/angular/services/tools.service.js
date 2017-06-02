@@ -325,11 +325,11 @@
                             var data_enviar = new FormData();
 
                             for (var _key in $_SCOPE.DatosForm) {
-                                if($_SCOPE.DatosForm.hasOwnProperty(_key)){
+                                if ($_SCOPE.DatosForm.hasOwnProperty(_key)) {
                                     data_enviar.append(_key, $_SCOPE.DatosForm[_key]);
                                 }
                             }
-                            
+
                             config_http = {
                                 method: 'POST',
                                 url: opciones.url,
@@ -347,7 +347,7 @@
                             };
                         }
 
-                        $_HTTP(config_http).then(function (data) {
+                        $http(config_http).then(function (data) {
 
                             if (data.data.resultado) {
 
@@ -359,14 +359,13 @@
                                     mensajes: opciones.exito.mensajes
                                 };
 
-                                $_TIMEOUT(function () {
+                                $timeout(function () {
                                     //Desactivamos el loading
                                     global_this.loading_button(opciones.id_btn_accion, false);
 
                                     if (opciones.formulario) {
                                         formulario.form('clear');
                                     }
-
                                     if (opciones.callbackSuccess) {
                                         opciones.callbackSuccess($_SCOPE);
                                     }
