@@ -132,7 +132,8 @@ function cargar_crear_imagen_usuario($archivo = null, $name_usuario = "")
     if ($archivo) {
         $extension = explode(".", $archivo->getClientOriginalName());
         $extension = $extension[count($extension) - 1];
-        $name = sprintf('%s_img_perfil_user.%s', $name_usuario, $extension);
+        $name_generate = hash('ripemd160', "imagen_perfil" . $name_usuario);
+        $name = $name_generate . "." . $extension;
         $archivo->move('uploads/imagenes', $name);
         return $name;
     } else {
@@ -210,10 +211,10 @@ function crear_notificacion($mensaje = null, $receptor_id = null)
 
         try {
             $id_mensaje = DB::table('mensajes')->insertGetId([
-                    'mensaje' => $mensaje,
-                    'created_at' => get_now(),
-                    'updated_at' => get_now()
-                ]);
+                'mensaje' => $mensaje,
+                'created_at' => get_now(),
+                'updated_at' => get_now()
+            ]);
 
             DB::table('notificaciones')->insert([
                 'mensaje_id' => $id_mensaje,
