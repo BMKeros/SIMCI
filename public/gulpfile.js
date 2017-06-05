@@ -31,7 +31,7 @@ gulp.task('compilar_archivos_angular', ['validar_javascript'], function () {
 
 
 gulp.task('listen_modificaciones', ['compilar_archivos_angular'], function () {
-    gulp.watch('./js/angular/*.js', ['compilar_archivos_angular'], function (e) {
+    gulp.watch('./js/angular/**/*.js', ['compilar_archivos_angular'], function (e) {
         _("archivo %s [%s]", e.type, e.path);
     })
 });

@@ -78,19 +78,17 @@
                 });
 
             $scope.columnas_tabla_documentos = [
-                DTColumnBuilder.newColumn(null).withTitle('Fecha')
-                    .notSortable(),
-
-                DTColumnBuilder.newColumn('documentos_enviados').withTitle('Documentos Enviados').notSortable(),
-
-                DTColumnBuilder.newColumn('documentos_respondidos').withTitle('Documentos Respondidos').notSortable(),
+                DTColumnBuilder.newColumn(null).withTitle('Fecha').notSortable().withOption('width', '11%'),
+                DTColumnBuilder.newColumn('emisor').withTitle('Emisor').notSortable().withOption('width', '15%'),
+                DTColumnBuilder.newColumn('asunto').withTitle('Asunto').notSortable(),
+                DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable(),
 
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
                         return '<div class="ui icon button blue spopup" data-content="Ver Documentos" ng-click="modal_ver_documentos(' + data.id + ')"><i class="unhide icon"></i></div>' +
-                            '<div class="ui icon button green spopup"  data-content="Modificar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="edit icon"></i></div>' +
-                            '<div class="ui icon button red spopup"  data-content="Eliminar Documentos" ng-click="modal_eliminar_documentos(' + data.id + ')"><i class="remove icon"></i></div>';
-                    }).withOption('width', '17%')
+                            //'<div class="ui icon button green spopup"  data-content="Modificar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="edit icon"></i></div>' +
+                            '<div class="ui icon button orange spopup"  data-content="Descargar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="download icon"></i></div>';
+                    }).withOption('width', '15%')
             ];
 
         }//Fin de /mostrar/documentos
