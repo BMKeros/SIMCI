@@ -57,6 +57,7 @@
 
         if ($location.$$url == '/documentos/ver/todos') {
 
+
             $scope.tabla_documentos = {};
             $scope.id_objeto_documentos = null;
 
@@ -96,6 +97,7 @@
 
         if ($location.$$url == '/documentos/enviar-documento') {
 
+            ToolsService.reload_template_cache($route, $templateCache);
             $scope.enviar_correo = ToolsService.registrar_dinamico($scope, $http, $timeout, {
                 url: '/api/correos/enviar-correo',
                 formulario: {
