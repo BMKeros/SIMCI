@@ -16,7 +16,9 @@
     "gulp-sourcemaps": "^2.6.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bower_install":"bower install",
+    "compilar_assets": "gulp compilar_archivos_angular"
   },
   "author": "Israel Lugo",
   "license": "MIT"
