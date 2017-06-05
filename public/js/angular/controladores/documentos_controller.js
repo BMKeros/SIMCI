@@ -86,7 +86,7 @@
 
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
-                        return '<div class="ui icon button blue spopup" data-content="Ver Documentos" ng-click="modal_ver_documentos(' + data.id + ')"><i class="unhide icon"></i></div>' +
+                        return '<div class="ui icon button blue spopup" data-content="Ver Documentos" ng-click="modal_ver_correo(' + data.id + ')"><i class="unhid`e icon"></i></div>' +
                             //'<div class="ui icon button green spopup"  data-content="Modificar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="edit icon"></i></div>' +
                             '<div class="ui icon button orange spopup"  data-content="Descargar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="download icon"></i></div>';
                     }).withOption('width', '10%')
@@ -94,10 +94,22 @@
 
         }//Fin de /mostrar/documentos
 
+        ///Funciones
+        $scope.modal_ver_correo = function (id) {
+
+            $scope.data_correo = {};
+
+            ToolsService.mostrar_modal_dinamico($scope, $http, {
+                url: '/api/correo/mostrar?type=objeto&id=' + id,
+                scope_data_save_success: 'data_correo',
+                id_modal: 'modal_ver_correo'
+            });
+        };
+
 
         if ($location.$$url == '/documentos/enviar-documento') {
 
-            ToolsService.reload_template_cache($route, $templateCache);
+            ToolsService.reload_template_cache();
             $scope.enviar_correo = ToolsService.registrar_dinamico($scope, $http, $timeout, {
                 url: '/api/correos/enviar-correo',
                 formulario: {
