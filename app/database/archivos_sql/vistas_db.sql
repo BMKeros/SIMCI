@@ -260,7 +260,7 @@ CREATE OR REPLACE VIEW vista_correos AS
     correos.asunto                              AS asunto,
     correos.descripcion                         AS descripcion,
     correos.created_at                          AS fecha_recibido,
-    archivos.id                                 AS id_archivo,
+    archivos.id                                 AS archivo_id,
     archivos.path                               AS path_archivo,
     archivos.nombre_original                    AS nombre_original_archivo,
     archivos.nombre_generado                    AS nombre_generado_archivo,

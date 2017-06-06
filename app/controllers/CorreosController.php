@@ -7,6 +7,7 @@ class CorreosController extends BaseController
     {
         $tipo_busqueda = Input::get('type', 'todos');
         $orden = Input::get('ordenar', ' asc');
+        $id_correo = Input::get('id');
 
         switch ($tipo_busqueda) {
             case 'todos':
@@ -31,7 +32,9 @@ class CorreosController extends BaseController
             case 'correo':
                     if($id_correo){
                         $response = DB::table('vista_correos')
-                            ->select('emisor_id', 'emisor', 'asunto', 'descripcion', 'fecha_recibido', 'ruta_descargar_archivo')
+                            ->select('id', 'emisor_id', 'emisor', 'asunto', 'descripcion', 'fecha_recibido',
+                                        'archivo_id', 'path_archivo', 'nombre_original_archivo', 
+                                        'nombre_generado_archivo', 'extension_archivo', 'ruta_descargar_archivo')
                             ->where('id', '=', $id_correo)
                             ->first();
                             
@@ -48,8 +51,7 @@ class CorreosController extends BaseController
             case 'paginacion':
 
                 $consulta = DB::table('vista_correos')
-                    ->select('id', 'emisor', 'asunto', 'descripcion', 'path_archivo', 'nombre_original_archivo',
-                        'nombre_generado_archivo', 'extension_archivo');
+                    ->select('id', 'emisor_id', 'emisor', 'asunto', 'descripcion', 'fecha_recibido', 'ruta_descargar_archivo');
 
                 $response = $this->generar_paginacion_dinamica($consulta,
                     array('campo_where' => 'asunto', 'campo_orden' => 'id'));
