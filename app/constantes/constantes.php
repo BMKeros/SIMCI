@@ -68,13 +68,13 @@ define('CODIGO_PROVEEDORES', 'PRV');
 
 
 //Tipos de moviemientos
-const MOV01 = ['id' => 1, 'descripcion' => 'ENTRADA POR PROVEEDOR'];
-const MOV02 = ['id' => 2, 'descripcion' => 'ENTRADA POR DONACON'];
-const MOV03 = ['id' => 3, 'descripcion' => 'SALIDA POR PEDIDO'];
-const MOV04 = ['id' => 4, 'descripcion' => 'SALIDA POR PERDIDA'];
-const MOV05 = ['id' => 5, 'descripcion' => 'SALIDA DESCONOCIDA'];
-const MOV06 = ['id' => 6, 'descripcion' => 'RETENIDO STOCK'];
-const MOV07 = ['id' => 7, 'descripcion' => 'RETENIDO POR PEDIDO'];
+const MOV01 = array('id' => 1, 'descripcion' => 'ENTRADA POR PROVEEDOR');
+const MOV02 = array('id' => 2, 'descripcion' => 'ENTRADA POR DONACON');
+const MOV03 = array('id' => 3, 'descripcion' => 'SALIDA POR PEDIDO');
+const MOV04 = array('id' => 4, 'descripcion' => 'SALIDA POR PERDIDA');
+const MOV05 = array('id' => 5, 'descripcion' => 'SALIDA DESCONOCIDA');
+const MOV06 = array('id' => 6, 'descripcion' => 'RETENIDO STOCK');
+const MOV07 = array('id' => 7, 'descripcion' => 'RETENIDO POR PEDIDO');
 
 
 //Condiciones para ordenes
