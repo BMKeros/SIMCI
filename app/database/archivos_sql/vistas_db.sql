@@ -259,11 +259,13 @@ CREATE OR REPLACE VIEW vista_correos AS
     usuarios.usuario                            AS emisor,
     correos.asunto                              AS asunto,
     correos.descripcion                         AS descripcion,
+    correos.created_at                          AS fecha_recibido,
     archivos.id                                 AS id_archivo,
     archivos.path                               AS path_archivo,
     archivos.nombre_original                    AS nombre_original_archivo,
     archivos.nombre_generado                    AS nombre_generado_archivo,
-    archivos.extension                          AS extension_archivo
+    archivos.extension                          AS extension_archivo,
+    archivos.path || archivos.nombre_generado || '.' || archivos.extension  AS ruta_descargar_archivo
 
   FROM correos
   LEFT JOIN archivos ON archivos.id = correos.archivo_id

@@ -13,7 +13,7 @@ class CorreosController extends BaseController
                 if ($orden) {
                     //le falta aun los campos que traera la consulta
                     $response = DB::table('correo_destinatarios')
-                        ->select('correos.emisor', 'correos.asunto', 'correos.descripcion')
+                        ->select('correos.emisor', 'correos.asunto', 'correos.descripcion', 'ruta_descargar_archivo')
                         ->join('correos', 'correos.id', '=', 'correo_destinatarios.correos_id')
                         ->where('correo_destinatarios.destinatario', '=', Auth::user()->id)
                         ->orderBy('correos.id', $orden)
@@ -21,11 +21,28 @@ class CorreosController extends BaseController
 
                 } else {
                     $response = DB::table('correo_destinatarios')
-                        ->select('correos.emisor', 'correos.asunto', 'correos.descripcion')
+                        ->select('correos.emisor', 'correos.asunto', 'correos.descripcion', 'ruta_descargar_archivo')
                         ->join('correos', 'correos.id', '=', 'correo_destinatarios.correos_id')
                         ->where('correo_destinatarios.destinatario', '=', Auth::user()->id)
                         ->get();
                 }
+                break;
+
+            case 'correo':
+                    if($id_correo){
+                        $response = DB::table('vista_correos')
+                            ->select('emisor_id', 'emisor', 'asunto', 'descripcion', 'fecha_recibido', 'ruta_descargar_archivo')
+                            ->where('id', '=', $id_correo)
+                            ->first();
+                            
+
+                        if(is_null($response)){
+                            $response = array();
+                        }
+                    }
+                    else{
+                        $response = array();
+                    }
                 break;
 
             case 'paginacion':
@@ -106,6 +123,8 @@ class CorreosController extends BaseController
                 $nombre_archivo_subido = "";
 
                 if (Input::hasFile('archivo')) {
+
+                    crear_directorio(PATH_ARCHIVOS_CORREO);
 
                     $nuevo_archivo = new Archivo();
                     $nuevo_archivo->nombre_original = $archivo->getClientOriginalName();
