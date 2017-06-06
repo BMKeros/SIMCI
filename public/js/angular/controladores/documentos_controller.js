@@ -83,9 +83,10 @@
                 //DTColumnBuilder.newColumn('fecha_recibido').withTitle('Fecha').notSortable().withOption('width', '15%'),
                 DTColumnBuilder.newColumn(null).renderWith(
                     function (data, type, full, config) {
-                        return $filter('formato_fecha')(data.fecha_recibido, 'DD/MM/YY');
+                        var fecha = data.fecha_recibido.split(" ");
+                        return $filter('formato_fecha')(fecha[0], 'DD/MM/YY');
                     }
-                ).withTitle('Fecha').withOption('width', '15%').notSortable(),
+                ).withTitle('Fecha').withOption('width', '10%').notSortable(),
                 DTColumnBuilder.newColumn('emisor').withTitle('Emisor').notSortable().withOption('width', '15%'),
                 DTColumnBuilder.newColumn('asunto').withTitle('Asunto').notSortable().withOption('width', '20%'),
                 DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable().withOption('width', '40%'),
