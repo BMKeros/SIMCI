@@ -8,6 +8,7 @@
         .controller('DocumentosController', DocumentosController);
 
     DocumentosController.$injector = [
+        '$filter',
         '$scope',
         '$http',
         '$log',
@@ -22,7 +23,7 @@
         '$templateCache'
     ];
 
-    function DocumentosController($scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache) {
+    function DocumentosController($filter, $scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache) {
 
         $scope.modulo = {};
         $scope.DatosForm = {}; // Objeto para los datos de formulario
@@ -79,7 +80,12 @@
                 });
 
             $scope.columnas_tabla_documentos = [
-                DTColumnBuilder.newColumn(null).withTitle('Fecha').notSortable().withOption('width', '15%'),
+                //DTColumnBuilder.newColumn('fecha_recibido').withTitle('Fecha').notSortable().withOption('width', '15%'),
+                DTColumnBuilder.newColumn(null).renderWith(
+                    function (data, type, full, config) {
+                        return $filter('formato_fecha')(data.fecha_recibido, 'DD/MM/YY');
+                    }
+                ).withTitle('Fecha').withOption('width', '15%').notSortable(),
                 DTColumnBuilder.newColumn('emisor').withTitle('Emisor').notSortable().withOption('width', '15%'),
                 DTColumnBuilder.newColumn('asunto').withTitle('Asunto').notSortable().withOption('width', '20%'),
                 DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable().withOption('width', '40%'),
@@ -98,7 +104,7 @@
                 $scope.data_correo = {};
 
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
-                    url: '/api/correo/mostrar?type=objeto&id=' + id,
+                    url: '/api/correos/mostrar?type=correo&id=' + id,
                     scope_data_save_success: 'data_correo',
                     id_modal: 'modal_ver_correo'
                 });
