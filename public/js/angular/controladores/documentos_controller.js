@@ -92,20 +92,19 @@
                     }).withOption('width', '10%')
             ];
 
+            ///Funciones
+            $scope.modal_ver_correo = function (id) {
+
+                $scope.data_correo = {};
+
+                ToolsService.mostrar_modal_dinamico($scope, $http, {
+                    url: '/api/correo/mostrar?type=objeto&id=' + id,
+                    scope_data_save_success: 'data_correo',
+                    id_modal: 'modal_ver_correo'
+                });
+            };
+
         }//Fin de /mostrar/documentos
-
-        ///Funciones
-        $scope.modal_ver_correo = function (id) {
-
-            $scope.data_correo = {};
-
-            ToolsService.mostrar_modal_dinamico($scope, $http, {
-                url: '/api/correo/mostrar?type=objeto&id=' + id,
-                scope_data_save_success: 'data_correo',
-                id_modal: 'modal_ver_correo'
-            });
-        };
-
 
         if ($location.$$url == '/documentos/enviar-documento') {
 
