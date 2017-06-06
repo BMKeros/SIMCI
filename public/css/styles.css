@@ -1,10 +1,5 @@
 /**** Icono barra notificaciones ***/
 
-#icono_barra_notificaciones {
-    font-size: 18x;
-    margin-right: -5px;
-}
-
 .menu_notificaciones {
     width: 400px;
     margin-left: -150px !important;
@@ -50,11 +45,6 @@
 
 /**** Fin notificaciones ***/
 
-#reloj {
-    font-size: 17px;
-    padding-left: 5px;
-}
-
 .capitalize {
     text-transform: capitalize;
 }
@@ -64,7 +54,8 @@
 }
 
 .barra_inferior {
-    background-color: #FFB177 !important;
+    background: #f5e79e !important;
+    border-color: transparent !important;
 }
 
 .espacio_top {
@@ -133,11 +124,6 @@
     color: #000000 !important;
 }
 
-#btn_agregar_items {
-    margin-top: 22px;
-    margin-left: 22px;
-}
-
 /* --------- Ng Animate ---------- */
 
 .animate-repeat.ng-move,
@@ -178,17 +164,6 @@
     border-radius: 12px;
 }
 
-#btn_items_ordenes {
-    margin-left: 50px;
-    margin-top: 40px;
-}
-
-#btn_adjuntar {
-    margin-top: 25px;
-    margin-left: 30px;
-    color: #00B5AD;
-}
-
 /* Clases para el status */
 
 .color-info {
@@ -214,4 +189,31 @@
 .color-validation {
     color: #D63301;
     background-color: #FFCCBA;
+}
+
+#btn_adjuntar {
+    margin-top: 25px;
+    margin-left: 30px;
+    color: #00B5AD;
+}
+
+#icono_barra_notificaciones {
+    font-size: 18px;
+    margin-right: -5px;
+}
+
+#btn_agregar_items {
+    margin-top: 22px;
+    margin-left: 22px;
+}
+
+#reloj {
+    color: #0a0a0b !important;
+    font-size: 17px;
+    padding-left: 5px;
+}
+
+#btn_items_ordenes {
+    margin-left: 50px;
+    margin-top: 40px;
 }
