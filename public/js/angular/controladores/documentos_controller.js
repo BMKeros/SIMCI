@@ -86,9 +86,9 @@
 
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
-                        return '<div class="ui icon button blue spopup" data-content="Ver Documentos" ng-click="modal_ver_correo(' + data.id + ')"><i class="unhid`e icon"></i></div>' +
+                        return '<div class="ui icon button blue spopup" data-content="Ver Detalles" ng-click="modal_ver_correo(' + data.id + ')"><i class="unhide icon"></i></div>' +
                             //'<div class="ui icon button green spopup"  data-content="Modificar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="edit icon"></i></div>' +
-                            '<div class="ui icon button orange spopup"  data-content="Descargar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="download icon"></i></div>';
+                            '<div class="ui icon button orange spopup"  data-content="Descargar Documento" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="download icon"></i></div>';
                     }).withOption('width', '10%')
             ];
 
