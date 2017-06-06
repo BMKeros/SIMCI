@@ -11,11 +11,11 @@
 
         $routeProvider
 
+            //Rutas para el dashboard
             .when('/', {
-                templateUrl: 'main_dashboard.html',
+                templateUrl: '/views/dashboard/main_dashboard',
                 controller: 'DashboardController'
             })
-
             //Rutas para usuarios
             .when('/usuarios', {
                 templateUrl: '/views/layouts/layout_main_modulos',
