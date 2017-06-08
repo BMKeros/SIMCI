@@ -9,35 +9,25 @@
 </div>
 
 <div class="ui modal" id="modal_ver_correo">
-    <div class="header">Datos del Objeto</div>
+    <div class="header">Datos de correo</div>
     <div class="content">
         <table class="ui celled table capitalize">
             <tbody>
             <tr>
-                <td colspan="5"><b>Nombre del Objeto: </b><br> <% data_correo.nombre %></td>
+                <td colspan="5"><b>Nombre del Emisor: </b><br> <% data_correo.emisor %></td>
 
             </tr>
             <tr>
-                <td><b>Clase de Objeto: </b><br> <% data_correo.nombre_clase %>
+                <td colspan="2"><b>Enviado:</b><br>
+                    <p><% data_correo.created_at %></p>
                 </td>
-                <td colspan="2"><b>Unidad:</b><br><%data_correo.nombre_unidad %> (<%data_correo.abreviatura_unidad %>
-                    )
-                </td>
-                <td colspan="3"><b>Especificaciones:</b><br>
-                    <p><% data_correo.especificaciones | uppercase %></p>
+                <td colspan="4"><b>Tipo de asunto:</b><br>
+                    <p><% data_correo.asunto | uppercase %></p>
                 </td>
             </tr>
             <tr>
                 <td colspan="5"><b>Descripcion:</b><br>
                     <p><% data_correo.descripcion | uppercase %></p>
-                </td>
-            </tr>
-            <tr>
-                <td colspan="2"><b>Creado:</b><br>
-                    <p><% data_correo.created_at | formato_timestamps %></p>
-                </td>
-                <td colspan="2"><b>Actualizado:</b><br>
-                    <p><% data_correo.updated_at | formato_timestamps %></p>
                 </td>
             </tr>
             </tbody>

@@ -80,7 +80,6 @@
                 });
 
             $scope.columnas_tabla_documentos = [
-                //DTColumnBuilder.newColumn('fecha_recibido').withTitle('Fecha').notSortable().withOption('width', '15%'),
                 DTColumnBuilder.newColumn(null).renderWith(
                     function (data, type, full, config) {
                         var fecha = data.fecha_recibido.split(" ");
@@ -94,16 +93,13 @@
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
                         return '<div class="ui icon button blue spopup" data-content="Ver Detalles" ng-click="modal_ver_correo(' + data.id + ')"><i class="unhide icon"></i></div>' +
-                            //'<div class="ui icon button green spopup"  data-content="Modificar Documentos" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="edit icon"></i></div>' +
                             '<div class="ui icon button orange spopup"  data-content="Descargar Documento" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="download icon"></i></div>';
                     }).withOption('width', '10%')
             ];
 
             ///Funciones
             $scope.modal_ver_correo = function (id) {
-
                 $scope.data_correo = {};
-
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/correos/mostrar?type=correo&id=' + id,
                     scope_data_save_success: 'data_correo',
