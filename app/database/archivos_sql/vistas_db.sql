@@ -98,20 +98,23 @@ CREATE OR REPLACE VIEW vista_inventario_full AS
 DROP VIEW IF EXISTS vista_almacen_full CASCADE;
 CREATE OR REPLACE VIEW vista_almacen_full AS
   SELECT
-    almacenes.codigo                 AS cod_dimension,
-    almacenes.descripcion            AS descripcion,
-    almacenes.created_at             AS created_at,
-    almacenes.updated_at             AS updated_at,
-    responsable.primer_nombre        AS primer_nombre_responsable,
-    responsable.primer_apellido      AS primer_apellido_responsable,
-    primer_auxiliar.primer_nombre    AS primer_nombre_primer_auxiliar,
-    primer_auxiliar.primer_apellido  AS primer_apellido_primer_auxiliar,
-    segundo_auxiliar.primer_nombre   AS primer_nombre_segundo_auxiliar,
-    segundo_auxiliar.primer_apellido AS primer_apellido_segundo_auxiliar
+    almacenes.codigo                    AS cod_dimension,
+    almacenes.descripcion               AS descripcion,
+    almacenes.created_at                AS created_at,
+    almacenes.updated_at                AS updated_at,
+    responsable_p.primer_nombre         AS primer_nombre_responsable,
+    responsable_p.primer_apellido       AS primer_apellido_responsable,
+    primer_auxiliar_p.primer_nombre     AS primer_nombre_primer_auxiliar,
+    primer_auxiliar_p.primer_apellido   AS primer_apellido_primer_auxiliar,
+    segundo_auxiliar_p.primer_nombre    AS primer_nombre_segundo_auxiliar,
+    segundo_auxiliar_p.primer_apellido  AS primer_apellido_segundo_auxiliar
   FROM almacenes
-    INNER JOIN personas AS responsable ON responsable.id = almacenes.responsable
-    INNER JOIN personas AS primer_auxiliar ON primer_auxiliar.id = almacenes.primer_auxiliar
-    LEFT JOIN personas AS segundo_auxiliar ON segundo_auxiliar.id = almacenes.segundo_auxiliar;
+    INNER JOIN usuarios AS responsable ON responsable.id = almacenes.responsable
+    INNER JOIN personas AS responsable_p ON responsable_p.usuario_id = responsable.id
+    INNER JOIN usuarios AS primer_auxiliar ON primer_auxiliar.id = almacenes.primer_auxiliar
+    INNER JOIN personas AS primer_auxiliar_p ON primer_auxiliar_p.usuario_id = primer_auxiliar.id
+    LEFT JOIN usuarios AS segundo_auxiliar ON segundo_auxiliar.id = almacenes.segundo_auxiliar
+    LEFT JOIN personas AS segundo_auxiliar_p ON segundo_auxiliar_p.usuario_id = segundo_auxiliar.id;
 
 DROP VIEW IF EXISTS vista_laboratorio_full;
 CREATE OR REPLACE VIEW vista_laboratorio_full AS
