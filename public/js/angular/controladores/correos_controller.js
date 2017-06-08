@@ -1,13 +1,13 @@
-/// Controlador para documentos
+/// Controlador para Correos
 
 (function () {
     'use strict';
 
     angular
         .module('SIMCI')
-        .controller('DocumentosController', DocumentosController);
+        .controller('CorreosController', CorreosController);
 
-    DocumentosController.$injector = [
+    CorreosController.$injector = [
         '$filter',
         '$scope',
         '$http',
@@ -23,13 +23,13 @@
         '$templateCache'
     ];
 
-    function DocumentosController($filter, $scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache) {
+    function CorreosController($filter, $scope, $http, $log, $timeout, $route, $routeParams, $location, DTOptionsBuilder, DTColumnBuilder, $compile, ToolsService, $templateCache) {
 
         $scope.modulo = {};
         $scope.DatosForm = {}; // Objeto para los datos de formulario
         $scope.data_global_user = ToolsService.get_data_user_localstorage();
 
-        $scope.modulo.nombre = "Documentos";
+        $scope.modulo.nombre = "Correos";
         $scope.modulo.icono = {
             tipo: "travel",
             color: "teal"
@@ -38,17 +38,17 @@
         $scope.modulo.opciones = [
 
             {
-                nombre: "enviar documentos",
-                descripcion: "Esta opcion le permitira enviar email a contactos del sistema",
-                url: "#/documentos/enviar-documento",
+                nombre: "enviar correos",
+                descripcion: "Esta opcion le permitira enviar correos a contactos del sistema",
+                url: "#/correos/enviar-correo",
                 icono: 'send',
                 show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
             },
 
             {
-                nombre: "mostrar documentos",
-                descripcion: "Esta opcion le permitira mostrar los documentos enviados y recibidos",
-                url: "#/documentos/ver/todos",
+                nombre: "mostrar correos",
+                descripcion: "Esta opcion le permitira mostrar los correos enviados y recibidos",
+                url: "#/correos/ver/todos",
                 icono: 'unhide',
                 show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN, TIPO_USER_ALMACENISTA, TIPO_USER_SUPERVISOR, TIPO_USER_PROFESOR]
             }
@@ -56,13 +56,13 @@
         ];
 
 
-        if ($location.$$url == '/documentos/ver/todos') {
+        if ($location.$$url == '/correos/ver/todos') {
 
 
-            $scope.tabla_documentos = {};
-            $scope.id_objeto_documentos = null;
+            $scope.tabla_correos = {};
+            $scope.id_objeto_correos = null;
 
-            $scope.opciones_tabla_documentos = DTOptionsBuilder.newOptions()
+            $scope.opciones_tabla_correos = DTOptionsBuilder.newOptions()
                 .withOption('ajax', {
                     url: '/api/correos/mostrar?type=paginacion',
                     type: 'GET'
@@ -79,7 +79,7 @@
                     }, false, 0);
                 });
 
-            $scope.columnas_tabla_documentos = [
+            $scope.columnas_tabla_correos = [
                 DTColumnBuilder.newColumn(null).renderWith(
                     function (data, type, full, config) {
                         var fecha = data.fecha_recibido.split(" ");
@@ -93,7 +93,7 @@
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
                         return '<div class="ui icon button blue spopup" data-content="Ver Detalles" ng-click="modal_ver_correo(' + data.id + ')"><i class="unhide icon"></i></div>' +
-                            '<div class="ui icon button orange spopup"  data-content="Descargar Documento" ng-click="modal_modificar_documentos(' + data.id + ')"><i class="download icon"></i></div>';
+                            '<div class="ui icon button orange spopup"  data-content="Descargar Correo" ng-click="modal_modificar_correos(' + data.id + ')"><i class="download icon"></i></div>';
                     }).withOption('width', '10%')
             ];
 
@@ -107,9 +107,9 @@
                 });
             };
 
-        }//Fin de /mostrar/documentos
+        }//Fin de /mostrar/correos
 
-        if ($location.$$url == '/documentos/enviar-documento') {
+        if ($location.$$url == '/correos/enviar-correo') {
 
             ToolsService.reload_template_cache();
             $scope.enviar_correo = ToolsService.registrar_dinamico($scope, $http, $timeout, {
@@ -125,7 +125,7 @@
                 post_archivo: true
             });
 
-        }//Fin de enviar-documento
+        }//Fin de enviar-correo
 
     }
 })();

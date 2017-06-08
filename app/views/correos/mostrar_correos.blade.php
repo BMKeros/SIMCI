@@ -2,8 +2,8 @@
 <div class="ui two column doubling stackable grid container">
     <div class="ui container centered grid">
         <div class="column">
-            <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_documentos"
-                   dt-columns="columnas_tabla_documentos" dt-instance='tabla_documentos' width="100%"></table>
+            <table class="ui selectable celled table capitalize" datatable="" dt-options="opciones_tabla_correos"
+                   dt-columns="columnas_tabla_correos" dt-instance='tabla_correos' width="100%"></table>
         </div>
     </div>
 </div>
@@ -12,7 +12,7 @@
     <div class="header">Datos de correo</div>
     <div class="content">
         <table class="ui celled table capitalize">
-            <tbody>
+            <tbody  >
             <tr>
                 <td colspan="5"><b>Nombre del Emisor: </b><br> <% data_correo.emisor %></td>
 

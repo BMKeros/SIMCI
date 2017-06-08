@@ -169,18 +169,18 @@
                 controller: 'OrdenesController'
             })
 
-            //Rutas Documentos
-            .when('/documentos', {
+            //Rutas Correos
+            .when('/correos', {
                 templateUrl: '/views/layouts/layout_main_modulos',
-                controller: 'DocumentosController'
+                controller: 'CorreosController'
             })
-            .when('/documentos/ver/todos', {
-                templateUrl: '/views/documentos/mostrar_documentos',
-                controller: 'DocumentosController'
+            .when('/correos/ver/todos', {
+                templateUrl: '/views/correos/mostrar_correos',
+                controller: 'CorreosController'
             })
-            .when('/documentos/enviar-documento', {
-                templateUrl: '/views/documentos/enviar_documento',
-                controller: 'DocumentosController'
+            .when('/correos/enviar-correo', {
+                templateUrl: '/views/correos/enviar_correo',
+                controller: 'CorreosController'
             })
 
             //Rutas Proveedores
