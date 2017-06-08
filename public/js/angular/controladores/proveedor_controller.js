@@ -60,6 +60,8 @@
 
             $scope.cargar_municipios = function (cod_estado) {
 
+                ToolsService.reload_template_cache($route, $templateCache);
+
                 var s_municipios = angular.element('#select_municipios');
                 var s_ciudades = angular.element('#select_ciudades');
                 var s_parroquias = angular.element('#select_parroquias');
@@ -74,6 +76,8 @@
 
                     //Cargamos las ciudades tambien
                     $scope.cargar_ciudades(cod_estado);
+
+                    ToolsService.reload_template_cache($route, $templateCache);
 
                     //Se agrega la clase loading para mostrar el icono de cargando
                     s_municipios.addClass('loading');
@@ -97,6 +101,8 @@
             };
 
             $scope.cargar_parroquias = function (cod_municipio) {
+
+                ToolsService.reload_template_cache($route, $templateCache);
 
                 var SELECT = $('#select_parroquias');
 
@@ -140,7 +146,9 @@
                     });
             };
 
-            $scope.registrar_proveedor = ToolsService.registrar_dinamico($scope, $http, $timeout, {
+            $scope.registrar_proveedor = {};
+            ToolsService.reload_template_cache($route, $templateCache);
+            ToolsService.registrar_dinamico($scope, $http, $timeout, {
                 url: '/api/proveedores/registrar-proveedor',
 
                 formulario: {
@@ -208,8 +216,9 @@
 
 
             $scope.modal_ver_proveedor = function (codigo_proveedor) {
-                $scope.data_proveedor = {};
 
+                ToolsService.reload_template_cache($route, $templateCache);
+                $scope.data_proveedor = {};
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/proveedores/mostrar?type=full&codigo=' + codigo_proveedor,
                     scope_data_save_success: 'data_proveedor',
@@ -218,6 +227,8 @@
             };
 
             $scope.modal_modificar_proveedor = function (codigo_proveedor) {
+
+                ToolsService.reload_template_cache($route, $templateCache);
                 //Desactivamos los mensajes
                 $scope.mostrar_mensaje = false;
 

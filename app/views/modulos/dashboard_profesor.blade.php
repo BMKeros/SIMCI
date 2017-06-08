@@ -114,10 +114,10 @@
 	      	Reportes
     	</a>
 
-		<a class="item" ng-href="#/documentos">
-	      	<i class="travel icon"></i>
-	      	Documentos
-    	</a>
+		<a class="item" ng-href="#/correos">
+			<i class="mail icon"></i>
+			Correos
+		</a>
 
     	<a class="item" ng-href="#/consulta">
   			<i class="search icon"></i>

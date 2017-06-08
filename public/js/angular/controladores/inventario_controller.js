@@ -332,9 +332,8 @@
 
 
             $scope.modal_ver_elemento = function (cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto, numero_orden) {
-                $scope.data_elemento = {};
-
-                ToolsService.mostrar_modal_dinamico($scope, $http, {
+                ToolsService.reload_template_cache($route, $templateCache);
+                $scope.data_elemento = ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/inventario/mostrar?type=elemento_full&' + ToolsService.printf('cod_dimension={0}&cod_subdimension={1}&cod_agrupacion={2}&cod_objeto={3}&numero_orden={4}', cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto, numero_orden),
                     scope_data_save_success: 'data_elemento',
                     id_modal: 'modal_ver_elemento'
@@ -475,8 +474,8 @@
             ];
 
             $scope.modal_ver_almacen = function (cod_almacen) {
+                ToolsService.reload_template_cache($route, $templateCache);
                 $scope.data_almacen = {};
-
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/inventario/mostrar?type=almacen_full&' + ToolsService.printf('cod_almacen={0}', cod_almacen),
                     scope_data_save_success: 'data_almacen',

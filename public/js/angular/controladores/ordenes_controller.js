@@ -145,6 +145,7 @@
 
             $scope.mostrar_orden = function (codigo_orden) {
 
+                ToolsService.reload_template_cache($route, $templateCache);
                 var altura_modal = screen.height * .6 + 'px';
                 var ancho = '100%';
 

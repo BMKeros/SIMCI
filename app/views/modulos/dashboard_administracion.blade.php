@@ -147,13 +147,13 @@
         </a>
 
         <a class="item" ng-href="#/reportes">
-            <i class="file text outline icon"></i>
+            <i class="file text icon"></i>
             Reportes
         </a>
 
-        <a class="item" ng-href="#/documentos">
-            <i class="travel icon"></i>
-            Documentos
+        <a class="item" ng-href="#/correos">
+            <i class="mail icon"></i>
+            Correos
         </a>
 
         <a class="item" ng-href="#/consulta">

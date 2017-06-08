@@ -321,7 +321,7 @@
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
                         return '<div class="ui icon button blue spopup" data-content="Ver Stock" ng-click="modal_ver_stock(\'' + data.cod_laboratorio + '\',\'' + data.cod_dimension + '\',\'' + data.cod_subdimension + '\',\'' + data.cod_agrupacion + '\',' + data.cod_objeto + ')"><i class="unhide icon"></i></div>' +
-                            '<div class="ui icon button orange spopup" data-content="Retornar Stock" ng-click="retornar_stock(' + data.id + ','+ data.cantidad+')"><i class="sign out icon"></i></div>';
+                            '<div class="ui icon button orange spopup" data-content="Retornar Stock" ng-click="retornar_stock(' + data.id + ',' + data.cantidad + ')"><i class="sign out icon"></i></div>';
                     }).withOption('width', '11%')
                     .withClass('center aligned')
             ];
@@ -341,10 +341,10 @@
 
                 alertify.prompt('Escriba la cantidad que desea retornar', '',
                     function (evt, cantidad_a_retornar) {
-                        if(cantidad_a_retornar > _cantidad_existente){
+                        if (cantidad_a_retornar > _cantidad_existente) {
                             alertify.notify('No puedes retornar una cantidad mayor a la existente', 'error', 5);
                         }
-                        else{
+                        else {
                             $http({
                                 method: 'POST',
                                 url: '/api/laboratorio/retornar-stock',
@@ -357,9 +357,10 @@
                                     if (data.data.resultado) {
                                         alertify.notify('Cantidad retornada al inventario con exito', 'success', 5);
 
-                                        ToolsService.reload_tabla($scope,'tabla_stock',function(){});
+                                        ToolsService.reload_tabla($scope, 'tabla_stock', function () {
+                                        });
                                     }
-                                    else{
+                                    else {
                                         alertify.notify('Ha ocurrido un error al realizar la operacion', 'error', 5);
                                     }
                                 },

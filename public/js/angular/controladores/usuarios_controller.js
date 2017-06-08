@@ -152,9 +152,8 @@
 
             ///Funciones
             $scope.modal_ver_usuario = function (id) {
-                $scope.data_usuario = {};
-
-                ToolsService.mostrar_modal_dinamico($scope, $http, {
+                ToolsService.reload_template_cache($route, $templateCache);
+                $scope.data_usuario = ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/usuarios/mostrar?type=usuario_full&id=' + id,
                     scope_data_save_success: 'data_usuario',
                     id_modal: 'modal_ver_usuario',
@@ -166,6 +165,7 @@
 
             $scope.modal_modificar_usuario = function (id) {
 
+                ToolsService.reload_template_cache($route, $templateCache);
                 $scope.id_usuario_actual = id;
                 $scope.mostrar_mensaje = false;
 
@@ -204,6 +204,8 @@
 
 
                     $timeout(function () {
+
+                        ToolsService.reload_template_cache($route, $templateCache);
                         //Setteamos los dropdown con sus respectivos valores
 
                         angular.element('#permisos').dropdown('set selected', $scope.DatosForm.permisos);
@@ -288,6 +290,7 @@
 
             $scope.modal_eliminar_usuario = function (id) {
 
+                ToolsService.reload_template_cache($route, $templateCache);
                 ToolsService.eliminar_elemento_dinamico($scope, {
                     titulo_confirm: {
                         principal: '¡Alerta!',
