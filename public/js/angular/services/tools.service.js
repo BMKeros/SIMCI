@@ -119,11 +119,8 @@
             //Funcion para extender los atributos de un objeto
             extender_atributos_objeto: function (_objeto, _objeto_atributos) {
                 if (typeof _objeto === "object" && typeof _objeto_atributos === "object") {
-                    for (key in _objeto_atributos) {
-                        if (typeof _objeto_atributos[key] !== "function") {
-                            _objeto[key] = _objeto_atributos[key];
-                        }
-                    }
+                    //Usamos la funcion assign del objeto para extender los atributos del objeto pasado por parametro
+                    Object.assign(_objeto, _objeto_atributos);
                 }
             },
             //Funcion  para eliminar algun objeto o elemento de un arreglo
