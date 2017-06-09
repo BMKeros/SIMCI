@@ -51,7 +51,7 @@ class CorreosController extends BaseController
             case 'paginacion':
 
                 $consulta = DB::table('vista_correos')
-                    ->select('id', 'emisor_id', 'emisor', 'asunto', 'descripcion', 'fecha_recibido', 'ruta_descargar_archivo');
+                    ->select('id', 'emisor_id', 'emisor', 'asunto', 'descripcion', 'fecha_recibido', 'nombre_original_archivo', 'ruta_descargar_archivo');
 
                 $response = $this->generar_paginacion_dinamica($consulta,
                     array('campo_where' => 'asunto', 'campo_orden' => 'id'));
