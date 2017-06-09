@@ -594,21 +594,21 @@
                 var columna_estado = 1;
 
                 //Fila del item
-                fila_item = _AE('#' + id_item_fila);
+                var fila_item = _AE('#' + id_item_fila);
 
                 //Boton seleccionar
-                btn_seleccionar = _AE(fila_item.find('button[name="btn_action_seleccionar"]').get(0));
+                var btn_seleccionar = _AE(fila_item.find('button[name="btn_action_seleccionar"]').get(0));
 
-                icon_btn_seleccionar = _AE(btn_seleccionar.children().get());
+                var icon_btn_seleccionar = _AE(btn_seleccionar.children().get());
 
                 //Boton confirmar
-                btn_confirmar = _AE(fila_item.find('button[name="btn_action_confirmar"]').get(0));
+                var btn_confirmar = _AE(fila_item.find('button[name="btn_action_confirmar"]').get(0));
 
                 //input cantidad mover
-                input_cantidad_mover = _AE(fila_item.find('input[name="input_cantidad_mover"]').get(0));
+                var input_cantidad_mover = _AE(fila_item.find('input[name="input_cantidad_mover"]').get(0));
 
                 //Icono del estado del item
-                icon_estado_item = _AE(_AE(fila_item.find('td').get(columna_estado))).children();
+                var icon_estado_item = _AE(_AE(fila_item.find('td').get(columna_estado))).children();
 
                 //Seteamos 0 cada vez que se active
                 input_cantidad_mover.val(0).trigger('change');
