@@ -93,7 +93,7 @@
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
                         return '<div class="ui icon button blue spopup" data-content="Ver Detalles" ng-click="modal_ver_correo(' + data.id + ')"><i class="unhide icon"></i></div>' +
-                            '<div class="ui icon button orange spopup"  data-content="Descargar Correo" ng-click="modal_modificar_correos(' + data.id + ')"><i class="download icon"></i></div>';
+                            '<div class="ui icon button orange spopup"  data-content="Descargar Correo" ng-click="descargar_archivo_adjunto(' + ToolsService.anadir_comillas_params(data.ruta_descargar_archivo, data.nombre_original_archivo) + ')"><i class="download icon"></i></div>';
                     }).withOption('width', '10%')
             ];
 
@@ -106,6 +106,15 @@
                     id_modal: 'modal_ver_correo'
                 });
             };
+
+            $scope.descargar_archivo_adjunto = function (_url_archivo, _nombre_archivo) {
+                var url = _url_archivo;
+                var a = document.createElement('a');
+                a.href = url;
+                a.download = _nombre_archivo;
+                a.target = '_blank';
+                a.click();
+            }
 
         }//Fin de /mostrar/correos
 
