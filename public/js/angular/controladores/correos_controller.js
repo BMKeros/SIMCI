@@ -86,7 +86,14 @@
                         return $filter('formato_fecha')(fecha[0], 'DD/MM/YY');
                     }
                 ).withTitle('Fecha').withOption('width', '10%').notSortable(),
-                DTColumnBuilder.newColumn('emisor').withTitle('Emisor').notSortable().withOption('width', '15%'),
+                 DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+                    function (data, type, full) {
+                        return data.nombre_emisor + ' ' + data.apellido_emisor + ' (' + data.usuario_emisor + ')';
+                    }
+                )
+                    .notSortable()
+                    .withOption('width', '15%'),
+
                 DTColumnBuilder.newColumn('asunto').withTitle('Asunto').notSortable().withOption('width', '20%'),
                 DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable().withOption('width', '40%'),
 

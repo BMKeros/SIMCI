@@ -259,7 +259,9 @@ CREATE OR REPLACE VIEW vista_correos AS
   SELECT
     correos.id                                  AS id,
     correos.emisor                              AS emisor_id,
-    usuarios.usuario                            AS emisor,
+    usuarios.usuario                            AS usuario_emisor,
+    personas.primer_nombre                      AS nombre_emisor,
+    personas.primer_apellido                    AS apellido_emisor,
     correos.asunto                              AS asunto,
     correos.descripcion                         AS descripcion,
     correos.created_at                          AS fecha_recibido,
@@ -272,4 +274,5 @@ CREATE OR REPLACE VIEW vista_correos AS
 
   FROM correos
   LEFT JOIN archivos ON archivos.id = correos.archivo_id
-  INNER JOIN usuarios ON usuarios.id = correos.emisor;
+  INNER JOIN usuarios ON usuarios.id = correos.emisor
+  INNER JOIN personas ON personas.usuario_id = usuarios.id;
