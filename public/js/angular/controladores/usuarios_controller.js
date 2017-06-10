@@ -57,11 +57,8 @@
                 url: "#/usuarios/crear/tipo-usuario",
                 icono: 'user',
                 show_in: [TIPO_USER_ROOT, TIPO_USER_ADMIN]
-            },
+            }
         ];
-
-        $log.info($routeParams);
-        $log.info($location);
 
         if ($location.$$url == '/usuarios/crear') {
 
@@ -83,6 +80,8 @@
         }// If == '/usuarios/crear'
 
         if ($location.$$url == '/usuarios/ver/todos') {
+
+            ToolsService.reload_template_cache();
 
             $scope.tabla_usuarios = {};
             $scope.id_objeto_actual = null;
@@ -152,8 +151,9 @@
 
             ///Funciones
             $scope.modal_ver_usuario = function (id) {
-                ToolsService.reload_template_cache();
+
                 $scope.data_usuario = {};
+
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/usuarios/mostrar?type=usuario_full&id=' + id,
                     scope_data_save_success: 'data_usuario',
