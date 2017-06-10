@@ -8,7 +8,7 @@
             margin: 20px 30px 20px 30px;
             text-align: center;
             font-family: arial, helvetica, sans-serif;
-            font-size: 10;
+            font-size: 10px;
         }
 
         #cod {
@@ -96,15 +96,15 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2">Nom. del Solicitante: <b>{{ Orden::get_datos_solicitante($codigo_orden)->nombre_completo }}</b>
+        <td colspan="2">Nom. del Solicitante: <b>{{ $datos_orden->get_datos_solicitante() }}</b>
         </td>
     </tr>
     <tr>
-        <td colspan="2">Nom. del Responsable: <b>{{ Orden::get_datos_responsable($codigo_orden)->nombre_completo }}</b>
+        <td colspan="2">Nom. del Responsable: <b>{{ $datos_orden->get_datos_responsable() }}</b>
         </td>
     </tr>
     <tr>
-        <td colspan="2">Lab. de Solicitud: <b>{{ Laboratorio::get_nombre($datos_orden->cod_laboratorio) }}</b></td>
+        <td colspan="2">Lab. de Solicitud: <b>{{ $datos_orden->get_nombre_laboratorio() }}</b></td>
     </tr>
     <tr>
         <td colspan="2">Fec. de Actividad: <b>{{ convertir_fecha($datos_orden->fecha_actividad) }}</b></td>
