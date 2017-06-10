@@ -199,7 +199,7 @@
                     $scope.DatosForm.primer_apellido = data.data.primer_apellido || null;
                     $scope.DatosForm.segundo_apellido = data.data.segundo_apellido || null;
                     $scope.DatosForm.cedula = data.data.cedula || null;
-                    $scope.DatosForm.sexo = (!!data.data.sexo_id) ? (data.data.sexo_id.toString()) : (null);
+                    $scope.DatosForm.sexo = (!!data.data.sexo_id) ? (data.data.sexo_id.toString()) : ("");
                     $scope.DatosForm.fecha_nacimiento = data.data.fecha_nacimiento || null;
 
 
