@@ -3,8 +3,7 @@
 		protected $table = 'ordenes';
         protected $fillable = array('id', 'codigo', 'responsable', 'solicitante', 'fecha_actividad', 'fecha', 'hora', 'cod_laboratorio', 'observaciones', 'status');
 
-
-        static public function get_datos_responsable($codigo_orden)
+        public function get_datos_responsable()
         {
             $consulta = DB::table('ordenes')
                 ->select(
@@ -12,13 +11,13 @@
                     'usuarios.email')
                 ->join('usuarios', 'usuarios.id', '=', 'ordenes.responsable')
                 ->join('personas', 'personas.usuario_id', '=', 'usuarios.id')
-                ->where('codigo', $codigo_orden)
+                ->where('codigo', $this->codigo)
                 ->first();
 
-            return $consulta;
+            return $consulta->nombre_completo;
         }
 
-        static public function get_datos_solicitante($codigo_orden)
+        public function get_datos_solicitante()
         {
             $consulta = DB::table('ordenes')
                 ->select(
@@ -26,10 +25,10 @@
                     'usuarios.email')
                 ->join('usuarios', 'usuarios.id', '=', 'ordenes.solicitante')
                 ->join('personas', 'personas.usuario_id', '=', 'usuarios.id')
-                ->where('codigo', $codigo_orden)
+                ->where('codigo', $this->codigo)
                 ->first();
 
-            return $consulta;
+            return $consulta->nombre_completo;
         }
 
         public function get_estado_orden()
@@ -42,6 +41,16 @@
                 ->first();
 
             return $consulta->nombre;
+        }
+
+        public function get_nombre_laboratorio()
+        {
+            $consulta = DB::table('laboratorios')
+                ->select(RAW("UPPER(laboratorios.nombre) as nombre_laboratorio"))
+                ->where('laboratorios.codigo', '=', $this->cod_laboratorio)
+                ->first();
+
+            return $consulta->nombre_laboratorio;
         }
 
 	}
