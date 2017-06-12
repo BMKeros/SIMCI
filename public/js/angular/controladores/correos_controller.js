@@ -124,7 +124,7 @@
             };
 
             $scope.descargar_archivo_adjunto = function (_url_archivo, _nombre_archivo) {
-                var url = _url_archivo;
+                var url = '/' + _url_archivo;
                 var a = document.createElement('a');
                 a.href = url;
                 a.download = _nombre_archivo;
