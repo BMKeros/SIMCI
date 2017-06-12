@@ -57,7 +57,7 @@
 
 
         if ($location.$$url == '/correos/ver/todos') {
-
+            ToolsService.reload_template_cache();
 
             $scope.tabla_correos = {};
             $scope.id_objeto_correos = null;
@@ -86,7 +86,7 @@
                         return $filter('formato_fecha')(fecha[0], 'DD/MM/YY');
                     }
                 ).withTitle('Fecha').withOption('width', '10%').notSortable(),
-                 DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+                DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
                     function (data, type, full) {
                         return data.nombre_emisor + ' ' + data.apellido_emisor + ' (' + data.usuario_emisor + ')';
                     }
@@ -127,7 +127,6 @@
 
         if ($location.$$url == '/correos/enviar-correo') {
 
-            ToolsService.reload_template_cache();
             $scope.enviar_correo = ToolsService.registrar_dinamico($scope, $http, $timeout, {
                 url: '/api/correos/enviar-correo',
                 formulario: {
