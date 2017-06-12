@@ -14,19 +14,18 @@
         <table class="ui celled table capitalize">
             <tbody  >
             <tr>
-                <td colspan="5"><b>Nombre del Emisor: </b><br> <% data_correo.emisor %></td>
+                <td colspan="3"><b>Remitente: </b><br> <% data_correo.nombre_completo + ' ' + ' (' + data_correo.usuario + ')' %></td>
 
+                <td colspan="3"><b>Enviado:</b><br>
+                    <p><% data_correo.fecha_recibido | formato_timestamps %></p>
+                </td>
             </tr>
             <tr>
-                <td colspan="2"><b>Enviado:</b><br>
-                    <p><% data_correo.created_at %></p>
-                </td>
-                <td colspan="4"><b>Tipo de asunto:</b><br>
+                <td colspan="2  "><b>Asunto:</b><br>
                     <p><% data_correo.asunto | uppercase %></p>
                 </td>
-            </tr>
-            <tr>
-                <td colspan="5"><b>Descripcion:</b><br>
+
+                <td colspan="2"><b>Descripcion:</b><br>
                     <p><% data_correo.descripcion | uppercase %></p>
                 </td>
             </tr>

@@ -24,8 +24,8 @@
                     <p>[<% data_elemento_stock.cod_dimension %>] - <% data_elemento_stock.descripcion_dimension | uppercase %></p>
                 </td>
                 <td colspan="1">
-                    <b>Numero de Ordenes</b><br>
-                    <p>43</p>
+                    <b>Numero de Orden</b><br>
+                    <p><% data_elemento_stock.numero_orden %></p>
                 </td>
             </tr>
 
