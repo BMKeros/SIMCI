@@ -7,7 +7,7 @@
         .module('SIMCI')
         .controller('OrdenesController', OrdenesController);
 
-    OrdenesController.$injector =  [
+    OrdenesController.$injector = [
         '$scope',
         '$http',
         '$filter',
@@ -64,6 +64,7 @@
         ];
 
         if ($location.$$url == '/ordenes/ver/todos') {
+            ToolsService.reload_template_cache($route, $templateCache);
 
             $scope.tabla_ordenes = {};
             $scope.id_objeto_ordenes = null;
@@ -145,7 +146,6 @@
 
             $scope.mostrar_orden = function (codigo_orden) {
 
-                ToolsService.reload_template_cache($route, $templateCache);
                 var altura_modal = screen.height * .6 + 'px';
                 var ancho = '100%';
 
