@@ -55,6 +55,7 @@
         ];
 
         if ($location.$$url == '/reportes/ver/todos') {
+            ToolsService.reload_template_cache($route, $templateCache);
 
             $scope.tabla_reportes = {};
             $scope.id_objeto_reportes = null;
