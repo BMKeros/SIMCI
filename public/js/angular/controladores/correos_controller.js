@@ -86,16 +86,13 @@
                         return $filter('formato_fecha')(fecha[0], 'DD/MM/YY');
                     }
                 ).withTitle('Fecha').withOption('width', '10%').notSortable(),
-                DTColumnBuilder.newColumn(null).withTitle('Unidad').renderWith(
+                DTColumnBuilder.newColumn(null).withTitle('Remitente').renderWith(
                     function (data, type, full) {
                         return data.nombre_emisor + ' ' + data.apellido_emisor + ' (' + data.usuario_emisor + ')';
                     }
-                )
-                    .notSortable()
-                    .withOption('width', '15%'),
-
+                ).notSortable().withOption('width', '23%'),
                 DTColumnBuilder.newColumn('asunto').withTitle('Asunto').notSortable().withOption('width', '20%'),
-                DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable().withOption('width', '40%'),
+                DTColumnBuilder.newColumn('descripcion').withTitle('Descripcion').notSortable().withOption('width', '32%'),
 
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
