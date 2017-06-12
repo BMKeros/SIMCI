@@ -408,6 +408,8 @@
         }// inventario/ver/entrada-salida"
 
         if ($location.$$url == "/inventario/ver/almacenes") {
+            ToolsService.reload_template_cache($route, $templateCache);
+
             $scope.tabla_almacenes = {};
             $scope.id_almacen_actual = null;
 
@@ -474,7 +476,6 @@
             ];
 
             $scope.modal_ver_almacen = function (cod_almacen) {
-                ToolsService.reload_template_cache($route, $templateCache);
                 $scope.data_almacen = {};
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/inventario/mostrar?type=almacen_full&' + ToolsService.printf('cod_almacen={0}', cod_almacen),
