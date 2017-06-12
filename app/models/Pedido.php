@@ -11,13 +11,22 @@ class Pedido extends Eloquent
         'numero_orden',
         'cantidad_disponible',
         'cantidad_solicitada',
-        'cod_referencia',
-        'cod_tipo_movimiento'
+        'status'
     );
 
     public function orden()
     {
         return $this->belongsTo('Orden', 'cod_orden', 'codigo');
+    }
+
+    public function objeto()
+    {
+        return $this->hasOne('Catalogo', 'id', 'cod_objeto');
+    }
+
+    public function condicion()
+    {
+        return $this->hasOne('Condicion', 'codigo', 'status');
     }
 }
 
