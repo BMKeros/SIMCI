@@ -99,8 +99,17 @@
 
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
+                        var clase_btn_descargar = '';
+
+                        if (!!(data.ruta_descargar_archivo) && !!(data.nombre_original_archivo)) {
+                            clase_btn_descargar = 'ui icon button orange spopup';
+                        }
+                        else {
+                            clase_btn_descargar = 'ui disabled icon button orange spopup';
+                        }
+
                         return '<div class="ui icon button blue spopup" data-content="Ver Detalles" ng-click="modal_ver_correo(' + data.id + ')"><i class="unhide icon"></i></div>' +
-                            '<div class="ui icon button orange spopup"  data-content="Descargar Correo" ng-click="descargar_archivo_adjunto(' + ToolsService.anadir_comillas_params(data.ruta_descargar_archivo, data.nombre_original_archivo) + ')"><i class="download icon"></i></div>';
+                            '<div class="' + clase_btn_descargar + '"  data-content="Descargar Correo" ng-click="descargar_archivo_adjunto(' + ToolsService.anadir_comillas_params(data.ruta_descargar_archivo, data.nombre_original_archivo) + ')"><i class="download icon"></i></div>';
                     }).withOption('width', '10%')
             ];
 
