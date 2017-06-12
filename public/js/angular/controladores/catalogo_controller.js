@@ -157,7 +157,6 @@
 
             ///Funciones
             $scope.modal_ver_objeto = function (id) {
-                ToolsService.reload_template_cache($route, $templateCache);
                 $scope.data_objeto = {};
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/catalogo/mostrar?type=objeto&id=' + id,
