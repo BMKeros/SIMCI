@@ -47,8 +47,8 @@
             float: left;
             width: 50%;
             text-align: left;
-            margin: 0px;
-            float: left;
+            margin: 0;
+            font-size: 14px;
         }
 
         .lisreac {
@@ -125,120 +125,35 @@
 </table>
 <table class="lisreac" border=3 width="100%" bordercolor="orange">
     <tr>
-        <td bgcolor="orange" width="100%"><h3>Lista de Reactivos</h3></td>
+        <td bgcolor="orange" width="100%"><h3>Lista de Pedidos</h3></td>
     </tr>
 </table>
+
 <Table border=3 width="100%" bordercolor="orange">
     <tr>
         <td><strong>N°</strong></td>
         <td><strong>Dimensión</strong></td>
-        <td><strong>Sub-Dimensión</strong></td>
+        <td><strong>Sub <br>Dimensión</strong></td>
         <td><strong>Agrupación</strong></td>
-        <td><strong>Sub-Agrupación</strong></td>
+        <td><strong>Sub <br>Agrupación</strong></td>
         <td><strong>Nombre</strong></td>
-        <td><strong>Cantidad</strong></td>
+        <td><strong>Cantidad Solicitada</strong></td>
+        <td><strong>Unidad</strong></td>
         <td><strong>Estado</strong></td>
     </tr>
-    <tr>
-        <td><strong>1</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>2</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>3</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>4</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>5</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>6</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>7</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>8</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>9</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td><strong>10</strong></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
+    @foreach ($datos_orden->pedidos as $pedido)
+        <tr>
+            <td>*</td>
+            <td>{{ $pedido->cod_dimension }}</td>
+            <td>{{ $pedido->cod_subdimension }}</td>
+            <td>{{ $pedido->cod_agrupacion }}</td>
+            <td>{{ $pedido->cod_objeto }}</td>
+            <td>{{ strtoupper($pedido->objeto->nombre) }}</td>
+            <td>{{ $pedido->cantidad_solicitada }}</td>
+            <td>{{ $pedido->objeto->unidad->nombre }}</td>
+            <td>{{ strtoupper($pedido->condicion->nombre) }}</td>
+        </tr>
+    @endforeach
 </Table>
 <br>
 <table class="obser" width="100%">
