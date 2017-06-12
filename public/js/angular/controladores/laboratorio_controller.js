@@ -104,6 +104,7 @@
         }// If == '/laboratorio/crear-laboratorio'
 
         if ($location.$$url == '/laboratorio/ver/todos') {
+            ToolsService.reload_template_cache();
 
             $scope.tabla_laboratorios = {};
             $scope.id_laboratorio_actual = null;
@@ -283,6 +284,7 @@
 
 
         if ($location.$$url == '/laboratorio/ver/stock') {
+            ToolsService.reload_template_cache();
 
             $scope.tabla_stock = {};
             $scope.id_objeto_stock = null;
@@ -377,6 +379,7 @@
         }// If == '/laboratorio/ver/stock
 
         if ($location.$$url == '/laboratorio/agregar-stock') {
+            ToolsService.reload_template_cache();
 
             $scope.items_tabla_stock = []; //Aqui se guardaran todos los elementos que se agreguen con el btn plus
             $scope.select_laboratorio = ""; //Laboratorio seleccionado
