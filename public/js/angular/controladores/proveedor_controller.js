@@ -147,7 +147,7 @@
             };
 
             $scope.registrar_proveedor = {};
-            ToolsService.reload_template_cache($route, $templateCache);
+
             ToolsService.registrar_dinamico($scope, $http, $timeout, {
                 url: '/api/proveedores/registrar-proveedor',
 
@@ -164,6 +164,7 @@
 
 
         if ($location.$$url == "/proveedores/ver/todos") {
+            ToolsService.reload_template_cache($route, $templateCache);
 
             $scope.tabla_proveedores = {};
             $scope.id_proveedor_actual = null;
@@ -217,7 +218,6 @@
 
             $scope.modal_ver_proveedor = function (codigo_proveedor) {
 
-                ToolsService.reload_template_cache($route, $templateCache);
                 $scope.data_proveedor = {};
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
                     url: '/api/proveedores/mostrar?type=full&codigo=' + codigo_proveedor,
@@ -228,7 +228,6 @@
 
             $scope.modal_modificar_proveedor = function (codigo_proveedor) {
 
-                ToolsService.reload_template_cache($route, $templateCache);
                 //Desactivamos los mensajes
                 $scope.mostrar_mensaje = false;
 
