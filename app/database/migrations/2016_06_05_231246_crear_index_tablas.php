@@ -175,10 +175,10 @@ class CrearIndexTablas extends Migration
             $table->foreign('status')->references('codigo')
                 ->on('condiciones');
 
-            $table->foreign('solicitante')->references('id')
+            $table->foreign('solicitante_id')->references('id')
                 ->on('usuarios');
 
-            $table->foreign('responsable')->references('id')
+            $table->foreign('responsable_id')->references('id')
                 ->on('usuarios');
         });
 
