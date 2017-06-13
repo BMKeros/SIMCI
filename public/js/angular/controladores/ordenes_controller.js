@@ -112,7 +112,7 @@
 
                         return $filter('formato_fecha')(data.fecha_actividad, 'DD/MM/YY');
                     }
-                ).withTitle('Fecha Actividad').withOption('width', '10%').notSortable(),
+                ).withTitle('Fecha Solicitud').withOption('width', '10%').notSortable(),
 
                 DTColumnBuilder.newColumn('nombre_status').withTitle('Estado').withOption('width', '10%').notSortable(),
 
