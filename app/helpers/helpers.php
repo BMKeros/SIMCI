@@ -241,7 +241,7 @@ function crear_notificacion($mensaje = null, $receptor_id = null)
 }
 
 
-function enviar_email($template, $datos = [], $callback)
+function enviar_email($template, $datos = array(), $callback)
 {
     Mail::send($template, $datos, $callback);
 }
