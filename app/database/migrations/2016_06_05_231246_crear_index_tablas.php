@@ -174,6 +174,12 @@ class CrearIndexTablas extends Migration
         Schema::table('ordenes', function($table){
             $table->foreign('status')->references('codigo')
                 ->on('condiciones');
+
+            $table->foreign('solicitante')->references('id')
+                ->on('usuarios');
+
+            $table->foreign('responsable')->references('id')
+                ->on('usuarios');
         });
 
         //PEDIDOS-CONDICIONES_ORDENES
