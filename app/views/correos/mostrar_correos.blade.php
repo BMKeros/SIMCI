@@ -14,7 +14,7 @@
         <table class="ui celled table capitalize">
             <tbody>
             <tr rowspan="5">
-                <td colspan="2"><b>Remitente: </b><br> <% data_correo.nombre_completo + ' ' + ' (' + data_correo.usuario + ')' %></td>
+                <td colspan="2"><b>Remitente: </b><br> <% data_correo.nombre_emisor_completo + ' ' + ' (' + data_correo.usuario_emisor + ')' %></td>
 
                 <td colspan="3"><b>Fecha de enviado:</b><br>
                     <p><% data_correo.fecha_recibido | formato_timestamps %></p>

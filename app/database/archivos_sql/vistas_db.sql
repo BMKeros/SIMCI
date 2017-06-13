@@ -257,11 +257,11 @@ CREATE OR REPLACE VIEW vista_pedidos_full AS
 DROP VIEW IF EXISTS vista_correos CASCADE;
 CREATE OR REPLACE VIEW vista_correos AS
   SELECT
-    correos.id                                  AS id,
+    correos.id                                  AS id_correo,
     correos.emisor                              AS emisor_id,
+    usuarios.id                                 AS id_usuario_emisor,
     usuarios.usuario                            AS usuario_emisor,
-    personas.primer_nombre                      AS nombre_emisor,
-    personas.primer_apellido                    AS apellido_emisor,
+    formato_nombre_completo(personas.primer_nombre, personas.primer_apellido)   AS nombre_emisor_completo,
     correos.asunto                              AS asunto,
     correos.descripcion                         AS descripcion,
     correos.created_at                          AS fecha_recibido,
