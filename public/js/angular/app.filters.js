@@ -74,4 +74,10 @@
             }
         })
 
+        .filter('cut_string', function (ToolsService) {
+            return function (input, num_char) {
+                return ToolsService.cut_string(input, num_char);
+            }
+        })
+
 })();

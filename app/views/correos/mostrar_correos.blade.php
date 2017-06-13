@@ -12,21 +12,31 @@
     <div class="header">Datos de correo</div>
     <div class="content">
         <table class="ui celled table capitalize">
-            <tbody  >
-            <tr>
-                <td colspan="3"><b>Remitente: </b><br> <% data_correo.nombre_completo + ' ' + ' (' + data_correo.usuario + ')' %></td>
+            <tbody>
+            <tr rowspan="5">
+                <td colspan="2"><b>Remitente: </b><br> <% data_correo.nombre_completo + ' ' + ' (' + data_correo.usuario + ')' %></td>
 
-                <td colspan="3"><b>Enviado:</b><br>
+                <td colspan="3"><b>Fecha de enviado:</b><br>
                     <p><% data_correo.fecha_recibido | formato_timestamps %></p>
                 </td>
             </tr>
-            <tr>
-                <td colspan="2  "><b>Asunto:</b><br>
+            <tr rowspan="5">
+                <td colspan="2"><b>Asunto:</b><br>
                     <p><% data_correo.asunto | uppercase %></p>
                 </td>
 
                 <td colspan="2"><b>Descripcion:</b><br>
                     <p><% data_correo.descripcion | uppercase %></p>
+                </td>
+            </tr>
+
+            <tr rowspan="5">
+                <td colspan="2"><b>Nombre original del archivo:</b><br>
+                    <p ng-if="data_correo.nombre_original_archivo"><%data_correo.nombre_original_archivo | cut_string:15 | uppercase%></p>
+                </td>
+
+                <td colspan="2"><b>Extension del archivo</b><br>
+                    <p><%data_correo.extension_archivo | uppercase %></p>
                 </td>
             </tr>
             </tbody>
