@@ -241,33 +241,42 @@
             };
 
             $scope.cancelar_orden = function (_codigo) {
-                alertify.prompt("Seguro que desea cancelar la orden? <br> Escriba una razon por la cual cancelara la orden", '', function (_event, value_campo) {
+                alertify.alert('')
+                    .set('title', '¡Atencion! <p>Seguro que desea cancelar la orden?</p>')
+                    .setContent(
+                        '<h4>Escriba una razon por la cual cancelara la orden</h4>' +
+                        '<textarea style="width: 100%; height: 100%" id="_textarea_prompt"></textarea>')
+                    .set('onok', function (closeEvent) {
 
-                    $http({
-                        method: 'POST',
-                        url: '/api/ordenes/procesar-orden',
-                        data: {
-                            accion_orden: 'cancelar',
-                            codigo_orden: _codigo,
-                            razon_cancelar: value_campo
-                        }
-                    }).then(
-                        function (data) {
+                        var _data_textarea = document.getElementById("_textarea_prompt").value;
 
-                            if (data.data.resultado) {
-                                ToolsService.reload_tabla($scope, 'tabla_ordenes', function () {
-                                    alertify.success('Orden ' + _codigo + ' cancelada con exito.');
-                                });
+                        $http({
+                            method: 'POST',
+                            url: '/api/ordenes/procesar-orden',
+                            data: {
+                                accion_orden: 'cancelar',
+                                codigo_orden: _codigo,
+                                razon_cancelar: _data_textarea
                             }
-                            else {
-                                alertify.error(data.data.mensajes[0]);
+                        }).then(
+                            function (data) {
+
+                                if (data.data.resultado) {
+                                    ToolsService.reload_tabla($scope, 'tabla_ordenes', function () {
+                                        alertify.success('Orden ' + _codigo + ' cancelada con exito.');
+                                    });
+                                }
+                                else {
+                                    alertify.error(data.data.mensajes[0]);
+                                }
+                            },
+                            function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
                             }
-                        },
-                        function (data_error) {
-                            ToolsService.generar_alerta_status(data_error);
-                        }
-                    );
-                }).set('title', '¡Atencion!');
+                        );
+                    });
+
+
             };
 
 
