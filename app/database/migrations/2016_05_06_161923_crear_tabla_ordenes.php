@@ -15,9 +15,9 @@ class CrearTablaOrdenes extends Migration {
 		Schema::create('ordenes', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('codigo', 10);			
-			$table->integer('responsable');
-			$table->integer('solicitante');
+			$table->string('codigo', 10);
+            $table->integer('responsable_id');
+            $table->integer('solicitante_id');
 			$table->date('fecha_actividad');
 			$table->date('fecha');
 			$table->time('hora');
