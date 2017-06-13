@@ -70,7 +70,7 @@
 
         .filter('default_value', function () {
             return function (input, mensaje) {
-                return (!!input) ? (input) : ((!!mensaje) ? ( mensaje ) : ('No especificado'));
+                return ((!!input) || input === 'null') ? (input) : ((!!mensaje) ? ( mensaje ) : ('No especificado'));
             }
         })
 
