@@ -166,7 +166,7 @@
                 iframe.setAttribute('webkitallowfullscreen', true);
 
                 //Asignamos el src para cargar el pdf
-                iframe.src = '/bower_components/viewerjs/ViewerJS/index.html?zoom=page-width#../../../datasheet/generar-pdf/' + codigo_orden;
+                iframe.src = '/bower_components/viewerjs/ViewerJS/index.html?zoom=page-width#../../../api/ordenes/generar-pdf/' + codigo_orden;
 
                 //Asignamos el nuevo iframe al modal
                 contenedor_modal.appendChild(iframe);
