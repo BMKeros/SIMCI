@@ -330,6 +330,8 @@
 
             ///Funciones
             $scope.modal_ver_stock = function (cod_laboratorio, cod_dimension, cod_subdimension, cod_agrupacion, cod_objeto) {
+
+                ToolsService.reload_template_cache();
                 $scope.data_elemento_stock = {};
 
                 ToolsService.mostrar_modal_dinamico($scope, $http, {
@@ -339,7 +341,7 @@
                 });
             };
 
-            $scope.retornar_stock = function (id, _cantidad_existente) {
+            $scope.retornar_sftock = function (id, _cantidad_existente) {
 
                 alertify.prompt('Escriba la cantidad que desea retornar', '',
                     function (evt, cantidad_a_retornar) {
@@ -506,6 +508,7 @@
         }//Fin de agregar-stock
 
         if ($location.$$url == '/laboratorio/mover-stock') {
+
 
             $scope.items_tabla_objetos_laboratorio = [];
             $scope.select_laboratorio_origen = null;
