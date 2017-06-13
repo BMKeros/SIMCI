@@ -58,6 +58,22 @@
         h2 {
             text-align: right;
         }
+
+        .center_bold {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        #footer {
+            width: 900px;
+            height: 100px;
+            background: white;
+            margin-top: 100px;
+            bottom: 0;
+            clear: both;
+            position: absolute;
+        }
+
     </style>
 </head>
 <body>
@@ -136,6 +152,8 @@
         <td><strong>Sub <br>Dimensión</strong></td>
         <td><strong>Agrupación</strong></td>
         <td><strong>Sub <br>Agrupación</strong></td>
+        <td><strong>Objeto</strong></td>
+        <td><strong>Numero <br> Orden</strong></td>
         <td><strong>Nombre</strong></td>
         <td><strong>Cantidad Solicitada</strong></td>
         <td><strong>Unidad</strong></td>
@@ -144,10 +162,12 @@
     @foreach ($datos_orden->pedidos as $pedido)
         <tr>
             <td>*</td>
-            <td>{{ $pedido->cod_dimension }}</td>
-            <td>{{ $pedido->cod_subdimension }}</td>
-            <td>{{ $pedido->cod_agrupacion }}</td>
-            <td>{{ $pedido->cod_objeto }}</td>
+            <td class="center_bold">{{ $pedido->cod_dimension }}</td>
+            <td class="center_bold">{{ $pedido->cod_subdimension }}</td>
+            <td class="center_bold">{{ $pedido->cod_agrupacion }}</td>
+            <td class="center_bold">{{ ($pedido->cod_subagrupacion) ? ($pedido->cod_subagrupacion) : ("N/P") }}</td>
+            <td class="center_bold">{{ $pedido->cod_objeto }}</td>
+            <td class="center_bold">{{ $pedido->numero_orden }}</td>
             <td>{{ strtoupper($pedido->objeto->nombre) }}</td>
             <td>{{ $pedido->cantidad_solicitada }}</td>
             <td>{{ $pedido->objeto->unidad->nombre }}</td>
@@ -156,7 +176,7 @@
     @endforeach
 </Table>
 <br>
-<table class="obser" width="100%">
+<table class="obser" width="100%" id="footer">
     <tr>
         <td><strong>Observación:</strong></td>
     </tr>
