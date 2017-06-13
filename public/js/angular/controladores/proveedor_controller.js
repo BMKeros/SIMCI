@@ -67,7 +67,7 @@
                 var s_parroquias = angular.element('#select_parroquias');
 
                 $timeout(function () {
-                    s_municipios.dropdown('clear')
+                    s_municipios.dropdown('clear');
                     s_ciudades.dropdown('clear');
                     s_parroquias.dropdown('clear');
                 });
@@ -146,9 +146,7 @@
                     });
             };
 
-            $scope.registrar_proveedor = {};
-
-            ToolsService.registrar_dinamico($scope, $http, $timeout, {
+            $scope.registrar_proveedor = ToolsService.registrar_dinamico($scope, $http, $timeout, {
                 url: '/api/proveedores/registrar-proveedor',
 
                 formulario: {
@@ -160,6 +158,8 @@
                     mensajes: ['Nuevo proveedor registrado en la base de datos.']
                 }
             });
+
+
         }// If  === "/proveedores/registrar-proveedor"
 
 
