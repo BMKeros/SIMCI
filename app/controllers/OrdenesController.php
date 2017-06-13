@@ -19,8 +19,8 @@ class OrdenesController extends BaseController
                         'ordenes.fecha_actividad',
                         'ordenes.status',
                         'nombre as nombre_status')
-                    ->leftJoin(RAW('personas AS PER1'), RAW('PER1.usuario_id'), '=', 'ordenes.responsable')
-                    ->leftJoin(RAW('personas AS PER2'), RAW('PER2.usuario_id'), '=', 'ordenes.solicitante')
+                    ->leftJoin(RAW('personas AS PER1'), RAW('PER1.usuario_id'), '=', 'ordenes.responsable_id')
+                    ->leftJoin(RAW('personas AS PER2'), RAW('PER2.usuario_id'), '=', 'ordenes.solicitante_id')
                     ->join('condiciones', 'condiciones.codigo', '=', 'status');
 
                 $response = $this->generar_paginacion_dinamica($consulta,
@@ -122,8 +122,8 @@ class OrdenesController extends BaseController
             $nueva_orden = new Orden;
 
             $nueva_orden->codigo = generar_codigo_orden();
-            $nueva_orden->responsable = $responsable;
-            $nueva_orden->solicitante = $solicitante;
+            $nueva_orden->responsable_id = $responsable;
+            $nueva_orden->solicitante_id = $solicitante;
             $nueva_orden->fecha_actividad = $fecha_actividad;
             $nueva_orden->fecha = get_fecha();
             $nueva_orden->hora = get_hora();
@@ -147,6 +147,7 @@ class OrdenesController extends BaseController
                     'cod_objeto' => $value['cod_objeto'],
                     'numero_orden' => $value['numero_orden'],
                     'cantidad_solicitada' => $value['cantidad_solicitada'],
+                    'cantidad_retornada' => 0,
                     'status' => EN_ESPERA,
                     'created_at' => get_now(),
                     'updated_at' => get_now()
@@ -161,16 +162,16 @@ class OrdenesController extends BaseController
             //Enviamos un mensaje al responsable de la orden
             $datos_email = [
                 'datos_orden' => $nueva_orden,
-                'responsable' => Orden::get_datos_responsable($nueva_orden->codigo),
-                'solicitante' => Orden::get_datos_solicitante($nueva_orden->codigo),
+                'responsable' => $nueva_orden->responsable,
+                'solicitante' => $nueva_orden->solicitante,
                 'data_pedidos' => $data
             ];
 
 
             enviar_email('emails.plantilla_comprobante_solicitud', $datos_email, function ($mensaje) use ($datos_email) {
                 $mensaje
-                    ->to($datos_email['solicitante']->email, $datos_email['solicitante']->nombre_completo)
-                    ->cc($datos_email['responsable']->email, $datos_email['responsable']->nombre_completo)
+                    ->to($datos_email['solicitante']->usuario->email, $datos_email['solicitante']->get_nombre_completo())
+                    ->cc($datos_email['responsable']->usuario->email, $datos_email['responsable']->get_nombre_completo())
                     ->subject('SIMCI - Comprobante de solicitud orden [' . $datos_email['datos_orden']->codigo . ']');
             });
 
@@ -339,18 +340,21 @@ class OrdenesController extends BaseController
                                 ->where('status', '=', EN_ESPERA)
                                 ->update(['status' => CANCELADO /*, 'cantidad_retornada' => 0*/]);
 
+                            $orden_cancelar = Orden::where('codigo', '=', $codigo_orden)->first();
+
+
                             //Enviamos un mensaje al responsable de la orden
                             $data_email = [
                                 'cod_orden' => $codigo_orden,
                                 'razon_cancelar' => $razon_cancelar,
-                                'responsable' => Orden::get_datos_responsable($codigo_orden),
-                                'solicitante' => Orden::get_datos_solicitante($codigo_orden),
+                                'responsable' => $orden_cancelar->responsable,
+                                'solicitante' => $orden_cancelar->solicitante,
                             ];
 
                             enviar_email('emails.plantilla_cancelar_orden', $data_email, function ($mensaje) use ($data_email) {
                                 $mensaje
-                                    ->to($data_email['solicitante']->email, $data_email['solicitante']->nombre_completo)
-                                    ->cc($data_email['responsable']->email, $data_email['responsable']->nombre_completo)
+                                    ->to($data_email['solicitante']->email, $data_email['solicitante']->get_nombre_completo())
+                                    ->cc($data_email['responsable']->email, $data_email['responsable']->get_nombre_completo())
                                     ->subject('SIMCI - Orden Cancelada');
                             });
 

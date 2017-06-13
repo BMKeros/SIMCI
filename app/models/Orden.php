@@ -3,12 +3,22 @@
 class Orden extends Eloquent
 {
     protected $table = 'ordenes';
-    protected $fillable = array('id', 'codigo', 'responsable', 'solicitante', 'fecha_actividad', 'fecha', 'hora', 'cod_laboratorio', 'observaciones', 'status');
+    protected $fillable = array('id', 'codigo', 'responsable_id', 'solicitante_id', 'fecha_actividad', 'fecha', 'hora', 'cod_laboratorio', 'observaciones', 'status');
 
 
     public function pedidos()
     {
         return $this->hasMany('Pedido', 'cod_orden', 'codigo');
+    }
+
+    public function responsable()
+    {
+        return $this->belongsTo('Usuario', 'responsable_id');
+    }
+
+    public function solicitante()
+    {
+        return $this->belongsTo('Usuario', 'solicitante_id');
     }
 
     public function get_datos_responsable()
@@ -17,7 +27,7 @@ class Orden extends Eloquent
             ->select(
                 RAW('formato_nombre_completo(personas.primer_nombre, personas.primer_apellido) as nombre_completo'),
                 'usuarios.email')
-            ->join('usuarios', 'usuarios.id', '=', 'ordenes.responsable')
+            ->join('usuarios', 'usuarios.id', '=', 'ordenes.responsable_id')
             ->join('personas', 'personas.usuario_id', '=', 'usuarios.id')
             ->where('codigo', $this->codigo)
             ->first();
@@ -31,7 +41,7 @@ class Orden extends Eloquent
             ->select(
                 RAW('formato_nombre_completo(personas.primer_nombre, personas.primer_apellido) as nombre_completo'),
                 'usuarios.email')
-            ->join('usuarios', 'usuarios.id', '=', 'ordenes.solicitante')
+            ->join('usuarios', 'usuarios.id', '=', 'ordenes.solicitante_id')
             ->join('personas', 'personas.usuario_id', '=', 'usuarios.id')
             ->where('codigo', $this->codigo)
             ->first();
