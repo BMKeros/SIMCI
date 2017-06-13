@@ -32,11 +32,11 @@ class CorreosController extends BaseController
             case 'correo':
                     if($id_correo){
                         $response = DB::table('vista_correos')
-                            ->select('id_correo AS id', 'emisor_id', 'usuario_emisor', 'nombre_emisor_completo',
+                            ->select('id', 'emisor_id', 'usuario_emisor', 'nombre_emisor_completo',
                                         'asunto', 'descripcion', 'fecha_recibido', 'archivo_id', 'path_archivo', 
                                         'nombre_original_archivo', 'nombre_generado_archivo', 'extension_archivo', 
                                         'ruta_descargar_archivo')
-                            ->where('id_correo', '=', $id_correo)
+                            ->where('id', '=', $id_correo)
                             ->first();
                             
 
@@ -52,11 +52,10 @@ class CorreosController extends BaseController
             case 'paginacion':
 
                 $consulta = DB::table('vista_correos')
-                    ->select('id', 'emisor_id', 'id_usuario_emisor', 'usuario_emisor', 'nombre_emisor_completo', 
-                                'asunto', 'descripcion', 'fecha_recibido', 'nombre_original_archivo', 
-                                'ruta_descargar_archivo')
-                    ->join('correo_destinatarios', 'correo_destinatarios.destinatario', '=', 'vista_correos.id_usuario_emisor')
-                    ->where('correo_destinatarios.destinatario', '=', Auth::user()->id);
+                    ->select('id', 'emisor_id', 'id_usuario_emisor', 'usuario_emisor', 
+                                'nombre_emisor_completo', 'asunto', 'descripcion', 'fecha_recibido', 
+                                'nombre_original_archivo', 'ruta_descargar_archivo')
+                    ->where('id_usuario_receptor', '=', Auth::user()->id);
 
                 $response = $this->generar_paginacion_dinamica($consulta,
                     array('campo_where' => 'asunto', 'campo_orden' => 'id'));

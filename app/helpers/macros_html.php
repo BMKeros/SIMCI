@@ -319,7 +319,7 @@ Form::macro('select_tipo_unidad', function ($atributos = null) {
 
 Form::macro('select_destinatarios', function ($atributos = null, $selected = null, $placeholder = null) {
 
-    $personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'personas.id')
+    $personas = DB::table('personas')->select('primer_nombre', 'primer_apellido', 'personas.id', 'usuarios.id as id_usuario', 'usuarios.usuario')
         ->join('usuarios', 'usuarios.id', '=', 'personas.usuario_id')
         ->get();
 
@@ -329,7 +329,7 @@ Form::macro('select_destinatarios', function ($atributos = null, $selected = nul
     $html .= '<option value="">' . $placeholder . '</option>';
 
     foreach ($personas as $persona) {
-        $html .= sprintf('<option value="%s">%s %s</option>', $persona->id, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido));
+        $html .= sprintf('<option value="%s">%s %s - Usuario: %s</option>', $persona->id_usuario, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido), ucfirst($persona->usuario));
     }
 
     $html .= '</select>';

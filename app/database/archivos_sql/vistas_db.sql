@@ -257,11 +257,16 @@ CREATE OR REPLACE VIEW vista_pedidos_full AS
 DROP VIEW IF EXISTS vista_correos CASCADE;
 CREATE OR REPLACE VIEW vista_correos AS
   SELECT
-    correos.id                                  AS id_correo,
+    correos.id                                  AS id,
     correos.emisor                              AS emisor_id,
     usuarios.id                                 AS id_usuario_emisor,
     usuarios.usuario                            AS usuario_emisor,
     formato_nombre_completo(personas.primer_nombre, personas.primer_apellido)   AS nombre_emisor_completo,
+
+    usuario_receptor.id                         AS id_usuario_receptor,
+    usuario_receptor.usuario                    AS usuario_receptor,
+    formato_nombre_completo(personas_receptor.primer_nombre, personas_receptor.primer_apellido)   AS nombre_receptor_completo,
+    
     correos.asunto                              AS asunto,
     correos.descripcion                         AS descripcion,
     correos.created_at                          AS fecha_recibido,
@@ -272,7 +277,11 @@ CREATE OR REPLACE VIEW vista_correos AS
     archivos.extension                          AS extension_archivo,
     archivos.path || archivos.nombre_generado || '.' || archivos.extension  AS ruta_descargar_archivo
 
-  FROM correos
+  FROM correo_destinatarios
+  INNER JOIN correos ON correos.id = correo_destinatarios.correo_id
   LEFT JOIN archivos ON archivos.id = correos.archivo_id
   INNER JOIN usuarios ON usuarios.id = correos.emisor
-  INNER JOIN personas ON personas.usuario_id = usuarios.id;
+  INNER JOIN personas ON personas.usuario_id = usuarios.id
+
+  INNER JOIN usuarios AS usuario_receptor ON usuario_receptor.id = correo_destinatarios.destinatario
+  INNER JOIN personas AS personas_receptor ON personas_receptor.usuario_id = usuario_receptor.id;

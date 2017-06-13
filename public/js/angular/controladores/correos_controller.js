@@ -88,7 +88,7 @@
                 ).withTitle('Fecha').withOption('width', '10%').notSortable(),
                 DTColumnBuilder.newColumn(null).withTitle('Remitente').renderWith(
                     function (data, type, full) {
-                        return data.nombre_emisor + ' ' + data.apellido_emisor + ' (' + data.usuario_emisor + ')';
+                        return data.nombre_emisor_completo + ' (' + data.usuario_emisor + ')';
                     }
                 ).notSortable().withOption('width', '23%'),
                 DTColumnBuilder.newColumn('asunto').withTitle('Asunto').notSortable().withOption('width', '20%'),
