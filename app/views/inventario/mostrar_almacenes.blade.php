@@ -24,16 +24,16 @@
             <tr>
                 <td colspan="2">
                     <b>Responsable:</b><br>
-                    <p><% data_almacen.nombre_responsable +' '+ data_almacen.apellido_responsable%></p>
+                    <p><% data_almacen.nombre_responsable +' '+ data_almacen.apellido_responsable + ' ' + '(' + data_almacen.usuario + ')' %></p>
                 </td>
                 <td colspan="2">
                     <b>Primer auxiliar:</b><br>
-                    <p><% data_almacen.nombre_primer_auxiliar +' '+ data_almacen.apellido_primer_auxiliar%></p>
+                    <p><% data_almacen.nombre_primer_auxiliar +' '+ data_almacen.apellido_primer_auxiliar + ' ' + '(' + data_almacen.usuario + ')'%></p>
                 </td>
 
                 <td colspan="2">
                     <b>Segundo auxiliar:</b><br>
-                    <p><% data_almacen.nombre_segundo_auxiliar +' '+ data_almacen.apellido_segundo_auxiliar%></p>
+                    <p><% data_almacen.nombre_segundo_auxiliar +' '+ data_almacen.apellido_segundo_auxiliar + ' ' + '(' + data_almacen.usuario + ')'%></p>
                 </td>
             </tr>
             <tr>
