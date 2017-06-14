@@ -537,6 +537,7 @@
 
 
             $scope.procesar_mover_stock = function () {
+                ToolsService.reload_template_cache();
 
                 var formulario = $('#formulario_mover_stock');
                 var is_valid_form = formulario.form(reglas_formulario_mover_stock).form('is valid');
