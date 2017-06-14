@@ -662,8 +662,14 @@
                     //convertimos la data con angular.fromJson para luego agregarla al arreglo
                     var elemento_seleccionado = angular.fromJson(data_item);
 
+
+                    console.log(elemento_seleccionado);
+
                     if (elemento_seleccionado.cantidad_mover <= 0) {
                         alertify.warning('Debes especificar la cantidad que va a mover');
+                    }
+                    else if (elemento_seleccionado.cantidad_mover > elemento_seleccionado.cantidad) {
+                        alertify.error('No puedes mover una cantidad mayor a la existente');
                     }
                     else {
                         //Agregamos el item seleccionado al arreglo
