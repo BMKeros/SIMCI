@@ -61,10 +61,11 @@
 
             $scope.tabla_correos = {};
             $scope.id_objeto_correos = null;
+            $scope.mostrar = 'recibidos';
 
             $scope.opciones_tabla_correos = DTOptionsBuilder.newOptions()
                 .withOption('ajax', {
-                    url: '/api/correos/mostrar?type=paginacion',
+                    url: '/api/correos/mostrar?type=paginacion&mostrar=' + $scope.mostrar,
                     type: 'GET'
                 })
                 .withDataProp('data')
@@ -127,7 +128,27 @@
                 a.download = _nombre_archivo;
                 a.target = '_blank';
                 a.click();
-            }
+            };
+
+            $scope.cargar_correos_enviados = function () {
+                $scope.mostrar = 'enviados';
+
+                $scope.opciones_tabla_correos = $scope.opciones_tabla_correos
+                    .withOption('ajax', {
+                        url: '/api/correos/mostrar?type=paginacion&mostrar=' + $scope.mostrar,
+                        type: 'GET'
+                    });
+            };
+
+            $scope.cargar_correos_recibidos = function () {
+                $scope.mostrar = 'recibidos';
+
+                $scope.opciones_tabla_correos = $scope.opciones_tabla_correos
+                    .withOption('ajax', {
+                        url: '/api/correos/mostrar?type=paginacion&mostrar=' + $scope.mostrar,
+                        type: 'GET'
+                    });
+            };
 
         }//Fin de /mostrar/correos
 
