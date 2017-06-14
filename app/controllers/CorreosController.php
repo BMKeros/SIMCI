@@ -8,7 +8,7 @@ class CorreosController extends BaseController
         $tipo_busqueda = Input::get('type', 'todos');
         $orden = Input::get('ordenar', ' asc');
         $id_correo = Input::get('id');
-
+        
         switch ($tipo_busqueda) {
             case 'todos':
                 if ($orden) {
@@ -51,11 +51,31 @@ class CorreosController extends BaseController
 
             case 'paginacion':
 
-                $consulta = DB::table('vista_correos')
-                    ->select('id', 'emisor_id', 'id_usuario_emisor', 'usuario_emisor', 
-                                'nombre_emisor_completo', 'asunto', 'descripcion', 'fecha_recibido', 
-                                'nombre_original_archivo', 'ruta_descargar_archivo')
-                    ->where('id_usuario_receptor', '=', Auth::user()->id);
+                $tipo_paginacion = Input::get('mostrar', 'recibidos');
+                $consulta = null;
+
+                switch ($tipo_paginacion) {
+
+                    case 'recibidos':
+
+                        $consulta = DB::table('vista_correos')
+                            ->select('id', 'emisor_id', 'id_usuario_emisor', 'usuario_emisor', 
+                                        'nombre_emisor_completo', 'asunto', 'descripcion', 'fecha_recibido', 
+                                        'nombre_original_archivo', 'ruta_descargar_archivo')
+                            ->where('id_usuario_receptor', '=', Auth::user()->id);
+                        
+                        break;
+                    
+                    case 'enviados':
+
+                        $consulta = DB::table('vista_correos')
+                            ->select('id', 'emisor_id', 'id_usuario_emisor', 'usuario_emisor', 
+                                        'nombre_emisor_completo', 'asunto', 'descripcion', 'fecha_recibido', 
+                                        'nombre_original_archivo', 'ruta_descargar_archivo')
+                            ->where('emisor_id', '=', Auth::user()->id);
+
+                        break;
+                }
 
                 $response = $this->generar_paginacion_dinamica($consulta,
                     array('campo_where' => 'asunto', 'campo_orden' => 'id'));
