@@ -441,13 +441,13 @@
                 DTColumnBuilder.newColumn(null).withTitle('Responsable')
                     .renderWith(
                         function (data, type, full) {
-                            return data.nombre_responsable + ' ' + data.apellido_responsable;
+                            return data.nombre_responsable + ' ' + data.apellido_responsable + ' ' + '(' + data.usuario + ')';
                         })
                     .notSortable(),
                 DTColumnBuilder.newColumn(null).withTitle('Primer auxiliar')
                     .renderWith(
                         function (data, type, full) {
-                            return data.nombre_primer_auxiliar + ' ' + data.apellido_primer_auxiliar;
+                            return data.nombre_primer_auxiliar + ' ' + data.apellido_primer_auxiliar + ' ' + '(' + data.usuario + ')';
                         })
                     .notSortable(),
                 DTColumnBuilder.newColumn(null).withTitle('Segundo auxiliar')
@@ -458,7 +458,7 @@
                                 return "No Especificado";
                             }
                             else {
-                                return data.nombre_segundo_auxiliar + ' ' + data.apellido_segundo_auxiliar;
+                                return data.nombre_segundo_auxiliar + ' ' + data.apellido_segundo_auxiliar + ' ' + '(' + data.usuario + ')';
                             }
                         })
                     .notSortable(),

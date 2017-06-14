@@ -153,6 +153,7 @@
         }//Fin de /mostrar/correos
 
         if ($location.$$url == '/correos/enviar-correo') {
+            ToolsService.reload_template_cache();
 
             $scope.enviar_correo = ToolsService.registrar_dinamico($scope, $http, $timeout, {
                 url: '/api/correos/enviar-correo',
