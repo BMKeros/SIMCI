@@ -102,12 +102,12 @@ CREATE OR REPLACE VIEW vista_almacen_full AS
     almacenes.descripcion               AS descripcion,
     almacenes.created_at                AS created_at,
     almacenes.updated_at                AS updated_at,
-    responsable_p.primer_nombre         AS primer_nombre_responsable,
-    responsable_p.primer_apellido       AS primer_apellido_responsable,
-    primer_auxiliar_p.primer_nombre     AS primer_nombre_primer_auxiliar,
-    primer_auxiliar_p.primer_apellido   AS primer_apellido_primer_auxiliar,
-    segundo_auxiliar_p.primer_nombre    AS primer_nombre_segundo_auxiliar,
-    segundo_auxiliar_p.primer_apellido  AS primer_apellido_segundo_auxiliar
+    responsable.usuario                 AS usuario_responsable,
+    formato_nombre_completo(responsable_p.primer_nombre, responsable_p.primer_apellido)     AS nombre_completo_responsable,
+    primer_auxiliar.usuario                 AS usuario_primer_auxiliar,
+    formato_nombre_completo(primer_auxiliar_p.primer_nombre, primer_auxiliar_p.primer_apellido)   AS nombre_completo_primer_auxiliar,
+    segundo_auxiliar.usuario                 AS usuario_segundo_auxiliar,
+    formato_nombre_completo(segundo_auxiliar_p.primer_nombre, segundo_auxiliar_p.primer_apellido)  AS nombre_completo_segundo_auxiliar
   FROM almacenes
     INNER JOIN usuarios AS responsable ON responsable.id = almacenes.responsable
     INNER JOIN personas AS responsable_p ON responsable_p.usuario_id = responsable.id
