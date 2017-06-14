@@ -455,10 +455,10 @@
                         function (data, type, full) {
 
                             if (!(data.nombre_completo_segundo_auxiliar)) {
-                                 return data.nombre_completo_segundo_auxiliar + ' ' + '(' + data.usuario_segundo_auxiliar + ')';
+                                return "No Especificado";
                             }
                             else {
-                                return "No Especificado";
+                                return data.nombre_completo_segundo_auxiliar + ' ' + '(' + data.usuario_segundo_auxiliar + ')';
 
                                
                             }
