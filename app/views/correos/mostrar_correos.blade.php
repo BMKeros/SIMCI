@@ -1,4 +1,15 @@
 <!--Bloque 1 -> Tabla Principal-->
+
+<div style="padding-left: 38%">
+    <button class="ui teal labeled icon button" ng-click="cargar_correos_recibidos()">
+        <i class="inbox icon"></i> Recibidos
+    </button>
+    <button class="ui blue right labeled icon button" ng-click="cargar_correos_enviados()">
+        <i class="mail outline icon"></i> Enviados
+    </button>
+</div>
+
+
 <div class="ui two column doubling stackable grid container">
     <div class="ui container centered grid">
         <div class="column">
@@ -14,7 +25,9 @@
         <table class="ui celled table capitalize">
             <tbody>
             <tr rowspan="5">
-                <td colspan="2"><b>Remitente: </b><br> <% data_correo.nombre_emisor_completo + ' ' + ' (' + data_correo.usuario_emisor + ')' %></td>
+                <td colspan="2"><b>Remitente: </b><br> <% data_correo.nombre_emisor_completo + ' ' + ' (' +
+                    data_correo.usuario_emisor + ')' %>
+                </td>
 
                 <td colspan="3"><b>Fecha de enviado:</b><br>
                     <p><% data_correo.fecha_recibido | formato_timestamps %></p>
@@ -32,7 +45,8 @@
 
             <tr rowspan="5">
                 <td colspan="2"><b>Nombre original del archivo:</b><br>
-                    <p ng-if="data_correo.nombre_original_archivo"><%data_correo.nombre_original_archivo | cut_string:15 | uppercase%></p>
+                    <p ng-if="data_correo.nombre_original_archivo"><%data_correo.nombre_original_archivo | cut_string:15
+                        | uppercase%></p>
                 </td>
 
                 <td colspan="2"><b>Extension del archivo</b><br>
@@ -51,5 +65,14 @@
 
 <script>
     $('.ui.dropdown').dropdown();
+
+    $('.combo.dropdown')
+        .dropdown({
+            action: 'combo',
+            onChange: function (value, text, $selectedItem) {
+                console.log($selectedItem);
+            }
+        })
+    ;
 </script>
 
