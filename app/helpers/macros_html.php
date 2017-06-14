@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 Form::macro('select_permisos', function ($atributos = null) {
     if ($atributos) {
@@ -219,7 +219,7 @@ Form::macro('select_personas', function ($atributos = null, $selected = null, $p
             break;
         default:
             foreach ($personas as $persona) {
-                $html .= sprintf('<option value="%s">%s %s</option>', $persona->id_usuario, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido));
+                $html .= sprintf('<option value="%s">%s %s > Usuario: %s</option>', $persona->id_usuario, ucfirst($persona->primer_nombre), ucfirst($persona->primer_apellido), ucfirst($persona->usuario));
             }
         break;
 
