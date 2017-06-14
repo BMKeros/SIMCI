@@ -441,24 +441,26 @@
                 DTColumnBuilder.newColumn(null).withTitle('Responsable')
                     .renderWith(
                         function (data, type, full) {
-                            return data.nombre_responsable + ' ' + data.apellido_responsable + ' ' + '(' + data.usuario + ')';
+                            return data.nombre_completo_responsable + ' ' + '(' + data.usuario_responsable + ')';
                         })
                     .notSortable(),
                 DTColumnBuilder.newColumn(null).withTitle('Primer auxiliar')
                     .renderWith(
                         function (data, type, full) {
-                            return data.nombre_primer_auxiliar + ' ' + data.apellido_primer_auxiliar + ' ' + '(' + data.usuario + ')';
+                            return data.nombre_completo_primer_auxiliar + ' ' + '(' + data.usuario_primer_auxiliar + ')';
                         })
                     .notSortable(),
                 DTColumnBuilder.newColumn(null).withTitle('Segundo auxiliar')
                     .renderWith(
                         function (data, type, full) {
 
-                            if (!(data.nombre_segundo_auxiliar && data.apellido_segundo_auxiliar)) {
-                                return "No Especificado";
+                            if (!(data.nombre_completo_segundo_auxiliar)) {
+                                 return data.nombre_completo_segundo_auxiliar + ' ' + '(' + data.usuario_segundo_auxiliar + ')';
                             }
                             else {
-                                return data.nombre_segundo_auxiliar + ' ' + data.apellido_segundo_auxiliar + ' ' + '(' + data.usuario + ')';
+                                return "No Especificado";
+
+                               
                             }
                         })
                     .notSortable(),
