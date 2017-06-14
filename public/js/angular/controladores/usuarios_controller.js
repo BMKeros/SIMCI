@@ -142,10 +142,12 @@
                 DTColumnBuilder.newColumn(null).withTitle('Acciones').renderWith(
                     function (data, type, full) {
                         return '<a class="ui icon button blue spopup" data-content="Ver Usuario" ng-click="modal_ver_usuario(' + data.id + ')"><i class="unhide icon"></i></a>' +
-                            '<a class="ui icon button green spopup"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario(' + data.id + ')"><i class="edit icon"></i></a>' +
-                            '<a class="ui icon button red spopup"  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario(' + data.id + ')"><i class="remove icon"></i></a>';
+                            '<a class="ui icon button green spopup"  data-content="Modificar Usuario" ng-click="modal_modificar_usuario(' + data.id + ')"><i class="edit icon"></i></a>'
+
+                        //Esto se comento hasta que se haga la logica de inhabilitacion de usuarios
+                        //'<a class="ui icon button red spopup"  data-content="Eliminar Usuario" ng-click="modal_eliminar_usuario(' + data.id + ')"><i class="remove icon"></i></a>';
                     })
-                    .withOption('width', '15%')
+                    .withOption('width', '11%')
                     .notSortable()
             ];
 
