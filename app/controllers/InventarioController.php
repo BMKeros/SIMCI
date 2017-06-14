@@ -108,12 +108,12 @@ class InventarioController extends BaseController
                 $consulta = DB::table('vista_almacen_full')
                     ->select('cod_dimension as codigo',
                         'descripcion',
-                        'primer_nombre_responsable as nombre_responsable',
-                        'primer_apellido_responsable as apellido_responsable',
-                        'primer_nombre_primer_auxiliar as nombre_primer_auxiliar',
-                        'primer_apellido_primer_auxiliar as apellido_primer_auxiliar',
-                        'primer_nombre_segundo_auxiliar as nombre_segundo_auxiliar',
-                        'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar');
+                        'nombre_completo_responsable',
+                        'nombre_completo_primer_auxiliar',
+                        'nombre_completo_segundo_auxiliar',
+                        'usuario_responsable',
+                        'usuario_primer_auxiliar',
+                        'usuario_segundo_auxiliar');
 
                 $response = $this->generar_paginacion_dinamica($consulta,
                     array('campo_where' => 'descripcion', 'campo_orden' => 'cod_dimension'));
@@ -126,12 +126,12 @@ class InventarioController extends BaseController
                 $data = DB::table('vista_almacen_full')
                     ->select('cod_dimension as codigo',
                         'descripcion',
-                        'primer_nombre_responsable as nombre_responsable',
-                        'primer_apellido_responsable as apellido_responsable',
-                        'primer_nombre_primer_auxiliar as nombre_primer_auxiliar',
-                        'primer_apellido_primer_auxiliar as apellido_primer_auxiliar',
-                        'primer_nombre_segundo_auxiliar as nombre_segundo_auxiliar',
-                        'primer_apellido_segundo_auxiliar as apellido_segundo_auxiliar',
+                        'nombre_completo_responsable',
+                        'nombre_completo_primer_auxiliar',
+                        'nombre_completo_segundo_auxiliar',
+                        'usuario_responsable',
+                        'usuario_primer_auxiliar',
+                        'usuario_segundo_auxiliar',
                         'created_at',
                         'updated_at')
                     ->where('cod_dimension', '=', $cod_almacen)
