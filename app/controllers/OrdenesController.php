@@ -9,6 +9,41 @@ class OrdenesController extends BaseController
         $orden = Input::get('ordenar', ' asc');
 
         switch ($tipo_busqueda) {
+
+            case 'orden':
+                $cod_orden = Input::get('cod_orden', null);
+
+                if ($cod_orden) {
+
+                    $response = DB::table('ordenes')
+                        ->select('ordenes.id',
+                            'ordenes.codigo',
+                            RAW('formato_nombre_completo(PER1.primer_nombre, PER1.primer_apellido) as nombre_completo_responsable'),
+                            RAW('formato_nombre_completo(PER2.primer_nombre, PER2.primer_apellido) as nombre_completo_solicitante'),
+                            'ordenes.fecha_actividad',
+                            'ordenes.status',
+                            'nombre as nombre_status')
+                        ->leftJoin(RAW('personas AS PER1'), RAW('PER1.usuario_id'), '=', 'ordenes.responsable_id')
+                        ->leftJoin(RAW('personas AS PER2'), RAW('PER2.usuario_id'), '=', 'ordenes.solicitante_id')
+                        ->join('condiciones', 'condiciones.codigo', '=', 'status')
+                        ->where('ordenes.codigo', '=', $cod_orden)
+                        ->get();
+
+
+                    if (is_null($response)) {
+                        $response = array(
+                            "resultado" => false,
+                            'mensajes' => array('La orden no existe')
+                        );
+                    }
+                } else {
+                    $response = array(
+                        "resultado" => false,
+                        'mensajes' => array('Este codigo ' . $cod_orden . ' no pertenece a ninguna orden')
+                    );
+                }
+
+                break;
             case 'paginacion':
 
                 $consulta = DB::table('ordenes')
@@ -403,10 +438,9 @@ class OrdenesController extends BaseController
 
                             $data_pedido_completar = Input::get('data_pedido', null);
 
-                            if(is_null($data_pedido_completar)){
-                                $response = ['resultado' => false,'mensajes' => ['Error no se ha pasado la data del pedido que se va a completar']];
-                            }
-                            else{
+                            if (is_null($data_pedido_completar)) {
+                                $response = ['resultado' => false, 'mensajes' => ['Error no se ha pasado la data del pedido que se va a completar']];
+                            } else {
                                 $error_en_pedidos = 0;
                                 $error_especial = 0;
 
@@ -430,23 +464,24 @@ class OrdenesController extends BaseController
                                         ->where('status', '=', ACTIVA)
                                         ->get();
 
-                                    if($pedido_aceptar['cantidad_retornada'] > $pedido_original[0]->cantidad_solicitada ||
-                                        $pedido_aceptar['cantidad_retornada'] < 0){
+                                    if ($pedido_aceptar['cantidad_retornada'] > $pedido_original[0]->cantidad_solicitada ||
+                                        $pedido_aceptar['cantidad_retornada'] < 0
+                                    ) {
 
                                         $error_en_pedidos++;
                                     }
 
-                                    $cantidad_disponible_elemento  = ElementoInventario::get_cantidad_disponible($pedido_aceptar['cod_dimension'],
-                                        $pedido_aceptar['cod_subdimension'], $pedido_aceptar['cod_agrupacion'], $pedido_aceptar['cod_objeto'],$pedido_aceptar['numero_orden']);
+                                    $cantidad_disponible_elemento = ElementoInventario::get_cantidad_disponible($pedido_aceptar['cod_dimension'],
+                                        $pedido_aceptar['cod_subdimension'], $pedido_aceptar['cod_agrupacion'], $pedido_aceptar['cod_objeto'], $pedido_aceptar['numero_orden']);
 
                                     //En este caso se verifica si la cantidad que esta retornando es mayor a la existente en el inventario
-                                    if($pedido_aceptar['cantidad_retornada'] > $cantidad_disponible_elemento){
+                                    if ($pedido_aceptar['cantidad_retornada'] > $cantidad_disponible_elemento) {
                                         $error_especial++;
                                     }
 
                                 }
 
-                                if($error_en_pedidos === 0 && $error_especial === 0){
+                                if ($error_en_pedidos === 0 && $error_especial === 0) {
 
                                     /***************** OJO ******************/
                                     // SE DEBE VERIFICAR ESTA FUNCION PARA EL CASO DE CUANDO SE SELECCIONAN DOS ELEMENTOS
@@ -471,8 +506,8 @@ class OrdenesController extends BaseController
                                             ->where('numero_orden', '=', $pedido_aceptar['numero_orden'])
                                             ->delete();
 
-                                        $cantidad_disponible_elemento  = ElementoInventario::get_cantidad_disponible($pedido_aceptar['cod_dimension'],
-                                            $pedido_aceptar['cod_subdimension'], $pedido_aceptar['cod_agrupacion'], $pedido_aceptar['cod_objeto'],$pedido_aceptar['numero_orden']);
+                                        $cantidad_disponible_elemento = ElementoInventario::get_cantidad_disponible($pedido_aceptar['cod_dimension'],
+                                            $pedido_aceptar['cod_subdimension'], $pedido_aceptar['cod_agrupacion'], $pedido_aceptar['cod_objeto'], $pedido_aceptar['numero_orden']);
 
                                         //Restamos la cantidad disponible con la cantidad retornada para obtener la cantidad restante
                                         $nueva_cantidad_elemento = $cantidad_disponible_elemento - $pedido_aceptar['cantidad_retornada'];
@@ -484,7 +519,7 @@ class OrdenesController extends BaseController
                                             ->where('cod_agrupacion', '=', $pedido_aceptar['cod_agrupacion'])
                                             ->where('cod_objeto', '=', $pedido_aceptar['cod_objeto'])
                                             ->where('numero_orden', '=', $pedido_aceptar['numero_orden'])
-                                            ->update(['cantidad_disponible' => $nueva_cantidad_elemento ]);
+                                            ->update(['cantidad_disponible' => $nueva_cantidad_elemento]);
 
 
                                         //Creamos un asiento de salida para este elemento del inventario
@@ -513,13 +548,11 @@ class OrdenesController extends BaseController
                                         ->where('status', '=', ACTIVA)
                                         ->update(['status' => COMPLETADO /*, 'cantidad_retornada' => $pedido_aceptar['cantidad_retornada']*/]);
 
-                                    $response = ['resultado' => true,'mensajes' => ['']];
-                                }
-                                elseif($error_especial > 0){
-                                    $response = ['resultado' => false,'mensajes' => ['Error, existe algun problema con las cantidades retornadas, sobrepasan las cantidades existenten en el inventario']];
-                                }
-                                else{
-                                    $response = ['resultado' => false,'mensajes' => ['Error, verifique las cantidades retornadas de los pedidos']];
+                                    $response = ['resultado' => true, 'mensajes' => ['']];
+                                } elseif ($error_especial > 0) {
+                                    $response = ['resultado' => false, 'mensajes' => ['Error, existe algun problema con las cantidades retornadas, sobrepasan las cantidades existenten en el inventario']];
+                                } else {
+                                    $response = ['resultado' => false, 'mensajes' => ['Error, verifique las cantidades retornadas de los pedidos']];
                                 }
                             }
 
