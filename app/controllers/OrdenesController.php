@@ -21,6 +21,7 @@ class OrdenesController extends BaseController
                             RAW('formato_nombre_completo(PER1.primer_nombre, PER1.primer_apellido) as nombre_completo_responsable'),
                             RAW('formato_nombre_completo(PER2.primer_nombre, PER2.primer_apellido) as nombre_completo_solicitante'),
                             'ordenes.fecha_actividad',
+                            'ordenes.fecha as fecha_solicitud',
                             'ordenes.status',
                             'nombre as nombre_status')
                         ->leftJoin(RAW('personas AS PER1'), RAW('PER1.usuario_id'), '=', 'ordenes.responsable_id')

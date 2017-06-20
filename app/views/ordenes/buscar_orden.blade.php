@@ -75,16 +75,17 @@
                 <tr ng-if="items_busqueda.length != 0" ng-repeat="elemento in items_busqueda track by $index"
                     id="<% elemento.id_item_stock %>"
                     ng-animate="'animate'" class="animate-repeat">
-                    <td><% elemento.codigo | lowercase | capitalize%></td>
+                    <td><% elemento.codigo | uppercase | capitalize%></td>
                     <td><% elemento.nombre_completo_responsable %></td>
                     <td><% elemento.nombre_completo_solicitante | lowercase | capitalize %></td>
-                    <td><% elemento.fecha_actividad %></td>
+                    <td><% elemento.fecha_solicitud | formato_fecha%></td>
                     <td><% elemento.nombre_status | uppercase %></td>
                     <td>
-                        <button class="ui  icon small button" id="btn_action_item"
-                                ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
-                            <i class="trash outline icon"></i>
-                        </button>
+                        <div class="ui small basic icon buttons">
+                            <button class="ui button" data-content="Ver Orden"><i class="eye icon"></i></button>
+                            <button class="ui button" data-content="Aceptar Orden"><i class="check icon"></i></button>
+                            <button class="ui button" data-content="Cancelar Orden"><i class="remove icon"></i></button>
+                        </div>
                     </td>
                 </tr>
 
@@ -113,7 +114,4 @@
 
         </div>
     </div>
-
-    <script>
-        $('.ui.dropdown').dropdown();
-    </script>
+</div>

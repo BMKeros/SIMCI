@@ -600,8 +600,8 @@
                         }).then(
                             function (data) {
 
-                                if (data.data.resultado) {
-
+                                if (data.data) {
+                                    $scope.items_busqueda = data.data;
                                 }
                                 else {
                                     alertify.error(data.data.mensajes[0]);
