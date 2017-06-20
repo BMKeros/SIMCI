@@ -567,6 +567,7 @@
 
         if ($location.$$url == '/ordenes/buscar-orden') {
             $scope.opcion_busqueda = 'busqueda_orden_normal';
+            $scope.items_busqueda = [];
 
             $scope.verificar_opcion = function () {
                 alert($scope.opcion_busqueda);
@@ -581,6 +582,44 @@
             $scope.onVideoError = function (error) {
                 console.log(error);
             };
+
+
+            $scope.buscar_orden = function (_codigo_orden) {
+                if (!!(_codigo_orden)) {
+                    var _text_codigo = new RegExp(/\b^[oO]\b[-]?\w[a-zA-Z0-9]{7}/i);
+
+                    if (_text_codigo.test(_codigo_orden)) {
+
+                        $http({
+                            method: 'GET',
+                            url: '/api/ordenes/mostrar',
+                            params: {
+                                type: 'orden',
+                                cod_orden: _codigo_orden
+                            }
+                        }).then(
+                            function (data) {
+
+                                if (data.data.resultado) {
+
+                                }
+                                else {
+                                    alertify.error(data.data.mensajes[0]);
+                                }
+                            },
+                            function (data_error) {
+                                ToolsService.generar_alerta_status(data_error);
+                            }
+                        );
+
+                    }
+                    else {
+                        alertify.error("Error codigo es incorrecto");
+                    }
+                } else {
+                    alertify.error("Debes especificar el codigo de la orden");
+                }
+            }
 
         }
 
