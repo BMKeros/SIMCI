@@ -26,26 +26,22 @@
                     <div class="two fields">
                         <div class="seven wide field">
                             <div class="field">
-                                <label>Escribe el numero de orden</label>
+                                <label>Escribe el codigo de orden</label>
 
                                 <div class="ui fluid category search">
                                     <div class="ui left icon input">
-                                        <input class="prompt" placeholder="Buscar Numero de Orden" type="text"
-                                               id="campo_search_orden">
-
-                                        <input type="hidden" ng-model="select_orden" id="select_orden"
-                                               name="select_orden" ng-update-hidden>
+                                        <input class="prompt" placeholder="Buscar Numero de Orden"
+                                               type="text"
+                                               ng-model="codigo_orden_search">
                                         <i class="search icon"></i>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--  Input que almacena los codigos del elemento -->
-                        <input type="hidden" ng-model="codigos_orden" id="codigos_orden" ng-update-hidden>
 
                         <div class="field">
                             <button class="ui icon large inverted green button" id="btn_agregar_items"
-                                    ng-click="agregar_stock_tabla()"><i class="qrcode icon"></i></button>
+                                    ng-click="buscar_orden(codigo_orden_search)"><i class="qrcode icon"></i></button>
                         </div>
                     </div>
                 </div>
@@ -76,11 +72,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="elemento in items_tabla_stock track by $index" id="<% elemento.id_item_stock %>"
+                <tr ng-if="items_busqueda.length != 0" ng-repeat="elemento in items_busqueda track by $index"
+                    id="<% elemento.id_item_stock %>"
                     ng-animate="'animate'" class="animate-repeat">
-                    <td><% elemento.nombre_objeto | lowercase | capitalize%></td>
-                    <td><% elemento.cantidad %></td>
-                    <td><% elemento.nombre_laboratorio | lowercase | capitalize %></td>
+                    <td><% elemento.codigo | lowercase | capitalize%></td>
+                    <td><% elemento.nombre_completo_responsable %></td>
+                    <td><% elemento.nombre_completo_solicitante | lowercase | capitalize %></td>
+                    <td><% elemento.fecha_actividad %></td>
+                    <td><% elemento.nombre_status | uppercase %></td>
                     <td>
                         <button class="ui  icon small button" id="btn_action_item"
                                 ng-click="eliminar_stock_tabla(elemento.id_item_stock )">
@@ -89,9 +88,9 @@
                     </td>
                 </tr>
 
-                <tr ng-if="items_tabla_stock.length == 0">
-                    <td colspan="4">
-                        <p align="center">No hay elementos para ser agregados</p>
+                <tr ng-if="items_busqueda.length == 0">
+                    <td colspan="5">
+                        <p align="center">No hay elementos para mostrar</p>
                     </td>
                 </tr>
                 </tbody>
@@ -112,14 +111,6 @@
                 </tfoot>
             </table>
 
-            <br>
-
-            <div class="action">
-                <div class="ui big right floated submit button green"
-                     id="">
-                    Aceptar
-                </div>
-            </div>
         </div>
     </div>
 
