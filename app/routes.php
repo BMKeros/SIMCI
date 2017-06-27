@@ -52,6 +52,7 @@ Route::group(array('prefix' => 'api'), function () {
     Route::controller('/pedidos', 'PedidosController');
     Route::controller('/ordenes', 'OrdenesController');
     Route::controller('/correos', 'CorreosController');
+    Route::controller('/reportes', 'ReportesController');
 });
 
 Route::controller('/autenticacion', 'AutenticacionController');
